@@ -1,0 +1,10 @@
+<ul>
+  {{ $files := readDir "static/library" }}
+  {{ range $files }}
+    {{ if not .IsDir }}
+    <li>
+      <a href="/library/{{ .Name }}" target="_blank">{{ .Name }}</a>
+    {{ end }}
+  {{ end }}
+</ul>
+
