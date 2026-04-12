@@ -1,1 +1,4 @@
+baseURL = 'https://nbasastro.org'
+languageCode = 'en-gb'
+title = 'Northern Berkshire Astronomical Society'
 theme = 'ananke'

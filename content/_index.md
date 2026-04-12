@@ -1,6 +1,8 @@
-+++
-date = '2026-04-12T16:06:07-04:00'
-draft = true
-title = ''
-+++
+---
+title: "Northern Berkshire Astronomical Society"
+description: "Official site for the NBAS"
+---
+Welcome to the home of the Northern Berkshire Astronomical Society.
+
+## Club Library
 {{< pdf_list >}}
