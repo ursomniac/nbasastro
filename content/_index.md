@@ -16,4 +16,3 @@ The **first Wednesday** of every month at **6:00 PM**. Guests are always welcome
 ---
 
 ## 📚 Club Library
-{{< pdf_list >}}

@@ -1,0 +1,11 @@
+{{ define "main" }}
+  <article class="cf ph3 ph5-ns pv5">
+    <header class="fn fl-ns w-50-ns pr4-ns">
+      <h1 class="f2 lh-title fw9 mb3 mt0 pt3 bw2">{{ .Title }}</h1>
+      <div class="f3 lh-copy mt0-ns">{{ .Content }}</div>
+    </header>
+    <div class="fn fl-ns w-50-ns">
+      {{ partial "recent_articles.html" . }}
+    </div>
+  </article>
+{{ end }}

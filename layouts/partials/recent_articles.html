@@ -1,0 +1,12 @@
+<section class="mw7 center pa3">
+  <h2 class="f3 fw7 ttu tracked">Recent Updates</h2>
+  {{ range first 3 (where .Site.RegularPages "Section" "articles") }}
+    <div class="mb4">
+      <a href="{{ .Permalink }}" class="link blue hover-dark-blue">
+        <h3 class="f4 mb1">{{ .Title }}</h3>
+      </a>
+      <p class="f6 gray mv1">{{ .Date.Format "Jan 2, 2006" }} | {{ .Params.feature }}</p>
+      <p class="f5 lh-copy">{{ .Params.byline | default .Summary }}</p>
+    </div>
+  {{ end }}
+</section>
