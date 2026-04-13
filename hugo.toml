@@ -1,12 +1,15 @@
 baseURL = "https://nbasastro.org"
 languageCode = "en-us"
 title = "Northern Berkshire Astronomical Society"
-theme = "ananke"
+theme = "mainroad"
 
 [params]
-  custom_css = ["css/custom.css"]
-  site_logo = "images/nbas-transparent-logo.png"
+  logo = "images/nbas-transparent-logo.png"
+  description = "Exploring the stars from the Northern Berkshires"
   mainSections = ["posts", "articles", "gallery"]
+
+[params.widgets]
+  sidebar = ["search", "recent", "taglist"]
 
 [markup.goldmark.renderer]
   unsafe = true
