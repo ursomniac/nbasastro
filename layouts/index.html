@@ -1,20 +1,15 @@
 {{ define "main" }}
-  <div class="flex-l mw9 center ph3 ph5-ns pv4">
-    <main class="w-100 w-70-l pr4-l">
+  <div class="mw8 center ph3 pv4">
+    <header class="bb b--light-gray pb3 mb4">
+      <h1 class="f2 lh-title fw9 mb2 mt0">{{ .Title }}</h1>
+      <div class="flex-ns items-center f6 gray">
+        <div class="mr4-ns mb2 mb0-ns">📍 <b>Meeting:</b> North Adams Public Library</div>
+        <div class="mr4-ns mb2 mb0-ns">🕒 <b>When:</b> 1st Wednesday @ 6:00 PM</div>
+      </div>
+    </header>
+    <main>
+      <div class="f5 lh-copy mb5">{{ .Content }}</div>
       {{ partial "recent_articles.html" . }}
     </main>
-    <aside class="w-100 w-30-l pl4-l bl-l b--moon-gray">
-      <div class="f6 lh-copy mb4">
-        {{ .Content }}
-      </div>
-      <div id="sidebar-links" class="mt4 bt pt3 b--light-gray">
-        <h4 class="f6 ttu tracked gray">Quick Links</h4>
-        <ul class="list pl0 f6">
-          <li class="mv2"><a href="/about" class="link blue hover-dark-blue">About</a></li>
-          <li class="mv2"><a href="/contact" class="link blue hover-dark-blue">Contact</a></li>
-          <li class="mv2"><a href="/library" class="link blue hover-dark-blue">Library</a></li>
-        </ul>
-      </div>
-    </aside>
   </div>
 {{ end }}
