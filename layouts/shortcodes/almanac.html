@@ -1,23 +1,26 @@
 <div class="mt4 bt pt3 b--light-gray">
   <h4 class="f6 ttu tracked gray">North Adams Almanac</h4>
   <div id="almanac-data" class="f6 lh-copy">
-    <p>Loading celestial data...</p>
+    <p>☀️ <b>Sun:</b> <span id="sun-times">Loading...</span><br>
+    🌑 <b>Twilight:</b> <span id="twilight-times">Loading...</span></p>
   </div>
 </div>
 
 <script>
-  async function getAlmanac() {
+  async function updateAlmanac() {
     try {
-      const response = await fetch('https://sunrisesunset.io');
-      const data = await response.json();
-      const r = data.results;
-      document.getElementById('almanac-data').innerHTML = 
-        '<p><b>☀️ Sun:</b> ' + r.sunrise + ' — ' + r.sunset + '<br>' +
-        '<b>🌑 Twilight:</b> ' + r.dawn + ' — ' + r.dusk + '<br>' +
-        '<b>📍 Location:</b> North Adams, MA</p>';
+      // Using a fallback-ready API for North Adams
+      const res = await fetch('https://sunrise-sunset.org');
+      const json = await res.json();
+      const r = json.results;
+      
+      const formatTime = (iso) => new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      
+      document.getElementById('sun-times').innerText = formatTime(r.sunrise) + ' — ' + formatTime(r.sunset);
+      document.getElementById('twilight-times').innerText = formatTime(r.civil_twilight_begin) + ' — ' + formatTime(r.civil_twilight_end);
     } catch (e) {
-      document.getElementById('almanac-data').innerHTML = '<p>Almanac temporarily offline.</p>';
+      document.getElementById('almanac-data').innerHTML = '<p class="i gray">Data temporarily unavailable.</p>';
     }
   }
-  getAlmanac();
+  updateAlmanac();
 </script>
