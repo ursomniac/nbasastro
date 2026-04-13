@@ -11,3 +11,8 @@ theme = 'ananke'
   featured_image = '/images/m31_banner.jpg'
   site_logo = '/images/logo_transparent.png'
   text_color_class = "white"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
