@@ -19,3 +19,6 @@ Guests are always welcome!
 
 ## Club Library
 {{< pdf_list >}}
+
+### 🔭 Current Observing Conditions
+{{< clearsky >}}
