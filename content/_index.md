@@ -21,4 +21,4 @@ Guests are always welcome!
 {{< pdf_list >}}
 
 ### 🔭 Current Observing Conditions
-{{< clearsky >}}
+{{< calendar >}}
