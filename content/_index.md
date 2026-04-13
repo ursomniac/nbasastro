@@ -15,11 +15,11 @@ The **first Wednesday** of every month at **6:00 PM**. Guests are always welcome
 
 ---
 
-## Club Resources
-* [View Observing Forecast (Astropheric)](https://astropheric.com)
-* [View Weather Chart (Clear Sky Chart)](https://cleardarksky.com)
+## 🔭 Observing Resources
+* [Live Observing Forecast (Astropheric)](https://astropheric.com)
+* [North Adams Clear Sky Chart](https://cleardarksky.com)
 
 ---
 
-## Club Library
+## 📚 Club Library
 {{< pdf_list >}}
