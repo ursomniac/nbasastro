@@ -1,9 +1,2 @@
-/* Adds a white halo around the logo so black text is visible on dark banners */
-/* Force a white glow around any image in the header/logo area */
-img.db.dn-l, 
-.site-logo, 
-header img {
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) !important;
-    -webkit-filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) !important;
-}
-
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.bg-black-60 { background-color: #001f3f !important; } /* Deep Space Blue */

@@ -17,7 +17,7 @@ jobs:
         with:
           hugo-version: 'latest'
           extended: true
-      - run: hugo --minify --baseURL "https://github.io"
+      - run: hugo --minify 
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
