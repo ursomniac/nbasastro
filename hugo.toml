@@ -5,7 +5,9 @@ theme = "ananke"
 canonifyURLs = false
 
 [params]
-  featured_image = ""  custom_css = ["css/custom.css"]
+  cover_dimming_class = "bg-black-60"
+  featured_image = ""
+  custom_css = ["css/custom.css"]
   site_logo = "images/nbas-transparent-logo.png"
   mainSections = ["posts", "articles", "gallery"]
 
