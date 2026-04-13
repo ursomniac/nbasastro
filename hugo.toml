@@ -6,7 +6,7 @@ canonifyURLs = false
 
 [params]
   custom_css = ["css/custom.css"]
-  site_logo = "images/logo-transparent.png"
+  site_logo = "images/nbas-transparent-logo.png"
   mainSections = ["posts", "articles", "gallery"]
 
 [markup.goldmark.renderer]
