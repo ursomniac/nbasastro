@@ -21,3 +21,5 @@ canonifyURLs = true
 [taxonomies]
   feature = "features"
   tag = "tags"
+[[params.custom_css]]
+  href = "css/custom.css"

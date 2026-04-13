@@ -1,0 +1,3 @@
+.cover {
+  min-height: 30vh !important; /* Shrinks the banner height from 100% to 30% */
+}
