@@ -5,7 +5,7 @@ theme = "ananke"
 canonifyURLs = false
 
 [params]
-  custom_css = ["css/custom.css"]
+  featured_image = ""  custom_css = ["css/custom.css"]
   site_logo = "images/nbas-transparent-logo.png"
   mainSections = ["posts", "articles", "gallery"]
 
