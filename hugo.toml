@@ -4,7 +4,8 @@ title = 'Northern Berkshire Astronomical Society'
 theme = 'ananke'
 
 [params]
-  background_color_class = "bg-black-60"
+  #background_color_class = "bg-black-60"
+  background_color_class = "bg-black"
   custom_css = ["custom/css"]
   description = 'Founded 2023'
   featured_image = '/images/m31_banner.jpg'

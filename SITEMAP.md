@@ -1,15 +1,16 @@
+cat <<EOF > SITEMAP.md
 # NBAS Site Architecture & Feature Roadmap
 
 ## 1. Content Organization
 - **Home**: branding and PDF list.
-- **Library**: PDFs in static/library/.
-- **Gallery**: Leaf Bundles in content/gallery/.
-- **Posts**: News in content/posts/.
+- **Library**: static/library/ (Automated list active).
+- **Gallery**: content/gallery/ (Leaf Bundles ready).
 
 ## 2. Feature Checklist
-- [x] Infrastructure (Hugo/Netlify)
-- [x] Domain (nbasastro.org)
-- [x] Automated PDF List
-- [ ] Member Image Gallery
-- [ ] Astronomy Widgets
-- [ ] CMS Hand-off
+- [x] v0.3.0: Branding & Metadata
+- [x] v0.3.5: Deployment & GitHub Sync
+- [ ] v0.4.0: High-contrast logo update (Awaiting assets)
+- [ ] v0.5.0: Clear Sky Chart Widget
+- [ ] v0.6.0: Community Calendar
+EOF
+
