@@ -3,18 +3,9 @@ languageCode = "en-us"
 title = "Northern Berkshire Astronomical Society"
 theme = "ananke"
 
-canonifyURLs = true
-
-[taxonomies]
-  feature = "features"
-  tag = "tags"
-
 [params]
   custom_css = ["css/custom.css"]
-  # Pointing directly to your logo file
-  site_logo = "images/logo-transparent.png"
+  logo = "images/logo-transparent.png"
 
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+[markup.goldmark.renderer]
+  unsafe = true
