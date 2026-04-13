@@ -8,4 +8,4 @@ theme = 'ananke'
   # This puts your banner at the top of the site
   featured_image = '/images/m31_banner.jpg'
   # This puts the logo in the header
-  site_logo = '/images/logo.png'
+  site_logo = '/images/logo_transparent.png'
