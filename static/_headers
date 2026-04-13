@@ -1,0 +1,3 @@
+/*
+  X-Frame-Options: ALLOWALL
+  Content-Security-Policy: frame-src 'self' https://www.google.com https://calendar.google.com https://cleardarksky.com\; img-src 'self' data: https://cleardarksky.com\;
