@@ -1,4 +1,3 @@
-cat <<EOF > SITEMAP.md
 # NBAS Site Architecture & Feature Roadmap
 
 ## 1. Content Organization
@@ -12,5 +11,4 @@ cat <<EOF > SITEMAP.md
 - [ ] v0.4.0: High-contrast logo update (Awaiting assets)
 - [ ] v0.5.0: Clear Sky Chart Widget
 - [ ] v0.6.0: Community Calendar
-EOF
 

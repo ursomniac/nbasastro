@@ -12,7 +12,7 @@ theme = "mainroad"
   highlightColor = "#1a2a44"
 
 [params.logo]
-  image = "images/nbas-transparent-logo.png"
+  image = "images/logo-grey.png"
   title = "NBAS"
   subtitle = "Northern Berkshire Astronomical Society"
 
