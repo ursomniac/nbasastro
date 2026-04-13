@@ -1,6 +1,6 @@
 {{ define "main" }}
   <article class="pa3 pa4-ns">
-    <h1 class="f2 lh-title fw9 mb4">Feature: {{ .Title }}</h1>
+    <h1 class="f2 lh-title fw9 mb4">{{ .Title }}</h1>
     <section class="cf w-100">
       {{ range .Pages }}
         <div class="mb4 pb3 bb b--moon-gray">
@@ -8,7 +8,8 @@
             <h2 class="f3 fw7 mb1 blue">{{ .Title }}</h2>
           </a>
           <p class="f6 gray mv1">{{ .Date.Format "January 2, 2006" }} {{ with .Params.author }}by {{ . }}{{ end }}</p>
-          <p class="f5 lh-copy mv2">{{ .Params.byline | default .Summary }}</p>
+          {{ with .Params.byline }}<p class="f5 lh-copy mv2 i">{{ . }}</p>{{ end }}
+          <p class="f5 lh-copy mv2">{{ .Summary }}</p>
         </div>
       {{ end }}
     </section>
