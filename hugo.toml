@@ -5,8 +5,10 @@ theme = "ananke"
 canonifyURLs = false
 
 [params]
+  site_logo = "images/nbas-transparent-logo.png"
   custom_css = ["css/custom.css"]
-  logo = "images/nbas-transparent-logo.png"
+  featured_image = ""
+  featured_image_class = "cover bg-center"
   mainSections = ["posts", "articles", "gallery"]
 
 [markup.goldmark.renderer]
