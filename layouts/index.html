@@ -1,6 +1,5 @@
 {{ define "main" }}
   <div class="flex-l mw9 center ph3 ph5-ns pv4">
-    <!-- Left Sidebar: Utility & Almanac -->
     <aside class="w-100 w-30-l pr4-l br-l b--moon-gray">
       <h1 class="f3 lh-title fw9 mb3 mt0 pt3">{{ .Title }}</h1>
       <div class="f5 lh-copy mt0-ns mb4">
@@ -9,7 +8,7 @@
       
       <div id="sidebar-services" class="mt4 bt pt3 b--light-gray">
         {{ partial "weather_widget.html" . }}
-        {{< almanac >}}
+        {{ .RenderShortcodes }} 
       </div>
 
       <div id="sidebar-links" class="mt4 bt pt3 b--light-gray">
@@ -22,7 +21,6 @@
       </div>
     </aside>
 
-    <!-- Right Main: The Feed -->
     <main class="w-100 w-70-l pl4-l">
       {{ partial "recent_articles.html" . }}
     </main>
