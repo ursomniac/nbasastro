@@ -17,3 +17,7 @@ theme = 'ananke'
     [markup.goldmark.renderer]
       unsafe = true
 canonifyURLs = true
+
+[taxonomies]
+  feature = "features"
+  tag = "tags"
