@@ -4,9 +4,17 @@ title = "Northern Berkshire Astronomical Society"
 theme = "mainroad"
 
 [params]
-  logo = "images/nbas-transparent-logo.png"
-  description = "Exploring the stars from the Northern Berkshires"
+  customCSS = ["css/custom.css"]
   mainSections = ["posts", "articles", "gallery"]
+  # This brings the banner back:
+  header_image = "images/nbas-transparent-logo.png"
+  # This tones down the "vivid" red to a professional navy/astronomy blue:
+  highlightColor = "#1a2a44"
+
+[params.logo]
+  image = "images/nbas-transparent-logo.png"
+  title = "NBAS"
+  subtitle = "Northern Berkshire Astronomical Society"
 
 [params.widgets]
   sidebar = ["search", "recent", "taglist"]
