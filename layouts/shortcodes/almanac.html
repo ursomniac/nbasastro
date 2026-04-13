@@ -1,0 +1,23 @@
+<div class="mt4 bt pt3 b--light-gray">
+  <h4 class="f6 ttu tracked gray">North Adams Almanac</h4>
+  <div id="almanac-data" class="f6 lh-copy">
+    <p>Loading celestial data...</p>
+  </div>
+</div>
+
+<script>
+  async function getAlmanac() {
+    try {
+      const response = await fetch('https://sunrisesunset.io');
+      const data = await response.json();
+      const r = data.results;
+      document.getElementById('almanac-data').innerHTML = 
+        '<p><b>☀️ Sun:</b> ' + r.sunrise + ' — ' + r.sunset + '<br>' +
+        '<b>🌑 Twilight:</b> ' + r.dawn + ' — ' + r.dusk + '<br>' +
+        '<b>📍 Location:</b> North Adams, MA</p>';
+    } catch (e) {
+      document.getElementById('almanac-data').innerHTML = '<p>Almanac temporarily offline.</p>';
+    }
+  }
+  getAlmanac();
+</script>
