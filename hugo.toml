@@ -1,4 +1,4 @@
-baseURL = "https://github.io"
+baseURL = "https://nbasastro.org"
 languageCode = 'en-us'
 title = 'Northern Berkshire Astronomical Society'
 theme = 'ananke'
