@@ -2,3 +2,7 @@ body {
     font-family: sans-serif !important; 
     background-color: #fff;
 }
+
+/* Force header height reduction */
+.vh-100 { min-height: 25vh !important; }
+.pv4-l { padding-top: 2rem !important; padding-bottom: 2rem !important; }
