@@ -1,7 +1,7 @@
-<ul>
+<ul class="list pl0">
   {{ range (readDir "static/library") }}
     {{ if and (not .IsDir) (ne (substr .Name 0 1) ".") }}
-      <li><a href="/library/{{ .Name }}" target="_blank">{{ .Name }}</a></li>
+      <li class="mb2"><a href="/library/{{ .Name }}" target="_blank" class="link blue underline">{{ .Name }}</a></li>
     {{ end }}
   {{ end }}
 </ul>
