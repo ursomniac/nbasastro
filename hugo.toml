@@ -1,4 +1,11 @@
 baseURL = 'https://nbasastro.org'
-languageCode = 'en-gb'
+languageCode = 'en-us'
 title = 'Northern Berkshire Astronomical Society'
 theme = 'ananke'
+
+[params]
+  description = 'Advancing astronomy in the Berkshires since 1962.'
+  # This puts your banner at the top of the site
+  featured_image = '/images/m31_banner.jpg'
+  # This puts the logo in the header
+  site_logo = '/images/logo.png'
