@@ -6,7 +6,7 @@ canonifyURLs = false
 
 [params]
   custom_css = ["css/custom.css"]
-  logo = "/images/logo-transparent.png"
+  site_logo = "images/logo-transparent.png"
   mainSections = ["posts", "articles", "gallery"]
 
 [markup.goldmark.renderer]
