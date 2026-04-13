@@ -17,3 +17,5 @@
 - Restore the banner image using Mainroad's specific 'header_image' logic.
 - Verify why custom.css is not overriding the "vivid" colors.
 - Finalize the automated PDF library display.
+
+**UPDATE**: Theme converted to submodule to fix GitHub Actions build.
