@@ -1,15 +1,18 @@
 {{ define "main" }}
   <div class="flex-l mw9 center ph3 ph5-ns pv4">
-    <!-- Left Sidebar: Utility & Info -->
+    <!-- Left Sidebar: Utility & Almanac -->
     <aside class="w-100 w-30-l pr4-l br-l b--moon-gray">
       <h1 class="f3 lh-title fw9 mb3 mt0 pt3">{{ .Title }}</h1>
       <div class="f5 lh-copy mt0-ns mb4">
         {{ .Content }}
       </div>
       
-      <!-- Placeholder for future Widgets/Services -->
-      <div id="sidebar-widgets" class="mt4 bt pt3 b--light-gray">
-        {{< almanac}}}
+      <div id="sidebar-services" class="mt4 bt pt3 b--light-gray">
+        {{ partial "weather_widget.html" . }}
+        {{< almanac >}}
+      </div>
+
+      <div id="sidebar-links" class="mt4 bt pt3 b--light-gray">
         <h4 class="f6 ttu tracked gray">Quick Links</h4>
         <ul class="list pl0 f6">
           <li class="mv2"><a href="/about" class="link blue hover-dark-blue">About NBAS</a></li>
