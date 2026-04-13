@@ -1,3 +1,11 @@
 .cover {
-  min-height: 30vh !important; /* Shrinks the banner height from 100% to 30% */
+  min-height: 30vh !important;
+}
+/* This removes the theme's dark/blurry overlay on the banner */
+.bg-black-60 {
+  background-color: transparent !important;
+}
+.cover.bg-top {
+  background-size: cover !important;
+  opacity: 1 !important;
 }

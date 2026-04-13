@@ -11,6 +11,8 @@ canonifyURLs = true
 
 [params]
   custom_css = ["css/custom.css"]
+  # Pointing directly to your logo file
+  logo = "images/logo-transparent.png"
 
 [markup]
   [markup.goldmark]
