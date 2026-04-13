@@ -1,25 +1,18 @@
 baseURL = "https://nbasastro.org"
-languageCode = 'en-us'
-title = 'Northern Berkshire Astronomical Society'
-theme = 'ananke'
+languageCode = "en-us"
+title = "Northern Berkshire Astronomical Society"
+theme = "ananke"
 
-[params]
-  #background_color_class = "bg-black-60"
-  background_color_class = "bg-black"
-  custom_css = ["custom/css"]
-  description = 'Founded 2023'
-  featured_image = '/images/m31_banner.jpg'
-  site_logo = '/images/logo_transparent.png'
-  text_color_class = "white"
-
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
 canonifyURLs = true
 
 [taxonomies]
   feature = "features"
   tag = "tags"
-[[params.custom_css]]
-  href = "css/custom.css"
+
+[params]
+  custom_css = ["css/custom.css"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
