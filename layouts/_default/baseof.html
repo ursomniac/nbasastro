@@ -3,50 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ .Title }} | {{ .Site.Title }}</title>
-
-<style>
-  body { background: #1a2a44; color: #d1d1d1; margin: 0; font-family: sans-serif; }
-  .nbas-header { 
-    background: #1a2a44 url('/images/m31_banner.jpg') no-repeat center 40%; 
-    background-size: cover; height: 200px; 
-    /* CHANGED: Matches the subtle vertical divider color */
-    border-bottom: 2px solid #3a4a64; 
-    display: flex; align-items: center; padding: 0 20px;
-  }
-  .nbas-logo { height: 195px; width: auto; margin-right: 30px; }
-  .branding h1 { margin: 0; color: #fff; text-shadow: 3px 3px 6px #000; font-size: 2.2rem; }
-  .branding p { margin: 0; color: #f1c40f; font-size: 1.3rem; margin-top: 10px; }
-  .container { display: flex; min-height: 100vh; }
-  /* THE SUBTLE LINE: 2px solid grey-blue */
-  .sidebar { width: 300px; padding: 30px 20px; border-right: 2px solid #3a4a64; background: #1a2a44; }
-  .main { flex: 1; padding: 50px; background: #1a2a44; }
-</style>
-
-
+    <style>
+        body { background: #1a2a44; color: #d1d1d1; margin: 0; font-family: sans-serif; }
+        .nbas-header { 
+            background: #1a2a44 url('/images/m31_banner.jpg') no-repeat center 40%; 
+            background-size: cover; height: 200px; border-bottom: 2px solid #3a4a64;
+            display: flex; align-items: center; padding: 0 20px;
+        }
+        .nbas-logo { height: 195px; width: auto; margin-right: 30px; }
+        .branding h1 { margin: 0; color: #fff; text-shadow: 3px 3px 6px #000; font-size: 2.2rem; }
+        .branding p { margin: 0; color: #c5a059; font-size: 1.3rem; margin-top: 10px; }
+        .container { display: flex; min-height: 100vh; }
+        .sidebar { width: 300px; padding: 30px 20px; border-right: 2px solid #3a4a64; background: #1a2a44; }
+        .main { flex: 1; padding: 30px; background: #1a2a44; }
+        a { color: #ffffff; text-decoration: underline #c5a059; font-weight: bold; }
+    </style>
 </head>
 <body>
     <header class="nbas-header">
-        <!-- Logo must be in static/images/nbas-grey.png -->
         <img src="/images/logo-grey.png" class="nbas-logo" alt="NBAS Logo">
-        <div class="branding">
-            <h1>{{ .Site.Title }}</h1>
-            <p>{{ .Site.Params.subtitle }}</p>
-        </div>
+        <div class="branding"><h1>{{ .Site.Title }}</h1><p>{{ .Site.Params.subtitle }}</p></div>
     </header>
     <div class="container">
         <nav class="sidebar">
-            <h3>Next Meeting</h3>
-            <p><strong>1st Wednesday, 6 PM</strong><br>North Adams Public Library</p>
+            <h3 style="margin-top:0;">Next Meeting</h3>
+            <p>1st Wednesday, 6 PM<br>North Adams Public Library</p>
             <a href="https://google.com" target="_blank">View on Google Maps</a>
-            <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;">
-            <ul style="list-style: none; padding: 0;">
-                <li><a href="/" style="color:#fff;">Home</a></li>
-                <li><a href="/articles/" style="color:#fff;">Articles</a></li>
+            
+            <div style="margin-top: 20px; border: 1px solid #3a4a64; border-radius: 4px; overflow: hidden;">
+                <!-- Placeholder Calendar: US Holidays -->
+                <iframe src="https://google.com" 
+                        style="border-width:0" width="100%" height="250" frameborder="0" scrolling="no"></iframe>
+            </div>
+
+            <hr style="border:0; border-top:1px solid #3a4a64; margin:20px 0;">
+            <ul style="list-style:none; padding:0; line-height:2;">
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles/">Articles</a></li>
+                <li><a href="/library/">Library</a></li>
             </ul>
         </nav>
-        <main class="main">
-            {{ block "main" . }}{{ end }}
-        </main>
+        <main class="main">{{ block "main" . }}{{ end }}</main>
     </div>
 </body>
 </html>

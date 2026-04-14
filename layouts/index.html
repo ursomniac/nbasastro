@@ -1,23 +1,43 @@
 {{ define "main" }}
-  <!-- TIGHT HERO SECTION -->
-  <div style="background: #0d1421; border-left: 4px solid #f1c40f; padding: 4px 20px; margin-bottom: 20px;">
-    <div style="font-size: 1.1rem; line-height: 1.2; color: #ffffff;">
-      {{ .Content }}
-    </div>
+  <div class="welcome-hero" style="background: #0d1421; border-left: 4px solid #c5a059; padding: 4px 20px; margin-bottom: 25px;">
+    <div style="font-size: 1.1rem; line-height: 1.4; color: #d1d1d1;">{{ .Content }}</div>
   </div>
 
-  <h2 style="color: #f1c40f; border-bottom: 1px solid #3a4a64; padding-bottom: 8px;">Latest from the Society</h2>
+  <h2 style="color: #ffffff; border-bottom: 1px solid #3a4a64; padding-bottom: 8px; font-size: 1.3rem; margin-bottom: 30px;">Latest from the Society</h2>
   
-  {{ range (where .Site.RegularPages "Section" "articles") | first 5 }}
-    <div style="display: flex; gap: 20px; margin-bottom: 30px; align-items: center;">
-      <div style="flex: 0 0 100px;">
-        <img src="/images/logo-grey.png" style="width: 100px; height: 100px; object-fit: contain; background: #0a0d14; border: 1px solid #3a4a64; padding: 10px;">
+  <div class="article-list">
+    {{ range (where .Site.RegularPages "Section" "articles") | first 5 }}
+      <div class="article-entry" style="display: flex; gap: 25px; margin-bottom: 45px; align-items: flex-start;">
+        
+        <div class="entry-image" style="flex: 0 0 100px;">
+          <img src="/images/logo-grey.png" style="width: 100px; height: 100px; object-fit: contain; background: #0a0d14; border: 1px solid #3a4a64; padding: 10px;">
+        </div>
+
+        <div class="entry-text" style="flex: 1;">
+          <!-- 1. DIMMED FEATURE LABEL (Silver with Spacing) -->
+          {{ with .Params.feature }}
+            <div style="color: #888888; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 8px;">{{ . }}</div>
+          {{ end }}
+
+          <!-- 2. REFINED TITLE -->
+          <a href="{{ .RelPermalink }}" style="text-decoration: none;">
+              <h1 style="color: #ffffff; font-size: 1.3rem; margin: 0 0 8px 0; line-height: 1.2;">{{ .Title }}</h1>
+          </a>
+
+          <!-- 3. RESTORED AUTHOR & DATE -->
+          <div style="color: #777; font-size: 0.85rem; margin-bottom: 12px;">
+              {{ with .Params.author }}<span>By {{ . }}</span> | {{ end }}
+              <time>{{ .PublishDate.Format "January 2, 2006" }}</time>
+          </div>
+
+          <!-- 4. RESTORED BYLINE (With breathing room) -->
+          {{ with .Params.byline }}
+          <div style="font-style: italic; color: #aaaaaa; border-left: 2px solid #3a4a64; padding-left: 15px; line-height: 1.5; margin-top: 10px;">
+              {{ . }}
+          </div>
+          {{ end }}
+        </div>
       </div>
-      <div style="flex: 1;">
-        <div style="color: #f1c40f; font-weight: bold; text-transform: uppercase; font-size: 0.8rem;">{{ .Params.feature }}</div>
-        <a href="{{ .RelPermalink }}" style="color: #fff; font-size: 1.6rem; text-decoration: none; font-weight: bold;">{{ .Title }}</a>
-        <div style="color: #999; font-size: 0.85rem;">{{ .Date.Format "Jan 2, 2006" }}</div>
-      </div>
-    </div>
-  {{ end }}
+    {{ end }}
+  </div>
 {{ end }}
