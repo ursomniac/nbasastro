@@ -1,5 +1,6 @@
 {{ define "main" }}
   <div class="welcome-hero" style="background: #0d1421; border-left: 4px solid #c5a059; padding: 4px 20px; margin-bottom: 25px;">
+{{ partial "news_logic.html" . }}
     <div style="font-size: 1.1rem; line-height: 1.4; color: #d1d1d1;">{{ .Content }}</div>
   </div>
 
