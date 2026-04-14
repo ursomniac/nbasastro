@@ -9,9 +9,17 @@
     {{ range (where .Site.RegularPages "Section" "articles") | first 5 }}
       <div class="article-entry" style="display: flex; gap: 25px; margin-bottom: 45px; align-items: flex-start;">
         
-        <div class="entry-image" style="flex: 0 0 100px;">
-          <img src="/images/logo-grey.png" style="width: 100px; height: 100px; object-fit: contain; background: #0a0d14; border: 1px solid #3a4a64; padding: 10px;">
-        </div>
+<div class="entry-image" style="flex: 0 0 100px;">
+    {{ if eq .Params.feature "Object Highlight" }}
+        <img src="/images/icons/saturn.svg" style="width: 80px; height: 80px; object-fit: contain;">
+    {{ else if eq .Params.feature "News" }}
+        <img src="/images/icons/comet.svg" style="width: 80px; height: 80px; object-fit: contain;">
+    {{ else }}
+        <!-- Default for everything else -->
+        <img src="/images/icons/galaxy.svg" style="width: 80px; height: 80px; object-fit: contain;">
+    {{ end }}
+</div>
+
 
         <div class="entry-text" style="flex: 1;">
           <!-- 1. DIMMED FEATURE LABEL (Silver with Spacing) -->

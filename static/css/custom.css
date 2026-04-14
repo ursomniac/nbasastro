@@ -40,3 +40,26 @@ body {
     width: 70%;
     padding: 20px;
 }
+
+/* 1. Internal Links (Logo Gold) */
+a {
+    color: #c5a059;
+    text-decoration: underline;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+/* 2. External Links (Distinct from Gold/H3) */
+.external-link {
+    color: #4db8ff !important; /* Electric Blue */
+    text-decoration: underline wavy #4db8ff; /* Wavy underline for tactile feel */
+}
+
+/* 3. Global H3 (White) - Keeping as reference */
+h3 {
+    color: #ffffff;
+}

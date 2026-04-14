@@ -1,4 +1,38 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
+<!-- 1. DYNAMIC HEADER -->
+<h1 style="color: #c5a059; border-bottom: 2px solid #3a4a64; padding-bottom: 15px; margin-bottom: 40px; font-size: 2rem;">
+    {{ if eq .Kind "taxonomy" }}Tag: {{ .Title }}{{ else }}{{ .Title }}{{ end }}
+</h1>
+
+<div class="article-list">
+    {{ range .Pages.ByPublishDate.Reverse }}
+    <div class="list-entry" style="margin-bottom: 50px; border-bottom: 1px solid #1a2a44; padding-bottom: 30px;">
+        
+        <!-- 2. METADATA ROW -->
+        <div style="color: #777; font-size: 0.85rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">
+            <time>{{ .PublishDate.Format "January 2, 2006" }}</time>
+            {{ with .Params.feature }} 
+                | <span style="color: #c5a059; font-weight: bold;">{{ . }}</span>
+            {{ end }}
+        </div>
+
+        <!-- 3. TITLE LINK -->
+        <a href="{{ .RelPermalink }}" style="text-decoration: none;">
+            <h2 style="color: #ffffff; margin: 0 0 15px 0; font-size: 1.6rem; line-height: 1.3;">{{ .Title }}</h2>
+        </a>
+
+        <!-- 4. BYLINE / SUMMARY -->
+        {{ with .Params.byline }}
+        <p style="color: #aaaaaa; font-style: italic; border-left: 3px solid #3a4a64; padding-left: 20px; line-height: 1.6;">
+            {{ . }}
+        </p>
+        {{ end }}
+
+        <a href="{{ .RelPermalink }}" style="color: #c5a059; font-size: 0.9rem; font-weight: bold; text-decoration: none;">Read Article ↗</a>
+    </div>
+    {{ else }}
+    <p style="color: #888;">No articles found in this section.</p>
+    {{ end }}
+</div>
 {{ end }}
+

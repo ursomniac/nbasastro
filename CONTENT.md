@@ -35,7 +35,7 @@
   * Observing Report
     * this will likely have a gallery IN it.
 
-## 2. Widgets
+## 2. Widgets --- THIS IS DONE as of V0.5.
 
 NOTE: none of these are fleshed out and will have to be developed over time.
 
@@ -62,4 +62,4 @@ NOTE: none of these are fleshed out and will have to be developed over time.
 ## 3. Utility pages
 * about us
 * contact
-
+(see PLAN_260414.md for additions to this list)
