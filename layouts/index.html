@@ -1,52 +1,51 @@
 {{ define "main" }}
-  <div class="welcome-hero" style="background: #0d1421; border-left: 4px solid #c5a059; padding: 4px 20px; margin-bottom: 25px;">
-{{ partial "news_logic.html" . }}
-    <div style="font-size: 1.1rem; line-height: 1.4; color: #d1d1d1;">{{ .Content }}</div>
+
+  {{/* 1. ANNOUNCEMENT & WELCOME SECTION */}}
+  <div class="welcome-hero" style="background: #0d1421; border-left: 4px solid #c5a059; padding: 15px 20px; margin-bottom: 35px;">
+    {{ partial "news_logic.html" . }}
+    {{/* Only include .Content if you want secondary text below the NewsFlash/Welcome box */}}
+    <div style="font-size: 1.1rem; line-height: 1.5; color: #d1d1d1; margin-top: 10px;">
+      {{ .Content }}
+    </div>
   </div>
 
-  <h2 style="color: #ffffff; border-bottom: 1px solid #3a4a64; padding-bottom: 8px; font-size: 1.3rem; margin-bottom: 30px;">Latest from the Society</h2>
-  
+  {{/* 2. ARTICLE LIST SECTION */}}
+  <h2 style="color: #ffffff; border-bottom: 1px solid #3a4a64; padding-bottom: 8px; font-size: 1.3rem; margin-bottom: 30px;">
+    Latest from the Society
+  </h2>
+
   <div class="article-list">
-    {{ range (where .Site.RegularPages "Section" "articles") | first 5 }}
-      <div class="article-entry" style="display: flex; gap: 25px; margin-bottom: 45px; align-items: flex-start;">
+    {{ range (where .Site.RegularPages "Section" "articles").ByPublishDate.Reverse }}
+      <div class="list-entry" style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 40px; border-bottom: 1px solid #1a2a44; padding-bottom: 25px;">
         
-<div class="entry-image" style="flex: 0 0 100px;">
-    {{ if eq .Params.feature "Object Highlight" }}
-        <img src="/images/icons/saturn.svg" style="width: 80px; height: 80px; object-fit: contain;">
-    {{ else if eq .Params.feature "News" }}
-        <img src="/images/icons/comet.svg" style="width: 80px; height: 80px; object-fit: contain;">
-    {{ else }}
-        <!-- Default for everything else -->
-        <img src="/images/icons/galaxy.svg" style="width: 80px; height: 80px; object-fit: contain;">
-    {{ end }}
-</div>
+        <!-- ICON COLUMN -->
+        <div class="feature-icon-wrap" style="flex: 0 0 60px; padding-top: 5px;">
+          {{ partial "feature-icon.html" . }}
+        </div>
 
-
-        <div class="entry-text" style="flex: 1;">
-          <!-- 1. DIMMED FEATURE LABEL (Silver with Spacing) -->
-          {{ with .Params.feature }}
-            <div style="color: #888888; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 8px;">{{ . }}</div>
-          {{ end }}
-
-          <!-- 2. REFINED TITLE -->
+        <!-- TEXT COLUMN -->
+        <div class="article-info" style="flex: 1;">
+          <div style="color: #777; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">
+            {{ .Params.feature | default "General" }}
+          </div>
+          
           <a href="{{ .RelPermalink }}" style="text-decoration: none;">
-              <h1 style="color: #ffffff; font-size: 1.3rem; margin: 0 0 8px 0; line-height: 1.2;">{{ .Title }}</h1>
+            <h2 style="color: #ffffff; margin: 0 0 8px 0; font-size: 1.5rem; line-height: 1.2;">{{ .Title }}</h2>
           </a>
 
-          <!-- 3. RESTORED AUTHOR & DATE -->
-          <div style="color: #777; font-size: 0.85rem; margin-bottom: 12px;">
-              {{ with .Params.author }}<span>By {{ . }}</span> | {{ end }}
-              <time>{{ .PublishDate.Format "January 2, 2006" }}</time>
+          <div style="color: #666; font-size: 0.85rem; margin-bottom: 12px;">
+            By {{ .Params.author | default "NBAS Staff" }} | {{ .PublishDate.Format "Jan 2, 2006" }}
           </div>
 
-          <!-- 4. RESTORED BYLINE (With breathing room) -->
           {{ with .Params.byline }}
-          <div style="font-style: italic; color: #aaaaaa; border-left: 2px solid #3a4a64; padding-left: 15px; line-height: 1.5; margin-top: 10px;">
+            <p style="color: #aaaaaa; font-style: italic; border-left: 2px solid #c5a059; padding-left: 15px; margin: 0; font-size: 0.95rem; line-height: 1.4;">
               {{ . }}
-          </div>
+            </p>
           {{ end }}
         </div>
+
       </div>
     {{ end }}
   </div>
+
 {{ end }}

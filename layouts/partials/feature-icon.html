@@ -1,0 +1,14 @@
+{{ $iconName := .Params.feature | lower | urlize }}
+
+{{/* Mapping verified filenames from your 'ls' output */}}
+{{ if eq $iconName "object-highlight" }}{{ $iconName = "saturn" }}
+{{ else if eq $iconName "constellation-highlight" }}{{ $iconName = "galaxy" }}
+{{ else if eq $iconName "imaging" }}{{ $iconName = "comet" }}
+{{ end }}
+
+{{/* Absolute path from the local root */}}
+{{ $iconPath := printf "/icons/%s.svg" $iconName }}
+
+<img src="{{ $iconPath }}" 
+     alt="" 
+     style="width: 100%; max-width: 50px; height: auto; display: block; border: 0;">

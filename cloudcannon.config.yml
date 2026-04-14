@@ -1,7 +1,67 @@
+# CloudCannon Configuration for https://nbasastro.org
+# Consolidated v0.7.0
+
+# 1. Global Environment Settings
 paths:
   static: static
   uploads: static/uploads
 timezone: America/New_York
+
+# 2. Collections (NewsFlash + Articles + Pages)
+collections_config:
+  newsflash:
+    path: content/newsflash
+    name: NewsFlash Announcements
+    output: false
+    icon: notification_important
+    # Defines the fields specifically for the NewsFlash UI
+    _inputs:
+      start_date:
+        type: datetime
+        label: Go Live Date
+      end_date:
+        type: datetime
+        label: Expiration Date
+
+  articles:
+    path: content/articles
+    name: Society Articles
+    icon: article
+    # This allows users to pick from your Feature list in CONTENT.md
+    _select_data:
+      feature_list:
+        - News
+        - General Article
+        - Astronomy Explained
+        - Tech
+        - Event
+        - Constellation Highlight
+        - Object Highlight
+        - Advice / How-To
+        - Imaging
+        - Gallery
+        - Observing Report
+
+  pages:
+    path: ''
+    icon: wysiwyg
+    filter:
+      base: strict
+
+# 3. Global Editor & Input Behavior
+_inputs:
+  publishDate:
+    type: date
+    label: Publication Date (Future dates won't show live)
+  feature:
+    type: select
+    options:
+      values: data.feature_list
+  author:
+    type: text
+    placeholder: "e.g., Jane Doe"
+
+# 4. Markdown Engine Settings
 markdown:
   engine: commonmark
   options:
@@ -17,14 +77,8 @@ markdown:
     attributes: false
     typographer: false
     treat_indentation_as_code: true
+
 _snippets_imports:
   hugo:
     exclude:
       - hugo_instagram
-collections_config:
-  pages:
-    path: ''
-    icon: wysiwyg
-  content:
-    path: content
-    icon: wysiwyg
