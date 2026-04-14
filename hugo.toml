@@ -1,23 +1,8 @@
 baseURL = "https://nbasastro.org"
 languageCode = "en-us"
 title = "Northern Berkshire Astronomical Society"
-theme = "mainroad"
 
 [params]
-  customCSS = ["css/custom.css"]
-  mainSections = ["posts", "articles", "gallery"]
-  # This brings the banner back:
-  header_image = "images/nbas-transparent-logo.png"
-  # This tones down the "vivid" red to a professional navy/astronomy blue:
-  highlightColor = "#1a2a44"
-
-[params.logo]
-  image = "images/logo-grey.png"
-  title = "NBAS"
-  subtitle = "Northern Berkshire Astronomical Society"
-
-[params.widgets]
-  sidebar = ["search", "recent", "taglist"]
-
-[markup.goldmark.renderer]
-  unsafe = true
+  subtitle = "Clear Skies over the Berkshires"
+  banner = "images/m31_banner.jpg"
+  logo = "images/nbas-grey.png"

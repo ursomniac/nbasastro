@@ -1,20 +1,42 @@
-body { 
-    font-family: sans-serif !important; 
-    background-color: #fff;
+/* 1. Global Reset - Deep Space Theme */
+body {
+    background-color: #0b0e14 !important;
+    color: #e0e0e0 !important;
+    margin: 0;
+    font-family: sans-serif;
 }
 
-/* Force header height reduction */
-.vh-100 { min-height: 25vh !important; }
-.pv4-l { padding-top: 2rem !important; padding-bottom: 2rem !important; }
-
-/* Force header height reduction for v0.0.12 */
-.cover {
-    min-height: 30vh !important;
+/* 2. THE BANNER FIX: Make it span the top and stay thin */
+.nbas-header {
+    background-image: url("/images/m31_banner.jpg");
+    background-size: cover;
+    background-position: center 65%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 2px solid #1a2a44;
 }
-.pv4-l, .pv5-l {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+
+/* 3. THE LOGO FIX: 90% Height */
+.nbas-logo {
+    height: 108px; /* 90% of 120px */
+    width: auto;
+    margin-right: 20px;
 }
 
-.vh-100 { min-height: 250px !important; height: 250px !important; }
-.cover { min-height: 250px !important; }
+/* 4. SIDEBAR FIX: Under 50% width */
+.nbas-container {
+    display: flex;
+}
+
+.nbas-sidebar {
+    width: 30%;
+    padding: 20px;
+    border-right: 1px solid #333;
+}
+
+.nbas-main {
+    width: 70%;
+    padding: 20px;
+}

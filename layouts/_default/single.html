@@ -1,0 +1,32 @@
+{{ define "main" }}
+<article style="max-width: 800px;">
+    <!-- 1. ABOVE TITLE: Feature (Gold All Caps) -->
+    {{ with .Params.feature }}
+    <div style="color: #f1c40f; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 5px;">
+        {{ . }}
+    </div>
+    {{ end }}
+
+    <h1 style="color: #ffffff; font-size: 2.5rem; margin: 0 0 10px 0;">{{ .Title }}</h1>
+
+    <!-- 2. BELOW TITLE: Author & Date (Light Grey) -->
+    <div style="color: #999; font-size: 0.9rem; margin-bottom: 20px;">
+        {{ with .Params.author }}<span>By {{ . }}</span> | {{ end }}
+        <time datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "January 2, 2006" }}</time>
+    </div>
+
+    <!-- 3. BYLINE: Italicized with a subtle left border -->
+    {{ with .Params.byline }}
+    <div style="font-style: italic; color: #cccccc; border-left: 3px solid #3a4a64; padding-left: 15px; margin: 20px 0; line-height: 1.5;">
+        {{ . }}
+    </div>
+    {{ end }}
+
+    <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 30px 0;">
+
+    <!-- 4. ACTUAL CONTENT -->
+    <div style="line-height: 1.8; font-size: 1.1rem;">
+        {{ .Content }}
+    </div>
+</article>
+{{ end }}
