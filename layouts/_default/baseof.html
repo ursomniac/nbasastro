@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ .Title }} | {{ .Site.Title }}</title>
     <style>
         body { background: #1a2a44; color: #d1d1d1; margin: 0; font-family: sans-serif; }
@@ -17,117 +18,172 @@
         .sidebar { width: 300px; padding: 30px 20px; border-right: 2px solid #3a4a64; background: #1a2a44; }
         .main { flex: 1; padding: 30px; background: #1a2a44; }
         a { color: #ffffff; text-decoration: underline #c5a059; font-weight: bold; }
-    </style>
+
+    /* Responsive Breakpoints */
+    @media (max-width: 800px) {
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar {
+            display: contents;
+        }
+
+        .sidebar-top {
+            order: 1; /* Move to the very top */
+            padding: 20px;
+            background: #1a2a44;
+            border-bottom: 2px solid #3a4a64;
+        }
+
+        .main {
+            order: 2; /* Content sits in the middle */
+            padding: 20px;
+        }
+
+        .sidebar-bottom {
+            order: 3; /* Widgets move to the bottom */
+            padding: 20px;
+            background: #1a2a44;
+            border-top: 2px solid #3a4a64;
+        }
+
+        .mobile-hide { display: none; } /* Hide the divider since we have borders now */
+
+
+        .nbas-header {
+            height: auto;
+            padding: 20px;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .nbas-logo {
+            margin-right: 0;
+            margin-bottom: 15px;
+            height: 120px; /* Shrink logo for mobile */
+        }
+        }
+
+        /* Responsive Breakpoint for Mobile */
+    @media (max-width: 600px) {
+        .list-entry {
+            flex-direction: column;
+            gap: 10px !important;
+        }
+        .feature-icon-wrap {
+            flex: 0 0 auto !important;
+        }
+        h1 {
+            font-size: 1.6rem !important;
+        }
+    }
+</style>
 </head>
+
 <body>
     <header class="nbas-header">
         <img src="/images/logo-grey.png" class="nbas-logo" alt="NBAS Logo">
         <div class="branding"><h1>{{ .Site.Title }}</h1><p>{{ .Site.Params.subtitle }}</p></div>
     </header>
+
     <div class="container">
+        <nav class="sidebar">
+            <div class="sidebar-top">
+            <!-- 1. Next meeting -->
+                <h3 style="color: #c5a059; margin-bottom: 10px; margin-top:0;">Next Meeting</h3>
+                <p id="next-meeting-text" style="color:#ffffff; font-weight: bold;">Calculating...</p>
+                <p style="color:#d1d1d1; font-size: 0.9rem;">6 PM | North Adams Public Library</p>
+                <a href="https://google.com" target="_blank" class="external-link" style="font-weight:bold;">View on Google Maps</a>
 
-<nav class="sidebar">
+                <script>
+                    function getNextMeeting() {
+                        const now = new Date();
+                    
+                        function findFirstWednesday(date) {
+                            let d = new Date(date.getFullYear(), date.getMonth(), 1);
+                            // Find first Wednesday (3)
+                            while (d.getDay() !== 3) {
+                                d.setDate(d.getDate() + 1);
+                            }
+                            // Set time to 6 PM (18:00)
+                            d.setHours(18, 0, 0, 0);
+                            return d;
+                        }
 
-<!-- 1. Next meeting -->
-<h3 style="color: #c5a059; margin-bottom: 10px; margin-top:0;">Next Meeting</h3>
-<p id="next-meeting-text" style="color:#ffffff; font-weight: bold;">Calculating...</p>
-<p style="color:#d1d1d1; font-size: 0.9rem;">6 PM | North Adams Public Library</p>
-<a href="https://google.com" target="_blank" class="external-link" style="font-weight:bold;">View on Google Maps</a>
+                        let meetingDate = findFirstWednesday(now);
 
-<script>
-function getNextMeeting() {
-    const now = new Date();
-    
-    function findFirstWednesday(date) {
-        let d = new Date(date.getFullYear(), date.getMonth(), 1);
-        // Find first Wednesday (3)
-        while (d.getDay() !== 3) {
-            d.setDate(d.getDate() + 1);
-        }
-        // Set time to 6 PM (18:00)
-        d.setHours(18, 0, 0, 0);
-        return d;
-    }
+                        // If today is after the meeting time, move to next month
+                        if (now > meetingDate) {
+                            let nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+                            meetingDate = findFirstWednesday(nextMonth);
+                        }
 
-    let meetingDate = findFirstWednesday(now);
+                        const options = { weekday: 'long', month: 'long', day: 'numeric' };
+                        document.getElementById('next-meeting-text').innerText = meetingDate.toLocaleDateString('en-US', options);
+                    }
+                    getNextMeeting();
+                </script>
+            </div>
 
-    // If today is after the meeting time, move to next month
-    if (now > meetingDate) {
-        let nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-        meetingDate = findFirstWednesday(nextMonth);
-    }
+            <hr class="mobile-hide" style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
 
-    const options = { weekday: 'long', month: 'long', day: 'numeric' };
-    document.getElementById('next-meeting-text').innerText = meetingDate.toLocaleDateString('en-US', options);
-}
+            <div class="sidebar-bottom">
+            <!-- CALENDAR WIDGET -->
+                <div style="margin-top: 20px; border: 1px solid #3a4a64; border-radius: 4px; overflow: hidden; background: #1a2a44;">
+                    <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%231a2a44&ctz=America%2FNew_York&mode=AGENDA&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&src=17a5d515a1fa7666d6311042841c063dbf4ff28021f15888267187f6dcecf86a%40group.calendar.google.com&color=%23c5a059&src=dirv9v10c32debb8njakrl0mdpp7d8fm%40import.calendar.google.com&color=%237CB342"></iframe>
+                </div>
 
-getNextMeeting();
-</script>
+                <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
 
+            <!-- SKY FORECAST -->
+                <h3 style="color: #c5a059; margin-bottom: 10px;">Sky Forecast</h3>
+                <div style="background: #0d1421; padding: 12px; border-radius: 4px; border: 1px solid #3a4a64; text-align: center;">
+                    <a href="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" target="_blank">
+                        <img src="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" 
+                            alt="North Adams Sky Forecast" 
+                            style="width: 100%; height: auto; border: 1px solid #3a4a64;">
+                    </a>
+                    <div style="margin-top: 8px;">
+                        <span style="font-size: 0.7rem; color: #666;">Data provided by </span>
+                        <a href="https://7timer.info/index.php" target="_blank" style="font-size: 0.7rem; color: #888; text-decoration: none; font-weight: normal;">7Timer! ↗</a>
+                    </div>
+                </div>
 
-    <!-- CALENDAR WIDGET -->
-    <div style="margin-top: 20px; border: 1px solid #3a4a64; border-radius: 4px; overflow: hidden; background: #1a2a44;">
-<iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%231a2a44&ctz=America%2FNew_York&mode=AGENDA&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&src=17a5d515a1fa7666d6311042841c063dbf4ff28021f15888267187f6dcecf86a%40group.calendar.google.com&color=%23c5a059&src=dirv9v10c32debb8njakrl0mdpp7d8fm%40import.calendar.google.com&color=%237CB342"></iframe>
-    </div>
+            <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
 
-    <!--div style="margin-top: 20px; border: 1px solid #3a4a64; border-radius: 4px; overflow: hidden; background: #1a2a44;">
-        <iframe src="https://calendar.google.com/calendar/embed?src=17a5d515a1fa7666d6311042841c063dbf4ff28021f15888267187f6dcecf86a@://google.com&ctz=America/New_York&mode=AGENDA&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&bgcolor=%231a2a44"
-                style="border-width:0" width="100%" height="250" frameborder="0" scrolling="no"></iframe>
-    </div-->
+            <!-- TONIGHT'S SKY (Verified Professional Embed) -->
+                <h3 style="color: #c5a059; margin-top: 25px; margin-bottom: 10px;">Tonight's Sky</h3>
+                <div style="background: #000; border: 1px solid #3a4a64; border-radius: 4px; overflow: hidden; height: 260px;">
+                    <iframe src="https://virtualsky.lco.global/embed/index.html?longitude=-73.11&latitude=42.70&projection=stereo&constellations=true&constellationlabels=true&live=true" 
+                        style="width: 100%; height: 260px; border: none;" scrolling="no"></iframe>
+                </div>
 
-    <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
+            <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
 
-    <!-- SKY FORECAST -->
-<h3 style="color: #c5a059; margin-bottom: 10px;">Sky Forecast</h3>
-<div style="background: #0d1421; padding: 12px; border-radius: 4px; border: 1px solid #3a4a64; text-align: center;">
-    <a href="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" target="_blank">
-        <img src="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" 
-             alt="North Adams Sky Forecast" 
-             style="width: 100%; height: auto; border: 1px solid #3a4a64;">
-    </a>
-    <div style="margin-top: 8px;">
-        <span style="font-size: 0.7rem; color: #666;">Data provided by </span>
-        <a href="https://7timer.info/index.php" target="_blank" style="font-size: 0.7rem; color: #888; text-decoration: none; font-weight: normal;">7Timer! ↗</a>
-    </div>
-</div>
+            <!-- DAILY ALMANAC (NASA VERIFIED & DYNAMIC) -->
+                <h3 style="color: #c5a059; margin-top: 25px; margin-bottom: 10px;">Daily Almanac</h3>
+                <div style="background: #0d1421; border-radius: 4px; border: 1px solid #3a4a64; padding: 25px; text-align: center;">
+                    <div style="margin: 0 auto 20px auto; width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 1px solid #3a4a64;">
+                    <!-- NASA SVS Frame for Apr 13, 2026, 23:00 UTC -->
+                        <img src="https://svs.gsfc.nasa.gov/vis/a000000/a005500/a005587/frames/730x730_1x1_30p/moon.2449.jpg" 
+                            alt="Current Moon Phase" 
+                            style="width: 100%; height: auto; filter: brightness(1.1) contrast(1.1);">
+                    </div>
+                    <div style="color: #c5a059; font-size: 0.9rem; margin-bottom: 15px; font-weight: bold;">Waning Crescent (16%)</div>
+                    <div style="margin-top: 15px;">
+                        <a href="https://www.timeanddate.com/sun/@4945495" target="_blank" class="external-link" style="font-weight: bold; text-decoration: underline #c5a059;">Sun & Moon Times ↗</a>
+                </div>
+            </div>
 
-    <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
-
-<!-- TONIGHT'S SKY (Verified Professional Embed) -->
-<h3 style="color: #c5a059; margin-top: 25px; margin-bottom: 10px;">Tonight's Sky</h3>
-<div style="background: #000; border: 1px solid #3a4a64; border-radius: 4px; overflow: hidden; height: 260px;">
-    <iframe src="https://virtualsky.lco.global/embed/index.html?longitude=-73.11&latitude=42.70&projection=stereo&constellations=true&constellationlabels=true&live=true" 
-            style="width: 100%; height: 260px; border: none;" scrolling="no"></iframe>
-</div>
-
-    <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
-
-<!-- DAILY ALMANAC (NASA VERIFIED & DYNAMIC) -->
-<h3 style="color: #c5a059; margin-top: 25px; margin-bottom: 10px;">Daily Almanac</h3>
-<div style="background: #0d1421; border-radius: 4px; border: 1px solid #3a4a64; padding: 25px; text-align: center;">
-    <div style="margin: 0 auto 20px auto; width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 1px solid #3a4a64;">
-        <!-- NASA SVS Frame for Apr 13, 2026, 23:00 UTC -->
-        <img src="https://svs.gsfc.nasa.gov/vis/a000000/a005500/a005587/frames/730x730_1x1_30p/moon.2449.jpg" 
-             alt="Current Moon Phase" 
-             style="width: 100%; height: auto; filter: brightness(1.1) contrast(1.1);">
-    </div>
-    <div style="color: #c5a059; font-size: 0.9rem; margin-bottom: 15px; font-weight: bold;">Waning Crescent (16%)</div>
-    <div style="margin-top: 15px;">
-        <a href="https://www.timeanddate.com/sun/@4945495" target="_blank" class="external-link" style="font-weight: bold; text-decoration: underline #c5a059;">Sun & Moon Times ↗</a>
-    </div>
-</div>
-
-
-
-
-    <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
-
-    <ul style="list-style:none; padding:0; line-height:2;">
-        <li><a href="/" style="color:#c5a059; font-weight:bold;">Home</a></li>
-        <li><a href="/articles/" style="color:#c5a059; font-weight:bold;">Articles</a></li>
-        <li><a href="/library/" style="color:#c5a059; font-weight:bold;">Library</a></li>
-    </ul>
-</nav>
+            <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
+            <ul style="list-style:none; padding:0; line-height:2;">
+                <li><a href="/" style="color:#c5a059; font-weight:bold;">Home</a></li>
+                <li><a href="/articles/" style="color:#c5a059; font-weight:bold;">Articles</a></li>
+                <li><a href="/library/" style="color:#c5a059; font-weight:bold;">Library</a></li>
+            </ul>
+        </nav>
 
         <main class="main">{{ block "main" . }}{{ end }}</main>
     </div>
