@@ -3,7 +3,7 @@ title: "T Coronae Borealis: The Blaze Star Prepares to Erupt"
 date: 2026-04-15
 feature_image: "t-crb-nova.jpg"
 description: "A look at the upcoming eruption of the famous recurring nova in Corona Borealis."
-author: "Bob Donahue"
+author: "bob-donahue"
 tags: "variable star, events: May 2026, constellation: Corona Borealis"
 
 # Metadata Panel Data

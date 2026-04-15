@@ -1,0 +1,49 @@
+{{ define "main" }}
+<article class="article-body">
+  <!-- 1. ABOVE TITLE: Feature -->
+  {{ with .Params.feature }}
+    <div class="article-feature-tag">{{ . }}</div>
+  {{ end }}
+
+  <h1 class="article-title">{{ .Title }}</h1>
+
+<!-- 2. BELOW TITLE: Author & Date -->
+<div class="article-metadata">
+  {{ $name := .Params.author }}
+  {{ if reflect.IsSlice $name }}{{ $name = index $name 0 }}{{ end }}
+
+  {{ if $name }}
+    {{/* We use 'urlize' which Hugo uses to create the folder name */}}
+    {{ $slug := $name | urlize }}
+    {{ $authorPage := $.Site.GetPage (printf "/authors/%s" $slug) }}
+    
+    <span class="author-byline">
+      By 
+      {{ if $authorPage }}
+        <a href="{{ $authorPage.RelPermalink }}" style="color: #c5a059; text-decoration: underline;">{{ $name }}</a>
+      {{ else }}
+        {{ $name }}
+      {{ end }}
+    </span>
+    <span class="meta-separator">|</span>
+  {{ end }}
+  
+  <time>{{ .PublishDate.Format "January 2, 2006" }}</time>
+</div>
+
+
+
+  <!-- 3. BYLINE -->
+  {{ with .Params.byline }}
+    <div class="article-italic-byline">{{ . }}</div>
+  {{ end }}
+
+  <hr class="article-divider">
+
+  <!-- 4. ACTUAL CONTENT -->
+  <div class="article-content">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}
+

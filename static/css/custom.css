@@ -213,6 +213,106 @@ a:hover { color: #f1c40f; }
     font-weight: bold;
 }
 
+/* --- 12. AUTHOR PAGES (Goal 1.8) --- */
+.author-profile {
+	max-width: 850px;
+	margin: 0 auto;
+}
+.author-bio-text {
+    line-height: 1.8;
+    color: #d1d1d1;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+}
+
+.author-profile h2.archive-header {
+    border-top: 1px solid #3a4a64;
+    padding-top: 2rem;
+    margin-top: 2rem;
+}
+
+
+.author-headshot {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #c5a059;
+    object-fit: cover;
+}
+
+.author-meta h1 {
+    margin-top: 0;
+    color: #f1c40f;
+}
+
+.author-role {
+    color: #aaa;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.article-meta {
+    margin: 10px 0 30px 0;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #3a4a64;
+    padding-bottom: 15px;
+}
+
+.meta-label {
+    color: #666;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.author-link {
+    color: #c5a059 !important; /* Logo Gold */
+    text-decoration: underline;
+}
+
+
+/* --- 13. ARTICLE METADATA (Goal 1.8 Refactor) --- */
+.article-metadata {
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+/* --- 16. ARTICLE HEADER UI --- */
+.article-metadata {
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.author-byline a {
+    color: #c5a059; /* Logo Gold */
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.meta-separator {
+    margin: 0 10px;
+    color: #444;
+}
+
+
+.author-byline a {
+    color: #c5a059; /* Logo Gold */
+    text-decoration: underline;
+    text-decoration-color: rgba(197, 160, 89, 0.3);
+}
+
+.author-byline a:hover {
+    color: #f1c40f;
+}
+
+.meta-separator {
+    margin: 0 10px;
+    color: #444;
+}
+
+/* --- 99. Last content section--- */
 
 /* --- RESPONSIVE LAYOUT (The "Sandwich" Fix) --- */
 @media (max-width: 800px) {

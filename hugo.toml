@@ -7,3 +7,7 @@ title = "Northern Berkshire Astronomical Society"
   banner = "images/m31_banner.jpg"
   logo = "images/nbas-grey.png"
 
+[taxonomies]
+  author = "authors"
+  tag = "tags"
+

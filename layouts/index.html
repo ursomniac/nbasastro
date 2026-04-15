@@ -33,9 +33,11 @@
             <h2 style="color: #ffffff; margin: 0 0 8px 0; font-size: 1.5rem; line-height: 1.2;">{{ .Title }}</h2>
           </a>
 
-          <div style="color: #666; font-size: 0.85rem; margin-bottom: 12px;">
-            By {{ .Params.author | default "NBAS Staff" }} | {{ .PublishDate.Format "Jan 2, 2006" }}
-          </div>
+<div style="color: #666; font-size: 0.85rem; margin-bottom: 12px;">
+  {{ $name := .Params.author }}
+  {{ if reflect.IsSlice $name }}{{ $name = index $name 0 }}{{ end }}
+  By {{ $name | default "NBAS Staff" }} | {{ .PublishDate.Format "Jan 2, 2006" }}
+</div>
 
           {{ with .Params.byline }}
             <p style="color: #aaaaaa; font-style: italic; border-left: 2px solid #c5a059; padding-left: 15px; margin: 0; font-size: 0.95rem; line-height: 1.4;">
