@@ -1,19 +1,22 @@
-{{ $image := .Page.Resources.GetMatch (.Get "src") }}
-<figure class="nbas-media-container" style="margin: 2rem auto; text-align: center;">
-  {{ with $image }}
-    {{/* Automatically resize to 1000px wide if the original is larger */}}
-    {{ $scaled := .Resize "1000x" }}
+{{- $image := .Page.Resources.GetMatch (.Get "src") -}}
+{{- $align := .Get "align" | default "center" -}}
+{{- $width := .Get "width" | default "100%" -}}
+
+<figure class="nbas-media-container align-{{ $align }}" style="width: {{ $width }};">
+  {{- with $image -}}
+    {{- $scaled := .Resize "1000x" -}}
     <a href="{{ .RelPermalink }}" target="_blank" title="Click for full resolution">
       <img src="{{ $scaled.RelPermalink }}" 
            alt="{{ $.Get "alt" }}" 
-           style="border: 2px solid #c5a059; border-radius: 4px; max-width: 100%; height: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+           class="nbas-media-img">
     </a>
-  {{ else }}
-    <p style="color: #ff4444;">Image "{{ .Get "src" }}" not found.</p>
-  {{ end }}
-  {{ with .Get "caption" }}
-    <figcaption style="color: #aaa; font-style: italic; font-size: 0.9rem; margin-top: 10px;">
+  {{- else -}}
+    <p class="nbas-image-error">Image "{{ .Get "src" }}" not found.</p>
+  {{- end -}}
+  
+  {{- with .Get "caption" -}}
+    <figcaption class="nbas-caption">
       {{ . | markdownify }}
     </figcaption>
-  {{ end }}
+  {{- end -}}
 </figure>

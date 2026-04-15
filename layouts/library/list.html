@@ -16,7 +16,17 @@
       </thead>
       <tbody>
         {{ range $j, $f := .Sections.ByTitle.Reverse }}
-          {{ $mNum := (sub 12 $j) }}
+
+
+		{{/* Determine the "starting month" for the countdown */}}
+		{{ $topMonth := 12 }}
+		{{ if eq $year 2026 }}
+		    {{ $topMonth = 4 }}
+		{{ end }}
+
+		{{/* Subtract from our dynamic top month instead of a fixed 12 */}}
+		{{ $mNum := (sub $topMonth $j) }}
+
           {{ $mName := index (slice "" "January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December") $mNum }}
           
           <tr>

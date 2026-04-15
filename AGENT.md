@@ -16,8 +16,8 @@
 
 * **RULE 4.** We use strict versioning
     * Major versions: (next V1.0) for full-site redesign (we're working to V1.0)
-    * Minor versions: (next V0.9) for feature changes/additions
-    * Tertiary versions: for incremental changes, sets of bug fixes, ongoing dev of a feature release
+    * Minor versions: (current V0.9) for feature changes/additions
+    * Tertiary versions: (current V0.9.0) for incr. changes, sets of bug fixes, ongoing dev of a feature release
     * Minor Version releases are tagged
 
 # Overall Parameters:

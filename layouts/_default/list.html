@@ -1,7 +1,7 @@
 {{ define "main" }}
 <!-- 1. DYNAMIC HEADER -->
-<h1 style="color: #c5a059; border-bottom: 2px solid #3a4a64; padding-bottom: 15px; margin-bottom: 40px; font-size: 2rem;">
-    {{ if eq .Kind "taxonomy" }}Tag: {{ .Title }}{{ else }}{{ .Title }}{{ end }}
+<h1 class="dynamic-section-header">
+  {{ if eq .Kind "taxonomy" }}Tag: {{ .Title }}{{ else }}{{ .Title }}{{ end }}
 </h1>
 
 <div class="article-list">
