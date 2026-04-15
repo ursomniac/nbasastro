@@ -1,65 +1,64 @@
-/* 1. Global Reset - Deep Space Theme */
-body {
-    background-color: #0b0e14 !important;
-    color: #e0e0e0 !important;
-    margin: 0;
-    font-family: sans-serif;
+/* --- 1. GLOBAL THEME: Restoring Deep Space Blue --- */
+body { 
+    background-color: #1a2a44; /* Your Original Color */
+    color: #d1d1d1; 
+    margin: 0; 
+    font-family: sans-serif; 
 }
 
-/* 2. THE BANNER FIX: Make it span the top and stay thin */
-.nbas-header {
-    background-image: url("/images/m31_banner.jpg");
-    background-size: cover;
-    background-position: center 65%;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    border-bottom: 2px solid #1a2a44;
+/* --- 2. LINKS: Clean Logo Gold --- */
+a { 
+    color: #c5a059; 
+    text-decoration: underline; 
+    text-decoration-color: rgba(197, 160, 89, 0.4);
+    font-weight: bold; 
+}
+a:hover { color: #f1c40f; }
+
+/* Remove the blue/wavy amateur look */
+.external-link { color: #c5a059 !important; text-decoration: underline !important; }
+
+/* --- 3. GEOMETRY --- */
+.nbas-header { 
+    background: #1a2a44 url('/images/m31_banner.jpg') no-repeat center 65%; 
+    background-size: cover; height: 120px; display: flex; align-items: center; padding: 0 20px; 
+    border-bottom: 2px solid #1a2a44; 
+}
+.nbas-logo { height: 108px; width: auto; margin-right: 20px; }
+.nbas-container { display: flex; min-height: 100vh; background: #1a2a44; }
+.nbas-sidebar { width: 300px; padding: 20px; border-right: 2px solid #3a4a64; background: #1a2a44; }
+.nbas-main { flex: 1; padding: 30px; background: #1a2a44; }
+
+/* --- 4. LIBRARY GRID --- */
+.library-table { width: 100%; border-collapse: collapse; background: #0d1421; border: 1px solid #1a2a44; margin-bottom: 40px; }
+.library-table th { background: #1a2a44; color: #aaaaaa; text-align: left; padding: 12px; border: 1px solid #3a4a64; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+.library-table td { padding: 12px; border: 1px solid #3a4a64; }
+.lib-size { 
+    color: #666; 
+    font-size: 0.75rem; 
+    font-weight: normal; 
+    margin-left: 5px;
+    letter-spacing: 0.5px;
+}
+/* Brighter Electric Gold for Section Headers */
+.archive-header { 
+    color: #ffd700; /* Pure/Bright Gold */
+    margin-top: 50px; 
+    margin-bottom: 20px; 
+    font-size: 1.8rem; 
+    letter-spacing: 1px;
 }
 
-/* 3. THE LOGO FIX: 90% Height */
-.nbas-logo {
-    height: 108px; /* 90% of 120px */
-    width: auto;
-    margin-right: 20px;
+/* Standard Electric Gold for Newsletter Links */
+.newsletter-link { 
+    color: #f1c40f; 
+    font-weight: bold; 
 }
 
-/* 4. SIDEBAR FIX: Under 50% width */
-.nbas-container {
-    display: flex;
-}
 
-.nbas-sidebar {
-    width: 30%;
-    padding: 20px;
-    border-right: 1px solid #333;
-}
 
-.nbas-main {
-    width: 70%;
-    padding: 20px;
-}
-
-/* 1. Internal Links (Logo Gold) */
-a {
-    color: #c5a059;
-    text-decoration: underline;
-    font-weight: bold;
-    transition: opacity 0.2s;
-}
-
-a:hover {
-    opacity: 0.8;
-}
-
-/* 2. External Links (Distinct from Gold/H3) */
-.external-link {
-    color: #4db8ff !important; /* Electric Blue */
-    text-decoration: underline wavy #4db8ff; /* Wavy underline for tactile feel */
-}
-
-/* 3. Global H3 (White) - Keeping as reference */
-h3 {
-    color: #ffffff;
-}
+.archive-header { color: #f1c40f; margin-top: 40px; margin-bottom: 15px; font-size: 1.8rem; }
+.newsletter-link { color: #f1c40f !important; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.starmap-link { color: #e67e22 !important; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.constellation-link { color: #8e7037 !important; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.constellation-text { color: #d1d1d1; }

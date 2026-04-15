@@ -1,95 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ .Title }} | {{ .Site.Title }}</title>
-    <style>
-        body { background: #1a2a44; color: #d1d1d1; margin: 0; font-family: sans-serif; }
-        .nbas-header { 
-            background: #1a2a44 url('/images/m31_banner.jpg') no-repeat center 40%; 
-            background-size: cover; height: 200px; border-bottom: 2px solid #3a4a64;
-            display: flex; align-items: center; padding: 0 20px;
-        }
-        .nbas-logo { height: 195px; width: auto; margin-right: 30px; }
-        .branding h1 { margin: 0; color: #fff; text-shadow: 3px 3px 6px #000; font-size: 2.2rem; }
-        .branding p { margin: 0; color: #c5a059; font-size: 1.3rem; margin-top: 10px; }
-        .container { display: flex; min-height: 100vh; }
-        .sidebar { width: 300px; padding: 30px 20px; border-right: 2px solid #3a4a64; background: #1a2a44; }
-        .main { flex: 1; padding: 30px; background: #1a2a44; }
-        a { color: #ffffff; text-decoration: underline #c5a059; font-weight: bold; }
-
-    /* Responsive Breakpoints */
-    @media (max-width: 800px) {
-        .container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar {
-            display: contents;
-        }
-
-        .sidebar-top {
-            order: 1; /* Move to the very top */
-            padding: 20px;
-            background: #1a2a44;
-            border-bottom: 2px solid #3a4a64;
-        }
-
-        .main {
-            order: 2; /* Content sits in the middle */
-            padding: 20px;
-        }
-
-        .sidebar-bottom {
-            order: 3; /* Widgets move to the bottom */
-            padding: 20px;
-            background: #1a2a44;
-            border-top: 2px solid #3a4a64;
-        }
-
-        .mobile-hide { display: none; } /* Hide the divider since we have borders now */
-
-
-        .nbas-header {
-            height: auto;
-            padding: 20px;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .nbas-logo {
-            margin-right: 0;
-            margin-bottom: 15px;
-            height: 120px; /* Shrink logo for mobile */
-        }
-        }
-
-        /* Responsive Breakpoint for Mobile */
-    @media (max-width: 600px) {
-        .list-entry {
-            flex-direction: column;
-            gap: 10px !important;
-        }
-        .feature-icon-wrap {
-            flex: 0 0 auto !important;
-        }
-        h1 {
-            font-size: 1.6rem !important;
-        }
-    }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ .Title }} | {{ .Site.Title }}</title>
+  
+  {{/* Link to your external stylesheet only */}}
+  <link rel="stylesheet" href="/css/custom.css">
 </head>
 
 <body>
-    <header class="nbas-header">
-        <img src="/images/logo-grey.png" class="nbas-logo" alt="NBAS Logo">
-        <div class="branding"><h1>{{ .Site.Title }}</h1><p>{{ .Site.Params.subtitle }}</p></div>
-    </header>
+  <header class="nbas-header">
+    <img src="/images/logo-grey.png" class="nbas-logo" alt="NBAS Logo">
+    <div class="branding">
+      <h1>{{ .Site.Title }}</h1>
+      <p>{{ .Site.Params.subtitle }}</p>
+    </div>
+  </header>
 
-    <div class="container">
-        <nav class="sidebar">
+
+    <div class="nbas-container">
+        <nav class="nbas-sidebar">
             <div class="sidebar-top">
             <!-- 1. Next meeting -->
                 <h3 style="color: #c5a059; margin-bottom: 10px; margin-top:0;">Next Meeting</h3>
@@ -185,7 +116,7 @@
             </ul>
         </nav>
 
-        <main class="main">{{ block "main" . }}{{ end }}</main>
+        <main class="nbas-main">{{ block "main" . }}{{ end }}</main>
     </div>
 </body>
 </html>

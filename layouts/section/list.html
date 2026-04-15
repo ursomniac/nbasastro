@@ -1,0 +1,51 @@
+{{ define "main" }}
+<div class="library-container" style="max-width: 900px; margin: 0 auto; padding: 20px;">
+  <h1 style="color: #ffffff; border-bottom: 2px solid #c5a059; padding-bottom: 10px; margin-bottom: 30px;">Resource Library</h1>
+
+  {{ $resources := resources.Match "library/**.pdf" }}
+  
+  {{/* Extract unique years from the folder structure */}}
+  {{ $years := slice }}
+  {{ range $resources }}{{ $years = $years | append (index (split .Name "/") 1) }}{{ end }}
+
+  {{ range (uniq $years | sort (slice) "desc") }}
+    {{ $currentYear := . }}
+    <h2 style="color: #c5a059; margin-top: 40px; border-bottom: 1px solid #3a4a64;">{{ $currentYear }} Archive</h2>
+    
+    {{/* Extract unique months for this year */}}
+    {{ $months := slice }}
+    {{ range $resources }}
+      {{ if eq (index (split .Name "/") 1) $currentYear }}
+        {{ $months = $months | append (index (split .Name "/") 2) }}
+      {{ end }}
+    {{ end }}
+
+    {{ range (uniq $months | sort (slice) "desc") }}
+      {{ $mNum := . }}
+      {{/* Logic to turn "04" into "April" automatically */}}
+      {{ $mName := dateFormat "January" (printf "2026-%s-01" $mNum) }}
+      
+      <div class="month-block" style="margin-top: 20px; padding-left: 20px; border-left: 2px solid #3a4a64;">
+        <h3 style="color: #ffffff; margin-bottom: 10px;">{{ $mName }}</h3>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+          {{ range $resources }}
+            {{ if and (eq (index (split .Name "/") 1) $currentYear) (eq (index (split .Name "/") 2) $mNum) }}
+              <a href="{{ .RelPermalink }}" target="_blank" style="color: #c5a059; text-decoration: none; background: #0d1421; padding: 6px 15px; border-radius: 4px; border: 1px solid #3a4a64; font-size: 0.9rem;">
+                {{/* Smart Labeling based on Keywords */}}
+                {{ $lowName := .Name | lower }}
+                {{ if in $lowName "newsletter" }}📄 Newsletter
+                {{ else if in $lowName "starmap" }}🌟 Star Map
+                {{ else if in $lowName "constellation" }}🔭 Constellation
+                {{ else }}
+                  {{/* Fallback: Strip path and extension, replace dashes/dots with spaces */}}
+                  📄 {{ .Name | replaceRE ".*/" "" | replaceRE "\\..*" "" | replaceRE "[-_]" " " | title }}
+                {{ end }}
+              </a>
+            {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  {{ end }}
+</div>
+{{ end }}
