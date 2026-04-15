@@ -62,7 +62,7 @@
 
             <div class="sidebar-bottom">
             <!-- CALENDAR WIDGET -->
-                <div style="margin-top: 20px; border: 1px solid #3a4a64; border-radius: 4px; overflow: hidden; background: #1a2a44;">
+		<div class="responsive-iframe-wrap ratio-calendar">
                     <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%231a2a44&ctz=America%2FNew_York&mode=AGENDA&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&src=17a5d515a1fa7666d6311042841c063dbf4ff28021f15888267187f6dcecf86a%40group.calendar.google.com&color=%23c5a059&src=dirv9v10c32debb8njakrl0mdpp7d8fm%40import.calendar.google.com&color=%237CB342"></iframe>
                 </div>
 
@@ -70,7 +70,7 @@
 
             <!-- SKY FORECAST -->
                 <h3 style="color: #c5a059; margin-bottom: 10px;">Sky Forecast</h3>
-                <div style="background: #0d1421; padding: 12px; border-radius: 4px; border: 1px solid #3a4a64; text-align: center;">
+                  <div class="widget-box">
                     <a href="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" target="_blank">
                         <img src="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" 
                             alt="North Adams Sky Forecast" 
@@ -86,7 +86,7 @@
 
             <!-- TONIGHT'S SKY (Verified Professional Embed) -->
                 <h3 style="color: #c5a059; margin-top: 25px; margin-bottom: 10px;">Tonight's Sky</h3>
-                <div style="background: #000; border: 1px solid #3a4a64; border-radius: 4px; overflow: hidden; height: 260px;">
+                  <div class="responsive-iframe-wrap ratio-sky">
                     <iframe src="https://virtualsky.lco.global/embed/index.html?longitude=-73.11&latitude=42.70&projection=stereo&constellations=true&constellationlabels=true&live=true" 
                         style="width: 100%; height: 260px; border: none;" scrolling="no"></iframe>
                 </div>
@@ -95,18 +95,68 @@
 
             <!-- DAILY ALMANAC (NASA VERIFIED & DYNAMIC) -->
                 <h3 style="color: #c5a059; margin-top: 25px; margin-bottom: 10px;">Daily Almanac</h3>
-                <div style="background: #0d1421; border-radius: 4px; border: 1px solid #3a4a64; padding: 25px; text-align: center;">
-                    <div style="margin: 0 auto 20px auto; width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 1px solid #3a4a64;">
-                    <!-- NASA SVS Frame for Apr 13, 2026, 23:00 UTC -->
-                        <img src="https://svs.gsfc.nasa.gov/vis/a000000/a005500/a005587/frames/730x730_1x1_30p/moon.2449.jpg" 
-                            alt="Current Moon Phase" 
-                            style="width: 100%; height: auto; filter: brightness(1.1) contrast(1.1);">
-                    </div>
-                    <div style="color: #c5a059; font-size: 0.9rem; margin-bottom: 15px; font-weight: bold;">Waning Crescent (16%)</div>
-                    <div style="margin-top: 15px;">
-                        <a href="https://www.timeanddate.com/sun/@4945495" target="_blank" class="external-link" style="font-weight: bold; text-decoration: underline #c5a059;">Sun & Moon Times ↗</a>
-                </div>
-            </div>
+
+<!--- MOON STARTS HERE -->
+
+<div class="moon-widget">
+  <div class="moon-porthole">
+    {{/* 1. CALCULATE LUNAR PHASE (0.0 to 1.0) */}}
+    {{ $now := now.Unix }}
+    {{ $newMoon := 1704944400 }} {{/* Jan 11, 2024 Anchor */}}
+    {{ $cycle := 2551443 }}       {{/* 29.53 days in seconds */}}
+    {{ $age := mod (sub $now $newMoon) $cycle }}
+    {{ $phase := div (float $age) (float $cycle) }}
+
+    {{/* 2. SVG DRAWING: A moonlight circle with a shifting shadow ellipse */}}
+    <svg viewBox="0 0 100 100" class="moon-svg">
+      <circle cx="50" cy="50" r="48" class="moon-surface" />
+      
+      {{ if lt $phase 0.5 }}
+        {{/* Waxing Logic */}}
+        <ellipse cx="{{ add 50 (mul 100 (sub 0.25 $phase)) }}" cy="50" rx="{{ mul 50 (sub 1 (mul $phase 4)) }}" ry="48" class="moon-shadow" />
+      {{ else }}
+        {{/* Waning Logic */}}
+        {{ $waningPhase := sub $phase 0.5 }}
+        <ellipse cx="{{ sub 50 (mul 100 (sub 0.25 $waningPhase)) }}" cy="50" rx="{{ mul 50 (sub 1 (mul $waningPhase 4)) }}" ry="48" class="moon-shadow" />
+      {{ end }}
+    </svg>
+  </div>
+
+  <div class="moon-phase-label">
+    {{ if lt $phase 0.03 }}New Moon
+    {{ else if lt $phase 0.22 }}Waxing Crescent
+    {{ else if lt $phase 0.28 }}First Quarter
+    {{ else if lt $phase 0.47 }}Waxing Gibbous
+    {{ else if lt $phase 0.53 }}Full Moon
+    {{ else if lt $phase 0.72 }}Waning Gibbous
+    {{ else if lt $phase 0.78 }}Last Quarter
+    {{ else }}Waning Crescent{{ end }}
+  </div>
+
+  <div style="margin-top: 15px;">
+    <a href="https://timeanddate.com/sun/@4945495" target="_blank" class="external-link">
+      Sun & Moon Times ↗
+    </a>
+  </div>
+
+  {{/* 3. DEBUG BAR: Accessible values for equation tuning */}}
+  <div style="margin-top: 20px; font-size: 0.65rem; color: #8e7037; border-top: 1px solid #3a4a64; padding-top: 10px; font-family: monospace; text-align: left;">
+    <div style="display: flex; justify-content: space-between;">
+      <span>NOW: {{ $now }}</span>
+      <span>PHS: {{ printf "%.4f" $phase }}</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+      <span>ANC: {{ $newMoon }}</span>
+      <span>AGE: {{ printf "%.1f" (div (float $age) 86400.0) }}d</span>
+    </div>
+    <div style="margin-top: 40px; color: #555; text-align: center; font-style: italic;">
+      Internal v0.8.2 Almanac Engine
+    </div>
+  </div>
+</div>
+
+
+<!--- MOON ENDS HERE -->
 
             <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
             <ul style="list-style:none; padding:0; line-height:2;">

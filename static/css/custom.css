@@ -55,10 +55,134 @@ a:hover { color: #f1c40f; }
     font-weight: bold; 
 }
 
+/* Base container for all responsive iframes */
+.responsive-iframe-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 20px;
+    border: 1px solid #3a4a64;
+    border-radius: 4px;
+    background: #0d1421; /* Clean dark placeholder */
+}
 
+.responsive-iframe-wrap iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Specific Ratios */
+.ratio-square { padding-top: 100%; } /* 1:1 */
+.ratio-video  { padding-top: 56.25%; } /* 16:9 */
+.ratio-standard { padding-top: 75%; } /* 4:3 (Good for Calendar) */
+.ratio-tall    { padding-top: 120%; } /* For long lists */
+.ratio-calendar { padding-top: 75%; }   /* 4:3 Aspect */
+.ratio-sky      { padding-top: 50%; }   /* Widescreen for Sky Map */
+
+/* Cleanup for the Static Images (Forecast/Almanac) */
+.widget-box {
+    background: #0d1421;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #3a4a64;
+    text-align: center;
+    margin-top: 20px;
+}
 
 .archive-header { color: #f1c40f; margin-top: 40px; margin-bottom: 15px; font-size: 1.8rem; }
 .newsletter-link { color: #f1c40f !important; text-decoration: none; display: flex; align-items: center; gap: 8px; }
 .starmap-link { color: #e67e22 !important; text-decoration: none; display: flex; align-items: center; gap: 8px; }
 .constellation-link { color: #8e7037 !important; text-decoration: none; display: flex; align-items: center; gap: 8px; }
 .constellation-text { color: #d1d1d1; }
+
+/* --- LUNAR ENGINE (v0.8.2) --- */
+.moon-widget {
+    background: #0d1421;
+    border-radius: 4px;
+    border: 1px solid #3a4a64;
+    padding: 25px;
+    text-align: center;
+}
+.moon-porthole {
+    margin: 0 auto 20px auto;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 1px solid #3a4a64;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+.moon-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(15deg); /* Natural orbital tilt */
+}
+.moon-surface { fill: #e0e0e0; } /* Sunlight */
+.moon-shadow  { fill: #000000; } /* Earth's Shadow */
+.moon-phase-label {
+    color: #c5a059;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+
+
+/* --- RESPONSIVE LAYOUT (The "Sandwich" Fix) --- */
+@media (max-width: 800px) {
+    /* 1. Break the side-by-side flex and stack them */
+    .nbas-container { 
+        flex-direction: column; 
+    }
+
+    /* 2. Make Sidebar and Main take full width */
+    .nbas-sidebar, .nbas-main {
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* 3. Handle the Sidebar contents for the Sandwich */
+    .nbas-sidebar {
+        display: contents; /* Allows children to move independently */
+        border-right: none;
+    }
+
+    .sidebar-top { 
+        order: 1; 
+        padding: 20px; 
+        border-bottom: 2px solid #3a4a64; 
+    }
+
+    .nbas-main { 
+        order: 2; 
+        padding: 20px; 
+    }
+
+    .sidebar-bottom { 
+        order: 3; 
+        padding: 20px; 
+        border-top: 2px solid #3a4a64; 
+    }
+
+    /* 4. Header adjustments for mobile */
+    .nbas-header {
+        height: auto;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .nbas-logo {
+        margin-right: 0;
+        margin-bottom: 15px;
+        height: 100px;
+    }
+}
+
+
