@@ -81,7 +81,7 @@ a:hover { color: #f1c40f; }
 .ratio-standard { padding-top: 75%; } /* 4:3 (Good for Calendar) */
 .ratio-tall    { padding-top: 120%; } /* For long lists */
 .ratio-calendar { padding-top: 75%; }   /* 4:3 Aspect */
-.ratio-sky      { padding-top: 50%; }   /* Widescreen for Sky Map */
+.ratio-sky      { padding-top: 90%; }   /* Widescreen for Sky Map  38% for mobile */
 
 /* Cleanup for the Static Images (Forecast/Almanac) */
 .widget-box {
