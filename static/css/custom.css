@@ -122,8 +122,11 @@ a:hover { color: #f1c40f; }
     height: 100%;
     transform: rotate(15deg); /* Natural orbital tilt */
 }
-.moon-surface { fill: #e0e0e0; } /* Sunlight */
-.moon-shadow  { fill: #000000; } /* Earth's Shadow */
+.moon-shadow { fill: #0d1421; }
+.moon-surface { fill: #c5a059; } /* Using Logo Gold for the lit portion */
+
+
+
 .moon-phase-label {
     color: #c5a059;
     font-size: 0.9rem;

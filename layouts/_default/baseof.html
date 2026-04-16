@@ -1,184 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ .Title }} | {{ .Site.Title }}</title>
-  
-  {{/* Link to your external stylesheet only */}}
-  <link rel="stylesheet" href="/css/custom.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <link rel="stylesheet" href="/css/custom.css">
 </head>
-
 <body>
-  <header class="nbas-header">
-    <img src="/images/logo-grey.png" class="nbas-logo" alt="NBAS Logo">
-    <div class="branding">
-      <h1>{{ .Site.Title }}</h1>
-      <p>{{ .Site.Params.subtitle }}</p>
-    </div>
-  </header>
-
+<h1 style="background: red; color: white; padding: 20px;">I AM THE CORRECT BASEOF</h1>
+    <header class="nbas-header">
+        <a href="/">
+            <img src="/images/logo-grey.png" class="nbas-logo" alt="NBAS Logo">
+        </a>
+        <div class="branding">
+            <h1>{{ .Site.Title }}</h1>
+            <p>{{ .Site.Params.subtitle }}</p>
+        </div>
+    </header>
 
     <div class="nbas-container">
         <nav class="nbas-sidebar">
             <div class="sidebar-top">
-            <!-- 1. Next meeting -->
-                <h3 style="color: #c5a059; margin-bottom: 10px; margin-top:0;">Next Meeting</h3>
-                <p id="next-meeting-text" style="color:#ffffff; font-weight: bold;">Calculating...</p>
-                <p style="color:#d1d1d1; font-size: 0.9rem;">6 PM | North Adams Public Library</p>
-                <a href="https://google.com" target="_blank" class="external-link" style="font-weight:bold;">View on Google Maps</a>
-
-                <script>
-                    function getNextMeeting() {
-                        const now = new Date();
-                    
-                        function findFirstWednesday(date) {
-                            let d = new Date(date.getFullYear(), date.getMonth(), 1);
-                            // Find first Wednesday (3)
-                            while (d.getDay() !== 3) {
-                                d.setDate(d.getDate() + 1);
-                            }
-                            // Set time to 6 PM (18:00)
-                            d.setHours(18, 0, 0, 0);
-                            return d;
-                        }
-
-                        let meetingDate = findFirstWednesday(now);
-
-                        // If today is after the meeting time, move to next month
-                        if (now > meetingDate) {
-                            let nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-                            meetingDate = findFirstWednesday(nextMonth);
-                        }
-
-                        const options = { weekday: 'long', month: 'long', day: 'numeric' };
-                        document.getElementById('next-meeting-text').innerText = meetingDate.toLocaleDateString('en-US', options);
-                    }
-                    getNextMeeting();
-                </script>
+                <h3 class="sidebar-heading">Next Meeting</h3>
+                <p id="next-meeting-text" class="meeting-highlight">Loading...</p>
+                <p class="meeting-details">6 PM | North Adams Public Library</p>
+                <a href="https://maps.google.com/?q=North+Adams+Public+Library" target="_blank" class="external-link">View on Google Maps</a>
             </div>
 
-            <hr class="mobile-hide" style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
+            <hr class="sidebar-divider">
 
             <div class="sidebar-bottom">
-            <!-- CALENDAR WIDGET -->
-		<div class="responsive-iframe-wrap ratio-calendar">
-                    <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%231a2a44&ctz=America%2FNew_York&mode=AGENDA&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&src=17a5d515a1fa7666d6311042841c063dbf4ff28021f15888267187f6dcecf86a%40group.calendar.google.com&color=%23c5a059&src=dirv9v10c32debb8njakrl0mdpp7d8fm%40import.calendar.google.com&color=%237CB342"></iframe>
+                <h3 class="sidebar-heading">Calendar</h3>
+                <div class="responsive-iframe-wrap ratio-calendar">
+                    <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%231a2a44&ctz=America%2FNew_York&mode=AGENDA&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&src=17a5d515a1fa7666d6311042841c063dbf4ff28021f15888267187f6dcecf86a%40group.calendar.google.com&color=%23c5a059"></iframe>
                 </div>
 
-                <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
-
-            <!-- SKY FORECAST -->
-                <h3 style="color: #c5a059; margin-bottom: 10px;">Sky Forecast</h3>
-                  <div class="widget-box">
-                    <a href="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" target="_blank">
-                        <img src="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" 
-                            alt="North Adams Sky Forecast" 
-                            style="width: 100%; height: auto; border: 1px solid #3a4a64;">
-                    </a>
-                    <div style="margin-top: 8px;">
-                        <span style="font-size: 0.7rem; color: #666;">Data provided by </span>
-                        <a href="https://7timer.info/index.php" target="_blank" style="font-size: 0.7rem; color: #888; text-decoration: none; font-weight: normal;">7Timer! ↗</a>
-                    </div>
+                <h3 class="sidebar-heading">Sky Forecast</h3>
+                <div class="widget-box">
+                    <img src="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" alt="Sky Forecast">
                 </div>
 
-            <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
+                <h3 class="sidebar-heading">Tonight's Sky</h3>
+                {{ partial "sky-widget.html" . }}
 
-            <!-- TONIGHT'S SKY (Verified Professional Embed) -->
-                <h3 style="color: #c5a059; margin-top: 25px; margin-bottom: 10px;">Tonight's Sky</h3>
+		<h3 class="sidebar-heading">Moon Phase</h3>
+                {{ partial "moon-widget.html" . }}
 
-		<div class="sky-widget-container">
-                  <div class="responsive-iframe-wrap ratio-sky">
-                    <iframe src="https://virtualsky.lco.global/embed/index.html?longitude=-73.11&latitude=42.70&projection=stereo&constellations=true&constellationlabels=true&live=true" 
-                        class="virtual-sky-frame" scrolling="no"></iframe>
-		   </div>
-		   <div class="widget-footer">
-                    <a 
-			href="https://virtualsky.lco.global/embed/index.html?longitude=-73.11&latitude=42.70&projection=stereo&constellations=true&constellationlabels=true&live=true" 
-			target="_blank"
-			class="external-link">
-		        [ ⛶ Expand to Fullscreen ]
-		    </a>
-		    </div>
-                </div>
-		
-
-            <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
-
-            <!-- DAILY ALMANAC (NASA VERIFIED & DYNAMIC) -->
-                <h3 style="color: #c5a059; margin-top: 25px; margin-bottom: 10px;">Daily Almanac</h3>
-
-<!--- MOON STARTS HERE -->
-
-<div class="moon-widget">
-  <div class="moon-porthole">
-    {{/* 1. CALCULATE LUNAR PHASE (0.0 to 1.0) */}}
-    {{ $now := now.Unix }}
-    {{ $newMoon := 1704944400 }} {{/* Jan 11, 2024 Anchor */}}
-    {{ $cycle := 2551443 }}       {{/* 29.53 days in seconds */}}
-    {{ $age := mod (sub $now $newMoon) $cycle }}
-    {{ $phase := div (float $age) (float $cycle) }}
-
-    {{/* 2. SVG DRAWING: A moonlight circle with a shifting shadow ellipse */}}
-    <svg viewBox="0 0 100 100" class="moon-svg">
-      <circle cx="50" cy="50" r="48" class="moon-surface" />
-      
-      {{ if lt $phase 0.5 }}
-        {{/* Waxing Logic */}}
-        <ellipse cx="{{ add 50 (mul 100 (sub 0.25 $phase)) }}" cy="50" rx="{{ mul 50 (sub 1 (mul $phase 4)) }}" ry="48" class="moon-shadow" />
-      {{ else }}
-        {{/* Waning Logic */}}
-        {{ $waningPhase := sub $phase 0.5 }}
-        <ellipse cx="{{ sub 50 (mul 100 (sub 0.25 $waningPhase)) }}" cy="50" rx="{{ mul 50 (sub 1 (mul $waningPhase 4)) }}" ry="48" class="moon-shadow" />
-      {{ end }}
-    </svg>
-  </div>
-
-  <div class="moon-phase-label">
-    {{ if lt $phase 0.03 }}New Moon
-    {{ else if lt $phase 0.22 }}Waxing Crescent
-    {{ else if lt $phase 0.28 }}First Quarter
-    {{ else if lt $phase 0.47 }}Waxing Gibbous
-    {{ else if lt $phase 0.53 }}Full Moon
-    {{ else if lt $phase 0.72 }}Waning Gibbous
-    {{ else if lt $phase 0.78 }}Last Quarter
-    {{ else }}Waning Crescent{{ end }}
-  </div>
-
-  <div style="margin-top: 15px;">
-    <a href="https://timeanddate.com/sun/@4945495" target="_blank" class="external-link">
-      Sun & Moon Times ↗
-    </a>
-  </div>
-
-  {{/* 3. DEBUG BAR: Accessible values for equation tuning */}}
-  <div style="margin-top: 20px; font-size: 0.65rem; color: #8e7037; border-top: 1px solid #3a4a64; padding-top: 10px; font-family: monospace; text-align: left;">
-    <div style="display: flex; justify-content: space-between;">
-      <span>NOW: {{ $now }}</span>
-      <span>PHS: {{ printf "%.4f" $phase }}</span>
-    </div>
-    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
-      <span>ANC: {{ $newMoon }}</span>
-      <span>AGE: {{ printf "%.1f" (div (float $age) 86400.0) }}d</span>
-    </div>
-    <div style="margin-top: 40px; color: #555; text-align: center; font-style: italic;">
-      Internal v0.8.2 Almanac Engine
-    </div>
-  </div>
-</div>
-
-
-<!--- MOON ENDS HERE -->
-
-            <hr style="border: 0; border-top: 1px solid #3a4a64; margin: 20px 0;">
-            <ul style="list-style:none; padding:0; line-height:2;">
-                <li><a href="/" style="color:#c5a059; font-weight:bold;">Home</a></li>
-                <li><a href="/articles/" style="color:#c5a059; font-weight:bold;">Articles</a></li>
-                <li><a href="/library/" style="color:#c5a059; font-weight:bold;">Library</a></li>
-            </ul>
+                <hr class="sidebar-divider">
+                
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/articles/">Articles</a></li>
+                    <li><a href="/library/">Library</a></li>
+                </ul>
+            </div>
         </nav>
 
-        <main class="nbas-main">{{ block "main" . }}{{ end }}</main>
+        <main class="nbas-main">
+            {{ block "main" . }}{{ end }}
+        </main>
     </div>
+
+    {{/* Move JS to the bottom and outside the main loop */}}
+    <script src="/js/meeting.js"></script>
 </body>
 </html>
+

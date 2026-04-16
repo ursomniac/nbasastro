@@ -1,0 +1,40 @@
+<div class="moon-widget">
+    <div class="moon-porthole">
+        {{/* 1. EXISTING PHASE CALCULATIONS */}}
+        {{ $now := now.Unix }}
+        {{ $newMoon := 1704944400 }}{{ $cycle := 2551443 }}
+        {{ $ageSec := mod (sub $now $newMoon) $cycle }}
+        {{ $P := div (float $ageSec) (float $cycle) }}
+
+        {{/* 2. NEW METADATA MATH */}}
+        {{/* Age in Days: Phase * 29.530589 */}}
+        {{ $ageDays := mul $P 29.530589 }}
+        
+        {{/* % Illuminated: (1 - cos(2 * PI * P)) / 2 * 100 */}}
+        {{ $illumination := mul (div (sub 1 (math.Cos (mul 2 (mul math.Pi $P)))) 2) 100 }}
+
+        {{/* 3. EXISTING SVG ALGORITHM */}}
+        {{ $W := 0 }}{{ $sweep := 0 }}
+        {{ if le $P 0.5 }}
+            {{ $W = mul 48 (math.Cos (mul math.Pi (div $P 0.5))) }}
+            {{ $sweep = 1 }}
+        {{ else }}
+            {{ $W = mul 48 (math.Cos (mul math.Pi (div (sub $P 0.5) 0.5))) }}
+            {{ $sweep = 0 }}
+        {{ end }}
+
+        <svg viewBox="0 0 100 100" class="moon-svg">
+            <circle cx="50" cy="50" r="48" fill="#0d1421" />
+            <path d="M 50 2 A {{ $W }} 48 0 0 {{ $sweep }} 50 98 A 48 48 0 0 {{ if eq $sweep 1 }}0{{ else }}1{{ end }} 50 2" fill="#c5a059" />
+        </svg>
+    </div>
+
+    <div class="moon-phase-label" style="text-align: center; color: #c5a059; margin-top: 10px;">
+        <strong>{{ if lt $P 0.03 }}New Moon{{ else if lt $P 0.22 }}Waxing Crescent{{ else if lt $P 0.28 }}First Quarter{{ else if lt $P 0.47 }}Waxing Gibbous{{ else if lt $P 0.53 }}Full Moon{{ else if lt $P 0.72 }}Waning Gibbous{{ else if lt $P 0.78 }}Last Quarter{{ else }}Waning Crescent{{ end }}</strong>
+        <div style="font-size: 0.8rem; color: #aaa; margin-top: 5px;">
+            {{ printf "%.1f" $illumination }}% Illuminated<br>
+            Age: {{ printf "%.2f" $ageDays }} days
+        </div>
+    </div>
+</div>
+
