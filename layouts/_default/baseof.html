@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-<h1 style="background: red; color: white; padding: 20px;">I AM THE CORRECT BASEOF</h1>
     <header class="nbas-header">
         <a href="/">
             <img src="/images/logo-grey.png" class="nbas-logo" alt="NBAS Logo">
@@ -67,12 +66,18 @@
 
 <footer class="nbas-footer">
     <div class="footer-signoff">Clear Skies from the Berkshires</div>
-    <p>&copy; {{ now.Format "2006" }} Northern Berkshire Astronomical Society</p>
-    <p>
-        <a href="https://github.com" target="_blank" class="external-link">GitHub Source</a> | 
-        <a href="/contact/" style="color: #666; text-decoration: none;">Contact Us</a>
-    </p>
+    
+    <nav class="footer-nav">
+        {{ range (where .Site.RegularPages "Section" "pages") }}
+            <a href="{{ .RelPermalink }}" class="footer-link">{{ .Title }}</a>
+        {{ end }}
+    </nav>
+
+    <div class="footer-copyright">
+        &copy; {{ now.Format "2006" }} Northern Berkshire Astronomical Society
+    </div>
 </footer>
+
 </body>
 </html>
 

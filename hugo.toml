@@ -11,3 +11,6 @@ title = "Northern Berkshire Astronomical Society"
   author = "authors"
   tag = "tags"
 
+[permalinks]
+  pages = "/:filename/"
+

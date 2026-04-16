@@ -82,6 +82,20 @@ a:hover { color: #f1c40f; }
     margin-top: 20px;
 }
 
+/* --- 23. SKY FORECAST WIDGET FIX --- */
+.widget-box img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid #3a4a64;
+    pointer-events: none; /* This kills the "Click for full resolution" hover/tooltip */
+}
+
+.widget-box a {
+    cursor: default; /* Removes the "hand" icon if you don't want it to be a link */
+}
+
+
 .archive-header { color: #f1c40f; margin-top: 40px; margin-bottom: 15px; font-size: 1.8rem; }
 .newsletter-link { color: #f1c40f !important; text-decoration: none; display: flex; align-items: center; gap: 8px; }
 .starmap-link { color: #e67e22 !important; text-decoration: none; display: flex; align-items: center; gap: 8px; }
@@ -280,7 +294,6 @@ a:hover { color: #f1c40f; }
     text-transform: uppercase;
 }
 
-/* --- 20. ARTICLE DATA TABLES (Goal 1.4 - Contrast Fix) --- */
 /* --- 20. ARTICLE DATA TABLES (Goal 1.4 - Final) --- */
 .article-table-wrap {
     margin: 1.5rem 0;
@@ -313,6 +326,52 @@ a:hover { color: #f1c40f; }
 /* Ensure floating works */
 .article-table-wrap.align-left { float: left; margin-right: 25px; }
 .article-table-wrap.align-right { float: right; margin-left: 25px; }
+
+
+/* --- 24. FOOTER UX POLISH (Goal 4.1) --- */
+.footer-nav {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-link {
+    color: #c5a059 !important; /* Logo Gold */
+    text-decoration: none !important;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.footer-link:hover {
+    color: #f1c40f !important;
+    text-decoration: underline !important;
+}
+
+
+/* The "Separator" logic to stop the thought balloons */
+.footer-link:not(:last-child)::after {
+    content: "|";
+    margin-left: 20px;
+    color: #444;
+}
+
+.footer-signoff {
+    color: #8e7037; /* A more muted, "bronze" gold so it doesn't scream 'Click Me' */
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    cursor: default; /* Tells the mouse 'nothing to see here' */
+    user-select: none; /* Prevents accidental highlighting */
+}
+
+.footer-copyright {
+    margin-top: 20px;
+    color: #666;
+    font-size: 0.75rem;
+}
 
 
 /* ------------ NUMBERED THINGS END HERE ---------- */
@@ -350,12 +409,6 @@ a:hover { color: #f1c40f; }
     font-size: 0.85rem;
 }
 
-.footer-signoff {
-    color: #c5a059;
-    font-style: italic;
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-}
 
 .author-byline a {
     color: #c5a059; /* Logo Gold */
