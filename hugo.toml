@@ -12,5 +12,6 @@ title = "Northern Berkshire Astronomical Society"
   tag = "tags"
 
 [permalinks]
-  pages = "/:filename/"
+  articles = "/articles/:year/:month/:title/"
+  pages = "/:contentbasename/"
 

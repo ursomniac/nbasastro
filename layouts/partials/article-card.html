@@ -1,0 +1,33 @@
+<div class="article-card"> {{/* Changed from list-entry */}}
+    <div class="card-feature-icon">
+        {{ partial "feature-icon.html" . }}
+    </div>
+
+    <div class="card-content">
+        <div class="card-facets">
+            {{ with .Params.series }}
+                <span class="facet-badge series-badge">{{ . }}</span>
+            {{ end }}
+        </div>
+
+        <a href="{{ .RelPermalink }}" class="card-title-link">
+            <h2 class="card-title">{{ .Title }}</h2>
+        </a>
+
+        <div class="card-metadata">
+            {{ $authorPage := $.Site.GetPage (printf "/authors/%s" (.Params.author | urlize)) }}
+            By 
+            {{ if $authorPage }}
+                <a href="{{ $authorPage.RelPermalink }}" class="author-link">{{ $authorPage.Title }}</a>
+            {{ else }}
+                {{ .Params.author | default "NBAS Staff" }}
+            {{ end }} 
+            | {{ .PublishDate.Format "Jan 2, 2006" }}
+        </div>
+
+        {{ with .Params.byline }}
+            <p class="card-byline">{{ . }}</p>
+        {{ end }}
+    </div>
+</div>
+

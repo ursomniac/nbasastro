@@ -1,12 +1,21 @@
-<div class="news-container">
-  {{ range first 5 (where .Site.RegularPages "Section" "articles") }}
-    <div class="news-item" style="margin-bottom: 20px;">
-      {{ $author := .Params.author }}
-      {{ if reflect.IsSlice $author }}{{ $author = index $author 0 }}{{ end }}
-      <h3 style="margin-bottom: 5px;"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-      <div style="color: #666; font-size: 0.85rem;">
-        By {{ $author | default "NBAS Staff" }} | {{ .Date.Format "Jan 2, 2006" }}
-      </div>
-    </div>
-  {{ end }}
+{{ $activeFlash := false }}
+{{ $currentTime := now }}
+
+{{/* Force a physical gap of 20px above the content area */}}
+<div style="height: 0.5rem; clear: both;"></div>
+
+{{/* The wrapper controls the outer spacing to the Welcome text below */}}
+<div class="header-announcement-area" style="margin-bottom: 1.5rem;">
+    {{ range (where .Site.RegularPages "Section" "newsflash").ByWeight }}
+        {{ if and (ge $currentTime (time .Params.start_date)) (le $currentTime (time .Params.end_date)) }}
+            {{ if not $activeFlash }}
+                {{/* Reduced internal padding (0.6rem top/bottom) and inlined content */}}
+                <div class="news-banner" style="border: 1px solid #c5a059; padding: 0.6rem 1rem; border-radius: 2px; line-height: 1.4;">
+                    <span style="color: #c5a059; font-weight: bold; text-transform: uppercase; margin-right: 0.8rem;">NewsFlash:</span>
+                    <span>{{ .Content | plainify }}</span>
+                </div>
+                {{ $activeFlash = true }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
 </div>

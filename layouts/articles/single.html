@@ -9,27 +9,24 @@
 
 <!-- 2. BELOW TITLE: Author & Date -->
 <div class="article-metadata">
-  {{ $name := .Params.author }}
-  {{ if reflect.IsSlice $name }}{{ $name = index $name 0 }}{{ end }}
-
-  {{ if $name }}
-    {{/* We use 'urlize' which Hugo uses to create the folder name */}}
-    {{ $slug := $name | urlize }}
-    {{ $authorPage := $.Site.GetPage (printf "/authors/%s" $slug) }}
-    
-    <span class="author-byline">
-      By 
-      {{ if $authorPage }}
-        <a href="{{ $authorPage.RelPermalink }}" style="color: #c5a059; text-decoration: underline;">{{ $name }}</a>
-      {{ else }}
-        {{ $name }}
-      {{ end }}
-    </span>
-    <span class="meta-separator">|</span>
-  {{ end }}
+  {{ $authorSlug := .Params.author }}
+  {{/* 1. Get the actual bio page using the slug */}}
+  {{ $authorPage := $.Site.GetPage (printf "/authors/%s" ($authorSlug | urlize)) }}
   
+  <span class="author-byline">
+    By 
+    {{ if $authorPage }}
+      {{/* 2. Print the Title (Bob Donahue) and link to the page */}}
+      <a href="{{ $authorPage.RelPermalink }}">{{ $authorPage.Title }}</a>
+    {{ else }}
+      {{/* Fallback if no bio exists */}}
+      {{ $authorSlug }}
+    {{ end }}
+  </span>
+  <span class="meta-separator">|</span>
   <time>{{ .PublishDate.Format "January 2, 2006" }}</time>
 </div>
+
 
 
 
