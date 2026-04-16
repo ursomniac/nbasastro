@@ -7,8 +7,6 @@ byline: "Exploring a huge Galaxy!"
 thumbnail: "m_87-92U-PIXRCAGRAXGHS-square.jpg"
 tags: ["Deep Sky", "Galaxy"]
 categories: ["Deep Sky"]
-
-feature: "Object Highlight"
 ---
 
 Welcome to our first bundled article. Below is a test of our new gold-bordered image shortcode.
