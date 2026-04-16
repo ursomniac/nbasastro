@@ -31,6 +31,20 @@ and they're locked in a 227.58-day orbit.
 
 {{< nbas-image src="system_diagram.png" caption="T CrB system diagram" >}}
 
+### System Parameters: T Coronae Borealis
+
+{{< article-table >}}
+
+| Parameter | Red Giant (Primary) | White Dwarf (Secondary) |
+| :--- | :--- | :--- |
+| **Mass** | 0.69 M☉ | 1.37 M☉ |
+| **Radius** | ~63 R☉ | ~0.01 R☉ |
+| **Orbit** | 227.58 Days | (Circular) |
+| **Separation** | 0.96 AU | (~143 million km) |
+{{< /article-table >}}
+
+
+
 The red giant is about 69% of the Sun's mass, but with 63x the size - it reaches out to ~0.29 AU, almost 
 one-third the separation, and the pull of the white dwarf stretches it out like tides, 
 so that's more egg-shaped than spherical.   This causes light variations of half the orbital 

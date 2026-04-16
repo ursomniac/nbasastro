@@ -1,0 +1,5 @@
+{{ $align := .Get "align" | default "none" }}
+<div class="article-table-wrap align-{{ $align }}">
+    {{ .Inner | markdownify }}
+</div>
+

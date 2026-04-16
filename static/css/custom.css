@@ -55,17 +55,6 @@ a:hover { color: #f1c40f; }
     font-weight: bold; 
 }
 
-/* Base container for all responsive iframes */
-.responsive-iframe-wrap {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    margin-top: 20px;
-    border: 1px solid #3a4a64;
-    border-radius: 4px;
-    background: #0d1421; /* Clean dark placeholder */
-}
-
 .responsive-iframe-wrap iframe {
     position: absolute;
     top: 0;
@@ -273,14 +262,6 @@ a:hover { color: #f1c40f; }
     text-decoration: underline;
 }
 
-
-/* --- 13. ARTICLE METADATA (Goal 1.8 Refactor) --- */
-.article-metadata {
-    color: #999;
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-}
-
 /* --- 16. ARTICLE HEADER UI --- */
 .article-metadata {
     color: #999;
@@ -288,17 +269,93 @@ a:hover { color: #f1c40f; }
     margin-bottom: 20px;
 }
 
-.author-byline a {
-    color: #c5a059; /* Logo Gold */
-    text-decoration: underline;
+/* --- 19. GLOBAL UI POLISH (Goal 2.3, 3.5, 4.1) --- */
+
+/* Banner Provenance */
+.nbas-provenance {
+    font-size: 0.8rem;
+    color: rgba(197, 160, 89, 0.7); /* Subtle Logo Gold */
+    margin-top: 5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* --- 20. ARTICLE DATA TABLES (Goal 1.4 - Contrast Fix) --- */
+/* --- 20. ARTICLE DATA TABLES (Goal 1.4 - Final) --- */
+.article-table-wrap {
+    margin: 1.5rem 0;
+    clear: both;
+}
+
+.article-table-wrap table {
+    display: table;
+    border-collapse: collapse !important;
+    background-color: #0d1421 !important;
+    border: 2px solid #3a4a64 !important;
+    width: auto;
+    min-width: 300px;
+}
+
+.article-table-wrap th {
+    background-color: #1a2a44 !important;
+    color: #c5a059 !important;
+    padding: 12px 20px !important;
+    border: 1px solid #3a4a64 !important;
+    text-transform: uppercase;
+}
+
+.article-table-wrap td {
+    padding: 10px 20px !important;
+    border: 1px solid #3a4a64 !important;
+    color: #e0e0e0 !important;
+}
+
+/* Ensure floating works */
+.article-table-wrap.align-left { float: left; margin-right: 25px; }
+.article-table-wrap.align-right { float: right; margin-left: 25px; }
+
+
+/* ------------ NUMBERED THINGS END HERE ---------- */
+
+/* Horizontal Top Nav Bar */
+.nbas-topnav {
+    background: #0d1421;
+    border-bottom: 2px solid #3a4a64;
+    padding: 10px 20px;
+    display: flex;
+    gap: 30px;
+}
+
+.nbas-topnav a {
+    color: #c5a059;
+    text-decoration: none;
     font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.meta-separator {
-    margin: 0 10px;
-    color: #444;
+.nbas-topnav a:hover {
+    color: #f1c40f;
 }
 
+/* Footer Branding */
+.nbas-footer {
+    background: #0d1421;
+    border-top: 2px solid #3a4a64;
+    padding: 40px 20px;
+    margin-top: 50px;
+    text-align: center;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.footer-signoff {
+    color: #c5a059;
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
 
 .author-byline a {
     color: #c5a059; /* Logo Gold */

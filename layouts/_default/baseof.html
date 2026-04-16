@@ -18,6 +18,13 @@
         </div>
     </header>
 
+	<!-- New Top Nav Bar (Goal 3.5) -->
+	<nav class="nbas-topnav">
+	    <a href="/">Home</a>
+	    <a href="/articles/">Articles</a>
+	    <a href="/library/">Library</a>
+	</nav>
+
     <div class="nbas-container">
         <nav class="nbas-sidebar">
             <div class="sidebar-top">
@@ -47,12 +54,6 @@
                 {{ partial "moon-widget.html" . }}
 
                 <hr class="sidebar-divider">
-                
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/articles/">Articles</a></li>
-                    <li><a href="/library/">Library</a></li>
-                </ul>
             </div>
         </nav>
 
@@ -63,6 +64,15 @@
 
     {{/* Move JS to the bottom and outside the main loop */}}
     <script src="/js/meeting.js"></script>
+
+<footer class="nbas-footer">
+    <div class="footer-signoff">Clear Skies from the Berkshires</div>
+    <p>&copy; {{ now.Format "2006" }} Northern Berkshire Astronomical Society</p>
+    <p>
+        <a href="https://github.com" target="_blank" class="external-link">GitHub Source</a> | 
+        <a href="/contact/" style="color: #666; text-decoration: none;">Contact Us</a>
+    </p>
+</footer>
 </body>
 </html>
 
