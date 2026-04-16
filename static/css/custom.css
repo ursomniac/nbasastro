@@ -438,15 +438,21 @@ a:hover { color: #f1c40f; }
 }
 
 /* --- 26. ARTICLE CARD UI (V0.9.15) --- */
+/* Refined Facet Header */
+.card-facets {
+    margin-bottom: 12px;
+    display: block;
+}
+
 .facet-badge {
-    font-size: 0.7rem;
-    padding: 2px 8px;
-    border-radius: 4px;
+    font-size: 0.75rem;
+    color: #c5a059; /* Logo Gold */
     text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: bold;
-    border: 1px solid #3a4a64;
-    display: inline-block;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    border: none;      /* Remove the amateur box */
+    padding: 0;        /* Remove the padding */
+    background: none;  /* Remove the background */
 }
 
 .series-badge {
@@ -466,7 +472,13 @@ a:hover { color: #f1c40f; }
 }
 
 .card-content { flex: 1; }
-.card-title { color: #ffffff; margin: 0 0 8px 0; font-size: 1.5rem; }
+.card-titleOLD { color: #ffffff; margin: 0 0 8px 0; font-size: 1.5rem; }
+
+/* While we're at it, let's ensure the title doesn't hug the facets too tight */
+.card-title {
+    margin-top: 5px; 
+    line-height: 1.3;
+}
 .card-title-link { text-decoration: none; }
 
 .card-metadata { color: #666; font-size: 0.85rem; margin-bottom: 12px; }
@@ -491,6 +503,87 @@ a:hover { color: #f1c40f; }
 }
 
 .series-badge { color: #c5a059; border-color: #c5a059; }
+
+/* --- 28. ARTICLE JOURNAL UI (V0.9.19) --- */
+.nbas-article { margin-bottom: 60px; }
+
+.article-header {
+    margin-bottom: 35px;
+    border-bottom: 1px solid #3a4a64;
+    padding-bottom: 25px;
+}
+
+.article-series-label {
+    color: #c5a059;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.article-titleOLD { color: #ffffff; font-size: 2rem; margin: 0 0 12px 0; line-height: 1.2; }
+.article-byline { color: #d1d1d1; font-style: italic; font-size: 1.1rem; margin: 0 0 15px 0; }
+.article-metadata { color: #999; font-size: 0.9rem; }
+.meta-pipe { margin: 0 10px; color: #3a4a64; }
+
+.article-body { color: #eeeeee; line-height: 1.6; font-size: 1.1rem; }
+
+/* Related Articles UI */
+.related-articles {
+    margin-top: 60px;
+    border-top: 2px solid #3a4a64;
+    padding-top: 40px;
+}
+
+.related-heading {
+    color: #c5a059;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.related-item {
+    margin-bottom: 20px;
+    border-left: 3px solid #1a2a44;
+    padding-left: 15px;
+}
+
+.related-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.related-date { color: #999; font-size: 0.85rem; }
+
+
+/* --- 30. TITLE CONTRAST FIX --- */
+
+/* Home Page / List Titles */
+.card-title-link {
+    text-decoration: none;
+}
+
+.card-title-link .card-title {
+    color: #ffffff !important; /* Force title to White */
+    transition: color 0.2s ease;
+}
+
+.card-title-link:hover .card-title {
+    color: #c5a059 !important; /* Only turn Gold on hover */
+}
+
+/* Single Article Title */
+.article-title {
+    color: #ffffff !important;
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
 
 
 

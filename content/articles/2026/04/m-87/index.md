@@ -1,10 +1,14 @@
 ---
 title: "M87: Behemoth of the Virgo Cluster"
-publishDate: 2026-04-14
-author: "R. Donahue"
-feature: "Object Highlight"
+date: 2026-04-14
+author: "bob-donahue"
+series: "Deep Sky Wonders"
 byline: "Exploring a huge Galaxy!"
 thumbnail: "m_87-92U-PIXRCAGRAXGHS-square.jpg"
+tags: ["Deep Sky", "Galaxy"]
+categories: ["Deep Sky"]
+
+feature: "Object Highlight"
 ---
 
 Welcome to our first bundled article. Below is a test of our new gold-bordered image shortcode.

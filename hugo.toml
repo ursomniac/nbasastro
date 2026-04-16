@@ -15,3 +15,19 @@ title = "Northern Berkshire Astronomical Society"
   articles = "/articles/:year/:month/:title/"
   pages = "/:contentbasename/"
 
+[related]
+  threshold = 1
+  includeNewer = true
+  toLower = true
+
+  [[related.indices]]
+    name = "series"
+    weight = 100  # A shared series is a perfect match
+
+  [[related.indices]]
+    name = "categories"
+    weight = 80   # Shared categories are a strong match
+
+  [[related.indices]]
+    name = "tags"
+    weight = 100   # Shared tags are a strong match
