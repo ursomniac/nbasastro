@@ -1,48 +1,25 @@
 {{ define "main" }}
-<!-- 1. DYNAMIC HEADER -->
-<h1 class="dynamic-section-header">
-  {{ if eq .Kind "taxonomy" }}Tag: {{ .Title }}{{ else }}{{ .Title }}{{ end }}
-</h1>
+<div class="archive-container">
+    <header class="archive-header" style="margin-bottom: 40px; border-bottom: 2px solid #3a4a64; padding-bottom: 20px;">
+        <h1 class="page-title" style="color: #ffffff; font-size: 2.2rem; margin: 0 0 10px 0;">
+            {{ if eq .Kind "taxonomy" }}{{ .Data.Singular | title }}: {{ end }}{{ .Title }}
+        </h1>
+        {{ with .Params.description }}
+            <p class="page-subtitle" style="color: #888; font-size: 1.1rem; font-style: italic;">{{ . }}</p>
+        {{ end }}
+    </header>
 
-<div class="article-list">
-	{{ range (where .Pages "Section" "articles").ByPublishDate.Reverse }}
-
-
-<div class="list-entry" style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 40px; border-bottom: 1px solid #1a2a44; padding-bottom: 25px;">
-  
-  <!-- 1. COMPACT ICON (Fixed Width) -->
-  <div class="feature-icon-wrap" style="flex: 0 0 60px; padding-top: 5px;">
-    {{ partial "feature-icon.html" . }}
-  </div>
-
-  <!-- 2. CONTENT BLOCK -->
-  <div class="article-info" style="flex: 1;">
-    <div style="color: #777; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">
-      {{ .Params.feature }}
-    </div>
-    
-    <a href="{{ .RelPermalink }}" style="text-decoration: none;">
-      <h2 style="color: #ffffff; margin: 0 0 8px 0; font-size: 1.4rem;">{{ .Title }}</h2>
-    </a>
-
-    <div style="color: #666; font-size: 0.85rem; margin-bottom: 12px;">
-      By {{ .Params.author | default "NBAS Staff" }} | {{ .PublishDate.Format "Jan 2, 2006" }}
+    <div class="article-list">
+        {{/* Use .Paginator.Pages to respect the 10-article limit from hugo.toml */}}
+        {{ range .Paginator.Pages }}
+            {{ partial "article-card.html" . }}
+        {{ else }}
+            <p style="color: #888;">No articles found in this subset.</p>
+        {{ end }}
     </div>
 
-    {{ with .Params.byline }}
-      <p style="color: #aaaaaa; font-style: italic; border-left: 2px solid #c5a059; padding-left: 15px; margin: 0; font-size: 0.95rem;">
-        {{ . }}
-      </p>
-    {{ end }}
-  </div>
-</div>
-
-
-
-
-    {{ else }}
-    <p style="color: #888;">No articles found in this section.</p>
-    {{ end }}
+    {{/* We will build this partial next or use Hugo's default */}}
+    {{ template "_internal/pagination.html" . }}
 </div>
 {{ end }}
 

@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ .Title }} | {{ .Site.Title }}</title>
-    <link rel="stylesheet" href="/css/custom.css">
+    {{ partial "head.html" . }}
 </head>
 <body>
+
     <header class="nbas-header">
         <a href="/">
             <img src="/images/logo-grey.png" class="nbas-logo" alt="NBAS Logo">
@@ -17,67 +18,68 @@
         </div>
     </header>
 
-	<!-- New Top Nav Bar (Goal 3.5) -->
-	<nav class="nbas-topnav">
-	    <a href="/">Home</a>
-	    <a href="/articles/">Articles</a>
-	    <a href="/library/">Library</a>
-	</nav>
-
-    <div class="nbas-container">
-        <nav class="nbas-sidebar">
-            <div class="sidebar-top">
-                <h3 class="sidebar-heading">Next Meeting</h3>
-                <p id="next-meeting-text" class="meeting-highlight">Loading...</p>
-                <p class="meeting-details">6 PM | North Adams Public Library</p>
-                <a href="https://maps.google.com/?q=North+Adams+Public+Library" target="_blank" class="external-link">View on Google Maps</a>
-            </div>
-
-            <hr class="sidebar-divider">
-
-            <div class="sidebar-bottom">
-                <h3 class="sidebar-heading">Calendar</h3>
-                <div class="responsive-iframe-wrap ratio-calendar">
-                    <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%231a2a44&ctz=America%2FNew_York&mode=AGENDA&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&src=17a5d515a1fa7666d6311042841c063dbf4ff28021f15888267187f6dcecf86a%40group.calendar.google.com&color=%23c5a059"></iframe>
-                </div>
-
-                <h3 class="sidebar-heading">Sky Forecast</h3>
-                <div class="widget-box">
-                    <img src="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" alt="Sky Forecast">
-                </div>
-
-                <h3 class="sidebar-heading">Tonight's Sky</h3>
-                {{ partial "sky-widget.html" . }}
-
-		<h3 class="sidebar-heading">Moon Phase</h3>
-                {{ partial "moon-widget.html" . }}
-
-                <hr class="sidebar-divider">
-            </div>
-        </nav>
-
-        <main class="nbas-main">
-            {{ block "main" . }}{{ end }}
-        </main>
-    </div>
-
-    {{/* Move JS to the bottom and outside the main loop */}}
-    <script src="/js/meeting.js"></script>
-
-<footer class="nbas-footer">
-    <div class="footer-signoff">Clear Skies from the Berkshires</div>
-    
-    <nav class="footer-nav">
-        {{ range (where .Site.RegularPages "Section" "pages") }}
-            <a href="{{ .RelPermalink }}" class="footer-link">{{ .Title }}</a>
-        {{ end }}
+    <nav class="nbas-topnav">
+        <a href="/">Home</a>
+        <a href="/articles/">Articles</a>
+        <a href="/library/">Library</a>
+	<a href="#discovery-modal" class="explore-trigger">Explore Topics</a>
     </nav>
 
-    <div class="footer-copyright">
-        &copy; {{ now.Format "2006" }} Northern Berkshire Astronomical Society
-    </div>
-</footer>
+    <div class="nbas-container">
+        {{ partial "discovery-bar.html" . }}
 
+        <div class="nbas-columns">
+            <aside class="nbas-sidebar">
+                <div class="sidebar-top">
+                    <h3 class="sidebar-heading">Next Meeting</h3>
+                    <p id="next-meeting-text" class="meeting-highlight">Loading...</p>
+                    <p class="meeting-details">6 PM | North Adams Public Library</p>
+                    <a href="https://maps.google.com/?q=North+Adams+Public+Library" target="_blank" class="external-link">View on Google Maps</a>
+                </div>
+
+                <hr class="sidebar-divider">
+
+                <div class="sidebar-widgets">
+                    <h3 class="sidebar-heading">Calendar</h3>
+                    <div class="responsive-iframe-wrap ratio-calendar">
+                        {{/* RESTORED MULTI-SOURCE CALENDAR */}}
+                        <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%231a2a44&ctz=America%2FNew_York&mode=AGENDA&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&src=17a5d515a1fa7666d6311042841c063dbf4ff28021f15888267187f6dcecf86a%40group.calendar.google.com&src=nbasastro%40gmail.com&color=%23c5a059" 
+                                style="background:transparent; border:none;" 
+                                class="calendar-frame"></iframe>
+                    </div>
+
+                    <h3 class="sidebar-heading">Sky Forecast</h3>
+                    <div class="widget-box">
+                        <img src="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" alt="Sky Forecast">
+                    </div>
+
+                    <h3 class="sidebar-heading">Tonight's Sky</h3>
+                    {{ partial "sky-widget.html" . }}
+
+                    <h3 class="sidebar-heading">Moon Phase</h3>
+                    {{ partial "moon-widget.html" . }}
+                </div>
+            </aside>
+
+            <main class="nbas-main">
+                {{ block "main" . }}{{ end }}
+            </main>
+        </div>
+    </div>
+
+    <footer class="nbas-footer">
+        <div class="footer-signoff">Clear Skies from the Berkshires</div>
+        <nav class="footer-nav">
+            {{ range (where .Site.RegularPages "Section" "pages") }}
+                <a href="{{ .RelPermalink }}" class="footer-link">{{ .Title }}</a>
+            {{ end }}
+        </nav>
+        <div class="footer-copyright">
+            &copy; {{ now.Format "2006" }} Northern Berkshire Astronomical Society
+        </div>
+    </footer>
+
+    <script src="/js/meeting.js"></script>
 </body>
 </html>
 

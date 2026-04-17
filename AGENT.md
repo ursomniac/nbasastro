@@ -25,5 +25,5 @@
 * The site is at https://nbasastro.org/
 * The site is hosted through GitHub:  https://github.com/ursomniac/nbasastro
 * The site uses Hugo as a backend engine with NO THEME
-* The site WILL use CloudCannon as a way to help other users add content
+* The site MIGHT use CloudCannon as a way to help other users add content; other users will download the repo and submit changes to GitHub.
 

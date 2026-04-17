@@ -1,0 +1,49 @@
+:root {
+    /* --- BLUES --- */
+    --space-blue: #1a2a44;
+    --deep-bg: #0d1421;
+    --border-soft: #3a4a64;
+
+    /* --- GOLD TIERS (Anchor: #f8d44e) --- */
+    --gold-base: #f8d44e;     /* High Alert / Explore Button */
+    --gold-link: #f8d44e;     /* Moving back to the anchor for maximum clarity */
+    --gold-dim: #d4af37;      /* A bit more "metallic" for badges */
+    --gold-border: #8e7037;   /* Decorative */
+
+    --tag-cyan: #78909c;      /* A soft, bright slate-cyan */
+    --tag-cyan-bg: #102027;   /* Deep midnight-cyan background */
+
+    /* --- NEUTRALS --- */
+    --text-pure: #ffffff;
+    --text-main: #d1d1d1;
+    --text-muted: #b0bec5;
+}
+
+/* --- THE GLOBAL RESET (RE-INTEGRATED) --- */
+a, 
+.author-link, 
+.card-title-link, 
+.newsletter-link, 
+.footer-link,
+.author-byline a,
+.card-byline a,
+.author-link {
+    color: var(--gold-link) !important;
+    text-decoration: underline !important;
+    font-weight: bold !important;
+}
+
+/* Metadata Badges use the Dimmed Gold for context */
+.facet-badge,
+.series-badge {
+    color: var(--gold-dim) !important;
+    border: 1px solid var(--gold-dim) !important;
+    text-decoration: none !important;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+a:hover {
+    color: var(--gold-base) !important;
+}
+

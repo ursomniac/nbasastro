@@ -1,21 +1,19 @@
 {{ define "main" }}
-  {{/* 1. ANNOUNCEMENT & WELCOME SECTION */}}
-  <div class="welcome-hero" style="background: #0d1421; border-left: 4px solid #c5a059; padding: 15px 20px; margin-bottom: 35px;">
-    {{ partial "news_logic.html" . }}
-    <div style="font-size: 1.1rem; line-height: 1.5; color: #d1d1d1; margin-top: 10px;">
-      {{ .Content }}
+    {{/* 1. ANNOUNCEMENT & WELCOME SECTION */}}
+    <div class="welcome-hero">
+        {{ partial "news_logic.html" . }}
+        <div class="welcome-text">
+            {{ .Content }}
+        </div>
     </div>
-  </div>
 
-  {{/* 2. ARTICLE LIST SECTION */}}
-  <h2 style="color: #ffffff; border-bottom: 1px solid #3a4a64; padding-bottom: 8px; font-size: 1.3rem; margin-bottom: 30px;">
-    Latest from the NBAS
-  </h2>
-
-  <div class="article-list">
-    {{ range first 5 (where .Site.RegularPages "Section" "articles").ByPublishDate.Reverse }}
-        {{ partial "article-card.html" . }}
-    {{ end }}
-  </div>
+    {{/* 2. ARTICLE LIST SECTION */}}
+    <h2 class="section-title">Latest from the NBAS</h2>
+    
+    <div class="article-list">
+        {{ range first 5 (where .Site.RegularPages "Section" "articles").ByPublishDate.Reverse }}
+            {{ partial "article-card.html" . }}
+        {{ end }}
+    </div>
 {{ end }}
 

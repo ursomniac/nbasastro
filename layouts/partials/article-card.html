@@ -1,12 +1,15 @@
-<div class="article-card"> {{/* Changed from list-entry */}}
+<div class="article-card">
     <div class="card-feature-icon">
         {{ partial "feature-icon.html" . }}
     </div>
 
     <div class="card-content">
-        <div class="card-facets">
+        <div class="card-facets" style="margin-bottom: 12px;">
             {{ with .Params.series }}
-                <span class="facet-badge series-badge">{{ . }}</span>
+                <a href="{{ "/series/" | relLangURL }}{{ . | urlize }}" class="facet-badge series-badge">{{ . }}</a>
+            {{ end }}
+            {{ range .Params.categories }}
+                <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}" class="facet-badge category-badge">{{ . }}</a>
             {{ end }}
         </div>
 
@@ -22,12 +25,22 @@
             {{ else }}
                 {{ .Params.author | default "NBAS Staff" }}
             {{ end }} 
+
+
             | {{ .PublishDate.Format "Jan 2, 2006" }}
         </div>
 
         {{ with .Params.byline }}
             <p class="card-byline">{{ . }}</p>
         {{ end }}
-    </div>
-</div>
 
+        {{/* Item 0.2: The Tags */}}
+        {{ with .Params.tags }}
+        <div class="card-tags" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+            {{ range . }}
+                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag-link" style="font-family: monospace; font-size: 0.8rem;">#{{ . }}</a>
+            {{ end }}
+        </div>
+        {{ end }}
+    </div> {{/* CLOSES .card-content */}}
+</div> {{/* CLOSES .article-card */}}

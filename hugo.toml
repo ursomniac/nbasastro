@@ -10,6 +10,8 @@ title = "Northern Berkshire Astronomical Society"
 [taxonomies]
   author = "authors"
   tag = "tags"
+  category = "categories"
+  series = "series"
 
 [permalinks]
   articles = "/articles/:year/:month/:title/"

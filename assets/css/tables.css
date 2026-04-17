@@ -1,0 +1,30 @@
+.article-table-wrap { margin: 1.5rem 0; clear: both; }
+
+.article-table-wrap table { 
+    display: table; 
+    border-collapse: collapse !important; 
+    background-color: var(--deep-bg) !important; 
+    border: 2px solid var(--border-soft) !important; 
+    width: auto; 
+    min-width: 300px; 
+}
+
+.article-table-wrap th { 
+    background-color: var(--space-blue) !important; 
+    color: var(--logo-gold) !important; 
+    padding: 12px 20px !important; 
+    border: 1px solid var(--border-soft) !important; 
+    text-transform: uppercase; 
+}
+
+.article-table-wrap td { 
+    padding: 10px 20px !important; 
+    border: 1px solid var(--border-soft) !important; 
+    color: #e0e0e0 !important; 
+}
+
+/* Floating logic for desktop */
+@media (min-width: 768px) {
+    .article-table-wrap.align-left { float: left; margin-right: 25px; }
+    .article-table-wrap.align-right { float: right; margin-left: 25px; }
+}
