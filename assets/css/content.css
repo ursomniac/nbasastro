@@ -1,23 +1,61 @@
 /* Article Metadata & Stats */
+.article-body {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.article-byline {
+    font-style: italic;
+    color: #cccccc;
+    border-left: 3px solid var(--border-soft);
+    padding-left: 15px;
+    margin: 20px 0;
+    line-height: 1.5;
+}
+.article-header { 
+	margin-bottom: 35px; 
+	border-bottom: 1px solid var(--border-soft); 
+	padding-bottom: 25px; 
+}
+
 .article-meta { 
     margin: 10px 0 30px 0; 
     font-size: 0.95rem; 
     border-bottom: 1px solid var(--border-soft); 
     padding-bottom: 15px; 
 }
-.meta-label { 
-    color: #666; 
-    text-transform: uppercase; 
-    font-size: 0.8rem; 
-    letter-spacing: 1px; 
-}
-
 .article-metadata {
     color: #999;
     font-size: 0.9rem;
     margin-bottom: 20px;
 }
 
+.article-separator {
+    border: 0;
+    border-top: 1px solid var(--border-soft);
+    margin: 30px 0;
+}
+
+.article-series-label {
+    color: var(--logo-gold) !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+}
+
+.article-title {
+    color: #ffffff !important;
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+}
+
+.meta-label { 
+    color: #666; 
+    text-transform: uppercase; 
+    font-size: 0.8rem; 
+    letter-spacing: 1px; 
+}
 
 /* Iframe Wrapper */
 .responsive-iframe-wrap { 
@@ -30,49 +68,123 @@
     background: #000; 
 }
 
-/* --- ARTICLE JOURNAL UI --- */
-.nbas-article { max-width: 800px; }
-.article-header { margin-bottom: 35px; border-bottom: 1px solid var(--border-soft); padding-bottom: 25px; }
-
-.article-title {
-    color: #ffffff !important;
-    font-size: 2.5rem;
-    margin: 0 0 10px 0;
-}
-
-.article-series-label {
-    color: var(--logo-gold) !important;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    margin-bottom: 5px;
-}
-
-.article-byline {
-    font-style: italic;
-    color: #cccccc;
-    border-left: 3px solid var(--border-soft);
-    padding-left: 15px;
-    margin: 20px 0;
-    line-height: 1.5;
-}
-
-.article-separator {
-    border: 0;
-    border-top: 1px solid var(--border-soft);
-    margin: 30px 0;
-}
 
 
-.article-body {
-    line-height: 1.8;
-    font-size: 1.1rem;
-}
+
+
 
 /* Related Articles */
-.related-articles { margin-top: 60px; border-top: 2px solid var(--border-soft); padding-top: 40px; }
-.related-heading { color: var(--logo-gold); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; }
-.related-item { margin-bottom: 20px; border-left: 3px solid var(--space-blue); padding-left: 15px; }
-.related-link { color: #ffffff; text-decoration: none; font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 5px; }
+.related-articles { 
+	margin-top: 60px; 
+	border-top: 2px solid var(--border-soft); 
+	padding-top: 40px; 
+}
+
 .related-date { color: #999; font-size: 0.85rem; }
+
+.related-heading { 
+	color: var(--logo-gold); 
+	font-size: 0.9rem; 
+	text-transform: uppercase; 
+	letter-spacing: 2px; 
+	margin-bottom: 25px; 
+}
+
+.related-item { 
+	margin-bottom: 20px; 
+	border-left: 3px solid var(--space-blue); 
+	padding-left: 15px; 
+}
+
+.related-link { 
+	color: #ffffff; 
+	text-decoration: none; 
+	font-weight: bold; 
+	font-size: 1.2rem; 
+	display: block; 
+	margin-bottom: 5px; 
+}
+
+.nbas-article { max-width: 800px; }
+
+/* --- NBAS VIDEO SHORTCODE --- */
+/* --- V0.10.1: MEDIA SHORTCODES (Video & Image) --- */
+
+/* Video Container */
+.nbas-video-container {
+    margin: 2.5rem auto;
+    text-align: center;
+    max-width: 850px; /* Matches article width */
+}
+
+.video-responsive-wrap {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    background: #000;
+    border: 2px solid var(--logo-gold);
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.video-responsive-wrap iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.video-caption {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 12px;
+}
+
+/* Image Container */
+.nbas-media-container {
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.nbas-media-img {
+    border: 2px solid var(--gold-dim);
+    border-radius: 4px;
+    height: auto;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transition: border-color 0.2s ease;
+}
+
+.nbas-media-img:hover {
+    border-color: var(--gold-base); /* Brightens on hover */
+}
+
+/* Desktop Width/Float Control */
+@media (min-width: 768px) {
+    .nbas-media-container.align-left {
+        float: left;
+        margin: 0.5rem 25px 1rem 0;
+        width: 45%; 
+    }
+    .nbas-media-container.align-right {
+        float: right;
+        margin: 0.5rem 0 1rem 25px;
+        width: 45%;
+    }
+    .nbas-media-container.align-center {
+        max-width: 900px;
+        margin: 2.5rem auto;
+    }
+}
+
+.nbas-media-caption {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 12px;
+}
 

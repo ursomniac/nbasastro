@@ -1,6 +1,6 @@
 ---
 title: "The NBAS Archive"
-description: "A chronological list of all observations, news, and history from the Society."
-layout: "list"
+description: "The collection of NBAS member articles, club activities, and astronomical news."
+layout: "section"
 ---
 
