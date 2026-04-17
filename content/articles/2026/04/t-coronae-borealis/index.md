@@ -10,11 +10,12 @@ feature_image: "t-crb-nova.jpg"
 description: "A look at the upcoming eruption of the famous recurring nova in Corona Borealis."
 
 # Metadata Panel Data
-object_type: "Recurring Nova"
-constellation: "Corona Borealis"
-coordinates: "RA 15h 59m 30s | Dec +25° 55′ 13″"
-magnitude: "10.8 (Current) / 2.0 (Peak)"
-distance: "3,000 Light Years"
+object_info:
+  object_type: "Recurring Nova"
+  constellation: "Corona Borealis"
+  coordinates: "RA 15h 59m 30s | Dec +25° 55′ 13″"
+  magnitude: "10.8 (Current) / 2.0 (Peak)"
+  distance: "3,000 ly"
 ---
 
 {{< nbas-image src="system.jpg" align="left" width="350px" caption="T CrB drawing" >}}

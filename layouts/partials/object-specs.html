@@ -1,0 +1,13 @@
+<div class="object-specs-wrapper">
+    <h4 class="specs-title">Object Specs</h4>
+    <table class="specs-table">
+        <tbody>
+            {{ range $key, $value := .Params.object_info }}
+            <tr>
+                <th>{{ $key | humanize }}</th>
+                <td>{{ $value }}</td>
+            </tr>
+            {{ end }}
+        </tbody>
+    </table>
+</div>

@@ -29,6 +29,22 @@ h1, h2, h3, h4,
     margin-bottom: 1rem;
 }
 
+/* --- V0.10.2: ARTICLE GRID & SIDEBAR --- */
+.article-grid-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Stacked on mobile */
+    gap: 40px;
+    align-items: start;
+    margin-top: 30px;
+}
+
+@media (min-width: 992px) {
+    .article-grid-container {
+        grid-template-columns: 1fr 320px; /* Sidebar on right */
+    }
+}
+
+
 /* Internal Links: Forced to Logo Gold (#c5a059) */
 a { 
     color: var(--logo-gold) !important; 
