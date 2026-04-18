@@ -40,6 +40,7 @@
                 <hr class="sidebar-divider">
 
                 <div class="sidebar-widgets">
+		  <div class="widget-box">
                     <h3 class="sidebar-heading">Calendar</h3>
                     <div class="responsive-iframe-wrap ratio-calendar">
                         {{/* RESTORED MULTI-SOURCE CALENDAR */}}
@@ -47,17 +48,22 @@
                                 style="background:transparent; border:none;" 
                                 class="calendar-frame"></iframe>
                     </div>
+		  </div>
 
+                  <div class="widget-box">
                     <h3 class="sidebar-heading">Sky Forecast</h3>
-                    <div class="widget-box">
                         <img src="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" alt="Sky Forecast">
-                    </div>
+                  </div>
 
+		  <div class="widget-box">
                     <h3 class="sidebar-heading">Tonight's Sky</h3>
                     {{ partial "sky-widget.html" . }}
+                  </div>
 
+                  <div class="widget-box">
                     <h3 class="sidebar-heading">Moon Phase</h3>
                     {{ partial "moon-widget.html" . }}
+		  </div>
                 </div>
             </aside>
 
