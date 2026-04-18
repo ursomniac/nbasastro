@@ -6,13 +6,16 @@ title = "Northern Berkshire Astronomical Society"
   subtitle = "Clear Skies over the Berkshires"
   banner = "images/m31_banner.jpg"
   logo = "images/nbas-grey.png"
-  site_version = "v0.10.0"
+  site_version = "v0.13.0"
 
 [taxonomies]
   author = "authors"
   tag = "tags"
   category = "categories"
   series = "series"
+  constellation = "constellations"
+  catalog = "catalogs"
+  solarsystem = "solarsystem"
 
 [permalinks]
   articles = "/articles/:year/:month/:title/"

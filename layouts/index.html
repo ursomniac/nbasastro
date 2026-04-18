@@ -12,7 +12,7 @@
     
     <div class="article-list">
         {{ range first 5 (where .Site.RegularPages "Section" "articles").ByPublishDate.Reverse }}
-            {{ partial "article-card.html" . }}
+	{{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
         {{ end }}
     </div>
 {{ end }}

@@ -4,10 +4,12 @@ date: 2026-04-15
 author: "bob-donahue"
 series: "Stars"
 byline: "The Blaze Star prepares to erupt!"
-tags: ["Variable Star", "Nova", "Corona Borealis", "White Dwarf", "Red Giant"]
+tags: ["Variable Star", "Nova"]
 categories: ["Deep Sky"]
 feature_image: "t-crb-nova.jpg"
 description: "A look at the upcoming eruption of the famous recurring nova in Corona Borealis."
+
+constellations: ["Corona Borealis"]
 
 # Metadata Panel Data
 object_info:

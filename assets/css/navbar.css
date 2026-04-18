@@ -1,0 +1,89 @@
+/* --- V0.13.3 STABLE PRODUCTION ARCHITECTURE --- */
+
+.nbas-topnav {
+    display: flex !important;
+    width: 100% !important;
+    background: var(--deep-bg) !important;
+    border-top: 1.5px solid var(--gold-border) !important;
+    border-bottom: 1.5px solid var(--gold-border) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    box-sizing: border-box !important;
+}
+
+.nav-item {
+    flex: 1 0 0% !important;
+    text-align: center !important;
+    border-left: 1px solid var(--gold-border) !important;
+    position: relative !important;
+    height: 44px !important;
+    box-sizing: border-box !important;
+}
+
+.nav-item:last-child {
+    border-right: 1px solid var(--gold-border) !important;
+}
+
+.nav-item a, .nav-item button {
+    display: block !important;
+    width: 100% !important;
+    height: 44px !important;
+    line-height: 44px !important;
+    color: var(--gold-link) !important;
+    text-transform: uppercase !important;
+    font-size: 0.65rem !important; /* COMPACT FOR DESKTOP */
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    padding: 0 2px !important;
+}
+
+.nav-item:hover {
+    background: rgba(248, 212, 78, 0.15) !important;
+}
+
+/* DROPDOWN REPAIR */
+.dropdown-content {
+    display: none !important;
+    position: absolute !important;
+    top: 44px !important;
+    left: -1px !important;
+    background: var(--deep-bg) !important;
+    min-width: 180px !important;
+    border: 1px solid var(--gold-border) !important;
+    z-index: 10000 !important;
+    overflow: hidden !important;
+}
+
+.nav-item:hover .dropdown-content {
+    display: block !important;
+}
+
+.dropdown-content a {
+    text-align: left !important;
+    padding: 0 15px !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+    font-size: 0.75rem !important;
+}
+
+/* MOBILE REPAIR: 2-COLUMN GRID */
+@media screen and (max-width: 1024px) {
+    .nbas-topnav {
+        flex-wrap: wrap !important;
+        height: auto !important; 
+    }
+    .nav-item {
+        flex: 1 0 50% !important; /* 2 COLUMNS */
+        border: 0.5px solid var(--gold-border) !important;
+    }
+    .nav-item a, .nav-item button {
+        font-size: 0.75rem !important;
+    }
+}
+

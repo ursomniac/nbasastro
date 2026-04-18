@@ -1,0 +1,25 @@
+{{ define "main" }}
+<main class="nbas-container">
+    <h1 class="dynamic-section-header">{{ .Data.Singular | humanize }}: {{ .Title }}</h1>
+
+    <div class="article-grid-container">
+        {{ $pages := .Pages }}
+        {{ $catalogType := lower .Title }}
+
+        {{ if eq .Data.Singular "constellation" }}
+            {{ $pages = .Pages.ByTitle }}
+        {{ else if eq .Data.Singular "catalog" }}
+            <!-- NUMERICAL SORT: Ascending by the first ID in the list -->
+            {{ $pages = sort .Pages (printf "Params.object_sections.%s" $catalogType) "asc" }}
+        {{ else }}
+            {{ $pages = .Pages.ByDate.Reverse }}
+        {{ end }}
+
+        {{ range $pages }}
+            <!-- PASS THE CONTEXT TO THE CARD -->
+            {{ partial "article-card.html" (dict "context" . "catalogPage" $catalogType) }}
+        {{ end }}
+    </div>
+</main>
+{{ end }}
+

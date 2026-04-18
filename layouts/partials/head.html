@@ -1,39 +1,59 @@
 <head data-pagefind-ignore="all">
-    <meta charset="utf-8">
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  <meta charset="utf-8">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 
-    {{/* PAGEFIND METADATA TRAINING: Searches body, but displays this description */}}
-    {{ with .Description }}
-      <meta name="description" content="{{ . }}" data-pagefind-meta="excerpt[content]">
-    {{ else }}
-      <meta name="description" content="{{ .Summary | plainify }}" data-pagefind-meta="excerpt[content]">
-    {{ end }}
+  {{/* PAGEFIND METADATA TRAINING: Searches body, but displays this description */}}
+  {{ with .Description }}
+  <meta name="description" content="{{ . }}" data-pagefind-meta="excerpt[content]">
+  {{ else }}
+  <meta name="description" content="{{ .Summary | plainify }}" data-pagefind-meta="excerpt[content]">
+  {{ end }}
 
-    {{/* CSS BUNDLING & CACHE BUSTING */}}
-    {{- $style_slice := slice 
-        (resources.Get "css/01-variables.css") 
-        (resources.Get "css/02-layout.css") 
-        (resources.Get "css/03-discovery-overlay.css") 
-        (resources.Get "css/04-night-vision.css") 
-        (resources.Get "css/cards.css") 
-        (resources.Get "css/content.css") 
-        (resources.Get "css/tables.css") 
-        (resources.Get "css/authors.css") 
-    -}}
-    {{- $styles := $style_slice | resources.Concat "css/main.css" | minify | fingerprint -}}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+  {{/* CSS BUNDLING & CACHE BUSTING */}}
+  {{- $style_slice := slice (resources.Get "css/01-variables.css") (resources.Get "css/02-layout.css") (resources.Get "css/navbar.css") (resources.Get "css/03-discovery-overlay.css") (resources.Get "css/04-night-vision.css") (resources.Get "css/cards.css") (resources.Get "css/content.css") (resources.Get "css/tables.css") (resources.Get "css/authors.css") -}}
+  {{- $styles := $style_slice | resources.Concat "css/main.css" | minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
 
-    {{/* PAGEFIND UI ASSETS */}}
-    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-    <script src="/pagefind/pagefind-ui.js"></script>
-    <script>
-        window.addEventListener('DOMContentLoaded', (event) => {
-            new PagefindUI({ 
-                element: "#search", 
-                showImages: false,
-                resetStyles: false 
-            });
-        });
-    </script>
+  {{/* PAGEFIND UI ASSETS */}}
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+  <script src="/pagefind/pagefind-ui.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+      new PagefindUI({
+        element: "#search",
+        showImages: false,
+        resetStyles: false
+      });
+    });
+  </script>
+</head>
+<head data-pagefind-ignore="all">
+  <meta charset="utf-8">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+
+  {{/* PAGEFIND METADATA TRAINING: Searches body, but displays this description */}}
+  {{ with .Description }}
+  <meta name="description" content="{{ . }}" data-pagefind-meta="excerpt[content]">
+  {{ else }}
+  <meta name="description" content="{{ .Summary | plainify }}" data-pagefind-meta="excerpt[content]">
+  {{ end }}
+
+  {{/* CSS BUNDLING & CACHE BUSTING */}}
+  {{- $style_slice := slice (resources.Get "css/01-variables.css") (resources.Get "css/02-layout.css") (resources.Get "css/navbar.css") (resources.Get "css/03-discovery-overlay.css") (resources.Get "css/04-night-vision.css") (resources.Get "css/cards.css") (resources.Get "css/content.css") (resources.Get "css/tables.css") (resources.Get "css/authors.css") -}}
+  {{- $styles := $style_slice | resources.Concat "css/main.css" | minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+
+  {{/* PAGEFIND UI ASSETS */}}
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+  <script src="/pagefind/pagefind-ui.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+      new PagefindUI({
+        element: "#search",
+        showImages: false,
+        resetStyles: false
+      });
+    });
+  </script>
 </head>
 

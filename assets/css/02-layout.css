@@ -63,45 +63,64 @@ a:hover {
     padding: 0 20px;
 }
 
-.nbas-topnav {
+/* CONSTELLATION ATLAS TABLE */
+.nbas-atlas-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
     background: var(--deep-bg);
-    border-top: 2px solid var(--border-soft);
-    border-bottom: 2px solid var(--border-soft);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 0px 20px;
+    border: 1px solid var(--border-soft);
 }
 
-.nbas-topnav a,
-.nbas-topnav a:link,
-.nbas-topnav a:visited {
-    color: #c5a059 !important;
-    text-decoration: none !important;
+.nbas-atlas-table th {
+    background: rgba(197, 160, 89, 0.1);
+    color: #c5a059;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-size: 0.85rem;
-    font-weight: bold;
-    padding: 15px 25px; /* Creates the clickable hit-area */
-    display: flex;
-    align-items: center;
+    letter-spacing: 1px;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #c5a059;
+}
+
+.nbas-atlas-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-soft);
+    vertical-align: top;
+}
+
+.pronounce-guide {
+    color: #888;
+    font-family: monospace;
+    font-size: 0.75rem;
+}
+
+.nbas-atlas-table tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* CONSTELLATION ATLAS LINK OVERRIDES */
+.active-atlas-link, 
+.active-atlas-link:link, 
+.active-atlas-link:visited {
+    color: #c5a059 !important; /* Force Logo Gold */
+    font-weight: bold !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.3);
     transition: all 0.2s ease;
-    border-right: 1px solid var(--border-soft); 
 }
 
-.nbas-topnav a:last-child {
-    border-right: none;
-}
-
-.nbas-topnav a:hover {
+.active-atlas-link:hover {
     color: var(--logo-gold-bright) !important;
-    background: rgba(197, 160,  89, 0.1);
+    border-bottom: 1px solid #c5a059;
+    background: rgba(197, 160, 89, 0.1);
 }
 
-/* Restore the vertical "pipe" separators */
-.nbas-topnav a:not(:last-child) {
-    border-right: 1px solid var(--border-soft);
+.inactive-atlas-name {
+    color: #eee;
+    font-weight: 500;
 }
+
+
 
 
 
@@ -473,14 +492,7 @@ mark {
 }
 
 @media (max-width: 991px) {
-    .nbas-topnav {
-        justify-content: center;
-        padding: 5px;
-    }
-    .nbas-topnav a {
-        padding: 10px 15px;
-        font-size: 0.8rem;
-    }
+
     .nbas-columns {
         display: flex;
         flex-direction: column;
@@ -506,3 +518,12 @@ mark {
     }
     .left-col, .right-col { text-align: center; }
 }
+
+/* Ensure this is at the end of the file */
+@media screen and (max-width: 1200px) {
+    .nav-label { 
+        display: none !important; 
+        visibility: hidden;
+    }
+}
+

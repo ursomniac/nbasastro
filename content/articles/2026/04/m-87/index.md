@@ -4,8 +4,14 @@ date: 2026-04-14
 author: "bob-donahue"
 byline: "Exploring a huge Galaxy!"
 thumbnail: "m_87-92U-PIXRCAGRAXGHS-square.jpg"
-tags: ["Deep Sky", "Galaxy"]
+tags: ["Galaxy", "Virgo Cluster"]
 categories: ["Deep Sky"]
+constellations: ["Virgo"]
+
+catalogs: ["Messier"]
+
+object_sections:
+  messier: [87]
 ---
 
 FOO FOO FOO

@@ -1,46 +1,61 @@
 <div class="article-card">
     <div class="card-feature-icon">
-        {{ partial "feature-icon.html" . }}
+        {{ partial "feature-icon.html" .context }}
     </div>
 
     <div class="card-content">
-        <div class="card-facets" style="margin-bottom: 12px;">
-            {{ with .Params.series }}
+        <div class="card-facets" style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
+            {{ with .context.Params.series }}
                 <a href="{{ "/series/" | relLangURL }}{{ . | urlize }}" class="facet-badge series-badge">{{ . }}</a>
             {{ end }}
-            {{ range .Params.categories }}
+
+            {{ range .context.Params.categories }}
                 <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}" class="facet-badge category-badge">{{ . }}</a>
+            {{ end }}
+
+            {{/* CATALOG PILLS: ONLY RENDER IF ON A CATALOG PAGE */}}
+            {{ if .catalogPage }}
+                {{ $cat := .catalogPage }}
+                {{ with (index .context.Params.object_sections $cat) }}
+                    {{ $prefix := "" }}
+                    {{ if eq $cat "messier" }}{{ $prefix = "M " }}{{ end }}
+                    {{ if eq $cat "caldwell" }}{{ $prefix = "C " }}{{ end }}
+                    {{ if eq $cat "ngc" }}{{ $prefix = "NGC " }}{{ end }}
+                    
+                    {{ range . }}
+                        <span class="facet-badge catalog-badge">{{ $prefix }}{{ . }}</span>
+                    {{ end }}
+                {{ end }}
             {{ end }}
         </div>
 
-        <a href="{{ .RelPermalink }}" class="card-title-link">
-            <h2 class="card-title">{{ .Title }}</h2>
+        <a href="{{ .context.RelPermalink }}" class="card-title-link">
+            <h2 class="card-title">{{ .context.Title }}</h2>
         </a>
 
         <div class="card-metadata">
-            {{ $authorPage := $.Site.GetPage (printf "/authors/%s" (.Params.author | urlize)) }}
+            {{ $authorPage := $.Site.GetPage (printf "/authors/%s" (.context.Params.author | urlize)) }}
             By 
             {{ if $authorPage }}
                 <a href="{{ $authorPage.RelPermalink }}" class="author-link">{{ $authorPage.Title }}</a>
             {{ else }}
-                {{ .Params.author | default "NBAS Staff" }}
+                {{ .context.Params.author | default "NBAS Staff" }}
             {{ end }} 
 
-
-            | {{ .PublishDate.Format "Jan 2, 2006" }}
+            | {{ .context.PublishDate.Format "Jan 2, 2006" }}
         </div>
 
-        {{ with .Params.byline }}
+        {{ with .context.Params.byline }}
             <p class="card-byline">{{ . }}</p>
         {{ end }}
 
-        {{/* Item 0.2: The Tags */}}
-        {{ with .Params.tags }}
-        <div class="card-tags" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
-            {{ range . }}
-                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag-link" style="font-family: monospace; font-size: 0.8rem;">#{{ . }}</a>
-            {{ end }}
-        </div>
+        {{ with .context.Params.tags }}
+            <div class="card-tags" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                {{ range . }}
+                    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag-link" style="font-family: monospace; font-size: 0.8rem;">#{{ . }}</a>
+                {{ end }}
+            </div>
         {{ end }}
-    </div> {{/* CLOSES .card-content */}}
-</div> {{/* CLOSES .article-card */}}
+    </div>
+</div>
+

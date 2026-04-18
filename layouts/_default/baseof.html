@@ -18,16 +18,9 @@
         </div>
     </header>
 
-    <nav class="nbas-topnav">
-        <a href="/">Home</a>
-        <a href="/articles/">Articles</a>
-        <a href="/library/">Library</a>
-	<a href="#discovery-modal" class="explore-trigger">Explore Topics</a>
-    </nav>
+    {{ partial "nav.html" . }}
 
     <div class="nbas-container">
-        {{ partial "discovery-bar.html" . }}
-
         <div class="nbas-columns">
 
 <!-- BEGINNING OF SIDEBAR -->
@@ -85,8 +78,8 @@
 
                 </div>
             </aside>
-<!--- END OF SIDEBAR -->
 
+<!-- end of sidebar -->
             <main class="nbas-main" data-pagefind-body>
                 {{ block "main" . }}{{ end }}
             </main>

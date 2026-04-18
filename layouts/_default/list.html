@@ -28,7 +28,7 @@
     <div class="article-list">
         {{/* Use .Paginator.Pages to respect the 10-article limit from hugo.toml */}}
         {{ range .Paginator.Pages }}
-            {{ partial "article-card.html" . }}
+            {{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
         {{ else }}
             <p style="color: #888;">No articles found in this subset.</p>
         {{ end }}

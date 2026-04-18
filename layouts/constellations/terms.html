@@ -1,0 +1,53 @@
+{{ define "main" }}
+<main class="nbas-container">
+    <h1 class="page-title">The 88 Constellations</h1>
+    
+    <table class="nbas-atlas-table">
+        <thead>
+            <tr>
+                <th>Constellation</th>
+                <th>Genitive</th>
+                <th>Meaning</th>
+                <th style="text-align: center;">Articles</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ $allData := hugo.Data.constellations }}
+            {{ $tax := $.Site.Taxonomies.constellations }}
+            
+            {{ range $name, $meta := $allData }}
+                {{ $count := 0 }}
+                {{ $url := "" }}
+                
+                {{/* FAIL-SAFE LOOKUP: Scan the taxonomy for a name match */}}
+                {{ range $termName, $term := $tax }}
+                    {{ if eq ($termName | lower) ($name | lower) }}
+                        {{ $count = $term.Count }}
+                        {{ $url = $term.Page.RelPermalink }}
+                    {{ end }}
+                {{ end }}
+
+                <tr>
+                    <td>
+                        {{ if gt $count 0 }}
+                           <a href="{{ $url }}" class="active-atlas-link">{{ $name }}</a>
+                        {{ else }}
+                            <strong class="inactive-atlas-name">{{ $name }}</strong>
+                        {{ end }}
+                        <br><small class="pronounce-guide">{{ $meta.pronounce_name }}</small>
+                    </td>
+                    <td>
+                        <em>{{ $meta.genitive }}</em>
+                        <br><small class="pronounce-guide">{{ $meta.pronounce_gen }}</small>
+                    </td>
+                    <td>{{ $meta.translation }}</td>
+                    <td style="text-align: center; color: #888;">
+                        {{ $count }}
+                    </td>
+                </tr>
+            {{ end }}
+        </tbody>
+    </table>
+</main>
+{{ end }}
+
