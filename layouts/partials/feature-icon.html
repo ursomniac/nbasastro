@@ -1,22 +1,28 @@
-{{ $iconSrc := "" }}
-{{ $img := "" }}
-
-{{/* 1. If you explicitly named an image in Front Matter, use it */}}
-{{ if .Params.thumbnail }}
+<div class="card-feature-icon">
+  {{ $img := "" }}
+  {{ if .Params.thumbnail }}
     {{ $img = .Resources.GetMatch .Params.thumbnail }}
-{{ end }}
+  {{ end }}
 
-{{ if $img }}
-    {{/* Process the image into a perfect 120x120 thumb */}}
+  {{ if $img }}
+    {{/* 1. CUSTOM THUMBNAIL (Hand-picked for this article) */}}
     {{ $thumb := $img.Fill "120x120 Center" }}
-    <img src="{{ $thumb.RelPermalink }}" 
-         style="width: 60px; height: 60px; border-radius: 4px; border: 1px solid #c5a059; object-fit: cover;">
-{{ else }}
-    {{/* 2. No thumbnail defined? Use the Feature SVG (Zero Futz) */}}
-    {{ $iconName := .Params.feature | lower | urlize }}
-    {{ if eq $iconName "object-highlight" }}{{ $iconName = "saturn" }}{{ end }}
-    {{ if eq $iconName "constellation-highlight" }}{{ $iconName = "galaxy" }}{{ end }}
-    {{ if eq $iconName "imaging" }}{{ $iconName = "comet" }}{{ end }}
+    <img src="{{ $thumb.RelPermalink }}" class="article-thumb">
+  {{ else }}
+    {{/* 2. SERIES OR DEFAULT ICON */}}
+    {{ $icon := "comet" }}
     
-    <img src="/icons/{{ $iconName | default "news" }}.svg" style="width: 50px; height: auto;">
-{{ end }}
+    {{ if eq .Params.series "Constellation" }}{{ $icon = "constellation" }}
+    {{ else if eq .Params.series "Newsletter" }}{{ $icon = "telescope" }}
+    {{ else if eq .Params.series "Solar System" }}{{ $icon = "saturn" }}
+    {{ else if eq .Params.series "Stars" }}{{ $icon = "star" }}
+    {{ else if eq .Params.series "Deep Sky" }}{{ $icon = "galaxy" }}
+    {{ else if eq .Params.series "Imaging" }}{{ $icon = "camera" }}
+    {{ else if eq .Params.series "Event" }}{{ $icon = "moon" }}
+    {{ else if eq .Params.series "NBAS" }}{{ $icon = "logo" }}
+
+    {{ end }}
+
+    {{ partial (printf "icons/%s.html" $icon) . }}
+  {{ end }}
+</div>

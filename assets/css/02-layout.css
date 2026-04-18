@@ -155,6 +155,95 @@ a:hover {
     box-sizing: border-box !important;
 }
 
+/* --- V0.13.0: PAGEFIND SEARCH STYLING --- */
+#search {
+    --pagefind-ui-primary: #c5a059;      /* Gold highlights */
+    --pagefind-ui-text: #ffffff;        /* White text for readability */
+    --pagefind-ui-background: #0d1421;  /* Darker background for results */
+    --pagefind-ui-border: #c5a059;      /* Gold borders */
+    --pagefind-ui-tag: #c5a059;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.pagefind-ui {
+    --pagefind-ui-primary: #c5a059;
+    --pagefind-ui-text: var(--text-main);
+    --pagefind-ui-background: #050a14;
+    --pagefind-ui-border: var(--border-soft);
+    padding: 10px;
+}
+
+/* 1. Remove the "Crashed" grey boxes */
+.pagefind-ui__result {
+    padding: 12px !important; /* The "Safe Zone" */
+    margin-bottom: 10px !important;
+    background: rgba(255, 255, 255, 0.02); /* Subtle contrast from sidebar */
+    border-bottom: 1px solid var(--border-soft) !important;
+    list-style: none;
+
+    border-radius: 4px;
+    text-align: left !important;
+}
+
+/* 3. The Highlight Fix (Replaces neon yellow with a subtle gold glow) */
+mark {
+    background-color: rgba(197, 160, 89, 0.3) !important;
+    color: #ffffff !important;
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
+/* 2. Style the Result Link */
+.pagefind-ui__result-link {
+    color: #c5a059 !important;
+    font-size: 1rem !important;
+    font-weight: bold;
+    text-decoration: none !important;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.pagefind-ui__result-excerpt {
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+    color: #aaa !important;
+}
+
+.pagefind-ui__search-input {
+    background-color: #050a14 !important;
+    color: #ffffff !important;
+    border-radius: 4px !important;
+}
+
+.pagefind-ui__search-clear, 
+.pagefind-ui__result-thumb { 
+    display: none !important; 
+}
+
+.pagefind-ui__status {
+    margin: 5px 0 !important; /* Tightens the "1 result found" line */
+    padding: 0 10px !important;
+    text-align: left !important;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+.pagefind-ui__results-area {
+    margin-top: 10px !important;
+    max-height: 400px; /* Prevents search from eating the whole sidebar */
+    overflow-y: auto;  /* Adds a scrollbar if there are many hits */
+    padding: 0 10px;   /* Consistent internal gutter */
+}
+
+/* Fix for the result container to prevent "bleeding" */
+.pagefind-ui__drawer {
+    background: #0d1421;
+    border: 1px solid var(--logo-gold);
+    z-index: 100;
+}
+
+
 /* --- SKY MAP: 4:3 SCALE STABILIZATION --- */
 .ratio-sky {
     position: relative !important;
@@ -187,15 +276,112 @@ a:hover {
     filter: invert(90%) hue-rotate(180deg) brightness(1.1) !important;
 }
 
+/* --- V0.10.7: MOON WIDGET ALIGNMENT --- */
+/* --- V0.11.0: FLATTENED MOON WIDGET --- */
+
+/* --- V0.11.2: MOON WIDGET STABILIZATION --- */
+
+/* --- V0.11.3: MOON WIDGET DARK BACKGROUND --- */
+
+.moon-widget {
+    /* Deep space blue/black to pop the gold crescent */
+    background-color: #0c1830 !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 0 0 20px 0 !important;
+}
+
+#moon-container {
+    width: 100px;
+    height: 100px;
+    margin: 20px 0 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.moon-svg {
+    width: 100px;
+    height: 100px;
+    display: block;
+    filter: drop-shadow(0 0 8px rgba(197, 160, 89, 0.3));
+}
+
+.moon-phase-label {
+    text-align: center;
+    color: #c5a059;
+    font-weight: bold;
+}
+
+.moon-meta {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 5px;
+    font-weight: normal;
+}
+
+
+
+
 /* --- 6. FOOTER --- */
 .nbas-footer {
     background: var(--deep-bg);
     border-top: 2px solid var(--border-soft);
-    padding: 40px 20px;
-    margin-top: 50px;
-    text-align: center;
-    color: #666;
+    padding: 40px 0; /* Tightened vertical padding */
+    color: var(--text-main);
 }
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Force 3 equal columns */
+    align-items: center; /* Vertically center all columns */
+    gap: 20px;
+}
+
+/* Column Alignments */
+.left-col { text-align: left; }
+.footer-nav { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+    text-align: center; 
+}
+.right-col { text-align: right; }
+
+/* --- V0.11.0: DIAGNOSTIC VERSION ANCHOR --- */
+.site-version {
+    /* font-family: monospace; */
+    font-size: 0.75rem;
+    color: var(--text-main);
+    opacity: 0.4; /* Faint, only visible if you're looking for it */
+    text-align: right;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+
+
+/* Typography */
+.footer-signoff {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.founded {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.5;
+}
+
+.footer-copyright {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    opacity: 0.5;
+}
+
 
 /* --- 7. THE "SANDWICH" RESPONSIVE FIX --- */
 @media (min-width: 992px) {
@@ -204,6 +390,17 @@ a:hover {
         grid-template-columns: 300px 1fr;
         gap: 40px;
         align-items: start;
+    }
+    .footer-flex {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    .footer-copyright {
+        text-align: center;
+    }
+    .footer-nav {
+        margin: 20px 0;
     }
 }
 
@@ -234,4 +431,10 @@ a:hover {
     .ratio-calendar {
         height: 250px !important;
     }
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
+    }
+    .left-col, .right-col { text-align: center; }
 }

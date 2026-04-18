@@ -2,7 +2,7 @@
 title: "M31: The Great Andromeda Galaxy"
 date: 2026-04-13
 author: "R. Donahue"
-feature: "Object Highlight"
+series: "Event"
 byline: "A deep dive into our nearest galactic neighbor."
 tags: ["DSO", "Andromeda"]
 ---

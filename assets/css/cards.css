@@ -31,3 +31,32 @@ h1.article-title {
 .card-title-link:hover .card-title {
     color: var(--gold-base) !important; /* Only turns Gold on Hover */
 }
+
+/* --- V0.12.0: ARTICLE CARD MEDIA FRAME --- */
+
+
+.article-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-feature-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(197, 160, 89, 0.05);
+    border: 1px solid #c5a059;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.astro-icon {
+    width: 35px;
+    height: 35px;
+    color: #c5a059; /* Inherited by 'currentColor' in SVG */
+    filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.4));
+}
+

@@ -41,12 +41,6 @@
 .starmap-link { color: var(--starmap-orange) !important; text-decoration: none; display: flex; align-items: center; gap: 8px; }
 .constellation-link { color: var(--constellation-tan) !important; text-decoration: none; display: flex; align-items: center; gap: 8px; }
 
-/* Lunar Engine (v0.8.2) */
-.moon-widget { background: var(--deep-bg); border-radius: 4px; border: 1px solid var(--border-soft); padding: 25px; text-align: center; }
-.moon-porthole { margin: 0 auto 20px auto; width: 120px; height: 120px; border-radius: 50%; border: 1px solid var(--border-soft); background: #000; position: relative; overflow: hidden; }
-.moon-svg { width: 100%; height: 100%; transform: rotate(15deg); }
-.moon-shadow { fill: var(--deep-bg); }
-.moon-surface { fill: var(--logo-gold); }
 
 .discovery-bar { width: 100%; box-sizing: border-box; margin-bottom: 35px; }
 
