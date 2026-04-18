@@ -1,0 +1,82 @@
+/* --- V0.13.28 STABLE LOCKED ARCHITECTURE --- */
+
+/* 1. ANCHOR THE INPUT BAR */
+#search .pagefind-ui__search-input {
+    background-color: #050a14 !important;
+    color: #ffffff !important;
+    border: 1.5px solid #8e7037 !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* 2. THE BUTTON (FIXED PIXEL ANCHOR) */
+#search .pagefind-ui__search-clear {
+    position: absolute !important;
+    /* YOUR FIXED ANCHOR FIX: */
+    top: 25px !important; 
+    transform: translateY(-50%) !important;
+    right: 10px !important;
+    /* YOUR PADDING FIX: */
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+    height: 26px !important;
+    background-color: #1a2a44 !important;
+    border: 1px solid #8e7037 !important;
+    color: #f8d44e !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* 3. INPUT TEXT READABILITY */
+#search .pagefind-ui__search-input input {
+    color: #ffffff !important;
+    background: transparent !important;
+}
+
+/* 4. THE MESSAGE BAR & TAGS (READABILITY) */
+.pagefind-ui__message {
+    color: #cccccc !important;
+    padding: 10px 0 !important;
+    font-weight: 700 !important;
+}
+
+.pagefind-ui__result-tag {
+    background-color: #1a2a44 !important;
+    color: #d1d1d1 !important;
+    border: 1px solid #3a4a64 !important;
+}
+
+/* 5. THE WHITE BLOB EXTERMINATOR */
+.pagefind-ui__result-excerpt, 
+.pagefind-ui__result-inner {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #d1d1d1 !important;
+}
+
+/* 6. TITLES & HIGHLIGHTS */
+.pagefind-ui__result-link {
+    color: #f8d44e !important;
+    text-decoration: none !important;
+}
+
+mark {
+    background-color: #f8d44e !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+}
+
+/* 7. SCROLLABLE AREA */
+.pagefind-ui__results-area {
+    max-height: 400px !important;
+    overflow-y: auto !important;
+}
+
