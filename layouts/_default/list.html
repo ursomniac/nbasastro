@@ -5,9 +5,25 @@
             {{ if eq .Kind "taxonomy" }}{{ .Data.Singular | title }}: {{ end }}{{ .Title }}
         </h1>
         {{ with .Params.description }}
-            <p class="page-subtitle" style="color: #888; font-size: 1.1rem; font-style: italic;">{{ . }}</p>
+        <p class="page-subtitle" style="color: #888; font-size: 1.1rem; font-style: italic;">{{ . }}</p>
         {{ end }}
     </header>
+
+    {{/* V0.11.1: EXPLORE TOPICS FILTER (Restricted to Articles) */}}
+	{{ if or (eq .Section "articles") (eq .Kind "taxonomy") (eq .Kind "term") }}
+	<div class="nbas-filter-bar" data-pagefind-ignore>
+    	<span class="filter-label">Explore Series:</span>
+    	<select id="series-select" class="series-dropdown" onchange="window.location.href=this.value;">
+        	<option value="">-- Select --</option>
+        	<option value="{{ "/articles/" | relURL }}">All Articles</option>
+        	{{ range $name, $taxonomy := .Site.Taxonomies.series }}
+            	<option value="{{ "/series/" | relURL }}{{ $name | urlize }}/" {{ if eq $.Title ($name | humanize) }}selected{{ end }}>
+                {{ $name | humanize }} ({{ $taxonomy.Count }})
+            	</option>
+        	{{ end }}
+    	</select>
+	</div>
+	{{ end }}
 
     <div class="article-list">
         {{/* Use .Paginator.Pages to respect the 10-article limit from hugo.toml */}}
@@ -18,8 +34,6 @@
         {{ end }}
     </div>
 
-    {{/* We will build this partial next or use Hugo's default */}}
     {{ template "_internal/pagination.html" . }}
 </div>
 {{ end }}
-

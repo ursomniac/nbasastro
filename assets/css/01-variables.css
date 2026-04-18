@@ -33,15 +33,6 @@ a,
     font-weight: bold !important;
 }
 
-/* Metadata Badges use the Dimmed Gold for context */
-.facet-badge,
-.series-badge {
-    color: var(--gold-dim) !important;
-    border: 1px solid var(--gold-dim) !important;
-    text-decoration: none !important;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-}
 
 a:hover {
     color: var(--gold-base) !important;

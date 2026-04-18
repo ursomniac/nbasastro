@@ -2,7 +2,6 @@
 title: "M87: Behemoth of the Virgo Cluster"
 date: 2026-04-14
 author: "bob-donahue"
-series: "Deep Sky"
 byline: "Exploring a huge Galaxy!"
 thumbnail: "m_87-92U-PIXRCAGRAXGHS-square.jpg"
 tags: ["Deep Sky", "Galaxy"]

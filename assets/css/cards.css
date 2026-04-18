@@ -60,3 +60,66 @@ h1.article-title {
     filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.4));
 }
 
+/* --- V0.11.2: UNIFIED PRECISION PILLS (Facets & Tags) --- */
+/* 1. Common Base: Defines the "Precision" footprint for all pills */
+.facet-badge, 
+.tag-link, 
+.card-tags a, 
+.discovery-pill {
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 12px !important;
+    border-radius: 3px;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+    display: inline-block;
+    border: 1px solid transparent;
+}
+
+/* 2. Series Badge: Solid Gold with Dark Text */
+.series-badge {
+    background-color: #c5a059 !important;
+    color: #050a14 !important; /* High-contrast dark blue */
+    border: 1px solid #c5a059;
+}
+
+/* 3. Category Badge: Outlined Gold with faint wash */
+.category-badge {
+    background-color: rgba(197, 160, 89, 0.05);
+    color: #c5a059 !important;
+    border: 1px solid rgba(197, 160, 89, 0.4);
+}
+
+/* 4. Tags / Discovery Pills: The "Support" (Subtle Outline) */
+.tag-link, 
+.card-tags a, 
+.discovery-pill {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #aaa !important;
+    border-color: var(--border-soft);
+}
+
+/* 5. Wrappers: Ensures consistent spacing across all containers */
+.card-facets, 
+.card-tags, 
+.discovery-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+/* 6. Interaction: Global Hover Polish */
+.facet-badge:hover, 
+.tag-link:hover, 
+.card-tags a:hover, 
+.discovery-pill:hover {
+    filter: brightness(1.2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    color: #c5a059 !important;
+    border-color: #c5a059;
+}
+

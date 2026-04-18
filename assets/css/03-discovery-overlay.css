@@ -76,38 +76,6 @@
 }
 
 /* --- 3. THE PILLS: REMOVING THE "SQUASH" & UNDERLINES --- */
-.discovery-pills { 
-    display: flex !important; 
-    flex-wrap: wrap !important; /* FORCES WRAP */
-    gap: 12px !important;       /* SEPARATES THE RECTANGLES */
-    justify-content: flex-start !important; /* Top/Left justified */
-    width: 100%;
-
-}
-
-.discovery-pill, .tag-link {
-    text-decoration: none !important; /* KILLS THE UNDERLINE */
-    padding: 8px 16px !important;    /* BREATHING ROOM */
-    display: inline-flex !important;
-    align-items: center;
-    font-weight: bold !important;
-    border-radius: 4px !important;
-}
-
-/* CATEGORIES: Clean White-on-Blue */
-.discovery-pill {
-    background: var(--space-blue) !important;
-    color: #ffffff !important;
-    border: 1px solid var(--gold-link) !important;
-}
-.discovery-pill:hover { border-color: var(--logo-gold); background: #24344d; }
-
-.tag-link {
-    background: var(--tag-cyan-bg) !important;
-    color: var(--tag-cyan) !important;
-    border: 1px solid var(--tag-cyan) !important;
-    font-family: monospace;
-}
 
 .pill-count {
     color: var(--gold-base) !important; /* Uses the vibrant gold for the number */
