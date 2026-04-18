@@ -29,8 +29,11 @@
         {{ partial "discovery-bar.html" . }}
 
         <div class="nbas-columns">
+
+<!-- BEGINNING OF SIDEBAR -->
             <aside class="nbas-sidebar">
 
+<!-- T1. SEARCH -->
                 <div class="sidebar-top">
 					<div class="search-widget widget-box">
 					    <h3 class="sidebar-heading">Search Archive</h3>
@@ -47,6 +50,8 @@
                 <hr class="sidebar-divider">
 
                 <div class="sidebar-widgets">
+
+<!-- W1. CALENDAR -->
 		  <div class="widget-box">
                     <h3 class="sidebar-heading">Calendar</h3>
                     <div class="responsive-iframe-wrap ratio-calendar">
@@ -57,24 +62,30 @@
                     </div>
 		  </div>
 
-                  <div class="widget-box">
-                    <h3 class="sidebar-heading">Sky Forecast</h3>
-                        <img src="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" alt="Sky Forecast">
-                  </div>
+<!-- W2. ALMANAC -->
+		{{ partial "almanac-widget.html" . }}
 
+<!-- W3. SKYMAP -->
 		  <div class="widget-box">
                     <h3 class="sidebar-heading">Tonight's Sky</h3>
                     {{ partial "sky-widget.html" . }}
                   </div>
 
+<!-- W4. MOON -->
 <div class="moon-widget widget-box">
     <h3 class="sidebar-heading">Moon Phase</h3>
     {{ partial "moon-widget.html" . }}
 </div>
 
+<!-- W5. FORECAST -->
+                  <div class="widget-box">
+                    <h3 class="sidebar-heading">Sky Forecast</h3>
+                        <img src="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" alt="Sky Forecast">
+                  </div>
 
                 </div>
             </aside>
+<!--- END OF SIDEBAR -->
 
             <main class="nbas-main" data-pagefind-body>
                 {{ block "main" . }}{{ end }}

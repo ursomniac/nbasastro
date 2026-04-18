@@ -276,13 +276,7 @@ mark {
     filter: invert(90%) hue-rotate(180deg) brightness(1.1) !important;
 }
 
-/* --- V0.10.7: MOON WIDGET ALIGNMENT --- */
-/* --- V0.11.0: FLATTENED MOON WIDGET --- */
-
-/* --- V0.11.2: MOON WIDGET STABILIZATION --- */
-
 /* --- V0.11.3: MOON WIDGET DARK BACKGROUND --- */
-
 .moon-widget {
     /* Deep space blue/black to pop the gold crescent */
     background-color: #0c1830 !important; 
@@ -320,6 +314,32 @@ mark {
     margin-top: 5px;
     font-weight: normal;
 }
+
+/* --- V0.12.1: Almanac Widget -- */
+.almanac-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.almanac-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+    padding-bottom: 4px;
+}
+
+.almanac-item span {
+    color: var(--text-main);
+    opacity: 0.8;
+}
+
+.almanac-item strong {
+    color: var(--logo-gold);
+}
+
 
 
 /* --- V0.11.1: TOPIC FILTER STYLING --- */

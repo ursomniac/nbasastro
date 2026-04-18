@@ -1,0 +1,61 @@
+<div class="almanac-widget widget-box" data-pagefind-ignore>
+    <h3 class="sidebar-heading">Local Almanac</h3>
+    <div id="almanac-list" class="almanac-grid">
+        <!-- Chronological injection by JS -->
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const KEY = "C5PSZZWG7887M7BQT7UN848CP"; 
+    const LOC = "42.70,-73.11";
+    const BASE = "https://weather" + ".visualcrossing.com" + "/VisualCrossingWebServices/rest/services/timeline/";
+    const PARAMS = LOC + "/today" + "?unitGroup=us&elements=sunrise,sunset,moonrise,moonset&include=days&key=" + KEY;
+    const URL = BASE + PARAMS;
+
+    const to12h = (t) => {
+        if (!t) return "--:--";
+        let [h, m] = t.split(':');
+        let hrs = parseInt(h);
+        let suffix = hrs >= 12 ? 'PM' : 'AM';
+        hrs = hrs % 12 || 12;
+        return hrs + ":" + m + " " + suffix;
+    };
+
+    async function updateAlmanac() {
+        const list = document.getElementById("almanac-list");
+        try {
+            const response = await fetch(URL);
+            if (!response.ok) throw new Error("FETCH_ERR");
+            
+            const data = await response.json();
+            const today = data.days[0];
+
+            // 1. ASSEMBLE REMAINING DATA POINTS
+            const events = [
+                { label: "Sunrise", time: today.sunrise },
+                { label: "Sunset", time: today.sunset },
+                { label: "Moonrise", time: today.moonrise },
+                { label: "Moonset", time: today.moonset }
+            ].filter(e => e.time); // REMOVE NULLS
+
+            // 2. CHRONOLOGICAL SORT
+            events.sort((a, b) => a.time.localeCompare(b.time));
+
+            // 3. RENDER
+            list.innerHTML = events.map(e => `
+                <div class="almanac-item">
+                    <span>${e.label}:</span> 
+                    <strong>${to12h(e.time)}</strong>
+                </div>
+            `).join('');
+
+        } catch (e) {
+            console.error("ALMANAC_FAIL:", e);
+            list.innerHTML = "<div>Almanac Data Unavailable</div>";
+        }
+    }
+    updateAlmanac();
+});
+</script>
+
