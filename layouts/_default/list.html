@@ -4,6 +4,7 @@
         <h1 class="page-title" style="color: #ffffff; font-size: 2.2rem; margin: 0 0 10px 0;">
             {{ if eq .Kind "taxonomy" }}{{ .Data.Singular | title }}: {{ end }}{{ .Title }}
         </h1>
+
         {{ with .Params.description }}
         <p class="page-subtitle" style="color: #888; font-size: 1.1rem; font-style: italic;">{{ . }}</p>
         {{ end }}

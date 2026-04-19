@@ -1,0 +1,13 @@
+{{ define "main" }}
+  {{/* SEO Suicide Switch */}}
+  <head>
+    <meta name="robots" content="noindex, nofollow, noarchive">
+  </head>
+
+  <article class="nbas-internal-docs" data-pagefind-ignore>
+    <h1>INTERNAL: {{ .Title }}</h1>
+    <div class="internal-content">
+      {{ .Content }}
+    </div>
+  </article>
+{{ end }}
