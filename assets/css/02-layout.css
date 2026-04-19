@@ -438,3 +438,25 @@ a:hover {
     }
 }
 
+@media (max-width: 768px) {
+  /* Target the container that holds both the article and the sidebar */
+  .main-content-wrapper { 
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Move the article (content) to the top */
+  article {
+    order: 1;
+  }
+
+  /* Move the sidebar (search/meeting) to the bottom */
+  aside {
+    order: 2;
+    margin-top: 40px; /* Gap so it doesn't touch the article end */
+    border-top: 1px solid #333;
+    padding-top: 20px;
+  }
+}
+
+
