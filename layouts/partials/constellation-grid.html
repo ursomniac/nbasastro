@@ -1,0 +1,22 @@
+<div class="constellation-highlights-grid">
+  {{ range .Params.highlights }}
+    <div class="highlight-card">
+      <div class="highlight-image">
+        {{ $img := $.Page.Resources.GetMatch .img }}
+        {{ with $img }}
+          {{ $scaled := .Fill "400x300 Center" }}
+          <img src="{{ $scaled.RelPermalink }}" alt="{{ .name }}" loading="lazy">
+        {{ else }}
+          <div class="img-placeholder">Image Missing</div>
+        {{ end }}
+      </div>
+      <div class="highlight-info">
+        <h4>{{ .name }}</h4>
+        <p class="highlight-specs">
+          <span class="type">{{ .type }}</span> | <span class="mag">Mag: {{ .mag }}</span>
+        </p>
+        <p class="highlight-desc">{{ .desc }}</p>
+      </div>
+    </div>
+  {{ end }}
+</div>

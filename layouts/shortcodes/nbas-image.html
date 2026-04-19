@@ -1,20 +1,20 @@
 {{- $image := .Page.Resources.GetMatch (.Get "src") -}}
 {{- $align := .Get "align" | default "center" -}}
+{{- $w := .Get "width" | default (.Get "size" | default "600") | strings.TrimSuffix "px" -}}
 
-<figure class="nbas-media-container align-{{ $align }}">
-    {{- with $image -}}
-        {{- $scaled := .Resize "1000x" -}}
-        <a href="{{ .RelPermalink }}" target="_blank" title="Click for full resolution">
-            <img src="{{ $scaled.RelPermalink }}" alt="{{ $.Get "alt" }}" class="nbas-media-img">
-        </a>
-    {{- else -}}
-        <p class="nbas-image-error">Image "{{ .Get "src" }}" not found.</p>
-    {{- end -}}
-
-    {{- with .Get "caption" -}}
-        <figcaption class="nbas-media-caption">
-            {{ . | markdownify }}
-        </figcaption>
-    {{- end -}}
+<figure class="nbas-media-container align-{{ $align }}" style="width: {{ $w }}px; max-width: 100%; margin: 10px auto;">
+  {{- with $image -}}
+    {{- $scaled := .Resize (printf "%sx" $w) -}}
+    <a href="{{ .RelPermalink }}" target="_blank">
+      <img src="{{ $scaled.RelPermalink }}" width="{{ $scaled.Width }}" height="{{ $scaled.Height }}" class="nbas-media-img" style="width: 100%; height: auto; display: block;">
+    </a>
+  {{- else -}}
+    <p class="nbas-image-error">Image "{{ $.Get "src" }}" not found.</p>
+  {{- end -}}
+  {{- with .Get "caption" -}}
+    <figcaption class="nbas-media-caption" style="text-align: center; font-size: 0.85rem; color: #888; padding: 5px;">
+      {{ . | markdownify }}
+    </figcaption>
+  {{- end -}}
 </figure>
 

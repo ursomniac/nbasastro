@@ -11,7 +11,7 @@ constellations: ["Virgo"]
 catalogs: ["Messier"]
 
 object_sections:
-  messier: [87]
+  messier: ["87"]
 ---
 
 FOO FOO FOO

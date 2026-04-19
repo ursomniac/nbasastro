@@ -188,3 +188,27 @@
     margin-top: 12px;
 }
 
+/* Ensure content doesn't bleed out of the viewport */
+.article-body {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+/* Force standard floats for the nbas-media-container */
+.align-left {
+    float: left;
+    margin: 0 20px 20px 0 !important;
+}
+
+.align-right {
+    float: right;
+    margin: 0 0 20px 20px !important;
+}
+
+/* Clearfix: Prevents headers from getting stuck next to images */
+.article-body::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+

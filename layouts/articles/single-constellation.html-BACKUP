@@ -1,0 +1,48 @@
+{{ define "main" }}
+<article class="nbas-constellation-hub">
+  
+  <header class="constellation-header">
+    <h1 class="constellation-title">{{ .Title }}</h1>
+    <div class="constellation-specs">
+      {{ with .Params.abbreviation }}<span><strong>Abbr:</strong> {{ . }}</span>{{ end }}
+      {{ with .Params.best_viewed }}<span> | <strong>Best Viewed:</strong> {{ . }}</span>{{ end }}
+    </div>
+  </header>
+
+  {{/* 1. THE QUICK REFERENCE TABLE (From Metadata) */}}
+  {{ if .Params.highlights }}
+  <section class="constellation-quick-ref">
+    <table class="nbas-spec-table">
+      <thead>
+        <tr><th>Object</th><th>Type</th><th>Equipment</th></tr>
+      </thead>
+      <tbody>
+        {{ range .Params.highlights }}
+        <tr><td><strong>{{ .name }}</strong></td><td>{{ .type }}</td><td>{{ .using }}</td></tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </section>
+  {{ end }}
+
+  <hr>
+
+  {{/* 2. THE MAIN CONTENT (From your _index.md) */}}
+  <div class="article-body">
+    {{ .Content }}
+  </div>
+
+  <hr>
+
+  {{/* 3. THE CROSS-REFERENCES (Related Articles like M-87) */}}
+  <section class="related-articles">
+    <h3>Related Content & Observations</h3>
+    <div class="article-list">
+      {{ range .Pages }}
+        {{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
+      {{ end }}
+    </div>
+  </section>
+
+</article>
+{{ end }}

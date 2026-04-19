@@ -1,0 +1,46 @@
+{{ define "main" }}
+<article class="nbas-constellation" data-pagefind-body>
+  
+  <header class="constellation-header">
+    <h1 class="constellation-title">{{ .Title }}</h1>
+    <div class="constellation-specs">
+      {{ with .Params.abbreviation }}<span><strong>Abbr:</strong> {{ . }}</span>{{ end }}
+      {{ with .Params.best_viewed }}<span> | <strong>Best Viewed:</strong> {{ . }}</span>{{ end }}
+    </div>
+  </header>
+
+  {{/* 1. QUICK REFERENCE TABLE (From Metadata) */}}
+  {{ if .Params.highlights }}
+  <section class="constellation-quick-ref">
+    <h3>Quick Reference: Objects of Interest</h3>
+    <table class="nbas-spec-table">
+      <thead>
+        <tr>
+          <th>Object</th>
+          <th>Type</th>
+          <th>Equipment</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range .Params.highlights }}
+        <tr>
+          <td><strong>{{ .name }}</strong></td>
+          <td>{{ .type }}</td>
+          <td>{{ .using }}</td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </section>
+  {{ end }}
+
+  <hr class="section-divider">
+
+  {{/* 2. FLEXIBLE CONTENT AREA (From Markdown) */}}
+  <div class="article-body">
+    {{ .Content }}
+  </div>
+
+</article>
+{{ end }}
+

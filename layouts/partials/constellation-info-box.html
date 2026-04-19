@@ -1,0 +1,28 @@
+<aside class="constellation-info-box">
+  <header class="info-box-header">
+    <h4>{{ .Title }} Profile</h4>
+  </header>
+  <table class="info-box-table">
+    <tr><th>Abbr:</th><td>{{ .Params.abbreviation }}</td></tr>
+    <tr><th>Genitive:</th><td>{{ .Params.genitive }}</td></tr>
+    <tr><th>Viewed:</th><td>{{ .Params.best_viewed }}</td></tr>
+  </table>
+  
+  <div class="info-box-highlights">
+    <h5>Objects of Interest</h5>
+    <table class="highlights-table">
+      <thead>
+        <tr><th>Object</th><th>Type</th><th>Equip.</th></tr>
+      </thead>
+      <tbody>
+        {{ range .Params.highlights }}
+        <tr>
+          <td><strong>{{ .name }}</strong></td>
+          <td>{{ .type }}</td>
+          <td>{{ .using }}</td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+</aside>

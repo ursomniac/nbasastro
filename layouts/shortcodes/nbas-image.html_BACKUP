@@ -1,0 +1,20 @@
+{{- $image := .Page.Resources.GetMatch (.Get "src") -}}
+{{- $align := .Get "align" | default "center" -}}
+
+<figure class="nbas-media-container align-{{ $align }}">
+    {{- with $image -}}
+        {{- $scaled := .Resize "1000x" -}}
+        <a href="{{ .RelPermalink }}" target="_blank" title="Click for full resolution">
+            <img src="{{ $scaled.RelPermalink }}" alt="{{ $.Get "alt" }}" class="nbas-media-img">
+        </a>
+    {{- else -}}
+        <p class="nbas-image-error">Image "{{ .Get "src" }}" not found.</p>
+    {{- end -}}
+
+    {{- with .Get "caption" -}}
+        <figcaption class="nbas-media-caption">
+            {{ . | markdownify }}
+        </figcaption>
+    {{- end -}}
+</figure>
+

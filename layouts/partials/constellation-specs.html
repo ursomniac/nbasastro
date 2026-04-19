@@ -1,0 +1,16 @@
+<div class="object-cross-refs">
+  {{ range $catalog, $objects := .Params.object_sections }}
+    <div class="catalog-row">
+      <span class="catalog-label">{{ $catalog | title }}:</span>
+      {{/* Use 'range' without 'sort' to preserve your manual order */}}
+      {{ range $objects }}
+        <a href="/catalogs/{{ $catalog | urlize }}/{{ . | urlize }}/" class="object-badge">
+          {{ if eq $catalog "messier" }}M {{ end }}
+          {{ if eq $catalog "caldwell" }}C {{ end }}
+          {{ if eq $catalog "ngc" }}NGC {{ end }}
+          {{ . }}
+        </a>
+      {{ end }}
+    </div>
+  {{ end }}
+</div>
