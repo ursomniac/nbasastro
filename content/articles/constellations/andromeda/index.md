@@ -7,6 +7,7 @@ series: "Constellation Highlights"
 constellations: ["Andromeda"]
 byline: "All about this Fall constellation, and the most famous galaxy"
 description: "Things to learn about the Andromeda constellation"
+thumbnail: "icon.jpg"
 
 # High-level Data
 abbreviation: "AND"
@@ -18,9 +19,9 @@ best_viewed: "Fall"
 stars: ["Almach"]
 catalogs: ["messier", "caldwell", "ngc"]
 object_sections:
-  messier: [31, 32, 110]
-  caldwell: [22, 23, 28]
-  ngc: [206, 752, 891, 7662]
+  messier: ["31", "32", "110"]
+  caldwell: ["22", "23", "28"]
+  ngc: ["206", "752", "891", "7662"]
 
 
 # The 6 Objects of Interest

@@ -26,14 +26,21 @@
 	</div>
 	{{ end }}
 
-    <div class="article-list">
-        {{/* Use .Paginator.Pages to respect the 10-article limit from hugo.toml */}}
-        {{ range .Paginator.Pages }}
-            {{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
-        {{ else }}
-            <p style="color: #888;">No articles found in this subset.</p>
-        {{ end }}
-    </div>
+<div class="article-list">
+  {{/* Define which pages to show: current section + constellations sub-folder */}}
+  {{ $pages := .Pages }}
+  {{ if eq .Section "articles" }}
+    {{ $pages = where .Site.RegularPages "Section" "in" (slice "articles" "constellations") }}
+  {{ end }}
+
+  {{/* Run the paginator on that specific set of pages */}}
+  {{ range (.Paginate ($pages.ByPublishDate.Reverse)).Pages }}
+    {{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
+  {{ else }}
+    <p style="color: #888;">No articles found in this subset.</p>
+  {{ end }}
+</div>
+
 
     {{ template "_internal/pagination.html" . }}
 </div>

@@ -1,19 +1,20 @@
 {{ define "main" }}
-    {{/* 1. ANNOUNCEMENT & WELCOME SECTION */}}
-    <div class="welcome-hero">
-        {{ partial "news_logic.html" . }}
-        <div class="welcome-text">
-            {{ .Content }}
-        </div>
+  {{/* 1. ANNOUNCEMENT & WELCOME SECTION */}}
+  <div class="welcome-hero">
+    {{ partial "news_logic.html" . }}
+    <div class="welcome-text">
+      {{ .Content }}
     </div>
+  </div>
 
-    {{/* 2. ARTICLE LIST SECTION */}}
-    <h2 class="section-title">Latest from the NBAS</h2>
-    
-    <div class="article-list">
-        {{ range first 5 (where .Site.RegularPages "Section" "articles").ByPublishDate.Reverse }}
-	{{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
-        {{ end }}
-    </div>
+  {{/* 2. ARTICLE LIST SECTION */}}
+  <h2 class="section-title">Latest from the NBAS</h2>
+  <div class="article-list">
+    {{/* Updated to include both 'articles' and 'constellations' */}}
+    {{ $all_posts := where .Site.RegularPages "Section" "in" (slice "articles" "constellations") }}
+    {{ range first 10 ($all_posts.ByPublishDate.Reverse) }}
+      {{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
+    {{ end }}
+  </div>
 {{ end }}
 
