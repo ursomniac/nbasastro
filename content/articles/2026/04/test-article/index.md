@@ -1,7 +1,7 @@
 ---
 title: "M31: The Great Andromeda Galaxy"
 date: 2026-04-13
-author: "R. Donahue"
+authors: ["Stitch Brown"]
 byline: "A deep dive into our nearest galactic neighbor."
 tags: ["Local Group"]
 constellations: ["Andromeda"]

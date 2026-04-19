@@ -72,6 +72,14 @@
     font-size: 0.75rem !important;
 }
 
+.nav-disabled {
+    color: var(--text-muted, #666) !important;
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+
 /* MOBILE REPAIR: 2-COLUMN GRID */
 @media screen and (max-width: 1024px) {
     .nbas-topnav {

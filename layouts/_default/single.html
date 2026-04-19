@@ -10,11 +10,25 @@
 
     <h1 class="article-title">{{ .Title }}</h1>
 
-    <!-- 2. BELOW TITLE: Author & Date -->
-    <div class="article-metadata">
-        {{ with .Params.author }}<span>By {{ . }}</span> | {{ end }}
-        <time datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "January 2, 2006" }}</time>
-    </div>
+<!-- 2. BELOW TITLE: Author & Date (REPAIRED) -->
+<div class="article-metadata">
+  <span>By 
+    {{ if .Params.authors }}
+      {{ range $index, $author := .Params.authors }}
+        {{ if $index }}, {{ end }}<a href="/authors/{{ $author | urlize }}/">{{ $author | humanize | title }}</a>
+      {{ end }}
+    {{ else if .Params.author }}
+      <a href="/authors/{{ .Params.author | urlize }}/">{{ .Params.author | humanize | title }}</a>
+    {{ else }}
+      NBAS Staff
+    {{ end }}
+  </span> | 
+  <time datetime="{{ .Date.Format "2006-01-02" }}">
+    {{ if not .Date.IsZero }}{{ .Date.Format "January 2, 2006" }}{{ else }}Date TBD{{ end }}
+  </time>
+</div>
+
+
 
     <!-- 3. BYLINE: Italicized with a subtle left border -->
     {{ with .Params.byline }}

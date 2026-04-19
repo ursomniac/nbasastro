@@ -1,61 +1,47 @@
 <div class="article-card">
-    <div class="card-feature-icon">
-        {{ partial "feature-icon.html" .context }}
+  <div class="card-feature-icon">
+    {{ partial "feature-icon.html" .context }}
+  </div>
+  <div class="card-content">
+    <div class="card-facets" style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
+      {{ with .context.Params.series }}
+        <a href="{{ "/series/" | relLangURL }}{{ . | urlize }}" class="facet-badge series-badge">{{ . | replace "-" " " | title | replace "Nbas" "NBAS" }}</a>
+      {{ end }}
     </div>
 
-    <div class="card-content">
-        <div class="card-facets" style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
-            {{ with .context.Params.series }}
-                <a href="{{ "/series/" | relLangURL }}{{ . | urlize }}" class="facet-badge series-badge">{{ . }}</a>
-            {{ end }}
+    <a href="{{ .context.RelPermalink }}" class="card-title-link">
+      <h2 class="card-title">{{ .context.Title }}</h2>
+    </a>
 
-            {{ range .context.Params.categories }}
-                <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}" class="facet-badge category-badge">{{ . }}</a>
-            {{ end }}
+<div class="card-metadata">
+  By 
+  {{ if .context.Params.authors }}
+    {{ range $index, $item := .context.Params.authors }}
+      {{ if $index }}, {{ end }}
+      {{ $p := site.GetPage (printf "authors/%s" ($item | urlize)) }}
+      {{ if and $p (ne $p.Kind "taxonomy") }}
+        <a href="{{ $p.RelPermalink }}" style="color: #ffcc00; font-weight: bold;">{{ $p.Title }}</a>
+      {{ else }}
+        {{ $item | replace "-" " " | title | replace "Nbas" "NBAS" }}
+      {{ end }}
+    {{ end }}
+  {{ else }}
+    NBAS
+  {{ end }}
+  | {{ .context.PublishDate.Format "Jan 2, 2006" }}
+</div>
 
-            {{/* CATALOG PILLS: ONLY RENDER IF ON A CATALOG PAGE */}}
-            {{ if .catalogPage }}
-                {{ $cat := .catalogPage }}
-                {{ with (index .context.Params.object_sections $cat) }}
-                    {{ $prefix := "" }}
-                    {{ if eq $cat "messier" }}{{ $prefix = "M " }}{{ end }}
-                    {{ if eq $cat "caldwell" }}{{ $prefix = "C " }}{{ end }}
-                    {{ if eq $cat "ngc" }}{{ $prefix = "NGC " }}{{ end }}
-                    
-                    {{ range . }}
-                        <span class="facet-badge catalog-badge">{{ $prefix }}{{ . }}</span>
-                    {{ end }}
-                {{ end }}
-            {{ end }}
-        </div>
+    {{ with .context.Params.byline }}
+      <p class="card-byline">{{ . }}</p>
+    {{ end }}
 
-        <a href="{{ .context.RelPermalink }}" class="card-title-link">
-            <h2 class="card-title">{{ .context.Title }}</h2>
-        </a>
-
-        <div class="card-metadata">
-            {{ $authorPage := $.Site.GetPage (printf "/authors/%s" (.context.Params.author | urlize)) }}
-            By 
-            {{ if $authorPage }}
-                <a href="{{ $authorPage.RelPermalink }}" class="author-link">{{ $authorPage.Title }}</a>
-            {{ else }}
-                {{ .context.Params.author | default "NBAS Staff" }}
-            {{ end }} 
-
-            | {{ .context.PublishDate.Format "Jan 2, 2006" }}
-        </div>
-
-        {{ with .context.Params.byline }}
-            <p class="card-byline">{{ . }}</p>
+    {{ with .context.Params.tags }}
+      <div class="card-tags" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+        {{ range . }}
+          <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag-link" style="font-family: monospace; font-size: 0.8rem;">#{{ . }}</a>
         {{ end }}
-
-        {{ with .context.Params.tags }}
-            <div class="card-tags" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
-                {{ range . }}
-                    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag-link" style="font-family: monospace; font-size: 0.8rem;">#{{ . }}</a>
-                {{ end }}
-            </div>
-        {{ end }}
-    </div>
+      </div>
+    {{ end }}
+  </div>
 </div>
 

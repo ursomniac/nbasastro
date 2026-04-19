@@ -1,0 +1,25 @@
+{{ define "main" }}
+<section class="nbas-author-profile">
+  <header class="author-header">
+    <h1 class="author-title">{{ .Title }}</h1>
+    {{ with .Params.subtitle }}
+      <p class="author-subtitle">{{ . }}</p>
+    {{ end }}
+  </header>
+
+  <div class="author-bio">
+    {{ .Content }}
+  </div>
+
+  <hr class="section-divider">
+
+  <section class="author-articles">
+    <h3>Articles by {{ .Title }}</h3>
+    <div class="article-list">
+      {{ range .Pages }}
+        {{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
+      {{ end }}
+    </div>
+  </section>
+</section>
+{{ end }}

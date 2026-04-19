@@ -1,7 +1,7 @@
 ---
 title: "M87: Behemoth of the Virgo Cluster"
 date: 2026-04-14
-author: "bob-donahue"
+authors: ["Stitch Brown", "bob-donahue"]
 byline: "Exploring a huge Galaxy!"
 thumbnail: "m_87-92U-PIXRCAGRAXGHS-square.jpg"
 tags: ["Galaxy", "Virgo Cluster"]

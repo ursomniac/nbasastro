@@ -1,8 +1,7 @@
 ---
 title: "T Coronae Borealis: The Blaze Star Prepares to Erupt"
 date: 2026-04-15
-author: "bob-donahue"
-series: "Stars"
+authors: ["bob-donahue"]
 byline: "The Blaze Star prepares to erupt!"
 tags: ["Variable Star", "Nova"]
 categories: ["Deep Sky"]

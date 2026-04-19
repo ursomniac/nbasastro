@@ -1,4 +1,6 @@
 {{ define "main" }}
+
+
 <article class="nbas-article" data-pagefind-body>
     <!-- 1. HEADER SECTION -->
     <header class="article-header">
@@ -9,16 +11,26 @@
         {{ with .Params.byline }}
         <p class="article-byline">{{ . }}</p>
         {{ end }}
-        <div class="article-metadata" data-pagefind-ignore>
-            {{ $authorPage := $.Site.GetPage (printf "/authors/%s" (.Params.author | urlize)) }}
-            By {{ if $authorPage }}
-                <a href="{{ $authorPage.RelPermalink }}" class="author-link">{{ $authorPage.Title }}</a>
-            {{ else }}
-                {{ .Params.author }}
-            {{ end }}
-            <span class="meta-pipe">|</span>
-            <time datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "January 2, 2006" }}</time>
-        </div>
+
+<div class="article-metadata">
+  <span>By 
+    {{ if .Params.authors }}
+      {{ range $index, $item := .Params.authors }}
+        {{ if $index }}, {{ end }}
+        {{ $p := site.GetPage (printf "authors/%s" ($item | urlize)) }}
+        {{ if and $p (ne $p.Kind "taxonomy") }}
+          <a href="{{ $p.RelPermalink }}" style="color: #ffcc00; font-weight: bold;">{{ $p.Title }}</a>
+        {{ else }}
+          {{ $item | replace "-" " " | title | replace "Nbas" "NBAS" }}
+        {{ end }}
+      {{ end }}
+    {{ else }}
+      NBAS
+    {{ end }}
+  </span> | 
+  <time>{{ .Date.Format "January 2, 2006" }}</time>
+</div>
+
     </header>
 
     {{ if .Params.object_info }}
