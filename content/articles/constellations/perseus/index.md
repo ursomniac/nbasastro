@@ -11,7 +11,7 @@ thumbnail: "icon.jpg"
 
 # High-level Data
 abbreviation: "PER"
-genitive: "Perseus"
+genitive: "Persei"
 hemisphere: "North"
 best_viewed: "Fall"
 
@@ -55,7 +55,7 @@ he’s depicted wielding his sword and holding the head of the Gorgon. In Babylo
 the constellation of the “Old Man”.
 
 {{< nbas-image src="hist_PER.jpg" align="right" width="500" 
-caption="Depiction of _Camelopardalis_ from Urania’s Mirror, c. 1825"
+caption="Depiction of _Perseus_ from Urania’s Mirror, c. 1825"
 >}}
 
 Astronomically, the constellation is almost overhead in the late Fall, 
