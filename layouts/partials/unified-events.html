@@ -9,7 +9,10 @@
     {{/* TAB 1: NBAS - Strictly pulls from calendar_nbas.txt */}}
 <!-- Update the NBAS block in layouts/partials/unified-events.html -->
 <div id="feed-nbas" class="events-content active">
-    {{ $nbasData := split (trim (readFile "data/calendar_nbas.txt") "\n") "\n" }}
+
+{{ $nbasFile := resources.Get "calendar/calendar_nbas.txt" }}
+{{ $nbasData := split (trim $nbasFile.Content "\n") "\n" }}
+
     {{ range first 15 $nbasData }}
         {{ if . }}{{ $row := split . " | " }}
         <div class="event-split-row">
@@ -29,7 +32,10 @@
 
     {{/* TAB 2: ASTRO - Strictly pulls from calendar_events.txt */}}
     <div id="feed-astro" class="events-content">
-        {{ $astroData := split (trim (readFile "data/calendar_events.txt") "\n") "\n" }}
+
+{{ $astroFile := resources.Get "calendar/calendar_events.txt" }}
+{{ $astroData := split (trim $astroFile.Content "\n") "\n" }}
+
         {{ range first 15 $astroData }}
             {{ if . }}{{ $row := split . " | " }}
             <div class="event-split-row">
@@ -45,7 +51,10 @@
 
     {{/* TAB 3: ALMANAC - High Density Grid */}}
     <div id="feed-almanac" class="events-content">
-        {{ $almData := split (trim (readFile "data/calendar_almanac.txt") "\n") "\n" }}
+
+{{ $almFile := resources.Get "calendar/calendar_almanac.txt" }}
+{{ $almData := split (trim $almFile.Content "\n") "\n" }}
+
         {{ range first 15 $almData }}
             {{ if . }}{{ $row := split . " | " }}
             <div class="almanac-row">
