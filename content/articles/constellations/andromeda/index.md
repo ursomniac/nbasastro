@@ -9,11 +9,12 @@ byline: "All about this Fall constellation, and the most famous galaxy"
 description: "Things to learn about the Andromeda constellation"
 thumbnail: "icon.jpg"
 
-# High-level Data
-abbreviation: "AND"
-genitive: "Andromedae"
-hemisphere: "North"
-best_viewed: "Fall"
+profile_data:
+  "Abbreviation": AND
+  "Genitive": Andromedae
+  "Best Viewed": Fall
+  "Hemisphere": Northern
+  "Brighest Star": Alpheratz
 
 # Taxonomy refs:
 stars: ["Almach"]

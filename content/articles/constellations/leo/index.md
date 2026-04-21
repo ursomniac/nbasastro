@@ -9,11 +9,12 @@ byline: "Gateway constellation to Spring"
 description: "Things to learn about the Leo constellation"
 thumbnail: "icon.jpg"
 
-# High-level Data
-abbreviation: "LEO"
-genitive: "Leonis"
-hemisphere: "Equatorial"
-best_viewed: "Spring"
+profile_data:
+  "Abbreviation": LEO
+  "Genitive": Leonis
+  "Best Viewed": Spring
+  "Hemisphere": Northern
+  "Brighest Star": Regulus
 
 # Taxonomy refs:
 stars: ["&gamma; Leo", "Wolf 359", "R Leonis"]

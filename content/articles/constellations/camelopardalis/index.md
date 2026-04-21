@@ -9,11 +9,11 @@ byline: "A faint circumpolar constellation from the 17th century"
 description: "Things to learn about the Camelopardalis constellation"
 thumbnail: "icon.jpg"
 
-# High-level Data
-abbreviation: "CAM"
-genitive: "Camelopardalis"
-hemisphere: "North"
-best_viewed: "Winter"
+profile_data:
+  "Abbreviation": CAM
+  "Genitive": Camelopardalis
+  "Best Viewed": Winter
+  "Hemisphere": Northern
 
 # Taxonomy refs:
 stars: ["RU Cam"]

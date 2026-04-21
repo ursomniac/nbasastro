@@ -9,11 +9,11 @@ byline: "The dimmest constellation in the Zodiac"
 description: "Things to learn about the Cancer constellation"
 thumbnail: "icon.jpg"
 
-# High-level Data
-abbreviation: "CNC"
-genitive: "Cancri"
-hemisphere: "Equatorial"
-best_viewed: "Winter/Spring"
+profile_data:
+  "Abbreviation": CNC
+  "Genitive": Cancri
+  "Best Viewed": Winter/Spring
+  "Hemisphere": Equatorial
 
 # Taxonomy refs:
 stars: ["Iota Cnc", "Zeta Cnc", "55 Cnc", "X Cnc"]

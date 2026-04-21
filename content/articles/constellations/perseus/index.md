@@ -9,11 +9,12 @@ byline: "Ancient constellation from Greek mythology"
 description: "Things to learn about the Perseus constellation"
 thumbnail: "icon.jpg"
 
-# High-level Data
-abbreviation: "PER"
-genitive: "Persei"
-hemisphere: "North"
-best_viewed: "Fall"
+profile_data:
+  "Abbreviation": PER
+  "Genitive": Persei
+  "Best Viewed": Fall
+  "Hemisphere": Northern
+  "Brighest Star": Mirfak
 
 # Taxonomy refs:
 stars: ["Algol"]

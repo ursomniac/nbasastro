@@ -9,11 +9,13 @@ byline: "The mythical strongman in the sky"
 description: "Things to learn about the Hercules constellation"
 thumbnail: "icon.jpg"
 
-# High-level Data
-abbreviation: "HER"
-genitive: "Herculis"
-hemisphere: "Northern"
-best_viewed: "Spring"
+profile_data:
+  "Abbreviation": HER
+  "Genitive": Herculis
+  "Best Viewed": Spring
+  "Hemisphere": Northern
+  "Area": 1225 sq deg
+  "Brightest Star": Ras Algethi
 
 # Taxonomy refs:
 stars: ["Ras Algethi"]

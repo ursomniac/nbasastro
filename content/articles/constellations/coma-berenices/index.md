@@ -9,11 +9,12 @@ byline: "The only constellation named after an historical figure"
 description: "Things to learn about the Coma Berenices constellation"
 thumbnail: "icon.jpg"
 
-# High-level Data
-abbreviation: "COM"
-genitive: "Comae Berenices"
-hemisphere: "Equatorial"
-best_viewed: "Spring"
+profile_data:
+  "Abbreviation": COM
+  "Genitive": Comae Berenices
+  "Best Viewed": Spring
+  "Hemisphere": Equatorial
+  "Brighest Star": Diadem
 
 # Taxonomy refs:
 catalogs: ["messier", "ngc", "other"]

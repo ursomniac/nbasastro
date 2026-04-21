@@ -9,11 +9,12 @@ byline: "The only constellation named after an historical figure"
 description: "Things to learn about the Canes Venatici constellation"
 thumbnail: "icon.jpg"
 
-# High-level Data
-abbreviation: "CVN"
-genitive: "Canum Venaticorum"
-hemisphere: "Northern"
-best_viewed: "Spring"
+profile_data:
+  "Abbreviation": CVN
+  "Genitive": Canum Venaticorum
+  "Best Viewed": Spring
+  "Hemisphere": Northern
+  "Brighest Star": Cor Caroli
 
 # Taxonomy refs:
 stars: ["Y CVn", "TON 618"]

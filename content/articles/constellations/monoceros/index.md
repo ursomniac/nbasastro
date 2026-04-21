@@ -9,11 +9,11 @@ byline: "Constellation going back to at least the 17th century"
 description: "Things to learn about the Monoceros constellation"
 thumbnail: "icon.jpg"
 
-# High-level Data
-abbreviation: "MON"
-genitive: "Monocerotis"
-hemisphere: "Equatorial"
-best_viewed: "Winter"
+profile_data:
+  "Abbreviation": MON
+  "Genitive": Monocerotis
+  "Best Viewed": Winter
+  "Hemisphere": Equatorial
 
 # Taxonomy refs:
 catalogs: ["caldwell", "messier", "ngc", "other"]
