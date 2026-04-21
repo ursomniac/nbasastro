@@ -3,7 +3,7 @@ layout: "single-constellation"
 title: "Cancer"
 date: 2024-02-07
 authors: ["nbas-staff"]
-series: "Constellation Highlights"
+series: ["constellation-highlights"]
 constellations: ["Cancer"]
 byline: "The dimmest constellation in the Zodiac"
 description: "Things to learn about the Cancer constellation"

@@ -3,7 +3,7 @@ layout: "single-constellation"
 title: "Leo"
 date: 2024-03-07
 authors: ["nbas-staff"]
-series: "Constellation Highlights"
+series: ["constellation-highlights"]
 constellations: ["Leo"]
 byline: "Gateway constellation to Spring"
 description: "Things to learn about the Leo constellation"

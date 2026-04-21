@@ -3,7 +3,7 @@ layout: "single-constellation"
 title: "Monoceros"
 date: 2024-01-03
 authors: ["nbas-staff"]
-series: "Constellation Highlights"
+series: ["constellation-highlights"]
 constellations: ["Monoceros"]
 byline: "Constellation going back to at least the 17th century"
 description: "Things to learn about the Monoceros constellation"

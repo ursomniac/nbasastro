@@ -106,4 +106,18 @@
     color: #888;
     font-weight: bold;
 }
+.card-object-matches {
+  display: block;
+  margin: 6px 0 12px 0 !important; /* Clear margin above/below to prevent 'crashing' */
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  color: #D2B48C; /* Tan/Amber: High visibility, astronomical feel */
+  line-height: 1.4;
+}
 
+.match-label {
+  color: #A68B6A; /* Slightly darker tan for the label */
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-right: 5px;
+}

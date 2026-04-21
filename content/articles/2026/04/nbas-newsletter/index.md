@@ -2,7 +2,7 @@
 title: "April 2026 Newsletter"
 date: "2026-04-01"
 authors: []
-series: "nbas-newsletter"
+series: ["nbas-newsletter"]
 byline: "Comet C/2025 R3 at Perihelion, Lyrids, and the return of Venus!"
 tags: []
 

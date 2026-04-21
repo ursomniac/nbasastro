@@ -9,20 +9,17 @@
     {{ $thumb := $img.Fill "120x120 Center" }}
     <img src="{{ $thumb.RelPermalink }}" class="article-thumb">
   {{ else }}
-    {{/* 2. SERIES OR DEFAULT ICON */}}
-    {{ $icon := "comet" }}
-    
-    {{ if eq .Params.series "Constellation" }}{{ $icon = "constellation" }}
-    {{ else if eq .Params.series "Newsletter" }}{{ $icon = "telescope" }}
-    {{ else if eq .Params.series "Solar System" }}{{ $icon = "saturn" }}
-    {{ else if eq .Params.series "Stars" }}{{ $icon = "star" }}
-    {{ else if eq .Params.series "Deep Sky" }}{{ $icon = "galaxy" }}
-    {{ else if eq .Params.series "Imaging" }}{{ $icon = "camera" }}
-    {{ else if eq .Params.series "Event" }}{{ $icon = "moon" }}
-    {{ else if eq .Params.series "NBAS" }}{{ $icon = "logo" }}
 
-    {{ end }}
+	{{/* 2. SERIES OR DEFAULT ICON */}}
+	{{ $icon := "logo" }} {{/* Default fallback */}}
+	{{ $s := .Params.series }}
 
-    {{ partial (printf "icons/%s.html" $icon) . }}
-  {{ end }}
+	{{ if in $s "constellation-highlights" }}{{ $icon = "constellation" }}
+	{{ else if in $s "nbas-newsletter" }}{{ $icon = "telescope" }}
+	{{ else if in $s "nbas-announcement" }}{{ $icon = "star" }}
+	{{ else if in $s "nbas-events" }}{{ $icon = "moon" }}
+	{{ end }}
+
+{{ partial (printf "icons/%s.html" $icon) . }}
+{{ end }}
 </div>

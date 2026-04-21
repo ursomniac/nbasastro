@@ -3,7 +3,7 @@ layout: "single-constellation"
 title: "Sagittarius"
 date: 2024-08-07
 authors: ["nbas-staff"]
-series: "Constellation Highlights"
+series: ["constellation-highlights"]
 constellations: ["Sagittarius"]
 byline: "Looking to the center of our Galaxy"
 description: "Things to learn about the Sagittarius constellation"

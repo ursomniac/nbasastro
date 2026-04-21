@@ -3,7 +3,7 @@ layout: "single-constellation"
 title: "Canes Venatici"
 date: 2024-05-01
 authors: ["nbas-staff"]
-series: "Constellation Highlights"
+series: ["constellation-highlights"]
 constellations: ["Canes Venatici"]
 byline: "The only constellation named after an historical figure"
 description: "Things to learn about the Canes Venatici constellation"

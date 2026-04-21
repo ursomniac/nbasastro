@@ -1,4 +1,7 @@
 {{ define "main" }}
+{{ with resources.Get "css/constellations.css" | minify }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}">
+{{ end }}
 <section class="nbas-series-list">
   
   {{/* 1. THE HEADER - Manual Override for NBAS */}}
@@ -28,9 +31,10 @@
         </div>
       {{ end }}
     {{ else }}
-      {{ range .Pages }}
-        {{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
-      {{ end }}
+{{ $currentTerm := .Data.Term }}
+{{ range .Pages }}
+  {{ partial "article-card.html" (dict "context" . "currentTerm" $currentTerm "catalogPage" false) }}
+{{ end }}
     {{ end }}
   </div>
 

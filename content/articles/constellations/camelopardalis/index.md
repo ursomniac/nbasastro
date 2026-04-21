@@ -3,7 +3,7 @@ layout: "single-constellation"
 title: "Camelopardalis"
 date: 2023-11-01
 authors: ["nbas-staff"]
-series: "Constellation Highlights"
+series: ["constellation-highlights"]
 constellations: ["Camelopardalis"]
 byline: "A faint circumpolar constellation from the 17th century"
 description: "Things to learn about the Camelopardalis constellation"

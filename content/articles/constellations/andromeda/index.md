@@ -3,7 +3,7 @@ layout: "single-constellation"
 title: "Andromeda"
 date: 2023-10-04
 authors: ["nbas-staff"]
-series: "Constellation Highlights"
+series: ["constellation-highlights"]
 constellations: ["Andromeda"]
 byline: "All about this Fall constellation, and the most famous galaxy"
 description: "Things to learn about the Andromeda constellation"

@@ -35,13 +35,15 @@
 
   {{/* Run the paginator on that specific set of pages */}}
   {{ range (.Paginate ($pages.ByPublishDate.Reverse)).Pages }}
-    {{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
+    {{/* partial "article-card.html" (dict "context" . "catalogPage" false) */}}
+	{{ partial "article-card.html" (dict "context" . "listContext" $) }}
   {{ else }}
     <p style="color: #888;">No articles found in this subset.</p>
   {{ end }}
 </div>
 
-
-    {{ template "_internal/pagination.html" . }}
+<nav class="pagination-container">
+  {{ template "_internal/pagination.html" . }}
+</nav>
 </div>
 {{ end }}

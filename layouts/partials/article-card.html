@@ -3,15 +3,47 @@
     {{ partial "feature-icon.html" .context }}
   </div>
   <div class="card-content">
-    <div class="card-facets" style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
-      {{ with .context.Params.series }}
-        <a href="{{ "/series/" | relLangURL }}{{ . | urlize }}" class="facet-badge series-badge">{{ . | replace "-" " " | title | replace "Nbas" "NBAS" }}</a>
-      {{ end }}
-    </div>
+
+<div class="card-facets" style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
+  {{ $series := .context.Params.series }}
+  
+  {{ range $series }}
+    {{/* This reaches out to find the 'Definition' file we just made */}}
+    {{ $termPage := site.GetPage (printf "series/%s" (. | urlize)) }}
+    
+    <a href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}#{{ end }}" 
+       class="facet-badge series-badge {{ . | urlize }}">
+      {{/* This displays the 'title' from the _index.md file */}}
+      {{ if $termPage }}{{ $termPage.LinkTitle }}{{ else }}{{ . | humanize }}{{ end }}
+    </a>
+  {{ end }}
+
+  {{/* 3. Fallback for articles with NO series metadata */}}
+</div>
+
 
     <a href="{{ .context.RelPermalink }}" class="card-title-link">
       <h2 class="card-title">{{ .context.Title }}</h2>
     </a>
+
+{{/* STABILIZED OBJECT MATCHING: CSS COMPLIANT REVISION */}}
+{{ with .currentTerm }}
+  <div class="card-object-matches">
+    {{ $listTerm := . }}
+    {{ range $mapName, $objList := $.context.Params.object_sections }}
+      {{ if eq $listTerm $mapName }}
+        {{ if ne $mapName "other" }}
+          {{ $termPage := $.context.Site.GetPage (printf "catalogs/%s" $mapName) }}
+          {{ if not $termPage }}{{ $termPage = $.context.Site.GetPage (printf "solarsystem/%s" $mapName) }}{{ end }}
+          <span class="match-label">
+            {{ if $termPage }}{{ $termPage.Title }}{{ else }}{{ $mapName }}{{ end }}:
+          </span>
+        {{ end }}
+        {{ range $idx, $id := $objList }} {{ if gt $idx 0 }}, {{ end }}{{ $id }} {{ end }}
+      {{ end }}
+    {{ end }}
+  </div>
+{{ end }}
 
 <div class="card-metadata">
   By 

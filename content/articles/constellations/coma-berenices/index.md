@@ -3,7 +3,7 @@ layout: "single-constellation"
 title: "Coma Berenices"
 date: 2024-04-03
 authors: ["nbas-staff"]
-series: "Constellation Highlights"
+series: ["constellation-highlights"]
 constellations: ["Coma Berenices"]
 byline: "The only constellation named after an historical figure"
 description: "Things to learn about the Coma Berenices constellation"

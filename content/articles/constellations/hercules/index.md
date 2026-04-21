@@ -3,7 +3,7 @@ layout: "single-constellation"
 title: "Hercules"
 date: 2024-06-05
 authors: ["nbas-staff"]
-series: "Constellation Highlights"
+series: ["constellation-highlights"]
 constellations: ["Hercules"]
 byline: "The mythical strongman in the sky"
 description: "Things to learn about the Hercules constellation"

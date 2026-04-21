@@ -3,7 +3,7 @@ layout: "single-constellation"
 title: "Scorpius"
 date: 2024-07-03
 authors: ["nbas-staff"]
-series: "Constellation Highlights"
+series: ["constellation-highlights"]
 constellations: ["Scorpius"]
 byline: "The celestial arachnid holding the Milky Way’s heart in its sting."
 description: "Things to learn about the Scorpius constellation"

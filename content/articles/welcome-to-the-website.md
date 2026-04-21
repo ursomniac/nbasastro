@@ -3,8 +3,8 @@ title: "Launching the NBAS Website"
 date: 2026-04-12
 author: "NBAS Staff"
 byline: "A new way to stay connected with the stars in the Northern Berkshires."
-feature: "News"
-tags: ["Announcements", "Digital"]
+series: ["nbas-announcement"]
+tags: ["Digital"]
 draft: false
 ---
 

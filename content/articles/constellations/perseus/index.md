@@ -3,7 +3,7 @@ layout: "single-constellation"
 title: "Perseus"
 date: 2023-12-06
 authors: ["nbas-staff"]
-series: "Constellation Highlights"
+series: ["constellation-highlights"]
 constellations: ["Perseus"]
 byline: "Ancient constellation from Greek mythology"
 description: "Things to learn about the Perseus constellation"
