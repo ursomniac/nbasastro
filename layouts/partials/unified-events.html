@@ -1,0 +1,91 @@
+<!-- layouts/partials/unified-events.html -->
+<div class="unified-events-widget" id="nbas-unified-events">
+    <nav class="events-nav">
+        <button class="events-tab active" onclick="switchEvents(event, 'nbas')">NBAS</button>
+        <button class="events-tab" onclick="switchEvents(event, 'astro')">Astro</button>
+        <button class="events-tab" onclick="switchEvents(event, 'almanac')">Almanac</button>
+    </nav>
+
+    {{/* TAB 1: NBAS - Strictly pulls from calendar_nbas.txt */}}
+<!-- Update the NBAS block in layouts/partials/unified-events.html -->
+<div id="feed-nbas" class="events-content active">
+    {{ $nbasData := split (trim (readFile "data/calendar_nbas.txt") "\n") "\n" }}
+    {{ range first 15 $nbasData }}
+        {{ if . }}{{ $row := split . " | " }}
+        <div class="event-split-row">
+            <div class="event-chron-col" style="flex: 0 0 110px;"> {{/* Wider for side-by-side */}}
+                <div class="event-date-time">
+                    <span class="event-date">{{ time.Format "Jan 02" (index $row 0) }}</span>
+                    {{ if ne (index $row 1) "--:--" }}
+                        <span class="event-time">{{ time.Format "3:04PM" (printf "2006-01-02T%s:00" (index $row 1)) }}</span>
+                    {{ end }}
+                </div>
+            </div>
+            <div class="event-desc-col">{{ index $row 2 }}</div>
+        </div>
+        {{ end }}
+    {{ end }}
+</div>
+
+    {{/* TAB 2: ASTRO - Strictly pulls from calendar_events.txt */}}
+    <div id="feed-astro" class="events-content">
+        {{ $astroData := split (trim (readFile "data/calendar_events.txt") "\n") "\n" }}
+        {{ range first 15 $astroData }}
+            {{ if . }}{{ $row := split . " | " }}
+            <div class="event-split-row">
+                <div class="event-chron-col">
+                    <div class="event-date">{{ time.Format "Jan 02" (index $row 0) }}</div>
+                    <div class="event-time">{{ index $row 1 }}</div>
+                </div>
+                <div class="event-desc-col">{{ index $row 2 }}</div>
+            </div>
+            {{ end }}
+        {{ end }}
+    </div>
+
+    {{/* TAB 3: ALMANAC - High Density Grid */}}
+    <div id="feed-almanac" class="events-content">
+        {{ $almData := split (trim (readFile "data/calendar_almanac.txt") "\n") "\n" }}
+        {{ range first 15 $almData }}
+            {{ if . }}{{ $row := split . " | " }}
+            <div class="almanac-row">
+                <div class="almanac-date">{{ time.Format "Jan 02" (index $row 0) }}</div>
+                <div class="almanac-grid">
+                    <span class="alm-sun">☀️ {{ index $row 1 }}/{{ index $row 2 }}</span>
+                    <span class="alm-twilight">🔭 {{ index $row 3 }}/{{ index $row 4 }}</span>
+                    <span class="alm-moon">🌙 {{ index $row 6 }}/{{ index $row 5 }}</span>
+                </div>
+            </div>
+            {{ end }}
+        {{ end }}
+    </div>
+</div>
+
+<script>
+function switchEvents(e, type) {
+    // Prevent default anchor/button behavior
+    if (e) e.preventDefault();
+    
+    const widget = document.getElementById('nbas-unified-events');
+    
+    // 1. Reset Tabs
+    widget.querySelectorAll('.events-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // 2. Reset Feeds
+    widget.querySelectorAll('.events-content').forEach(feed => {
+        feed.classList.remove('active');
+        feed.style.display = 'none'; // Force hide
+    });
+    
+    // 3. Activate Selection
+    const activeTab = e.currentTarget || e.target;
+    activeTab.classList.add('active');
+    
+    const activeFeed = document.getElementById('feed-' + type);
+    activeFeed.classList.add('active');
+    activeFeed.style.display = 'block'; // Force show
+}
+</script>
+

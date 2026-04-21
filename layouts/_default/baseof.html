@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- NEW CALENDAR CSS -->
+	{{ with resources.Get "css/events-widget.css" | minify }}
+	  <link rel="stylesheet" href="{{ .RelPermalink }}">
+	{{ end }}
+	<!-- end -->
     <title>{{ .Title }} | {{ .Site.Title }}</title>
     {{ partial "head.html" . }}
 </head>
@@ -45,19 +50,9 @@
     <div id="search"></div>
 </div>
 
-<!-- W1. CALENDAR -->
-		  <div class="widget-box">
-                    <h3 class="sidebar-heading">Calendar</h3>
-                    <div class="responsive-iframe-wrap ratio-calendar">
-                        {{/* RESTORED MULTI-SOURCE CALENDAR */}}
-                        <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%231a2a44&ctz=America%2FNew_York&mode=AGENDA&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&src=17a5d515a1fa7666d6311042841c063dbf4ff28021f15888267187f6dcecf86a%40group.calendar.google.com&src=nbasastro%40gmail.com&color=%23c5a059" 
-                                style="background:transparent; border:none;" 
-                                class="calendar-frame"></iframe>
-                    </div>
-		  </div>
-
-<!-- W2. ALMANAC -->
-		{{ partial "almanac-widget.html" . }}
+<!-- W1. NEW CALENDAR -->
+<h3 class="sidebar-heading">Calendar</h3>
+{{ partial "unified-events.html" . }}
 
 <!-- W3. SKYMAP -->
 		  <div class="widget-box">

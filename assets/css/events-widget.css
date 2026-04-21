@@ -1,0 +1,125 @@
+/* --- UNIFIED EVENTS WIDGET (V0.14.0) --- */
+
+.unified-events-widget {
+    background: #0d1626;
+    border: 1px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+/* Tab Navigation */
+.events-nav {
+    display: flex;
+    background: #1a2a44;
+    border-bottom: 1px solid #333;
+}
+
+.events-tab {
+    flex: 1;
+    padding: 10px 5px;
+    border: none;
+    background: transparent;
+    color: #888;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+.events-tab.active {
+    color: #ffcc00;
+    background: #0d1626;
+}
+
+/* List Content & Scroll Container */
+.events-content {
+    padding: 10px;
+    display: none;
+    min-height: 220px;
+    max-height: 220px; 
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #333 #0d1626;
+}
+
+.events-content.active {
+    display: block;
+}
+
+/* TWO-COLUMN LAYOUT (NBAS & ASTRO) */
+.event-split-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 4px 0;
+    border-bottom: 1px solid #222;
+}
+
+.event-chron-col {
+    flex: 0 0 55px;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.0;
+    padding-right: 6px;
+    margin-right: 8px;
+    border-right: 1px solid #333;
+    text-align: center;
+}
+
+.event-date {
+    color: #ffcc00;
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin-bottom: 1px;
+}
+
+.event-time {
+    color: #78909c;
+    font-size: 0.65rem;
+}
+
+.event-desc-col {
+    flex: 1;
+    color: #eee;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    padding-top: 0px;
+}
+
+/* HIGH-DENSITY GRID (ALMANAC) */
+.almanac-row {
+    padding: 4px 0;
+    border-bottom: 1px solid #222;
+    margin-left: 12px;
+}
+
+.almanac-date {
+    color: #a0a0a0; /* Muted Off-White/Grey: distinct from gold and the ice-blue/yellow icons */
+    font-weight: normal; /* Normal weight as requested */
+    font-size: 0.8rem; /* Slightly larger for readability since it's normal weight */
+    font-family: var(--font-main, sans-serif); /* Normal UI font, not monospace */
+    margin-bottom: 3px;
+    letter-spacing: 0.01em;
+}
+
+.almanac-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    font-family: 'Courier New', Courier, monospace; /* Keeping data fixed-width for alignment */
+    font-size: 0.65rem;
+    line-height: 1.1;
+}
+
+
+.alm-sun { color: #ffeb3b; }      
+.alm-twilight { color: #78909c; } 
+.alm-moon { color: #cfd8dc; }
+
+.almanac-grid span { white-space: nowrap; }
+
+/* Custom Scrollbar for Chrome/Safari */
+.events-content::-webkit-scrollbar { width: 6px; }
+.events-content::-webkit-scrollbar-track { background: #0d1626; }
+.events-content::-webkit-scrollbar-thumb { background-color: #333; border-radius: 10px; }
+
