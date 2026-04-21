@@ -5,10 +5,12 @@ authors: []
 series: "nbas-newsletter"
 byline: "Comet C/2025 R3 at Perihelion, Lyrids, and the return of Venus!"
 tags: []
+
+solarsystem: ["comets", "meteor_showers", "planets"]
 object_sections:
-  comet: ["C/2025 R3"]
-  meteor_shower: ["Lyrids"]
-  planet: ["Venus"]
+  comets: ["C/2025 R3"]
+  planets: ["Venus"]
+  meteor_showers: ["Lyrids"]
 ---
 
 ## Comet C2025 R3 at Perihelion 4/19

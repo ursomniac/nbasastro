@@ -17,26 +17,50 @@
   <div class="nav-item"><a href="/series/">Series</a></div>
   <div class="nav-item"><a href="/tags/">Tags</a></div>
   <div class="nav-item"><a href="/constellations/">Constellations</a></div>
+
   <!-- CATALOG DROPDOWN -->
   <div class="nav-item nbas-dropdown">
     <button class="dropbtn">Catalog ▾</button>
     <div class="dropdown-content">
+
       {{ $messier := 0 }}{{ with index .Site.Taxonomies.catalogs "messier" }}{{ $messier = .Count }}{{ end }}
       <a href="{{ if gt $messier 0 }}/catalogs/messier/{{ else }}#{{ end }}" class="{{ if eq $messier 0 }}nav-disabled{{ end }}">Messier</a>
+
       {{ $caldwell := 0 }}{{ with index .Site.Taxonomies.catalogs "caldwell" }}{{ $caldwell = .Count }}{{ end }}
       <a href="{{ if gt $caldwell 0 }}/catalogs/caldwell/{{ else }}#{{ end }}" class="{{ if eq $caldwell 0 }}nav-disabled{{ end }}">Caldwell</a>
+
       {{ $ngc := 0 }}{{ with index .Site.Taxonomies.catalogs "ngc" }}{{ $ngc = .Count }}{{ end }}
       <a href="{{ if gt $ngc 0 }}/catalogs/ngc/{{ else }}#{{ end }}" class="{{ if eq $ngc 0 }}nav-disabled{{ end }}">NGC</a>
+
+      {{ $other := 0 }}{{ with index .Site.Taxonomies.catalogs "other" }}{{ $other = .Count }}{{ end }}
+      <a href="{{ if gt $other 0 }}/catalogs/other/{{ else }}#{{ end }}" class="{{ if eq $other 0 }}nav-disabled{{ end }}">Other</a>
+
     </div>
   </div>
+
   <!-- SOLAR SYSTEM DROPDOWN -->
   <div class="nav-item nbas-dropdown">
     <button class="dropbtn">Solar System ▾</button>
+
     <div class="dropdown-content">
       {{ $moon := 0 }}{{ with index .Site.Taxonomies.solarsystem "moon" }}{{ $moon = .Count }}{{ end }}
       <a href="{{ if gt $moon 0 }}/solarsystem/moon/{{ else }}#{{ end }}" class="{{ if eq $moon 0 }}nav-disabled{{ end }}">The Moon</a>
+
       {{ $planets := 0 }}{{ with index .Site.Taxonomies.solarsystem "planets" }}{{ $planets = .Count }}{{ end }}
       <a href="{{ if gt $planets 0 }}/solarsystem/planets/{{ else }}#{{ end }}" class="{{ if eq $planets 0 }}nav-disabled{{ end }}">Planets</a>
+
+    {{/* NEW: COMETS */}}
+    {{ $comets := 0 }}{{ with index .Site.Taxonomies.solarsystem "comets" }}{{ $comets = .Count }}{{ end }}
+    <a href="{{ if gt $comets 0 }}/solarsystem/comets/{{ else }}#{{ end }}" class="{{ if eq $comets 0 }}nav-disabled{{ end }}">Comets</a>
+
+    {{/* NEW: ASTEROIDS */}}
+    {{ $asteroids := 0 }}{{ with index .Site.Taxonomies.solarsystem "asteroids" }}{{ $asteroids = .Count }}{{ end }}
+    <a href="{{ if gt $asteroids 0 }}/solarsystem/asteroids/{{ else }}#{{ end }}" class="{{ if eq $asteroids 0 }}nav-disabled{{ end }}">Asteroids</a>
+
+    {{/* NEW: METEOR SHOWERS */}}
+    {{ $meteors := 0 }}{{ with index .Site.Taxonomies.solarsystem "meteor-showers" }}{{ $meteors = .Count }}{{ end }}
+    <a href="{{ if gt $meteors 0 }}/solarsystem/meteor-showers/{{ else }}#{{ end }}" class="{{ if eq $meteors 0 }}nav-disabled{{ end }}">Meteors</a>
+
     </div>
   </div>
 </nav>

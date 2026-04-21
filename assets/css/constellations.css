@@ -1,4 +1,5 @@
 /* static/css/constellations.css */
+
 .constellation-highlights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -68,4 +69,41 @@
 .info-box-table th { text-align: left; color: #888; width: 40%; }
 .highlights-table th { text-align: left; font-size: 0.75rem; color: #888; }
 .highlights-table td { padding: 4px 0; border-bottom: 1px solid #222; }
+
+/* Profile box */
+/* Container Box */
+.nbas-constellation-profile {
+    float: right;
+    width: 280px;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    padding: 15px;
+    margin: 0 0 20px 20px;
+    border-radius: 8px;
+}
+
+/* Yellow Header */
+.profile-title {
+    color: #ffcc00;
+    margin-top: 0;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+/* Text Formatting */
+.profile-data {
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.profile-row {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.profile-label {
+    color: #888;
+    font-weight: bold;
+}
 

@@ -1,13 +1,19 @@
 {{ define "main" }}
 <article class="nbas-constellation" data-pagefind-body>
   
-  <header class="constellation-header">
-    <h1 class="constellation-title">{{ .Title }}</h1>
-    <div class="constellation-specs">
-      {{ with .Params.abbreviation }}<span><strong>Abbr:</strong> {{ . }}</span>{{ end }}
-      {{ with .Params.best_viewed }}<span> | <strong>Best Viewed:</strong> {{ . }}</span>{{ end }}
-    </div>
-  </header>
+<header class="constellation-header">
+  <h1 class="constellation-title">{{ .Title }}</h1>
+  
+  <div class="constellation-profile-panel">
+    <h3>{{ .Title }} Profile</h3>
+    <hr>
+    {{ range .Params.profile_stats }}
+      <div class="profile-row">
+        <strong>{{ .label }}:</strong> {{ .value }}
+      </div>
+    {{ end }}
+  </div>
+</header>
 
   {{/* 1. QUICK REFERENCE TABLE (From Metadata) */}}
   {{ if .Params.highlights }}

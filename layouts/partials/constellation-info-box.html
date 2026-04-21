@@ -2,12 +2,19 @@
   <header class="info-box-header">
     <h4>{{ .Title }} Profile</h4>
   </header>
-  <table class="info-box-table">
-    <tr><th>Abbr:</th><td>{{ .Params.abbreviation }}</td></tr>
-    <tr><th>Genitive:</th><td>{{ .Params.genitive }}</td></tr>
-    <tr><th>Viewed:</th><td>{{ .Params.best_viewed }}</td></tr>
-  </table>
-  
+
+<table class="info-box-table">
+  {{ range .Params.profile_stats }}
+    <tr>
+      <th>{{ .label }}:</th>
+      <td>{{ .value }}</td>
+    </tr>
+  {{ else }}
+    {{/* This will show if the array is empty or unreadable */}}
+    <tr><td colspan="2" style="color:red;">DATA ERROR: profile_stats not found</td></tr>
+  {{ end }}
+</table>
+
   <div class="info-box-highlights">
     <h5>Objects of Interest</h5>
     <table class="highlights-table">
