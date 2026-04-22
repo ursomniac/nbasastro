@@ -1,5 +1,5 @@
 ---
-title: "Frequently Asked Questions"
+title: "FAQs"
 description: "Q&A about the NBAS"
 date: 2026-04-01
 ---

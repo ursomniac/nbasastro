@@ -1,0 +1,14 @@
+<!-- V0.14.4: BASEOF HEADER REFACTOR -->
+{{ with resources.Get "css/events-widget.css" | minify }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}">
+{{ end }}
+
+<header class="nbas-header" data-pagefind-ignore="all">
+  <a href="/">
+    <img src="/images/logo-grey.png" class="nbas-logo" alt="NBAS Logo">
+  </a>
+  <div class="branding">
+    <h1>{{ .Site.Title }}</h1>
+    <p>{{ .Site.Params.subtitle }}</p>
+  </div>
+</header>

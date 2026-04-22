@@ -1,124 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- NEW CALENDAR CSS -->
-	{{ with resources.Get "css/events-widget.css" | minify }}
-	  <link rel="stylesheet" href="{{ .RelPermalink }}">
-	{{ end }}
-	<!-- end -->
-    <title>{{ .Title }} | {{ .Site.Title }}</title>
-    {{ partial "head.html" . }}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  {{ partial "head.html" . }}
 </head>
 <body>
+  {{ partial "baseof_header.html" . }}
+  {{ partial "nav.html" . }}
 
-    <header class="nbas-header" data-pagefind-ignore="all">
-        <a href="/">
-            <img src="/images/logo-grey.png" class="nbas-logo" alt="NBAS Logo">
-        </a>
-        <div class="branding">
-            <h1>{{ .Site.Title }}</h1>
-            <p>{{ .Site.Params.subtitle }}</p>
-        </div>
-    </header>
+  <div class="nbas-container">
+    <div class="nbas-columns">
+      {{/* V0.15.0 Preparation: Conditional Sidebar */}}
+      {{ if eq .Section "members" }}
+        {{ partial "baseof_sidebar_members.html" . }}
+      {{ else }}
+        {{ partial "baseof_sidebar_public.html" . }}
+      {{ end }}
 
-    {{ partial "nav.html" . }}
-
-    <div class="nbas-container">
-        <div class="nbas-columns">
-
-<!-- BEGINNING OF SIDEBAR -->
-            <aside class="nbas-sidebar">
-
-<!-- T1. SEARCH -->
-                <div class="sidebar-top">
-
-                    <h3 class="sidebar-heading">Next Meeting</h3>
-                    <p id="next-meeting-text" class="meeting-highlight">Loading...</p>
-                    <p class="meeting-details">6 PM | North Adams Public Library</p>
-                    <a href="https://maps.google.com/?q=North+Adams+Public+Library" target="_blank" class="external-link">View on Google Maps</a>
-                </div>
-
-                <hr class="sidebar-divider">
-
-                <div class="sidebar-widgets">
-
-<div class="search-widget widget-box">
-    <h3 class="sidebar-heading">Search Archive</h3>
-    <!-- Pagefind will inject the search UI here -->
-    <div id="search"></div>
-</div>
-
-<!-- W1. NEW CALENDAR -->
-<h3 class="sidebar-heading">Calendar</h3>
-{{ partial "unified-events.html" . }}
-
-<!-- W3. SKYMAP -->
-		  <div class="widget-box">
-                    <h3 class="sidebar-heading">Tonight's Sky</h3>
-                    {{ partial "sky-widget.html" . }}
-                  </div>
-
-<!-- W4. MOON -->
-<div class="moon-widget widget-box">
-    <h3 class="sidebar-heading">Moon Phase</h3>
-    {{ partial "moon-widget.html" . }}
-</div>
-
-<!-- W5. FORECAST -->
-                  <div class="widget-box">
-                    <h3 class="sidebar-heading">Sky Forecast</h3>
-                        <img src="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" alt="Sky Forecast">
-                  </div>
-
-                </div>
-
-            </aside><main class="nbas-main" data-pagefind-body>
-                {{ block "main" . }}{{ end }}
-            </main>
-
-        </div>
+      <main class="nbas-main" data-pagefind-body>
+        {{ block "main" . }}{{ end }}
+      </main>
     </div>
-<footer class="nbas-footer">
-    <div class="nbas-container footer-grid">
-        
-        <div class="footer-col signoff-col">
-            <div class="footer-signoff">Clear Skies from the Berkshires</div>
-            <span class="founded">Founded 2023</span>
-        </div>
+  </div>
 
-        <!-- Column 2: Navigation -->
-        <nav class="footer-nav">
-            {{ range (where .Site.RegularPages "Section" "pages") }}
-            <a href="{{ .RelPermalink }}" class="footer-link">{{ .Title }}</a>
-            {{ end }}
-        </nav>
-
-        <!-- Column 3: Legal & Copyright -->
-        <div class="footer-col right-col">
-            <div class="footer-copyright">
-                &copy; {{ now.Format "2006" }} Northern Berkshire Astronomical Society
-            </div>
-	    <!-- THE DIAGNOSTIC ANCHOR -->
-	    <div class="site-version">{{ .Site.Params.site_version }}</div>
-        </div>
-    </div>
-</footer>
-
-
-    <script src="/js/meeting.js"></script>
-
-<script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-        new PagefindUI({ 
-            element: "#search", 
-            showImages: false, 
-            resetStyles: false 
-        });
-    });
-</script>
-
+  {{ partial "baseof_footer.html" . }}
 </body>
 </html>
 

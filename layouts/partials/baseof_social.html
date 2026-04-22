@@ -1,9 +1,16 @@
-<div class="footer-social">
-  {{ range .Site.Data.social }}
+<div class="footer-social-links">
+  {{ range hugo.Data.social }}
     {{ if .active }}
-      <a href="{{ .url }}" class="social-icon {{ .icon }}" title="{{ .name }}" target="_blank">
-        {{ partial (printf "icons/%s.html" .icon) . }}
+      <a href="{{ .url }}" class="social-link" title="{{ .name }}" target="_blank" rel="noopener">
+        {{ $iconPath := printf "icons/%s.svg" .icon }}
+        {{ $icon := resources.Get $iconPath }}
+        {{ with $icon }}
+          {{ .Content | safeHTML }}
+        {{ else }}
+          <span class="fallback-text">{{ .name }}</span>
+        {{ end }}
       </a>
     {{ end }}
   {{ end }}
 </div>
+
