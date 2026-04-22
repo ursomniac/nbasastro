@@ -56,7 +56,7 @@ document.getElementById('toggle-constellations').addEventListener('click', funct
                         {{ end }}
                         <br><small class="pronounce-guide">{{ $meta.pronounce_name }}</small>
                     </td>
-		    <td><strong>{{ index $.Site.Data.constellations_abbr $name | default "---" }}</strong></td>
+		    <td><strong>{{ index hugo.Data.constellations_abbr $name | default "---" }}</strong></td>
                     <td class="genitive-col">
                         <em>{{ $meta.genitive }}</em>
                         <br><small class="pronounce-guide">{{ $meta.pronounce_gen }}</small>
