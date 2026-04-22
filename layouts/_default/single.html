@@ -1,4 +1,8 @@
 {{ define "main" }}
+{{ with resources.Get "css/galleries.css" | minify }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}">
+{{ end }}
+
 <article class="nbas-article">
     
     <!-- 1. ABOVE TITLE: Feature -->

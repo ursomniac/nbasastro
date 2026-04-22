@@ -1,0 +1,43 @@
+{{/* V0.15.15: DYNAMIC STYLE SELECTOR */}}
+{{ $style := .Get "style" | default "grid" }}
+{{ $size := .Get "size" | default "250px" }}
+{{ $title := .Get "title" }}
+
+<section class="nbas-gallery-wrapper" data-pagefind-ignore>
+  {{ if $title }}
+    <h3 class="gallery-title" style="color:#ffcc00; border-left:4px solid #ffcc00; padding-left:15px; margin-bottom:20px;">
+      {{ $title }}
+    </h3>
+  {{ end }}
+
+  {{/* CHANGE: The class now responds to style="carousel" or style="grid" */}}
+  <div class="nbas-gallery-{{ $style }}" style="--grid-size: {{ $size }};">
+    {{ $lines := split (trim .Inner "\n\r ") "\n" }}
+    {{ range $lines }}
+      {{ $line := trim . " \r\n\t" }}
+      {{ if ne $line "" }}
+        {{ $parts := split $line "|" }}
+        {{ $imgName := trim (index $parts 0) " " }}
+        {{ $caption := "" }}{{ if gt (len $parts) 1 }}{{ $caption = trim (index $parts 1) " " }}{{ end }}
+        {{ $credit := "" }}{{ if gt (len $parts) 2 }}{{ $credit = trim (index $parts 2) " " }}{{ end }}
+
+        {{ $img := $.Page.Resources.GetMatch $imgName }}
+        {{ with $img }}
+          {{ $thumb := .Fill "400x400 Center q60" }}
+          <div class="gallery-item">
+            <a href="{{ .RelPermalink }}" target="_blank">
+              <img src="{{ $thumb.RelPermalink }}" alt="{{ $caption }}" loading="lazy">
+              {{ if or $caption $credit }}
+                <div class="gallery-overlay">
+                  {{ with $caption }}<strong style="color:#ffcc00">{{ . }}</strong>{{ end }}
+                  {{ with $credit }}<br><em>© {{ . }}</em>{{ end }}
+                </div>
+              {{ end }}
+            </a>
+          </div>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </div>
+</section>
+

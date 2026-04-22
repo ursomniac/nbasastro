@@ -1,0 +1,99 @@
+/* 1. WRAPPER & TYPOGRAPHY */
+.nbas-gallery-wrapper { 
+    margin: 3rem 0; 
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    border: 1px solid #3a4a64;
+}
+
+.gallery-title { 
+    color: #ffcc00; 
+    border-left: 4px solid #ffcc00; 
+    padding-left: 15px; 
+    margin: 0 0 20px 0; 
+    text-transform: uppercase; 
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+/* 2. GRID MODE (DEFAULT) */
+.nbas-gallery-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(var(--grid-size, 250px), 1fr)) !important;
+    gap: 15px !important;
+}
+
+/* 3. CAROUSEL MODE */
+.nbas-gallery-carousel {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 15px !important;
+    padding-bottom: 15px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.nbas-gallery-carousel .gallery-item {
+    flex: 0 0 var(--grid-size, 250px) !important;
+    scroll-snap-align: start;
+}
+
+/* 4. COMMON ITEM STYLES */
+.gallery-item { 
+    position: relative; 
+    aspect-ratio: 1 / 1; 
+    overflow: hidden; 
+    border-radius: 4px; 
+    background: #000; 
+    border: 1px solid #3a4a64; 
+}
+
+.gallery-item img { 
+    width: 100% !important; 
+    height: 100% !important; 
+    object-fit: cover !important; 
+    display: block; 
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* 5. METADATA OVERLAYS */
+.gallery-overlay { 
+    position: absolute; 
+    bottom: 0; 
+    width: 100%; 
+    background: linear-gradient(transparent, rgba(0,0,0,0.9)); 
+    color: #fff; 
+    padding: 15px 10px 10px 10px; 
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay strong { 
+    color: #ffcc00; 
+    display: block;
+    margin-bottom: 2px;
+}
+
+.gallery-overlay em { 
+    font-size: 0.7rem; 
+    color: #bbb;
+    font-style: italic;
+}
+
+/* 6. SCROLLBAR (NIGHT VISION) */
+.nbas-gallery-carousel::-webkit-scrollbar { height: 6px; }
+.nbas-gallery-carousel::-webkit-scrollbar-track { background: #1a1a1a; }
+.nbas-gallery-carousel::-webkit-scrollbar-thumb { background: #3a4a64; border-radius: 10px; }
+
