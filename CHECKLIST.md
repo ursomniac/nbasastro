@@ -1,6 +1,7 @@
 
 ## THINGS TO NOT FORGET ABOUT
-- [ ] Image Galleries on Article Pages
+- [x] Image Galleries on Article Pages
+- [ ] /members and /members/demo, /members/docs, /members/process
 - [ ] Utility pages audit, creation
 - [ ] Event Schema/SEO (Rich snippets for Google Search).
 - [ ] **SEO & Social:**

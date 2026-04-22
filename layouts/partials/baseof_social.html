@@ -1,0 +1,9 @@
+<div class="footer-social">
+  {{ range .Site.Data.social }}
+    {{ if .active }}
+      <a href="{{ .url }}" class="social-icon {{ .icon }}" title="{{ .name }}" target="_blank">
+        {{ partial (printf "icons/%s.html" .icon) . }}
+      </a>
+    {{ end }}
+  {{ end }}
+</div>

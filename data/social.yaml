@@ -1,0 +1,8 @@
+- name: "Facebook"
+  icon: "facebook"
+  url: "https://www.facebook.com/groups/nberkastro"
+  active: true
+- name: "Email"
+  icon: "envelope"
+  url: "mailto:info@nbasastro.org"
+  active: false
