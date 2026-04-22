@@ -1,12 +1,12 @@
 {{ define "main" }}
 <div class="archive-container">
-    <header class="archive-header" style="margin-bottom: 40px; border-bottom: 2px solid #3a4a64; padding-bottom: 20px;">
-        <h1 class="page-title" style="color: #ffffff; font-size: 2.2rem; margin: 0 0 10px 0;">
+    <header class="archive-header">
+        <h1 class="page-title">
             {{ if eq .Kind "taxonomy" }}{{ .Data.Singular | title }}: {{ end }}{{ .Title }}
         </h1>
 
         {{ with .Params.description }}
-        <p class="page-subtitle" style="color: #888; font-size: 1.1rem; font-style: italic;">{{ . }}</p>
+        <p class="page-subtitle">{{ . }}</p>
         {{ end }}
     </header>
 
@@ -38,7 +38,7 @@
     {{/* partial "article-card.html" (dict "context" . "catalogPage" false) */}}
 	{{ partial "article-card.html" (dict "context" . "listContext" $) }}
   {{ else }}
-    <p style="color: #888;">No articles found in this subset.</p>
+    <p class="no-articles-msg">No articles found in this subset.</p>
   {{ end }}
 </div>
 

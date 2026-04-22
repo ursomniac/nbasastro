@@ -1,12 +1,31 @@
 {{ define "main" }}
+{{ with resources.Get "css/constellations.css" | minify }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}">
+{{ end }}
 <main class="nbas-container">
     <h1 class="page-title">The 88 Constellations</h1>
+
+<!-- Toggle to show all rows -->
+<div class="table-controls" data-pagefind-ignore>
+    <button id="toggle-constellations" class="nbas-button-secondary">
+        Show All 88 Constellations
+    </button>
+</div>
+<script>
+document.getElementById('toggle-constellations').addEventListener('click', function() {
+    const table = document.querySelector('.nbas-atlas-table');
+    const isHidden = table.classList.toggle('show-empty-rows');
+    this.textContent = isHidden ? "Show Only Active Constellations" : "Show All 88 Constellations";
+});
+</script>
+<!-- end toggle -->
     
     <table class="nbas-atlas-table">
         <thead>
             <tr>
                 <th>Constellation</th>
-                <th>Genitive</th>
+		<th>Abbr.</th>
+                <th class="genitive-col">Genitive</th>
                 <th>Meaning</th>
                 <th style="text-align: center;">Articles</th>
             </tr>
@@ -27,7 +46,8 @@
                     {{ end }}
                 {{ end }}
 
-                <tr>
+		{{/* Inside the range loop */}}
+		<tr class="const-row {{ if eq $count 0 }}row-empty{{ end }}">
                     <td>
                         {{ if gt $count 0 }}
                            <a href="{{ $url }}" class="active-atlas-link">{{ $name }}</a>
@@ -36,7 +56,8 @@
                         {{ end }}
                         <br><small class="pronounce-guide">{{ $meta.pronounce_name }}</small>
                     </td>
-                    <td>
+		    <td><strong>{{ index $.Site.Data.constellations_abbr $name | default "---" }}</strong></td>
+                    <td class="genitive-col">
                         <em>{{ $meta.genitive }}</em>
                         <br><small class="pronounce-guide">{{ $meta.pronounce_gen }}</small>
                     </td>

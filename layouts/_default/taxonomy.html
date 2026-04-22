@@ -30,12 +30,18 @@
           <span class="card-metadata" style="margin-left: 15px; color: #888;">Series Archive</span>
         </div>
       {{ end }}
+
     {{ else }}
-{{ $currentTerm := .Data.Term }}
-{{ range .Pages }}
-  {{ partial "article-card.html" (dict "context" . "currentTerm" $currentTerm "catalogPage" false) }}
-{{ end }}
-    {{ end }}
+    	{{ $currentTerm := .Data.Term }}
+    	{{ $pages := .Pages }}
+    	{{ if eq .Title "Constellation Highlight" }}
+        	{{ $pages = .Pages.ByTitle }}
+    	{{ end }}
+    	{{ range $pages }}
+      		{{ partial "article-card.html" (dict "context" . "currentTerm" $currentTerm "catalogPage" false) }}
+    	{{ end }}
+	{{ end }}
+
   </div>
 
 </section>
