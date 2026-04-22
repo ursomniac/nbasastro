@@ -1,0 +1,30 @@
+/* V0.15.0: INTERNAL-ONLY STYLING */
+.members-sidebar {
+    background: rgba(255, 68, 68, 0.05) !important;
+    border-left: 3px solid #ff4444 !important;
+    padding: 20px 15px !important;
+}
+
+.members-nav {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin-top: 15px !important;
+}
+
+.sidebar-link {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    display: block;
+    transition: all 0.2s ease;
+}
+
+.sidebar-link:hover {
+    background: #ffcc00 !important;
+    color: #1a1a1a !important;
+    transform: translateX(5px);
+}

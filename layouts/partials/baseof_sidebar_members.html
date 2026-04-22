@@ -1,3 +1,8 @@
+<!-- V0.15.0: MEMBERS SIDEBAR + ISOLATED CSS -->
+{{ with resources.Get "css/members.css" | minify }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}">
+{{ end }}
+
 <aside class="nbas-sidebar members-sidebar">
   <h3 class="sidebar-heading">Members Area</h3>
   <nav class="members-nav">
@@ -6,3 +11,4 @@
     <a href="/members/demo/" class="sidebar-link">Site Demos</a>
   </nav>
 </aside>
+
