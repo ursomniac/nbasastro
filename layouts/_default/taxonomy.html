@@ -34,7 +34,14 @@
     {{ else }}
     	{{ $currentTerm := .Data.Term }}
     	{{ $pages := .Pages }}
-    	{{ if eq .Title "Constellation Highlight" }}
+    	{{ if eq .Title "Constellation Highlights" }}
+		<div class="top-matter-box">
+			<div class="top-matter-content">
+		        Each Highlight page has some constellation history, 
+			description, and a list of a few Deep Sky Objects (DSOs) 
+			to check out!
+    			</div>
+		</div>
         	{{ $pages = .Pages.ByTitle }}
     	{{ end }}
     	{{ range $pages }}

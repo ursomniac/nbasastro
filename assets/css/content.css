@@ -212,3 +212,23 @@
     clear: both;
 }
 
+/* --- TOP MATTER BOX --- */
+.top-matter-box {
+    background-color: var(--tag-cyan-bg);
+    border: 1px solid var(--border-soft);
+    border-left: 4px solid var(--gold-base);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 4px;
+}
+
+.top-matter-content {
+    color: var(--text-main);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.top-matter-content strong {
+    color: var(--gold-base);
+}
+

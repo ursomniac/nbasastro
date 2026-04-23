@@ -1,36 +1,66 @@
+/* --- MEMBERS SIDEBAR (V0.15.2) --- */
 .nbas-sidebar.members-sidebar {
     background: rgba(255, 68, 68, 0.05) !important;
-    border-left: 4px solid #ff4444 !important; /* Slightly thicker for visibility */
+    border-left: 4px solid #ff4444 !important; 
     padding: 20px 15px !important;
     display: block !important;
-}
-
-.members-sidebar {
-    background: rgba(255, 68, 68, 0.05) !important;
-    border-left: 3px solid #ff4444 !important;
-    padding: 20px 15px !important;
 }
 
 .members-nav {
     display: flex !important;
     flex-direction: column !important;
-    gap: 12px !important;
+    gap: 15px !important; /* Slightly more space */
     margin-top: 20px !important;
 }
 
+/* DASHBOARD BOX: Using Gold to distinguish from regular links */
 .sidebar-link {
-    color: #ffffff !important;
+    color: var(--gold-base) !important; 
     text-decoration: none !important;
-    font-size: 0.95rem;
-    padding: 8px 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 12px;
     border-radius: 4px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(248, 212, 78, 0.1); /* Faint gold tint */
+    border: 1px solid rgba(248, 212, 78, 0.3);
     display: block;
     transition: all 0.2s ease;
+    text-align: center;
 }
 
 .sidebar-link:hover {
-    background: #ffcc00 !important;
-    color: #1a1a1a !important;
-    transform: translateX(5px);
+    background: var(--gold-base) !important;
+    color: var(--space-blue) !important;
+    transform: none;
 }
+
+/* SECTION HEADERS: Muted to separate from clickable links */
+.sidebar-subheading {
+    color: var(--text-muted) !important;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 1.5rem 0 0.5rem 0;
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 4px;
+}
+
+/* NESTED ARTICLE LINKS: Regular text color for contrast */
+.sidebar-sublink {
+    color: var(--text-main) !important;
+    text-decoration: none !important;
+    font-size: 0.9rem;
+    display: block;
+    padding: 4px 0;
+}
+
+.sidebar-sublink:hover {
+    color: var(--gold-base) !important;
+    text-decoration: underline !important;
+}
+
+.sidebar-sublink.active {
+    color: var(--gold-base) !important;
+    font-weight: bold;
+}
+
