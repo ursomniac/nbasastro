@@ -27,9 +27,20 @@
       NBAS Staff
     {{ end }}
   </span> | 
-  <time datetime="{{ .Date.Format "2006-01-02" }}">
-    {{ if not .Date.IsZero }}{{ .Date.Format "January 2, 2006" }}{{ else }}Date TBD{{ end }}
-  </time>
+<time datetime="{{ .Date.Format "2006-01-02" }}">
+    {{ if not .Date.IsZero }}
+        Published: {{ .Date.Format "January 2, 2006" }}
+    {{ else }}
+        Date TBD
+    {{ end }}
+</time>
+
+{{/* Add Revised date if it exists and differs from Publish date */}}
+{{ if and (not .Date.IsZero) .Params.lastmod (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+    | <time datetime="{{ .Lastmod.Format "2006-01-02" }}">
+        Revised: {{ .Lastmod.Format "January 2, 2006" }}
+    </time>
+{{ end }}
 </div>
 
 

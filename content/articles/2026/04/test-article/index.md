@@ -6,6 +6,7 @@ byline: "A deep dive into our nearest galactic neighbor."
 tags: ["Local Group"]
 constellations: ["Andromeda"]
 catalogs: ["Messier", "NGC"]
+description: "I am a test article..."
 
 object_sections:
   messier: ["31", "32", "110"]

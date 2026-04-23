@@ -2,6 +2,7 @@
 layout: "single-constellation"
 title: "Andromeda"
 date: 2023-10-04
+lastmod: 2026-04-23
 authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Andromeda"]

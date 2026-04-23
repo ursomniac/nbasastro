@@ -1,6 +1,5 @@
 {{ define "main" }}
 
-
 <article class="nbas-article" data-pagefind-body>
     <!-- 1. HEADER SECTION -->
     <header class="article-header">
@@ -27,11 +26,14 @@
     {{ else }}
       NBAS
     {{ end }}
-  </span> | 
-  <time>{{ .Date.Format "January 2, 2006" }}</time>
+  </span> | <time>Published: {{ .Date.Format "January 2, 2006" }}</time>
+{{ if and .Params.lastmod (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+    | <time>Revised: {{ .Lastmod.Format "January 2, 2006" }}</time>
+{{ end }}
 </div>
-
     </header>
+
+{{ partial "social-share.html" . }}
 
     {{ if .Params.object_info }}
     <div data-pagefind-ignore>
