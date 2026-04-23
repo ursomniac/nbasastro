@@ -7,16 +7,17 @@
 * /members/process = checklists for content submission 
 
 ## 1. /members/
- * [ ] - landing page
+ * [X] - landing page
 
 ## 2. /members/docs/
- * [ ] - landing page
- * [ ] - install/  - Windows and Mac setup: git, hugo, venv
- * [ ] - concepts/ - Series, DSO Catalog, Solar System, Club, etc.
- * [ ] - strucure/ - layout of /content/articles
+ * [X] - landing page
+ * [X] - install/  - Windows and Mac setup: git, hugo, venv
+ * [X] - concepts/ - Series, DSO Catalog, Solar System, Club, etc.
+ * [X] - strucure/ - layout of /content/articles
+ * [ ] - article/  - Description of Articles (and Markdown)
 
 ## 3. /members/templates/
- * [ ] - landing page
+ * [X] - landing page
  * [ ] - simple/ - a VERY simple article
  * [ ] - series_example/ - a new article that's part of a series
  * [ ] - event_example/ - a new article for an event (with images)
@@ -25,14 +26,14 @@
  * [ ] - object_exmaple_sso - a new article focusing on 1 (or more) SSOs
 
 ## 4. /members/howto/
- * [ ] - landing page
+ * [X] - landing page
  * [ ] - howto_metadata/ - General Metadata related features
  * [ ] - howto_dso/ - Metadata about DSOs
  * [ ] - howto_sso/ - Metadata about SSOs
  * [ ] - howto_stars/ - Metadata about Stars
 
 ## 5. /members/demo/
- * [ ] - landing page
+ * [X] - landing page
  * [ ] - demo_simple/ - simple article
  * [ ] - demo_series/ -  series article
  * [ ] - demo_dso/ - DSO article
@@ -42,7 +43,7 @@
  * [ ] - demo_event/ -  Event article
 
 ## 6. /members/process/
- * [ ] - landing page
+ * [X] - landing page
  * [ ] - editorial/ - publishing guidelines
  * [ ] - git/ - using git and Github
  * [ ] - easy/ - the simplest way to submit articles (email ZIP to Bob)

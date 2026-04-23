@@ -1,4 +1,10 @@
-/* V0.15.0: INTERNAL-ONLY STYLING */
+.nbas-sidebar.members-sidebar {
+    background: rgba(255, 68, 68, 0.05) !important;
+    border-left: 4px solid #ff4444 !important; /* Slightly thicker for visibility */
+    padding: 20px 15px !important;
+    display: block !important;
+}
+
 .members-sidebar {
     background: rgba(255, 68, 68, 0.05) !important;
     border-left: 3px solid #ff4444 !important;
@@ -9,7 +15,7 @@
     display: flex !important;
     flex-direction: column !important;
     gap: 12px !important;
-    margin-top: 15px !important;
+    margin-top: 20px !important;
 }
 
 .sidebar-link {
