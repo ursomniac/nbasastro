@@ -17,7 +17,7 @@ body {
 
 /* --- 2. GLOBAL TYPE HIERARCHY --- */
 h1, h2, h3, h4, .dynamic-section-header, .archive-header, .article-title { 
-    color: #ffffcc !important; 
+    color: #ffffff !important; 
     border-bottom: 1px solid var(--border-soft) !important; 
     margin-top: 1.5rem; 
     margin-bottom: 1rem; 

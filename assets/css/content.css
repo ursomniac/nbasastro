@@ -1,5 +1,5 @@
 /* Article Metadata & Stats */
-.article-body {
+.article-body, .internal-content {
     line-height: 1.8;
     font-size: 1.1rem;
 }
@@ -153,6 +153,17 @@
     margin: 2rem auto;
     text-align: center;
 }
+
+/* --- V0.15.5: FULL-WIDTH IMAGE OVERRIDE --- */
+.nbas-media-container.full-width {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.nbas-media-container.full-width .nbas-media-img {
+    width: 100% !important;
+}
+
 
 .nbas-media-img {
     border: 2px solid var(--gold-dim);

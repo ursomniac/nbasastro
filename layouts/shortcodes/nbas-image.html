@@ -1,12 +1,19 @@
 {{- $image := .Page.Resources.GetMatch (.Get "src") -}}
 {{- $align := .Get "align" | default "center" -}}
-{{- $w := .Get "width" | default (.Get "size" | default "600") | strings.TrimSuffix "px" -}}
+{{- $fullWidth := eq (.Get "fullwidth") "true" -}}
+{{/* Resize: 1200px for full-width to ensure clarity; otherwise use provided width or default 600px */}}
+{{- $w := cond $fullWidth "1200" (.Get "width" | default (.Get "size" | default "600") | strings.TrimSuffix "px") -}}
 
-<figure class="nbas-media-container align-{{ $align }}" style="width: {{ $w }}px; max-width: 100%; margin: 10px auto;">
+<figure class="nbas-media-container align-{{ $align }} {{ if $fullWidth }}full-width{{ end }}" 
+        style="{{ if $fullWidth }}width: 100%;{{ else }}width: {{ $w }}px;{{ end }} max-width: 100%; margin: 2rem auto;">
   {{- with $image -}}
     {{- $scaled := .Resize (printf "%sx" $w) -}}
     <a href="{{ .RelPermalink }}" target="_blank">
-      <img src="{{ $scaled.RelPermalink }}" width="{{ $scaled.Width }}" height="{{ $scaled.Height }}" class="nbas-media-img" style="width: 100%; height: auto; display: block;">
+      <img src="{{ $scaled.RelPermalink }}" 
+           width="{{ $scaled.Width }}" 
+           height="{{ $scaled.Height }}" 
+           class="nbas-media-img" 
+           style="width: 100%; height: auto; display: block;">
     </a>
   {{- else -}}
     <p class="nbas-image-error">Image "{{ $.Get "src" }}" not found.</p>
