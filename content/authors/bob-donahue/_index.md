@@ -2,6 +2,7 @@
 title: "Bob Donahue"
 role: "NBAS Contributor & Resident Astronomer"
 email: "bob@nbasastro.org"
+photo: "headshot.jpg"
 social_links:
   - platform: "LinkedIn"
     url: "https://linkedin.com + /in/robertdonahue"

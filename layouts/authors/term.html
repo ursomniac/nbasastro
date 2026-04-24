@@ -7,13 +7,31 @@
     {{ end }}
   </header>
 
+{{- $photo := "" -}}
+{{- if .Params.photo -}}
+  {{- $resource := .Resources.GetMatch .Params.photo -}}
+  {{- if $resource -}}
+    {{- $photo = $resource.RelPermalink -}}
+  {{- else -}}
+    {{- $photo = .Params.photo | relURL -}}
+  {{- end -}}
+{{- end -}}
+
+{{ if $photo }}
+  <img src="{{ $photo }}" 
+       alt="{{ .Title }}" 
+       class="author-headshot" 
+       style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; float: left; margin: 0 20px 20px 0; border: 2px solid var(--gold-base);">
+{{ end }}
+
+
   <div class="author-bio">
     {{ .Content }}
   </div>
 
   <hr class="section-divider">
 
-  <section class="author-articles">
+  <section class="author-articles" style="clear: both; padding-top: 20px;">
     <h3>Articles by {{ .Title }}</h3>
     <div class="article-list">
       {{ range .Pages }}
