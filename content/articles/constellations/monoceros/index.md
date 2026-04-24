@@ -14,6 +14,8 @@ profile_data:
   "Genitive": Monocerotis
   "Best Viewed": Winter
   "Hemisphere": Equatorial
+  "Brightest Star": &beta; Mon
+  "Area": 482 sq degrees (35th)
 
 # Taxonomy refs:
 catalogs: ["caldwell", "messier", "ngc", "other"]

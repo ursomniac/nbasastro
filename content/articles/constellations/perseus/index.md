@@ -14,7 +14,8 @@ profile_data:
   "Genitive": Persei
   "Best Viewed": Fall
   "Hemisphere": Northern
-  "Brighest Star": Mirfak
+  "Brighest Star": Mirfak (&alpha;)
+  "Area": 615 sq degrees (24th)
 
 # Taxonomy refs:
 stars: ["Algol"]

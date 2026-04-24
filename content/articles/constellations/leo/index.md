@@ -14,7 +14,8 @@ profile_data:
   "Genitive": Leonis
   "Best Viewed": Spring
   "Hemisphere": Northern
-  "Brighest Star": Regulus
+  "Brighest Star": Regulus (&alpha;)
+  "Area": 947 sq degrees (12th)
 
 # Taxonomy refs:
 stars: ["&gamma; Leo", "Wolf 359", "R Leonis"]

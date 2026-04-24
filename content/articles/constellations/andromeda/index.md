@@ -15,7 +15,8 @@ profile_data:
   "Genitive": Andromedae
   "Best Viewed": Fall
   "Hemisphere": Northern
-  "Brighest Star": Alpheratz
+  "Brighest Star": Alpheratz (&alpha; And)
+  "Area": 722 sq deg (19th)
 
 # Taxonomy refs:
 stars: ["Almach"]

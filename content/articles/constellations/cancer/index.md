@@ -14,6 +14,8 @@ profile_data:
   "Genitive": Cancri
   "Best Viewed": Winter/Spring
   "Hemisphere": Equatorial
+  "Brightest Star": Altarf (&beta;)
+  "Area": 506 sq degrees (31st)
 
 # Taxonomy refs:
 stars: ["Iota Cnc", "Zeta Cnc", "55 Cnc", "X Cnc"]

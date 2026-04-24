@@ -14,8 +14,8 @@ profile_data:
   "Genitive": Herculis
   "Best Viewed": Spring
   "Hemisphere": Northern
-  "Area": 1225 sq deg
   "Brightest Star": Ras Algethi
+  "Area": 1,225 (5th)
 
 # Taxonomy refs:
 stars: ["Ras Algethi"]

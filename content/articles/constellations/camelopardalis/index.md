@@ -14,6 +14,8 @@ profile_data:
   "Genitive": Camelopardalis
   "Best Viewed": Winter
   "Hemisphere": Northern
+  "Brightest Star": &beta; Cam
+  "Area": 757 sq deg (18th)
 
 # Taxonomy refs:
 stars: ["RU Cam"]

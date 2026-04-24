@@ -14,7 +14,8 @@ profile_data:
   "Genitive": Comae Berenices
   "Best Viewed": Spring
   "Hemisphere": Equatorial
-  "Brighest Star": Diadem
+  "Brighest Star": &beta; Coma
+  "Area": 386 eq degrees (42nd)
 
 # Taxonomy refs:
 catalogs: ["messier", "ngc", "other"]

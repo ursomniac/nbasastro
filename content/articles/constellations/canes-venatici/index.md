@@ -14,7 +14,8 @@ profile_data:
   "Genitive": Canum Venaticorum
   "Best Viewed": Spring
   "Hemisphere": Northern
-  "Brighest Star": Cor Caroli
+  "Brighest Star": Cor Caroli (&alpha;)
+  "Area": 465 sq degrees (52nd)
 
 # Taxonomy refs:
 stars: ["Y CVn", "TON 618"]

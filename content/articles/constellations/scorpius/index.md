@@ -14,7 +14,8 @@ profile_data:
   "Genitive": Scorpii
   "Best Viewed": Summer
   "Hemisphere": Southern
-  "Brightest Star": Antares
+  "Brightest Star": Antares (&alpha;)
+  "Area": 497 sq degrees (33rd)
 
 # Taxonomy refs:
 stars: ["Antares"]

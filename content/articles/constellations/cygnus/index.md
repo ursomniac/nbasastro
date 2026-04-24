@@ -14,8 +14,8 @@ profile_data:
   "Genitive": Cygni
   "Best Viewed": Summer
   "Hemisphere": Northern
-  "Brightest Star": Deneb
-  "Area": 804 sq degrees
+  "Brightest Star": Deneb (&alpha;)
+  "Area": 804 sq degrees (16th)
 
 # Taxonomy refs:
 stars: ["Albireo"]

@@ -15,7 +15,7 @@ profile_data:
   "Best Viewed": Summer
   "Hemisphere": Southern
   "Brightest Star": Kaus Australis
-  "Area": 867 sq degrees
+  "Area": 867 sq degrees (15th)
 
 # Taxonomy refs:
 stars: ["Sgr A"]
