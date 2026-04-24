@@ -18,7 +18,9 @@ profile_data:
   "Area": 497 sq degrees (33rd)
 
 # Taxonomy refs:
-stars: ["Antares"]
+stargroups: ["multiple"]
+stardata: 
+  multiple: ["Antares"]
 catalogs: ["messier", "ngc", "other"]
 object_sections:
   messier: ["4", "6", "7"]

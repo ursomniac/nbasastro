@@ -18,7 +18,9 @@ profile_data:
   "Area": 804 sq degrees (16th)
 
 # Taxonomy refs:
-stars: ["Albireo"]
+stargroups: ["multiple"]
+stardata: 
+  multiple: ["Albireo"]
 catalogs: ["messier", "ngc", "caldwell", "other"]
 object_sections:
   messier: ["29"]

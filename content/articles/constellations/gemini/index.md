@@ -18,7 +18,9 @@ profile_data:
   "Area": 514 sq degrees (30th)
 
 # Taxonomy refs:
-stars: ["Castor"]
+stargroups: ["multiple"]
+stardata: 
+  multiple: ["Castor"]
 catalogs: ["messier", "caldwell", "ngc", "other"]
 object_sections:
   messier: ["35"]

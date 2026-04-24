@@ -18,7 +18,9 @@ profile_data:
   "Area": 1,225 (5th)
 
 # Taxonomy refs:
-stars: ["Ras Algethi"]
+stargroups: ["multiple"]
+stardata: 
+  multiple: ["Ras Algethi"]
 catalogs: ["messier", "ngc", "other"]
 object_sections:
   messier: ["13", "92"]

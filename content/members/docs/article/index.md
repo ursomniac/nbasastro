@@ -153,7 +153,9 @@ profile_data:
   "Area": 867 sq degrees
 
 # Taxonomy refs:
-stars: ["Sgr A"]
+star_type: ["exotic_stars"]
+stars:
+  exotic_stars: ["Sgr A"]
 catalogs: ["messier", "ngc", "caldwell", "other"]
 object_sections:
   messier: ["17", "20", "21", "22"]

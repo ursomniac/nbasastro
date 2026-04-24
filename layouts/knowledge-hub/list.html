@@ -1,0 +1,36 @@
+{{ define "main" }}
+<section class="nbas-explorer-hub">
+  <h1 class="hub-title">{{ .Title }}</h1>
+  <p class="hub-subtitle">Educational resources, technical guides, and scientific deep-dives.</p>
+
+  <div class="explorer-grid">
+    {{/* 1. AUTOMATICALLY GET ALL TOPICS DEFINED IN THE TAXONOMY */}}
+    {{ range $term, $weightedPages := .Site.Taxonomies.knowledgetopics }}
+      {{/* 2. GET THE TERM PAGE (for your _index.md titles) */}}
+      {{ $termPage := $.Site.GetPage (printf "knowledgetopics/%s" $term) }}
+      
+      <div class="explorer-col">
+        <h3>{{ if $termPage }}{{ $termPage.LinkTitle }}{{ else }}{{ $term | humanize }}{{ end }}</h3>
+        
+        <ul class="explorer-list">
+          {{/* 3. LIST THE LATEST ARTICLES */}}
+          {{ range first 5 $weightedPages.Pages.ByPublishDate.Reverse }}
+            <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+          {{ else }}
+            <li class="nav-disabled">No articles yet.</li>
+          {{ end }}
+        </ul>
+        
+        {{ if gt (len $weightedPages.Pages) 5 }}
+          <div style="margin-top: 15px; border-top: 1px solid var(--border-soft); padding-top: 10px;">
+            <a href="/knowledgetopics/{{ $term | urlize }}/" style="font-size: 0.85rem; color: var(--gold-base);">
+              View all {{ len $weightedPages.Pages }} articles →
+            </a>
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+

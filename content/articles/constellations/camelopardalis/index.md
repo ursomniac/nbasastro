@@ -18,7 +18,9 @@ profile_data:
   "Area": 757 sq deg (18th)
 
 # Taxonomy refs:
-stars: ["RU Cam"]
+stargroups: ["variable"]
+stardata: 
+  variable: ["RU Cam"]
 catalogs: ["caldwell", "ngc", "other"]
 object_sections:
   caldwell: ["5", "7"]

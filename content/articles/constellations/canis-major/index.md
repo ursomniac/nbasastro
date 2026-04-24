@@ -18,7 +18,10 @@ profile_data:
   "Area": 380 sq degrees (43rd)
 
 # Taxonomy refs:
-stars: ["Sirius"]
+stargroups: ["multiple", "nearby"]
+stardata: 
+  multiple: ["Sirius"]
+  nearby: ["Sirius"]
 catalogs: ["messier", "caldwell", "ngc", "other"]
 object_sections:
   messier: ["41"]

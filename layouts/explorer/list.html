@@ -1,0 +1,82 @@
+{{ define "main" }}
+<section class="nbas-explorer-hub">
+  <h1 class="hub-title">{{ .Title }}</h1>
+  <p class="hub-subtitle">Observational targets categorized by catalog and celestial type.</p>
+
+  <div class="explorer-grid">
+    <!-- COLUMN 1: SOLAR SYSTEM -->
+    <div class="explorer-col">
+      <h3>Solar System</h3>
+      <ul class="explorer-list">
+        {{ range $item := slice "moon" "planets" "comets" "asteroids" "meteor-showers" }}
+          {{ $count := 0 }}{{ with (index $.Site.Taxonomies.solarsystem $item) }}{{ $count = .Count }}{{ end }}
+          <li>
+            {{ if gt $count 0 }}
+              <a href="/solarsystem/{{ $item | urlize }}/">{{ $item | humanize }}</a> <span class="count">({{ $count }})</span>
+            {{ else }}
+              <span class="nav-disabled">{{ $item | humanize }} (0)</span>
+            {{ end }}
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+
+    <!-- COLUMN 2: STARS & SYSTEMS -->
+<!-- COLUMN 2: STARS & SYSTEMS -->
+<div class="explorer-col">
+  <h3>Stars & Systems</h3>
+  <ul class="explorer-list">
+    {{/* Only the "keys" remain hard-coded; the labels are pulled from content */}}
+    {{ $keys := slice "multiple" "variable" "nearby" "exoplanet" "exotic" }}
+    
+    {{ range $key := $keys }}
+      {{ $count := 0 }}
+      {{/* Get the taxonomy term page object */}}
+      {{ $termPage := site.GetPage (printf "stargroups/%s" $key) }}
+      
+      {{ range $.Site.RegularPages }}
+        {{ if .Params.stardata }}
+          {{ if (index .Params.stardata $key) }}
+            {{ $count = add $count 1 }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+      <li>
+        {{ if gt $count 0 }}
+          {{/* We use $termPage.LinkTitle to get the name from your _index.md */}}
+          <a href="/stargroups/{{ $key }}/">
+            {{ if $termPage }}{{ $termPage.LinkTitle }}{{ else }}{{ $key | humanize }}{{ end }}
+          </a> 
+          <span class="count">({{ $count }})</span>
+        {{ else }}
+          <span class="nav-disabled">
+            {{ if $termPage }}{{ $termPage.LinkTitle }}{{ else }}{{ $key | humanize }}{{ end }} (0)
+          </span>
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+</div>
+
+
+    <!-- COLUMN 3: DSO CATALOGS -->
+    <div class="explorer-col">
+      <h3>DSO Catalogs</h3>
+      <ul class="explorer-list">
+        {{ range $cat := slice "messier" "caldwell" "ngc" "other" }}
+          {{ $count := 0 }}{{ with (index $.Site.Taxonomies.catalogs $cat) }}{{ $count = .Count }}{{ end }}
+          <li>
+            {{ if gt $count 0 }}
+              <a href="/catalogs/{{ $cat | urlize }}/">{{ $cat | humanize | upper }}</a> <span class="count">({{ $count }})</span>
+            {{ else }}
+              <span class="nav-disabled">{{ $cat | humanize | upper }} (0)</span>
+            {{ end }}
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</section>
+{{ end }}
+

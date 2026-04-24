@@ -1,0 +1,10 @@
+{{ define "main" }}
+<section class="nbas-taxonomy-list">
+  <h1 class="taxonomy-title">Category: {{ .Title }}</h1>
+  <div class="article-list">
+    {{ range .Pages }}
+      {{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}

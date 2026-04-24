@@ -27,23 +27,33 @@
     </a>
 
 {{/* STABILIZED OBJECT MATCHING: CSS COMPLIANT REVISION */}}
+{{/* STABILIZED OBJECT MATCHING: STARS & CATALOGS */}}
 {{ with .currentTerm }}
   <div class="card-object-matches">
     {{ $listTerm := . }}
+    
+    {{/* 1. CHECK CATALOGS & SOLAR SYSTEM (Existing Logic) */}}
     {{ range $mapName, $objList := $.context.Params.object_sections }}
       {{ if eq $listTerm $mapName }}
         {{ if ne $mapName "other" }}
           {{ $termPage := $.context.Site.GetPage (printf "catalogs/%s" $mapName) }}
           {{ if not $termPage }}{{ $termPage = $.context.Site.GetPage (printf "solarsystem/%s" $mapName) }}{{ end }}
-          <span class="match-label">
-            {{ if $termPage }}{{ $termPage.Title }}{{ else }}{{ $mapName }}{{ end }}:
-          </span>
+          <span class="match-label">{{ if $termPage }}{{ $termPage.Title }}{{ else }}{{ $mapName | upper }}{{ end }}:</span>
         {{ end }}
-        {{ range $idx, $id := $objList }} {{ if gt $idx 0 }}, {{ end }}{{ $id }} {{ end }}
+        {{ range $idx, $id := $objList }}{{ if gt $idx 0 }}, {{ end }}{{ $id }}{{ end }}
+      {{ end }}
+    {{ end }}
+
+    {{/* 2. CHECK STAR GROUPS (New Logic for v0.16.2) */}}
+    {{ range $mapName, $objList := $.context.Params.stardata }}
+      {{ if eq $listTerm $mapName }}
+        <span class="match-label">Stars:</span>
+        {{ range $idx, $id := $objList }}{{ if gt $idx 0 }}, {{ end }}{{ $id }}{{ end }}
       {{ end }}
     {{ end }}
   </div>
 {{ end }}
+
 
 <div class="card-metadata">
   By 

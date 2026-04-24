@@ -23,8 +23,6 @@
       (resources.Get "css/01-variables.css") 
       (resources.Get "css/02-layout.css") 
       (resources.Get "css/navbar.css") 
-      (resources.Get "css/03-discovery-overlay.css") 
-      (resources.Get "css/04-night-vision.css") 
       (resources.Get "css/galleries.css")
       (resources.Get "css/members.css")
       (resources.Get "css/search-fix.css")
@@ -32,6 +30,7 @@
       (resources.Get "css/content.css") 
       (resources.Get "css/tables.css") 
       (resources.Get "css/authors.css") 
+      (resources.Get "css/hubs.css") 
   -}}
   
   {{- $styles := $style_slice | resources.Concat "css/main.css" | minify | fingerprint -}}

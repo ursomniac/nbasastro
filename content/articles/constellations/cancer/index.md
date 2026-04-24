@@ -18,7 +18,11 @@ profile_data:
   "Area": 506 sq degrees (31st)
 
 # Taxonomy refs:
-stars: ["Iota Cnc", "Zeta Cnc", "55 Cnc", "X Cnc"]
+stargroups: ["multiple", "variable", "exoplanet"]
+stardata: 
+  multiple: ["Iota Cnc", "Zeta Cnc"]
+  variable: ["X Cnc"]
+  exoplanet: ["55 Cnc"]
 catalogs: ["caldwell", "messier", "ngc", "other"]
 object_sections:
   caldwell: ["48"]
@@ -77,7 +81,7 @@ caption="Telescope view of &zeta; Cancri"
 >}}
 
 There are a few interesting double/triple stars:
-Zeta (ζ) Cancri - named Tegrmine - is a multiple
+Zeta (ζ) Cancri - named Tegmine - is a multiple
 star system: two stars are 5” apart and relatively
 easy to discern with a small telescope, but the
 primary star is also a close double star - only 1” apart,

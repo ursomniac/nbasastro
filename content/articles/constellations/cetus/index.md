@@ -18,7 +18,9 @@ profile_data:
   "Area": 1,231 sq degrees (4th)
 
 # Taxonomy refs:
-stars: ["Mira"]
+stargroups: ["variable"]
+stardata: 
+  variable: ["Mira"]
 catalogs: ["messier", "ngc", "caldwell", "other"]
 object_sections:
   messier: ["77"]

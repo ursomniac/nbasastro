@@ -18,7 +18,9 @@ profile_data:
   "Area": 615 sq degrees (24th)
 
 # Taxonomy refs:
-stars: ["Algol"]
+stargroups: ["variable"]
+stardata: 
+  variable: ["Algol"]
 catalogs: ["caldwell", "messier", "ngc"]
 object_sections:
   caldwell: ["14", "24"]

@@ -18,7 +18,11 @@ profile_data:
   "Area": 947 sq degrees (12th)
 
 # Taxonomy refs:
-stars: ["&gamma; Leo", "Wolf 359", "R Leonis"]
+stargroups: ["multiple", "variable", "nearby"]
+stardata: 
+  multiple: ["Gamma Leo"]
+  variable: ["R Leo"]
+  nearby: ["Wolf 359"]
 catalogs: ["messier", "ngc"]
 object_sections:
   messier: ["65", "66"]

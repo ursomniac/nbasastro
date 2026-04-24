@@ -19,7 +19,9 @@ profile_data:
   "Area": 722 sq deg (19th)
 
 # Taxonomy refs:
-stars: ["Almach"]
+stargroups: ["multiple"]
+stardata: 
+  multiple: ["Almach"]
 catalogs: ["messier", "caldwell", "ngc"]
 object_sections:
   messier: ["31", "32", "110"]

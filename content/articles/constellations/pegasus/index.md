@@ -18,7 +18,9 @@ profile_data:
   "Area": 1,121 sq degrees (7th)
 
 # Taxonomy refs:
-stars: ["51 Peg"]
+stargroups: ["exoplanet"]
+stardata: 
+  exoplanet: ["51 Peg"]
 catalogs: ["messier", "ngc", "caldwell", "other"]
 object_sections:
   messier: ["15"]

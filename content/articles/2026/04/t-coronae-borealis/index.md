@@ -11,6 +11,9 @@ description: "A look at the upcoming eruption of the famous recurring nova in Co
 constellations: ["Corona Borealis"]
 
 # Metadata Panel Data
+stargroups: ["variable"]
+stardata:
+  variable: ["T CrB"]
 object_info:
   object_type: "Recurring Nova"
   constellation: "Corona Borealis"

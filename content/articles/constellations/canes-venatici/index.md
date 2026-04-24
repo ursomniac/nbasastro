@@ -18,7 +18,10 @@ profile_data:
   "Area": 465 sq degrees (52nd)
 
 # Taxonomy refs:
-stars: ["Y CVn", "TON 618"]
+stargroups: ["variable", "exotic"]
+stardata: 
+  variable: ["Y CVn"]
+  exotic: ["TON 618"]
 catalogs: ["messier", "caldwell", "ngc"]
 object_sections:
   messier: ["3", "51", "63"]

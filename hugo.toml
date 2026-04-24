@@ -13,9 +13,10 @@ title = "Northern Berkshire Astronomical Society"
   tag = "tags"
   series = "series"
   constellation = "constellations"
-  stars = "stars"
   catalog = "catalogs"
   solarsystem = "solarsystem"
+  stargroups = "stargroups"
+  knowledgetopics = "knowledgetopics"
 
 [permalinks]
   articles = "/articles/:year/:month/:title/"
@@ -33,3 +34,8 @@ title = "Northern Berkshire Astronomical Society"
   [[related.indices]]
     name = "tags"
     weight = 100   # Shared tags are a strong match
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
