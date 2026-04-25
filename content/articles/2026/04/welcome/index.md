@@ -1,5 +1,6 @@
 ---
 title: "Welcome to the NBAS Website"
+thumbnail: "NAPL-small.jpg"
 date: 2026-04-12
 author: "NBAS Staff"
 byline: "A new way to stay connected with the stars in the Northern Berkshires."

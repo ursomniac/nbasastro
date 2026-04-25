@@ -1,5 +1,6 @@
 ---
 title: "Identifying Clusters in the Andromeda Galaxy"
+thumbnail: "m31_thumb.jpg"
 date: 2026-04-23
 authors: ["bob-donahue"]
 byline: "Finding DSOs in DSOs"

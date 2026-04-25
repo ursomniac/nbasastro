@@ -1,5 +1,6 @@
 ---
 title: "T Coronae Borealis: The Blaze Star Prepares to Erupt"
+thumbnail: "system2.jpg"
 date: 2026-04-15
 authors: ["bob-donahue"]
 byline: "The Blaze Star prepares to erupt!"
