@@ -42,7 +42,7 @@ def sync():
 
     # 4. Save the expanded list
     os.makedirs("data", exist_ok=True)
-    with open("assets/calendar/calendar_nbas.txt", "w") as f:
+    with open("data/calendar_nbas.txt", "w") as f:
         f.write("\n".join(formatted_entries))
     
     print(f"SUCCESS: Generated {len(formatted_entries)} upcoming events.")

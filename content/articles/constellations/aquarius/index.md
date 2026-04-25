@@ -11,7 +11,7 @@ thumbnail: "icon.jpg"
 
 profile_data:
   "Abbreviation": AQR
-  "Genitive": Aquarius
+  "Genitive": Aquarii
   "Best Viewed": Fall
   "Hemisphere": Equatorial
   "Brightest Star": Sadalsuud (&beta; Aqr)

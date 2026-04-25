@@ -11,7 +11,7 @@ thumbnail: "icon.jpg"
 
 profile_data:
   "Abbreviation": CMA
-  "Genitive": Canis Major
+  "Genitive": Canis Majoris
   "Best Viewed": Winter
   "Hemisphere": Southern
   "Brightest Star": Sirius (&alpha;)

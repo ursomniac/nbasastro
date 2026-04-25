@@ -11,8 +11,8 @@ thumbnail: "icon.jpg"
 
 profile_data:
   "Abbreviation": ORI
-  "Genitive": Orion
-  "Best Viewed": Fall
+  "Genitive": Orionis
+  "Best Viewed": Winter
   "Hemisphere": Equatorial
   "Brightest Star": Betelgeuse (&alpha;)
   "Area": 1,231 sq degrees (4th)

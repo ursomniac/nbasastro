@@ -11,7 +11,7 @@ thumbnail: "icon.jpg"
 
 profile_data:
   "Abbreviation": GEM
-  "Genitive": Gemini
+  "Genitive": Geminorum
   "Best Viewed": Winter
   "Hemisphere": Northern
   "Brightest Star": Pollux (&beta;)
@@ -24,7 +24,7 @@ stardata:
 catalogs: ["messier", "caldwell", "ngc", "other"]
 object_sections:
   messier: ["35"]
-  calwell: ["39"]
+  caldwell: ["39"]
   ngc: ["2158", "2371", "2392", "2420"]
   other: ["IC 443"]
 

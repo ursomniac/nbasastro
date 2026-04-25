@@ -11,7 +11,7 @@ thumbnail: "icon.jpg"
 
 profile_data:
   "Abbreviation": PEG
-  "Genitive": Pegasus
+  "Genitive": Pegasi
   "Best Viewed": Fall
   "Hemisphere": Northern
   "Brightest Star": Enif (&epsilon; Peg)
