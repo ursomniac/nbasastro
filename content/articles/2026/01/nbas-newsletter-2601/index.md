@@ -3,7 +3,7 @@ title: "January 2026 Newsletter"
 date: "2026-01-07"
 authors: []
 series: ["nbas-newsletter"]
-byline: "All about Jupiter!  Mercury appears briefly."
+byline: "Comparing supergiant stars: Betelgeuse and Rigel"
 tags: ["Supergiant Stars"]
 
 # Taxonomy refs:
@@ -44,9 +44,7 @@ object_sections:
 
 ## The Supergiants of Orion
 
-{{< nbas-image align="right" width="350" 
-src="Orion-region.jpg" alt="Orion" 
->}}
+{{< nbas-image align="right" width="350" src="Orion-region.jpg" alt="Orion" >}}
 The two brightest stars in Orion look very different in the sky:
 very orangey-red Betelgeuse as Orion’s shoulder, blue-white Rigel
 as his knee. But they’re more alike than you think!  Both are
@@ -114,7 +112,6 @@ Still, no matter what part of our Galaxy you observe (even the outer
 halo with its globular clusters) - there are fantastic objects to
 discover and appreciate!
 
-m_45-93T-PIXRCADBEGHS-mosaic-square.jpg
 {{< clear >}}
 ## This Month's Image
 
