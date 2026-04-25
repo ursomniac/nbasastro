@@ -121,7 +121,7 @@ spirals, there does not appear to be a central black hole. 
 
 {{< clear >}}
 
-### Emmbedded Star-Forming Region
+### Embedded Star-Forming Region
 
 {{< nbas-image src="ngc_604.jpg" width="400" align="right"
 caption="Bob Donahue, NBAS" >}}
