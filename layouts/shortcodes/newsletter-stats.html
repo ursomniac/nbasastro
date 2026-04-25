@@ -1,0 +1,36 @@
+{{ $moon := .Get "moon" | transform.Unmarshal }}
+{{ $planets := .Get "planets" | transform.Unmarshal }}
+{{ $dso := .Get "dso" | transform.Unmarshal }}
+
+<section class="newsletter-stats-grid">
+  <!-- THE MOON -->
+  <div class="stat-column">
+    <h4>The Moon</h4>
+    <ul class="stat-list">
+      {{ range $moon }}
+      <li><span class="icon">{{ .i }}</span> {{ .d }}: {{ .v }}</li>
+      {{ end }}
+    </ul>
+  </div>
+
+  <!-- PLANETS -->
+  <div class="stat-column">
+    <h4>Planets</h4>
+    <ul class="stat-list">
+      {{ range $planets }}
+      <li><strong>{{ .p }}:</strong> {{ .o }}</li>
+      {{ end }}
+    </ul>
+  </div>
+
+  <!-- DEEP SKY -->
+  <div class="stat-column">
+    <h4>Deep-Sky Objects</h4>
+    {{ range $k, $v := $dso }}
+    <div class="dso-sub">
+      <strong>{{ $k | title }}:</strong> {{ $v }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+

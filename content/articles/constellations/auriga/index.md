@@ -1,7 +1,7 @@
 ---
 layout: "single-constellation"
 title: "Auriga"
-date: 2026-01-07
+date: 2026-02-04
 authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Auriga"]

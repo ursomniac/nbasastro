@@ -8,6 +8,9 @@ title = "Northern Berkshire Astronomical Society"
   logo = "images/nbas-grey.png"
   site_version = "v0.16.2"
 
+[frontmatter]
+  date = ["lastmod", "date", "publishDate"]
+
 [taxonomies]
   author = "authors"
   tag = "tags"

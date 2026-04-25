@@ -158,4 +158,24 @@
     font-size: 0.9rem;
 }
 
+.float-table-left {
+    float: left; /* Change to 'right' if preferred */
+    margin: 0 20px 10px 0; /* Adds breathing room between table and text */
+    max-width: 300px; /* Prevents table from hogging the width */
+}
+
+.float-table-right {
+    float: right; /* Change to 'right' if preferred */
+    margin: 0 20px 10px 0; /* Adds breathing room between table and text */
+    max-width: 300px; /* Prevents table from hogging the width */
+}
+
+/* Mobile Fix: Tables should NOT float on small screens */
+@media (max-width: 600px) {
+    .float-table {
+        float: none;
+        margin: 10px auto;
+        max-width: 100%;
+    }
+}
 

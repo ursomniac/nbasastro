@@ -36,6 +36,13 @@
   {{- $styles := $style_slice | resources.Concat "css/main.css" | minify | fingerprint -}}
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
 
+{{/* for Newsletters only */}}
+{{ if .HasShortcode "newsletter-stats" }}
+  {{ with resources.Get "css/newsletter-stats.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+  {{ end }}
+{{ end }}
+
   {{/* PAGEFIND UI ASSETS */}}
   <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
   <script src="/pagefind/pagefind-ui.js"></script>
