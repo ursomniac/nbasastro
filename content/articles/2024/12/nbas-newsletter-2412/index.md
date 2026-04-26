@@ -3,7 +3,7 @@ title: "December 2024 Newsletter"
 date: "2024-12-04"
 authors: []
 series: ["nbas-newsletter"]
-byline: "Looking at Mars, and poking around Gemini"
+byline: "Venus and the Moon, and poking around Taurus"
 tags: []
 
 # Taxonomy refs4
