@@ -71,3 +71,128 @@
     cursor: not-allowed;
 }
 
+/* ADDED v0.16.3 */
+.hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+.hub-card {
+    background: var(--space-blue, #1a2635);
+    border: 1px solid var(--border-soft);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 4px;
+}
+.hub-summary {
+    color: var(--text-main);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+.hub-link {
+    color: var(--gold-link) !important;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.hub-count {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    white-space: nowrap; /* PRIMARY FIX: Prevents breaking over two lines */
+    border-top: 1px solid var(--border-soft);
+    padding-top: 0.75rem;
+}
+
+/* --- TAG INDEX STYLING (Add to assets/css/hubs.css) --- */
+
+.tag-group {
+    margin-bottom: 2.5rem;
+}
+
+.tag-letter-header {
+    scroll-margin-top: 100px; /* Isolated offset for jump-links only */
+}
+
+.tag-pill-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows tags to wrap L -> R instead of just stacking */
+    gap: 12px;
+}
+
+.tag-pill {
+    background: var(--tag-cyan-bg, #102027);
+    border: 1px solid var(--tag-cyan, #78909c);
+    padding: 6px 14px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none !important; /* Removes the underline from global reset */
+    transition: all 0.2s ease;
+}
+
+.tag-pill:hover {
+    border-color: var(--gold-base);
+    background: var(--space-blue);
+    transform: translateY(-1px);
+}
+
+.tag-name {
+    color: var(--text-pure) !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.tag-count {
+    color: var(--gold-dim);
+    font-size: 0.75rem;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1px 6px;
+    border-radius: 10px;
+}
+
+.tag-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 3rem;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    border: 1px solid var(--border-soft);
+    justify-content: flex-start;
+}
+
+.nav-letter {
+    background: var(--tag-cyan-bg);
+    border: 1px solid var(--border-soft);
+    color: var(--gold-link) !important;
+    padding: 4px 12px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-weight: bold;
+    text-decoration: none !important;
+    font-size: 0.9rem;
+    transition: all 0.1s ease;
+}
+
+.nav-letter:hover {
+    background: var(--space-blue);
+    border-color: var(--gold-base);
+    color: var(--text-pure) !important;
+    transform: translateY(-1px);
+}
+
+
+.nav-separator {
+    color: var(--border-soft);
+    font-family: monospace;
+    font-weight: normal;
+    opacity: 0.6;
+}
+

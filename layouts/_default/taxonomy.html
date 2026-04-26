@@ -1,56 +1,86 @@
 {{ define "main" }}
-{{ with resources.Get "css/constellations.css" | minify }}
-  <link rel="stylesheet" href="{{ .RelPermalink }}">
-{{ end }}
 <section class="nbas-series-list">
-  
-  {{/* 1. THE HEADER - Manual Override for NBAS */}}
+  {{/* 1. THE HEADER */}}
   <h1>
     {{ $t := .Title | lower }}
-    {{ if in $t "nbas" }}
-      NBAS Newsletter
-    {{ else if eq $t "series" }}
-      Article Series
-    {{ else }}
-      {{ .Title | title }}
-    {{ end }}
+    {{ if in $t "nbas" }}NBAS Newsletter{{ else if eq $t "series" }}Article Series{{ else }}{{ .Title | title }}{{ end }}
   </h1>
-
   <hr class="section-divider">
 
-  {{/* 2. THE LOOP */}}
   <div class="list-container">
     {{ if eq .Kind "taxonomy" }}
-      {{ range .Data.Terms }}
-        <div class="article-card" style="margin-bottom: 20px;">
-          {{ $termTitle := .Page.LinkTitle | lower }}
-          <a href="{{ .Page.RelPermalink }}" style="color: #ffcc00; font-size: 1.5rem; font-weight: bold; text-decoration: underline;">
-            {{ if in $termTitle "nbas" }}NBAS Newsletter{{ else }}{{ .Page.LinkTitle | title }}{{ end }}
-          </a>
-          <span class="card-metadata" style="margin-left: 15px; color: #888;">Series Archive</span>
+      
+      {{ if eq .Data.Plural "tags" }}
+        {{/* TAGS: ALPHABETICAL PILL GRID */}}
+{{/* 2. THE JUMP-LINKS (A-Z Navigation) */}}
+
+<nav class="tag-nav">
+  {{ range .Data.Terms.Alphabetical }}
+    {{ $letter := substr .Page.Title 0 1 | upper }}
+    {{ $.Scratch.SetInMap "alphabet" $letter true }}
+  {{ end }}
+  
+  {{ range $letter, $exists := ($.Scratch.Get "alphabet") }}
+    <a href="#tag-{{ $letter }}" class="nav-letter">{{ $letter }}</a>
+  {{ end }}
+</nav>
+
+
+        <div class="tag-index-wrapper">
+          {{ $currentLetter := "" }}
+          {{ range .Data.Terms.Alphabetical }}
+            {{ $firstChar := substr .Page.Title 0 1 | upper }}
+            
+            {{ if ne $firstChar $currentLetter }}
+              {{ if ne $currentLetter "" }}</div></div>{{ end }}
+              <div class="tag-group">
+<h2 class="tag-letter-header" id="tag-{{ $firstChar }}">{{ $firstChar }}</h2>
+                <div class="tag-pill-container">
+              {{ $currentLetter = $firstChar }}
+            {{ end }}
+
+            <a href="{{ .Page.RelPermalink }}" class="tag-pill">
+              <span class="tag-name">{{ .Page.Title }}</span>
+              <span class="tag-count">{{ .Count }}</span>
+            </a>
+          {{ end }}
+          {{ if ne $currentLetter "" }}</div></div>{{ end }}
+        </div>
+
+      {{ else }}
+        {{/* SERIES & OTHERS: HUB CARDS */}}
+        <div class="hub-grid">
+          {{ range .Data.Terms }}
+            <div class="hub-card">
+              <div class="hub-info">
+                <a href="{{ .Page.RelPermalink }}" class="hub-link">{{ .Page.Title }}</a>
+                {{ with .Page.Content }}
+                  <div class="hub-summary">{{ . }}</div>
+                {{ end }}
+              </div>
+              <span class="hub-count">{{ .Count }} Articles</span>
+            </div>
+          {{ end }}
         </div>
       {{ end }}
 
     {{ else }}
-    	{{ $currentTerm := .Data.Term }}
-    	{{ $pages := .Pages }}
-    	{{ if eq .Title "Constellation Highlights" }}
-		<div class="top-matter-box">
-			<div class="top-matter-content">
-		        Each Highlight page has some constellation history, 
-			description, and a list of a few Deep Sky Objects (DSOs) 
-			to check out!
-    			</div>
-		</div>
-        	{{ $pages = .Pages.ByTitle }}
-    	{{ end }}
-    	{{ range $pages }}
-      		{{ partial "article-card.html" (dict "context" . "currentTerm" $currentTerm "catalogPage" false) }}
-    	{{ end }}
-	{{ end }}
-
+      {{/* RETAINED CONTENT: The Article Listings (Term Pages) */}}
+      {{ $currentTerm := .Data.Term }}
+      {{ $pages := .Pages }}
+      {{ if eq .Title "Constellation Highlights" }}
+        <div class="top-matter-box">
+          <div class="top-matterserei-content">
+            Each Highlight page has some constellation history, description, and a list of a few Deep Sky Objects (DSOs) to check out!
+          </div>
+        </div>
+        {{ $pages = .Pages.ByTitle }}
+      {{ end }}
+      {{ range $pages }}
+        {{ partial "article-card.html" (dict "context" . "currentTerm" $currentTerm "catalogPage" false) }}
+      {{ end }}
+    {{ end }}
   </div>
-
 </section>
 {{ end }}
 
