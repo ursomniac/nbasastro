@@ -41,7 +41,7 @@
 
             <a href="{{ .Page.RelPermalink }}" class="tag-pill">
               <span class="tag-name">{{ .Page.Title }}</span>
-              <span class="tag-count">{{ .Count }}</span>
+              <span class="tag-count">{{ len .Pages }}</span>
             </a>
           {{ end }}
           {{ if ne $currentLetter "" }}</div></div>{{ end }}

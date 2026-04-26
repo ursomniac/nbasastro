@@ -26,13 +26,15 @@ object_info:
 {{< nbas-image src="system.jpg" align="left" width="350px" caption="T CrB drawing" >}}
 T Coronae Borealis is one of the few known recurring novae...
 
+{{< clear >}}
 ### Observation History
 The star was first noticed in an outburst for certain in 1866 during an outburst by John Birmingham: 
 earlier historical records may have also recorded it in 1787, and as far back as 1217.   
 The outburst in 1946 (seen by a Welsh teenager) led to the hypothesis that it was a recurrent nova, 
 with the expectation that another outburst might happen before 2027.
-{{< nbas-image src="1946_lightcurve.png" align="left" width="350px" caption="1946 Light Curve" >}}
+{{< nbas-image src="1946_lightcurve.png" caption="1946 Light Curve" >}}
 
+{{< clear >}}
 ### The System
 T CrB is a binary system with a red giant star and a white dwarf, in a nearly-circular orbit.
 The separation is about the same as the Earth and the Sun (0.96 AU), 
@@ -80,7 +82,9 @@ therefore, "it happens when it happens".
 
 #### So - when will it happen?
 
-{{< nbas-image src="recent_obs-seestar.jpg" align="left" width="350px" caption="T CrB drawing" >}}
+{{< nbas-image src="recent_obs-seestar.jpg" align="right" width="350px" 
+caption="T CrB drawing" >}}
+
 An interesting study of the timings of recorded outbursts 
 done by Jean Schneider shows that they appear to happen at the same orbital _phase_ (which is odd,
 given that the binary's orbit is nearly circular), give or take a month.   The recorded eruptions
@@ -88,8 +92,10 @@ seem to happen every 125-130 orbits.
 
 Orbit 129 happens on June 27, 2026.   
 
+{{< clear >}}
 #### Or not?
 
+{{< nbas-image src="system2.jpg" align="left" width="350px" caption="T CrB drawing" >}}
 Remember that no eruptions are recorded between 1787 back to 1217. 
 Telescopic observations wouldn't be possible before the early-to-mid 17th century, and while it defintely is 
 visible to the naked eye during an eruption, they only last for a day or so.
@@ -100,8 +106,8 @@ Or - perhaps - the 80-year-ish "spacing" that we've seen since 1787 is a coincid
 some thinking that it might be a triple system, and the third object has an 80-year orbit, so when it's at its 
 closest approach, that might contribute to a flare up - but no third star has been observed.
 
-{{< nbas-image src="system2.jpg" align="left" width="350px" caption="T CrB drawing" >}}
 
+{{< clear >}}
 #### Stellar Activity?
 
 Another possibly has to do with stellar activity.   Cool stars, like the red giant have surface activity: starspots, 
@@ -125,7 +131,8 @@ peak brightness), it's just a little SE of the central star of the Northern Crow
 With a telescope, here's a map showing faint nearby stars.  The numbers are the magnitudes with 
 the decimal point removed (so "108" would be mag 10.8).
 
-{{< nbas-image src="map2.jpg" align="right" width="350px" caption="Finding chart for T CrB." >}}
+{{< clear >}}
+{{< nbas-image src="map2.jpg" align="left" width="350px" caption="Finding chart for T CrB." >}}
 
 So, Corona Borealis being a late-Spring constellations just East of Boötes rises just after sunset, making 
 continued monitoring of the star convenient.   Keep you eyes peeled!  The "fuzzy" window of opportunity 
