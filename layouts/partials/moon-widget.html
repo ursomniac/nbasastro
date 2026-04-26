@@ -8,28 +8,60 @@
 </div>
 
 <script>
-    function drawMoon() {
-        const now = Math.floor(Date.now() / 1000);
-        const newMoon = 1704944400; 
-        const cycle = 2551443;
-        const P = ((now - newMoon) % cycle) / cycle;
-        const illumination = ((1 - Math.cos(2 * Math.PI * P)) / 2) * 100;
-        let W = (P <= 0.5) ? 48 * Math.cos(Math.PI * (P / 0.5)) : 48 * Math.cos(Math.PI * ((P - 0.5) / 0.5));
-        let sweep = (P <= 0.5) ? 1 : 0;
-        const svgHTML = `<svg viewBox="0 0 100 100" class="moon-svg"><circle cx="50" cy="50" r="48" fill="#0d1421" /><path d="M 50 2 A ${Math.abs(W)} 48 0 0 ${sweep} 50 98 A 48 48 0 0 ${sweep === 1 ? 0 : 1} 50 2" fill="#c5a059" /></svg>`;
-        document.getElementById('moon-container').innerHTML = svgHTML;
-        document.getElementById('js-moon-illum').innerText = illumination.toFixed(1);
-        document.getElementById('js-moon-age').innerText = (P * 29.53).toFixed(2);
-        let name = "New Moon";
-        if (P < 0.03) name = "New Moon";
-        else if (P < 0.22) name = "Waxing Crescent";
-        else if (P < 0.28) name = "First Quarter";
-        else if (P < 0.47) name = "Waxing Gibbous";
-        else if (P < 0.53) name = "Full Moon";
-        else if (P < 0.72) name = "Waning Gibbous";
-        else if (P < 0.78) name = "Last Quarter";
-        else name = "Waning Crescent";
-        document.getElementById('js-moon-name').innerText = name;
-    }
-    drawMoon();
+function drawMoon() {
+    const now = Math.floor(Date.now() / 1000);
+    // Reference New Moon: Jan 11, 2024
+    const newMoon = 1704944400; 
+    const cycle = 2551443; 
+    
+    // P = Phase (0 to 1)
+    let P = ((now - newMoon) % cycle) / cycle;
+    if (P < 0) P += 1;
+
+    const illumination = ((1 - Math.cos(2 * Math.PI * P)) / 2) * 100;
+    
+    // R is our radius. W is the horizontal radius of the terminator ellipse.
+    const R = 48;
+    // This cosine handles the transition from Crescent -> Quarter -> Gibbous
+    const W = Math.abs(R * Math.cos(P * 2 * Math.PI));
+    
+    // Determine which side of the moon is lit (Sweep 1 = Right, 0 = Left)
+    const side = P <= 0.5 ? 1 : 0;
+    
+    // Determine if the terminator ellipse is concave (crescent) or convex (gibbous)
+    // Waxing: Crescent (0-0.25) is sweep 0, Gibbous (0.25-0.5) is sweep 1
+    // Waning: Gibbous (0.5-0.75) is sweep 0, Crescent (0.75-1) is sweep 1
+    const terminatorSweep = (P <= 0.25 || (P > 0.5 && P <= 0.75)) ? 0 : 1;
+
+    const svgHTML = `
+    <svg viewBox="0 0 100 100" class="moon-svg">
+        <!-- Background (Shadow) -->
+        <circle cx="50" cy="50" r="${R}" fill="#1a2a44" />
+        
+        <!-- Illuminated Path -->
+        <path d="M 50 ${50 - R}
+                 A ${R} ${R} 0 0 ${side} 50 ${50 + R}
+                 A ${W} ${R} 0 0 ${terminatorSweep} 50 ${50 - R}"
+              fill="#f8d44e" />
+    </svg>`;
+
+    document.getElementById('moon-container').innerHTML = svgHTML;
+    document.getElementById('js-moon-illum').innerText = illumination.toFixed(1);
+    document.getElementById('js-moon-age').innerText = (P * 29.53).toFixed(2);
+
+    let name = "New Moon";
+    if (P < 0.03 || P > 0.97) name = "New Moon";
+    else if (P < 0.22) name = "Waxing Crescent";
+    else if (P < 0.28) name = "First Quarter";
+    else if (P < 0.47) name = "Waxing Gibbous";
+    else if (P < 0.53) name = "Full Moon";
+    else if (P < 0.72) name = "Waning Gibbous";
+    else if (P < 0.78) name = "Last Quarter";
+    else name = "Waning Crescent";
+    
+    document.getElementById('js-moon-name').innerText = name;
+}
+
+drawMoon();
 </script>
+
