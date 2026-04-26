@@ -1,181 +1,63 @@
-/* --- V0.10.2: FINAL TABLE GRID RESTORATION --- */
+/* --- V0.11.0: CLEANSED TABLE SYSTEM --- */
+
+/* 1. GLOBAL ARTICLE TABLES */
 .article-body table {
     width: 100%;
     border-collapse: collapse;
     margin: 2rem 0;
     border: 1px solid var(--border-soft);
 }
-
 .article-body th {
     background-color: var(--space-blue);
     color: var(--gold-dim);
     padding: 10px;
     border: 1px solid var(--border-soft);
 }
-
+.article-body td {
+    padding: 8px;
+    border: 1px solid var(--border-soft);
+    color: var(--text-main);
+}
 .article-body::after {
     content: "";
     display: table;
     clear: both;
 }
 
-.article-body td {
-    padding: 8px;
-    border: 1px solid var(--border-soft);
-    color: var(--text-main);
+.float-table-right { 
+    float: right; 
+    margin-left: 1.5rem; 
 }
 
-/* 2. OBJECT SPECS TABLE (Sidebar) */
-/* --- V0.10.7: CONSOLIDATED TWO-COLUMN TABLE --- */
-
-/* 1. Main Wrapper */
-.object-specs-wrapper {
-    float: right;
-    width: 420px; /* Narrowed slightly for better fit */
-    max-width: 100%;
-    margin: 0 0 15px 20px; /* Reduced bottom/left margin */
-    background: #0a0f1e; 
-    border: 1px solid var(--border-soft);
-    border-top: 3px solid var(--logo-gold);
-    padding: 12px 15px; /* Tightened internal padding */
-    border-radius: 4px;
+.float-table-left { 
+    float: left; 
+    margin-right: 1.5rem; 
 }
 
-/* 2. Header */
-.specs-title {
-    color: var(--logo-gold);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    margin: 0 0 8px 0;
-    border-bottom: 1px solid var(--border-soft);
-    padding-bottom: 5px;
-}
-
-/* 3. Table Structure (Standard Two-Column) */
-.specs-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.specs-table th {
-    text-align: left;
-    color: var(--text-muted);
-    font-size: 0.7rem; /* Smaller labels */
-    text-transform: uppercase;
-    padding: 5px 10px 5px 0; /* Reduced vertical padding */
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    width: 35%;
-    font-weight: normal;
-}
-
-.specs-table td {
-    text-align: right;
-    color: var(--gold-base);
-    font-size: 0.9rem; /* Smaller values */
-    padding: 5px 0; /* Reduced vertical padding */
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    line-height: 1.2;
-}
-
-/* Remove bottom border from the last row */
-.specs-table tr:last-child th,
-.specs-table tr:last-child td {
-    border-bottom: none;
-}
-
-
-/* Mobile Breakpoint */
-@media (max-width: 768px) {
-    .object-specs-wrapper {
-        float: none;
-        width: 100%;
-        margin: 20px 0;
-    }
-}
-
-/* --- V0.10.9: DOCUMENT LIBRARY STYLING --- */
-
-.library-container h2 {
-    color: var(--logo-gold);
-    border-bottom: 1px solid var(--border-soft);
-    padding-bottom: 10px;
-    margin: 40px 0 20px 0;
-}
-
+/* 3. DOCUMENT LIBRARY */
 .library-container table {
     width: 100%;
     border-collapse: collapse;
-    background: rgba(255, 255, 255, 0.02); /* Subtle base tint */
+    background: rgba(255, 255, 255, 0.02);
     margin-bottom: 40px;
     border: 1px solid var(--border-soft);
 }
-
-/* 1. Header Styling: Muted & Professional */
 .library-container th {
-    background: #0d1425; /* Deeper blue than content */
+    background: #0d1425;
     color: var(--text-muted);
     font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: left;
     padding: 12px 15px;
     border-bottom: 2px solid var(--border-soft);
 }
-
 .library-container td {
     padding: 10px 15px;
-    background-color: rgba(10, 15, 30, 0.4); /* Fills the cells */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03); /* Subtle separator */
-    vertical-align: middle;
-    color: #b0b8c4; /* Mutes the "blazing white" text */
+    background-color: rgba(10, 15, 30, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    color: #b0b8c4;
 }
 
-/* Link Styling */
-.library-container a {
-    color: var(--gold-base);
-    text-decoration: none !important; /* Removes underlines */
-    font-weight: 500;
-    transition: color 0.2s ease;
-}
-
-.library-container a:hover {
-    color: var(--logo-gold);
-    text-decoration: none !important;
-}
-
-/* 4. File Size: Less Prominent */
-.file-size {
-    color: #666; /* Darker gray to recede into background */
-    font-size: 0.75rem;
-    font-weight: normal;
-    margin-left: 5px;
-}
-
-/* 5. Icons: Keep Gold but soft */
-.file-icon {
-    margin-right: 8px;
-    color: var(--gold-dim);
-    font-size: 0.9rem;
-}
-
-.float-table-left {
-    float: left; /* Change to 'right' if preferred */
-    margin: 0 20px 10px 0; /* Adds breathing room between table and text */
-    max-width: 300px; /* Prevents table from hogging the width */
-}
-
-.float-table-right {
-    float: right; /* Change to 'right' if preferred */
-    margin: 0 20px 10px 0; /* Adds breathing room between table and text */
-    max-width: 300px; /* Prevents table from hogging the width */
-}
-
-/* Mobile Fix: Tables should NOT float on small screens */
-@media (max-width: 600px) {
-    .float-table {
-        float: none;
-        margin: 10px auto;
-        max-width: 100%;
-    }
+/* 4. RESPONSIVE */
+@media (max-width: 768px) {
 }
 

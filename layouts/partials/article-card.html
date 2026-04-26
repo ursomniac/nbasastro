@@ -1,88 +1,84 @@
 <div class="article-card">
-  <div class="card-feature-icon">
-    {{ partial "feature-icon.html" .context }}
-  </div>
-  <div class="card-content">
+    <div class="card-feature-icon">
+        {{ partial "feature-icon.html" .context }}
+    </div>
 
-<div class="card-facets" style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
-  {{ $series := .context.Params.series }}
-  
-  {{ range $series }}
-    {{/* This reaches out to find the 'Definition' file we just made */}}
-    {{ $termPage := site.GetPage (printf "series/%s" (. | urlize)) }}
-    
-    <a href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}#{{ end }}" 
-       class="facet-badge series-badge {{ . | urlize }}">
-      {{/* This displays the 'title' from the _index.md file */}}
-      {{ if $termPage }}{{ $termPage.LinkTitle }}{{ else }}{{ . | humanize }}{{ end }}
-    </a>
-  {{ end }}
-
-  {{/* 3. Fallback for articles with NO series metadata */}}
-</div>
-
-
-    <a href="{{ .context.RelPermalink }}" class="card-title-link">
-      <h2 class="card-title">{{ .context.Title }}</h2>
-    </a>
-
-{{/* STABILIZED OBJECT MATCHING: CSS COMPLIANT REVISION */}}
-{{/* STABILIZED OBJECT MATCHING: STARS & CATALOGS */}}
-{{ with .currentTerm }}
-  <div class="card-object-matches">
-    {{ $listTerm := . }}
-    
-    {{/* 1. CHECK CATALOGS & SOLAR SYSTEM (Existing Logic) */}}
-    {{ range $mapName, $objList := $.context.Params.object_sections }}
-      {{ if eq $listTerm $mapName }}
-        {{ if ne $mapName "other" }}
-          {{ $termPage := $.context.Site.GetPage (printf "catalogs/%s" $mapName) }}
-          {{ if not $termPage }}{{ $termPage = $.context.Site.GetPage (printf "solarsystem/%s" $mapName) }}{{ end }}
-          <span class="match-label">{{ if $termPage }}{{ $termPage.Title }}{{ else }}{{ $mapName | upper }}{{ end }}:</span>
+    <div class="card-content">
+        {{/* 1. SERIES BADGES */}}
+        {{ with .context.Params.series }}
+        <div class="card-facets">
+            {{ range . }}
+                {{ $termPage := site.GetPage (printf "series/%s" (. | urlize)) }}
+                <a href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}#{{ end }}" class="facet-badge series-badge {{ . | urlize }}">
+                    {{ if $termPage }}{{ $termPage.LinkTitle }}{{ else }}{{ . | humanize }}{{ end }}
+                </a>
+            {{ end }}
+        </div>
         {{ end }}
-        {{ range $idx, $id := $objList }}{{ if gt $idx 0 }}, {{ end }}{{ $id }}{{ end }}
-      {{ end }}
-    {{ end }}
 
-    {{/* 2. CHECK STAR GROUPS (New Logic for v0.16.2) */}}
-    {{ range $mapName, $objList := $.context.Params.stardata }}
-      {{ if eq $listTerm $mapName }}
-        <span class="match-label">Stars:</span>
-        {{ range $idx, $id := $objList }}{{ if gt $idx 0 }}, {{ end }}{{ $id }}{{ end }}
-      {{ end }}
-    {{ end }}
-  </div>
-{{ end }}
+        <a href="{{ .context.RelPermalink }}" class="card-title-link">
+            <h2 class="card-title">{{ .context.Title }}</h2>
+        </a>
 
+        {{/* 2. OBJECT DATA (Targeted by currentTerm) */}}
+        <div class="card-object-matches">
+            {{ $term := .currentTerm }}
+            
+            {{/* Check Stars */}}
+            {{ with index .context.Params.stardata $term }}
+                <div class="match-row">
+                    <span class="match-label">STARS:</span>
+                    <span class="match-value">{{ range $i, $id := . }}{{ if $i }}, {{ end }}{{ $id }}{{ end }}</span>
+                </div>
+            {{ end }}
 
-<div class="card-metadata">
-  By 
-  {{ if .context.Params.authors }}
-    {{ range $index, $item := .context.Params.authors }}
-      {{ if $index }}, {{ end }}
-      {{ $p := site.GetPage (printf "authors/%s" ($item | urlize)) }}
-      {{ if and $p (ne $p.Kind "taxonomy") }}
-        <a href="{{ $p.RelPermalink }}" style="color: #ffcc00; font-weight: bold;">{{ $p.Title }}</a>
-      {{ else }}
-        {{ $item | replace "-" " " | title | replace "Nbas" "NBAS" }}
-      {{ end }}
-    {{ end }}
-  {{ else }}
-    NBAS
-  {{ end }}
-  | {{ .context.PublishDate.Format "Jan 2, 2006" }}
-</div>
+            {{/* Check Catalogs/Solar System */}}
+            {{ with index .context.Params.object_sections $term }}
+                <div class="match-row">
+                    <span class="match-label">{{ $term | upper }}:</span>
+                    <span class="match-value">{{ range $i, $id := . }}{{ if $i }}, {{ end }}{{ $id }}{{ end }}</span>
+                </div>
+            {{ end }}
 
-    {{ with .context.Params.byline }}
-      <p class="card-byline">{{ . }}</p>
-    {{ end }}
+            {{/* Homepage/Feed Fallback: Show all if no term is provided */}}
+            {{ if not $term }}
+                {{ range $cat, $objs := .context.Params.object_sections }}
+                <div class="match-row">
+                    <span class="match-label">{{ $cat | upper }}:</span>
+                    <span class="match-value">{{ range $i, $id := $objs }}{{ if $i }}, {{ end }}{{ $id }}{{ end }}</span>
+                </div>
+                {{ end }}
+            {{ end }}
+        </div>
 
-    {{ with .context.Params.tags }}
-      <div class="card-tags" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
-        {{ range . }}
-          <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag-link" style="font-family: monospace; font-size: 0.8rem;">#{{ . }}</a>
+        {{/* 3. METADATA (Fixed: Space after 'By' & formatted slugs) */}}
+        <div class="card-metadata">
+            By&nbsp;
+            {{- if .context.Params.authors -}}
+                {{- range $i, $a := .context.Params.authors -}}
+                    {{- if $i }}, {{ end -}}
+                    {{- $p := site.GetPage (printf "authors/%s" ($a | urlize)) -}}
+                    <a href="{{ if $p }}{{ $p.RelPermalink }}{{ else }}#{{ end }}" class="author-link">
+                        {{- if $p }}{{ $p.Title }}{{ else }}{{ $a | replace "-" " " | title | replace "Nbas" "NBAS" }}{{ end -}}
+                    </a>
+                {{- end -}}
+            {{- else -}}
+                <span class="author-link">NBAS</span>
+            {{- end }} | {{ .context.PublishDate.Format "Jan 2, 2006" }}
+        </div>
+
+        {{ with .context.Params.byline }}
+            <p class="card-byline">{{ . }}</p>
         {{ end }}
-      </div>
-    {{ end }}
-  </div>
+
+        {{/* 4. TAGS */}}
+        {{ with .context.Params.tags }}
+        <div class="card-tags">
+            {{ range . }}
+                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag-link">#{{ . }}</a>
+            {{ end }}
+        </div>
+        {{ end }}
+    </div>
 </div>
+

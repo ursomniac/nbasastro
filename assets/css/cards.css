@@ -123,3 +123,32 @@ h1.article-title {
     border-color: #c5a059;
 }
 
+/* --- V0.13.0: OBJECT DATA UI --- */
+.card-object-matches {
+    margin: 6px 0 10px 0;
+}
+
+.match-row {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 2px;
+}
+
+.match-label {
+    color: var(--text-muted); /* Soft slate-blue/gray */
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-right: 6px;
+}
+
+.match-value {
+    color: var(--text-pure);
+}
+
+.card-metadata {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+

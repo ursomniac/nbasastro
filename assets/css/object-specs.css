@@ -1,0 +1,61 @@
+/* 1. The Wrapper: Adding internal breath, tightening width */
+.nbas-spec-box {
+    background: var(--deep-bg) !important;
+    border: 1px solid var(--border-soft) !important;
+    padding: 20px !important; /* Fixes text crashing into sides */
+    width: 270px !important;  /* Physically closes the label-value gap */
+    float: right;
+    margin: 0 0 1.5rem 1.5rem;
+    box-sizing: border-box;
+}
+
+/* 2. The Header: Killing the excessive vertical waste */
+.nbas-spec-title {
+    color: var(--text-pure) !important;
+    font-size: 0.85rem !important;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 8px !important;
+    margin: 0 0 4px 0 !important; /* Removes gap above table */
+}
+
+/* 3. The Table: Killing global margins and borders */
+.nbas-spec-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 0 !important; /* Removes vertical space above/below */
+    border: none !important;
+}
+
+.nbas-spec-table tr {
+    border-bottom: 1px solid var(--space-blue) !important;
+}
+
+.nbas-spec-table tr:last-child {
+    border-bottom: none !important;
+}
+
+/* 4. The Cells: Tightening vertical gap and column ratio */
+.nbas-spec-table th, 
+.nbas-spec-table td {
+    padding: 10px 0 !important; /* Uniform vertical spacing */
+    background: transparent !important;
+    border: none !important;
+    vertical-align: top;
+}
+
+.nbas-spec-label {
+    color: var(--gold-dim) !important;
+    font-size: 0.65rem !important;
+    text-align: left !important;
+    width: 90px !important; /* Pulls content closer to label */
+    font-weight: bold;
+}
+
+.nbas-spec-value {
+    color: var(--text-pure) !important;
+    font-size: 0.85rem !important;
+    text-align: right !important;
+    line-height: 1.3;
+}
+

@@ -1,0 +1,21 @@
+{{- $align := .Get "align" | default "right" -}}
+{{- with .Page.Params.object_info -}}
+<aside class="nbas-spec-box align-{{ $align }}" data-pagefind-ignore>
+  <h4 class="nbas-spec-title">Object Specs</h4>
+  <table class="nbas-spec-table">
+    {{- range $k, $v := . -}}
+    <tr>
+      <th class="nbas-spec-label">{{ (replace $k "_" " ") | upper }}</th>
+      <td class="nbas-spec-value">
+        {{- if reflect.IsSlice $v -}}
+          {{- range $v -}}{{ . | safeHTML }}<br>{{- end -}}
+        {{- else -}}
+          {{- $v | safeHTML -}}
+        {{- end -}}
+      </td>
+    </tr>
+    {{- end -}}
+  </table>
+</aside>
+{{- end -}}
+
