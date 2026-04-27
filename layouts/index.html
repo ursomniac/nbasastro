@@ -1,20 +1,23 @@
 {{ define "main" }}
-  {{/* 1. ANNOUNCEMENT & WELCOME SECTION */}}
-  <div class="welcome-hero">
-    {{ partial "news_logic.html" . }}
-    <div class="welcome-text">
-      {{ .Content }}
-    </div>
-  </div>
 
-  {{/* 2. ARTICLE LIST SECTION */}}
-  <h2 class="section-title">Latest from the NBAS</h2>
-  <div class="article-list">
-    {{/* Updated to include both 'articles' and 'constellations' */}}
+{{/* 1. IDENTITY SECTION */}}
+<h2 class="section-title">Welcome to the NBAS Website</h2>
+<div class="welcome-panel">
+    <p class="welcome-description">
+        A community of amateur astronomers dedicated to observational research, education, and technical deep-dives into the wonders of the night sky.
+    </p>
+</div>
+
+{{/* 2. NEWSFLASH SECTION */}}
+{{ partial "news_logic.html" . }}
+
+{{/* 3. ARTICLE LIST SECTION */}}
+<h2 class="section-title">Latest from the NBAS</h2>
+<div class="article-list">
     {{ $all_posts := where .Site.RegularPages "Section" "in" (slice "articles" "constellations") }}
     {{ range first 10 ($all_posts.ByPublishDate.Reverse) }}
-      {{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
+        {{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
     {{ end }}
-  </div>
+</div>
 {{ end }}
 

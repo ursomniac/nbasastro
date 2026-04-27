@@ -1,0 +1,61 @@
+/* hero.css */
+
+/* 1. The "Mild Box" for Welcome */
+.welcome-panel {
+    background: rgba(30, 58, 95, 0.2); /* Very subtle midnight blue tint */
+    border: 1px solid rgba(138, 156, 179, 0.15); /* Soft blue-gray border */
+    padding: 20px 30px;
+    border-radius: 8px;
+    margin: 10px 0 25px 0; /* Tight vertical space as requested */
+}
+
+.welcome-description {
+    /* Muted blue-gray: visible but not 'blinding' */
+    color: #a0aec0; 
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+    font-family: inherit; /* Uses site-wide font */
+}
+
+/* 2. Newsflash: Matching width and indent */
+.bulletin-panel {
+    background: rgba(248, 212, 78, 0.03);
+    border: 1px solid rgba(248, 212, 78, 0.1);
+    padding: 12px 30px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.bulletin-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.bulletin-label {
+    color: #f8d44e;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    flex-shrink: 0;
+}
+
+.bulletin-text {
+    color: #8a9cb3;
+    font-size: 0.95rem;
+    border-left: 1px solid rgba(248, 212, 78, 0.2);
+    padding-left: 20px;
+}
+
+/* 3. Section Titles: The Anchor */
+.section-title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 30px 0 10px 0;
+}
+

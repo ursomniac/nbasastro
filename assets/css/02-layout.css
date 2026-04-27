@@ -23,6 +23,19 @@ h1, h2, h3, h4, .dynamic-section-header, .archive-header, .article-title {
     margin-bottom: 1rem; 
 }
 
+/* Unifies the intro text across all landing pages */
+.welcome-text, 
+.section-description {
+    font-size: 1.2rem;
+    color: #8a9cb3; /* Muted blue-gray from your screenshots */
+    font-style: italic;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    max-width: 800px;
+}
+
+
 
 /* --- V0.10.3: PRODUCTION STABLE --- */
 .article-grid-container {
