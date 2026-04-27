@@ -5,90 +5,90 @@
         <button class="events-tab" onclick="switchEvents(event, 'almanac')">Almanac</button>
     </nav>
 
-    {{ $nbas := "" }}
-    {{ with resources.Get "calendar/calendar_nbas.txt" }}{{ $nbas = .Content }}{{ end }}
-    {{ $astro := (resources.Get "calendar/calendar_events.txt").Content }}
-    {{ $alm := (resources.Get "calendar/calendar_almanac.txt").Content }}
+    {{ $start := now.Format "2006-01-02" }}
+    {{ $end := (now.AddDate 0 0 31).Format "2006-01-02" }}
+
+    {{ $nbas := "" }}{{ with resources.Get "calendar/calendar_nbas.txt" }}{{ $nbas = .Content }}{{ end }}
+    {{ $astro := "" }}{{ with resources.Get "calendar/calendar_events.txt" }}{{ $astro = .Content }}{{ end }}
+    {{ $alm := "" }}{{ with resources.Get "calendar/calendar_almanac.txt" }}{{ $alm = .Content }}{{ end }}
 
     <div id="feed-nbas" class="events-content active">
         {{ range (split (trim $nbas "\n") "\n") }}
             {{ $p := split . " | " }}
-            <div class="event-split-row" data-date="{{ index $p 0 }}">
-                <div class="event-chron-col">
-                    <span class="event-date">{{ time.Format "Jan 02" (index $p 0) }}</span>
-                    <span class="event-year">{{ time.Format "2006" (index $p 0) }}</span>
+            {{ $d := index $p 0 }}
+            {{/* NBAS: Show everything from today forward (No 31-day limit) */}}
+            {{ if ge $d $start }}
+                <div class="event-split-row">
+                    <div class="event-chron-col">
+                        <span class="event-date">{{ time.Format "Jan 02" $d }}</span>
+                        <span class="event-year">{{ time.Format "2006" $d }}</span>
+                    </div>
+                    <div class="event-desc-col">
+                        <span class="event-time">{{ if ne (index $p 1) "--:--" }}{{ time.Format "3:04 PM" (printf "2006-01-02T%s:00" (index $p 1)) }}{{ else }}All Day{{ end }}</span>
+                        <div class="event-text">{{ index $p 2 | safeHTML }}</div>
+                    </div>
                 </div>
-                <div class="event-desc-col">
-                    <span class="event-time">
-                        {{ if ne (index $p 1) "--:--" }}{{ time.Format "3:04 PM" (printf "2006-01-02T%s:00" (index $p 1)) }}{{ else }}All Day{{ end }}
-                    </span>
-                    <div class="event-text">{{ index $p 2 | safeHTML }}</div>
-                </div>
-            </div>
+            {{ end }}
         {{ end }}
     </div>
 
     <div id="feed-astro" class="events-content">
         {{ range (split (trim $astro "\n") "\n") }}
             {{ $p := split . " | " }}
-            <div class="event-split-row" data-date="{{ index $p 0 }}">
-                <div class="event-chron-col">
-                    <span class="event-date">{{ time.Format "Jan 02" (index $p 0) }}</span>
-                    <span class="event-year">{{ time.Format "2006" (index $p 0) }}</span>
+            {{ $d := index $p 0 }}
+            {{/* Astro: Strict 31-day window */}}
+            {{ if ge $d $start }}{{ if le $d $end }}
+                <div class="event-split-row">
+                    <div class="event-chron-col">
+                        <span class="event-date">{{ time.Format "Jan 02" $d }}</span>
+                        <span class="event-year">{{ time.Format "2006" $d }}</span>
+                    </div>
+                    <div class="event-desc-col">
+                        <span class="event-time">{{ index $p 1 }}</span>
+                        <div class="event-text">{{ index $p 2 }}</div>
+                    </div>
                 </div>
-                <div class="event-desc-col">
-                    <span class="event-time">{{ index $p 1 }}</span>
-                    <div class="event-text">{{ index $p 2 }}</div>
-                </div>
-            </div>
+            {{ end }}{{ end }}
         {{ end }}
     </div>
 
     <div id="feed-almanac" class="events-content">
         {{ range (split (trim $alm "\n") "\n") }}
             {{ $p := split . " | " }}
-            <div class="almanac-row" data-date="{{ index $p 0 }}">
-                <div class="alm-header">
-                    <span class="alm-date">{{ time.Format "Jan 02" (index $p 0) }}</span>
-                    <span class="alm-year">{{ time.Format "2006" (index $p 0) }}</span>
+            {{ $d := index $p 0 }}
+            {{/* Almanac: Strict 31-day window */}}
+            {{ if ge $d $start }}{{ if le $d $end }}
+                <div class="almanac-row">
+                    <div class="alm-header">
+                        <span class="alm-date">{{ time.Format "Jan 02" $d }}</span>
+                        <span class="alm-year">{{ time.Format "2006" $d }}</span>
+                    </div>
+                    <div class="alm-data-stack">
+                        <span class="alm-sun">☀️ {{ index $p 1 }} / {{ index $p 2 }}</span>
+                        <span class="alm-twilight">🔭 {{ index $p 3 }} / {{ index $p 4 }}</span>
+                        <span class="alm-moon">🌙 {{ index $p 6 }} / {{ index $p 5 }}</span>
+                    </div>
                 </div>
-                <div class="alm-data-stack">
-                    <span class="alm-sun">☀️ {{ index $p 1 }} / {{ index $p 2 }}</span>
-                    <span class="alm-twilight">🔭 {{ index $p 3 }} / {{ index $p 4 }}</span>
-                    <span class="alm-moon">🌙 {{ index $p 6 }} / {{ index $p 5 }}</span>
-                </div>
-            </div>
+            {{ end }}{{ end }}
         {{ end }}
-    </div>
-
-    <div class="events-footer">
-        <select id="event-month-picker" onchange="jumpToMonth(this.value)">
-            <option value="today">Jump to Today</option>
-            {{ $now := now }}{{ range seq 0 11 }}{{ $d := $now.AddDate 0 . 0 }}
-            <option value="{{ $d.Format "2006-01" }}">{{ $d.Format "Jan 2006" }}</option>
-            {{ end }}
-        </select>
     </div>
 </div>
 
 <script>
-/* (Keep existing switchEvents and jumpToMonth functions) */
 function switchEvents(e, t) {
     if(e) e.preventDefault();
     const w = document.getElementById('nbas-unified-events');
     w.querySelectorAll('.events-tab').forEach(x => x.classList.remove('active'));
-    w.querySelectorAll('.events-content').forEach(x => { x.classList.remove('active'); x.style.display = 'none'; });
+    w.querySelectorAll('.events-content').forEach(x => {
+        x.classList.remove('active');
+        x.style.display = 'none';
+    });
     e.currentTarget.classList.add('active');
     const f = document.getElementById('feed-' + t);
-    f.classList.add('active'); f.style.display = 'block';
-    document.getElementById('event-month-picker').value = 'today';
-}
-function jumpToMonth(v) {
-    const a = document.querySelector('.events-content.active');
-    if(!a) return;
-    if(v === 'today') { a.scrollTop = 0; return; }
-    const t = a.querySelector('[data-date^="' + v + '"]');
-    if(t) a.scrollTo({ top: t.offsetTop, behavior: 'smooth' });
+    if(f) {
+        f.classList.add('active');
+        f.style.display = 'block';
+    }
 }
 </script>
 

@@ -17,7 +17,7 @@
     </div>
 
     <h3 class="sidebar-heading">Calendar</h3>
-    {{ partialCached "unified-events.html" . }}
+    {{ partialCached "unified-events.html" . (now.Format "2006-01-02") }}
 
     <div class="widget-box">
       <h3 class="sidebar-heading">Tonight's Sky</h3>
