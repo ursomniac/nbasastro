@@ -99,4 +99,8 @@ glare can be seen in the lower-right of the image.
 
 (Coming in June - Venus, Jupiter, and Mercury - just after sunset!)
 
+## 🔭 Monthly Starmap
+To help you navigate the night sky this month, we've provided a high-resolution starmap. 
+The PNG is great for quick viewing, while the PDF is optimized for sharp home printing.
 
+{{< starmap file="starmap-2604" month="April 2026" >}}

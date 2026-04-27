@@ -16,7 +16,7 @@
       {{ if eq .Section "members" }}
         {{ partial "baseof_sidebar_members.html" . }}
       {{ else }}
-        {{ partial "baseof_sidebar_public.html" . }}
+        {{ partialCached "baseof_sidebar_public.html" . }}
       {{ end }}
 
       <main class="nbas-main" data-pagefind-body>

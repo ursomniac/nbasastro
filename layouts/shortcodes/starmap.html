@@ -1,0 +1,33 @@
+{{ $filePrefix := .Get "file" | default "starmap" }}
+{{ $month := .Get "month" | default "This Month" }}
+
+<div class="starmap-card">
+  <div class="starmap-thumb-link">
+    {{ with .Page.Resources.GetMatch (printf "%s*.png" $filePrefix) }}
+      {{ $inverted := . | images.Filter images.Invert }}
+      <a href="{{ .RelPermalink }}" target="_blank">
+        <img src="{{ $inverted.RelPermalink }}" class="starmap-thumb" alt="Starmap Preview">
+      </a>
+    {{ end }}
+  </div>
+
+  <div class="starmap-content">
+    <h4 class="starmap-title">{{ $month }} Starmap</h4>
+    <p style="font-size: 0.9em; color: #8a9cb3; margin-bottom: 15px; font-family: sans-serif;">Optimized for sharp home printing:</p>
+    
+    {{ with .Page.Resources.GetMatch (printf "%s*.pdf" $filePrefix) }}
+    <a href="{{ .RelPermalink }}" target="_blank" class="starmap-btn">
+      📥 Download PDF (Print Ready)
+    </a>
+    {{ end }}
+    
+    <div style="margin-top: 8px;">
+        {{ with .Page.Resources.GetMatch (printf "%s*.png" $filePrefix) }}
+        <a href="{{ .RelPermalink }}" target="_blank" class="starmap-link-alt">
+          View Original PNG (Dark on Light)
+        </a>
+        {{ end }}
+    </div>
+  </div>
+</div>
+
