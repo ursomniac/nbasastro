@@ -3,7 +3,7 @@
 
 <div class="starmap-card">
   <div class="starmap-thumb-link">
-    {{ with .Page.Resources.GetMatch (printf "%s*.png" $filePrefix) }}
+    {{ with .Page.Resources.GetMatch (printf "*%s*.png" $filePrefix) }}
       {{ $inverted := . | images.Filter images.Invert }}
       <a href="{{ .RelPermalink }}" target="_blank">
         <img src="{{ $inverted.RelPermalink }}" class="starmap-thumb" alt="Starmap Preview">

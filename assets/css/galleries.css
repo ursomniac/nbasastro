@@ -69,7 +69,7 @@
     width: 100%; 
     background: linear-gradient(transparent, rgba(0,0,0,0.9)); 
     color: #fff; 
-    padding: 15px 10px 10px 10px; 
+    padding: 8px 10px 5px 10px; 
     font-size: 0.8rem;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -81,19 +81,20 @@
 }
 
 .gallery-overlay strong { 
+    font-size: 0.9rem; 
     color: #ffcc00; 
     display: block;
     margin-bottom: 2px;
 }
 
 .gallery-overlay em { 
-    font-size: 0.7rem; 
+    font-size: 0.85rem; 
     color: #bbb;
     font-style: italic;
 }
 
 /* 6. SCROLLBAR (NIGHT VISION) */
-.nbas-gallery-carousel::-webkit-scrollbar { height: 6px; }
+.nbas-gallery-carousel::-webkit-scrollbar { height: 10px; }
 .nbas-gallery-carousel::-webkit-scrollbar-track { background: #1a1a1a; }
 .nbas-gallery-carousel::-webkit-scrollbar-thumb { background: #3a4a64; border-radius: 10px; }
 

@@ -55,6 +55,7 @@ eclipse3.png | Maximum coverage: 3:25 PM |
 eclipse4.png | 4th contact 4:35 PM | 
 {{< /nbas-gallery >}}
 
+
 The eclipse runs from 2:15 to 4:35 PM with maximum lunar coverage
 of the Sun’s disk at 3:25 PM.
 

@@ -30,7 +30,7 @@
               {{ if or $caption $credit }}
                 <div class="gallery-overlay">
                   {{ with $caption }}<strong style="color:#ffcc00">{{ . }}</strong>{{ end }}
-                  {{ with $credit }}<br><em>© {{ . }}</em>{{ end }}
+                  {{ with $credit }}<br><em>{{ . }}</em>{{ end }}
                 </div>
               {{ end }}
             </a>
