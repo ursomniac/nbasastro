@@ -1,94 +1,105 @@
 <div class="unified-events-widget" id="nbas-unified-events">
-    <nav class="events-nav">
-        <button class="events-tab active" onclick="switchEvents(event, 'nbas')">NBAS</button>
-        <button class="events-tab" onclick="switchEvents(event, 'astro')">Astro</button>
-        <button class="events-tab" onclick="switchEvents(event, 'almanac')">Almanac</button>
-    </nav>
+  <nav class="events-nav">
+    <button class="events-tab active" onclick="switchEvents(event, 'nbas')">NBAS</button>
+    <button class="events-tab" onclick="switchEvents(event, 'astro')">Astro</button>
+    <button class="events-tab" onclick="switchEvents(event, 'almanac')">Almanac</button>
+  </nav>
 
-    {{ $start := now.Format "2006-01-02" }}
-    {{ $end := (now.AddDate 0 0 31).Format "2006-01-02" }}
+  {{/* 1. Establish robust Time objects */}}
+  {{ $now := now }}
+  {{ $today := $now.AddDate 0 0 -1 }} {{/* Buffer to include today's events */}}
+  {{ $limit := $now.AddDate 0 0 31 }}
 
-    {{ $nbas := "" }}{{ with resources.Get "calendar/calendar_nbas.txt" }}{{ $nbas = .Content }}{{ end }}
-    {{ $astro := "" }}{{ with resources.Get "calendar/calendar_events.txt" }}{{ $astro = .Content }}{{ end }}
-    {{ $alm := "" }}{{ with resources.Get "calendar/calendar_almanac.txt" }}{{ $alm = .Content }}{{ end }}
+  {{/* 2. Retrieve resources */}}
+  {{ $nbas := "" }}{{ with resources.Get "calendar/calendar_nbas.txt" }}{{ $nbas = .Content }}{{ end }}
+  {{ $astro := "" }}{{ with resources.Get "calendar/calendar_events.txt" }}{{ $astro = .Content }}{{ end }}
+  {{ $alm := "" }}{{ with resources.Get "calendar/calendar_almanac.txt" }}{{ $alm = .Content }}{{ end }}
 
-    <div id="feed-nbas" class="events-content active">
-        {{ range (split (trim $nbas "\n") "\n") }}
-            {{ $p := split . " | " }}
-            {{ $d := index $p 0 }}
-            {{/* NBAS: Show everything from today forward (No 31-day limit) */}}
-            {{ if ge $d $start }}
-                <div class="event-split-row">
-                    <div class="event-chron-col">
-                        <span class="event-date">{{ time.Format "Jan 02" $d }}</span>
-                        <span class="event-year">{{ time.Format "2006" $d }}</span>
-                    </div>
-                    <div class="event-desc-col">
-                        <span class="event-time">{{ if ne (index $p 1) "--:--" }}{{ time.Format "3:04 PM" (printf "2006-01-02T%s:00" (index $p 1)) }}{{ else }}All Day{{ end }}</span>
-                        <div class="event-text">{{ index $p 2 | safeHTML }}</div>
-                    </div>
-                </div>
-            {{ end }}
+  {{/* 3. NBAS: Shows all future events */}}
+  <div id="feed-nbas" class="events-content active">
+    {{ if $nbas }}
+      {{ range (split (trim $nbas "\n") "\n") }}
+        {{ $p := split . " | " }}
+        {{ $eDate := time (index $p 0) }}
+        {{ if $eDate.After $today }}
+          <div class="event-split-row">
+            <div class="event-chron-col">
+              <span class="event-date">{{ $eDate.Format "Jan 02" }}</span>
+              <span class="event-year">{{ $eDate.Format "2006" }}</span>
+            </div>
+            <div class="event-desc-col">
+              <span class="event-time">
+                {{ if ne (index $p 1) "--:--" }}{{ time.Format "3:04 PM" (printf "2006-01-02T%s:00" (index $p 1)) }}{{ else }}All Day{{ end }}
+              </span>
+              <div class="event-text">{{ index $p 2 | safeHTML }}</div>
+            </div>
+          </div>
         {{ end }}
-    </div>
+      {{ end }}
+    {{ end }}
+  </div>
 
-    <div id="feed-astro" class="events-content">
-        {{ range (split (trim $astro "\n") "\n") }}
-            {{ $p := split . " | " }}
-            {{ $d := index $p 0 }}
-            {{/* Astro: Strict 31-day window */}}
-            {{ if ge $d $start }}{{ if le $d $end }}
-                <div class="event-split-row">
-                    <div class="event-chron-col">
-                        <span class="event-date">{{ time.Format "Jan 02" $d }}</span>
-                        <span class="event-year">{{ time.Format "2006" $d }}</span>
-                    </div>
-                    <div class="event-desc-col">
-                        <span class="event-time">{{ index $p 1 }}</span>
-                        <div class="event-text">{{ index $p 2 }}</div>
-                    </div>
-                </div>
-            {{ end }}{{ end }}
+  {{/* 4. Astro: Truncated to 31 days */}}
+  <div id="feed-astro" class="events-content">
+    {{ if $astro }}
+      {{ range (split (trim $astro "\n") "\n") }}
+        {{ $p := split . " | " }}
+        {{ $eDate := time (index $p 0) }}
+        {{ if and ($eDate.After $today) ($eDate.Before $limit) }}
+          <div class="event-split-row">
+            <div class="event-chron-col">
+              <span class="event-date">{{ $eDate.Format "Jan 02" }}</span>
+              <span class="event-year">{{ $eDate.Format "2006" }}</span>
+            </div>
+            <div class="event-desc-col">
+              <span class="event-time">{{ index $p 1 }}</span>
+              <div class="event-text">{{ index $p 2 }}</div>
+            </div>
+          </div>
         {{ end }}
-    </div>
+      {{ end }}
+    {{ end }}
+  </div>
 
-    <div id="feed-almanac" class="events-content">
-        {{ range (split (trim $alm "\n") "\n") }}
-            {{ $p := split . " | " }}
-            {{ $d := index $p 0 }}
-            {{/* Almanac: Strict 31-day window */}}
-            {{ if ge $d $start }}{{ if le $d $end }}
-                <div class="almanac-row">
-                    <div class="alm-header">
-                        <span class="alm-date">{{ time.Format "Jan 02" $d }}</span>
-                        <span class="alm-year">{{ time.Format "2006" $d }}</span>
-                    </div>
-                    <div class="alm-data-stack">
-                        <span class="alm-sun">☀️ {{ index $p 1 }} / {{ index $p 2 }}</span>
-                        <span class="alm-twilight">🔭 {{ index $p 3 }} / {{ index $p 4 }}</span>
-                        <span class="alm-moon">🌙 {{ index $p 6 }} / {{ index $p 5 }}</span>
-                    </div>
-                </div>
-            {{ end }}{{ end }}
+  {{/* 5. Almanac: Truncated to 31 days */}}
+  <div id="feed-almanac" class="events-content">
+    {{ if $alm }}
+      {{ range (split (trim $alm "\n") "\n") }}
+        {{ $p := split . " | " }}
+        {{ $eDate := time (index $p 0) }}
+        {{ if and ($eDate.After $today) ($eDate.Before $limit) }}
+          <div class="almanac-row">
+            <div class="alm-header">
+              <span class="alm-date">{{ $eDate.Format "Jan 02" }}</span>
+              <span class="alm-year">{{ $eDate.Format "2006" }}</span>
+            </div>
+            <div class="alm-data-stack">
+              <span class="alm-sun">☀️ {{ index $p 1 }} / {{ index $p 2 }}</span>
+              <span class="alm-twilight">🔭 {{ index $p 3 }} / {{ index $p 4 }}</span>
+              <span class="alm-moon">🌙 {{ index $p 6 }} / {{ index $p 5 }}</span>
+            </div>
+          </div>
         {{ end }}
-    </div>
+      {{ end }}
+    {{ end }}
+  </div>
 </div>
 
 <script>
 function switchEvents(e, t) {
-    if(e) e.preventDefault();
-    const w = document.getElementById('nbas-unified-events');
-    w.querySelectorAll('.events-tab').forEach(x => x.classList.remove('active'));
-    w.querySelectorAll('.events-content').forEach(x => {
-        x.classList.remove('active');
-        x.style.display = 'none';
-    });
-    e.currentTarget.classList.add('active');
-    const f = document.getElementById('feed-' + t);
-    if(f) {
-        f.classList.add('active');
-        f.style.display = 'block';
-    }
+  if(e) e.preventDefault();
+  const w = document.getElementById('nbas-unified-events');
+  w.querySelectorAll('.events-tab').forEach(x => x.classList.remove('active'));
+  w.querySelectorAll('.events-content').forEach(x => {
+    x.classList.remove('active');
+    x.style.display = 'none';
+  });
+  e.currentTarget.classList.add('active');
+  const f = document.getElementById('feed-' + t);
+  if(f) {
+    f.classList.add('active');
+    f.style.display = 'block';
+  }
 }
 </script>
 
