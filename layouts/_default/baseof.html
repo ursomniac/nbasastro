@@ -7,12 +7,8 @@
   {{ partial "head.html" . }}
 </head>
 <body>
-  {{ partial "baseof_header.html" . }}
-  {{ partial "nav.html" . }}
-
-  <div class="nbas-container">
+  {{ partial "baseof_header.html" . }}{{ partial "nav.html" . }}<div class="nbas-container">
     <div class="nbas-columns">
-      {{/* V0.15.0 Preparation: Conditional Sidebar */}}
       {{ if eq .Section "members" }}
         {{ partial "baseof_sidebar_members.html" . }}
       {{ else }}

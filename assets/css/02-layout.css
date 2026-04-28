@@ -662,3 +662,23 @@ a:hover {
 .page-subtitle { color: #888; font-size: 1.1rem; font-style: italic; }
 .no-articles-msg { color: #888; }
 
+/* hack */
+@media (max-width: 991px) {
+    /* 1. Remove the 20px gap and 10px margin pushing content down */
+    .nbas-columns {
+        gap: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    /* 2. Kill the phantom dot character sitting in the 'ghost' space */
+    .nbas-columns > p:empty, 
+    .nbas-columns > br {
+        display: none !important;
+    }
+
+    /* 3. Pull the sidebar (Meeting Widget) UP to reclaim space */
+    .nbas-sidebar {
+        margin-top: -10px !important;
+    }
+}
+
