@@ -6,7 +6,7 @@ photo: "headshot.jpg"
 social_links:
   - platform: "LinkedIn"
     url: "https://linkedin.com + /in/robertdonahue"
-short_bio: "Long-time observer focusing on variable stars and the history of Corona Borealis."
+short_bio: "Semi-retired researcher, now smart telescope enthusiast!"
 ---
 
 Ever since I was a little kid, I wanted to be an astronomer.  It was my first love.
