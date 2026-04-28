@@ -1,0 +1,39 @@
+# Global Metadata
+title:
+  label: "Article Title"
+  hint: ""
+authors:
+  label: "Authors"
+  hint: 'Enter authors separated by commas. Use Full Names (e.g., "Jane Smith") or the slug of their Author page (e.g., "jane-smith") for members who have one.'
+  placeholder: "Jane Smith, mike-jones, nbas-staff"
+
+date:
+  label: "Date"
+  hint: 'Enter the date to publish the article, YYYY-MM-DD - you can set this in the future, and the article will not appear "live" until then.'
+
+byline:
+  label: "Byline"
+  hint: "A brief, one-sentence hook for the article card."
+
+# Cross-Referencing
+solar_system:
+  label: "Solar System"
+  hint: 'Select one or more categories to include. For each provide a list of those objects.  For examples if you select Planets, you can put in "Mercury, Mars"; for Asteroids, "1 Ceres, 2024 YR4", and so on.'
+  
+catalogs:
+  label: "DSO Catalogs"
+  hint: 'For Messier, Caldwell, and NGC, enter only the ID numbers, e.g., Messier or Caldwell "3, 15, 62", or for NGC "123, 7320C, 4565". For "Other", enter the full common name (e.g., "Sh 2-302, "vdb 15").'
+
+stars:
+  label: "Star Data"
+  hint: 'Select one or more categories, for each add a comma-separated list of stars: names or catalog IDs, e.g. "T CrB", or "OΣΣ 104".  Exotic is for things like black holes or supernovae.  Multiple covers all star systems (doubles, triples, etc.)'
+
+# Object Specs
+object_info:
+  label: "Object Specs Table"
+  hint: "(For articles on ONE object) Define technical attributes for the spec box. Labels will be automatically converted to lowercase keys.  Typical entries: constellation, coordinates, magnitude, etc., depending on the object - can be stars, DSOs, SSOs, etc."
+
+# Content Builder
+content_builder:
+  label: "Content Snippets"
+  hint: "Add sample visual elements to into the markdown body.  You can copy them as many times as you need."

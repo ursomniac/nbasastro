@@ -162,9 +162,9 @@ object_sections:
   ngc: ["6822"]
   caldwell: ["57"]
   other: ["PK 9-7.1"]
-solarsystem: ["planets", "meteor_showers"]
+solarsystem: ["planets", "meteors"]
   planets: ["Uranus", "Neptune"]
-  meteor_showers: ["Taurids"]
+  meteors: ["Taurids"]
 
 # The 6 Objects of Interest Table
 highlights:

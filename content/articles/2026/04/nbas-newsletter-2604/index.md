@@ -6,12 +6,12 @@ series: ["nbas-newsletter"]
 byline: "Comet C/2025 R3 at Perihelion, Lyrids, and the return of Venus!"
 tags: []
 
-solarsystem: ["comets", "meteor_showers", "planets"]
+solarsystem: ["comets", "meteors", "planets"]
 catalogs: ["other"]
 object_sections:
   comets: ["C/2025 R3"]
   planets: ["Venus"]
-  meteor_showers: ["Lyrids"]
+  meteors: ["Lyrids"]
   other: ["Leo Dwarf"]
 
 ---

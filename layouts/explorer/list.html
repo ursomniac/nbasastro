@@ -8,7 +8,7 @@
     <div class="explorer-col">
       <h3>Solar System</h3>
       <ul class="explorer-list">
-        {{ range $item := slice "moon" "planets" "comets" "asteroids" "meteor-showers" }}
+        {{ range $item := slice "moon" "planets" "comets" "asteroids" "meteors" }}
           {{ $count := 0 }}{{ with (index $.Site.Taxonomies.solarsystem $item) }}{{ $count = .Count }}{{ end }}
           <li>
             {{ if gt $count 0 }}
@@ -27,7 +27,7 @@
   <h3>Stars & Systems</h3>
   <ul class="explorer-list">
     {{/* Only the "keys" remain hard-coded; the labels are pulled from content */}}
-    {{ $keys := slice "multiple" "variable" "nearby" "exoplanet" "exotic" }}
+    {{ $keys := slice "multiple" "variable" "nearby" "exoplanet" "bright" "exotic" }}
     
     {{ range $key := $keys }}
       {{ $count := 0 }}

@@ -1,0 +1,128 @@
+{{ define "main" -}}
+{{ $styles := resources.Get "css/builder.css" | minify }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+{{ $script := resources.Get "js/builder.js" | minify }}
+<script src="{{ $script.RelPermalink }}"></script>
+
+<script>
+    function toggleInput(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+        }
+    }
+</script>
+
+<div class="builder-body">
+    <h1 style="color: var(--text-pure); margin-bottom: 30px;">Article Workbench (v0.18.35)</h1>
+
+    <!-- 1. REQUIRED GLOBAL METADATA -->
+    <div class="card">
+        <label style="color: var(--gold-link);">{{ site.Data.builder_docs.title.label }}</label>
+        <input type="text" id="r-title" placeholder="e.g. December 2025 Newsletter">
+        
+        <label style="margin-top:20px;">{{ site.Data.builder_docs.date.label }}</label>
+        <p class="instr">{{ site.Data.builder_docs.date.hint }}</p>
+        <input type="text" id="r-date" value="{{ now.Format "2006-01-02" }}">
+        
+        <label style="margin-top:20px;">{{ site.Data.builder_docs.authors.label }}</label>
+        <p class="instr">{{ site.Data.builder_docs.authors.hint }}</p>
+        <input type="text" id="r-authors" placeholder="{{ site.Data.builder_docs.authors.placeholder }}">
+
+        <label style="margin-top:20px;">{{ site.Data.builder_docs.byline.label }}</label>
+        <p class="instr">{{ site.Data.builder_docs.byline.hint }}</p>
+        <input type="text" id="r-byline">
+    </div>
+
+    <!-- 2. GLOBAL OPTIONALS -->
+    <details class="card">
+        <summary>Global Optionals (Series, Tags, Hub)</summary>
+        <div class="card-content">
+            <label>Series</label><input type="text" id="o-series" placeholder="nbas-newsletter">
+            <label>Tags</label><input type="text" id="o-tags" placeholder="planets, deep-sky">
+            <label>Knowledge Hub Topics</label>
+            <div class="horizontal-checks">
+                {{ range (slice "astronomy" "education" "observing" "tech") }}
+                <label class="check-item"><input type="checkbox" class="tax-know" value="{{ . }}"> {{ . | title }}</label>
+                {{ end }}
+            </div>
+        </div>
+    </details>
+
+    <!-- 3. SOLAR SYSTEM -->
+    <details class="card">
+        <summary>{{ site.Data.builder_docs.solar_system.label }}</summary>
+        <div class="card-content">
+            <p class="instr">{{ site.Data.builder_docs.solar_system.hint }}</p>
+            {{ range (slice "Planets" "Meteors" "Comets" "Asteroids") }}
+            <div class="check-row-wrapper">
+                <label class="check-item"><input type="checkbox" onclick="toggleInput('ss-{{ . | lower }}')"> {{ . }}</label>
+                <div id="ss-{{ . | lower }}" class="hidden-input"><input type="text" class="val-ss" data-cat="{{ . | lower }}" placeholder="Specific {{ . }} names..."></div>
+            </div>
+            {{ end }}
+        </div>
+    </details>
+
+    <!-- 4. DSO CATALOGS -->
+    <details class="card">
+        <summary>{{ site.Data.builder_docs.catalogs.label }}</summary>
+        <div class="card-content">
+            <p class="instr">{{ site.Data.builder_docs.catalogs.hint }}</p>
+            {{ range (slice "Messier" "Caldwell" "NGC" "Other") }}
+            <div class="check-row-wrapper">
+                <label class="check-item"><input type="checkbox" onclick="toggleInput('cat-{{ . | lower }}')"> {{ . | upper }}</label>
+                <div id="cat-{{ . | lower }}" class="hidden-input"><input type="text" class="val-cat" data-cat="{{ . | lower }}" placeholder="IDs or Names..."></div>
+            </div>
+            {{ end }}
+        </div>
+    </details>
+
+    <!-- 5. STAR DATA -->
+    <details class="card">
+        <summary>{{ site.Data.builder_docs.stars.label }}</summary>
+        <div class="card-content">
+            <p class="instr">{{ site.Data.builder_docs.stars.hint }}</p>
+            {{ range (slice "Variable" "Nearby" "Bright" "Multiple" "Exotic") }}
+            <div class="check-row-wrapper">
+                <label class="check-item"><input type="checkbox" onclick="toggleInput('star-{{ . | lower }}')"> {{ . }}</label>
+                <div id="star-{{ . | lower }}" class="hidden-input"><input type="text" class="val-star" data-cat="{{ . | lower }}" placeholder="Star names..."></div>
+            </div>
+            {{ end }}
+        </div>
+    </details>
+
+    <!-- 6. OBJECT SPECS (TABLE) -->
+    <details class="card">
+        <summary>{{ site.Data.builder_docs.object_info.label }}</summary>
+        <div class="card-content">
+            <p class="instr">{{ site.Data.builder_docs.object_info.hint }}</p>
+            <div id="specs-list">
+                <div class="check-row-wrapper" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <input type="text" class="spec-label" placeholder="Label (e.g. Magnitude)" style="flex: 1;">
+                    <input type="text" class="spec-value" placeholder="Value (e.g. 4.0)" style="flex: 1;">
+                </div>
+            </div>
+            <button type="button" class="btn-main" style="padding: 10px; font-size: 0.9rem; width: auto;" onclick="addSpecRow()">+ Add Row</button>
+        </div>
+    </details>
+
+    <!-- 7. CONTENT SNIPPETS -->
+    <details class="card">
+        <summary>Content Snippets (Shortcodes)</summary>
+        <div class="card-content">
+            <p class="instr">Check snippets to append to the markdown body.</p>
+            <div class="horizontal-checks">
+                <label class="check-item"><input type="checkbox" id="snip-img-align"> Image (Aligned)</label>
+                <label class="check-item"><input type="checkbox" id="snip-img-center"> Image (Centered)</label>
+                <label class="check-item"><input type="checkbox" id="snip-img-full"> Image (Full Width)</label>
+                <label class="check-item"><input type="checkbox" id="snip-gal-grid"> Gallery (Grid)</label>
+                <label class="check-item"><input type="checkbox" id="snip-gal-caro"> Gallery (Carousel)</label>
+                <label class="check-item"><input type="checkbox" id="snip-video"> Video</label>
+            </div>
+        </div>
+    </details>
+
+    <button class="btn-main" id="generate-btn">GENERATE INDEX.MD</button>
+</div>
+{{- end }}
+
