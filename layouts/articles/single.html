@@ -1,62 +1,117 @@
 {{ define "main" }}
-
 <article class="nbas-article" data-pagefind-body>
-    <!-- 1. HEADER SECTION -->
-    <header class="article-header">
-        {{ with .Params.series }}
-        <div class="article-series-label" data-pagefind-ignore>{{ . }}</div>
-        {{ end }}
-        <h1 class="article-title" data-pagefind-meta="title">{{ .Title }}</h1>
-        {{ with .Params.byline }}
-        <p class="article-byline">{{ . }}</p>
-        {{ end }}
-
-<div class="article-metadata">
-  <span>By 
-    {{ if .Params.authors }}
-      {{ range $index, $item := .Params.authors }}
-        {{ if $index }}, {{ end }}
-        {{ $p := site.GetPage (printf "authors/%s" ($item | urlize)) }}
-        {{ if and $p (ne $p.Kind "taxonomy") }}
-          <a href="{{ $p.RelPermalink }}" style="color: #ffcc00; font-weight: bold;">{{ $p.Title }}</a>
-        {{ else }}
-          {{ $item | replace "-" " " | title | replace "Nbas" "NBAS" }}
-        {{ end }}
+  <!-- 1. HEADER SECTION -->
+  <header class="article-header">
+    {{ with .Params.series }}
+    <div class="card-facets article-series-wrapper" data-pagefind-ignore>
+      {{ range . }}
+        {{ $termPage := site.GetPage (printf "series/%s" (. | urlize)) }}
+        <a href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}#{{ end }}" class="facet-badge series-badge {{ . | urlize }}">
+          {{ if $termPage }}{{ $termPage.LinkTitle | upper }}{{ else }}{{ . | humanize | upper }}{{ end }}
+        </a>
       {{ end }}
-    {{ else }}
-      NBAS
-    {{ end }}
-  </span> | <time>Published: {{ .Date.Format "January 2, 2006" }}</time>
-{{ if and .Params.lastmod (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
-    | <time>Revised: {{ .Lastmod.Format "January 2, 2006" }}</time>
-{{ end }}
-</div>
-    </header>
-
-{{/* partial "social-share.html" . */}}
-
-    <!-- 2. CONTENT SECTION (No nested grids) -->
-    <div class="article-content-wrapper">
-        <div class="article-body">
-            {{ .Content }}
-        </div>
     </div>
-
-    <!-- 3. RELATED ARTICLES SECTION (Goal 1.8) -->
-    {{ $related := .Site.RegularPages.Related . | first 3 }}
-    {{ with $related }}
-    <section class="related-articles" data-pagefind-ignore>
-        <h3 class="related-heading">Related Articles</h3>
-        <div class="related-list">
-            {{ range . }}
-            <div class="related-item">
-                <a href="{{ .RelPermalink }}" class="related-link">{{ .Title }}</a>
-                <div class="related-date">{{ .PublishDate.Format "Jan 2, 2006" }}</div>
-            </div>
-            {{ end }}
-        </div>
-    </section>
     {{ end }}
+
+    <h1 class="article-title" data-pagefind-meta="title">{{ .Title }}</h1>
+    
+    {{ with .Params.byline }}
+    <p class="article-byline">{{ . }}</p>
+    {{ end }}
+
+    <div class="article-metadata">
+      <span>By 
+        {{ if .Params.authors }}
+          {{ range $index, $item := .Params.authors }}
+            {{ if $index }}, {{ end }}
+            {{ $p := site.GetPage (printf "authors/%s" ($item | urlize)) }}
+            {{ if and $p (ne $p.Kind "taxonomy") }}
+              <a href="{{ $p.RelPermalink }}" class="author-link-highlight">{{ $p.Title }}</a>
+            {{ else }}
+              {{ $item | replace "-" " " | title | replace "Nbas" "NBAS" }}
+            {{ end }}
+          {{ end }}
+        {{ else }}
+          NBAS
+        {{ end }}
+      </span> | 
+      <time>Published: {{ .Date.Format "January 2, 2006" }}</time>
+      {{ if and .Params.lastmod (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+
+        | <time>Revised: {{ .Lastmod.Format "January 2, 2006" }}</time>
+      {{ end }}
+    </div>
+  </header>
+
+  <!-- 2. CONTENT SECTION -->
+  <div class="article-content-wrapper">
+    <div class="article-body">
+      {{ .Content }}
+    </div>
+  </div>
+
+<!-- 3. SERIES NAVIGATION (CHRONOLOGY REPAIRED) -->
+{{ if .Params.series }}
+  <hr class="article-separator">
+  {{ $currentSeries := index .Params.series 0 }}
+  {{ $termPage := site.GetPage (printf "series/%s" ($currentSeries | urlize)) }}
+  {{ $seriesPages := (where .Site.RegularPages "Params.series" "intersect" (slice $currentSeries)).ByDate }}
+  
+  <nav class="series-navigation" data-pagefind-ignore>
+    <div class="series-nav-container">
+      <div class="series-nav-header">
+        <span class="nav-series-label">PART OF SERIES:</span>
+        <a href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}#{{ end }}" class="facet-badge series-badge {{ $currentSeries | urlize }}">
+          {{ if $termPage }}{{ $termPage.LinkTitle | upper }}{{ else }}{{ $currentSeries | upper }}{{ end }}
+        </a>
+      </div>
+      
+<div class="series-nav-links">
+
+  {{/* FETCH NEWER CONTENT */}}
+  {{ with $seriesPages.Next . }}
+  <div class="nav-item nav-next">
+    <a href="{{ .RelPermalink }}" class="series-nav-link-custom">
+      <span class="dir-meta">← PREVIOUS</span>
+      <span class="title-meta">{{ .Title }}</span>
+    </a>
+  </div>
+  {{ end }}
+
+  {{/* FETCH OLDER CONTENT */}}
+  {{ with $seriesPages.Prev . }}
+  <div class="nav-item nav-prev">
+    <a href="{{ .RelPermalink }}" class="series-nav-link-custom">
+      <span class="dir-meta">NEXT →</span>
+      <span class="title-meta">{{ .Title }}</span>
+    </a>
+  </div>
+  {{ end }}
+
+
+</div>
+
+
+    </div>
+  </nav>
+{{ end }}
+
+
+
+  <!-- 4. RELATED ARTICLES SECTION (TASK 5.2) -->
+  {{ $related := .Site.RegularPages.Related . | first 3 }}
+  {{ if $related }}
+  <section class="related-articles" data-pagefind-ignore>
+    <h3 class="related-heading">Related Articles</h3>
+    <div class="related-list">
+      {{ range $related }}
+      <div class="related-item">
+        <a href="{{ .RelPermalink }}" class="related-link">{{ .Title }}</a>
+        <div class="related-date">{{ .PublishDate.Format "Jan 2, 2006" }}</div>
+      </div>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
 </article>
 {{ end }}
-

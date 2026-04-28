@@ -287,3 +287,60 @@
     color: var(--gold-base) !important;
 }
 
+/* v0.18.1 series nav */
+.series-navigation {
+    background-color: var(--space-blue); /* Solid blue from palette */
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin: 3rem 0;
+}
+
+.series-nav-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.series-nav-links {
+    margin-top: 1.75rem; /* Added more vertical breathing room */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.series-nav-link-custom {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none !important;
+}
+
+/* Metadata: Arrows and Labels (Differentiation) */
+.dir-meta {
+    font-size: 0.8rem; /* Increased size */
+    color: var(--text-muted); /* Muted gray for meta info */
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+    margin-bottom: 0.2rem;
+}
+
+/* Title: Newsletter Name (Primary Action) */
+.title-meta {
+    font-size: 0.95rem; /* Substantially larger text */
+    color: var(--gold-link) !important; /* Gold from variables */
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.series-nav-link-custom:hover .title-meta {
+    color: var(--gold-base) !important;
+    text-decoration: underline !important;
+}
+
+.nav-next {
+    text-align: right;
+}
+
