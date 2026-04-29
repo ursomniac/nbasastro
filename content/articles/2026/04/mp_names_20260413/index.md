@@ -5,6 +5,7 @@ authors: ["gareth-williams"]
 byline: "A look at (potentially) interesting new names of asteroids."
 tags: ["Asteroid Names", "WGSBN"]
 description: "A look at any interesting new names applied to asteroids."
+series: ["gareth-talks-about-asteroids"]
 
 sso_asteroids: 
   - "(9960) Brucewillis" 
