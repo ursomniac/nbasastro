@@ -7,10 +7,7 @@ series: ["supernova-watch"]
 byline: "A new SN in a bright, large, edge-on galaxy in Draco"
 tags: []
 
-#solarsystem: ["meteor_showers"]
-catalogs: ["ngc"]
-object_sections:
-  ngc: ["5907"]
+dso_ngc: ["5907"]
 
 object_info:
   object_type: "Intermediate Galaxy"

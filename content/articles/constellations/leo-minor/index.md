@@ -19,10 +19,8 @@ profile_data:
   "Area": 232 sq degrees (64th)
 
 # Taxonomy refs:
-catalogs: ["ngc", "other"]
-object_sections:
-  ngc: ["3003", "3344", "3395", "3396", "3432", "3486"]
-  other: ["0ΣΣ 104", "Arp 270"]
+dso_ngc: ["3003", "3344", "3395", "3396", "3432", "3486"]
+dso_other: ["0ΣΣ 104", "Arp 270"]
 
 # The 6 Objects of Interest
 highlights:

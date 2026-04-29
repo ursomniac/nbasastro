@@ -18,14 +18,10 @@ profile_data:
   "Area": 1,225 (5th)
 
 # Taxonomy refs:
-stargroups: ["multiple"]
-stardata: 
-  multiple: ["Ras Algethi"]
-catalogs: ["messier", "ngc", "other"]
-object_sections:
-  messier: ["13", "92"]
-  ngc: ["6207", "4631"]
-  other: ["Abell 39", "Abell 2151"]
+stars_multiple: ["Ras Algethi"]
+dso_messier: ["13", "92"]
+dso_ngc: ["6207", "4631"]
+dso_other: ["Abell 39", "Abell 2151"]
 
 # The 6 Objects of Interest
 highlights:

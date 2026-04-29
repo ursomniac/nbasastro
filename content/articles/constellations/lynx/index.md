@@ -18,11 +18,9 @@ profile_data:
   "Area": 545 sq degrees (28th)
 
 # Taxonomy refs:
-catalogs: ["caldwell", "ngc", "other"]
-object_sections:
-  caldwell: ["25"]
-  ngc: ["2419", "2537", "2552", "2683"]
-  other: ["Jones-Emberson 1", "Purgathofer-Weinberger 1"]
+dso_caldwell: ["25"]
+dso_ngc: ["2419", "2537", "2552", "2683"]
+dso_other: ["Jones-Emberson 1", "Purgathofer-Weinberger 1"]
 
 # The 6 Objects of Interest
 highlights:

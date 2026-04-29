@@ -9,12 +9,9 @@ categories: ["Deep Sky"]
 feature_image: "t-crb-nova.jpg"
 description: "A look at the upcoming eruption of the famous recurring nova in Corona Borealis."
 
-constellations: ["Corona Borealis"]
-
 # Metadata Panel Data
-stargroups: ["variable"]
-stardata:
-  variable: ["T CrB"]
+stars_variable: ["T CrB"]
+
 object_info:
   object_type: "Recurring Nova"
   constellation: "Corona Borealis"

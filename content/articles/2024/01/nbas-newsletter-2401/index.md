@@ -7,18 +7,9 @@ byline: "Winter Nebulae"
 tags: []
 
 # Taxonomy refs4
-#stargroups: [ "variable"]
-#stardata:
-#  variable: ["T CrB"]
-#solarsystem: ["comets"]
-catalogs: ["messier", "ngc", "other"]
-object_sections:
-#  planets: ["Saturn", "Neptune"]
-#  meteors: ["Perseids"]
-#  comets: ["12P/Pons-Brooks", "C/2023 A3 (Tsuchinshan-ATLAS)", "62P/Tsuchinshan"]
-  messier: ["42", "43"]
-  ngc: ["1909", "2024", "2359"]
-  other: ["Barnard 33", "Collinder 121", "Sh 2-308"]
+dso_messier: ["42", "43"]
+dso_ngc: ["1909", "2024", "2359"]
+dso_other: ["Barnard 33", "Collinder 121", "Sh 2-308"]
 ---
 
 {{< newsletter-stats 

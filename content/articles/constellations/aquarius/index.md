@@ -18,12 +18,10 @@ profile_data:
   "Area": 980 sq degrees (10th)
 
 # Taxonomy refs:
-catalogs: ["messier", "ngc", "caldwell", "other"]
-object_sections:
-  messier: ["2", "72", "73"]
-  ngc: ["7009", "7284", "7293"]
-  caldwell: ["55", "63"]
-  other: ["HCG 88", "Arp 93"]
+dso_messier: ["2", "72", "73"]
+dso_ngc: ["7009", "7284", "7293"]
+dso_caldwell: ["55", "63"]
+dso_other: ["HCG 88", "Arp 93"]
 
 # The 6 Objects of Interest
 highlights:

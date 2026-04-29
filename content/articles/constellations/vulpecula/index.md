@@ -18,12 +18,10 @@ profile_data:
   "Area": 268 sq degrees (55th)
 
 # Taxonomy refs:
-catalogs: ["messier", "caldwell", "ngc", "other"]
-object_sections:
-  messier: ["27"]
-  caldwell: ["37"]
-  ngc: ["6802", "6820", "6823", "6830"]
-  other: ["Collinder 399"]
+dso_messier: ["27"]
+dso_caldwell: ["37"]
+dso_ngc: ["6802", "6820", "6823", "6830"]
+dso_other: ["Collinder 399"]
 
 # The 6 Objects of Interest
 highlights:

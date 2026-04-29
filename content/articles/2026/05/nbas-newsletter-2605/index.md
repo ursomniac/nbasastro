@@ -6,13 +6,9 @@ series: ["nbas-newsletter"]
 byline: "Venus, Jupiter, Spring meteors, and a pit-stop at Mars"
 tags: []
 
-solarsystem: ["meteors", "asteroids"]
-catalogs: ["messier"]
-object_sections:
-  meteors: ["Eta Lyrids", "Eta Aquarids"]
-  messier: ["5"]
-  asteroids: ["16 Psyche"]
-
+sso_meteors: ["Eta Lyrids", "Eta Aquarids"]
+sso_asteroids: ["16 Psyche"]
+dso_messier: ["5"]
 ---
 
 {{< newsletter-stats

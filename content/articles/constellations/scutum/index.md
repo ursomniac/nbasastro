@@ -18,14 +18,11 @@ profile_data:
   "Area": 109 sq degrees (84th)
 
 # Taxonomy refs:
-stargroups: ["variable"]
-stardata: 
-  variable: ["Delta Sci"]
-catalogs: ["messier", "ngc", "other"]
-object_sections:
-  messier: ["11", "26"]
-  ngc: ["6712"]
-  other: ["Barnard 104", "Scutum Star Cloud"]
+stars_variable: ["Delta Sci"]
+stars_bright: ["Delta Sci"]
+dso_messier: ["11", "26"]
+dso_ngc: ["6712"]
+dso_other: ["Barnard 104", "Scutum Star Cloud"]
 
 # The 6 Objects of Interest
 highlights:

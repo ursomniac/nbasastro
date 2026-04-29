@@ -18,15 +18,11 @@ profile_data:
   "Area": 1,121 sq degrees (7th)
 
 # Taxonomy refs:
-stargroups: ["exoplanet"]
-stardata: 
-  exoplanet: ["51 Peg"]
-catalogs: ["messier", "ngc", "caldwell", "other"]
-object_sections:
-  messier: ["15"]
-  caldwell: ["30", "43", "44"]
-  ngc: ["7331", "7479", "7814"]
-  other: ["HCG 92"]
+stars_exoplanet: ["51 Peg"]
+dso_messier: ["15"]
+dso_caldwell: ["30", "43", "44"]
+dso_ngc: ["7331", "7479", "7814"]
+dso_other: ["HCG 92"]
 
 # The 6 Objects of Interest
 highlights:

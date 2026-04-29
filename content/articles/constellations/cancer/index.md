@@ -18,17 +18,13 @@ profile_data:
   "Area": 506 sq degrees (31st)
 
 # Taxonomy refs:
-stargroups: ["multiple", "variable", "exoplanet"]
-stardata: 
-  multiple: ["Iota Cnc", "Zeta Cnc"]
-  variable: ["X Cnc"]
-  exoplanet: ["55 Cnc"]
-catalogs: ["caldwell", "messier", "ngc", "other"]
-object_sections:
-  caldwell: ["48"]
-  messier: ["44", "67"]
-  ngc: ["2672", "2775"]
-  other: ["Arp 167"]
+stars_multiple: ["Iota Cnc", "Zeta Cnc"]
+stars_variable: ["X Cnc"]
+stars_exoplanet: ["55 Cnc"]
+dso_caldwell: ["48"]
+dso_messier: ["44", "67"]
+dso_ngc: ["2672", "2775"]
+dso_other: ["Arp 167"]
 
 # The 6 Objects of Interest
 highlights:

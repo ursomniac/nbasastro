@@ -18,14 +18,10 @@ profile_data:
   "Area": 538 sq degrees (29th)
 
 # Taxonomy refs:
-stargroups: ["nearby", "multiple"]
-stardata:
-  nearby: ["HD 140283"]
-  multiple: ["Alpha Lib"]
-catalogs: [ "ngc", "other"]
-object_sections:
-  ngc: ["5595", "5597", "5728", "5987"]
-  other: ["LDN 134"]
+stars_nearby: ["HD 140283"]
+stars_multiple: ["Alpha Lib"]
+dso_ngc: ["5595", "5597", "5728", "5987"]
+dso_other: ["LDN 134"]
 
 # The 6 Objects of Interest
 highlights:

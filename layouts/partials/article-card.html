@@ -19,48 +19,36 @@
       <h2 class="card-title">{{ .context.Title }}</h2>
     </a>
 
-    {{/* 2. OBJECT DATA (Targeted by currentTerm) */}}
-    <div class="card-object-matches">
-      {{ $term := .currentTerm }}
-      
-      {{ if $term }}
-        {{/* Specific Term View (Explorer Pages) */}}
-        {{ with index .context.Params.stardata $term }}
-          <div class="match-row">
-            <span class="match-label">STARS:</span>
-            <span class="match-value">{{ delimit . ", " }}</span>
-          </div>
-        {{ end }}
-        {{ with index .context.Params.object_sections $term }}
-          <div class="match-row">
-            <span class="match-label">{{ $term | upper }}:</span>
-            <span class="match-value">{{ delimit . ", " }}</span>
-          </div>
-        {{ end }}
-      {{ else }}
-        {{/* Fallback View (Home / All Articles) - AGGREGATED FIX */}}
-        
-        {{/* 1. Aggregate all Star data into one row */}}
-        {{ $allStars := slice }}
-        {{ range $cat, $objs := .context.Params.stardata }}
-          {{ $allStars = $allStars | append $objs }}
-        {{ end }}
-        {{ with uniq $allStars }}
-          <div class="match-row">
-            <span class="match-label">STARS:</span>
-            <span class="match-value">{{ delimit . ", " }}</span>
-          </div>
-        {{ end }}
+    {{/* 2. OBJECT DATA (V0.19 FLAT SCHEMA) */}}
 
-        {{/* 2. Range over object_sections (Messier, NGC, etc.) */}}
-        {{ range $cat, $objs := .context.Params.object_sections }}
+      <div class="card-object-matches {{ with .context }}{{ if ne .Kind "term" }}non-explorer-hidden{{ end }}{{ end }}">
+
+      {{/* STARS: Aggregated */}}
+      {{ $starKeys := slice "stars_variable" "stars_nearby" "stars_bright" "stars_multiple" "stars_exotic" "stars_exoplanet" }}
+      {{ $allStars := slice }}
+      {{ range $starKeys }}
+        {{ with index $.context.Params . }}{{ $allStars = $allStars | append . }}{{ end }}
+      {{ end }}
+      {{ with uniq $allStars }}
+        <div class="match-row">
+          <span class="match-label">STARS:</span>
+          <span class="match-value">{{ delimit . ", " }}</span>
+        </div>
+      {{ end }}
+
+      {{/* SSO & DSO: Direct Mapping */}}
+      {{ $objKeys := dict "sso_planets" "PLANETS" "sso_meteors" "METEORS" "sso_comets" "COMETS" "sso_asteroids" "ASTEROIDS" "dso_messier" "MESSIER" "dso_caldwell" "CALDWELL" "dso_ngc" "NGC" "dso_other" "OTHER" }}
+      
+      {{ range $key, $label := $objKeys }}
+        {{ with index $.context.Params $key }}
           <div class="match-row">
-            <span class="match-label">{{ $cat | upper }}:</span>
-            <span class="match-value">{{ delimit $objs ", " }}</span>
+            <span class="match-label">{{ $label }}:</span>
+            <span class="match-value">{{ delimit . ", " }}</span>
           </div>
         {{ end }}
-      {{ end }}
+      {{ end }} {{/* CORRECTED: Removed 'range' from the end tag */}}
     </div>
+
 
 
     {{/* 3. METADATA */}}

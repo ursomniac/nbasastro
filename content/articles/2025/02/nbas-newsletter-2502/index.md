@@ -7,14 +7,8 @@ byline: "Uranus challenge, winter open clusters"
 tags: []
 
 # Taxonomy refs:
-#stargroups: ["variable"]
-#stardata:
-#  variable: ["T CrB"]
-solarsystem: ["planets"]
-catalogs: ["caldwell"]
-object_sections:
-  planets: ["Uranus"]
-  caldwell: ["49", "50"]
+sso_planets: ["Uranus"]
+dso_caldwell: ["49", "50"]
 ---
 
 {{< newsletter-stats 

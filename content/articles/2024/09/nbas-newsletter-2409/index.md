@@ -7,15 +7,9 @@ byline: "NBAS anniversary, lunar eclipse and more"
 tags: []
 
 # Taxonomy refs4
-#stargroups: ["variable"]
-#stardata:
-#  variable: ["T CrB"]
-solarsystem: ["planets"]
-catalogs: ["caldwell", "ngc"]
-object_sections:
-  planets: ["Mercury"]
-  caldwell: ["4"]
-  ngc: ["281"]
+sso_planets: ["Mercury"]
+dso_caldwell: ["4"]
+dso_ngc: ["281"]
 ---
 
 {{< newsletter-stats 

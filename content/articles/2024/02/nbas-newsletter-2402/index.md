@@ -7,18 +7,9 @@ byline: "Spring, overhead DSOs"
 tags: []
 
 # Taxonomy refs4
-#stargroups: [ "variable"]
-#stardata:
-#  variable: ["T CrB"]
-#solarsystem: ["comets"]
-catalogs: ["caldwell", "ngc", "other"]
-object_sections:
-#  planets: ["Saturn", "Neptune"]
-#  meteors: ["Perseids"]
-#  comets: ["12P/Pons-Brooks", "C/2023 A3 (Tsuchinshan-ATLAS)", "62P/Tsuchinshan"]
-  caldwell: ["25", "39"]
-  ngc: ["2392", "2420", "2416", "2419"]
-  other: ["Barnard 33"]
+dso_caldwell: ["25", "39"]
+dso_ngc: ["2392", "2420", "2416", "2419"]
+dso_other: ["Barnard 33"]
 ---
 
 {{< newsletter-stats 

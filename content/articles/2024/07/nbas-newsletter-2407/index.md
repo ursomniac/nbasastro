@@ -7,16 +7,9 @@ byline: "Summer Triangle, and Beta Lyrae"
 tags: []
 
 # Taxonomy refs4
-stargroups: ["bright", "variable"]
-stardata:
-  bright: ["Vega", "Deneb", "Altair"]
-  variable: ["Beta Lyr"]
-#solarsystem: ["planets", "meteors"]
-catalogs: ["messier"]
-object_sections:
-#  planets: ["Saturn", "Neptune"]
-#  meteors: ["Perseids"]
-  messier: ["83"]
+stars_bright: ["Vega", "Deneb", "Altair"]
+stars_variable: ["Beta Lyr"]
+dso_messier: ["83"]
 ---
 
 {{< newsletter-stats 

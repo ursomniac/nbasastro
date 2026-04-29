@@ -18,15 +18,11 @@ profile_data:
   "Area": 465 sq degrees (52nd)
 
 # Taxonomy refs:
-stargroups: ["variable", "exotic"]
-stardata: 
-  variable: ["Y CVn"]
-  exotic: ["TON 618"]
-catalogs: ["messier", "caldwell", "ngc"]
-object_sections:
-  messier: ["3", "51", "63"]
-  caldwell: ["32"]
-  ngc: ["4627", "4631"]
+stars_variable: ["Y CVn"]
+stars_exotic: ["TON 618"]
+dso_messier: ["3", "51", "63"]
+dso_caldwell: ["32"]
+dso_ngc: ["4627", "4631"]
 
 # The 6 Objects of Interest
 highlights:

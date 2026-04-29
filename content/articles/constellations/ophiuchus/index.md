@@ -18,15 +18,11 @@ profile_data:
   "Area": 948 sq degrees (11th)
 
 # Taxonomy refs:
-stargroups: ["nearby", "exoplanet"]
-stardata: 
-  nearby: ["Barnard's Star"]
-  exoplanet: ["Barnard's Star"]
-catalogs: ["messier", "ngc", "other"]
-object_sections:
-  messier: ["10"]
-  ngc: ["6384"]
-  other: ["Barnard 65-67", "IC 4665", "Rho Ophiuchi"]
+stars_nearby: ["Barnard's Star"]
+stars_exoplanet: ["Barnard's Star"]
+dso_messier: ["10"]
+dso_ngc: ["6384"]
+dso_other: ["Barnard 65-67", "IC 4665", "Rho Ophiuchi"]
 
 # The 6 Objects of Interest
 highlights:

@@ -18,15 +18,12 @@ profile_data:
   "Area": 804 sq degrees (16th)
 
 # Taxonomy refs:
-stargroups: ["multiple"]
-stardata: 
-  multiple: ["Albireo"]
-catalogs: ["messier", "ngc", "caldwell", "other"]
-object_sections:
-  messier: ["29"]
-  ngc: ["6960", "6992", "6946", "7000"]
-  caldwell: ["12", "33", "34"]
-  other: ["Sh2-101"]
+stars_bright: ["Albireo"]
+stars_multiple: ["Albireo"]
+dso_messier: ["29"]
+dso_ngc: ["6960", "6992", "6946", "7000"]
+dso_caldwell: ["12", "33", "34"]
+dso_other: ["Sh2-101"]
 
 # The 6 Objects of Interest
 highlights:

@@ -7,15 +7,11 @@ byline: "Exploring stellar remnants and protostars in nebulae"
 tags: ["White Dwarfs", "Stellar Remnants", "Protostars"]
 
 # Taxonomy refs:
-stargroups: ["nearby", "multiple"]
-stardata:
-  nearby: ["Sirius", "Procyon"]
-  multiple: ["Sirius", "Procyon"]
-catalogs: ["messier", "caldwell", "ngc"]
-object_sections:
-  messier: ["1", "42"]
-  caldwell: ["49", "50"]
-  ngc: ["2264", "2903"]
+stars_nearby: ["Sirius", "Procyon"]
+stars_multiple: ["Sirius", "Procyon"]
+dso_messier: ["1", "42"]
+dso_caldwell: ["49", "50"]
+dso_ngc: ["2264", "2903"]
 ---
 
 {{< newsletter-stats 

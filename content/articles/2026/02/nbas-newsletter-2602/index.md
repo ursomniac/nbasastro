@@ -7,15 +7,9 @@ byline: "All about Jupiter!  Mercury appears briefly."
 tags: ["Great Red Spot"]
 
 # Taxonomy refs:
-#stargroups: ["nearby", "multiple"]
-#stardata:
-#  nearby: ["Sirius", "Procyon"]
-solarsystem: ["planets"]
-catalogs: ["messier", "ngc"]
-object_sections:
-  planets: ["Mercury", "Jupiter"]
-  messier: ["46"]
-  ngc: ["2438"]
+sso_planets: ["Mercury", "Jupiter"]
+dso_messier: ["46"]
+dso_ngc: ["2438"]
 ---
 
 {{< newsletter-stats 

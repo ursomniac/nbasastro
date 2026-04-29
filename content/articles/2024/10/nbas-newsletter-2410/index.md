@@ -7,14 +7,8 @@ byline: "Orionids, catching a comet, Binocular tour"
 tags: []
 
 # Taxonomy refs4
-#stargroups: ["variable"]
-#stardata:
-#  variable: ["T CrB"]
-solarsystem: ["comets"]
-catalogs: ["ngc"]
-object_sections:
-  comets: ["C/2023 A1"]
-  ngc: ["281"]
+sso_comets: ["C/2023 A1"]
+dso_ngc: ["281"]
 ---
 
 {{< newsletter-stats 

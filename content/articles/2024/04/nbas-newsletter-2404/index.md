@@ -7,16 +7,8 @@ byline: "2024 Eclipse, three comets"
 tags: []
 
 # Taxonomy refs4
-#stargroups: [ "variable"]
-#stardata:
-#  variable: ["T CrB"]
-solarsystem: ["comets"]
-catalogs: ["ngc"]
-object_sections:
-#  planets: ["Saturn", "Neptune"]
-#  meteors: ["Perseids"]
-  comets: ["12P/Pons-Brooks", "C/2023 A3 (Tsuchinshan-ATLAS)", "62P/Tsuchinshan"]
-  ngc: ["3628"]
+sso_comets: ["12P/Pons-Brooks", "C/2023 A3 (Tsuchinshan-ATLAS)", "62P/Tsuchinshan"]
+dso_ngc: ["3628"]
 ---
 
 {{< newsletter-stats 

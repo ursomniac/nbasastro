@@ -7,16 +7,10 @@ byline: "Venus and Uranus meet, checking ut Scorpius"
 tags: []
 
 # Taxonomy refs:
-#stargroups: ["variable"]
-#stardata:
-#  variable: ["T CrB"]
-solarsystem: ["planets", "meteors"]
-catalogs: ["messier", "ngc"]
-object_sections:
-  planets: ["Venus", "Uranus"]
-  meteors: ["S. Delta Aquarids"]
-  messier: ["51"]
-  ngc: ["5195"]
+sso_planets: ["Venus", "Uranus"]
+sso_meteors: ["S. Delta Aquarids"]
+dso_messier: ["51"]
+dso_ngc: ["5195"]
 ---
 
 {{< newsletter-stats 

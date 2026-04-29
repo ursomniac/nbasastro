@@ -7,13 +7,7 @@ byline: "Galaxy Seasion, Messier Marathon"
 tags: ["Messier Marathon"]
 
 # Taxonomy refs:
-#stargroups: ["variable"]
-#stardata:
-#  variable: ["T CrB"]
-#solarsystem: ["planets"]
-catalogs: ["ngc"]
-object_sections:
-  ngc: ["2903"]
+dso_ngc: ["2903"]
 ---
 
 {{< newsletter-stats 

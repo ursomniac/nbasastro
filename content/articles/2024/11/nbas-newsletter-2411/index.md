@@ -7,15 +7,9 @@ byline: "Twilight inner planets, looking around Perseus"
 tags: []
 
 # Taxonomy refs4
-#stargroups: ["variable"]
-#stardata:
-#  variable: ["T CrB"]
-solarsystem: ["planets"]
-catalogs: ["caldwell", "ngc"]
-object_sections:
-  planets: ["Venus", "Mercury"]
-  caldwell: ["65"]
-  ngc: ["253"]
+sso_planets: ["Venus", "Mercury"]
+dso_caldwell: ["65"]
+dso_ngc: ["253"]
 ---
 
 {{< newsletter-stats 

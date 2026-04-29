@@ -7,16 +7,8 @@ byline: "Fall open clusters, NBAS Public Observing"
 tags: []
 
 # Taxonomy refs:
-#stargroups: ["variable"]
-#stardata:
-#  variable: ["T CrB"]
-#olarsystem: ["planets", "meteors"]
-catalogs: ["caldwell", "ngc"]
-object_sections:
-# planets: ["Ceres", "Eris"]
-# meteors: ["Orionids"]
-  caldwell: ["30"]
-  ngc: ["7331"]
+dso_caldwell: ["30"]
+dso_ngc: ["7331"]
 ---
 
 {{< newsletter-stats 

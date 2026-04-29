@@ -6,16 +6,14 @@ byline: "A look at (potentially) interesting new names of asteroids."
 tags: ["Asteroid Names", "WGSBN"]
 description: "A look at any interesting new names applied to asteroids."
 
-solarsystem: ["asteroids"]
-object_sections:
-  asteroids: 
-    - "(9960) Brucewillis" 
-    - "(463368) Eurytus"
-    - "(533671) Nabu"
-    -  "(721153) Gunda"
-    -  "(721154) Heinz"
-    -  "(858334) Gioacchinopecci"
-    -  "(870437) Leilani"
+sso_asteroids: 
+  - "(9960) Brucewillis" 
+  - "(463368) Eurytus"
+  - "(533671) Nabu"
+  -  "(721153) Gunda"
+  -  "(721154) Heinz"
+  -  "(858334) Gioacchinopecci"
+  -  "(870437) Leilani"
 ---
 
 New names of minor planets are announced in the *WGSBN Bulletin*, which is published every three weeks by the [International Astronomical Union](https://www.iau.org)'s

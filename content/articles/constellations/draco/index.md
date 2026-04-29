@@ -18,15 +18,11 @@ profile_data:
   "Area": 1,083 sq degrees (8th)
 
 # Taxonomy refs:
-stargroups: ["bright"]
-stardata: 
-  bright: ["Thuban"]
-catalogs: ["messier", "caldwell", "ngc", "other"]
-object_sections:
-  caldwell: ["3", "6"]
-  messier: ["102"]
-  ngc: ["4236", "5981", "5982", "5985", "6543"]
-  other: ["Arp 188"]
+stars_bright: ["Thuban"]
+dso_caldwell: ["3", "6"]
+dso_messier: ["102"]
+dso_ngc: ["4236", "5981", "5982", "5985", "6543"]
+dso_other: ["Arp 188"]
 
 # The 6 Objects of Interest
 highlights:

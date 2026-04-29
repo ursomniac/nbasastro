@@ -7,14 +7,8 @@ byline: "Venus and the Moon, and poking around Taurus"
 tags: []
 
 # Taxonomy refs4
-#stargroups: ["variable"]
-#stardata:
-#  variable: ["T CrB"]
-solarsystem: ["planets"]
-catalogs: ["other"]
-object_sections:
-  planets: ["Mars"]
-  other: ["IC 1871"]
+sso_planets: ["Mars"]
+dso_other: ["IC 1871"]
 ---
 
 {{< newsletter-stats 

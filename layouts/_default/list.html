@@ -1,9 +1,19 @@
 {{ define "main" }}
 <div class="archive-container">
     <header class="archive-header">
-        <h1 class="page-title">
-            {{ if eq .Kind "taxonomy" }}{{ .Data.Singular | title }}: {{ end }}{{ .Title }}
-        </h1>
+
+<h1 class="page-title">
+  {{ if eq .Kind "taxonomy" }}
+    {{/* This is the Category list (e.g., /stars_multiple/) */}}
+    {{ .LinkTitle }}
+  {{ else if eq .Kind "term" }}
+    {{/* This is a specific Item list (e.g., /stars_multiple/sirius/) */}}
+    {{ .Title }}
+  {{ else }}
+    {{ .Title }}
+  {{ end }}
+</h1>
+
 
         {{ with .Params.description }}
         <p class="page-subtitle">{{ . }}</p>

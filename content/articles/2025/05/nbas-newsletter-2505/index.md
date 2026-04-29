@@ -7,14 +7,9 @@ byline: "Mars, the Moon and Praesepe"
 tags: []
 
 # Taxonomy refs:
-stargroups: ["bright"]
-stardata:
-  bright: ["Regulus"]
-solarsystem: ["planets"]
-catalogs: ["ngc"]
-object_sections:
-  planets: ["Mars"]
-  ngc: ["3486"]
+stars_bright: ["Regulus"]
+sso_planets: ["Mars"]
+dso_ngc: ["3486"]
 ---
 
 {{< newsletter-stats 

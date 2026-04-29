@@ -18,11 +18,9 @@ profile_data:
   "Area": 475 sq degrees (36th)
 
 # Taxonomy refs:
-catalogs: ["caldwell", "ngc", "other"]
-object_sections:
-  caldwell: ["65", "70"]
-  ngc: ["253", "288", "300", "613", "7793"]
-  other: ["PGC 3859"]
+dso_caldwell: ["65", "70"]
+dso_ngc: ["253", "288", "300", "613", "7793"]
+dso_other: ["PGC 3859"]
 
 # The 6 Objects of Interest
 highlights:

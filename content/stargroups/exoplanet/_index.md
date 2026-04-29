@@ -1,3 +1,0 @@
----
-title: "Exoplanet Systems"
----

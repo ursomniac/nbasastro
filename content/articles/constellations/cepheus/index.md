@@ -18,14 +18,10 @@ profile_data:
   "Area": 588 sq degrees (27th)
 
 # Taxonomy refs:
-stargroups: ["variable"]
-stardata:
-  variable: ["Delta Cep"]
-catalogs: ["caldwell", "ngc", "other"]
-object_sections:
-  caldwell: ["1", "4"]
-  ngc: ["188", "7023", "7510"]
-  other: ["IC 1396", "Sh 2-136"]
+stars_variable: ["Delta Cep"]
+dso_caldwell: ["1", "4"]
+dso_ngc: ["188", "7023", "7510"]
+dso_other: ["IC 1396", "Sh 2-136"]
 
 # The 6 Objects of Interest
 highlights:

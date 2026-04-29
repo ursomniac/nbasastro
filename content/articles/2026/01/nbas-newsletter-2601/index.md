@@ -7,16 +7,10 @@ byline: "Comparing supergiant stars: Betelgeuse and Rigel"
 tags: ["Supergiant Stars"]
 
 # Taxonomy refs:
-stargroups: ["bright"]
-stardata:
-  bright: ["Betelgeuse", "Rigel"]
-#solarsystem: ["planets"]
-catalogs: ["messier", "ngc", "other"]
-object_sections:
-#  planets: ["Mercury", "Jupiter"]
-  messier: ["45"]
-  ngc: ["1432", "1435"]
-  other: ["vdb 20"]
+stars_bright: ["Betelgeuse", "Rigel"]
+dso_messier: ["45"]
+dso_ngc: ["1432", "1435"]
+dso_other: ["vdb 20"]
 ---
 
 {{< newsletter-stats 

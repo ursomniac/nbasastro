@@ -7,15 +7,9 @@ byline: "Perseids, Saturn, and Neptune"
 tags: []
 
 # Taxonomy refs4
-#stargroups: ["variable"]
-#stardata:
-#  variable: ["T CrB"]
-solarsystem: ["planets", "meteors"]
-catalogs: ["ngc"]
-object_sections:
-  planets: ["Saturn", "Neptune"]
-  meteors: ["Perseids"]
-  ngc: ["6357"]
+sso_planets: ["Saturn", "Neptune"]
+sso_meteors: ["Perseids"]
+dso_ngc: ["6357"]
 ---
 
 {{< newsletter-stats 

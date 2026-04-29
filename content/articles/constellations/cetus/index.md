@@ -18,15 +18,11 @@ profile_data:
   "Area": 1,231 sq degrees (4th)
 
 # Taxonomy refs:
-stargroups: ["variable"]
-stardata: 
-  variable: ["Mira"]
-catalogs: ["messier", "ngc", "caldwell", "other"]
-object_sections:
-  messier: ["77"]
-  caldwell: ["51", "56", "62"]
-  ngc: ["246", "247"]
-  other: ["IC 1613", "Wolf-Lundmark-Melotte"]
+stars_variable: ["Mira"]
+dso_messier: ["77"]
+dso_caldwell: ["51", "56", "62"]
+dso_ngc: ["246", "247"]
+dso_other: ["IC 1613", "Wolf-Lundmark-Melotte"]
 
 # The 6 Objects of Interest
 highlights:

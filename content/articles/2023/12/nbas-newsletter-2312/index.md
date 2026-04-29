@@ -7,11 +7,9 @@ byline: "Winter soltices, open cluster pictograms"
 tags: []
 
 # Taxonomy refs
-catalogs: ["messier", "caldwell", "ngc"]
-object_sections:
-  messier: ["33"]
-  caldwell: ["13"]
-  ngc: ["457", "1245", "1893", "2169"]
+dso_messier: ["33"]
+dso_caldwell: ["13"]
+dso_ngc: ["457", "1245", "1893", "2169"]
 ---
 
 {{< newsletter-stats

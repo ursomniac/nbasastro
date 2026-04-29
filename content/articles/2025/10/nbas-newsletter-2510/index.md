@@ -7,16 +7,10 @@ byline: "Fall objets, Dwarf Planets, Orionids"
 tags: []
 
 # Taxonomy refs:
-#stargroups: ["variable"]
-#stardata:
-#  variable: ["T CrB"]
-solarsystem: ["planets", "meteors"]
-catalogs: ["caldwell", "ngc"]
-object_sections:
-  planets: ["Ceres", "Eris"]
-  meteors: ["Orionids"]
-  caldwell: ["27"]
-  ngc: ["6888"]
+sso_planets: ["Ceres", "Eris"]
+sso_meteors: ["Orionids"]
+dso_caldwell: ["27"]
+dso_ngc: ["6888"]
 ---
 
 {{< newsletter-stats 

@@ -16,10 +16,29 @@ title = "Northern Berkshire Astronomical Society"
   tag = "tags"
   series = "series"
   constellation = "constellations"
-  catalog = "catalogs"
-  solarsystem = "solarsystem"
-  stargroups = "stargroups"
   knowledgetopics = "knowledgetopics"
+
+
+  # STARS
+  stars_variable = "stars_variable"
+  stars_nearby   = "stars_nearby"
+  stars_bright   = "stars_bright"
+  stars_multiple = "stars_multiple"
+  stars_exotic   = "stars_exotic"
+  stars_exoplanet= "stars_exoplanet"
+
+  # SSO (Solar System Objects)
+  sso_planets   = "sso_planets"
+  sso_meteors   = "sso_meteors"
+  sso_comets    = "sso_comets"
+  sso_asteroids = "sso_asteroids"
+
+  # DSO (Deep Sky Objects)
+  dso_messier  = "dso_messier"
+  dso_caldwell = "dso_caldwell"
+  dso_ngc      = "dso_ngc"
+  dso_other    = "dso_other"
+
 
 [permalinks]
   articles = "/articles/:year/:month/:title/"

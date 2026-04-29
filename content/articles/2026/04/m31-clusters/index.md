@@ -8,10 +8,8 @@ tags: ["Local Group"]
 constellations: ["Andromeda"]
 description: "I am a test article..."
 
-catalogs: ["messier", "ngc"]
-object_sections:
-  messier: ["31", "32", "110"]
-  ngc: ["206", "224"]
+dso_messier: ["31", "32", "110"]
+dso_ngc: ["206", "224"]
 
 ---
 

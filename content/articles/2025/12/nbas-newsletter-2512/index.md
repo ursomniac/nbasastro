@@ -7,16 +7,11 @@ byline: "Jupiter, the Geminids, and T CrB."
 tags: []
 
 # Taxonomy refs:
-stargroups: ["variable"]
-stardata:
-  variable: ["T CrB"]
-solarsystem: ["planets", "meteors"]
-catalogs: ["caldwell", "ngc"]
-object_sections:
-  planets: ["Jupiter"]
-  meteors: ["Geminids"]
-  caldwell: ["63"]
-  ngc: ["7293"]
+stars_variable: ["T CrB"]
+sso_planets: ["Jupiter"]
+sso_meteors: ["Geminids"]
+dso_caldwell: ["63"]
+dso_ngc: ["7293"]
 ---
 
 {{< newsletter-stats 

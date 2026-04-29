@@ -18,14 +18,10 @@ profile_data:
   "Area": 867 sq degrees (15th)
 
 # Taxonomy refs:
-stargroups: ["exotic"]
-stardata: 
-  exotic: ["Sgr A"]
-catalogs: ["messier", "ngc", "caldwell"]
-object_sections:
-  messier: ["17", "20", "21", "22"]
-  ngc: ["6822"]
-  caldwell: ["57"]
+stars_exotic: ["Sgr A"]
+dso_messier: ["17", "20", "21", "22"]
+dso_ngc: ["6822"]
+dso_caldwell: ["57"]
 
 # The 6 Objects of Interest
 highlights:

@@ -7,14 +7,9 @@ byline: "Mars, the Moon and Praesepe"
 tags: []
 
 # Taxonomy refs:
-stargroups: ["variable"]
-stardata:
-  variable: ["T CrB"]
-solarsystem: ["planets"]
-catalogs: ["ngc"]
-object_sections:
-  planets: ["Venus", "Saturn"]
-  ngc: ["3344"]
+stars_variable: ["T CrB"]
+sso_planets: ["Venus", "Saturn"]
+dso_ngc: ["3344"]
 ---
 
 {{< newsletter-stats 

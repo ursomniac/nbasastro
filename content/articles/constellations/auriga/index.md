@@ -18,16 +18,12 @@ profile_data:
   "Area": 657 sq degrees (21st)
 
 # Taxonomy refs:
-stargroups: ["variable", "multiple"]
-stardata:
-  variable: ["Epsilon Aur", "AE Aur"]
-  multiple: ["Capella"]
-catalogs: ["messier", "caldwell", "ngc", "other"]
-object_sections:
-  messier: ["37"]
-  caldwell: ["31"]
-  ngc: ["1893", "1931"]
-  other: ["IC 405"]
+stars_variable: ["Epsilon Aur", "AE Aur"]
+stars_multiple: ["Capella"]
+dso_messier: ["37"]
+dso_caldwell: ["31"]
+dso_ngc: ["1893", "1931"]
+dso_other: ["IC 405"]
 
 # The 6 Objects of Interest
 highlights:

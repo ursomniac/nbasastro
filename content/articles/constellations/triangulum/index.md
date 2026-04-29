@@ -18,11 +18,9 @@ profile_data:
   "Area": 132 sq degrees (78th)
 
 # Taxonomy refs:
-catalogs: ["messier", "ngc", "other"]
-object_sections:
-  messier: ["33"]
-  ngc: ["604", "672", "784", "925"]
-  other: ["Collinder 21"]
+dso_messier: ["33"]
+dso_ngc: ["604", "672", "784", "925"]
+dso_other: ["Collinder 21"]
 
 # The 6 Objects of Interest
 highlights:

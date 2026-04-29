@@ -18,15 +18,12 @@ profile_data:
   "Area": 514 sq degrees (30th)
 
 # Taxonomy refs:
-stargroups: ["multiple"]
-stardata: 
-  multiple: ["Castor"]
-catalogs: ["messier", "caldwell", "ngc", "other"]
-object_sections:
-  messier: ["35"]
-  caldwell: ["39"]
-  ngc: ["2158", "2371", "2392", "2420"]
-  other: ["IC 443"]
+stars_multiple: ["Castor"]
+stars_bright: ["Castor"]
+dso_messier: ["35"]
+dso_caldwell: ["39"]
+dso_ngc: ["2158", "2371", "2392", "2420"]
+dso_other: ["IC 443"]
 
 # The 6 Objects of Interest
 highlights:

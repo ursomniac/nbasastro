@@ -18,14 +18,11 @@ profile_data:
   "Area": 1,231 sq degrees (4th)
 
 # Taxonomy refs:
-stargroups: ["variable"]
-stardata: 
-  variable: ["Betelgeuse"]
-catalogs: ["messier", "ngc", "other"]
-object_sections:
-  messier: ["42", "43"]
-  ngc: ["2024", "2169"]
-  other: ["Barnard 33", "LDN 1622"]
+stars_variable: ["Betelgeuse"]
+stars_bright: ["Betelgeuse"]
+dso_messier: ["42", "43"]
+dso_ngc: ["2024", "2169"]
+dso_other: ["Barnard 33", "LDN 1622"]
 
 # The 6 Objects of Interest
 highlights:

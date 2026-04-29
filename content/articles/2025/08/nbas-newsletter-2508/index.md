@@ -7,16 +7,10 @@ byline: "Planet close approaches! The Teaspoon asterism"
 tags: []
 
 # Taxonomy refs:
-#stargroups: ["variable"]
-#stardata:
-#  variable: ["T CrB"]
-solarsystem: ["planets"]
-catalogs: ["caldwell", "ngc", "other"]
-object_sections:
-  planets: ["Mercury", "Jupiter", "Venus"]
-  caldwell: ["11"]
-  ngc: ["7635"]
-  other: ["Sh 2-162"]
+sso_planets: ["Mercury", "Jupiter", "Venus"]
+dso_caldwell: ["11"]
+dso_ngc: ["7635"]
+dso_other: ["Sh 2-162"]
 ---
 
 {{< newsletter-stats 

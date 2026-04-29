@@ -18,15 +18,11 @@ profile_data:
   "Area": 907 sq degrees (13th)
 
 # Taxonomy refs:
-stargroups: ["bright", "multiple"]
-stardata: 
-  bright: ["Arcturus"]
-  multiple: ["Izar"]
-catalogs: ["caldwell", "ngc", "other"]
-object_sections:
-  caldwell: ["45"]
-  ngc: ["5428", "5466", "5529"]
-  other: ["Hickson 73"]
+stars_bright: ["Arcturus"]
+stars_multiple: ["Izar"]
+dso_caldwell: ["45"]
+dso_ngc: ["5428", "5466", "5529"]
+dso_other: ["Hickson 73"]
 
 # The 6 Objects of Interest
 highlights:

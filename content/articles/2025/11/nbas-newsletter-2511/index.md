@@ -7,16 +7,10 @@ byline: "Fall Galaxy challenges; Leonids, Uranus"
 tags: []
 
 # Taxonomy refs:
-#stargroups: ["variable"]
-#stardata:
-#  variable: ["T CrB"]
-solarsystem: ["planets", "meteors"]
-catalogs: ["ngc"]
-object_sections:
-  planets: ["Uranus"]
-  meteors: ["Leonids"]
-  caldwell: ["63"]
-  ngc: ["1501"]
+sso_planets: ["Uranus"]
+sso_meteors: ["Leonids"]
+dso_caldwell: ["63"]
+dso_ngc: ["1501"]
 ---
 
 {{< newsletter-stats 

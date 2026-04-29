@@ -18,14 +18,10 @@ profile_data:
   "Area": 757 sq deg (18th)
 
 # Taxonomy refs:
-stargroups: ["variable"]
-stardata: 
-  variable: ["RU Cam"]
-catalogs: ["caldwell", "ngc", "other"]
-object_sections:
-  caldwell: ["5", "7"]
-  ngc: ["1501", "1502", "2146", "2403"]
-  other: ["IC 342", "IC 3568"]
+stars_variable: ["RU Cam"]
+dso_caldwell: ["5", "7"]
+dso_ngc: ["1501", "1502", "2146", "2403"]
+dso_other: ["IC 342", "IC 3568"]
 
 # The 6 Objects of Interest
 highlights:

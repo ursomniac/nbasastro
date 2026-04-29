@@ -18,14 +18,11 @@ profile_data:
   "Area": 497 sq degrees (33rd)
 
 # Taxonomy refs:
-stargroups: ["multiple"]
-stardata: 
-  multiple: ["Antares"]
-catalogs: ["messier", "ngc", "other"]
-object_sections:
-  messier: ["4", "6", "7"]
-  ngc: ["6334", "6357"]
-  other: ["IC 4592"]
+stars_multiple: ["Antares"]
+stars_bright: ["Antares"]
+dso_messier: ["4", "6", "7"]
+dso_ngc: ["6334", "6357"]
+dso_other: ["IC 4592"]
 
 # The 6 Objects of Interest
 highlights:

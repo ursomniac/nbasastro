@@ -7,18 +7,9 @@ byline: "Spring, Ursa Major"
 tags: []
 
 # Taxonomy refs4
-#stargroups: [ "variable"]
-#stardata:
-#  variable: ["T CrB"]
-#solarsystem: ["comets"]
-catalogs: ["messier", "caldwell", "ngc"]
-object_sections:
-#  planets: ["Saturn", "Neptune"]
-#  meteors: ["Perseids"]
-#  comets: ["12P/Pons-Brooks", "C/2023 A3 (Tsuchinshan-ATLAS)", "62P/Tsuchinshan"]
-  messier: ["81", "82", "97"]
-  caldwell: ["3"]
-  ngc: ["2024"]
+dso_messier: ["81", "82", "97"]
+dso_caldwell: ["3"]
+dso_ngc: ["2024"]
 ---
 
 {{< newsletter-stats 

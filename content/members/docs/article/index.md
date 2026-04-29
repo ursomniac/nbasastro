@@ -153,18 +153,13 @@ profile_data:
   "Area": 867 sq degrees
 
 # Taxonomy refs:
-star_type: ["exotic_stars"]
-stars:
-  exotic_stars: ["Sgr A"]
-catalogs: ["messier", "ngc", "caldwell", "other"]
-object_sections:
-  messier: ["17", "20", "21", "22"]
-  ngc: ["6822"]
-  caldwell: ["57"]
-  other: ["PK 9-7.1"]
-solarsystem: ["planets", "meteors"]
-  planets: ["Uranus", "Neptune"]
-  meteors: ["Taurids"]
+exotic_stars: ["Sgr A"]
+dso_messier: ["17", "20", "21", "22"]
+dso_ngc: ["6822"]
+dso_caldwell: ["57"]
+dso_other: ["PK 9-7.1"]
+sso_planets: ["Uranus", "Neptune"]
+sso_meteors: ["Taurids"]
 
 # The 6 Objects of Interest Table
 highlights:
@@ -190,6 +185,8 @@ highlights:
 ```
 
 But here are ALSO the examples of "what to do with DSOs and SSOs".
+
+TODO: THIS IS WRONG - FIX!
 
 * **DSO**s: use `catalogs: ["messier", etc.] for the catalogs you want to reference
     * then for each one: e.g., `messier: ["17", "20", "24"], etc.

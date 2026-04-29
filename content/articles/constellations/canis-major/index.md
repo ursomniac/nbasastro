@@ -18,15 +18,11 @@ profile_data:
   "Area": 380 sq degrees (43rd)
 
 # Taxonomy refs:
-stargroups: ["multiple", "nearby"]
-stardata: 
-  multiple: ["Sirius"]
-  nearby: ["Sirius"]
-catalogs: ["messier", "caldwell", "ngc", "other"]
-object_sections:
-  messier: ["41"]
-  ngc: ["2359", "2360"]
-  other: ["CMa Overdensity", "Sh 2-308"]
+stars_multiple: ["Sirius"]
+stars_nearby: ["Sirius"]
+dso_messier: ["41"]
+dso_ngc: ["2359", "2360"]
+dso_other: ["CMa Overdensity", "Sh 2-308"]
 
 # The 6 Objects of Interest
 highlights:

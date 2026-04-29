@@ -18,11 +18,9 @@ profile_data:
   "Area": 386 eq degrees (42nd)
 
 # Taxonomy refs:
-catalogs: ["messier", "ngc", "other"]
-object_sections:
-  messier: ["64", "100"]
-  ngc: ["4173", "4565", "4889"]
-  other: ["HCG 61", "Melotte 111"]
+dso_messier: ["64", "100"]
+dso_ngc: ["4173", "4565", "4889"]
+dso_other: ["HCG 61", "Melotte 111"]
 
 # The 6 Objects of Interest
 highlights:

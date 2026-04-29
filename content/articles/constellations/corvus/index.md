@@ -18,11 +18,9 @@ profile_data:
   "Area": 184 sq degrees (70th)
 
 # Taxonomy refs:
-catalogs: ["caldwell", "ngc", "other"]
-object_sections:
-  caldwell: ["60", "61"]
-  ngc: ["4027", "4050", "4361", "4727"] 
-  other: ["STF 1659"]
+dso_caldwell: ["60", "61"]
+dso_ngc: ["4027", "4050", "4361", "4727"] 
+dso_other: ["STF 1659"]
 
 # The 6 Objects of Interest
 highlights:

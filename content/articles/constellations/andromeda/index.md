@@ -19,14 +19,10 @@ profile_data:
   "Area": 722 sq deg (19th)
 
 # Taxonomy refs:
-stargroups: ["multiple"]
-stardata: 
-  multiple: ["Almach"]
-catalogs: ["messier", "caldwell", "ngc"]
-object_sections:
-  messier: ["31", "32", "110"]
-  caldwell: ["22", "23", "28"]
-  ngc: ["206", "752", "891", "7662"]
+stars_multiple: ["Almach"]
+dso_messier: ["31", "32", "110"]
+dso_caldwell: ["22", "23", "28"]
+dso_ngc: ["206", "752", "891", "7662"]
 
 
 # The 6 Objects of Interest

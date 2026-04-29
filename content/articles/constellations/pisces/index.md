@@ -18,11 +18,9 @@ profile_data:
   "Area": 889 sq degrees (14th)
 
 # Taxonomy refs:
-catalogs: ["messier", "ngc", "other"]
-object_sections:
-  messier: ["74"]
-  ngc: ["266", "488", "507", "520", "660"]
-  other: ["Arp 157"]
+dso_messier: ["74"]
+dso_ngc: ["266", "488", "507", "520", "660"]
+dso_other: ["Arp 157"]
 
 # The 6 Objects of Interest
 highlights:

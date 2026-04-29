@@ -7,14 +7,9 @@ byline: "Venus and Uranus meet, checking ut Scorpius"
 tags: []
 
 # Taxonomy refs:
-stargroups: ["bright"]
-stardata:
-  bright: ["Regulus"]
-solarsystem: ["planets"]
-catalogs: ["messier"]
-object_sections:
-  planets: ["Mercury", "Uranus"]
-  messier: ["13"]
+stars_bright: ["Regulus"]
+sso_planets: ["Mercury", "Uranus"]
+dso_messier: ["13"]
 ---
 
 {{< newsletter-stats 

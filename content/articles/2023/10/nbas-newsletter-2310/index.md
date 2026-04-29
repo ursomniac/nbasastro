@@ -7,10 +7,8 @@ byline: "Welcome! Space art! Partial Solar Eclipse"
 tags: []
 
 # Taxonomy refs
-catalogs: ["caldwell", "ngc"]
-object_sections:
-  caldwell: ["34"]
-  ngc: ["6992"]
+dso_caldwell: ["34"]
+dso_ngc: ["6992"]
 ---
 
 {{< newsletter-stats

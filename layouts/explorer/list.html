@@ -8,13 +8,17 @@
     <div class="explorer-col">
       <h3>Solar System</h3>
       <ul class="explorer-list">
-        {{ range $item := slice "moon" "planets" "comets" "asteroids" "meteors" }}
-          {{ $count := 0 }}{{ with (index $.Site.Taxonomies.solarsystem $item) }}{{ $count = .Count }}{{ end }}
+        {{ $sso := dict "sso_planets" "Planets" "sso_comets" "Comets" "sso_asteroids" "Asteroids" "sso_meteors" "Meteors" "sso_moon" "Moon" }}
+        {{ range $key, $label := $sso }}
+          {{ $count := 0 }}
+          {{ $tax := index $.Site.Taxonomies $key }}
+          {{ if $tax }}{{ $count = len $tax }}{{ end }}
           <li>
             {{ if gt $count 0 }}
-              <a href="/solarsystem/{{ $item | urlize }}/">{{ $item | humanize }}</a> <span class="count">({{ $count }})</span>
+              <a href="/{{ $key | urlize }}/">{{ $label }}</a>
+              <span class="count">({{ $count }})</span>
             {{ else }}
-              <span class="nav-disabled">{{ $item | humanize }} (0)</span>
+              <span class="nav-disabled">{{ $label }} (0)</span>
             {{ end }}
           </li>
         {{ end }}
@@ -22,55 +26,42 @@
     </div>
 
     <!-- COLUMN 2: STARS & SYSTEMS -->
-<!-- COLUMN 2: STARS & SYSTEMS -->
-<div class="explorer-col">
-  <h3>Stars & Systems</h3>
-  <ul class="explorer-list">
-    {{/* Only the "keys" remain hard-coded; the labels are pulled from content */}}
-    {{ $keys := slice "multiple" "variable" "nearby" "exoplanet" "bright" "exotic" }}
-    
-    {{ range $key := $keys }}
-      {{ $count := 0 }}
-      {{/* Get the taxonomy term page object */}}
-      {{ $termPage := site.GetPage (printf "stargroups/%s" $key) }}
-      
-      {{ range $.Site.RegularPages }}
-        {{ if .Params.stardata }}
-          {{ if (index .Params.stardata $key) }}
-            {{ $count = add $count 1 }}
-          {{ end }}
+    <div class="explorer-col">
+      <h3>Stars & Systems</h3>
+      <ul class="explorer-list">
+        {{ $stars := slice "stars_multiple" "stars_variable" "stars_nearby" "stars_exoplanet" "stars_bright" "stars_exotic" }}
+        {{ range $key := $stars }}
+          {{ $count := 0 }}
+          {{ $tax := index $.Site.Taxonomies $key }}
+          {{ if $tax }}{{ $count = len $tax }}{{ end }}
+          {{ $termPage := site.GetPage $key }}
+          <li>
+            {{ if gt $count 0 }}
+              <a href="/{{ $key | urlize }}/">{{ if $termPage }}{{ $termPage.LinkTitle }}{{ else }}{{ $key | humanize }}{{ end }}</a>
+              <span class="count">({{ $count }})</span>
+            {{ else }}
+              <span class="nav-disabled">{{ if $termPage }}{{ $termPage.LinkTitle }}{{ else }}{{ $key | humanize }}{{ end }} (0)</span>
+            {{ end }}
+          </li>
         {{ end }}
-      {{ end }}
-
-      <li>
-        {{ if gt $count 0 }}
-          {{/* We use $termPage.LinkTitle to get the name from your _index.md */}}
-          <a href="/stargroups/{{ $key }}/">
-            {{ if $termPage }}{{ $termPage.LinkTitle }}{{ else }}{{ $key | humanize }}{{ end }}
-          </a> 
-          <span class="count">({{ $count }})</span>
-        {{ else }}
-          <span class="nav-disabled">
-            {{ if $termPage }}{{ $termPage.LinkTitle }}{{ else }}{{ $key | humanize }}{{ end }} (0)
-          </span>
-        {{ end }}
-      </li>
-    {{ end }}
-  </ul>
-</div>
-
+      </ul>
+    </div>
 
     <!-- COLUMN 3: DSO CATALOGS -->
     <div class="explorer-col">
       <h3>DSO Catalogs</h3>
       <ul class="explorer-list">
-        {{ range $cat := slice "messier" "caldwell" "ngc" "other" }}
-          {{ $count := 0 }}{{ with (index $.Site.Taxonomies.catalogs $cat) }}{{ $count = .Count }}{{ end }}
+        {{ $dsos := dict "dso_messier" "MESSIER" "dso_caldwell" "CALDWELL" "dso_ngc" "NGC" "dso_other" "OTHER" }}
+        {{ range $key, $label := $dsos }}
+          {{ $count := 0 }}
+          {{ $tax := index $.Site.Taxonomies $key }}
+          {{ if $tax }}{{ $count = len $tax }}{{ end }}
           <li>
             {{ if gt $count 0 }}
-              <a href="/catalogs/{{ $cat | urlize }}/">{{ $cat | humanize | upper }}</a> <span class="count">({{ $count }})</span>
+              <a href="/{{ $key | urlize }}/">{{ $label }}</a>
+              <span class="count">({{ $count }})</span>
             {{ else }}
-              <span class="nav-disabled">{{ $cat | humanize | upper }} (0)</span>
+              <span class="nav-disabled">{{ $label }} (0)</span>
             {{ end }}
           </li>
         {{ end }}

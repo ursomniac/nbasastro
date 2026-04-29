@@ -7,16 +7,9 @@ byline: "Incoming Comet, T CrB"
 tags: []
 
 # Taxonomy refs4
-stargroups: [ "variable"]
-stardata:
-  variable: ["T CrB"]
-solarsystem: ["comets"]
-catalogs: ["messier"]
-object_sections:
-#  planets: ["Saturn", "Neptune"]
-#  meteors: ["Perseids"]
-  comets: ["C/2023 A3 (Tsuchinshan-ATLAS)"]
-  messier: ["84", "86"]
+stars_variable: ["T CrB"]
+sso_comets: ["C/2023 A3 (Tsuchinshan-ATLAS)"]
+dso_messier: ["84", "86"]
 ---
 
 {{< newsletter-stats 

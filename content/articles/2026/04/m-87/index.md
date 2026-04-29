@@ -8,10 +8,7 @@ tags: ["Galaxy", "Virgo Cluster"]
 categories: ["Deep Sky"]
 constellations: ["Virgo"]
 
-catalogs: ["Messier"]
-
-object_sections:
-  messier: ["87"]
+dso_messier: ["87"]
 ---
 
 FOO FOO FOO

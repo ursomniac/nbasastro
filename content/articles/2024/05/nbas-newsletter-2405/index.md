@@ -6,17 +6,8 @@ series: ["nbas-newsletter"]
 byline: "2024 Eclipse recap, Galaxy Season"
 tags: []
 
-# Taxonomy refs4
-#stargroups: [ "variable"]
-#stardata:
-#  variable: ["T CrB"]
-#solarsystem: ["comets"]
-catalogs: ["messier"]
-object_sections:
-#  planets: ["Saturn", "Neptune"]
-#  meteors: ["Perseids"]
-#  comets: ["C/2023 A3 (Tsuchinshan-ATLAS)"]
-  messier: ["100"]
+# Taxonomy refs
+dso_messier: ["100"]
 ---
 
 {{< newsletter-stats 
