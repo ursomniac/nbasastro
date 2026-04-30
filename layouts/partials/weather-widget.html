@@ -1,0 +1,13 @@
+{{ $style := resources.Get "css/weather-widget.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink }}">
+
+<div class="widget-box">
+    <h3 class="sidebar-heading">Local Weather</h3>
+    <div id="weather-container">
+        <!-- JS from weather.js populates this -->
+    </div>
+</div>
+
+{{ $js := resources.Get "js/weather.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+

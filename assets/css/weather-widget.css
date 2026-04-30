@@ -1,0 +1,22 @@
+/* FORCE ALIGNMENT TO MATCH CALENDAR/SKY WIDGETS */
+.widget-box .sidebar-heading {
+    color: var(--gold-base) !important;
+    text-decoration: none !important;
+    text-align: center; /* Match existing sidebar-heading center alignment */
+    margin-top: 0 !important; /* Remove excessive top gap */
+    padding-bottom: 5px !important;
+    border-bottom: 1px solid var(--border-soft); /* Use soft border to match others */
+}
+
+#weather-container {
+    padding: 10px 0;
+    margin-top: 5px;
+}
+
+.weather-city {
+    text-align: center;
+    color: var(--text-pure);
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}

@@ -1,34 +1,42 @@
-<!-- V0.14.4: BASEOF PUBLIC SIDEBAR --><aside class="nbas-sidebar"><div class="sidebar-top"><h3 class="sidebar-heading">Next Meeting</h3>
-    <p id="next-meeting-text" class="meeting-highlight">Loading</p>
-    <p class="meeting-details">6 PM | North Adams Public Library</p>
-    <a href="https://maps.google.com/?q=North+Adams+Public+Library" target="_blank" class="external-link">View on Google Maps</a>
-  </div>
-  
-  <hr class="sidebar-divider">
-  
-  <div class="sidebar-widgets">
-    <div class="search-widget widget-box">
-      <h3 class="sidebar-heading">Search Archive</h3>
-      <!-- Pagefind will inject the search UI here -->
-      <div id="search"></div>
+<!-- V0.19.2: FULL STABLE SIDEBAR -->
+<aside class="nbas-sidebar">
+    <div class="sidebar-top">
+        <h3 class="sidebar-heading">Next Meeting</h3>
+        <p id="next-meeting-text" class="meeting-highlight">Loading</p>
+        <p class="meeting-details">6 PM | North Adams Public Library</p>
+        <a href="https://google.com" target="_blank" class="external-link">View on Google Maps</a>
     </div>
+    
+    <hr class="sidebar-divider">
+    
+    <div class="sidebar-widgets">
+        <div class="search-widget widget-box">
+            <h3 class="sidebar-heading">Search Archive</h3>
+            <div id="search"></div>
+        </div>
 
-    <h3 class="sidebar-heading">Calendar</h3>
-    {{ partialCached "unified-events.html" . (now.Format "2006-01-02") }}
+        <h3 class="sidebar-heading">Calendar</h3>
+        {{ partial "unified-events.html" . (now.Format "2006-01-02") }}
 
-    <div class="widget-box">
-      <h3 class="sidebar-heading">Tonight's Sky</h3>
-      {{ partial "sky-widget.html" . }}
+        {{ partial "weather-widget.html" . }}
+
+        <div class="widget-box">
+            <h3 class="sidebar-heading">Tonight's Sky</h3>
+            {{ partial "sky-widget.html" . }}
+        </div>
+
+        <div class="moon-widget widget-box">
+            <h3 class="sidebar-heading">Moon Phase</h3>
+            {{ partial "moon-widget.html" . }}
+        </div>
+
+        <div class="widget-box">
+            <h3 class="sidebar-heading">Sky Forecast</h3>
+		<img src="https://www.7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0">
+        </div>
+
+        {{ partial "aurora-widget.html" . }}
+        {{ partial "sunspot-widget.html" . }}
     </div>
-
-    <div class="moon-widget widget-box">
-      <h3 class="sidebar-heading">Moon Phase</h3>
-      {{ partial "moon-widget.html" . }}
-    </div>
-
-    <div class="widget-box">
-      <h3 class="sidebar-heading">Sky Forecast</h3>
-      <img src="https://7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0" alt="Sky Forecast">
-    </div>
-  </div>
 </aside>
+

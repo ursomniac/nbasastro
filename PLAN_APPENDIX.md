@@ -6,12 +6,12 @@
 
 Must not have a CORS block issue.  FEEDS of infomation are OK, if we can use that and design our own widget to filter/format/display the content therein.
 
-1. Aurora / Space weather? - current Kp index with 12-24h forecast...
-2. APOD (Astronomy Picture of the Day)
-3. Sunspots / H-alpha image?
-4. Local Weather  (temp, and anything that would be relevant to planning observing sessions)
-5. Meteoblue - Astronomy Seeing (supposedly no CORS)
-6. ISS (NASA) - direct HTML/JS snippet - show upcoming passes for the ISS at our location
+1. DONE - Aurora / Space weather? - current Kp index with 12-24h forecast...
+2. DOES NOT WORK - APOD (Astronomy Picture of the Day)
+3. DONE - Sunspots / H-alpha image?
+4. DONE - Local Weather  (temp, and anything that would be relevant to planning observing sessions)
+5. WORKED NOW BROKEN - Meteoblue - Astronomy Seeing (supposedly no CORS)
+6. TODO - ISS (NASA) - direct HTML/JS snippet - show upcoming passes for the ISS at our location
 
 ### A.1. OR External Links:
 
