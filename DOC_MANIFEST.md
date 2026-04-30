@@ -1,7 +1,8 @@
 # NBAS - Documentation Manifest
 
 * /members  = "home" page with custom navigation (but including the navbar and footer)
-* /members/docs = all the "how to" articles with sample code - list with descriptions
+* /members/docs = overview of the site and how it works
+* /members/howto = all the "how to" articles with sample code - list with descriptions
 * /members/demo = all the "demo" articles - this endpoint is also a listing page
 * /members/templates = all the "fill in the blank" templates
 * /members/process = checklists for content submission 
@@ -32,6 +33,13 @@
  * [ ] - howto_sso/ - Metadata about SSOs
  * [ ] - howto_stars/ - Metadata about Stars
 
+### 4.1. "How do I...?"
+ * [ ] - Start a new article
+ * [ ] - Start a new Series
+ * [ ] - Add an image
+ * [ ] - Add an image gallery
+ * [ ] - Add a video
+
 ## 5. /members/demo/
  * [X] - landing page
  * [ ] - demo_simple/ - simple article
@@ -48,3 +56,4 @@
  * [ ] - git/ - using git and Github
  * [ ] - easy/ - the simplest way to submit articles (email ZIP to Bob)
  * [ ] - cloudcannon/ - how to use CloudCannon
+ 
