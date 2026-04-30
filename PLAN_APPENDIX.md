@@ -1,16 +1,17 @@
-# PROJECT PLAN: NBAS ASTRO (V0.18.0 PREP)
-**DATE:** 2026-04-27
-**STATUS:** ACTIVE | [V: 0.17.2 AGENT]
+# PROJECT PLAN: NBAS ASTRO (V0.20.0 PREP)
+**DATE:** 2026-04-29
+**STATUS:** ACTIVE | [V: 0.19.2 AGENT]
 
 ## A. Sidebar widgets
-Must not have a CORS block.
 
-1. Aurora / Space weather?
-2. APOD
-3. Sunspots / H-alpha image? 
-4. Local Weather 
-5. ISS (NASA) - direct HTML/JS snippet
+Must not have a CORS block issue.  FEEDS of infomation are OK, if we can use that and design our own widget to filter/format/display the content therein.
+
+1. Aurora / Space weather? - current Kp index with 12-24h forecast...
+2. APOD (Astronomy Picture of the Day)
+3. Sunspots / H-alpha image?
+4. Local Weather  (temp, and anything that would be relevant to planning observing sessions)
 5. Meteoblue - Astronomy Seeing (supposedly no CORS)
+6. ISS (NASA) - direct HTML/JS snippet - show upcoming passes for the ISS at our location
 
 ### A.1. OR External Links:
 
