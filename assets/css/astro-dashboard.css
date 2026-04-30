@@ -1,0 +1,35 @@
+/* astro-dashboard.css */
+.astro-dashboard {
+    width: 100%;
+    overflow-x: auto; /* Responsive for mobile */
+    font-family: var(--font-family-monospace, monospace);
+    line-height: 1.6;
+    padding: 1rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background: transparent; /* Inherit site background */
+}
+
+.astro-table {
+    display: block;
+    white-space: pre;
+}
+
+.astro-section-header {
+    font-weight: bold;
+    color: var(--primary-color, #00ff00);
+    border-bottom: 1px solid #444;
+    margin-bottom: 10px;
+}
+
+#astro-output {
+    font-family: 'Courier New', Courier, monospace;
+    background: #fdfdfd; /* or match site background */
+    color: #333;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    line-height: 1.2;
+    overflow-x: auto;
+}
+
