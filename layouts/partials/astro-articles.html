@@ -1,0 +1,9 @@
+<div class="hub-grid">
+    {{ $listContext := . }}
+    {{ range .Pages.ByPublishDate.Reverse }}
+        {{ partial "article-card.html" (dict "context" . "listContext" $listContext) }}
+    {{ else }}
+        <p class="no-articles-msg">No articles found for this object.</p>
+    {{ end }}
+</div>
+

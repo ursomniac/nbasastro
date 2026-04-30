@@ -52,20 +52,24 @@
 
 
     {{/* 3. METADATA */}}
-    <div class="card-metadata">
-      By&nbsp;
-      {{- if .context.Params.authors -}}
-        {{- range $i, $a := .context.Params.authors -}}
-          {{- if $i }}, {{ end -}}
-          {{- $p := site.GetPage (printf "authors/%s" ($a | urlize)) -}}
-          <a href="{{ if $p }}{{ $p.RelPermalink }}{{ else }}#{{ end }}" class="author-link">
-            {{- if $p }}{{ $p.Title }}{{ else }}{{ $a | replace "-" " " | title | replace "Nbas" "NBAS" }}{{ end -}}
-          </a>
-        {{- end -}}
+<div class="card-metadata">
+  By&nbsp;
+  {{- if .context.Params.authors -}}
+    {{- range $i, $a := .context.Params.authors -}}
+      {{- if $i }}, {{ end -}}
+      {{- $p := site.GetPage (printf "authors/%s" ($a | urlize)) -}}
+      {{- if $p -}}
+        <a href="{{ $p.RelPermalink }}" class="author-link">{{ $p.Title }}</a>
       {{- else -}}
-        <span class="author-link">NBAS</span>
-      {{- end }} | {{ .context.PublishDate.Format "Jan 2, 2006" }}
-    </div>
+        <span class="author-plain">{{ $a | replaceRE "-" " " | title | replaceRE "Nbas" "NBAS" }}</span>
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    <span class="author-plain">NBAS</span>
+  {{- end }} | {{ .context.PublishDate.Format "Jan 2, 2006" }}
+</div>
+
+
 
     {{ with .context.Params.byline }}
     <p class="card-byline">{{ . }}</p>

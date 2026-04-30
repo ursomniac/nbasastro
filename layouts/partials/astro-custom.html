@@ -1,0 +1,25 @@
+<table class="astro-data-table" style="width:100%; border-collapse: collapse;">
+    <thead><tr><th style="padding: 12px; text-align: left;">Catalog Item</th><th style="padding: 12px; text-align: left;">Article Count</th></tr></thead>
+    <tbody>
+        {{ $scratch := newScratch }}
+        {{ range $term, $pages := .Data.Terms }}
+            {{/* Extract digits for sorting: e.g. "(1) Ceres" -> 1 */}}
+            {{ $nums := findRE `\d+` $term }}
+            {{ $val := 999999 }}
+            {{ if gt (len $nums) 0 }}{{ $val = int (index $nums 0) }}{{ end }}
+            
+            {{/* Force numeric padding to ensure 1 < 10 */}}
+            {{ $sortKey := printf "%08d-%s" $val $term }}
+            {{ $scratch.SetInMap "custSort" $sortKey (dict "Term" $term "Count" (len $pages)) }}
+        {{ end }}
+
+        {{ range sort ($scratch.Get "custSort") "_key_" "asc" }}
+            {{ $tp := $.Site.GetPage (printf "/%s/%s" $.Data.Plural .Term) }}
+            <tr style="border-bottom: 1px solid #333;">
+                <td style="padding: 10px;"><strong><a href="{{ $tp.RelPermalink }}">{{ $tp.Title | default .Term }}</a></strong></td>
+                <td style="padding: 10px;">{{ .Count }} Article(s)</td>
+            </tr>
+        {{ end }}
+    </tbody>
+</table>
+

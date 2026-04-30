@@ -1,0 +1,12 @@
+{{ define "main" }}
+<h1 class="page-title">{{ .Title }}</h1>
+{{ $t := .Data.Plural }}
+{{ if in (slice "dso_messier" "dso_caldwell" "dso_ngc") $t }}
+    {{ partial "astro-numeric.html" . }}
+{{ else if in (slice "sso_asteroids" "sso_comets") $t }}
+    {{ partial "astro-custom.html" . }}
+{{ else }}
+    {{ partial "astro-alpha.html" . }}
+{{ end }}
+{{ end }}
+

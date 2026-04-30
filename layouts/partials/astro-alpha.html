@@ -1,0 +1,22 @@
+<table class="astro-data-table" style="width:100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+        <tr>
+            <th style="padding: 12px; text-align: left;">Catalog Item</th>
+            <th style="padding: 12px; text-align: left;">Article Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ $sorted := slice }}
+        {{ range $term, $pages := .Data.Terms }}
+            {{ $tp := $.Site.GetPage (printf "/%s/%s" $.Data.Plural $term) }}
+            {{ $sorted = $sorted | append (dict "Title" ($tp.Title | default $term) "Link" $tp.RelPermalink "Count" (len $pages)) }}
+        {{ end }}
+        {{ range sort $sorted "Title" "asc" }}
+            <tr style="border-bottom: 1px solid #333;">
+                <td style="padding: 10px;"><strong><a href="{{ .Link }}">{{ .Title }}</a></strong></td>
+                <td style="padding: 10px;">{{ .Count }} Article(s)</td>
+            </tr>
+        {{ end }}
+    </tbody>
+</table>
+
