@@ -1,23 +1,22 @@
-<!-- V0.15.1: DYNAMIC INTERNAL SIDEBAR -->
 <aside class="nbas-sidebar members-sidebar">
   <h3 class="sidebar-heading">Members Area</h3>
-  
   <nav class="members-nav">
-    {{/* 1. Dashboard Link */}}
+    {{/* 1. Primary Links */}}
     <a href="/members/" class="sidebar-link {{ if eq .RelPermalink "/members/" }}active{{ end }}">Dashboard</a>
+    <a href="/members/article-builder/" class="sidebar-link {{ if eq .RelPermalink "/members/article-builder/" }}active{{ end }}" style="color: var(--gold-link); font-weight: bold;">Article Builder</a>
 
-    {{/* 2. Range through Sub-Sections (Docs, How-To, etc.) */}}
+    {{/* 2. Range through Sub-Sections (Docs, Demos, etc.) */}}
     {{ $members := .Site.GetPage "section" "members" }}
     {{ range $members.Sections.ByWeight }}
       <div class="sidebar-group">
         <h4 class="sidebar-subheading">{{ .Title }}</h4>
         <ul class="sidebar-list">
           {{ range .Pages.ByTitle }}
-            <li>
-              <a href="{{ .RelPermalink }}" class="sidebar-sublink {{ if eq $.RelPermalink .RelPermalink }}active{{ end }}">
-                {{ .LinkTitle }}
-              </a>
-            </li>
+          <li>
+            <a href="{{ .RelPermalink }}" class="sidebar-sublink {{ if eq $.RelPermalink .RelPermalink }}active{{ end }}">
+              {{ .LinkTitle }}
+            </a>
+          </li>
           {{ end }}
         </ul>
       </div>

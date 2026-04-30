@@ -49,47 +49,48 @@
         </div>
     </details>
 
-    <!-- 3. SOLAR SYSTEM -->
-    <details class="card">
-        <summary>{{ site.Data.builder_docs.solar_system.label }}</summary>
-        <div class="card-content">
-            <p class="instr">{{ site.Data.builder_docs.solar_system.hint }}</p>
-            {{ range (slice "Planets" "Meteors" "Comets" "Asteroids") }}
-            <div class="check-row-wrapper">
-                <label class="check-item"><input type="checkbox" onclick="toggleInput('ss-{{ . | lower }}')"> {{ . }}</label>
-                <div id="ss-{{ . | lower }}" class="hidden-input"><input type="text" class="val-ss" data-cat="{{ . | lower }}" placeholder="Specific {{ . }} names..."></div>
-            </div>
-            {{ end }}
+<!-- 3. SOLAR SYSTEM -->
+<details class="card">
+    <summary>{{ site.Data.builder_docs.solar_system.label }}</summary>
+    <div class="card-content">
+        <p class="instr">{{ site.Data.builder_docs.solar_system.hint }}</p>
+        {{ range (slice "Planets" "Meteors" "Comets" "Asteroids") }}
+        <div class="input-row-wrapper" style="margin-bottom: 15px;">
+            <label>{{ . }}</label>
+            <input type="text" class="val-astro" data-cat="{{ . | lower }}" placeholder="e.g. {{ if eq . "Planets" }}Jupiter, Mars{{ else if eq . "Messier" }}45, 31{{ else }}Names...{{ end }}">
         </div>
-    </details>
+        {{ end }}
+    </div>
+</details>
 
-    <!-- 4. DSO CATALOGS -->
-    <details class="card">
-        <summary>{{ site.Data.builder_docs.catalogs.label }}</summary>
-        <div class="card-content">
-            <p class="instr">{{ site.Data.builder_docs.catalogs.hint }}</p>
-            {{ range (slice "Messier" "Caldwell" "NGC" "Other") }}
-            <div class="check-row-wrapper">
-                <label class="check-item"><input type="checkbox" onclick="toggleInput('cat-{{ . | lower }}')"> {{ . | upper }}</label>
-                <div id="cat-{{ . | lower }}" class="hidden-input"><input type="text" class="val-cat" data-cat="{{ . | lower }}" placeholder="IDs or Names..."></div>
-            </div>
-            {{ end }}
+<!-- 4. DSO CATALOGS -->
+<details class="card">
+    <summary>{{ site.Data.builder_docs.catalogs.label }}</summary>
+    <div class="card-content">
+        <p class="instr">{{ site.Data.builder_docs.catalogs.hint }}</p>
+        {{ range (slice "Messier" "Caldwell" "NGC" "Other") }}
+        <div class="input-row-wrapper" style="margin-bottom: 15px;">
+            <label>{{ . | upper }}</label>
+            <input type="text" class="val-astro" data-cat="{{ . | lower }}" placeholder="IDs or Names...">
         </div>
-    </details>
+        {{ end }}
+    </div>
+</details>
 
-    <!-- 5. STAR DATA -->
-    <details class="card">
-        <summary>{{ site.Data.builder_docs.stars.label }}</summary>
-        <div class="card-content">
-            <p class="instr">{{ site.Data.builder_docs.stars.hint }}</p>
-            {{ range (slice "Variable" "Nearby" "Bright" "Multiple" "Exotic") }}
-            <div class="check-row-wrapper">
-                <label class="check-item"><input type="checkbox" onclick="toggleInput('star-{{ . | lower }}')"> {{ . }}</label>
-                <div id="star-{{ . | lower }}" class="hidden-input"><input type="text" class="val-star" data-cat="{{ . | lower }}" placeholder="Star names..."></div>
-            </div>
-            {{ end }}
+<!-- 5. STAR DATA -->
+<details class="card">
+    <summary>{{ site.Data.builder_docs.stars.label }}</summary>
+    <div class="card-content">
+        <p class="instr">{{ site.Data.builder_docs.stars.hint }}</p>
+        {{ range (slice "Variable" "Nearby" "Bright" "Multiple" "Exotic") }}
+        <div class="input-row-wrapper" style="margin-bottom: 15px;">
+            <label>{{ . }}</label>
+            <input type="text" class="val-astro" data-cat="{{ . | lower }}" placeholder="Star names...">
         </div>
-    </details>
+        {{ end }}
+    </div>
+</details>
+
 
     <!-- 6. OBJECT SPECS (TABLE) -->
     <details class="card">
