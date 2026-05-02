@@ -17,16 +17,16 @@
 ## PHASE 2: SYSTEM EXPANSION (V0.20.0)
 *Target: Integration of **Astronomia** library for specialized physical parameters.*
 
-* **Jupiter GRS:** 
+* [ ]  **Jupiter GRS:** 
     * Implement System II Longitude calculation.
     * Track GRS drift (Current ref: ~375°).
     * Visibility flag: `TRUE` if GRS is within ±90° of Central Meridian.
-* **Saturn’s Rings:**
+* [*] **Saturn’s Rings:**
     * Calculate **B** (tilt relative to Earth).
     * Calculate **P** (Position angle of the North pole).
-* **Inner Planet Phases:** 
+* [*] **Inner Planet Phases:** 
     * Detailed illuminated fraction and "appearance" (e.g., Crescent vs. Gibbous).
-* **Mars/Saturn/Uranus Moons:**
+* [ ] **Mars/Saturn/Uranus Moons:**
     * Expanding the moon dashboard to include Deimos/Phobos and Titan.
 
 ---
@@ -35,8 +35,8 @@
 *Target: Connecting math to visual assets.*
 
 * **Asset Prep:**
-    * Source high-res NASA planetary textures (PNG/Transparent).
-    * Source moon "sprite" icons.
+    * [*] Source high-res NASA planetary textures (PNG/Transparent).
+    * Source moon "sprite" icons. ???
 * **Canvas Layering:**
     * Create an `AstroCanvas` component.
     * Layer 1: Static star field.
@@ -44,7 +44,9 @@
     * Layer 3: Moon coordinate overlay.
 * **Physical Orientation:**
     * Apply `rotate()` transforms to the Canvas based on calculated Position Angle (P) so the dashboard matches the eyepiece view.
-
+    * [ ] Moon
+    * [ ] Mars
+    * [ ] Jupiter
 ---
 
 ## PHASE 4: THE TELESCOPE VIEW (V1.0.0)

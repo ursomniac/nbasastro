@@ -222,6 +222,11 @@ function getPlanets(jde) {
         illuminationPct: (illuminatedFraction * 100).toFixed(1),
         phaseAngleDeg: phaseAngle * DEG,
 	lightTimeFmt,
+	helioLon: planetPos.lon,   // radians, heliocentric ecliptic longitude
+	helioLat: planetPos.lat,   // radians, heliocentric ecliptic latitude
+	earthLon: earthPos.lon,    // same for Earth (same for all planets)
+	earthLat: earthPos.lat,
+	earthR:   earthR,
         error: null
       }
     } catch (e) {

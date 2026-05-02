@@ -5,13 +5,15 @@
   "main": "index.js",
   "type": "module",
   "dependencies": {
-    "astronomia": "^4.2.0"
+    "astronomia": "^4.2.0",
+    "three": "^0.184.0"
   },
   "devDependencies": {
     "esbuild": "^0.28.0"
   },
   "scripts": {
     "build:sso": "esbuild assets/js/sso.js --bundle --outfile=static/js/astronomia.js --format=iife --platform=browser",
+    "build:jupiter": "esbuild assets/js/jupiter-globe.js --bundle --outfile=static/js/jupiter-globe.js --format=iife --platform=browser",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
