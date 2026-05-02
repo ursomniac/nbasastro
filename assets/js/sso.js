@@ -181,6 +181,7 @@ function getPlanets(jde) {
       const geoRange = Math.sqrt(dx*dx + dy*dy + dz*dz)
 
       const phaseAngle = illum.phaseAngle(r, geoRange, earthR)
+      const illuminatedFraction = illum.fraction(r, geoRange, earthR)
 
       let mag = null
       try {
@@ -198,6 +199,11 @@ function getPlanets(jde) {
       const sdRad = calcSD(p.sd0, geoRange)
       const sdArcsec = sdRad * DEG * 3600 * 2
       const pos = elliptic.position(planet, earth, jde)
+      const distKm = geoRange * 149597870.7
+      const lightSeconds = distKm / 299792.458
+      const ltMin = Math.floor(lightSeconds / 60)
+      const ltSec = (lightSeconds % 60).toFixed(1)
+      const lightTimeFmt = `${ltMin}m ${String(ltSec).padStart(4,'0')}s`
 
       return {
         name: p.name,
@@ -212,6 +218,10 @@ function getPlanets(jde) {
         sdFmt: sdArcsec.toFixed(1) + '"',
         mag,
         magFmt: mag !== null ? mag.toFixed(1) : '—',
+        illuminatedFraction,
+        illuminationPct: (illuminatedFraction * 100).toFixed(1),
+        phaseAngleDeg: phaseAngle * DEG,
+	lightTimeFmt,
         error: null
       }
     } catch (e) {

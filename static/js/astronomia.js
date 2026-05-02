@@ -71021,6 +71021,7 @@
         const dz = planetPos.range * Math.sin(planetPos.lat) - earthPos.range * Math.sin(earthPos.lat);
         const geoRange = Math.sqrt(dx * dx + dy * dy + dz * dz);
         const phaseAngle4 = illum_default.phaseAngle(r, geoRange, earthR);
+        const illuminatedFraction = illum_default.fraction(r, geoRange, earthR);
         let mag = null;
         try {
           switch (p.name) {
@@ -71052,6 +71053,11 @@
         const sdRad = semidiameter(p.sd0, geoRange);
         const sdArcsec = sdRad * DEG * 3600 * 2;
         const pos = elliptic_default.position(planet, earth2, jde);
+        const distKm = geoRange * 1495978707e-1;
+        const lightSeconds = distKm / 299792.458;
+        const ltMin = Math.floor(lightSeconds / 60);
+        const ltSec = (lightSeconds % 60).toFixed(1);
+        const lightTimeFmt = `${ltMin}m ${String(ltSec).padStart(4, "0")}s`;
         return {
           name: p.name,
           ra: pos.ra,
@@ -71065,6 +71071,10 @@
           sdFmt: sdArcsec.toFixed(1) + '"',
           mag,
           magFmt: mag !== null ? mag.toFixed(1) : "\u2014",
+          illuminatedFraction,
+          illuminationPct: (illuminatedFraction * 100).toFixed(1),
+          phaseAngleDeg: phaseAngle4 * DEG,
+          lightTimeFmt,
           error: null
         };
       } catch (e) {
