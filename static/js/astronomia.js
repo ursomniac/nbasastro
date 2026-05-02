@@ -1863,6 +1863,138 @@
     last
   };
 
+  // node_modules/astronomia/src/jupiter.js
+  function physical(jde, earth2, jupiter3) {
+    const d3 = jde - 24332825e-1;
+    const T1 = d3 / base_default.JulianCentury;
+    const p = Math.PI / 180;
+    const \u03B10 = 268 * p + 0.1061 * p * T1;
+    const \u03B40 = 64.5 * p - 0.0164 * p * T1;
+    const W1 = 17.71 * p + 877.90003539 * p * d3;
+    const W2 = 16.838 * p + 870.27003539 * p * d3;
+    const pos = earth2.position(jde);
+    let [l0, b0, R] = [pos.lon, pos.lat, pos.range];
+    const fk5 = planetposition_default.toFK5(l0, b0, jde);
+    l0 = fk5.lon;
+    b0 = fk5.lat;
+    const [sl0, cl0] = base_default.sincos(l0);
+    const sb0 = Math.sin(b0);
+    let \u0394 = 4;
+    let l = 0;
+    let b = 0;
+    let r = 0;
+    let x = 0;
+    let y = 0;
+    let z = 0;
+    const f = function() {
+      const \u03C4 = base_default.lightTime(\u0394);
+      const pos2 = jupiter3.position(jde - \u03C4);
+      l = pos2.lon;
+      b = pos2.lat;
+      r = pos2.range;
+      const fk52 = planetposition_default.toFK5(l, b, jde);
+      l = fk52.lon;
+      b = fk52.lat;
+      const [sb2, cb2] = base_default.sincos(b);
+      const [sl2, cl3] = base_default.sincos(l);
+      x = r * cb2 * cl3 - R * cl0;
+      y = r * cb2 * sl2 - R * sl0;
+      z = r * sb2 - R * sb0;
+      \u0394 = Math.sqrt(x * x + y * y + z * z);
+    };
+    f();
+    f();
+    const \u03B50 = nutation_default.meanObliquity(jde);
+    const [s\u03B50, c\u03B50] = base_default.sincos(\u03B50);
+    const [sl, cl2] = base_default.sincos(l);
+    const [sb, cb] = base_default.sincos(b);
+    const \u03B1s = Math.atan2(c\u03B50 * sl - s\u03B50 * sb / cb, cl2);
+    const \u03B4s = Math.asin(c\u03B50 * sb + s\u03B50 * cb * sl);
+    const [s\u03B4s, c\u03B4s] = base_default.sincos(\u03B4s);
+    const [s\u03B40, c\u03B40] = base_default.sincos(\u03B40);
+    const DS = Math.asin(-s\u03B40 * s\u03B4s - c\u03B40 * c\u03B4s * Math.cos(\u03B10 - \u03B1s));
+    const u = y * c\u03B50 - z * s\u03B50;
+    const v = y * s\u03B50 + z * c\u03B50;
+    let \u03B1 = Math.atan2(u, x);
+    let \u03B4 = Math.atan(v / Math.hypot(x, u));
+    const [s\u03B4, c\u03B4] = base_default.sincos(\u03B4);
+    const [s\u03B10\u03B1, c\u03B10\u03B1] = base_default.sincos(\u03B10 - \u03B1);
+    const \u03B6 = Math.atan2(s\u03B40 * c\u03B4 * c\u03B10\u03B1 - s\u03B4 * c\u03B40, c\u03B4 * s\u03B10\u03B1);
+    const DE = Math.asin(-s\u03B40 * s\u03B4 - c\u03B40 * c\u03B4 * Math.cos(\u03B10 - \u03B1));
+    let \u03C91 = W1 - \u03B6 - 5.07033 * p * \u0394;
+    let \u03C92 = W2 - \u03B6 - 5.02626 * p * \u0394;
+    let C = (2 * r * \u0394 + R * R - r * r - \u0394 * \u0394) / (4 * r * \u0394);
+    if (Math.sin(l - l0) < 0) {
+      C = -C;
+    }
+    \u03C91 = base_default.pmod(\u03C91 + C, 2 * Math.PI);
+    \u03C92 = base_default.pmod(\u03C92 + C, 2 * Math.PI);
+    const [\u0394\u03C8, \u0394\u03B5] = nutation_default.nutation(jde);
+    const \u03B5 = \u03B50 + \u0394\u03B5;
+    const [s\u03B5, c\u03B5] = base_default.sincos(\u03B5);
+    const [s\u03B1, c\u03B1] = base_default.sincos(\u03B1);
+    \u03B1 += 5693e-6 * p * (c\u03B1 * cl0 * c\u03B5 + s\u03B1 * sl0) / c\u03B4;
+    \u03B4 += 5693e-6 * p * (cl0 * c\u03B5 * (s\u03B5 / c\u03B5 * c\u03B4 - s\u03B1 * s\u03B4) + c\u03B1 * s\u03B4 * sl0);
+    const t\u03B4 = s\u03B4 / c\u03B4;
+    const \u0394\u03B1 = (c\u03B5 + s\u03B5 * s\u03B1 * t\u03B4) * \u0394\u03C8 - c\u03B1 * t\u03B4 * \u0394\u03B5;
+    const \u0394\u03B4 = s\u03B5 * c\u03B1 * \u0394\u03C8 + s\u03B1 * \u0394\u03B5;
+    const \u03B1\u02B9 = \u03B1 + \u0394\u03B1;
+    const \u03B4\u02B9 = \u03B4 + \u0394\u03B4;
+    const [s\u03B10, c\u03B10] = base_default.sincos(\u03B10);
+    const t\u03B40 = s\u03B40 / c\u03B40;
+    const \u0394\u03B10 = (c\u03B5 + s\u03B5 * s\u03B10 * t\u03B40) * \u0394\u03C8 - c\u03B10 * t\u03B40 * \u0394\u03B5;
+    const \u0394\u03B40 = s\u03B5 * c\u03B10 * \u0394\u03C8 + s\u03B10 * \u0394\u03B5;
+    const \u03B10\u02B9 = \u03B10 + \u0394\u03B10;
+    const \u03B40\u02B9 = \u03B40 + \u0394\u03B40;
+    const [s\u03B4\u02B9, c\u03B4\u02B9] = base_default.sincos(\u03B4\u02B9);
+    const [s\u03B40\u02B9, c\u03B40\u02B9] = base_default.sincos(\u03B40\u02B9);
+    const [s\u03B10\u02B9\u03B1\u02B9, c\u03B10\u02B9\u03B1\u02B9] = base_default.sincos(\u03B10\u02B9 - \u03B1\u02B9);
+    let P = Math.atan2(c\u03B40\u02B9 * s\u03B10\u02B9\u03B1\u02B9, s\u03B40\u02B9 * c\u03B4\u02B9 - c\u03B40\u02B9 * s\u03B4\u02B9 * c\u03B10\u02B9\u03B1\u02B9);
+    if (P < 0) {
+      P += 2 * Math.PI;
+    }
+    return [DS, DE, \u03C91, \u03C92, P];
+  }
+  function physical2(jde) {
+    const d3 = jde - base_default.J2000;
+    const p = Math.PI / 180;
+    const V = 172.74 * p + 111588e-8 * p * d3;
+    const M = 357.529 * p + 0.9856003 * p * d3;
+    const sV = Math.sin(V);
+    const N = 20.02 * p + 0.0830853 * p * d3 + 0.329 * p * sV;
+    const J2 = 66.115 * p + 0.9025179 * p * d3 - 0.329 * p * sV;
+    const [sM, cM] = base_default.sincos(M);
+    const [sN, cN] = base_default.sincos(N);
+    const [s2M, c2M] = base_default.sincos(2 * M);
+    const [s2N, c2N] = base_default.sincos(2 * N);
+    const A = 1.915 * p * sM + 0.02 * p * s2M;
+    const B = 5.555 * p * sN + 0.168 * p * s2N;
+    const K2 = J2 + A - B;
+    const R = 1.00014 - 0.01671 * cM - 14e-5 * c2M;
+    const r = 5.20872 - 0.25208 * cN - 611e-5 * c2N;
+    const [sK, cK] = base_default.sincos(K2);
+    const \u0394 = Math.sqrt(r * r + R * R - 2 * r * R * cK);
+    const \u03C8 = Math.asin(R / \u0394 * sK);
+    const dd = d3 - \u0394 / 173;
+    let \u03C91 = 210.98 * p + 877.8169088 * p * dd + \u03C8 - B;
+    let \u03C92 = 187.23 * p + 870.1869088 * p * dd + \u03C8 - B;
+    let C = Math.sin(\u03C8 / 2);
+    C *= C;
+    if (sK > 0) {
+      C = -C;
+    }
+    \u03C91 = base_default.pmod(\u03C91 + C, 2 * Math.PI);
+    \u03C92 = base_default.pmod(\u03C92 + C, 2 * Math.PI);
+    const \u03BB = 34.35 * p + 0.083091 * p * d3 + 0.329 * p * sV + B;
+    const DS = 3.12 * p * Math.sin(\u03BB + 42.8 * p);
+    const DE = DS - 2.22 * p * Math.sin(\u03C8) * Math.cos(\u03BB + 22 * p) - 1.3 * p * (r - \u0394) / \u0394 * Math.sin(\u03BB - 100.5 * p);
+    return [DS, DE, \u03C91, \u03C92];
+  }
+  var jupiter_default = {
+    physical,
+    physical2
+  };
+
   // node_modules/astronomia/src/planetelements.js
   var mercury = "mercury";
   var venus = "venus";
@@ -71203,7 +71335,11 @@
     getSaturnRing,
     dateToJDE,
     formatRA,
-    formatDeg
+    formatDeg,
+    jupiterCML: (jde) => {
+      const [DS, DE, \u03C91, \u03C92] = jupiter_default.physical2(jde);
+      return { sysi: \u03C91 * 180 / Math.PI, sysii: \u03C92 * 180 / Math.PI };
+    }
   };
   console.log("[SSO] SolarSystem library ready.");
 })();
@@ -71303,6 +71439,14 @@ astronomia/src/moonphase.js:
    * @copyright 2016 commenthol
    * @license MIT
    * @module moonphase
+   *)
+
+astronomia/src/jupiter.js:
+  (**
+   * @copyright 2013 Sonia Keys
+   * @copyright 2016 commenthol
+   * @license MIT
+   * @module jupiter
    *)
 
 astronomia/src/planetelements.js:

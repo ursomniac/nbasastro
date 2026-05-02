@@ -26857,40 +26857,25 @@ void main() {
   var GRS_LONGITUDE_EPOCH = 85;
   var GRS_EPOCH_JD = 24610425e-1;
   var GRS_DRIFT_DEG_PER_DAY = -0.0575;
-  var MAP_LONGITUDE_OFFSET = 148.6;
+  var MAP_LONGITUDE_OFFSET = 317.4;
   var TEXTURE_PATH = "/images/planets/cassini_jupiter_20001211.jpg";
   var CANVAS_ID = "jupiter-globe-canvas";
+  var META_ID = "jupiter-globe-meta";
   var _sphere = null;
+  var _renderer = null;
+  var _scene = null;
+  var _camera = null;
   var _sunLight = null;
   function degToRad(d) {
     return d * Math.PI / 180;
   }
-  function currentGRSLongitude(jde) {
-    const daysSinceEpoch = jde - GRS_EPOCH_JD;
-    const lon = GRS_LONGITUDE_EPOCH + GRS_DRIFT_DEG_PER_DAY * daysSinceEpoch;
+  function grsLongitude(jde) {
+    const lon = GRS_LONGITUDE_EPOCH + GRS_DRIFT_DEG_PER_DAY * (jde - GRS_EPOCH_JD);
     return (lon % 360 + 360) % 360;
-  }
-  function jupiterCML(jup, jde) {
-    const { helioLon, helioLat, earthLon, earthLat, earthR, r } = jup;
-    const jx = Math.cos(helioLat) * Math.cos(helioLon);
-    const jy = Math.cos(helioLat) * Math.sin(helioLon);
-    const jz = Math.sin(helioLat);
-    const ex = Math.cos(earthLat) * Math.cos(earthLon);
-    const ey = Math.cos(earthLat) * Math.sin(earthLon);
-    const ez = Math.sin(earthLat);
-    const dx = earthR * ex - r * jx;
-    const dy = earthR * ey - r * jy;
-    const dz = earthR * ez - r * jz;
-    const subEarthLon = Math.atan2(dy, dx) * 180 / Math.PI;
-    const SYSTEM_II_RATE = 870.27;
-    const J2000 = 2451545;
-    const daysSinceJ2000 = jde - J2000;
-    const systemIIPhase = SYSTEM_II_RATE * daysSinceJ2000 % 360;
-    return ((subEarthLon - systemIIPhase) % 360 + 360) % 360;
   }
   function computeSphereRotation(cml, grsLon) {
     const grsOffset = (grsLon - cml + 360) % 360;
-    return degToRad(-(grsOffset + MAP_LONGITUDE_OFFSET));
+    return degToRad(-grsOffset + MAP_LONGITUDE_OFFSET);
   }
   function sunDirection(jup) {
     const { helioLon, helioLat } = jup;
@@ -26900,6 +26885,26 @@ void main() {
       -Math.cos(helioLat) * Math.sin(helioLon)
     ).normalize();
   }
+  function updateMeta(jup, cml, grsLon, date) {
+    const meta = document.getElementById(META_ID);
+    if (!meta) return;
+    const grsFromCenter = (grsLon - cml + 180 + 360) % 360 - 180;
+    const grsSign = grsFromCenter >= 0 ? "+" : "";
+    meta.innerHTML = `
+    <table class="sso-table"><tbody>
+      <tr><td>Date (UTC)</td><td>${date.toUTCString().replace(" GMT", " UTC")}</td></tr>
+      <tr><td>Central Meridian (Sys II)</td><td>${cml.toFixed(1)}\xB0</td></tr>
+      <tr><td>GRS Longitude (Sys II)</td><td>${grsLon.toFixed(1)}\xB0</td></tr>
+      <tr><td>GRS from Center</td><td>${grsSign}${grsFromCenter.toFixed(1)}\xB0</td></tr>
+      <tr><td>Distance</td><td>${jup.rangeFmt}</td></tr>
+      <tr><td>Diameter</td><td>${jup.sdFmt}</td></tr>
+      <tr><td>Illumination</td><td>${jup.illuminationPct}%</td></tr>
+    </tbody></table>`;
+    console.log(`[Jupiter] CML: ${cml.toFixed(1)}\xB0  GRS: ${grsLon.toFixed(1)}\xB0  GRS from center: ${grsFromCenter.toFixed(1)}\xB0  rotation.y: ${computeSphereRotation(cml, grsLon).toFixed(4)} rad`);
+  }
+  function renderFrame() {
+    _renderer.render(_scene, _camera);
+  }
   function initJupiterGlobe() {
     const canvas = document.getElementById(CANVAS_ID);
     if (!canvas) return;
@@ -26907,78 +26912,45 @@ void main() {
       console.error("[Jupiter] window.SolarSystem not available");
       return;
     }
-    const jde = window.SolarSystem.dateToJDE(/* @__PURE__ */ new Date());
+    const date = /* @__PURE__ */ new Date();
+    const jde = window.SolarSystem.dateToJDE(date);
     const planets = window.SolarSystem.getPlanets(jde);
     const jup = planets.find((p) => p.name === "Jupiter");
     if (!jup || jup.error) {
       console.error("[Jupiter] Could not get Jupiter data:", jup?.error);
       return;
     }
-    const cml = jupiterCML(jup, jde);
-    const grsLon = currentGRSLongitude(jde);
+    const cml = window.SolarSystem.jupiterCML(jde).sysii;
+    const grsLon = grsLongitude(jde);
     const width = canvas.clientWidth || 400;
     const height = canvas.clientHeight || 400;
-    const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    const scene = new Scene();
-    const camera = new PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.z = 2.5;
-    const loader = new TextureLoader();
-    const texture = loader.load(TEXTURE_PATH);
+    _renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true });
+    _renderer.setSize(width, height);
+    _renderer.setPixelRatio(window.devicePixelRatio);
+    _scene = new Scene();
+    _camera = new PerspectiveCamera(45, width / height, 0.1, 100);
+    _camera.position.z = 2.5;
+    const texture = new TextureLoader().load(TEXTURE_PATH, renderFrame);
     const geometry = new SphereGeometry(1, 64, 64);
     const material = new MeshStandardMaterial({ map: texture });
     _sphere = new Mesh(geometry, material);
-    _sphere.rotation.z = degToRad(3.13);
     _sphere.rotation.y = computeSphereRotation(cml, grsLon);
-    scene.add(_sphere);
-    const ambient = new AmbientLight(16777215, 0.7);
-    scene.add(ambient);
+    const pivot = new Object3D();
+    pivot.rotation.z = degToRad(3.13);
+    pivot.add(_sphere);
+    _scene.add(pivot);
+    _scene.add(new AmbientLight(16777215, 0.7));
     _sunLight = new DirectionalLight(16777215, 2.5);
     _sunLight.position.copy(sunDirection(jup));
-    scene.add(_sunLight);
-    const DEG_PER_MS = 870.27 / 864e5;
-    let lastTime = null;
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) renderer.setAnimationLoop(animate);
-      else renderer.setAnimationLoop(null);
-    }, { threshold: 0.1 });
-    observer.observe(canvas);
-    function animate(now) {
-      if (lastTime !== null) {
-        const delta = now - lastTime;
-        _sphere.rotation.y += degToRad(DEG_PER_MS * delta);
-      }
-      lastTime = now;
-      renderer.render(scene, camera);
-    }
-    renderer.setAnimationLoop(animate);
+    _scene.add(_sunLight);
     window.addEventListener("resize", () => {
-      const w = canvas.clientWidth;
-      const h = canvas.clientHeight;
-      renderer.setSize(w, h);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
+      _renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+      _camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      _camera.updateProjectionMatrix();
+      renderFrame();
     });
-    const grsFromCenter = (grsLon - cml + 180 + 360) % 360 - 180;
-    const grsSign = grsFromCenter >= 0 ? "+" : "";
-    const meta = document.getElementById("jupiter-globe-meta");
-    if (meta) {
-      meta.innerHTML = `
-      <table class="sso-table">
-        <tbody>
-          <tr><td>Date (UTC)</td><td>${(/* @__PURE__ */ new Date()).toUTCString().replace(" GMT", " UTC")}</td></tr>
-          <tr><td>Central Meridian (Sys II)</td><td>${cml.toFixed(1)}\xB0</td></tr>
-          <tr><td>GRS Longitude (Sys II)</td><td>${grsLon.toFixed(1)}\xB0</td></tr>
-          <tr><td>GRS from Center</td><td>${grsSign}${grsFromCenter.toFixed(1)}\xB0</td></tr>
-          <tr><td>Distance</td><td>${jup.rangeFmt}</td></tr>
-          <tr><td>Diameter</td><td>${jup.sdFmt}</td></tr>
-          <tr><td>Illumination</td><td>${jup.illuminationPct}%</td></tr>
-        </tbody>
-      </table>
-    `;
-    }
-    console.log(`[Jupiter] CML: ${cml.toFixed(1)}\xB0  GRS: ${grsLon.toFixed(1)}\xB0  offset: ${grsFromCenter.toFixed(1)}\xB0`);
+    updateMeta(jup, cml, grsLon, date);
+    renderFrame();
   }
   window.renderJupiterGlobe = function(date) {
     if (!_sphere || !_sunLight) return;
@@ -26986,26 +26958,12 @@ void main() {
     const planets = window.SolarSystem.getPlanets(jde);
     const jup = planets.find((p) => p.name === "Jupiter");
     if (!jup || jup.error) return;
-    const cml = jupiterCML(jup, jde);
-    const grsLon = currentGRSLongitude(jde);
-    const grsFromCenter = (grsLon - cml + 180 + 360) % 360 - 180;
-    const grsSign = grsFromCenter >= 0 ? "+" : "";
+    const cml = window.SolarSystem.jupiterCML(jde).sysii;
+    const grsLon = grsLongitude(jde);
     _sphere.rotation.y = computeSphereRotation(cml, grsLon);
     _sunLight.position.copy(sunDirection(jup));
-    const meta = document.getElementById("jupiter-globe-meta");
-    if (meta) {
-      meta.innerHTML = `
-      <table class="sso-table"><tbody>
-        <tr><td>Date (UTC)</td><td>${date.toUTCString().replace(" GMT", " UTC")}</td></tr>
-        <tr><td>Central Meridian (Sys II)</td><td>${cml.toFixed(1)}\xB0</td></tr>
-        <tr><td>GRS Longitude (Sys II)</td><td>${grsLon.toFixed(1)}\xB0</td></tr>
-        <tr><td>GRS from Center</td><td>${grsSign}${grsFromCenter.toFixed(1)}\xB0</td></tr>
-        <tr><td>Distance</td><td>${jup.rangeFmt}</td></tr>
-        <tr><td>Diameter</td><td>${jup.sdFmt}</td></tr>
-        <tr><td>Illumination</td><td>${jup.illuminationPct}%</td></tr>
-      </tbody></table>`;
-    }
-    console.log(`[Jupiter] CML: ${cml.toFixed(1)}\xB0  GRS: ${grsLon.toFixed(1)}\xB0`);
+    updateMeta(jup, cml, grsLon, date);
+    renderFrame();
   };
   document.addEventListener("DOMContentLoaded", initJupiterGlobe);
 })();

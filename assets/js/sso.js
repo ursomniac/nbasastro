@@ -16,6 +16,7 @@ import moonphase from 'astronomia/moonphase'
 import base from 'astronomia/base'
 import nutation from 'astronomia/nutation'
 import { Ecliptic } from 'astronomia/coord'
+import jupiter from 'astronomia/jupiter'
 import jupitermoons from 'astronomia/jupitermoons'
 import saturnmoons from 'astronomia/saturnmoons'
 import saturnring from 'astronomia/saturnring'
@@ -356,6 +357,10 @@ window.SolarSystem = {
   getAll, getSun, getMoon, getPlanets,
   getJupiterMoons, getSaturnMoons, getSaturnRing,
   dateToJDE, formatRA, formatDeg,
+  jupiterCML: (jde) => {
+    const [DS, DE, ω1, ω2] = jupiter.physical2(jde)
+    return { sysi: ω1 * 180 / Math.PI, sysii: ω2 * 180 / Math.PI }
+  }
 }
 
 console.log('[SSO] SolarSystem library ready.')
