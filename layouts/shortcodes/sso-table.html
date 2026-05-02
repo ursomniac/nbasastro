@@ -1,0 +1,616 @@
+<!-- saved from url=(0052)file:///Users/robertdonahue/Downloads/sso-table.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><div class="sso-wrapper">
+
+<!-- Info Panel -->
+<div class="sso-panel" id="sso-info-panel">
+  <h3>🔭 Calculation Epoch</h3>
+  <table class="sso-table">
+    <tbody id="sso-info-rows">
+      <tr><td colspan="2">Loading...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+  <!-- Date/Time Picker -->
+  <div class="sso-controls">
+    <label for="sso-datetime">Date/Time (local):</label>
+    <input type="datetime-local" id="sso-datetime">
+    <button id="sso-now-btn">Now</button>
+    <button id="sso-calc-btn">Calculate</button>
+  </div>
+
+  <!-- Sun Panel -->
+  <div class="sso-panel" id="sso-sun-panel">
+    <h3>☀️ Sun</h3>
+    <table class="sso-table">
+      <tbody id="sso-sun-rows"><tr><td colspan="2" class="error">SolarSystem library not loaded. Check js/astronomia.js.</td></tr></tbody>
+    </table>
+  </div>
+
+  <!-- Moon Panel -->
+  <div class="sso-panel" id="sso-moon-panel">
+    <h3>🌙 Moon</h3>
+    <div class="sso-moon-layout">
+      <canvas id="sso-moon-canvas" width="120" height="120"></canvas>
+      <table class="sso-table">
+        <tbody id="sso-moon-rows">
+          <tr><td colspan="2">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Planets Panel -->
+  <div class="sso-panel" id="sso-planets-panel">
+    <h3>🪐 Planet Positions</h3>
+    <table class="sso-table">
+      <thead>
+        <tr>
+          <th>Planet</th>
+          <th>RA</th>
+          <th>Dec.</th>
+          <th>Distance (AU)</th>
+          <th>Ang. Size</th>
+	  <th>Magnitude</th>
+        </tr>
+      </thead>
+      <tbody id="sso-planet-rows">
+        <tr><td colspan="4">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Jupiter Moons Panel -->
+  <div class="sso-panel" id="sso-jupiter-panel">
+    <h3>Jupiter Moon System</h3>
+    <div class="sso-moon-system-layout">
+      <canvas id="sso-jupiter-canvas" width="800" height="160"></canvas>
+      <table class="sso-table">
+	<thead><tr><th>Moon</th><th>X (Rj)</th><th>Y (Rj)</th><th>Z (Rj)</th><th>Offset</th><th>Mag</th></tr></thead>
+        <tbody id="sso-jupiter-rows">
+          <tr><td colspan="3">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Saturn Panel -->
+<div class="sso-panel" id="sso-saturn-panel">
+  <h3>🪐 Saturn System</h3>
+  <canvas id="sso-saturn-canvas" width="300" height="120"></canvas>
+  <p id="sso-saturn-ring-info"></p>
+  <table class="sso-table">
+    <thead><tr><th>Moon</th><th>X (Rs)</th><th>Y (Rs)</th><th>Z (Rs)<th>Offset</th><th>Mag</th></tr></thead>
+    <tbody id="sso-saturn-rows">
+      <tr><td colspan="5">Loading...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+  <!-- Mars Moons Panel -->
+  <div class="sso-panel" id="sso-mars-panel">
+    <h3>Mars Moon System</h3>
+    <div class="sso-moon-system-layout">
+      <canvas id="sso-mars-canvas" width="300" height="100"></canvas>
+      <table class="sso-table">
+        <thead><tr><th>Moon</th><th>Offset</th><th>Side</th></tr></thead>
+        <tbody id="sso-mars-rows">
+          <tr><td colspan="3">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<style>
+.sso-wrapper { font-family: sans-serif; max-width: 900px; margin: 0 auto; }
+.sso-controls { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.sso-controls input { padding: 6px; border-radius: 4px; border: 1px solid #555; background: #222; color: #eee; }
+.sso-controls button { padding: 6px 14px; border-radius: 4px; border: none; background: #446; color: #eee; cursor: pointer; }
+.sso-controls button:hover { background: #668; }
+.sso-panel { background: #1a1a2e; border: 1px solid #334; border-radius: 8px; padding: 16px; margin-bottom: 20px; }
+.sso-panel h3 { margin: 0 0 12px 0; color: #adf; font-size: 1.1em; }
+.sso-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+.sso-table th { background: #223; color: #9bf; padding: 6px 10px; text-align: left; }
+.sso-table td { padding: 5px 10px; border-bottom: 1px solid #223; color: #ddd; }
+.sso-table tr:last-child td { border-bottom: none; }
+.sso-moon-layout { display: flex; align-items: flex-start; gap: 20px; }
+.sso-moon-system-layout { display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+#sso-jupiter-canvas { width: 100%; height: auto; }
+#sso-saturn-canvas { width: 100%; height: auto; }
+canvas { border-radius: 6px; background: #0a0a18; }
+.error { color: #f88; }
+</style>
+
+<script src="{{ "js/astronomia.js" | relURL }}"></script>
+
+<script>
+(function() {
+
+  // --- Date picker init ---
+  function toLocalDatetimeString(date) {
+    const offset = date.getTimezoneOffset() * 60000
+    return new Date(date - offset).toISOString().slice(0, 16)
+  }
+
+  const picker = document.getElementById('sso-datetime')
+  picker.value = toLocalDatetimeString(new Date())
+
+  document.getElementById('sso-now-btn').addEventListener('click', function() {
+    picker.value = toLocalDatetimeString(new Date())
+    calculate()
+  })
+  document.getElementById('sso-calc-btn').addEventListener('click', calculate)
+
+  // --- Rendering functions ---
+
+function renderSun(sun) {
+  const tbody = document.getElementById('sso-sun-rows')
+  if (sun.error) {
+    tbody.innerHTML = `<tr><td colspan="2" class="sso-error">Error: ${sun.error}</td></tr>`
+    return
+  }
+  tbody.innerHTML = `
+    <tr><td>RA</td><td>${sun.raFmt}</td></tr>
+    <tr><td>Dec</td><td>${sun.decFmt}</td></tr>
+    <tr><td>Distance</td><td>${sun.rangeFmt}</td></tr>
+    <tr><td>Angular Size</td><td>${sun.sdFmt}</td></tr>
+    <tr><td>Light Time</td><td>${sun.lightTimeFmt}</td></tr>
+  `
+}
+
+  function renderMoon(moon) {
+    const tbody = document.getElementById('sso-moon-rows')
+    if (moon.error) {
+      tbody.innerHTML = `<tr><td colspan="2" class="error">Error: ${moon.error}</td></tr>`
+      return
+    }
+    tbody.innerHTML = `
+      <tr><td>RA</td><td>${moon.raFmt}</td></tr>
+      <tr><td>Dec</td><td>${moon.decFmt}</td></tr>
+      <tr><td>Distance</td><td>${moon.rangeFmt}</td></tr>
+      <tr><td>Phase</td><td>${moon.phaseName}</td></tr>
+      <tr><td>Age</td><td>${moon.ageFmt}</td></tr>
+      <tr><td>Illumination</td><td>${moon.illumination}%</td></tr>
+    `
+    drawMoonPhase(moon)
+  }
+
+  function drawMoonPhase(moon) {
+    const canvas = document.getElementById('sso-moon-canvas')
+    const ctx = canvas.getContext('2d')
+    const cx = 60, cy = 60, r = 50
+    const illum = parseFloat(moon.illumination) / 100
+    const angle = parseFloat(moon.phaseAngle)
+
+    ctx.clearRect(0, 0, 120, 120)
+
+    // Dark side
+    ctx.beginPath()
+    ctx.arc(cx, cy, r, 0, Math.PI * 2)
+    ctx.fillStyle = '#222'
+    ctx.fill()
+
+    // Lit side — approximate phase shape
+    ctx.save()
+    ctx.beginPath()
+    ctx.arc(cx, cy, r, 0, Math.PI * 2)
+    ctx.clip()
+
+    const isWaxing = parseFloat(moon.ageFmt) < 14.765
+    const k = illum
+    // Terminator x-offset: 1 = fully dark side, -1 = fully lit
+    const termX = isWaxing ? (1 - 2 * k) * r : (2 * k - 1) * r
+
+    ctx.beginPath()
+    if (isWaxing) {
+      ctx.ellipse(cx + termX, cy, Math.abs(termX), r, 0, Math.PI / 2, Math.PI * 3 / 2)
+      ctx.arc(cx, cy, r, Math.PI * 3 / 2, Math.PI / 2)
+    } else {
+      ctx.ellipse(cx + termX, cy, Math.abs(termX), r, 0, Math.PI / 2, Math.PI * 3 / 2)
+      ctx.arc(cx, cy, r, Math.PI / 2, Math.PI * 3 / 2, true)
+    }
+    ctx.fillStyle = '#ffe87a'
+    ctx.fill()
+    ctx.restore()
+
+    // Outline
+    ctx.beginPath()
+    ctx.arc(cx, cy, r, 0, Math.PI * 2)
+    ctx.strokeStyle = '#888'
+    ctx.lineWidth = 1
+    ctx.stroke()
+  }
+
+  function renderPlanets(planets) {
+    const tbody = document.getElementById('sso-planet-rows')
+    let html = ''
+    planets.forEach(p => {
+      if (p.error) {
+        html += `<tr><td>${p.name}</td><td colspan="3" class="error">${p.error}</td></tr>`
+      } else {
+        html += `<tr>
+          <td><strong>${p.name}</strong></td>
+          <td>${p.raFmt}</td>
+          <td>${p.decFmt}</td>
+          <td>${p.range.toFixed(4)} AU</td>
+          <td>${p.sdFmt}</td>
+          <td>${p.magFmt}</td>
+        </tr>`
+      }
+    })
+    tbody.innerHTML = html || '<tr><td colspan="4">No data</td></tr>'
+  }
+
+function renderJupiterMoons(moons, jupiterRadiusArcsec) {
+  const tbody = document.getElementById('sso-jupiter-rows')
+  const canvas = document.getElementById('sso-jupiter-canvas')
+  const ctx = canvas.getContext('2d')
+  const W = 800, H = 200, cx = W / 2, cy = H / 2
+  canvas.width = W
+  canvas.height = H
+  ctx.clearRect(0, 0, W, H)
+
+  if (moons[0] && moons[0].error) {
+    tbody.innerHTML = `<tr><td colspan="5" class="sso-error">${moons[0].error}</td></tr>`
+    return
+  }
+
+  // Scale: pixels per arcsecond
+  // Callisto is ~26 Rj max, leave 60px margin each side
+  const maxArcsec = Math.max(...moons.map(m => Math.abs(m.x))) * jupiterRadiusArcsec
+  const scale = (W / 2 - 60) / maxArcsec   // px per arcsec
+
+  // Jupiter pixel radius
+  const jrx = jupiterRadiusArcsec * scale
+  const jry = jrx * (92.06 / 98.44)   // polar/equatorial ratio
+
+  // Occlusion: behind Jupiter if within disk AND z > 0
+  function isOccluded(m) {
+    const distFromCenter = Math.sqrt(m.x * m.x + m.y * m.y)
+    return distFromCenter < 1.0 && m.z > 0
+  }
+
+  const LABELS = ['I', 'E', 'G', 'C']
+  const moonColors = ['#fff8e0', '#d4c090', '#e8d8a0', '#c8b870']
+
+  function drawJupiter() {
+    // Bands behind
+    ctx.save()
+    ctx.beginPath()
+    ctx.ellipse(cx, cy, jrx, jry, 0, 0, Math.PI * 2)
+    ctx.clip()
+    ctx.fillStyle = '#c8a86b'
+    ctx.fillRect(cx - jrx, cy - jry, jrx * 2, jry * 2)
+    ctx.fillStyle = 'rgba(160, 120, 60, 0.4)'
+    ctx.fillRect(cx - jrx, cy - jry * 0.35, jrx * 2, jry * 0.2)
+    ctx.fillRect(cx - jrx, cy + jry * 0.15, jrx * 2, jry * 0.18)
+    ctx.restore()
+    ctx.beginPath()
+    ctx.ellipse(cx, cy, jrx, jry, 0, 0, Math.PI * 2)
+    ctx.strokeStyle = '#a08050'
+    ctx.lineWidth = 1.5
+    ctx.stroke()
+  }
+
+  function drawMoon(m, i, dimmed) {
+    const px = cx + m.x * jupiterRadiusArcsec * scale
+    const py = cy + m.y * jupiterRadiusArcsec * scale
+    const occluded = isOccluded(m)
+    ctx.globalAlpha = dimmed ? 0.35 : 1.0
+    ctx.beginPath()
+    ctx.arc(px, py, 4, 0, Math.PI * 2)
+    ctx.fillStyle = moonColors[i]
+    ctx.fill()
+    ctx.globalAlpha = 1.0
+    // Label: above if behind/occluded, below if in front
+    ctx.fillStyle = dimmed ? '#888' : '#ddd'
+    ctx.font = '11px monospace'
+    const lw = ctx.measureText(LABELS[i]).width
+    const labelY = occluded || m.z > 0 ? py - 8 : py + 16
+    ctx.fillText(LABELS[i], px - lw / 2, labelY)
+  }
+
+  // 1. Draw occluded moons first (dimmed, behind Jupiter)
+  moons.forEach((m, i) => {
+    if (isOccluded(m)) drawMoon(m, i, true)
+  })
+
+  // 2. Draw Jupiter
+  drawJupiter()
+
+  // 3. Draw visible moons on top
+  moons.forEach((m, i) => {
+    if (!isOccluded(m)) drawMoon(m, i, false)
+  })
+
+  // Table
+  const NAMES = ['Io', 'Europa', 'Ganymede', 'Callisto']
+  let html = ''
+  moons.forEach((m, i) => {
+    const side = m.x < 0 ? 'W' : 'E'
+    const occluded = isOccluded(m)
+    const status = occluded ? ' (occulted)' : m.z > 0 ? ' (transit)' : ''
+    html += `<tr>
+      <td>${NAMES[i]}</td>
+      <td>${m.x.toFixed(3)}</td>
+      <td>${m.y.toFixed(3)}</td>
+      <td>${m.z.toFixed(3)}</td>
+      <td>${Math.abs(m.x).toFixed(2)} Rj / ${(Math.abs(m.x) * jupiterRadiusArcsec).toFixed(1)}" ${side}${status}</td>
+      <td>${m.mag}</td>
+    </tr>`
+  })
+  tbody.innerHTML = html
+}
+
+  function renderSaturn(ring, moons, saturnRadiusArcsec) {
+    const canvas = document.getElementById('sso-saturn-canvas')
+    const ctx = canvas.getContext('2d')
+
+    if (ring.error) {
+      document.getElementById('sso-saturn-ring-info').innerHTML =
+        `<span class="sso-error">Ring error: ${ring.error}</span>`
+      return
+    }
+
+    const TITAN_SMA = 20.3
+    const SATURN_TILT_RAD = 26.7 * Math.PI / 180
+    const xxmaxRs = TITAN_SMA * 1.1
+    const yymaxRs = TITAN_SMA * Math.sin(SATURN_TILT_RAD) * 1.1
+    const aEdgeArcsec = ring.aEdge * (180 / Math.PI) * 3600
+    const bEdgeArcsec = ring.bEdge * (180 / Math.PI) * 3600
+    const xxmaxArcsec = xxmaxRs * saturnRadiusArcsec
+    const yymaxArcsec = yymaxRs * saturnRadiusArcsec
+
+    const W = 800
+    const MARGIN = 60
+    canvas.width = W
+    const scale = (W / 2 - MARGIN) / xxmaxArcsec
+
+    const srx = saturnRadiusArcsec * scale
+    const sry = srx * (73.82 / 82.73)
+    //const rax = aEdgeArcsec * scale
+    //const ray = bEdgeArcsec * scale
+    const rax = srx * 2.27
+    const ray = rax  * (bEdgeArcsec / aEdgeArcsec)
+    const H = Math.max(yymaxArcsec * scale * 2 + MARGIN * 2, srx * 3, 140)
+    canvas.height = H
+    const cx = W / 2, cy = H / 2
+    ctx.clearRect(0, 0, W, H)
+
+    function drawRingHalf(clipTop) {
+      ctx.save()
+      ctx.beginPath()
+      if (clipTop) {
+        ctx.rect(0, 0, W, cy)
+      } else {
+        ctx.rect(0, cy, W, cy)
+      }
+      ctx.clip()
+      ctx.beginPath()
+      ctx.ellipse(cx, cy, rax, ray, 0, 0, Math.PI * 2)
+      ctx.ellipse(cx, cy, rax * 0.860, ray * 0.860, 0, 0, Math.PI * 2, true)
+      ctx.fillStyle = '#a8a48c'
+      ctx.fill('evenodd')
+      ctx.beginPath()
+      ctx.ellipse(cx, cy, rax * 0.800, ray * 0.800, 0, 0, Math.PI * 2)
+      ctx.ellipse(cx, cy, rax * 0.673, ray * 0.673, 0, 0, Math.PI * 2, true)
+      ctx.fillStyle = '#c4c0a8'
+      ctx.fill('evenodd')
+      ctx.restore()
+    }
+
+    function drawSaturn() {
+      const bg = ctx.createRadialGradient(cx - srx*0.3, cy - sry*0.3, srx*0.1, cx, cy, srx)
+      bg.addColorStop(0, '#e8d08a')
+      bg.addColorStop(0.5, '#d4b86a')
+      bg.addColorStop(1, '#a08040')
+      ctx.beginPath()
+      ctx.ellipse(cx, cy, srx, sry, 0, 0, Math.PI * 2)
+      ctx.fillStyle = bg
+      ctx.fill()
+      ctx.save()
+      ctx.beginPath()
+      ctx.ellipse(cx, cy, srx, sry, 0, 0, Math.PI * 2)
+      ctx.clip()
+      ctx.fillStyle = 'rgba(140, 100, 40, 0.3)'
+      ctx.fillRect(cx - srx, cy - sry * 0.4, srx * 2, sry * 0.2)
+      ctx.fillRect(cx - srx, cy + sry * 0.2, srx * 2, sry * 0.15)
+      ctx.restore()
+      ctx.beginPath()
+      ctx.ellipse(cx, cy, srx, sry, 0, 0, Math.PI * 2)
+      ctx.strokeStyle = '#a08040'
+      ctx.lineWidth = 1
+      ctx.stroke()
+    }
+
+    function drawMoons() {
+      if (!moons || moons.length === 0) return
+      const validMoons = moons.filter(m => m && m.x !== undefined)
+      if (validMoons.length === 0 || validMoons[0].error) return
+      const LABELS = ['M','E','Te','D','R','Ti','H','I']
+      const COLORS = ['#ddd','#eee','#ddd','#ddd','#ccc','#f5c842','#bbb','#aaa']
+      validMoons.forEach((m, i) => {
+        const mxArcsec = m.x * saturnRadiusArcsec
+        const myArcsec = m.y * saturnRadiusArcsec
+        const px = cx + mxArcsec * scale
+        const py = cy - myArcsec * scale
+        const inBox = px >= MARGIN && px <= W - MARGIN &&
+                      py >= MARGIN && py <= H - MARGIN
+        const behind = m.z !== undefined && m.z > 0
+        const alpha = behind ? 0.6 : 1.0
+        if (inBox) {
+          ctx.globalAlpha = alpha
+          ctx.beginPath()
+          ctx.arc(px, py, 3, 0, Math.PI * 2)
+          ctx.fillStyle = COLORS[i]
+          ctx.fill()
+          ctx.globalAlpha = 1.0
+          ctx.fillStyle = behind ? '#999' : '#ddd'
+          ctx.font = '10px monospace'
+          const lw = ctx.measureText(LABELS[i]).width
+          const labelY = behind ? py - 8 : py + 14
+          ctx.fillText(LABELS[i], px - lw/2, labelY)
+        } else {
+          const dx = px - cx
+          const dy = py - cy
+          const angle = Math.atan2(dy, dx)
+          const boxRight  = W - MARGIN - cx
+          const boxLeft   = -(cx - MARGIN)
+          const boxBottom = H - MARGIN - cy
+          const boxTop    = -(cy - MARGIN)
+          const ts = []
+          if (dx !== 0) ts.push((dx > 0 ? boxRight : boxLeft) / dx)
+          if (dy !== 0) ts.push((dy > 0 ? boxBottom : boxTop) / dy)
+          const t = Math.min(...ts.filter(v => v > 0))
+          const arrowTipX = cx + dx * t
+          const arrowTipY = cy + dy * t
+          const arrowLen = 20
+          const shaftX = arrowTipX - Math.cos(angle) * arrowLen
+          const shaftY = arrowTipY - Math.sin(angle) * arrowLen
+          ctx.globalAlpha = alpha
+          ctx.strokeStyle = COLORS[i]
+          ctx.lineWidth = 1.5
+          ctx.beginPath()
+          ctx.moveTo(shaftX, shaftY)
+          ctx.lineTo(arrowTipX, arrowTipY)
+          ctx.stroke()
+          const headLen = 6
+          ctx.beginPath()
+          ctx.moveTo(arrowTipX, arrowTipY)
+          ctx.lineTo(arrowTipX - Math.cos(angle - 0.4) * headLen,
+                     arrowTipY - Math.sin(angle - 0.4) * headLen)
+          ctx.moveTo(arrowTipX, arrowTipY)
+          ctx.lineTo(arrowTipX - Math.cos(angle + 0.4) * headLen,
+                     arrowTipY - Math.sin(angle + 0.4) * headLen)
+          ctx.stroke()
+          ctx.globalAlpha = 1.0
+          ctx.fillStyle = COLORS[i]
+          ctx.font = '10px monospace'
+          const lw = ctx.measureText(LABELS[i]).width
+          const labelX = shaftX - Math.cos(angle) * 12 - lw/2
+          const labelY = shaftY - Math.sin(angle) * 12
+          ctx.fillText(LABELS[i], labelX, labelY)
+        }
+      })
+    }
+
+    drawRingHalf(false)
+    drawSaturn()
+    drawRingHalf(true)
+    drawMoons()
+
+    const info = document.getElementById('sso-saturn-ring-info')
+    info.innerHTML = `Ring tilt (B): ${ring.bFmt} &nbsp;|&nbsp; Outer ring: ${ring.aEdgeFmt} × ${ring.bEdgeFmt} &nbsp;|&nbsp; P: ${ring.pFmt}`
+    info.style.color = '#aaa'
+    info.style.fontSize = '0.85em'
+    info.style.marginTop = '6px'
+
+    const tbody = document.getElementById('sso-saturn-rows')
+    let html = ''
+    if (!moons || (moons[0] && moons[0].error)) {
+      html = `<tr><td colspan="6" class="sso-error">${moons && moons[0] ? moons[0].error : 'No data'}</td></tr>`
+    } else {
+      moons.filter(m => m && m.x !== undefined).forEach((m, i) => {
+        const xArcsec = (m.x * saturnRadiusArcsec).toFixed(1)
+        const yArcsec = (m.y * saturnRadiusArcsec).toFixed(1)
+        html += `<tr>
+          <td>${m.name}</td>
+          <td>${m.x.toFixed(3)} Rs / ${xArcsec}"</td>
+          <td>${m.y.toFixed(3)} Rs / ${yArcsec}"</td>
+          <td>${m.z !== undefined ? m.z.toFixed(3) : '—'}</td>
+          <td>${m.offsetFmt} ${m.side}</td>
+          <td>${m.mag}</td>
+        </tr>`
+      })
+    }
+    tbody.innerHTML = html
+  }
+  function renderMarsMoons(moons) {
+    const tbody = document.getElementById('sso-mars-rows')
+    const canvas = document.getElementById('sso-mars-canvas')
+    const ctx = canvas.getContext('2d')
+    const W = 300, H = 100, cx = W / 2, cy = H / 2
+
+    ctx.clearRect(0, 0, W, H)
+
+    // Mars disk
+    ctx.beginPath()
+    ctx.arc(cx, cy, 14, 0, Math.PI * 2)
+    ctx.fillStyle = '#c1440e'
+    ctx.fill()
+
+    const scale = 8
+    const names = ['Phobos', 'Deimos']
+    const colors = ['#bbb', '#999']
+    let html = ''
+
+    if (moons[0] && moons[0].error) {
+      html = `<tr><td colspan="3" class="error">${moons[0].error}</td></tr>`
+    } else {
+      moons.forEach((m, i) => {
+        const px = cx + m.x * scale
+        const py = cy + (i - 0.5) * 18
+
+        ctx.beginPath()
+        ctx.arc(px, py, 3, 0, Math.PI * 2)
+        ctx.fillStyle = colors[i]
+        ctx.fill()
+
+        ctx.fillStyle = '#ccc'
+        ctx.font = '9px sans-serif'
+        ctx.fillText(names[i], px + 4, py + 3)
+
+        const side = m.x < 0 ? 'West' : 'East'
+        html += `<tr>
+          <td>${names[i]}</td>
+          <td>${Math.abs(m.x).toFixed(2)}</td>
+          <td>${side}</td>
+        </tr>`
+      })
+    }
+    tbody.innerHTML = html
+  }
+
+  // --- Main calculate function ---
+  function calculate() {
+    if (typeof window.SolarSystem === 'undefined') {
+      document.getElementById('sso-sun-rows').innerHTML =
+        '<tr><td colspan="2" class="error">SolarSystem library not loaded. Check js/astronomia.js.</td></tr>'
+      return
+    }
+
+    const pickerVal = document.getElementById('sso-datetime').value
+    const date = pickerVal ? new Date(pickerVal) : new Date()
+    const data = window.SolarSystem.getAll(date)
+    document.getElementById('sso-info-rows').innerHTML = `
+  	<tr><td>Date (UTC)</td><td>${data.date}</td></tr>
+	<tr><td>Julian Day</td><td>${data.jde.toFixed(5)}</td></tr>
+	<tr><td>Sidereal Time (GST)</td><td>${data.gstFmt}</td></tr>
+	<tr><td>Sidereal Time (LST)</td><td>${data.lstFmt}</td></tr>
+    `
+
+    renderSun(data.sun)
+    renderMoon(data.moon)
+    renderPlanets(data.planets)
+    const jupiterData = data.planets.find(p => p.name === 'Jupiter')
+    renderJupiterMoons(data.jupiterMoons, jupiterData.sdArcsec / 2)
+    const saturnData = data.planets.find(p => p.name === 'Saturn')
+    renderSaturn(data.saturnRing, data.saturnMoons, saturnData.sdArcsec / 2)
+console.log('Saturn ring:', data.saturnRing)
+console.log('Saturn moons:', data.saturnMoons)
+console.log('Saturn sdArcsec:', saturnData.sdArcsec)
+    renderMarsMoons(data.marsMoons)
+  }
+
+  // Run on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', calculate)
+  } else {
+    calculate()
+  }
+
+})()
+</script>
+</body></html>
