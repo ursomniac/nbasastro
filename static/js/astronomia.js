@@ -71243,6 +71243,7 @@
         const planet = new Planet(p.vsop);
         const planetD = new Planet(p.vsopD);
         const planetPos = planetD.position(jde);
+        const planetSph = new Planet(p.vsop).position(jde);
         const r = planetPos.range;
         const dx = planetPos.range * Math.cos(planetPos.lat) * Math.cos(planetPos.lon) - earthPos.range * Math.cos(earthPos.lat) * Math.cos(earthPos.lon);
         const dy = planetPos.range * Math.cos(planetPos.lat) * Math.sin(planetPos.lon) - earthPos.range * Math.cos(earthPos.lat) * Math.sin(earthPos.lon);
@@ -71303,9 +71304,9 @@
           illuminationPct: (illuminatedFraction * 100).toFixed(1),
           phaseAngleDeg: phaseAngle4 * DEG,
           lightTimeFmt,
-          helioLon: planetPos.lon,
+          helioLon: planetSph.lon,
           // radians, heliocentric ecliptic longitude
-          helioLat: planetPos.lat,
+          helioLat: planetSph.lat,
           // radians, heliocentric ecliptic latitude
           earthLon: earthPos.lon,
           // same for Earth (same for all planets)

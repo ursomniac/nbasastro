@@ -48,6 +48,22 @@
     </div>
   </div>
 
+<!-- Orrery Panel -->
+<div class="sso-panel sso-half" id="sso-orrery-panel">
+  <h3>Solar System</h3>
+  <div class="orrery-layout">
+    <canvas id="orrery-canvas" width="380" height="380"></canvas>
+    <table class="orrery-table">
+      <thead>
+        <tr><th>Body</th><th>L (°)</th><th>D (AU)</th></tr>
+      </thead>
+      <tbody id="orrery-tbody">
+        <tr><td colspan="3">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
   <!-- Planets Panel -->
   <div class="sso-panel" id="sso-planets-panel">
     <h3>🪐 Planet Positions</h3>
@@ -182,6 +198,12 @@
 #sso-jupiter-canvas { width: 100%; height: auto; }
 #sso-saturn-canvas { width: 100%; height: auto; }
 #sso-moon-canvas { width: 120px; flex-shrink: 0; align-self: flex-start; }
+.orrery-layout { display:flex; gap:16px; align-items:flex-start; }
+.orrery-table { border-collapse:collapse; font-size:12px; white-space:nowrap; }
+.orrery-table th { color:#f8d44e; font-weight:500; padding:3px 8px; text-align:left; border-bottom:1px solid #3a4a64; }
+.orrery-table td { padding:3px 8px; color:#d1d1d1; border-bottom:1px solid #1e2e48; }
+.orrery-table td:nth-child(2), .orrery-table td:nth-child(3) { text-align:right; font-variant-numeric:tabular-nums; font-family:monospace; font-size:11px; }
+.orrery-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:4px; vertical-align:middle; }
 canvas { border-radius: 6px; background: #0a0a18; }
 .error { color: #f88; }
 </style>
@@ -693,6 +715,8 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
     const pickerVal = document.getElementById('sso-datetime').value
     const date = pickerVal ? new Date(pickerVal) : new Date()
     const data = window.SolarSystem.getAll(date)
+console.log('Uranus:', data.planets.find(p => p.name === 'Uranus'))
+console.log('Neptune:', data.planets.find(p => p.name === 'Neptune'))
     document.getElementById('sso-info-rows').innerHTML = `
   	<tr><td>Date (UTC)</td><td>${data.date}</td></tr>
 	<tr><td>Julian Day</td><td>${data.jde.toFixed(5)}</td></tr>
@@ -708,6 +732,7 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
     renderJupiterMoons(data.jupiterMoons, jupiterData.sdArcsec / 2)
     const saturnData = data.planets.find(p => p.name === 'Saturn')
     renderSaturn(data.saturnRing, data.saturnMoons, saturnData.sdArcsec / 2)
+    if (window.renderOrrery) window.renderOrrery(data.planets)
     if (window.renderJupiterGlobe) window.renderJupiterGlobe(date)
     if (window.renderMarsGlobe) window.renderMarsGlobe(date)
     // renderMarsMoons(data.marsMoons)

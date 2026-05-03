@@ -172,6 +172,7 @@ function getPlanets(jde) {
       const planet = new Planet(p.vsop)
       const planetD = new Planet(p.vsopD)
       const planetPos = planetD.position(jde)
+      const planetSph = new Planet(p.vsop).position(jde)
       const r = planetPos.range
 
       const dx = planetPos.range * Math.cos(planetPos.lat) * Math.cos(planetPos.lon) -
@@ -224,8 +225,8 @@ function getPlanets(jde) {
         illuminationPct: (illuminatedFraction * 100).toFixed(1),
         phaseAngleDeg: phaseAngle * DEG,
 	lightTimeFmt,
-	helioLon: planetPos.lon,   // radians, heliocentric ecliptic longitude
-	helioLat: planetPos.lat,   // radians, heliocentric ecliptic latitude
+	helioLon: planetSph.lon,   // radians, heliocentric ecliptic longitude
+	helioLat: planetSph.lat,   // radians, heliocentric ecliptic latitude
 	earthLon: earthPos.lon,    // same for Earth (same for all planets)
 	earthLat: earthPos.lat,
 	earthR:   earthR,
