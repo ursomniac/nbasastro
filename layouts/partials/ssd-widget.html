@@ -1,0 +1,196 @@
+{{/* ssd-widget.html — Solar System Dashboard Sidebar Widget */}}
+<style>
+.ssd-widget {
+  padding: 6px 4px 4px 4px;
+  background: var(--deep-bg);
+}
+.ssd-live-badge {
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 8px; justify-content: center;
+}
+.ssd-live-dot {
+  width: 7px; height: 7px; background: #4ade80;
+  border-radius: 50%; animation: ssd-pulse 1.5s ease-in-out infinite;
+}
+@keyframes ssd-pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.4; transform:scale(0.7); }
+}
+.ssd-live-text {
+  font-size: 0.65rem; font-weight: bold;
+  letter-spacing: 2px; color: #4ade80; text-transform: uppercase;
+}
+.ssd-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.7rem; margin-bottom: 6px;
+}
+.ssd-table th {
+  color: var(--text-muted); font-weight: normal; font-size: 0.6rem;
+  text-transform: uppercase; letter-spacing: 1px;
+  padding: 2px 3px; border-bottom: 1px solid var(--border-soft);
+  text-align: left;
+}
+.ssd-table th:last-child { text-align: right; }
+.ssd-table td {
+  padding: 4px 3px; border-bottom: 1px solid rgba(58,74,100,0.4);
+  color: var(--text-main); vertical-align: middle;
+}
+.ssd-table td:first-child { color: var(--gold-base); font-weight: bold; white-space: nowrap; }
+.ssd-table td:last-child { text-align: right; }
+.ssd-symbol { color: var(--text-muted); font-size: 0.85rem; margin-left: 3px; }
+.ssd-alt { color: #7dd3fc; }
+.ssd-radec { color: var(--text-muted); font-size: 0.65rem; }
+.ssd-set-time { color: #f87171; }
+.ssd-circ { color: #4ade80; }
+.ssd-empty { color: var(--text-muted); font-size: 0.7rem; text-align: center; padding: 8px 0; }
+.ssd-updated { color: var(--border-soft); font-size: 0.6rem; text-align: right; margin-top: 2px; }
+.ssd-btn {
+  display: block; width: 100%; margin-top: 8px; padding: 7px 0;
+  background: var(--gold-base); color: #000 !important; font-weight: bold;
+  font-size: 0.75rem; text-align: center; text-decoration: none !important;
+  letter-spacing: 1px; text-transform: uppercase; border-radius: 3px;
+  transition: background 0.2s;
+}
+.ssd-btn:hover { background: #fff !important; color: #000 !important; }
+</style>
+
+<div class="ssd-widget">
+  <div class="ssd-live-badge">
+    <div class="ssd-live-dot"></div>
+    <span class="ssd-live-text">Above Horizon Now</span>
+  </div>
+  <div id="ssd-widget-content"><div class="ssd-empty">Loading...</div></div>
+  <a href="/solar-system-dashboard/" class="ssd-btn">⊙ Open Dashboard</a>
+</div>
+
+<script>
+(function() {
+  const LAT_DEG = 42.70
+  const LON_DEG = -73.11
+  const LAT = LAT_DEG * Math.PI / 180
+  const D2R = Math.PI / 180
+  const R2D = 180 / Math.PI
+
+  const SYMBOLS = {
+    Sun:'☉', Moon:'☽', Mercury:'☿', Venus:'♀',
+    Mars:'♂', Jupiter:'♃', Saturn:'♄', Uranus:'⛢', Neptune:'♆'
+  }
+
+  // Greenwich Mean Sidereal Time in degrees
+  function gmst(jd) {
+    const T = (jd - 2451545.0) / 36525.0
+    let g = 280.46061837 + 360.98564736629*(jd-2451545.0)
+            + 0.000387933*T*T - T*T*T/38710000
+    return ((g % 360) + 360) % 360
+  }
+
+  function lst(jd) {
+    return ((gmst(jd) + LON_DEG) % 360 + 360) % 360
+  }
+
+  function altitude(raDeg, decDeg, lstDeg) {
+    const ha  = ((lstDeg - raDeg) % 360 + 360) % 360 * D2R
+    const dec = decDeg * D2R
+    return Math.asin(Math.sin(LAT)*Math.sin(dec) + Math.cos(LAT)*Math.cos(dec)*Math.cos(ha)) * R2D
+  }
+
+  function setTimeUTC(raDeg, decDeg, date) {
+    const dec  = decDeg * D2R
+    const cosH = -Math.tan(LAT) * Math.tan(dec)
+    if (cosH < -1) return 'Circ'
+    if (cosH >  1) return null
+    const H        = Math.acos(cosH) * R2D
+    const jd       = date / 86400000 + 2440587.5
+    const lstNow   = lst(jd)
+    const lstAtSet = ((raDeg + H) % 360 + 360) % 360
+    const diff     = (lstAtSet - lstNow + 360) % 360
+    const setDate  = new Date(date.getTime() + diff/15*3600000)
+    // Convert to local time
+    const local = new Date(setDate.getTime())
+    const offset = local.getTimezoneOffset()
+    const localSet = new Date(setDate.getTime() - offset*60000)
+    const h = localSet.getUTCHours().toString().padStart(2,'0')
+    const m = localSet.getUTCMinutes().toString().padStart(2,'0')
+    // EDT or EST?
+    const tzLabel = offset === 240 ? 'EDT' : 'EST'
+    return `${h}:${m} ${tzLabel}`
+  }
+
+  function fmtRA(rad) {
+    const deg = ((rad * R2D) % 360 + 360) % 360
+    const h   = deg / 15
+    const hh  = Math.floor(h)
+    const mm  = Math.floor((h - hh) * 60)
+    return `${hh.toString().padStart(2,'0')}h${mm.toString().padStart(2,'0')}m`
+  }
+
+  function fmtDec(rad) {
+    const deg  = rad * R2D
+    const sign = deg >= 0 ? '+' : '-'
+    const abs  = Math.abs(deg)
+    const dd   = Math.floor(abs)
+    const mm   = Math.floor((abs - dd) * 60)
+    return `${sign}${dd.toString().padStart(2,'0')}°${mm.toString().padStart(2,'0')}'`
+  }
+
+  function render() {
+    if (!window.SolarSystem) { setTimeout(render, 500); return }
+
+    const date    = new Date()
+    const jd      = date / 86400000 + 2440587.5
+    const jde     = window.SolarSystem.dateToJDE(date)
+    const lstNow  = lst(jd)
+
+    const sun     = window.SolarSystem.getSun(jde)
+    const moon    = window.SolarSystem.getMoon(jde)
+    const planets = window.SolarSystem.getPlanets(jde)
+
+    const objects = [
+      sun,
+      moon,
+      ...planets.filter(p => !['Earth'].includes(p.name))
+    ].filter(o => o && !o.error && o.ra != null && o.dec != null)
+
+    const visible = objects.map(o => {
+      // ra/dec are in radians from SolarSystem
+      const raDeg  = ((o.ra  * R2D) % 360 + 360) % 360
+      const decDeg = o.dec * R2D
+      const alt    = altitude(raDeg, decDeg, lstNow)
+      const set    = alt > 0 ? setTimeUTC(raDeg, decDeg, date) : null
+      return { name: o.name, raDeg, decDeg, alt: Math.round(alt), up: alt > 0, set }
+    }).filter(o => o.up)
+
+    const h = date.getUTCHours().toString().padStart(2,'0')
+    const m = date.getUTCMinutes().toString().padStart(2,'0')
+
+    if (visible.length === 0) {
+      document.getElementById('ssd-widget-content').innerHTML =
+        '<div class="ssd-empty">Nothing above horizon</div>'
+      return
+    }
+
+    const rows = visible.map(o => `
+      <tr>
+        <td>${o.name}<span class="ssd-symbol">${SYMBOLS[o.name]||''}</span></td>
+        <td><span class="ssd-alt">${o.alt}°</span></td>
+        <td class="ssd-radec">${fmtRA(o.raDeg*D2R)} ${fmtDec(o.decDeg*D2R)}</td>
+        <td>${o.set==='Circ'
+          ? '<span class="ssd-circ">Circ</span>'
+          : o.set ? `<span class="ssd-set-time">${o.set}</span>` : '—'
+        }</td>
+      </tr>`).join('')
+
+    document.getElementById('ssd-widget-content').innerHTML = `
+      <table class="ssd-table">
+        <thead><tr>
+          <th>Object</th><th>Alt</th><th>RA / Dec</th><th style="text-align:right">Sets</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <div class="ssd-updated">Updated ${h}:${m} UTC</div>`
+  }
+
+  render()
+  setInterval(render, 10*60*1000)
+})()
+</script>

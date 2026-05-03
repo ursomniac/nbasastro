@@ -18,16 +18,16 @@
         <h3 class="sidebar-heading">Calendar</h3>
         {{ partial "unified-events.html" . (now.Format "2006-01-02") }}
 
+	<div class="widget-box">
+	    <h3 class="sidebar-heading">Solar System</h3>
+            {{ partial "ssd-widget.html" . }}
+        </div>
+
         {{ partial "weather-widget.html" . }}
 
         <div class="widget-box">
             <h3 class="sidebar-heading">Tonight's Sky</h3>
             {{ partial "sky-widget.html" . }}
-        </div>
-
-	<div class="widget-box">
-	    <h3 class="sidebar-heading">Solar System</h3>
-            <a href="/solar-system-dashboard/" class="btn btn-astro">Live Dashboard</a>
         </div>
 
         <div class="moon-widget widget-box">
