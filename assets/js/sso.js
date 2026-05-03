@@ -57,7 +57,7 @@ function formatDeg(rad) {
   const d = Math.floor(abs)
   const mTotal = (abs - d) * 60
   const m = Math.floor(mTotal)
-  const s = ((mTotal - m) * 60).toFixed(1)
+  const s = ((mTotal - m) * 60).toFixed(2)
   return `${sign}${String(d).padStart(3,'0')}° ${String(m).padStart(2,'0')}' ${String(s).padStart(4,'0')}"`
 }
 
