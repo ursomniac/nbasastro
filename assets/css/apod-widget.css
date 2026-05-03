@@ -1,0 +1,12 @@
+.apod-widget { margin-bottom: 1.5rem; }
+.widget-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: var(--gold-base); text-transform: uppercase; margin-bottom: 8px; }
+.apod-img-wrap { border: 1px solid var(--border-soft); border-radius: 6px; overflow: hidden; background: var(--deep-bg); margin-bottom: 10px; }
+.apod-img { width: 100%; display: block; }
+.apod-video-link { display: block; padding: 1.5rem; text-align: center; color: var(--gold-link); }
+.apod-title { font-size: 14px; font-weight: 500; color: var(--text-pure); margin-bottom: 4px; }
+.apod-date { font-size: 12px; color: var(--tag-cyan); margin-bottom: 8px; }
+.apod-excerpt { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 10px; }
+.apod-footer { display: flex; justify-content: space-between; align-items: center; }
+.apod-copy { font-size: 11px; color: var(--text-muted); font-style: italic; }
+.apod-link { font-size: 12px; font-weight: 700; color: var(--gold-link); text-decoration: underline; }
+.apod-error { font-size: 13px; color: var(--text-muted); }

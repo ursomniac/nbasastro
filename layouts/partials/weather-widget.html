@@ -3,11 +3,24 @@
 
 <div class="widget-box">
     <h3 class="sidebar-heading">Local Weather</h3>
-    <div id="weather-container">
-        <!-- JS from weather.js populates this -->
+    <div id="weather-container"></div>
+</div>
+
+<div class="widget-box">
+    <h3 class="sidebar-heading">Sky Forecast</h3>
+    <img src="https://www.7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0">
+    <button class="sky-btn" onclick="document.getElementById('sky-modal').classList.add('open')">
+        3-Day Sky Forecast ↗
+    </button>
+</div>
+
+<div class="sky-modal-overlay" id="sky-modal" onclick="this.classList.remove('open')">
+    <div class="sky-modal" onclick="event.stopPropagation()">
+        <button class="sky-modal-close" onclick="document.getElementById('sky-modal').classList.remove('open')">✕</button>
+        <img src="https://www.7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0"
+             alt="3-day sky forecast" />
     </div>
 </div>
 
 {{ $js := resources.Get "js/weather.js" | minify | fingerprint }}
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
-

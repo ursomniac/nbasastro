@@ -25,6 +25,7 @@
 
         {{ partial "weather-widget.html" . }}
 
+        {{ partial "aurora-widget.html" . }}
         <div class="widget-box">
             <h3 class="sidebar-heading">Tonight's Sky</h3>
             {{ partial "sky-widget.html" . }}
@@ -35,12 +36,12 @@
             {{ partial "moon-widget.html" . }}
         </div>
 
-        <div class="widget-box">
-            <h3 class="sidebar-heading">Sky Forecast</h3>
-		<img src="https://www.7timer.info/bin/astro.php?lon=-73.11&lat=42.70&ac=0&lang=en&unit=british&output=internal&tzshift=0">
-        </div>
+	{{ partial "seeing-widget.html" . }}
 
-        {{ partial "aurora-widget.html" . }}
+
+	{{ partial "apod-widget.html" . }}
+
+
     </div>
 </aside>
 

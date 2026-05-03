@@ -1,22 +1,106 @@
-/* FORCE ALIGNMENT TO MATCH CALENDAR/SKY WIDGETS */
 .widget-box .sidebar-heading {
     color: var(--gold-base) !important;
     text-decoration: none !important;
-    text-align: center; /* Match existing sidebar-heading center alignment */
-    margin-top: 0 !important; /* Remove excessive top gap */
+    text-align: center;
+    margin-top: 0 !important;
     padding-bottom: 5px !important;
-    border-bottom: 1px solid var(--border-soft); /* Use soft border to match others */
+    border-bottom: 1px solid var(--border-soft);
 }
-
-#weather-container {
-    padding: 10px 0;
-    margin-top: 5px;
-}
-
+#weather-container { padding: 10px 0; }
 .weather-city {
     text-align: center;
     color: var(--text-pure);
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-size: 0.95rem;
 }
+.weather-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 4px 0;
+    font-size: 0.9em;
+}
+.weather-row span { color: var(--text-muted); }
+.weather-row b { color: var(--text-pure); }
+.weather-trend {
+    margin-top: 12px;
+    border-top: 1px solid var(--border-soft);
+    padding-top: 10px;
+}
+.weather-trend-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--gold-base);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.weather-trend-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 40px;
+}
+.weather-trend-bar {
+    flex: 1;
+    background: var(--space-blue);
+    border-radius: 2px 2px 0 0;
+    border: 1px solid var(--border-soft);
+    position: relative;
+    min-height: 4px;
+}
+.weather-trend-bar.cloudy { background: var(--tag-cyan-bg); border-color: var(--tag-cyan); }
+.weather-trend-times {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+/* Sky Forecast modal — reuses seeing-modal patterns */
+.sky-btn {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    background: var(--space-blue);
+    color: var(--gold-base);
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 8px;
+}
+.sky-btn:hover { border-color: var(--gold-border); }
+.sky-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+.sky-modal-overlay.open { display: flex; }
+.sky-modal {
+    position: relative;
+    width: 95vw;
+    max-width: 860px;
+    background: var(--deep-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.sky-modal-close {
+    position: absolute;
+    top: 8px; right: 12px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+.sky-modal img { display: block; width: 100%; }

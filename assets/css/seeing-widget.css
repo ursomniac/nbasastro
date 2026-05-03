@@ -1,0 +1,49 @@
+.seeing-btn {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    background: var(--space-blue);
+    color: var(--gold-base);
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+}
+.seeing-btn:hover { border-color: var(--gold-border); }
+.seeing-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+.seeing-modal-overlay.open { display: flex; }
+.seeing-modal {
+    position: relative;
+    width: 90vw;
+    max-width: 680px;
+    background: var(--deep-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.seeing-modal-close {
+    position: absolute;
+    top: 8px; right: 12px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+.seeing-modal iframe {
+    display: block;
+    width: 100%;
+    height: 500px;
+    border: none;
+}

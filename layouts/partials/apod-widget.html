@@ -1,0 +1,40 @@
+{{ $css := resources.Get "css/apod-widget.css" | minify }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{ $apiKey := "UHun6M4CraicZWON3gaoSBg1996dh5938lpbJXLC" }}
+
+<div class="widget-box">
+  <div class="sidebar-heading">Astronomy Picture of the Day</div>
+  <div id="apod-content" class="apod-content">
+    <div class="apod-skeleton apod-img-placeholder"></div>
+    <div class="apod-skeleton apod-text-placeholder"></div>
+  </div>
+</div>
+
+<script>
+(async () => {
+  const el = document.getElementById('apod-content');
+  try {
+    const res = await fetch('https://api.nasa.gov/planetary/apod?api_key={{ $apiKey }}');
+    if (!res.ok) throw new Error();
+    const d = await res.json();
+    const words = d.explanation.split(' ');
+    const excerpt = words.slice(0, 40).join(' ') + (words.length > 40 ? '…' : '');
+    const date = new Date(d.date).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    const isVideo = d.media_type === 'video';
+    const mediaHtml = isVideo
+      ? `<a class="apod-video-link" href="${d.url}" target="_blank">▶ Watch on NASA</a>`
+      : `<img class="apod-img" src="${d.url}" alt="${d.title}" loading="lazy" />`;
+    el.innerHTML = `
+      <div class="apod-img-wrap">${mediaHtml}</div>
+      <div class="apod-title">${d.title}</div>
+      <div class="apod-date">${date}</div>
+      <p class="apod-excerpt">${excerpt}</p>
+      <div class="apod-footer">
+        <span class="apod-copy">${d.copyright ? '© ' + d.copyright.trim() : ''}</span>
+        <a class="apod-link" href="https://apod.nasa.gov/apod/astropix.html" target="_blank">Full explanation ↗</a>
+      </div>`;
+  } catch {
+    el.innerHTML = '<p class="apod-error">APOD unavailable.</p>';
+  }
+})();
+</script>

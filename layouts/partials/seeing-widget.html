@@ -1,0 +1,19 @@
+{{ $css := resources.Get "css/seeing-widget.css" | minify }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+
+<div class="widget-box">
+  <h3 class="sidebar-heading">Seeing Forecast</h3>
+  <button class="seeing-btn" onclick="document.getElementById('seeing-modal').classList.add('open')">
+    View Seeing Forecast ↗
+  </button>
+</div>
+
+<div class="seeing-modal-overlay" id="seeing-modal" onclick="this.classList.remove('open')">
+  <div class="seeing-modal" onclick="event.stopPropagation()">
+    <button class="seeing-modal-close" onclick="document.getElementById('seeing-modal').classList.remove('open')">✕</button>
+    <iframe src="https://www.meteoblue.com/en/weather/widget/seeing?geoloc=fixed&lat=42.7001&lon=-73.1112&asl=215&tz=America%2FNew_York&tempunit=FAHRENHEIT&windunit=MILE_PER_HOUR&layout=dark"
+            loading="lazy"
+            referrerpolicy="no-referrer">
+    </iframe>
+  </div>
+</div>
