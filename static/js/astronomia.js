@@ -71349,7 +71349,12 @@
       const saturn3 = new Planet(vsop87Bsaturn_default);
       const pos = saturnmoons_default.positions(jde, earth2, saturn3);
       return pos.map((p, i) => {
-        const mag = H[i] + 5 * Math.log10(saturnR * saturnDelta);
+        let Hval = H[i];
+        if (i === 7) {
+          const phi = Math.atan2(p.y, p.x);
+          Hval = 2.6 + 0.9 * Math.cos(phi);
+        }
+        const mag = Hval + 5 * Math.log10(saturnR * saturnDelta);
         return {
           name: NAMES[i],
           x: p.x,

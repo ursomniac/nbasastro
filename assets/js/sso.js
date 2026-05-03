@@ -273,7 +273,12 @@ function getSaturnMoons(jde, saturnR, saturnDelta) {
     const saturn = new Planet(vsop87Bsaturn)
     const pos = saturnmoons.positions(jde, earth, saturn)
     return pos.map((p, i) => {
-      const mag = H[i] + 5 * Math.log10(saturnR * saturnDelta)
+      let Hval = H[i]
+      if (i === 7) {
+         const phi = Math.atan2(p.y, p.x)
+         Hval = 2.6 + 0.9 * Math.cos(phi)
+      }
+      const mag = Hval + 5 * Math.log10(saturnR * saturnDelta)
       return {
         name: NAMES[i],
         x: p.x,
