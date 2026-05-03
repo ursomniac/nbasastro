@@ -1,0 +1,404 @@
+/* ============================================================
+   SSD — Solar System Dashboard
+   Uses site CSS variables from 01-variables.css
+   ============================================================ */
+
+/* --- Wrapper & Grid --- */
+.sso-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.sso-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* --- Panels --- */
+.sso-panel {
+  background: var(--space-blue);
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 0 0 1px #4a6a94;
+  border-radius: 8px;
+  padding: 16px;
+  minwidth: 0;
+  overflow: hidden;
+}
+
+.sso-panel * { max-width: 100%; }
+
+.sso-panel canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+
+.sso-panel.sso-full {
+  grid-column: 1 / -1;
+}
+
+.sso-panel h3 {
+  margin: 0 0 12px 0;
+  color: var(--gold-base);
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+/* --- Controls --- */
+.sso-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.sso-controls input[type="datetime-local"] {
+  color-scheme: dark;
+}
+
+.sso-controls label {
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+.sso-controls input {
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-soft);
+  background: var(--deep-bg);
+  color: var(--text-pure);
+  font-size: 0.9em;
+}
+
+.sso-controls button {
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--border-soft);
+  background: var(--deep-bg);
+  color: var(--gold-base);
+  font-weight: 700;
+  font-size: 0.85em;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+}
+
+.sso-controls button:hover {
+  border-color: var(--gold-border);
+  background: var(--space-blue);
+}
+
+/* --- Base table --- */
+.sso-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88em;
+}
+
+.sso-table th {
+  background: var(--deep-bg);
+  color: var(--gold-base);
+  padding: 6px 10px;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.sso-table td {
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text-main);
+}
+
+.sso-table tr:last-child td {
+  border-bottom: none;
+}
+
+.sso-table tbody tr:hover td {
+  background: rgba(255,255,255,0.03);
+}
+
+/* --- Key/value tables (Sun, Moon, Mars, Jupiter GRS, Epoch) ---
+   Column 1: label (muted), Column 2: value (right-aligned, monospace) */
+#sso-info-rows td:first-child,
+#sso-sun-rows td:first-child,
+#sso-moon-rows td:first-child,
+#mars-globe-meta td:first-child,
+#jupiter-globe-meta td:first-child {
+  color: var(--text-muted);
+  width: auto;
+  white-space: nowrap;
+}
+
+#sso-info-rows td:last-child,
+#sso-sun-rows td:last-child,
+#sso-moon-rows td:last-child,
+#mars-globe-meta td:last-child,
+#jupiter-globe-meta td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: monospace;
+  color: var(--text-pure);
+}
+
+/* --- Planets table: cols 2-6 are numbers --- */
+#sso-planet-rows td:nth-child(n+2) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: monospace;
+}
+
+#sso-planet-rows td:first-child {
+  color: var(--text-pure);
+  font-weight: 600;
+}
+
+.sso-system-caption {
+  font-size: 0.78em;
+  color: var(--text-muted);
+  margin: 6px 0 10px 0;
+  font-style: italic;
+}
+
+/* --- Jupiter moons table: cols 2-6 --- */
+#sso-jupiter-rows td:nth-child(n+2) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: monospace;
+  font-size: 0.78em;
+  white-space: nowrap;
+}
+
+/* --- Saturn moons table: cols 2-6 --- */
+#sso-saturn-rows td:nth-child(n+2) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: monospace;
+  font-size: 0.78em;
+  white-space: nowrap;
+}
+
+/* --- Orrery table: cols 2-3 --- */
+.orrery-table {
+  width: 100%;
+  font-size: 0.8em;
+}
+
+.orrery-table-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.orrery-table th {
+  color: var(--gold-base);
+  font-weight: 600;
+  padding: 4px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-soft);
+  letter-spacing: 0.03em;
+}
+
+.orrery-table td {
+  padding: 4px 10px;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.orrery-table td:nth-child(2),
+.orrery-table td:nth-child(3) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: monospace;
+}
+
+.orrery-table tr:last-child td { border-bottom: none; }
+
+.orrery-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.orrery-layout {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+#orrery-canvas {
+  flex-shrink: 0;
+  width: 220px !important;
+  height: 220px !important;
+}
+
+/* --- Inner planets (Mercury/Venus) --- */
+.sso-inner-grid {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.sso-inner-subpanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 220px;
+}
+
+.sso-inner-name {
+  font-size: 1em;
+  font-weight: 700;
+  color: var(--gold-base);
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.sso-inner-body {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+}
+
+.sso-inner-canvas {
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.sso-inner-info { flex: 1; }
+
+.sso-inner-table {
+  font-size: 0.88em;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.sso-inner-table td {
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text-main);
+}
+
+.sso-inner-table tr:last-child td { border-bottom: none; }
+
+.sso-inner-table td:first-child {
+  color: var(--text-muted);
+  width: 50%;
+}
+
+.sso-inner-table td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: monospace;
+  color: var(--text-pure);
+}
+
+.sso-inner-table td:first-child {
+  color: var(--text-muted);
+  padding-right: 12px;
+  white-space: nowrap;
+}
+
+.sso-inner-table td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: monospace;
+  color: var(--text-pure);
+}
+
+/* --- Moon system layouts --- */
+.sso-moon-system-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* --- Moon phase canvas --- */
+#sso-moon-canvas {
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+/* --- Sun image layout --- */
+.sso-sun-layout {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.sso-sun-caption {
+  font-size: 0.75em;
+  color: var(--text-muted);
+  margin: 6px 0 0 0;
+}
+
+/* --- Panel image — fills panel width --- */
+.sso-panel-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.sso-panel-image-wrap {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.sso-panel-image-wrap svg,
+.sso-panel-image-wrap canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+
+/* --- Phase canvas (Mercury/Venus) — centered, not stretched --- */
+.sso-phase-canvas {
+  display: block;
+  margin: 0 auto 12px;
+}
+
+/* --- Image caption --- */
+.sso-image-caption {
+  font-size: 0.75em;
+  color: var(--text-muted);
+  margin: -8px 0 10px 0;
+}
+
+
+/* --- Saturn ring info --- */
+#sso-saturn-ring-info {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin: 6px 0 8px 0;
+}
+
+/* --- Canvas defaults --- */
+canvas {
+  border-radius: 6px;
+  background: var(--deep-bg);
+}
+
+#sso-jupiter-canvas { width: 100%; height: auto; }
+#sso-saturn-canvas  { width: 100%; height: auto; }
+
+/* --- Errors --- */
+.error, .sso-error { color: #f88; }

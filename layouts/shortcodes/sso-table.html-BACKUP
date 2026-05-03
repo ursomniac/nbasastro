@@ -1,142 +1,212 @@
+<!-- saved from url=(0052)file:///Users/robertdonahue/Downloads/sso-table.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><div class="sso-wrapper">
 
-{{ $css := resources.Get "css/sso.css" | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $css.Permalink }}">
+<!-- Info Panel -->
+<div class="sso-panel" id="sso-info-panel">
+  <h3>🔭 Calculation Epoch</h3>
+  <table class="sso-table">
+    <tbody id="sso-info-rows">
+      <tr><td colspan="2">Loading...</td></tr>
+    </tbody>
+  </table>
+</div>
 
-<div class="sso-wrapper">
+  <!-- Date/Time Picker -->
+  <div class="sso-controls">
+    <label for="sso-datetime">Date/Time (local):</label>
+    <input type="datetime-local" id="sso-datetime">
+    <button id="sso-now-btn">Now</button>
+    <button id="sso-calc-btn">Calculate</button>
+  </div>
 
-  <div class="sso-grid">
-
-    <!-- Epoch — half -->
-    <div class="sso-panel sso-full" id="sso-info-panel">
-      <h3>Epoch</h3>
-      <div class="sso-controls">
-        <label for="sso-datetime">Date/Time (local):</label>
-        <input type="datetime-local" id="sso-datetime">
-        <button id="sso-now-btn">Now</button>
-        <button id="sso-calc-btn">Calculate</button>
-      </div>
-      <table class="sso-table">
-        <tbody id="sso-info-rows"><tr><td colspan="2">Loading...</td></tr></tbody>
-      </table>
-    </div>
-
-    <!-- Planets — full -->
-    <div class="sso-panel sso-full" id="sso-planets-panel">
-      <h3>Planet Positions</h3>
-      <table class="sso-table">
-        <thead>
-          <tr>
-            <th>Planet</th>
-            <th>RA</th>
-            <th>Dec</th>
-            <th>Distance (AU)</th>
-            <th>Ang. Size</th>
-            <th>Magnitude</th>
-          </tr>
-        </thead>
-        <tbody id="sso-planet-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
-      </table>
-    </div>
-
-    <!-- Sun — half -->
-    <div class="sso-panel" id="sso-sun-panel">
-      <h3>Sun</h3>
-      <a href="https://soho.nascom.nasa.gov/data/realtime-images.html" target="_blank">
+  <!-- Sun Panel -->
+  <div class="sso-panel" id="sso-sun-panel">
+    <h3>☀️ Sun</h3>
+    <div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap;">
+      <a href="https://soho.nascom.nasa.gov/data/realtime-images.html" target="_blank" style="flex-shrink:0;">
         <img src="https://sohowww.nascom.nasa.gov/data/realtime/hmi_igr/1024/latest.jpg"
              alt="Current Sunspots (SOHO/SDO)"
-             class="sso-panel-image">
+             style="width:200px; height:auto; border-radius:6px; display:block;">
       </a>
-      <p class="sso-image-caption">HMI Intensitygram — click for full res</p>
-      <table class="sso-table">
+      <table class="sso-table" style="flex:1; align-self:flex-start; margin-top:0;">
         <tbody id="sso-sun-rows"><tr><td colspan="2">Loading...</td></tr></tbody>
       </table>
     </div>
+    <p style="font-size:0.75em; color:#666; margin:6px 0 0 0;">HMI Intensitygram (SOHO/SDO) — click for full res</p>
+  </div>
 
-    <!-- Moon — half -->
-    <div class="sso-panel" id="sso-moon-panel">
-      <h3>Moon</h3>
-      <div id="sso-moon-canvas" class="sso-panel-image-wrap"></div>
-      <table class="sso-table">
-        <tbody id="sso-moon-rows"><tr><td colspan="2">Loading...</td></tr></tbody>
+  <!-- Moon Panel -->
+  <div class="sso-panel" id="sso-moon-panel">
+    <h3>🌙 Moon</h3>
+    <div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap;">
+      <div id="sso-moon-canvas" style="flex-shrink:0; width:200px;"></div>
+      <table class="sso-table" style="flex:1; align-self:flex-start; margin-top:0;">
+        <tbody id="sso-moon-rows">
+          <tr><td colspan="2">Loading...</td></tr>
+        </tbody>
       </table>
     </div>
+  </div>
 
-    <!-- Mercury — half -->
-    <div class="sso-panel" id="sso-mercury-panel">
-      <h3>Mercury</h3>
-      <div class="sso-panel-image-wrap">
-        <canvas id="sso-mercury-canvas" width="160" height="160" class="sso-phase-canvas"></canvas>
+<!-- Orrery Panel -->
+<div class="sso-panel sso-half" id="sso-orrery-panel">
+  <h3>Solar System</h3>
+  <div class="orrery-layout">
+    <canvas id="orrery-canvas" width="380" height="380"></canvas>
+    <table class="orrery-table">
+      <thead>
+        <tr><th>Body</th><th>L (°)</th><th>D (AU)</th></tr>
+      </thead>
+      <tbody id="orrery-tbody">
+        <tr><td colspan="3">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  <!-- Planets Panel -->
+  <div class="sso-panel" id="sso-planets-panel">
+    <h3>🪐 Planet Positions</h3>
+    <table class="sso-table">
+      <thead>
+        <tr>
+          <th>Planet</th>
+          <th>RA</th>
+          <th>Dec.</th>
+          <th>Distance (AU)</th>
+          <th>Ang. Size</th>
+	  <th>Magnitude</th>
+        </tr>
+      </thead>
+      <tbody id="sso-planet-rows">
+        <tr><td colspan="4">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+<!-- Inner Planets Panel -->
+  <div class="sso-panel" id="sso-inner-panel">
+    <h3>☿♀ Inner Planets</h3>
+    <div class="sso-inner-grid">
+      <div class="sso-inner-subpanel">
+        <div class="sso-inner-name" id="sso-mercury-name">Mercury</div>
+        <div class="sso-inner-body">
+          <canvas id="sso-mercury-canvas" width="160" height="160" class="sso-inner-canvas"></canvas>
+          <div id="sso-mercury-info" class="sso-inner-info"></div>
+        </div>
       </div>
-      <div id="sso-mercury-info"></div>
-    </div>
-
-    <!-- Venus — half -->
-    <div class="sso-panel" id="sso-venus-panel">
-      <h3>Venus</h3>
-      <div class="sso-panel-image-wrap">
-        <canvas id="sso-venus-canvas" width="160" height="160" class="sso-phase-canvas"></canvas>
+      <div class="sso-inner-subpanel">
+        <div class="sso-inner-name" id="sso-venus-name">Venus</div>
+        <div class="sso-inner-body">
+          <canvas id="sso-venus-canvas" width="160" height="160" class="sso-inner-canvas"></canvas>
+          <div id="sso-venus-info" class="sso-inner-info"></div>
+        </div>
       </div>
-      <div id="sso-venus-info"></div>
     </div>
+  </div>
 
-    <!-- Mars — half -->
-    <div class="sso-panel" id="sso-mars-globe-panel">
-      <h3>Mars</h3>
-      <canvas id="mars-globe-canvas" width="400" height="400" class="sso-panel-image"></canvas>
+<!-- Mars Globe Panel -->
+  <div class="sso-panel" id="sso-mars-globe-panel">
+    <h3>Mars</h3>
+    <div style="display:flex; gap:1rem; align-items:flex-start;">
+      <div style="width:400px; height:400px; flex-shrink:0;">
+        <canvas id="mars-globe-canvas" width="400" height="400" style="width:100%; height:100%;"></canvas>
+      </div>
       <div id="mars-globe-meta"></div>
     </div>
+  </div>
 
-    <!-- Jupiter GRS — half -->
-    <div class="sso-panel" id="sso-jupiter-globe-panel">
-      <h3>Jupiter</h3>
-      <canvas id="jupiter-globe-canvas" width="400" height="400" class="sso-panel-image"></canvas>
+<!-- Jupiter Globe Panel -->
+  <div class="sso-panel" id="sso-jupiter-globe-panel">
+    <h3>Jupiter</h3>
+    <div style="display:flex; gap:1rem; align-items:flex-start;">
+      <div style="width:400px; height:400px; flex-shrink:0;">
+        <canvas id="jupiter-globe-canvas" width="400" height="400" style="width:100%; height:100%;"></canvas>
+      </div>
       <div id="jupiter-globe-meta"></div>
     </div>
+  </div>
 
-    <!-- Jupiter System — full -->
-    <div class="sso-panel sso-full" id="sso-jupiter-panel">
-      <h3>Jupiter System</h3>
-      <canvas id="sso-jupiter-canvas" width="800" height="200" class="sso-panel-image"></canvas>
-	<p class="sso-system-caption">Label above: moon is behind the planet. Label below: moon is in front.</p>
+  <!-- Jupiter Moons Panel -->
+  <div class="sso-panel" id="sso-jupiter-panel">
+    <h3>Jupiter Moon System</h3>
+    <div class="sso-moon-system-layout">
+      <canvas id="sso-jupiter-canvas" width="800" height="160"></canvas>
       <table class="sso-table">
-        <thead>
-          <tr>
-            <th>Moon</th>
-            <th>X (Rj)</th>
-            <th>Y (Rj)</th>
-            <th>Z (Rj)</th>
-            <th>Offset</th>
-            <th>Mag</th>
-          </tr>
-        </thead>
-        <tbody id="sso-jupiter-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
+	<thead><tr><th>Moon</th><th>X (Rj)</th><th>Y (Rj)</th><th>Z (Rj)</th><th>Offset</th><th>Mag</th></tr></thead>
+        <tbody id="sso-jupiter-rows">
+          <tr><td colspan="3">Loading...</td></tr>
+        </tbody>
       </table>
     </div>
+  </div>
 
-    <!-- Saturn System — full -->
-    <div class="sso-panel sso-full" id="sso-saturn-panel">
-      <h3>Saturn System</h3>
-      <canvas id="sso-saturn-canvas" width="800" height="120" class="sso-panel-image"></canvas>
-      <p id="sso-saturn-ring-info"></p>
-	<p class="sso-system-caption">Label above: moon is behind the planet. Label below: moon is in front.</p>
+  <!-- Saturn Panel -->
+<div class="sso-panel" id="sso-saturn-panel">
+  <h3>🪐 Saturn System</h3>
+  <canvas id="sso-saturn-canvas" width="300" height="120"></canvas>
+  <p id="sso-saturn-ring-info"></p>
+  <table class="sso-table">
+    <thead><tr><th>Moon</th><th>X (Rs)</th><th>Y (Rs)</th><th>Z (Rs)<th>Offset</th><th>Mag</th></tr></thead>
+    <tbody id="sso-saturn-rows">
+      <tr><td colspan="5">Loading...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+  <!-- Mars Moons Panel -->
+  
+  <!--div class="sso-panel" id="sso-mars-panel">
+    <h3>Mars Moon System</h3>
+    <div class="sso-moon-system-layout">
+      <canvas id="sso-mars-canvas" width="300" height="100"></canvas>
       <table class="sso-table">
-        <thead>
-          <tr>
-            <th>Moon</th>
-            <th>X (Rs)</th>
-            <th>Y (Rs)</th>
-            <th>Z (Rs)</th>
-            <th>Offset</th>
-            <th>Mag</th>
-          </tr>
-        </thead>
-        <tbody id="sso-saturn-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
+        <thead><tr><th>Moon</th><th>Offset</th><th>Side</th></tr></thead>
+        <tbody id="sso-mars-rows">
+          <tr><td colspan="3">Loading...</td></tr>
+        </tbody>
       </table>
     </div>
+  </div-->
 
-  </div><!-- .sso-grid -->
-</div><!-- .sso-wrapper -->
+</div>
 
+<style>
+.sso-wrapper { font-family: sans-serif; max-width: 900px; margin: 0 auto; }
+.sso-controls { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.sso-controls input { padding: 6px; border-radius: 4px; border: 1px solid #555; background: #222; color: #eee; }
+.sso-controls button { padding: 6px 14px; border-radius: 4px; border: none; background: #446; color: #eee; cursor: pointer; }
+.sso-controls button:hover { background: #668; }
+.sso-panel { background: #1a1a2e; border: 1px solid #334; border-radius: 8px; padding: 16px; margin-bottom: 20px; }
+.sso-panel h3 { margin: 0 0 12px 0; color: #adf; font-size: 1.1em; }
+.sso-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+.sso-table th { background: #223; color: #9bf; padding: 6px 10px; text-align: left; }
+.sso-table td { padding: 5px 10px; border-bottom: 1px solid #223; color: #ddd; }
+.sso-table tr:last-child td { border-bottom: none; }
+.sso-moon-layout { display: flex; align-items: flex-start; gap: 20px; }
+.sso-moon-system-layout { display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+.sso-inner-grid { display: flex; gap: 30px; flex-wrap: wrap; }
+.sso-inner-subpanel { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 240px; gap: 0; }
+.sso-inner-body { display: flex; gap: 16px; align-items: center !important; width: 100%; }
+.sso-inner-canvas { border-radius: 6px; flex-shrink: 0; }
+.sso-inner-info { flex: 1; }
+.sso-inner-name { font-size: 1.1em; font-weight: bold; color: #adf; margin: 0 0 -12px 0; }
+.sso-inner-table { font-size: 0.85em; color: #ccc; border-collapse: collapse; width: 100%; }
+.sso-inner-table td { padding: 4px 0; border: none; }
+.sso-inner-table td:first-child { color: #888; padding-left: 8px; padding-right: 12px; white-space: nowrap; }
+#sso-jupiter-canvas { width: 100%; height: auto; }
+#sso-saturn-canvas { width: 100%; height: auto; }
+#sso-moon-canvas { width: 120px; flex-shrink: 0; align-self: flex-start; }
+.orrery-layout { display:flex; gap:16px; align-items:flex-start; }
+.orrery-table { border-collapse:collapse; font-size:12px; white-space:nowrap; }
+.orrery-table th { color:#f8d44e; font-weight:500; padding:3px 8px; text-align:left; border-bottom:1px solid #3a4a64; }
+.orrery-table td { padding:3px 8px; color:#d1d1d1; border-bottom:1px solid #1e2e48; }
+.orrery-table td:nth-child(2), .orrery-table td:nth-child(3) { text-align:right; font-variant-numeric:tabular-nums; font-family:monospace; font-size:11px; }
+.orrery-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:4px; vertical-align:middle; }
+canvas { border-radius: 6px; background: #0a0a18; }
+.error { color: #f88; }
+</style>
 
 <script src="{{ "js/mars-globe.js" | relURL }}"></script>
 <script src="{{ "js/jupiter-globe.js" | relURL }}"></script>
@@ -386,7 +456,7 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
   })
 
   // Table
-  const NAMES = ['Io (I)', 'Europa (E)', 'Ganymede (G)', 'Callisto (C)']
+  const NAMES = ['Io', 'Europa', 'Ganymede', 'Callisto']
   let html = ''
   moons.forEach((m, i) => {
     const side = m.x < 0 ? 'W' : 'E'
@@ -394,9 +464,9 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
     const status = occluded ? ' (occulted)' : m.z > 0 ? ' (transit)' : ''
     html += `<tr>
       <td>${NAMES[i]}</td>
-      <td>${m.x.toFixed(1)} Rj / ${(Math.abs(m.x) * jupiterRadiusArcsec).toFixed(1)}" </td>
-      <td>${m.y.toFixed(1)} Rj / ${(Math.abs(m.y) * jupiterRadiusArcsec).toFixed(1)}" </td>
-      <td>${m.z.toFixed(1)}</td>
+      <td>${m.x.toFixed(3)}</td>
+      <td>${m.y.toFixed(3)}</td>
+      <td>${m.z.toFixed(3)}</td>
       <td>${Math.abs(m.x).toFixed(2)} Rj / ${(Math.abs(m.x) * jupiterRadiusArcsec).toFixed(1)}" ${side}${status}</td>
       <td>${m.mag}</td>
     </tr>`
@@ -577,8 +647,8 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
         const yArcsec = (m.y * saturnRadiusArcsec).toFixed(1)
         html += `<tr>
           <td>${m.name}</td>
-          <td>${m.x.toFixed(1)} Rs / ${xArcsec}"</td>
-          <td>${m.y.toFixed(1)} Rs / ${yArcsec}"</td>
+          <td>${m.x.toFixed(3)} Rs / ${xArcsec}"</td>
+          <td>${m.y.toFixed(3)} Rs / ${yArcsec}"</td>
           <td>${m.z !== undefined ? m.z.toFixed(3) : '—'}</td>
           <td>${m.offsetFmt} ${m.side}</td>
           <td>${m.mag}</td>
@@ -662,6 +732,7 @@ console.log('Neptune:', data.planets.find(p => p.name === 'Neptune'))
     renderJupiterMoons(data.jupiterMoons, jupiterData.sdArcsec / 2)
     const saturnData = data.planets.find(p => p.name === 'Saturn')
     renderSaturn(data.saturnRing, data.saturnMoons, saturnData.sdArcsec / 2)
+    if (window.renderOrrery) window.renderOrrery(data.planets)
     if (window.renderJupiterGlobe) window.renderJupiterGlobe(date)
     if (window.renderMarsGlobe) window.renderMarsGlobe(date)
     // renderMarsMoons(data.marsMoons)

@@ -26528,10 +26528,8 @@ void main() {
     if (!meta) return;
     meta.innerHTML = `
     <table class="sso-table"><tbody>
-      <tr><td>Date (UTC)</td><td>${date.toUTCString().replace(" GMT", " UTC")}</td></tr>
       <tr><td>Central Meridian</td><td>${cml.toFixed(1)}\xB0</td></tr>
       <tr><td>Sub-Earth Lat</td><td>${subEarthLat.toFixed(1)}\xB0</td></tr>
-      <tr><td>Distance</td><td>${mars.rangeFmt}</td></tr>
       <tr><td>Diameter</td><td>${mars.sdFmt}</td></tr>
       <tr><td>Illumination</td><td>${mars.illuminationPct}%</td></tr>
     </tbody></table>`;

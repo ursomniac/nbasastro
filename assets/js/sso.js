@@ -254,7 +254,7 @@ function getJupiterMoons(jde, jupiterR, jupiterDelta) {
         y: p.y,
         z: p.z,
         side: p.x < 0 ? 'West' : 'East',
-        offsetFmt: Math.abs(p.x).toFixed(3) + ' Rj',
+	offsetFmt: Math.sqrt(p.x*p.x + p.y*p.y).toFixed(1) + ' Rj',
         mag: mag.toFixed(2),
         error: null
       }
@@ -266,7 +266,7 @@ function getJupiterMoons(jde, jupiterR, jupiterDelta) {
 
 // Saturn moon magnitudes: V = H + 5*log10(r_saturn * delta_saturn)
 function getSaturnMoons(jde, saturnR, saturnDelta) {
-  const NAMES = ['Mimas','Enceladus','Tethys','Dione','Rhea','Titan','Hyperion','Iapetus']
+  const NAMES = ['Mimas (M)','Enceladus (E)','Tethys (Te)','Dione (D)','Rhea (R)','Titan (Ti)','Hyperion (H)','Iapetus (I)']
   const H = [3.3, 2.1, 0.6, 0.8, 0.1, -1.3, 4.9, 1.5]
   try {
     const earth  = new Planet(vsop87Bearth)
@@ -280,7 +280,7 @@ function getSaturnMoons(jde, saturnR, saturnDelta) {
         y: p.y,
         z: p.z,
         side: p.x < 0 ? 'West' : 'East',
-        offsetFmt: Math.abs(p.x).toFixed(3) + ' Rs',
+	offsetFmt: Math.sqrt(p.x*p.x + p.y*p.y).toFixed(1) + ' Rs',
         mag: mag.toFixed(2),
         error: null
       }

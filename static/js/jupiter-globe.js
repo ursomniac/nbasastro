@@ -26892,11 +26892,9 @@ void main() {
     const grsSign = grsFromCenter >= 0 ? "+" : "";
     meta.innerHTML = `
     <table class="sso-table"><tbody>
-      <tr><td>Date (UTC)</td><td>${date.toUTCString().replace(" GMT", " UTC")}</td></tr>
       <tr><td>Central Meridian (Sys II)</td><td>${cml.toFixed(1)}\xB0</td></tr>
       <tr><td>GRS Longitude (Sys II)</td><td>${grsLon.toFixed(1)}\xB0</td></tr>
       <tr><td>GRS from Center</td><td>${grsSign}${grsFromCenter.toFixed(1)}\xB0</td></tr>
-      <tr><td>Distance</td><td>${jup.rangeFmt}</td></tr>
       <tr><td>Diameter</td><td>${jup.sdFmt}</td></tr>
       <tr><td>Illumination</td><td>${jup.illuminationPct}%</td></tr>
     </tbody></table>`;

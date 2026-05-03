@@ -72,7 +72,7 @@
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    // Degree labels — inside ring
+    // Degree labels inside ring
     ctx.fillStyle = '#78909c';
     ctx.font = '8px monospace';
     ctx.textAlign = 'center';
@@ -82,7 +82,7 @@
       ctx.fillText(deg + '°', cx + (maxR - 8) * Math.cos(r), cy - (maxR - 8) * Math.sin(r));
     }
 
-    // Zodiac glyphs — just outside ring
+    // Zodiac glyphs outside ring
     ctx.fillStyle = '#b0bec5';
     ctx.font = '11px serif';
     ctx.textAlign = 'center';
@@ -132,14 +132,12 @@
       ctx.fillText(ABBREV[p.name] || p.name[0], pp.x, pp.y - 6);
     });
 
-    // Table — Earth + planets sorted by D_sun
+    // Build sorted rows: Earth + planets by D_sun
     const earth = { name: 'Earth', helioLon: earthLon, r: earthR };
     const rows = [earth, ...planets.filter(p => !p.error)]
       .sort((a, b) => a.r - b.r);
 
-    const tbody = document.getElementById('orrery-tbody');
-    if (!tbody) return;
-    tbody.innerHTML = rows.map(p => {
+    const makeRow = p => {
       const lonDeg = ((p.helioLon * DEG) % 360 + 360) % 360;
       const col = PLANET_COLORS[p.name] || '#fff';
       return `<tr>
@@ -147,7 +145,12 @@
         <td>${lonDeg.toFixed(2)}</td>
         <td>${p.r.toFixed(2)}</td>
       </tr>`;
-    }).join('');
+    };
+
+    const tbodyL = document.getElementById('orrery-tbody-left');
+    const tbodyR = document.getElementById('orrery-tbody-right');
+    if (tbodyL) tbodyL.innerHTML = rows.slice(0, 4).map(makeRow).join('');
+    if (tbodyR) tbodyR.innerHTML = rows.slice(4).map(makeRow).join('');
   };
 
 })();
