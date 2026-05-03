@@ -12661,91 +12661,6 @@
       this.type = "RawShaderMaterial";
     }
   };
-  var MeshStandardMaterial = class extends Material {
-    /**
-     * Constructs a new mesh standard material.
-     *
-     * @param {Object} [parameters] - An object with one or more properties
-     * defining the material's appearance. Any property of the material
-     * (including any property from inherited materials) can be passed
-     * in here. Color values can be passed any type of value accepted
-     * by {@link Color#set}.
-     */
-    constructor(parameters) {
-      super();
-      this.isMeshStandardMaterial = true;
-      this.type = "MeshStandardMaterial";
-      this.defines = { "STANDARD": "" };
-      this.color = new Color(16777215);
-      this.roughness = 1;
-      this.metalness = 0;
-      this.map = null;
-      this.lightMap = null;
-      this.lightMapIntensity = 1;
-      this.aoMap = null;
-      this.aoMapIntensity = 1;
-      this.emissive = new Color(0);
-      this.emissiveIntensity = 1;
-      this.emissiveMap = null;
-      this.bumpMap = null;
-      this.bumpScale = 1;
-      this.normalMap = null;
-      this.normalMapType = TangentSpaceNormalMap;
-      this.normalScale = new Vector2(1, 1);
-      this.displacementMap = null;
-      this.displacementScale = 1;
-      this.displacementBias = 0;
-      this.roughnessMap = null;
-      this.metalnessMap = null;
-      this.alphaMap = null;
-      this.envMap = null;
-      this.envMapRotation = new Euler();
-      this.envMapIntensity = 1;
-      this.wireframe = false;
-      this.wireframeLinewidth = 1;
-      this.wireframeLinecap = "round";
-      this.wireframeLinejoin = "round";
-      this.flatShading = false;
-      this.fog = true;
-      this.setValues(parameters);
-    }
-    copy(source) {
-      super.copy(source);
-      this.defines = { "STANDARD": "" };
-      this.color.copy(source.color);
-      this.roughness = source.roughness;
-      this.metalness = source.metalness;
-      this.map = source.map;
-      this.lightMap = source.lightMap;
-      this.lightMapIntensity = source.lightMapIntensity;
-      this.aoMap = source.aoMap;
-      this.aoMapIntensity = source.aoMapIntensity;
-      this.emissive.copy(source.emissive);
-      this.emissiveMap = source.emissiveMap;
-      this.emissiveIntensity = source.emissiveIntensity;
-      this.bumpMap = source.bumpMap;
-      this.bumpScale = source.bumpScale;
-      this.normalMap = source.normalMap;
-      this.normalMapType = source.normalMapType;
-      this.normalScale.copy(source.normalScale);
-      this.displacementMap = source.displacementMap;
-      this.displacementScale = source.displacementScale;
-      this.displacementBias = source.displacementBias;
-      this.roughnessMap = source.roughnessMap;
-      this.metalnessMap = source.metalnessMap;
-      this.alphaMap = source.alphaMap;
-      this.envMap = source.envMap;
-      this.envMapRotation.copy(source.envMapRotation);
-      this.envMapIntensity = source.envMapIntensity;
-      this.wireframe = source.wireframe;
-      this.wireframeLinewidth = source.wireframeLinewidth;
-      this.wireframeLinecap = source.wireframeLinecap;
-      this.wireframeLinejoin = source.wireframeLinejoin;
-      this.flatShading = source.flatShading;
-      this.fog = source.fog;
-      return this;
-    }
-  };
   var MeshDepthMaterial = class extends Material {
     /**
      * Constructs a new mesh depth material.
@@ -13986,219 +13901,6 @@
       return texture;
     }
   };
-  var Light = class extends Object3D {
-    /**
-     * Constructs a new light.
-     *
-     * @param {(number|Color|string)} [color=0xffffff] - The light's color.
-     * @param {number} [intensity=1] - The light's strength/intensity.
-     */
-    constructor(color, intensity = 1) {
-      super();
-      this.isLight = true;
-      this.type = "Light";
-      this.color = new Color(color);
-      this.intensity = intensity;
-    }
-    /**
-     * Frees the GPU-related resources allocated by this instance. Call this
-     * method whenever this instance is no longer used in your app.
-     */
-    dispose() {
-      this.dispatchEvent({ type: "dispose" });
-    }
-    copy(source, recursive) {
-      super.copy(source, recursive);
-      this.color.copy(source.color);
-      this.intensity = source.intensity;
-      return this;
-    }
-    toJSON(meta) {
-      const data = super.toJSON(meta);
-      data.object.color = this.color.getHex();
-      data.object.intensity = this.intensity;
-      return data;
-    }
-  };
-  var _projScreenMatrix = /* @__PURE__ */ new Matrix4();
-  var _lightPositionWorld = /* @__PURE__ */ new Vector3();
-  var _lookTarget = /* @__PURE__ */ new Vector3();
-  var LightShadow = class {
-    /**
-     * Constructs a new light shadow.
-     *
-     * @param {Camera} camera - The light's view of the world.
-     */
-    constructor(camera) {
-      this.camera = camera;
-      this.intensity = 1;
-      this.bias = 0;
-      this.biasNode = null;
-      this.normalBias = 0;
-      this.radius = 1;
-      this.blurSamples = 8;
-      this.mapSize = new Vector2(512, 512);
-      this.mapType = UnsignedByteType;
-      this.map = null;
-      this.mapPass = null;
-      this.matrix = new Matrix4();
-      this.autoUpdate = true;
-      this.needsUpdate = false;
-      this._frustum = new Frustum();
-      this._frameExtents = new Vector2(1, 1);
-      this._viewportCount = 1;
-      this._viewports = [
-        new Vector4(0, 0, 1, 1)
-      ];
-    }
-    /**
-     * Used internally by the renderer to get the number of viewports that need
-     * to be rendered for this shadow.
-     *
-     * @return {number} The viewport count.
-     */
-    getViewportCount() {
-      return this._viewportCount;
-    }
-    /**
-     * Gets the shadow cameras frustum. Used internally by the renderer to cull objects.
-     *
-     * @return {Frustum} The shadow camera frustum.
-     */
-    getFrustum() {
-      return this._frustum;
-    }
-    /**
-     * Update the matrices for the camera and shadow, used internally by the renderer.
-     *
-     * @param {Light} light - The light for which the shadow is being rendered.
-     */
-    updateMatrices(light) {
-      const shadowCamera = this.camera;
-      const shadowMatrix = this.matrix;
-      _lightPositionWorld.setFromMatrixPosition(light.matrixWorld);
-      shadowCamera.position.copy(_lightPositionWorld);
-      _lookTarget.setFromMatrixPosition(light.target.matrixWorld);
-      shadowCamera.lookAt(_lookTarget);
-      shadowCamera.updateMatrixWorld();
-      _projScreenMatrix.multiplyMatrices(shadowCamera.projectionMatrix, shadowCamera.matrixWorldInverse);
-      this._frustum.setFromProjectionMatrix(_projScreenMatrix, shadowCamera.coordinateSystem, shadowCamera.reversedDepth);
-      if (shadowCamera.coordinateSystem === WebGPUCoordinateSystem || shadowCamera.reversedDepth) {
-        shadowMatrix.set(
-          0.5,
-          0,
-          0,
-          0.5,
-          0,
-          0.5,
-          0,
-          0.5,
-          0,
-          0,
-          1,
-          0,
-          // Identity Z (preserving the correct [0, 1] range from the projection matrix)
-          0,
-          0,
-          0,
-          1
-        );
-      } else {
-        shadowMatrix.set(
-          0.5,
-          0,
-          0,
-          0.5,
-          0,
-          0.5,
-          0,
-          0.5,
-          0,
-          0,
-          0.5,
-          0.5,
-          0,
-          0,
-          0,
-          1
-        );
-      }
-      shadowMatrix.multiply(_projScreenMatrix);
-    }
-    /**
-     * Returns a viewport definition for the given viewport index.
-     *
-     * @param {number} viewportIndex - The viewport index.
-     * @return {Vector4} The viewport.
-     */
-    getViewport(viewportIndex) {
-      return this._viewports[viewportIndex];
-    }
-    /**
-     * Returns the frame extends.
-     *
-     * @return {Vector2} The frame extends.
-     */
-    getFrameExtents() {
-      return this._frameExtents;
-    }
-    /**
-     * Frees the GPU-related resources allocated by this instance. Call this
-     * method whenever this instance is no longer used in your app.
-     */
-    dispose() {
-      if (this.map) {
-        this.map.dispose();
-      }
-      if (this.mapPass) {
-        this.mapPass.dispose();
-      }
-    }
-    /**
-     * Copies the values of the given light shadow instance to this instance.
-     *
-     * @param {LightShadow} source - The light shadow to copy.
-     * @return {LightShadow} A reference to this light shadow instance.
-     */
-    copy(source) {
-      this.camera = source.camera.clone();
-      this.intensity = source.intensity;
-      this.bias = source.bias;
-      this.radius = source.radius;
-      this.autoUpdate = source.autoUpdate;
-      this.needsUpdate = source.needsUpdate;
-      this.normalBias = source.normalBias;
-      this.blurSamples = source.blurSamples;
-      this.mapSize.copy(source.mapSize);
-      this.biasNode = source.biasNode;
-      return this;
-    }
-    /**
-     * Returns a new light shadow instance with copied values from this instance.
-     *
-     * @return {LightShadow} A clone of this instance.
-     */
-    clone() {
-      return new this.constructor().copy(this);
-    }
-    /**
-     * Serializes the light shadow into JSON.
-     *
-     * @return {Object} A JSON object representing the serialized light shadow.
-     * @see {@link ObjectLoader#parse}
-     */
-    toJSON() {
-      const object = {};
-      if (this.intensity !== 1) object.intensity = this.intensity;
-      if (this.bias !== 0) object.bias = this.bias;
-      if (this.normalBias !== 0) object.normalBias = this.normalBias;
-      if (this.radius !== 1) object.radius = this.radius;
-      if (this.mapSize.x !== 512 || this.mapSize.y !== 512) object.mapSize = this.mapSize.toArray();
-      object.camera = this.camera.toJSON(false).object;
-      delete object.camera.matrix;
-      return object;
-    }
-  };
   var _position$2 = /* @__PURE__ */ new Vector3();
   var _quaternion$2 = /* @__PURE__ */ new Quaternion();
   var _scale$2 = /* @__PURE__ */ new Vector3();
@@ -14608,61 +14310,6 @@
       data.object.far = this.far;
       if (this.view !== null) data.object.view = Object.assign({}, this.view);
       return data;
-    }
-  };
-  var DirectionalLightShadow = class extends LightShadow {
-    /**
-     * Constructs a new directional light shadow.
-     */
-    constructor() {
-      super(new OrthographicCamera(-5, 5, 5, -5, 0.5, 500));
-      this.isDirectionalLightShadow = true;
-    }
-  };
-  var DirectionalLight = class extends Light {
-    /**
-     * Constructs a new directional light.
-     *
-     * @param {(number|Color|string)} [color=0xffffff] - The light's color.
-     * @param {number} [intensity=1] - The light's strength/intensity.
-     */
-    constructor(color, intensity) {
-      super(color, intensity);
-      this.isDirectionalLight = true;
-      this.type = "DirectionalLight";
-      this.position.copy(Object3D.DEFAULT_UP);
-      this.updateMatrix();
-      this.target = new Object3D();
-      this.shadow = new DirectionalLightShadow();
-    }
-    dispose() {
-      super.dispose();
-      this.shadow.dispose();
-    }
-    copy(source) {
-      super.copy(source);
-      this.target = source.target.clone();
-      this.shadow = source.shadow.clone();
-      return this;
-    }
-    toJSON(meta) {
-      const data = super.toJSON(meta);
-      data.object.shadow = this.shadow.toJSON();
-      data.object.target = this.target.uuid;
-      return data;
-    }
-  };
-  var AmbientLight = class extends Light {
-    /**
-     * Constructs a new ambient light.
-     *
-     * @param {(number|Color|string)} [color=0xffffff] - The light's color.
-     * @param {number} [intensity=1] - The light's strength/intensity.
-     */
-    constructor(color, intensity) {
-      super(color, intensity);
-      this.isAmbientLight = true;
-      this.type = "AmbientLight";
     }
   };
   var fov = -90;
@@ -21083,9 +20730,9 @@
     /* @__PURE__ */ new Vector3(0, -1, 0),
     /* @__PURE__ */ new Vector3(0, -1, 0)
   ];
-  var _projScreenMatrix2 = /* @__PURE__ */ new Matrix4();
-  var _lightPositionWorld2 = /* @__PURE__ */ new Vector3();
-  var _lookTarget2 = /* @__PURE__ */ new Vector3();
+  var _projScreenMatrix = /* @__PURE__ */ new Matrix4();
+  var _lightPositionWorld = /* @__PURE__ */ new Vector3();
+  var _lookTarget = /* @__PURE__ */ new Vector3();
   function WebGLShadowMap(renderer, objects, capabilities) {
     let _frustum = new Frustum();
     const _shadowMapSize = new Vector2(), _viewportSize = new Vector2(), _viewport = new Vector4(), _depthMaterial = new MeshDepthMaterial(), _distanceMaterial = new MeshDistanceMaterial(), _materialCache = {}, _maxTextureSize = capabilities.maxTextureSize;
@@ -21253,16 +20900,16 @@
               camera2.far = far;
               camera2.updateProjectionMatrix();
             }
-            _lightPositionWorld2.setFromMatrixPosition(light.matrixWorld);
-            camera2.position.copy(_lightPositionWorld2);
-            _lookTarget2.copy(camera2.position);
-            _lookTarget2.add(_cubeDirections[face]);
+            _lightPositionWorld.setFromMatrixPosition(light.matrixWorld);
+            camera2.position.copy(_lightPositionWorld);
+            _lookTarget.copy(camera2.position);
+            _lookTarget.add(_cubeDirections[face]);
             camera2.up.copy(_cubeUps[face]);
-            camera2.lookAt(_lookTarget2);
+            camera2.lookAt(_lookTarget);
             camera2.updateMatrixWorld();
-            shadowMatrix.makeTranslation(-_lightPositionWorld2.x, -_lightPositionWorld2.y, -_lightPositionWorld2.z);
-            _projScreenMatrix2.multiplyMatrices(camera2.projectionMatrix, camera2.matrixWorldInverse);
-            shadow._frustum.setFromProjectionMatrix(_projScreenMatrix2, camera2.coordinateSystem, camera2.reversedDepth);
+            shadowMatrix.makeTranslation(-_lightPositionWorld.x, -_lightPositionWorld.y, -_lightPositionWorld.z);
+            _projScreenMatrix.multiplyMatrices(camera2.projectionMatrix, camera2.matrixWorldInverse);
+            shadow._frustum.setFromProjectionMatrix(_projScreenMatrix, camera2.coordinateSystem, camera2.reversedDepth);
           } else {
             shadow.updateMatrices(light);
           }
@@ -25337,7 +24984,7 @@ void main() {
       const _frustum = new Frustum();
       let _clippingEnabled = false;
       let _localClippingEnabled = false;
-      const _projScreenMatrix3 = new Matrix4();
+      const _projScreenMatrix2 = new Matrix4();
       const _vector3 = new Vector3();
       const _vector4 = new Vector4();
       const _emptyScene = { background: null, fog: null, environment: null, overrideMaterial: null, isScene: true };
@@ -25873,8 +25520,8 @@ void main() {
         currentRenderState.init(camera);
         currentRenderState.state.textureUnits = textures.getTextureUnits();
         renderStateStack.push(currentRenderState);
-        _projScreenMatrix3.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
-        _frustum.setFromProjectionMatrix(_projScreenMatrix3, WebGLCoordinateSystem, camera.reversedDepth);
+        _projScreenMatrix2.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+        _frustum.setFromProjectionMatrix(_projScreenMatrix2, WebGLCoordinateSystem, camera.reversedDepth);
         _localClippingEnabled = this.localClippingEnabled;
         _clippingEnabled = clipping.init(this.clippingPlanes, _localClippingEnabled);
         currentRenderList = renderLists.get(scene, renderListStack.length);
@@ -25972,7 +25619,7 @@ void main() {
           } else if (object.isSprite) {
             if (!object.frustumCulled || _frustum.intersectsSprite(object)) {
               if (sortObjects) {
-                _vector4.setFromMatrixPosition(object.matrixWorld).applyMatrix4(_projScreenMatrix3);
+                _vector4.setFromMatrixPosition(object.matrixWorld).applyMatrix4(_projScreenMatrix2);
               }
               const geometry = objects.update(object);
               const material = object.material;
@@ -25992,7 +25639,7 @@ void main() {
                   if (geometry.boundingSphere === null) geometry.computeBoundingSphere();
                   _vector4.copy(geometry.boundingSphere.center);
                 }
-                _vector4.applyMatrix4(object.matrixWorld).applyMatrix4(_projScreenMatrix3);
+                _vector4.applyMatrix4(object.matrixWorld).applyMatrix4(_projScreenMatrix2);
               }
               if (Array.isArray(material)) {
                 const groups = geometry.groups;
@@ -26853,118 +26500,98 @@ void main() {
     }
   };
 
-  // assets/js/jupiter-globe.js
-  var GRS_LONGITUDE_EPOCH = 85;
-  var GRS_EPOCH_JD = 24610425e-1;
-  var GRS_DRIFT_DEG_PER_DAY = -0.0575;
-  var MAP_LONGITUDE_OFFSET = 317.4;
-  var TEXTURE_PATH = "/images/planets/cassini_jupiter_20001211.jpg";
-  var CANVAS_ID = "jupiter-globe-canvas";
-  var META_ID = "jupiter-globe-meta";
+  // assets/js/mars-globe.js
+  var MAP_LONGITUDE_OFFSET = 0;
+  var CAMERA_DIST = 8;
+  var TEXTURE_PATH = "/images/planets/mars/mars.png";
+  var CANVAS_ID = "mars-globe-canvas";
+  var META_ID = "mars-globe-meta";
   var _sphere = null;
   var _renderer = null;
   var _scene = null;
   var _camera = null;
-  var _sunLight = null;
   function degToRad(d) {
     return d * Math.PI / 180;
   }
-  function grsLongitude(jde) {
-    const lon = GRS_LONGITUDE_EPOCH + GRS_DRIFT_DEG_PER_DAY * (jde - GRS_EPOCH_JD);
-    return (lon % 360 + 360) % 360;
+  function applyRotations(cml, subEarthLat) {
+    _sphere.rotation.set(0, degToRad(cml + MAP_LONGITUDE_OFFSET) - Math.PI / 2, 0);
+    const latRad = degToRad(subEarthLat);
+    _camera.position.set(
+      0,
+      CAMERA_DIST * Math.sin(latRad),
+      CAMERA_DIST * Math.cos(latRad)
+    );
+    _camera.lookAt(0, 0, 0);
   }
-  function computeSphereRotation(cml, grsLon) {
-    const grsOffset = (grsLon - cml + 360) % 360;
-    return degToRad(-grsOffset + MAP_LONGITUDE_OFFSET);
-  }
-  function sunDirection(jup) {
-    const { helioLon, helioLat } = jup;
-    return new Vector3(
-      -Math.cos(helioLat) * Math.cos(helioLon),
-      -Math.sin(helioLat),
-      -Math.cos(helioLat) * Math.sin(helioLon)
-    ).normalize();
-  }
-  function updateMeta(jup, cml, grsLon, date) {
+  function updateMeta(mars, cml, subEarthLat, date) {
     const meta = document.getElementById(META_ID);
     if (!meta) return;
-    const grsFromCenter = (grsLon - cml + 180 + 360) % 360 - 180;
-    const grsSign = grsFromCenter >= 0 ? "+" : "";
     meta.innerHTML = `
     <table class="sso-table"><tbody>
       <tr><td>Date (UTC)</td><td>${date.toUTCString().replace(" GMT", " UTC")}</td></tr>
-      <tr><td>Central Meridian (Sys II)</td><td>${cml.toFixed(1)}\xB0</td></tr>
-      <tr><td>GRS Longitude (Sys II)</td><td>${grsLon.toFixed(1)}\xB0</td></tr>
-      <tr><td>GRS from Center</td><td>${grsSign}${grsFromCenter.toFixed(1)}\xB0</td></tr>
-      <tr><td>Distance</td><td>${jup.rangeFmt}</td></tr>
-      <tr><td>Diameter</td><td>${jup.sdFmt}</td></tr>
-      <tr><td>Illumination</td><td>${jup.illuminationPct}%</td></tr>
+      <tr><td>Central Meridian</td><td>${cml.toFixed(1)}\xB0</td></tr>
+      <tr><td>Sub-Earth Lat</td><td>${subEarthLat.toFixed(1)}\xB0</td></tr>
+      <tr><td>Distance</td><td>${mars.rangeFmt}</td></tr>
+      <tr><td>Diameter</td><td>${mars.sdFmt}</td></tr>
+      <tr><td>Illumination</td><td>${mars.illuminationPct}%</td></tr>
     </tbody></table>`;
+    console.log(`[Mars] CML: ${cml.toFixed(1)}\xB0  subEarthLat: ${subEarthLat.toFixed(1)}\xB0`);
   }
   function renderFrame() {
     _renderer.render(_scene, _camera);
   }
-  function initJupiterGlobe() {
+  function initMarsGlobe() {
     const canvas = document.getElementById(CANVAS_ID);
     if (!canvas) return;
     if (!window.SolarSystem) {
-      console.error("[Jupiter] window.SolarSystem not available");
+      console.error("[Mars] window.SolarSystem not available");
       return;
     }
     const date = /* @__PURE__ */ new Date();
     const jde = window.SolarSystem.dateToJDE(date);
     const planets = window.SolarSystem.getPlanets(jde);
-    const jup = planets.find((p) => p.name === "Jupiter");
-    if (!jup || jup.error) {
-      console.error("[Jupiter] Could not get Jupiter data:", jup?.error);
+    const mars = planets.find((p) => p.name === "Mars");
+    if (!mars || mars.error) {
+      console.error("[Mars] No data");
       return;
     }
-    const cml = window.SolarSystem.jupiterCML(jde).sysii;
-    const grsLon = grsLongitude(jde);
+    const { cml, subEarthLat } = window.SolarSystem.marsCML(jde);
     const width = canvas.clientWidth || 400;
     const height = canvas.clientHeight || 400;
     _renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true });
     _renderer.setSize(width, height);
     _renderer.setPixelRatio(window.devicePixelRatio);
+    _renderer.outputColorSpace = LinearSRGBColorSpace;
     _scene = new Scene();
-    _camera = new PerspectiveCamera(45, width / height, 0.1, 100);
-    _camera.position.z = 3;
+    _camera = new PerspectiveCamera(15, width / height, 0.1, 100);
     const texture = new TextureLoader().load(TEXTURE_PATH, renderFrame);
+    texture.colorSpace = LinearSRGBColorSpace;
     const geometry = new SphereGeometry(1, 64, 64);
-    const material = new MeshStandardMaterial({ map: texture });
+    const material = new MeshBasicMaterial({ map: texture });
     _sphere = new Mesh(geometry, material);
-    _sphere.rotation.y = computeSphereRotation(cml, grsLon);
-    const pivot = new Object3D();
-    pivot.rotation.z = degToRad(3.13);
-    pivot.add(_sphere);
-    _scene.add(pivot);
-    _scene.add(new AmbientLight(16777215, 0.7));
-    _sunLight = new DirectionalLight(16777215, 2.5);
-    _sunLight.position.copy(sunDirection(jup));
-    _scene.add(_sunLight);
+    _scene.add(_sphere);
+    applyRotations(cml, subEarthLat);
     window.addEventListener("resize", () => {
       _renderer.setSize(canvas.clientWidth, canvas.clientHeight);
       _camera.aspect = canvas.clientWidth / canvas.clientHeight;
       _camera.updateProjectionMatrix();
       renderFrame();
     });
-    updateMeta(jup, cml, grsLon, date);
+    updateMeta(mars, cml, subEarthLat, date);
     renderFrame();
   }
-  window.renderJupiterGlobe = function(date) {
-    if (!_sphere || !_sunLight) return;
+  window.renderMarsGlobe = function(date) {
+    if (!_sphere || !_camera) return;
     const jde = window.SolarSystem.dateToJDE(date);
     const planets = window.SolarSystem.getPlanets(jde);
-    const jup = planets.find((p) => p.name === "Jupiter");
-    if (!jup || jup.error) return;
-    const cml = window.SolarSystem.jupiterCML(jde).sysii;
-    const grsLon = grsLongitude(jde);
-    _sphere.rotation.y = computeSphereRotation(cml, grsLon);
-    _sunLight.position.copy(sunDirection(jup));
-    updateMeta(jup, cml, grsLon, date);
+    const mars = planets.find((p) => p.name === "Mars");
+    if (!mars || mars.error) return;
+    const { cml, subEarthLat } = window.SolarSystem.marsCML(jde);
+    applyRotations(cml, subEarthLat);
+    updateMeta(mars, cml, subEarthLat, date);
     renderFrame();
   };
-  document.addEventListener("DOMContentLoaded", initJupiterGlobe);
+  document.addEventListener("DOMContentLoaded", initMarsGlobe);
 })();
 /*! Bundled license information:
 

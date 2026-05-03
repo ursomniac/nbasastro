@@ -16,6 +16,7 @@ import moonphase from 'astronomia/moonphase'
 import base from 'astronomia/base'
 import nutation from 'astronomia/nutation'
 import { Ecliptic } from 'astronomia/coord'
+import mars from 'astronomia/mars'
 import jupiter from 'astronomia/jupiter'
 import jupitermoons from 'astronomia/jupitermoons'
 import saturnmoons from 'astronomia/saturnmoons'
@@ -357,6 +358,15 @@ window.SolarSystem = {
   getAll, getSun, getMoon, getPlanets,
   getJupiterMoons, getSaturnMoons, getSaturnRing,
   dateToJDE, formatRA, formatDeg,
+  marsCML: (jde) => {
+    const earth = new Planet(vsop87Bearth)
+    const marsP = new Planet(vsop87Bmars)
+    const [DE, DS, ω, P] = mars.physical(jde, earth, marsP)
+    return { 
+	cml: ω * 180 / Math.PI, 
+	subEarthLat: DE * 180 / Math.PI
+    }
+  },
   jupiterCML: (jde) => {
     const [DS, DE, ω1, ω2] = jupiter.physical2(jde)
     return { sysi: ω1 * 180 / Math.PI, sysii: ω2 * 180 / Math.PI }

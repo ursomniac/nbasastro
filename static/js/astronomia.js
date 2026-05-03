@@ -1863,8 +1863,216 @@
     last
   };
 
+  // node_modules/astronomia/src/illum.js
+  var { toDeg: toDeg2 } = base_default;
+  var D2R4 = Math.PI / 180;
+  function phaseAngle(r, \u0394, R) {
+    return Math.acos((r * r + \u0394 * \u0394 - R * R) / (2 * r * \u0394));
+  }
+  function fraction(r, \u0394, R) {
+    const s2 = r + \u0394;
+    return (s2 * s2 - R * R) / (4 * r * \u0394);
+  }
+  function phaseAngle2(L2, B, R, L0, R0, \u0394) {
+    return Math.acos((R - R0 * Math.cos(B) * Math.cos(L2 - L0)) / \u0394);
+  }
+  function phaseAngle3(L2, B, x, y, z, \u0394) {
+    const [sL, cL] = base_default.sincos(L2);
+    const [sB, cB] = base_default.sincos(B);
+    return Math.acos((x * cB * cL + y * cB * sL + z * sB) / \u0394);
+  }
+  function fractionVenus(jde) {
+    const T = base_default.J2000Century(jde);
+    const V = (261.51 + 22518.443 * T) * D2R4;
+    const M = (177.53 + 35999.05 * T) * D2R4;
+    const N = (50.42 + 58517.811 * T) * D2R4;
+    const W = V + (1.91 * Math.sin(M) + 0.78 * Math.sin(N)) * D2R4;
+    const \u0394 = Math.sqrt(1.52321 + 1.44666 * Math.cos(W));
+    const s2 = 0.72333 + \u0394;
+    return (s2 * s2 - 1) / 2.89332 / \u0394;
+  }
+  function mercury(r, \u0394, i) {
+    const s2 = toDeg2(i) - 50;
+    return 1.16 + 5 * Math.log10(r * \u0394) + (0.02838 + 1023e-7 * s2) * s2;
+  }
+  function venus(r, \u0394, i) {
+    const iDeg = toDeg2(i);
+    return -4 + 5 * Math.log10(r * \u0394) + (0.01322 + 4247e-10 * iDeg * iDeg) * iDeg;
+  }
+  function mars(r, \u0394, i) {
+    return -1.3 + 5 * Math.log10(r * \u0394) + 0.01486 * toDeg2(i);
+  }
+  function jupiter(r, \u0394) {
+    return -8.93 + 5 * Math.log10(r * \u0394);
+  }
+  function saturn(r, \u0394, B, \u0394U) {
+    const s2 = Math.sin(Math.abs(B));
+    return -8.68 + 5 * Math.log10(r * \u0394) + 0.044 * Math.abs(toDeg2(\u0394U)) - 2.6 * s2 + 1.25 * s2 * s2;
+  }
+  function uranus(r, \u0394) {
+    return -6.85 + 5 * Math.log10(r * \u0394);
+  }
+  function neptune(r, \u0394) {
+    return -7.05 + 5 * Math.log10(r * \u0394);
+  }
+  function mercury84(r, \u0394, i) {
+    return base_default.horner(
+      toDeg2(i),
+      -0.42 + 5 * Math.log10(r * \u0394),
+      0.038,
+      -273e-6,
+      2e-6
+    );
+  }
+  function venus84(r, \u0394, i) {
+    return base_default.horner(
+      toDeg2(i),
+      -4.4 + 5 * Math.log10(r * \u0394),
+      9e-4,
+      239e-6,
+      -65e-8
+    );
+  }
+  function mars84(r, \u0394, i) {
+    return -1.52 + 5 * Math.log10(r * \u0394) + 0.016 * toDeg2(i);
+  }
+  function jupiter84(r, \u0394, i) {
+    return -9.4 + 5 * Math.log10(r * \u0394) + 5e-3 * toDeg2(i);
+  }
+  function saturn84(r, \u0394, B, \u0394U) {
+    const s2 = Math.sin(Math.abs(B));
+    return -8.88 + 5 * Math.log10(r * \u0394) + 0.044 * Math.abs(toDeg2(\u0394U)) - 2.6 * s2 + 1.25 * s2 * s2;
+  }
+  function uranus84(r, \u0394) {
+    return -7.19 + 5 * Math.log10(r * \u0394);
+  }
+  function neptune84(r, \u0394) {
+    return -6.87 + 5 * Math.log10(r * \u0394);
+  }
+  function pluto84(r, \u0394) {
+    return -1 + 5 * Math.log10(r * \u0394);
+  }
+  var illum_default = {
+    phaseAngle,
+    fraction,
+    phaseAngle2,
+    phaseAngle3,
+    fractionVenus,
+    mercury,
+    venus,
+    mars,
+    jupiter,
+    saturn,
+    uranus,
+    neptune,
+    mercury84,
+    venus84,
+    mars84,
+    jupiter84,
+    saturn84,
+    uranus84,
+    neptune84,
+    pluto84
+  };
+
+  // node_modules/astronomia/src/mars.js
+  function physical(jde, earth2, mars3) {
+    const T = base_default.J2000Century(jde);
+    const p = Math.PI / 180;
+    let \u03BB0 = 352.9065 * p + 1.1733 * p * T;
+    const \u03B20 = 63.2818 * p - 394e-5 * p * T;
+    const earthPos = earth2.position(jde);
+    const R = earthPos.range;
+    const fk5 = planetposition_default.toFK5(earthPos.lon, earthPos.lat, jde);
+    const [l0, b0] = [fk5.lon, fk5.lat];
+    const [sl0, cl0] = base_default.sincos(l0);
+    const sb0 = Math.sin(b0);
+    let \u0394 = 0.5;
+    let \u03C4 = base_default.lightTime(\u0394);
+    let l = 0;
+    let b = 0;
+    let r = 0;
+    let x = 0;
+    let y = 0;
+    let z = 0;
+    function f() {
+      const marsPos = mars3.position(jde - \u03C4);
+      r = marsPos.range;
+      const fk52 = planetposition_default.toFK5(marsPos.lon, marsPos.lat, jde);
+      l = fk52.lon;
+      b = fk52.lat;
+      const [sb, cb] = base_default.sincos(b);
+      const [sl, cl2] = base_default.sincos(l);
+      x = r * cb * cl2 - R * cl0;
+      y = r * cb * sl - R * sl0;
+      z = r * sb - R * sb0;
+      \u0394 = Math.sqrt(x * x + y * y + z * z);
+      \u03C4 = base_default.lightTime(\u0394);
+    }
+    f();
+    f();
+    let \u03BB = Math.atan2(y, x);
+    let \u03B2 = Math.atan(z / Math.hypot(x, y));
+    const [s\u03B20, c\u03B20] = base_default.sincos(\u03B20);
+    const [s\u03B2, c\u03B2] = base_default.sincos(\u03B2);
+    const DE = Math.asin(-s\u03B20 * s\u03B2 - c\u03B20 * c\u03B2 * Math.cos(\u03BB0 - \u03BB));
+    const N = 49.5581 * p + 0.7721 * p * T;
+    const l\u02B9 = l - 697e-5 * p / r;
+    const b\u02B9 = b - 225e-6 * p * Math.cos(l - N) / r;
+    const [sb\u02B9, cb\u02B9] = base_default.sincos(b\u02B9);
+    const DS = Math.asin(-s\u03B20 * sb\u02B9 - c\u03B20 * cb\u02B9 * Math.cos(\u03BB0 - l\u02B9));
+    const W = 11.504 * p + 350.89200025 * p * (jde - \u03C4 - 24332825e-1);
+    const \u03B50 = nutation_default.meanObliquity(jde);
+    const [s\u03B50, c\u03B50] = base_default.sincos(\u03B50);
+    let eq = new coord_default.Ecliptic(\u03BB0, \u03B20).toEquatorial(\u03B50);
+    const [\u03B10, \u03B40] = [eq.ra, eq.dec];
+    const u = y * c\u03B50 - z * s\u03B50;
+    const v = y * s\u03B50 + z * c\u03B50;
+    const \u03B1 = Math.atan2(u, x);
+    const \u03B4 = Math.atan(v / Math.hypot(x, u));
+    const [s\u03B4, c\u03B4] = base_default.sincos(\u03B4);
+    const [s\u03B40, c\u03B40] = base_default.sincos(\u03B40);
+    const [s\u03B10\u03B1, c\u03B10\u03B1] = base_default.sincos(\u03B10 - \u03B1);
+    const \u03B6 = Math.atan2(s\u03B40 * c\u03B4 * c\u03B10\u03B1 - s\u03B4 * c\u03B40, c\u03B4 * s\u03B10\u03B1);
+    const \u03C9 = base_default.pmod(W - \u03B6, 2 * Math.PI);
+    const [\u0394\u03C8, \u0394\u03B5] = nutation_default.nutation(jde);
+    const [sl0\u03BB, cl0\u03BB] = base_default.sincos(l0 - \u03BB);
+    \u03BB += 5693e-6 * p * cl0\u03BB / c\u03B2;
+    \u03B2 += 5693e-6 * p * sl0\u03BB * s\u03B2;
+    \u03BB0 += \u0394\u03C8;
+    \u03BB += \u0394\u03C8;
+    const \u03B5 = \u03B50 + \u0394\u03B5;
+    const [s\u03B5, c\u03B5] = base_default.sincos(\u03B5);
+    eq = new coord_default.Ecliptic(\u03BB0, \u03B20).toEquatorial(\u03B5);
+    const [\u03B10\u02B9, \u03B40\u02B9] = [eq.ra, eq.dec];
+    eq = new coord_default.Ecliptic(\u03BB, \u03B2).toEquatorial(\u03B5);
+    const [\u03B1\u02B9, \u03B4\u02B9] = [eq.ra, eq.dec];
+    const [s\u03B40\u02B9, c\u03B40\u02B9] = base_default.sincos(\u03B40\u02B9);
+    const [s\u03B4\u02B9, c\u03B4\u02B9] = base_default.sincos(\u03B4\u02B9);
+    const [s\u03B10\u02B9\u03B1\u02B9, c\u03B10\u02B9\u03B1\u02B9] = base_default.sincos(\u03B10\u02B9 - \u03B1\u02B9);
+    let P = Math.atan2(c\u03B40\u02B9 * s\u03B10\u02B9\u03B1\u02B9, s\u03B40\u02B9 * c\u03B4\u02B9 - c\u03B40\u02B9 * s\u03B4\u02B9 * c\u03B10\u02B9\u03B1\u02B9);
+    if (P < 0) {
+      P += 2 * Math.PI;
+    }
+    const s2 = l0 + Math.PI;
+    const [ss, cs] = base_default.sincos(s2);
+    const \u03B1s = Math.atan2(c\u03B5 * ss, cs);
+    const \u03B4s = Math.asin(s\u03B5 * ss);
+    const [s\u03B4s, c\u03B4s] = base_default.sincos(\u03B4s);
+    const [s\u03B1s\u03B1, c\u03B1s\u03B1] = base_default.sincos(\u03B1s - \u03B1);
+    const \u03C7 = Math.atan2(c\u03B4s * s\u03B1s\u03B1, s\u03B4s * c\u03B4 - c\u03B4s * s\u03B4 * c\u03B1s\u03B1);
+    const Q = \u03C7 + Math.PI;
+    const d3 = 9.36 / 60 / 60 * Math.PI / 180 / \u0394;
+    const k3 = illum_default.fraction(r, \u0394, R);
+    const q = (1 - k3) * d3;
+    return [DE, DS, \u03C9, P, Q, d3, k3, q];
+  }
+  var mars_default = {
+    physical
+  };
+
   // node_modules/astronomia/src/jupiter.js
-  function physical(jde, earth2, jupiter3) {
+  function physical2(jde, earth2, jupiter3) {
     const d3 = jde - 24332825e-1;
     const T1 = d3 / base_default.JulianCentury;
     const p = Math.PI / 180;
@@ -1955,7 +2163,7 @@
     }
     return [DS, DE, \u03C91, \u03C92, P];
   }
-  function physical2(jde) {
+  function physical22(jde) {
     const d3 = jde - base_default.J2000;
     const p = Math.PI / 180;
     const V = 172.74 * p + 111588e-8 * p * d3;
@@ -1991,19 +2199,19 @@
     return [DS, DE, \u03C91, \u03C92];
   }
   var jupiter_default = {
-    physical,
-    physical2
+    physical: physical2,
+    physical2: physical22
   };
 
   // node_modules/astronomia/src/planetelements.js
-  var mercury = "mercury";
-  var venus = "venus";
+  var mercury2 = "mercury";
+  var venus2 = "venus";
   var earth = "earth";
-  var mars = "mars";
-  var jupiter = "jupiter";
-  var saturn = "saturn";
-  var uranus = "uranus";
-  var neptune = "neptune";
+  var mars2 = "mars";
+  var jupiter2 = "jupiter";
+  var saturn2 = "saturn";
+  var uranus2 = "uranus";
+  var neptune2 = "neptune";
   function Elements2(lon, axis, ecc, inc2, node4, peri) {
     const o = typeof lon === "object" ? lon : {};
     this.lon = o.lon || lon;
@@ -2106,14 +2314,14 @@
     return base_default.horner(base_default.J2000Century(jde), cMean[p].\u03A9) * Math.PI / 180;
   }
   var planetelements_default = {
-    mercury,
-    venus,
+    mercury: mercury2,
+    venus: venus2,
     earth,
-    mars,
-    jupiter,
-    saturn,
-    uranus,
-    neptune,
+    mars: mars2,
+    jupiter: jupiter2,
+    saturn: saturn2,
+    uranus: uranus2,
+    neptune: neptune2,
     Elements: Elements2,
     mean: mean2,
     inc,
@@ -3504,118 +3712,6 @@
   function semidiameter(s0, \u0394) {
     return s0 / \u0394;
   }
-
-  // node_modules/astronomia/src/illum.js
-  var { toDeg: toDeg2 } = base_default;
-  var D2R4 = Math.PI / 180;
-  function phaseAngle(r, \u0394, R) {
-    return Math.acos((r * r + \u0394 * \u0394 - R * R) / (2 * r * \u0394));
-  }
-  function fraction(r, \u0394, R) {
-    const s2 = r + \u0394;
-    return (s2 * s2 - R * R) / (4 * r * \u0394);
-  }
-  function phaseAngle2(L2, B, R, L0, R0, \u0394) {
-    return Math.acos((R - R0 * Math.cos(B) * Math.cos(L2 - L0)) / \u0394);
-  }
-  function phaseAngle3(L2, B, x, y, z, \u0394) {
-    const [sL, cL] = base_default.sincos(L2);
-    const [sB, cB] = base_default.sincos(B);
-    return Math.acos((x * cB * cL + y * cB * sL + z * sB) / \u0394);
-  }
-  function fractionVenus(jde) {
-    const T = base_default.J2000Century(jde);
-    const V = (261.51 + 22518.443 * T) * D2R4;
-    const M = (177.53 + 35999.05 * T) * D2R4;
-    const N = (50.42 + 58517.811 * T) * D2R4;
-    const W = V + (1.91 * Math.sin(M) + 0.78 * Math.sin(N)) * D2R4;
-    const \u0394 = Math.sqrt(1.52321 + 1.44666 * Math.cos(W));
-    const s2 = 0.72333 + \u0394;
-    return (s2 * s2 - 1) / 2.89332 / \u0394;
-  }
-  function mercury2(r, \u0394, i) {
-    const s2 = toDeg2(i) - 50;
-    return 1.16 + 5 * Math.log10(r * \u0394) + (0.02838 + 1023e-7 * s2) * s2;
-  }
-  function venus2(r, \u0394, i) {
-    const iDeg = toDeg2(i);
-    return -4 + 5 * Math.log10(r * \u0394) + (0.01322 + 4247e-10 * iDeg * iDeg) * iDeg;
-  }
-  function mars2(r, \u0394, i) {
-    return -1.3 + 5 * Math.log10(r * \u0394) + 0.01486 * toDeg2(i);
-  }
-  function jupiter2(r, \u0394) {
-    return -8.93 + 5 * Math.log10(r * \u0394);
-  }
-  function saturn2(r, \u0394, B, \u0394U) {
-    const s2 = Math.sin(Math.abs(B));
-    return -8.68 + 5 * Math.log10(r * \u0394) + 0.044 * Math.abs(toDeg2(\u0394U)) - 2.6 * s2 + 1.25 * s2 * s2;
-  }
-  function uranus2(r, \u0394) {
-    return -6.85 + 5 * Math.log10(r * \u0394);
-  }
-  function neptune2(r, \u0394) {
-    return -7.05 + 5 * Math.log10(r * \u0394);
-  }
-  function mercury84(r, \u0394, i) {
-    return base_default.horner(
-      toDeg2(i),
-      -0.42 + 5 * Math.log10(r * \u0394),
-      0.038,
-      -273e-6,
-      2e-6
-    );
-  }
-  function venus84(r, \u0394, i) {
-    return base_default.horner(
-      toDeg2(i),
-      -4.4 + 5 * Math.log10(r * \u0394),
-      9e-4,
-      239e-6,
-      -65e-8
-    );
-  }
-  function mars84(r, \u0394, i) {
-    return -1.52 + 5 * Math.log10(r * \u0394) + 0.016 * toDeg2(i);
-  }
-  function jupiter84(r, \u0394, i) {
-    return -9.4 + 5 * Math.log10(r * \u0394) + 5e-3 * toDeg2(i);
-  }
-  function saturn84(r, \u0394, B, \u0394U) {
-    const s2 = Math.sin(Math.abs(B));
-    return -8.88 + 5 * Math.log10(r * \u0394) + 0.044 * Math.abs(toDeg2(\u0394U)) - 2.6 * s2 + 1.25 * s2 * s2;
-  }
-  function uranus84(r, \u0394) {
-    return -7.19 + 5 * Math.log10(r * \u0394);
-  }
-  function neptune84(r, \u0394) {
-    return -6.87 + 5 * Math.log10(r * \u0394);
-  }
-  function pluto84(r, \u0394) {
-    return -1 + 5 * Math.log10(r * \u0394);
-  }
-  var illum_default = {
-    phaseAngle,
-    fraction,
-    phaseAngle2,
-    phaseAngle3,
-    fractionVenus,
-    mercury: mercury2,
-    venus: venus2,
-    mars: mars2,
-    jupiter: jupiter2,
-    saturn: saturn2,
-    uranus: uranus2,
-    neptune: neptune2,
-    mercury84,
-    venus84,
-    mars84,
-    jupiter84,
-    saturn84,
-    uranus84,
-    neptune84,
-    pluto84
-  };
 
   // node_modules/astronomia/data/vsop87Dearth.js
   var m = {
@@ -71336,6 +71432,15 @@
     dateToJDE,
     formatRA,
     formatDeg,
+    marsCML: (jde) => {
+      const earth2 = new Planet(vsop87Bearth_default);
+      const marsP = new Planet(vsop87Bmars_default);
+      const [DE, DS, \u03C9, P] = mars_default.physical(jde, earth2, marsP);
+      return {
+        cml: \u03C9 * 180 / Math.PI,
+        subEarthLat: DE * 180 / Math.PI
+      };
+    },
     jupiterCML: (jde) => {
       const [DS, DE, \u03C91, \u03C92] = jupiter_default.physical2(jde);
       return { sysi: \u03C91 * 180 / Math.PI, sysii: \u03C92 * 180 / Math.PI };
@@ -71441,6 +71546,22 @@ astronomia/src/moonphase.js:
    * @module moonphase
    *)
 
+astronomia/src/illum.js:
+  (**
+   * @copyright 2013 Sonia Keys
+   * @copyright 2016 commenthol
+   * @license MIT
+   * @module illum
+   *)
+
+astronomia/src/mars.js:
+  (**
+   * @copyright 2013 Sonia Keys
+   * @copyright 2016 commenthol
+   * @license MIT
+   * @module mars
+   *)
+
 astronomia/src/jupiter.js:
   (**
    * @copyright 2013 Sonia Keys
@@ -71543,13 +71664,5 @@ astronomia/src/semidiameter.js:
    * @copyright 2016 commenthol
    * @license MIT
    * @module semidiameter
-   *)
-
-astronomia/src/illum.js:
-  (**
-   * @copyright 2013 Sonia Keys
-   * @copyright 2016 commenthol
-   * @license MIT
-   * @module illum
    *)
 */

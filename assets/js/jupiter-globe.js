@@ -92,7 +92,6 @@ function updateMeta(jup, cml, grsLon, date) {
       <tr><td>Diameter</td><td>${jup.sdFmt}</td></tr>
       <tr><td>Illumination</td><td>${jup.illuminationPct}%</td></tr>
     </tbody></table>`
-  console.log(`[Jupiter] CML: ${cml.toFixed(1)}°  GRS: ${grsLon.toFixed(1)}°  GRS from center: ${grsFromCenter.toFixed(1)}°  rotation.y: ${computeSphereRotation(cml, grsLon).toFixed(4)} rad`)
 }
 
 function renderFrame() {
@@ -130,7 +129,8 @@ function initJupiterGlobe() {
 
   _scene  = new THREE.Scene()
   _camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100)
-  _camera.position.z = 2.5
+  //_camera.position.z = 2.5
+  _camera.position.z = 3.0
 
   const texture  = new THREE.TextureLoader().load(TEXTURE_PATH, renderFrame)
   const geometry = new THREE.SphereGeometry(1, 64, 64)

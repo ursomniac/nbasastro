@@ -90,6 +90,17 @@
     </div>
   </div>
 
+<!-- Mars Globe Panel -->
+  <div class="sso-panel" id="sso-mars-globe-panel">
+    <h3>Mars</h3>
+    <div style="display:flex; gap:1rem; align-items:flex-start;">
+      <div style="width:400px; height:400px; flex-shrink:0;">
+        <canvas id="mars-globe-canvas" width="400" height="400" style="width:100%; height:100%;"></canvas>
+      </div>
+      <div id="mars-globe-meta"></div>
+    </div>
+  </div>
+
 <!-- Jupiter Globe Panel -->
   <div class="sso-panel" id="sso-jupiter-globe-panel">
     <h3>Jupiter</h3>
@@ -176,7 +187,9 @@ canvas { border-radius: 6px; background: #0a0a18; }
 </style>
 
 <script src="{{ "js/astronomia.js" | relURL }}"></script>
+<script src="{{ "js/mars-globe.js" | relURL }}"></script>
 <script src="{{ "js/jupiter-globe.js" | relURL }}"></script>
+
 
 <script>
 (function() {
@@ -697,6 +710,7 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
     const saturnData = data.planets.find(p => p.name === 'Saturn')
     renderSaturn(data.saturnRing, data.saturnMoons, saturnData.sdArcsec / 2)
     if (window.renderJupiterGlobe) window.renderJupiterGlobe(date)
+    if (window.renderMarsGlobe) window.renderMarsGlobe(date)
     // renderMarsMoons(data.marsMoons)
   }
 
