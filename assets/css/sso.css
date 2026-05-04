@@ -23,7 +23,7 @@
   box-shadow: 0 0 0 1px #4a6a94;
   border-radius: 8px;
   padding: 16px;
-  minwidth: 0;
+  min-width: 0;        /* was: minwidth (typo) — this is what lets grid children shrink */
   overflow: hidden;
 }
 
@@ -33,7 +33,6 @@
   width: 100% !important;
   height: auto !important;
 }
-
 
 .sso-panel.sso-full {
   grid-column: 1 / -1;
@@ -94,11 +93,26 @@
   background: var(--space-blue);
 }
 
-/* --- Base table --- */
+/* ============================================================
+   TABLES — base styles
+   
+   .sso-table            the <table> element itself
+   .sso-table-scroll     scroll wrapper div (wraps wide tables only)
+   
+   Key/value tables (2-col) sit directly in the panel with no
+   scroll wrapper — they reflow naturally on narrow screens.
+   
+   Wide tables (Planet Positions, Jupiter System, Saturn System)
+   are wrapped in .sso-table-scroll in the HTML. The wrapper
+   clips and scrolls; the table stays at its natural width.
+   ============================================================ */
+
 .sso-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.88em;
+  /* Never set display:block here — that breaks table layout.
+     Horizontal scroll is handled by the wrapper div. */
 }
 
 .sso-table th {
@@ -109,6 +123,7 @@
   font-weight: 600;
   letter-spacing: 0.03em;
   border-bottom: 1px solid var(--border-soft);
+  white-space: nowrap;   /* keep headers on one line while scrolling */
 }
 
 .sso-table td {
@@ -125,15 +140,26 @@
   background: rgba(255,255,255,0.03);
 }
 
-/* --- Key/value tables (Sun, Moon, Mars, Jupiter GRS, Epoch) ---
-   Column 1: label (muted), Column 2: value (right-aligned, monospace) */
+/* --- Scroll wrapper for wide tables ---
+   Apply to a <div> that wraps the <table> in HTML.
+   The panel itself has overflow:hidden, so the scroll
+   must happen here, not on the table or the panel. */
+.sso-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  /* Subtle scroll hint on mobile */
+  border-radius: 4px;
+}
+
+/* --- Key/value tables: label + right-aligned value ---
+   Epoch, Sun, Moon, Mars globe meta, Jupiter globe meta  */
 #sso-info-rows td:first-child,
 #sso-sun-rows td:first-child,
 #sso-moon-rows td:first-child,
 #mars-globe-meta td:first-child,
 #jupiter-globe-meta td:first-child {
   color: var(--text-muted);
-  width: auto;
   white-space: nowrap;
 }
 
@@ -148,16 +174,44 @@
   color: var(--text-pure);
 }
 
-/* --- Planets table: cols 2-6 are numbers --- */
+/* --- Planet Positions table: cols 2–6 are numbers --- */
+#sso-planet-rows td:first-child {
+  color: var(--text-pure);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 #sso-planet-rows td:nth-child(n+2) {
   text-align: right;
   font-variant-numeric: tabular-nums;
   font-family: monospace;
+  white-space: nowrap;
 }
 
-#sso-planet-rows td:first-child {
-  color: var(--text-pure);
-  font-weight: 600;
+/* --- Jupiter moons table: cols 2–6 --- */
+#sso-jupiter-rows td:first-child {
+  white-space: nowrap;
+}
+
+#sso-jupiter-rows td:nth-child(n+2) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: monospace;
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+/* --- Saturn moons table: cols 2–6 --- */
+#sso-saturn-rows td:first-child {
+  white-space: nowrap;
+}
+
+#sso-saturn-rows td:nth-child(n+2) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: monospace;
+  font-size: 0.85em;
+  white-space: nowrap;
 }
 
 .sso-system-caption {
@@ -167,25 +221,7 @@
   font-style: italic;
 }
 
-/* --- Jupiter moons table: cols 2-6 --- */
-#sso-jupiter-rows td:nth-child(n+2) {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  font-family: monospace;
-  font-size: 0.78em;
-  white-space: nowrap;
-}
-
-/* --- Saturn moons table: cols 2-6 --- */
-#sso-saturn-rows td:nth-child(n+2) {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  font-family: monospace;
-  font-size: 0.78em;
-  white-space: nowrap;
-}
-
-/* --- Orrery table: cols 2-3 --- */
+/* --- Orrery table --- */
 .orrery-table {
   width: 100%;
   font-size: 0.8em;
@@ -205,6 +241,7 @@
   text-align: left;
   border-bottom: 1px solid var(--border-soft);
   letter-spacing: 0.03em;
+  white-space: nowrap;
 }
 
 .orrery-table td {
@@ -244,7 +281,7 @@
   height: 220px !important;
 }
 
-/* --- Inner planets (Mercury/Venus) --- */
+/* --- Inner planets (Mercury / Venus) --- */
 .sso-inner-grid {
   display: flex;
   gap: 24px;
@@ -298,18 +335,6 @@
 
 .sso-inner-table td:first-child {
   color: var(--text-muted);
-  width: 50%;
-}
-
-.sso-inner-table td:last-child {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  font-family: monospace;
-  color: var(--text-pure);
-}
-
-.sso-inner-table td:first-child {
-  color: var(--text-muted);
   padding-right: 12px;
   white-space: nowrap;
 }
@@ -321,7 +346,7 @@
   color: var(--text-pure);
 }
 
-/* --- Moon system layouts --- */
+/* --- Moon system layout --- */
 .sso-moon-system-layout {
   display: flex;
   align-items: flex-start;
@@ -329,13 +354,12 @@
   flex-wrap: wrap;
 }
 
-/* --- Moon phase canvas --- */
 #sso-moon-canvas {
   flex-shrink: 0;
   align-self: flex-start;
 }
 
-/* --- Sun image layout --- */
+/* --- Sun layout --- */
 .sso-sun-layout {
   display: flex;
   gap: 16px;
@@ -383,7 +407,6 @@
   margin: -8px 0 10px 0;
 }
 
-
 /* --- Saturn ring info --- */
 #sso-saturn-ring-info {
   font-size: 0.85em;
@@ -402,3 +425,29 @@ canvas {
 
 /* --- Errors --- */
 .error, .sso-error { color: #f88; }
+
+/* ============================================================
+   RESPONSIVE — mobile
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* Stack two-column grid to single column */
+  .sso-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Orrery side-by-side → stack */
+  .orrery-table-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  /* Controls: let the datetime input shrink */
+  .sso-controls {
+    gap: 8px;
+  }
+
+  .sso-controls input[type="datetime-local"] {
+    max-width: 100%;
+    flex: 1 1 auto;
+  }
+}

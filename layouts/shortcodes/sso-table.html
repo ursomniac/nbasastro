@@ -1,4 +1,3 @@
-
 {{ $css := resources.Get "css/sso.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.Permalink }}">
 
@@ -6,7 +5,7 @@
 
   <div class="sso-grid">
 
-    <!-- Epoch — half -->
+    <!-- Epoch — full -->
     <div class="sso-panel sso-full" id="sso-info-panel">
       <h3>Epoch</h3>
       <div class="sso-controls">
@@ -15,30 +14,33 @@
         <button id="sso-now-btn">Now</button>
         <button id="sso-calc-btn">Calculate</button>
       </div>
+      <!-- 2-column key/value: no scroll wrapper needed -->
       <table class="sso-table">
         <tbody id="sso-info-rows"><tr><td colspan="2">Loading...</td></tr></tbody>
       </table>
     </div>
 
-    <!-- Planets — full -->
+    <!-- Planets — full, 6 columns: needs scroll wrapper -->
     <div class="sso-panel sso-full" id="sso-planets-panel">
       <h3>Planet Positions</h3>
-      <table class="sso-table">
-        <thead>
-          <tr>
-            <th>Planet</th>
-            <th>RA</th>
-            <th>Dec</th>
-            <th>Distance (AU)</th>
-            <th>Ang. Size</th>
-            <th>Magnitude</th>
-          </tr>
-        </thead>
-        <tbody id="sso-planet-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
-      </table>
+      <div class="sso-table-scroll">
+        <table class="sso-table">
+          <thead>
+            <tr>
+              <th>Planet</th>
+              <th>RA</th>
+              <th>Dec</th>
+              <th>Distance (AU)</th>
+              <th>Ang. Size</th>
+              <th>Magnitude</th>
+            </tr>
+          </thead>
+          <tbody id="sso-planet-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- Sun — half -->
+    <!-- Sun — half, 2-column key/value: no scroll wrapper -->
     <div class="sso-panel" id="sso-sun-panel">
       <h3>Sun</h3>
       <a href="https://soho.nascom.nasa.gov/data/realtime-images.html" target="_blank">
@@ -52,7 +54,7 @@
       </table>
     </div>
 
-    <!-- Moon — half -->
+    <!-- Moon — half, 2-column key/value: no scroll wrapper -->
     <div class="sso-panel" id="sso-moon-panel">
       <h3>Moon</h3>
       <div id="sso-moon-canvas" class="sso-panel-image-wrap"></div>
@@ -79,59 +81,63 @@
       <div id="sso-venus-info"></div>
     </div>
 
-    <!-- Mars — half -->
+    <!-- Mars — half, 2-column key/value meta: no scroll wrapper -->
     <div class="sso-panel" id="sso-mars-globe-panel">
       <h3>Mars</h3>
       <canvas id="mars-globe-canvas" width="400" height="400" class="sso-panel-image"></canvas>
       <div id="mars-globe-meta"></div>
     </div>
 
-    <!-- Jupiter GRS — half -->
+    <!-- Jupiter GRS — half, 2-column key/value meta: no scroll wrapper -->
     <div class="sso-panel" id="sso-jupiter-globe-panel">
       <h3>Jupiter</h3>
       <canvas id="jupiter-globe-canvas" width="400" height="400" class="sso-panel-image"></canvas>
       <div id="jupiter-globe-meta"></div>
     </div>
 
-    <!-- Jupiter System — full -->
+    <!-- Jupiter System — full, 6 columns: needs scroll wrapper -->
     <div class="sso-panel sso-full" id="sso-jupiter-panel">
       <h3>Jupiter System</h3>
       <canvas id="sso-jupiter-canvas" width="800" height="200" class="sso-panel-image"></canvas>
-	<p class="sso-system-caption">Label above: moon is behind the planet. Label below: moon is in front.</p>
-      <table class="sso-table">
-        <thead>
-          <tr>
-            <th>Moon</th>
-            <th>X (Rj)</th>
-            <th>Y (Rj)</th>
-            <th>Z (Rj)</th>
-            <th>Offset</th>
-            <th>Mag</th>
-          </tr>
-        </thead>
-        <tbody id="sso-jupiter-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
-      </table>
+      <p class="sso-system-caption">Label above: moon is behind the planet. Label below: moon is in front.</p>
+      <div class="sso-table-scroll">
+        <table class="sso-table">
+          <thead>
+            <tr>
+              <th>Moon</th>
+              <th>X (Rj)</th>
+              <th>Y (Rj)</th>
+              <th>Z (Rj)</th>
+              <th>Offset</th>
+              <th>Mag</th>
+            </tr>
+          </thead>
+          <tbody id="sso-jupiter-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- Saturn System — full -->
+    <!-- Saturn System — full, 6 columns: needs scroll wrapper -->
     <div class="sso-panel sso-full" id="sso-saturn-panel">
       <h3>Saturn System</h3>
       <canvas id="sso-saturn-canvas" width="800" height="120" class="sso-panel-image"></canvas>
       <p id="sso-saturn-ring-info"></p>
-	<p class="sso-system-caption">Label above: moon is behind the planet. Label below: moon is in front.</p>
-      <table class="sso-table">
-        <thead>
-          <tr>
-            <th>Moon</th>
-            <th>X (Rs)</th>
-            <th>Y (Rs)</th>
-            <th>Z (Rs)</th>
-            <th>Offset</th>
-            <th>Mag</th>
-          </tr>
-        </thead>
-        <tbody id="sso-saturn-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
-      </table>
+      <p class="sso-system-caption">Label above: moon is behind the planet. Label below: moon is in front.</p>
+      <div class="sso-table-scroll">
+        <table class="sso-table">
+          <thead>
+            <tr>
+              <th>Moon</th>
+              <th>X (Rs)</th>
+              <th>Y (Rs)</th>
+              <th>Z (Rs)</th>
+              <th>Offset</th>
+              <th>Mag</th>
+            </tr>
+          </thead>
+          <tbody id="sso-saturn-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
+        </table>
+      </div>
     </div>
 
   </div><!-- .sso-grid -->
@@ -288,14 +294,14 @@ function renderSun(sun) {
     }
 
     function renderInfo(infoId, planet) {
-	document.getElementById(infoId).innerHTML = `
-  	<table class="sso-inner-table">
-    	  <tr><td>Size</td><td>${planet.sdFmt}</td></tr>
-      	  <tr><td>Illumination</td><td>${planet.illuminationPct}%</td></tr>
-    	  <tr><td>Magnitude</td><td>${planet.magFmt}</td></tr>
-    	  <tr><td>Light time</td><td>${planet.lightTimeFmt}</td></tr>
-  	</table>
-	`
+      document.getElementById(infoId).innerHTML = `
+        <table class="sso-inner-table">
+          <tr><td>Size</td><td>${planet.sdFmt}</td></tr>
+          <tr><td>Illumination</td><td>${planet.illuminationPct}%</td></tr>
+          <tr><td>Magnitude</td><td>${planet.magFmt}</td></tr>
+          <tr><td>Light time</td><td>${planet.lightTimeFmt}</td></tr>
+        </table>
+      `
     }
 
     drawPhase('sso-mercury-canvas', mercury)
@@ -430,8 +436,6 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
 
     const srx = saturnRadiusArcsec * scale
     const sry = srx * (73.82 / 82.73)
-    //const rax = aEdgeArcsec * scale
-    //const ray = bEdgeArcsec * scale
     const rax = srx * 2.27
     const ray = rax  * (bEdgeArcsec / aEdgeArcsec)
     const H = Math.max(yymaxArcsec * scale * 2 + MARGIN * 2, srx * 3, 140)
@@ -648,16 +652,16 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
 console.log('Uranus:', data.planets.find(p => p.name === 'Uranus'))
 console.log('Neptune:', data.planets.find(p => p.name === 'Neptune'))
     document.getElementById('sso-info-rows').innerHTML = `
-  	<tr><td>Date (UTC)</td><td>${data.date}</td></tr>
-	<tr><td>Julian Day</td><td>${data.jde.toFixed(5)}</td></tr>
-	<tr><td>Sidereal Time (GST)</td><td>${data.gstFmt}</td></tr>
-	<tr><td>Sidereal Time (LST)</td><td>${data.lstFmt}</td></tr>
+      <tr><td>Date (UTC)</td><td>${data.date}</td></tr>
+      <tr><td>Julian Day</td><td>${data.jde.toFixed(5)}</td></tr>
+      <tr><td>Sidereal Time (GST)</td><td>${data.gstFmt}</td></tr>
+      <tr><td>Sidereal Time (LST)</td><td>${data.lstFmt}</td></tr>
     `
 
     renderSun(data.sun)
     renderMoon(data.moon)
     renderPlanets(data.planets)
-    renderInnerPlanets(data.planets)    
+    renderInnerPlanets(data.planets)
     const jupiterData = data.planets.find(p => p.name === 'Jupiter')
     renderJupiterMoons(data.jupiterMoons, jupiterData.sdArcsec / 2)
     const saturnData = data.planets.find(p => p.name === 'Saturn')
@@ -676,4 +680,3 @@ console.log('Neptune:', data.planets.find(p => p.name === 'Neptune'))
 
 })()
 </script>
-</body></html>
