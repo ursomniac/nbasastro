@@ -31,6 +31,14 @@
   margin-bottom: 16px;
 }
 
+.iss-widget-body {
+  padding: 8px 0;
+  max-height: 240px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-soft) transparent;
+}
+
 .iss-widget-header {
   display: flex;
   align-items: center;
@@ -228,7 +236,6 @@
       // Filter to future passes only, cap at 5
       const futurePasses = passes
         .filter(p => p.startUTC > now)
-        .slice(0, 5);
 
       if (futurePasses.length === 0) {
         body.innerHTML = '<p class="iss-empty">No upcoming passes — check back tomorrow.</p>';

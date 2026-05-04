@@ -5,3 +5,4 @@ resources/
 public/
 .DS_Store
 */.DS_Store
+iss-passes.json
