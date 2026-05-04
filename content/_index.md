@@ -1,4 +1,5 @@
 ---
 title: "Welcome"
 ---
-Welcome to the NBAS. We are a community of amateur astronomers dedicated to sharing the wonders of the night sky.
+Northern Berkshire's home for amateur astronomy — whatever your experience, you belong under our skies.
+

@@ -1,0 +1,260 @@
+{{/* layouts/shortcodes/iss-passes.html
+     ISS upcoming visual passes widget for the sidebar.
+     Reads from /data/iss-passes.json (generated nightly by GitHub Actions).
+     Usage: {{< iss-passes >}}
+*/}}
+
+<div class="iss-widget" id="iss-widget">
+  <div class="iss-widget-header">
+    <span class="iss-icon">🛸</span>
+    <span class="iss-title">ISS Passes</span>
+    <span class="iss-location">Northern Berkshires</span>
+  </div>
+  <div class="iss-widget-body" id="iss-body">
+    <p class="iss-loading">Loading pass data…</p>
+  </div>
+  <div class="iss-widget-footer">
+    <a href="https://www.n2yo.com/satellite/?s=25544" target="_blank" rel="noopener">
+      Live tracking ↗
+    </a>
+  </div>
+</div>
+
+<style>
+.iss-widget {
+  background: var(--space-blue);
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 0 0 1px #4a6a94;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.85em;
+  margin-bottom: 16px;
+}
+
+.iss-widget-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--deep-bg);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.iss-icon {
+  font-size: 1em;
+}
+
+.iss-title {
+  color: var(--gold-base);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  flex: 1;
+}
+
+.iss-location {
+  color: var(--text-muted);
+  font-size: 0.8em;
+}
+
+.iss-widget-body {
+  padding: 8px 0;
+}
+
+.iss-loading,
+.iss-error,
+.iss-empty {
+  padding: 8px 12px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.iss-error { color: #f88; font-style: normal; }
+
+/* Pass rows */
+.iss-pass {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 8px;
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.iss-pass:last-child {
+  border-bottom: none;
+}
+
+.iss-pass-date {
+  color: var(--gold-base);
+  font-weight: 600;
+  font-size: 0.95em;
+  grid-column: 1 / -1;
+}
+
+.iss-pass-time {
+  color: var(--text-pure);
+  font-variant-numeric: tabular-nums;
+  font-family: monospace;
+}
+
+.iss-pass-duration {
+  color: var(--text-muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: monospace;
+}
+
+.iss-pass-detail {
+  color: var(--text-muted);
+  font-size: 0.88em;
+  grid-column: 1 / -1;
+}
+
+/* Max elevation badge */
+.iss-pass-elev {
+  display: inline-block;
+  font-size: 0.8em;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-weight: 600;
+  margin-left: 4px;
+  font-family: monospace;
+}
+
+.iss-elev-high  { background: #1a4a1a; color: #6f6; }   /* >60° excellent */
+.iss-elev-med   { background: #3a3a10; color: #dd4; }   /* 30-60° good */
+.iss-elev-low   { background: #2a1a10; color: #a86; }   /* <30° marginal */
+
+.iss-widget-footer {
+  padding: 6px 12px;
+  border-top: 1px solid var(--border-soft);
+  text-align: right;
+}
+
+.iss-widget-footer a {
+  color: var(--text-muted);
+  font-size: 0.8em;
+  text-decoration: none;
+}
+
+.iss-widget-footer a:hover {
+  color: var(--gold-base);
+}
+
+/* Stale data warning */
+.iss-stale {
+  padding: 4px 12px;
+  background: rgba(255, 180, 0, 0.08);
+  color: #aa8833;
+  font-size: 0.78em;
+  border-top: 1px solid var(--border-soft);
+  text-align: center;
+}
+</style>
+
+<script>
+(function() {
+  const body = document.getElementById('iss-body');
+
+  function formatTime(unixTs) {
+    const d = new Date(unixTs * 1000);
+    return d.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+      timeZoneName: 'short'
+    });
+  }
+
+  function formatDate(unixTs) {
+    const d = new Date(unixTs * 1000);
+    const today    = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
+    const sameDay = (a, b) =>
+      a.getFullYear() === b.getFullYear() &&
+      a.getMonth()    === b.getMonth()    &&
+      a.getDate()     === b.getDate();
+
+    if (sameDay(d, today))    return 'Today';
+    if (sameDay(d, tomorrow)) return 'Tomorrow';
+    return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  }
+
+  function elevClass(deg) {
+    if (deg >= 60) return 'iss-elev-high';
+    if (deg >= 30) return 'iss-elev-med';
+    return 'iss-elev-low';
+  }
+
+  function formatDuration(secs) {
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    return m > 0 ? `${m}m ${s}s` : `${s}s`;
+  }
+
+  function formatAzimuth(deg) {
+    const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE',
+                  'S','SSW','SW','WSW','W','WNW','NW','NNW'];
+    return dirs[Math.round(deg / 22.5) % 16];
+  }
+
+  fetch('/data/iss-passes.json')
+    .then(r => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return r.json();
+    })
+    .then(data => {
+      const passes = data.passes;
+
+      if (!passes || passes.length === 0) {
+        body.innerHTML = '<p class="iss-empty">No visible passes in the next 10 days.</p>';
+        return;
+      }
+
+      // Check data freshness — warn if JSON is >26 hours old
+      const generated = data.info && data.info.satname ? null : null;
+      // (N2YO doesn't return a generation timestamp, so we check the
+      //  earliest pass startUTC against now as a proxy)
+      const now = Math.floor(Date.now() / 1000);
+      const firstPass = passes[0].startUTC;
+      let staleWarning = '';
+      if (firstPass < now - 86400) {
+        staleWarning = '<p class="iss-stale">⚠ Pass data may be outdated</p>';
+      }
+
+      // Filter to future passes only, cap at 5
+      const futurePasses = passes
+        .filter(p => p.startUTC > now)
+        .slice(0, 5);
+
+      if (futurePasses.length === 0) {
+        body.innerHTML = '<p class="iss-empty">No upcoming passes — check back tomorrow.</p>';
+        return;
+      }
+
+      let html = '';
+      futurePasses.forEach(p => {
+        const ec = elevClass(p.maxEl);
+        html += `
+          <div class="iss-pass">
+            <span class="iss-pass-date">${formatDate(p.startUTC)}</span>
+            <span class="iss-pass-time">${formatTime(p.startUTC)}</span>
+            <span class="iss-pass-duration">${formatDuration(p.duration)}</span>
+            <span class="iss-pass-detail">
+              ${formatAzimuth(p.startAz)} → ${formatAzimuth(p.endAz)}
+              <span class="iss-pass-elev ${ec}">${p.maxEl}°</span>
+            </span>
+          </div>`;
+      });
+
+      body.innerHTML = html + staleWarning;
+    })
+    .catch(err => {
+      body.innerHTML = `<p class="iss-error">Could not load pass data.</p>`;
+      console.error('ISS widget:', err);
+    });
+})();
+</script>
