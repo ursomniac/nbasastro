@@ -64,3 +64,19 @@
     font-weight: bold;
 }
 
+/* --- INTERNAL DOCS CONTENT --- */
+.internal-content {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Code block overflow fix */
+.internal-content pre {
+    overflow-x: auto;
+    max-width: 100%;
+}
+/* Prevent grid blowout on members pages */
+.nbas-main {
+    min-width: 0;
+    overflow-x: hidden;
+}
