@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
-  {{ partial "head.html" . }}
-</head>
+{{ partial "head.html" . }}
 <body>
   {{ partial "baseof_header.html" . }}{{ partial "nav.html" . }}<div class="nbas-container">
     <div class="nbas-columns">
