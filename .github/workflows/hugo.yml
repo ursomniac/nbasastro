@@ -1,19 +1,16 @@
 name: Deploy
-
 on:
   push:
     branches: ["main"]
-  # NEW: Rebuilds every night at 00:05 UTC (approx. 8 PM ET)
+  # Rebuilds every night at 00:05 UTC (approx. 8 PM ET)
   schedule:
     - cron: '5 0 * * *'
-  # NEW: Allows you to manually trigger a build from the GitHub UI
+  # Allows you to manually trigger a build from the GitHub UI
   workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
   id-token: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,12 +22,19 @@ jobs:
         with:
           hugo-version: 'latest'
           extended: true
+      - name: Fetch ISS passes
+        env:
+          N2YO_API_KEY: ${{ secrets.N2YO_API_KEY }}
+        run: |
+          mkdir -p static/data
+          curl -s "https://api.n2yo.com/rest/v1/satellite/visualpasses/25544/42.7/-73.11/300/10/40/?apiKey=${N2YO_API_KEY}" \
+            -o static/data/iss-passes.json
+          echo "ISS passes fetched: $(jq '.info.passescount' static/data/iss-passes.json) passes"
       - run: hugo --minify
       - run: npx pagefind --site public
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -39,4 +43,3 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
-
