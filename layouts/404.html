@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page Not Found | {{ .Site.Title }}</title>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  {{ partial "baseof_header.html" . }}
+  {{ partial "nav.html" . }}
+
+  <div class="nbas-container">
+    <div style="max-width: 680px; margin: 4rem auto; text-align: center;">
+
+      <h1 style="font-size: 6rem; color: var(--gold-base); margin: 0; line-height: 1;">404</h1>
+      <h2 style="color: var(--text-pure); margin-top: 0.5rem;">Lost in the Dark</h2>
+      <p style="color: var(--text-muted); font-size: 1.1rem; margin: 1.5rem 0 2.5rem;">
+        That page has drifted out of range — it may have moved, been renamed,
+        or never existed at all.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center;">
+        <a href="/" class="starmap-btn" style="width: 280px;">🏠 Back to Home</a>
+        <a href="/articles/" class="starmap-btn" style="width: 280px;">📰 All Articles</a>
+        <a href="/tags/" class="starmap-btn" style="width: 280px;">🏷 Browse by Tag</a>
+        <a href="/explorer/" class="starmap-btn" style="width: 280px;">🔭 DSO Catalog</a>
+      </div>
+
+    </div>
+  </div>
+
+  {{ partial "baseof_footer.html" . }}
+</body>
+</html>
