@@ -3,7 +3,5 @@ public/
 resources/
 .hugo_build.lock
 public/
-.DS_Store
-*/.DS_Store
-static/.DS_Store
+**/.DS_Store
 iss-passes.json
