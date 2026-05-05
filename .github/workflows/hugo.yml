@@ -24,6 +24,10 @@ jobs:
         with:
           hugo-version: 'latest'
           extended: true
+      - name: Sync calendar
+        run: |
+          pip install requests icalendar recurring_ical_events --break-system-packages
+          python scripts/sync_calendar.py
       - name: Fetch ISS passes
         env:
           N2YO_API_KEY: ${{ secrets.N2YO_API_KEY }}
