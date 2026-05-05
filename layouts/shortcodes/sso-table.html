@@ -30,9 +30,10 @@
               <th>Planet</th>
               <th>RA</th>
               <th>Dec</th>
-              <th>Distance (AU)</th>
-              <th>Ang. Size</th>
-              <th>Magnitude</th>
+              <th>Con.</th>
+              <th>Dist. (AU)</th>
+              <th>Ang.<br>Size</th>
+              <th>Mag.</th>
             </tr>
           </thead>
           <tbody id="sso-planet-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
@@ -105,11 +106,11 @@
           <thead>
             <tr>
               <th>Moon</th>
-              <th>X (Rj)</th>
-              <th>Y (Rj)</th>
-              <th>Z (Rj)</th>
+              <th>X (R<sub>♃</sub> / &quot;)</th>
+              <th>Y (R<sub>♃</sub> / &quot;)</th>
+              <th>Z (R<sub>♃</sub>)</th>
               <th>Offset</th>
-              <th>Mag</th>
+              <th>Mag.</th>
             </tr>
           </thead>
           <tbody id="sso-jupiter-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
@@ -128,9 +129,9 @@
           <thead>
             <tr>
               <th>Moon</th>
-              <th>X (Rs)</th>
-              <th>Y (Rs)</th>
-              <th>Z (Rs)</th>
+              <th>X (R<sub>♄</sub> / &quot;)</th>
+              <th>Y (R<sub>♄</sub> / &quot;)</th>
+              <th>Z (R<sub>♄</sub>)</th>
               <th>Offset</th>
               <th>Mag</th>
             </tr>
@@ -166,7 +167,21 @@
   })
   document.getElementById('sso-calc-btn').addEventListener('click', calculate)
 
-  // --- Rendering functions ---
+// --- Constellation lookup --- //
+function getConstellation(raRad, decRad, short = false) {
+  if (!window.Astronomy) return null;
+  try {
+    const raHours = raRad * (180 / Math.PI) / 15;
+    const decDeg  = decRad * (180 / Math.PI);
+    const result  = window.Astronomy.Constellation(raHours, decDeg);
+    return short ? result.symbol : result.name;
+  } catch(e) {
+    return null;
+  }
+}
+
+
+// --- Rendering functions ---
 
 function renderSun(sun) {
   const tbody = document.getElementById('sso-sun-rows')
@@ -174,7 +189,9 @@ function renderSun(sun) {
     tbody.innerHTML = `<tr><td colspan="2" class="sso-error">Error: ${sun.error}</td></tr>`
     return
   }
+  const con = getConstellation(sun.ra, sun.dec)
   tbody.innerHTML = `
+    <tr><td>Constellation</td><td>${con || '—'}</td></tr>
     <tr><td>RA</td><td>${sun.raFmt}</td></tr>
     <tr><td>Dec</td><td>${sun.decFmt}</td></tr>
     <tr><td>Distance</td><td>${sun.rangeFmt}</td></tr>
@@ -183,13 +200,15 @@ function renderSun(sun) {
   `
 }
 
-  function renderMoon(moon) {
+function renderMoon(moon) {
     const tbody = document.getElementById('sso-moon-rows')
     if (moon.error) {
       tbody.innerHTML = `<tr><td colspan="2" class="error">Error: ${moon.error}</td></tr>`
       return
     }
+    const con = getConstellation(moon.ra, moon.dec)
     tbody.innerHTML = `
+      <tr><td>Constellation</td><td>${con || '—'}</td></tr>
       <tr><td>RA</td><td>${moon.raFmt}</td></tr>
       <tr><td>Dec</td><td>${moon.decFmt}</td></tr>
       <tr><td>Distance</td><td>${moon.rangeFmt}</td></tr>
@@ -218,25 +237,28 @@ function renderSun(sun) {
       </svg>`
   }
 
-  function renderPlanets(planets) {
+function renderPlanets(planets) {
     const tbody = document.getElementById('sso-planet-rows')
     let html = ''
     planets.forEach(p => {
       if (p.error) {
-        html += `<tr><td>${p.name}</td><td colspan="3" class="error">${p.error}</td></tr>`
+        html += `<tr><td>${p.name}</td><td colspan="6" class="error">${p.error}</td></tr>`
       } else {
+        const con = getConstellation(p.ra, p.dec, true)
         html += `<tr>
           <td><strong>${p.name}</strong></td>
           <td>${p.raFmt}</td>
           <td>${p.decFmt}</td>
+          <td>${con || '—'}</td>
           <td>${p.range.toFixed(4)} AU</td>
           <td>${p.sdFmt}</td>
           <td>${p.magFmt}</td>
         </tr>`
       }
     })
-    tbody.innerHTML = html || '<tr><td colspan="4">No data</td></tr>'
+    tbody.innerHTML = html || '<tr><td colspan="7">No data</td></tr>'
   }
+
   function renderInnerPlanets(planets) {
     const mercury = planets.find(p => p.name === 'Mercury')
     const venus   = planets.find(p => p.name === 'Venus')
@@ -400,10 +422,10 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
     const status = occluded ? ' (occulted)' : m.z > 0 ? ' (transit)' : ''
     html += `<tr>
       <td>${NAMES[i]}</td>
-      <td>${m.x.toFixed(1)} Rj / ${(Math.abs(m.x) * jupiterRadiusArcsec).toFixed(1)}" </td>
-      <td>${m.y.toFixed(1)} Rj / ${(Math.abs(m.y) * jupiterRadiusArcsec).toFixed(1)}" </td>
+      <td>${m.x.toFixed(1)} / ${(Math.abs(m.x) * jupiterRadiusArcsec).toFixed(1)}" </td>
+      <td>${m.y.toFixed(1)} / ${(Math.abs(m.y) * jupiterRadiusArcsec).toFixed(1)}" </td>
       <td>${m.z.toFixed(1)}</td>
-      <td>${Math.abs(m.x).toFixed(2)} Rj / ${(Math.abs(m.x) * jupiterRadiusArcsec).toFixed(1)}" ${side}${status}</td>
+      <td>${Math.abs(m.x).toFixed(2)} / ${(Math.abs(m.x) * jupiterRadiusArcsec).toFixed(1)}" ${side}${status}</td>
       <td>${m.mag}</td>
     </tr>`
   })
@@ -581,10 +603,10 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
         const yArcsec = (m.y * saturnRadiusArcsec).toFixed(1)
         html += `<tr>
           <td>${m.name}</td>
-          <td>${m.x.toFixed(1)} Rs / ${xArcsec}"</td>
-          <td>${m.y.toFixed(1)} Rs / ${yArcsec}"</td>
-          <td>${m.z !== undefined ? m.z.toFixed(3) : '—'}</td>
-          <td>${m.offsetFmt} ${m.side}</td>
+          <td>${m.x.toFixed(1)} / ${xArcsec}"</td>
+          <td>${m.y.toFixed(1)} / ${yArcsec}"</td>
+          <td>${m.z !== undefined ? m.z.toFixed(1) : '—'}</td>
+	  <td>${m.offsetFmt} / ${(Math.sqrt(m.x*m.x + m.y*m.y) * saturnRadiusArcsec).toFixed(1)}" ${m.side}</td>
           <td>${m.mag}</td>
         </tr>`
       })

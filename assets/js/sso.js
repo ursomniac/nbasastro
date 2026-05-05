@@ -285,7 +285,7 @@ function getSaturnMoons(jde, saturnR, saturnDelta) {
         y: p.y,
         z: p.z,
         side: p.x < 0 ? 'West' : 'East',
-	offsetFmt: Math.sqrt(p.x*p.x + p.y*p.y).toFixed(1) + ' Rs',
+	offsetFmt: Math.sqrt(p.x*p.x + p.y*p.y).toFixed(1),
         mag: mag.toFixed(2),
         error: null
       }
