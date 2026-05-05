@@ -13901,219 +13901,6 @@
       return texture;
     }
   };
-  var Light = class extends Object3D {
-    /**
-     * Constructs a new light.
-     *
-     * @param {(number|Color|string)} [color=0xffffff] - The light's color.
-     * @param {number} [intensity=1] - The light's strength/intensity.
-     */
-    constructor(color, intensity = 1) {
-      super();
-      this.isLight = true;
-      this.type = "Light";
-      this.color = new Color(color);
-      this.intensity = intensity;
-    }
-    /**
-     * Frees the GPU-related resources allocated by this instance. Call this
-     * method whenever this instance is no longer used in your app.
-     */
-    dispose() {
-      this.dispatchEvent({ type: "dispose" });
-    }
-    copy(source, recursive) {
-      super.copy(source, recursive);
-      this.color.copy(source.color);
-      this.intensity = source.intensity;
-      return this;
-    }
-    toJSON(meta) {
-      const data = super.toJSON(meta);
-      data.object.color = this.color.getHex();
-      data.object.intensity = this.intensity;
-      return data;
-    }
-  };
-  var _projScreenMatrix = /* @__PURE__ */ new Matrix4();
-  var _lightPositionWorld = /* @__PURE__ */ new Vector3();
-  var _lookTarget = /* @__PURE__ */ new Vector3();
-  var LightShadow = class {
-    /**
-     * Constructs a new light shadow.
-     *
-     * @param {Camera} camera - The light's view of the world.
-     */
-    constructor(camera) {
-      this.camera = camera;
-      this.intensity = 1;
-      this.bias = 0;
-      this.biasNode = null;
-      this.normalBias = 0;
-      this.radius = 1;
-      this.blurSamples = 8;
-      this.mapSize = new Vector2(512, 512);
-      this.mapType = UnsignedByteType;
-      this.map = null;
-      this.mapPass = null;
-      this.matrix = new Matrix4();
-      this.autoUpdate = true;
-      this.needsUpdate = false;
-      this._frustum = new Frustum();
-      this._frameExtents = new Vector2(1, 1);
-      this._viewportCount = 1;
-      this._viewports = [
-        new Vector4(0, 0, 1, 1)
-      ];
-    }
-    /**
-     * Used internally by the renderer to get the number of viewports that need
-     * to be rendered for this shadow.
-     *
-     * @return {number} The viewport count.
-     */
-    getViewportCount() {
-      return this._viewportCount;
-    }
-    /**
-     * Gets the shadow cameras frustum. Used internally by the renderer to cull objects.
-     *
-     * @return {Frustum} The shadow camera frustum.
-     */
-    getFrustum() {
-      return this._frustum;
-    }
-    /**
-     * Update the matrices for the camera and shadow, used internally by the renderer.
-     *
-     * @param {Light} light - The light for which the shadow is being rendered.
-     */
-    updateMatrices(light) {
-      const shadowCamera = this.camera;
-      const shadowMatrix = this.matrix;
-      _lightPositionWorld.setFromMatrixPosition(light.matrixWorld);
-      shadowCamera.position.copy(_lightPositionWorld);
-      _lookTarget.setFromMatrixPosition(light.target.matrixWorld);
-      shadowCamera.lookAt(_lookTarget);
-      shadowCamera.updateMatrixWorld();
-      _projScreenMatrix.multiplyMatrices(shadowCamera.projectionMatrix, shadowCamera.matrixWorldInverse);
-      this._frustum.setFromProjectionMatrix(_projScreenMatrix, shadowCamera.coordinateSystem, shadowCamera.reversedDepth);
-      if (shadowCamera.coordinateSystem === WebGPUCoordinateSystem || shadowCamera.reversedDepth) {
-        shadowMatrix.set(
-          0.5,
-          0,
-          0,
-          0.5,
-          0,
-          0.5,
-          0,
-          0.5,
-          0,
-          0,
-          1,
-          0,
-          // Identity Z (preserving the correct [0, 1] range from the projection matrix)
-          0,
-          0,
-          0,
-          1
-        );
-      } else {
-        shadowMatrix.set(
-          0.5,
-          0,
-          0,
-          0.5,
-          0,
-          0.5,
-          0,
-          0.5,
-          0,
-          0,
-          0.5,
-          0.5,
-          0,
-          0,
-          0,
-          1
-        );
-      }
-      shadowMatrix.multiply(_projScreenMatrix);
-    }
-    /**
-     * Returns a viewport definition for the given viewport index.
-     *
-     * @param {number} viewportIndex - The viewport index.
-     * @return {Vector4} The viewport.
-     */
-    getViewport(viewportIndex) {
-      return this._viewports[viewportIndex];
-    }
-    /**
-     * Returns the frame extends.
-     *
-     * @return {Vector2} The frame extends.
-     */
-    getFrameExtents() {
-      return this._frameExtents;
-    }
-    /**
-     * Frees the GPU-related resources allocated by this instance. Call this
-     * method whenever this instance is no longer used in your app.
-     */
-    dispose() {
-      if (this.map) {
-        this.map.dispose();
-      }
-      if (this.mapPass) {
-        this.mapPass.dispose();
-      }
-    }
-    /**
-     * Copies the values of the given light shadow instance to this instance.
-     *
-     * @param {LightShadow} source - The light shadow to copy.
-     * @return {LightShadow} A reference to this light shadow instance.
-     */
-    copy(source) {
-      this.camera = source.camera.clone();
-      this.intensity = source.intensity;
-      this.bias = source.bias;
-      this.radius = source.radius;
-      this.autoUpdate = source.autoUpdate;
-      this.needsUpdate = source.needsUpdate;
-      this.normalBias = source.normalBias;
-      this.blurSamples = source.blurSamples;
-      this.mapSize.copy(source.mapSize);
-      this.biasNode = source.biasNode;
-      return this;
-    }
-    /**
-     * Returns a new light shadow instance with copied values from this instance.
-     *
-     * @return {LightShadow} A clone of this instance.
-     */
-    clone() {
-      return new this.constructor().copy(this);
-    }
-    /**
-     * Serializes the light shadow into JSON.
-     *
-     * @return {Object} A JSON object representing the serialized light shadow.
-     * @see {@link ObjectLoader#parse}
-     */
-    toJSON() {
-      const object = {};
-      if (this.intensity !== 1) object.intensity = this.intensity;
-      if (this.bias !== 0) object.bias = this.bias;
-      if (this.normalBias !== 0) object.normalBias = this.normalBias;
-      if (this.radius !== 1) object.radius = this.radius;
-      if (this.mapSize.x !== 512 || this.mapSize.y !== 512) object.mapSize = this.mapSize.toArray();
-      object.camera = this.camera.toJSON(false).object;
-      delete object.camera.matrix;
-      return object;
-    }
-  };
   var _position$2 = /* @__PURE__ */ new Vector3();
   var _quaternion$2 = /* @__PURE__ */ new Quaternion();
   var _scale$2 = /* @__PURE__ */ new Vector3();
@@ -14523,61 +14310,6 @@
       data.object.far = this.far;
       if (this.view !== null) data.object.view = Object.assign({}, this.view);
       return data;
-    }
-  };
-  var DirectionalLightShadow = class extends LightShadow {
-    /**
-     * Constructs a new directional light shadow.
-     */
-    constructor() {
-      super(new OrthographicCamera(-5, 5, 5, -5, 0.5, 500));
-      this.isDirectionalLightShadow = true;
-    }
-  };
-  var DirectionalLight = class extends Light {
-    /**
-     * Constructs a new directional light.
-     *
-     * @param {(number|Color|string)} [color=0xffffff] - The light's color.
-     * @param {number} [intensity=1] - The light's strength/intensity.
-     */
-    constructor(color, intensity) {
-      super(color, intensity);
-      this.isDirectionalLight = true;
-      this.type = "DirectionalLight";
-      this.position.copy(Object3D.DEFAULT_UP);
-      this.updateMatrix();
-      this.target = new Object3D();
-      this.shadow = new DirectionalLightShadow();
-    }
-    dispose() {
-      super.dispose();
-      this.shadow.dispose();
-    }
-    copy(source) {
-      super.copy(source);
-      this.target = source.target.clone();
-      this.shadow = source.shadow.clone();
-      return this;
-    }
-    toJSON(meta) {
-      const data = super.toJSON(meta);
-      data.object.shadow = this.shadow.toJSON();
-      data.object.target = this.target.uuid;
-      return data;
-    }
-  };
-  var AmbientLight = class extends Light {
-    /**
-     * Constructs a new ambient light.
-     *
-     * @param {(number|Color|string)} [color=0xffffff] - The light's color.
-     * @param {number} [intensity=1] - The light's strength/intensity.
-     */
-    constructor(color, intensity) {
-      super(color, intensity);
-      this.isAmbientLight = true;
-      this.type = "AmbientLight";
     }
   };
   var fov = -90;
@@ -19451,8 +19183,8 @@
   function WebGLProgram(renderer, cacheKey, parameters, bindingStates) {
     const gl = renderer.getContext();
     const defines = parameters.defines;
-    let vertexShader = parameters.vertexShader;
-    let fragmentShader = parameters.fragmentShader;
+    let vertexShader2 = parameters.vertexShader;
+    let fragmentShader2 = parameters.fragmentShader;
     const shadowMapTypeDefine = generateShadowMapTypeDefine(parameters);
     const envMapTypeDefine = generateEnvMapTypeDefine(parameters);
     const envMapModeDefine = generateEnvMapModeDefine(parameters);
@@ -19700,14 +19432,14 @@
         "\n"
       ].filter(filterEmptyLine).join("\n");
     }
-    vertexShader = resolveIncludes(vertexShader);
-    vertexShader = replaceLightNums(vertexShader, parameters);
-    vertexShader = replaceClippingPlaneNums(vertexShader, parameters);
-    fragmentShader = resolveIncludes(fragmentShader);
-    fragmentShader = replaceLightNums(fragmentShader, parameters);
-    fragmentShader = replaceClippingPlaneNums(fragmentShader, parameters);
-    vertexShader = unrollLoops(vertexShader);
-    fragmentShader = unrollLoops(fragmentShader);
+    vertexShader2 = resolveIncludes(vertexShader2);
+    vertexShader2 = replaceLightNums(vertexShader2, parameters);
+    vertexShader2 = replaceClippingPlaneNums(vertexShader2, parameters);
+    fragmentShader2 = resolveIncludes(fragmentShader2);
+    fragmentShader2 = replaceLightNums(fragmentShader2, parameters);
+    fragmentShader2 = replaceClippingPlaneNums(fragmentShader2, parameters);
+    vertexShader2 = unrollLoops(vertexShader2);
+    fragmentShader2 = unrollLoops(fragmentShader2);
     if (parameters.isRawShaderMaterial !== true) {
       versionString = "#version 300 es\n";
       prefixVertex = [
@@ -19732,8 +19464,8 @@
         "#define textureCubeGradEXT textureGrad"
       ].join("\n") + "\n" + prefixFragment;
     }
-    const vertexGlsl = versionString + prefixVertex + vertexShader;
-    const fragmentGlsl = versionString + prefixFragment + fragmentShader;
+    const vertexGlsl = versionString + prefixVertex + vertexShader2;
+    const fragmentGlsl = versionString + prefixFragment + fragmentShader2;
     const glVertexShader = WebGLShader(gl, gl.VERTEX_SHADER, vertexGlsl);
     const glFragmentShader = WebGLShader(gl, gl.FRAGMENT_SHADER, fragmentGlsl);
     gl.attachShader(program, glVertexShader);
@@ -19833,10 +19565,10 @@
       this.materialCache = /* @__PURE__ */ new Map();
     }
     update(material) {
-      const vertexShader = material.vertexShader;
-      const fragmentShader = material.fragmentShader;
-      const vertexShaderStage = this._getShaderStage(vertexShader);
-      const fragmentShaderStage = this._getShaderStage(fragmentShader);
+      const vertexShader2 = material.vertexShader;
+      const fragmentShader2 = material.fragmentShader;
+      const vertexShaderStage = this._getShaderStage(vertexShader2);
+      const fragmentShaderStage = this._getShaderStage(fragmentShader2);
       const materialShaders = this._getShaderCacheForMaterial(material);
       if (materialShaders.has(vertexShaderStage) === false) {
         materialShaders.add(vertexShaderStage);
@@ -19946,15 +19678,15 @@
       if (geometry.morphAttributes.position !== void 0) morphTextureStride = 1;
       if (geometry.morphAttributes.normal !== void 0) morphTextureStride = 2;
       if (geometry.morphAttributes.color !== void 0) morphTextureStride = 3;
-      let vertexShader, fragmentShader;
+      let vertexShader2, fragmentShader2;
       let customVertexShaderID, customFragmentShaderID;
       if (shaderID) {
         const shader = ShaderLib[shaderID];
-        vertexShader = shader.vertexShader;
-        fragmentShader = shader.fragmentShader;
+        vertexShader2 = shader.vertexShader;
+        fragmentShader2 = shader.fragmentShader;
       } else {
-        vertexShader = material.vertexShader;
-        fragmentShader = material.fragmentShader;
+        vertexShader2 = material.vertexShader;
+        fragmentShader2 = material.fragmentShader;
         _customShaders.update(material);
         customVertexShaderID = _customShaders.getVertexShaderID(material);
         customFragmentShaderID = _customShaders.getFragmentShaderID(material);
@@ -20008,8 +19740,8 @@
         shaderID,
         shaderType: material.type,
         shaderName: material.name,
-        vertexShader,
-        fragmentShader,
+        vertexShader: vertexShader2,
+        fragmentShader: fragmentShader2,
         defines: material.defines,
         customVertexShaderID,
         customFragmentShaderID,
@@ -20998,9 +20730,9 @@
     /* @__PURE__ */ new Vector3(0, -1, 0),
     /* @__PURE__ */ new Vector3(0, -1, 0)
   ];
-  var _projScreenMatrix2 = /* @__PURE__ */ new Matrix4();
-  var _lightPositionWorld2 = /* @__PURE__ */ new Vector3();
-  var _lookTarget2 = /* @__PURE__ */ new Vector3();
+  var _projScreenMatrix = /* @__PURE__ */ new Matrix4();
+  var _lightPositionWorld = /* @__PURE__ */ new Vector3();
+  var _lookTarget = /* @__PURE__ */ new Vector3();
   function WebGLShadowMap(renderer, objects, capabilities) {
     let _frustum = new Frustum();
     const _shadowMapSize = new Vector2(), _viewportSize = new Vector2(), _viewport = new Vector4(), _depthMaterial = new MeshDepthMaterial(), _distanceMaterial = new MeshDistanceMaterial(), _materialCache = {}, _maxTextureSize = capabilities.maxTextureSize;
@@ -21168,16 +20900,16 @@
               camera2.far = far;
               camera2.updateProjectionMatrix();
             }
-            _lightPositionWorld2.setFromMatrixPosition(light.matrixWorld);
-            camera2.position.copy(_lightPositionWorld2);
-            _lookTarget2.copy(camera2.position);
-            _lookTarget2.add(_cubeDirections[face]);
+            _lightPositionWorld.setFromMatrixPosition(light.matrixWorld);
+            camera2.position.copy(_lightPositionWorld);
+            _lookTarget.copy(camera2.position);
+            _lookTarget.add(_cubeDirections[face]);
             camera2.up.copy(_cubeUps[face]);
-            camera2.lookAt(_lookTarget2);
+            camera2.lookAt(_lookTarget);
             camera2.updateMatrixWorld();
-            shadowMatrix.makeTranslation(-_lightPositionWorld2.x, -_lightPositionWorld2.y, -_lightPositionWorld2.z);
-            _projScreenMatrix2.multiplyMatrices(camera2.projectionMatrix, camera2.matrixWorldInverse);
-            shadow._frustum.setFromProjectionMatrix(_projScreenMatrix2, camera2.coordinateSystem, camera2.reversedDepth);
+            shadowMatrix.makeTranslation(-_lightPositionWorld.x, -_lightPositionWorld.y, -_lightPositionWorld.z);
+            _projScreenMatrix.multiplyMatrices(camera2.projectionMatrix, camera2.matrixWorldInverse);
+            shadow._frustum.setFromProjectionMatrix(_projScreenMatrix, camera2.coordinateSystem, camera2.reversedDepth);
           } else {
             shadow.updateMatrices(light);
           }
@@ -25252,7 +24984,7 @@ void main() {
       const _frustum = new Frustum();
       let _clippingEnabled = false;
       let _localClippingEnabled = false;
-      const _projScreenMatrix3 = new Matrix4();
+      const _projScreenMatrix2 = new Matrix4();
       const _vector3 = new Vector3();
       const _vector4 = new Vector4();
       const _emptyScene = { background: null, fog: null, environment: null, overrideMaterial: null, isScene: true };
@@ -25788,8 +25520,8 @@ void main() {
         currentRenderState.init(camera);
         currentRenderState.state.textureUnits = textures.getTextureUnits();
         renderStateStack.push(currentRenderState);
-        _projScreenMatrix3.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
-        _frustum.setFromProjectionMatrix(_projScreenMatrix3, WebGLCoordinateSystem, camera.reversedDepth);
+        _projScreenMatrix2.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+        _frustum.setFromProjectionMatrix(_projScreenMatrix2, WebGLCoordinateSystem, camera.reversedDepth);
         _localClippingEnabled = this.localClippingEnabled;
         _clippingEnabled = clipping.init(this.clippingPlanes, _localClippingEnabled);
         currentRenderList = renderLists.get(scene, renderListStack.length);
@@ -25887,7 +25619,7 @@ void main() {
           } else if (object.isSprite) {
             if (!object.frustumCulled || _frustum.intersectsSprite(object)) {
               if (sortObjects) {
-                _vector4.setFromMatrixPosition(object.matrixWorld).applyMatrix4(_projScreenMatrix3);
+                _vector4.setFromMatrixPosition(object.matrixWorld).applyMatrix4(_projScreenMatrix2);
               }
               const geometry = objects.update(object);
               const material = object.material;
@@ -25907,7 +25639,7 @@ void main() {
                   if (geometry.boundingSphere === null) geometry.computeBoundingSphere();
                   _vector4.copy(geometry.boundingSphere.center);
                 }
-                _vector4.applyMatrix4(object.matrixWorld).applyMatrix4(_projScreenMatrix3);
+                _vector4.applyMatrix4(object.matrixWorld).applyMatrix4(_projScreenMatrix2);
               }
               if (Array.isArray(material)) {
                 const groups = geometry.groups;
@@ -26768,135 +26500,185 @@ void main() {
     }
   };
 
-  // assets/js/jupiter-globe.js
-  var GRS_LONGITUDE_EPOCH = 85;
-  var GRS_EPOCH_JD = 24610425e-1;
-  var GRS_DRIFT_DEG_PER_DAY = -0.0575;
-  var MAP_LONGITUDE_OFFSET = 317.4;
-  var TEXTURE_PATH = "/images/planets/cassini_jupiter_20001211.jpg";
-  var CANVAS_ID = "jupiter-globe-canvas";
-  var META_ID = "jupiter-globe-meta";
-  var _sphere = null;
+  // assets/js/moon-globe.js
+  var TEXTURE_PATH = "/images/planets/2k_moon.jpg";
+  var CANVAS_ID = "sso-moon-canvas";
+  var META_ID = "sso-moon-rows";
+  var CAMERA_DIST = 6;
+  var vertexShader = `
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  void main() {
+    vUv = uv;
+    vNormal = normalize(normalMatrix * normal);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+  var fragmentShader = `
+  uniform sampler2D moonTexture;
+  uniform vec3 sunDirection;   // direction FROM moon TOWARD sun, in view space
+  uniform float earthshine;    // ambient fill for dark side
+
+  varying vec2 vUv;
+  varying vec3 vNormal;
+
+  void main() {
+    vec4 texColor = texture2D(moonTexture, vUv);
+
+    // Dot product of surface normal with sun direction
+    // Positive = lit side, negative = dark side
+    float intensity = dot(normalize(vNormal), normalize(sunDirection));
+
+    // Sharp terminator: no smoothstep, just clamp
+    //float lit = max(0.0, intensity);
+    //float lit = step(0.0, dot(normalize(vNormal), normalize(sunDirection)));
+    float lit = smoothstep(-0.05, 0.05, dot(normalize(vNormal), normalize(sunDirection)));
+    // Earthshine: very dim blue-grey fill on dark side
+    //float dark = earthshine * (1.0 - lit);
+    float dark = earthshine;
+
+    //vec3 color = texColor.rgb * (lit + dark);
+    vec3 color = texColor.rgb * mix(dark, 1.0, lit);
+    gl_FragColor = vec4(color, 1.0);
+  }
+`;
   var _renderer = null;
   var _scene = null;
   var _camera = null;
-  var _sunLight = null;
+  var _sphere = null;
+  var _material = null;
+  var _initiated = false;
   function degToRad(d) {
     return d * Math.PI / 180;
   }
-  function grsLongitude(jde) {
-    const lon = GRS_LONGITUDE_EPOCH + GRS_DRIFT_DEG_PER_DAY * (jde - GRS_EPOCH_JD);
-    return (lon % 360 + 360) % 360;
-  }
-  function computeSphereRotation(cml, grsLon) {
-    const grsOffset = (grsLon - cml + 360) % 360;
-    return degToRad(-grsOffset + MAP_LONGITUDE_OFFSET);
-  }
-  function sunDirection(jup) {
-    const { helioLon, helioLat } = jup;
-    return new Vector3(
-      -Math.cos(helioLat) * Math.cos(helioLon),
-      -Math.sin(helioLat),
-      -Math.cos(helioLat) * Math.sin(helioLon)
-    ).normalize();
-  }
-  function updateMeta(jup, cml, grsLon, date) {
-    const meta = document.getElementById(META_ID);
-    if (!meta) return;
-    const grsFromCenter = (grsLon - cml + 180 + 360) % 360 - 180;
-    const grsSign = grsFromCenter >= 0 ? "+" : "";
-    meta.innerHTML = `
-    <table class="sso-table"><tbody>
-      <tr><td>Central Meridian (Sys II)</td><td>${cml.toFixed(1)}\xB0</td></tr>
-      <tr><td>GRS Longitude (Sys II)</td><td>${grsLon.toFixed(1)}\xB0</td></tr>
-      <tr><td>GRS from Center</td><td>${grsSign}${grsFromCenter.toFixed(1)}\xB0</td></tr>
-      <tr><td>Diameter</td><td>${jup.sdFmt}</td></tr>
-      <tr><td>Illumination</td><td>${jup.illuminationPct}%</td></tr>
-    </tbody></table>`;
-  }
   function renderFrame() {
-    _renderer.render(_scene, _camera);
+    if (_renderer && _scene && _camera) {
+      _renderer.render(_scene, _camera);
+    }
   }
-  function initJupiterGlobe() {
-    const canvas = document.getElementById(CANVAS_ID);
-    if (!canvas) return;
+  function updateMeta(moon, lib) {
+    const tbody = document.getElementById(META_ID);
+    if (!tbody) return;
+    let con = "\u2014";
+    if (window.Astronomy && moon.ra !== void 0) {
+      try {
+        const result = window.Astronomy.Constellation(
+          moon.ra * (180 / Math.PI) / 15,
+          moon.dec * (180 / Math.PI)
+        );
+        if (result) con = result.name;
+      } catch (e) {
+      }
+    }
+    const diamArcmin = lib.diam_deg ? (lib.diam_deg * 60).toFixed(1) + "'" : "\u2014";
+    tbody.innerHTML = `
+    <tr><td>Constellation</td><td>${con}</td></tr>
+    <tr><td>RA</td><td>${moon.raFmt}</td></tr>
+    <tr><td>Dec</td><td>${moon.decFmt}</td></tr>
+    <tr><td>Distance</td><td>${moon.rangeFmt}</td></tr>
+    <tr><td>Phase</td><td>${moon.phaseName}</td></tr>
+    <tr><td>Age</td><td>${moon.ageFmt}</td></tr>
+    <tr><td>Illumination</td><td>${moon.illumination}%</td></tr>
+    <tr><td>Lib. Longitude</td><td>${lib.elon.toFixed(2)}\xB0</td></tr>
+    <tr><td>Lib. Latitude</td><td>${lib.elat.toFixed(2)}\xB0</td></tr>
+    <tr><td>Diameter</td><td>${diamArcmin}</td></tr>
+  `;
+  }
+  function applyState(phase, lib) {
+    if (!_sphere || !_camera || !_material) return;
+    _sphere.rotation.set(0, -Math.PI / 2 + degToRad(lib.elon), 0);
+    const latRad = degToRad(lib.elat);
+    _camera.position.set(
+      0,
+      CAMERA_DIST * Math.sin(latRad),
+      CAMERA_DIST * Math.cos(latRad)
+    );
+    _camera.lookAt(0, 0, 0);
+    const phi = degToRad(phase);
+    const sunWorld = new Vector3(-Math.sin(phi), 0, -Math.cos(phi));
+    const sunView = sunWorld.clone().transformDirection(_camera.matrixWorldInverse);
+    _material.uniforms.sunDirection.value = sunView;
+  }
+  function initMoonGlobe() {
+    const container = document.getElementById(CANVAS_ID);
+    if (!container) return;
     if (!window.SolarSystem) {
-      console.error("[Jupiter] window.SolarSystem not available");
+      console.error("[Moon] window.SolarSystem not available");
+      return;
+    }
+    if (!window.Astronomy) {
+      console.error("[Moon] window.Astronomy not available");
       return;
     }
     const date = /* @__PURE__ */ new Date();
     const jde = window.SolarSystem.dateToJDE(date);
-    const planets = window.SolarSystem.getPlanets(jde);
-    const jup = planets.find((p) => p.name === "Jupiter");
-    if (!jup || jup.error) {
-      console.error("[Jupiter] Could not get Jupiter data:", jup?.error);
+    const moon = window.SolarSystem.getMoon(jde);
+    if (!moon || moon.error) {
+      console.error("[Moon] No moon data");
       return;
     }
-    const cml = window.SolarSystem.jupiterCML(jde).sysii;
-    const grsLon = grsLongitude(jde);
-    const width = canvas.clientWidth || 400;
-    const height = canvas.clientHeight || 400;
+    const astroTime = window.Astronomy.MakeTime(date);
+    const lib = window.Astronomy.Libration(astroTime);
+    const phase = parseFloat(moon.phaseAngle) || 0;
+    container.innerHTML = "";
+    const canvas = document.createElement("canvas");
+    const size = container.clientWidth || 300;
+    canvas.width = size;
+    canvas.height = size;
+    canvas.style.width = "100%";
+    canvas.style.height = "auto";
+    canvas.style.borderRadius = "50%";
+    container.appendChild(canvas);
     _renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true });
-    _renderer.setSize(width, height);
+    _renderer.setSize(size, size);
     _renderer.setPixelRatio(window.devicePixelRatio);
-    _renderer.toneMapping = ReinhardToneMapping;
-    _renderer.toneMappingExposure = 0.6;
+    _renderer.outputColorSpace = LinearSRGBColorSpace;
     _scene = new Scene();
-    _camera = new PerspectiveCamera(45, width / height, 0.1, 100);
-    _camera.position.z = 3;
-    const texture = new TextureLoader().load(TEXTURE_PATH, renderFrame);
-    const geometry = new SphereGeometry(1, 64, 64);
-    const material = new ShaderMaterial({
-      uniforms: { map: { value: texture } },
-      vertexShader: `
-    varying vec2 vUv;
-    void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }
-  `,
-      fragmentShader: `
-    uniform sampler2D map;
-    varying vec2 vUv;
-    void main() {
-      vec4 c = texture2D(map, vUv);
-      vec3 col = (c.rgb - 0.5) * 1.4 + 0.5;
-      float gray = dot(col, vec3(0.299, 0.587, 0.114));
-      col = mix(vec3(gray), col, 1.3);
-      gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
-    }
-  `
+    const h = 1.05;
+    _camera = new OrthographicCamera(-h, h, h, -h, 0.1, 100);
+    const texture = new TextureLoader().load(TEXTURE_PATH, () => {
+      applyState(phase, lib);
+      renderFrame();
     });
-    _sphere = new Mesh(geometry, material);
-    _sphere.rotation.y = computeSphereRotation(cml, grsLon);
-    const pivot = new Object3D();
-    pivot.rotation.z = degToRad(3.13);
-    pivot.add(_sphere);
-    _scene.add(pivot);
-    _scene.add(new AmbientLight(16777215, 0.7));
-    _sunLight = new DirectionalLight(16777215, 2.5);
-    _sunLight.position.copy(sunDirection(jup));
-    _scene.add(_sunLight);
+    texture.colorSpace = LinearSRGBColorSpace;
+    _material = new ShaderMaterial({
+      uniforms: {
+        moonTexture: { value: texture },
+        sunDirection: { value: new Vector3(0, 0, 1) },
+        earthshine: { value: 0.06 }
+      },
+      vertexShader,
+      fragmentShader
+    });
+    const geometry = new SphereGeometry(1, 64, 64);
+    _sphere = new Mesh(geometry, _material);
+    _scene.add(_sphere);
+    applyState(phase, lib);
     window.addEventListener("resize", () => {
-      _renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-      _camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      const w = container.clientWidth || 300;
+      _renderer.setSize(w, w);
       _camera.updateProjectionMatrix();
       renderFrame();
     });
-    updateMeta(jup, cml, grsLon, date);
+    updateMeta(moon, lib);
+    _initiated = true;
     renderFrame();
+    console.log(`[Moon] shader \u2014 phase: ${phase.toFixed(1)}\xB0  elon: ${lib.elon.toFixed(2)}\xB0  elat: ${lib.elat.toFixed(2)}\xB0`);
   }
-  window.renderJupiterGlobe = function(date) {
-    if (!_sphere || !_sunLight) return;
-    const jde = window.SolarSystem.dateToJDE(date);
-    const planets = window.SolarSystem.getPlanets(jde);
-    const jup = planets.find((p) => p.name === "Jupiter");
-    if (!jup || jup.error) return;
-    const cml = window.SolarSystem.jupiterCML(jde).sysii;
-    const grsLon = grsLongitude(jde);
-    _sphere.rotation.y = computeSphereRotation(cml, grsLon);
-    _sunLight.position.copy(sunDirection(jup));
-    updateMeta(jup, cml, grsLon, date);
+  window.renderMoonGlobe = function(date, moon) {
+    if (!_initiated || !window.Astronomy) return;
+    const astroTime = window.Astronomy.MakeTime(date);
+    const lib = window.Astronomy.Libration(astroTime);
+    const phase = parseFloat(moon.phaseAngle) || 0;
+    applyState(phase, lib);
+    updateMeta(moon, lib);
     renderFrame();
   };
-  document.addEventListener("DOMContentLoaded", initJupiterGlobe);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMoonGlobe);
+  } else {
+    initMoonGlobe();
+  }
 })();
 /*! Bundled license information:
 

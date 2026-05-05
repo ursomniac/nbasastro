@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build:sso": "esbuild assets/js/sso.js --bundle --outfile=static/js/astronomia.js --format=iife --platform=browser",
+    "build:moon": "esbuild assets/js/moon-globe.js --bundle --outfile=static/js/moon-globe.js --format=iife --platform=browser",
     "build:mars": "esbuild assets/js/mars-globe.js --bundle --outfile=static/js/mars-globe.js --format=iife --platform=browser",
     "build:jupiter": "esbuild assets/js/jupiter-globe.js --bundle --outfile=static/js/jupiter-globe.js --format=iife --platform=browser",
     "test": "echo \"Error: no test specified\" && exit 1"

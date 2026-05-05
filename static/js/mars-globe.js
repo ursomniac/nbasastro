@@ -26533,7 +26533,6 @@ void main() {
       <tr><td>Diameter</td><td>${mars.sdFmt}</td></tr>
       <tr><td>Illumination</td><td>${mars.illuminationPct}%</td></tr>
     </tbody></table>`;
-    console.log(`[Mars] CML: ${cml.toFixed(1)}\xB0  subEarthLat: ${subEarthLat.toFixed(1)}\xB0`);
   }
   function renderFrame() {
     _renderer.render(_scene, _camera);

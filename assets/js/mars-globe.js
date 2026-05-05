@@ -62,7 +62,7 @@ function updateMeta(mars, cml, subEarthLat, date) {
       <tr><td>Diameter</td><td>${mars.sdFmt}</td></tr>
       <tr><td>Illumination</td><td>${mars.illuminationPct}%</td></tr>
     </tbody></table>`
-  console.log(`[Mars] CML: ${cml.toFixed(1)}°  subEarthLat: ${subEarthLat.toFixed(1)}°`)
+  //console.log(`[Mars] CML: ${cml.toFixed(1)}°  subEarthLat: ${subEarthLat.toFixed(1)}°`)
 }
 
 function renderFrame() {

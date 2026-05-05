@@ -144,10 +144,9 @@
   </div><!-- .sso-grid -->
 </div><!-- .sso-wrapper -->
 
-
+<script src="{{ "js/moon-globe.js" | relURL }}"></script>
 <script src="{{ "js/mars-globe.js" | relURL }}"></script>
 <script src="{{ "js/jupiter-globe.js" | relURL }}"></script>
-
 
 <script>
 (function() {
@@ -216,7 +215,7 @@ function renderMoon(moon) {
       <tr><td>Age</td><td>${moon.ageFmt}</td></tr>
       <tr><td>Illumination</td><td>${moon.illumination}%</td></tr>
     `
-    drawMoonPhase(moon)
+    //drawMoonPhase(moon)
   }
 
   function drawMoonPhase(moon) {
@@ -671,8 +670,8 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
     const pickerVal = document.getElementById('sso-datetime').value
     const date = pickerVal ? new Date(pickerVal) : new Date()
     const data = window.SolarSystem.getAll(date)
-console.log('Uranus:', data.planets.find(p => p.name === 'Uranus'))
-console.log('Neptune:', data.planets.find(p => p.name === 'Neptune'))
+//console.log('Uranus:', data.planets.find(p => p.name === 'Uranus'))
+//console.log('Neptune:', data.planets.find(p => p.name === 'Neptune'))
     document.getElementById('sso-info-rows').innerHTML = `
       <tr><td>Date (UTC)</td><td>${data.date}</td></tr>
       <tr><td>Julian Day</td><td>${data.jde.toFixed(5)}</td></tr>
@@ -682,12 +681,14 @@ console.log('Neptune:', data.planets.find(p => p.name === 'Neptune'))
 
     renderSun(data.sun)
     renderMoon(data.moon)
+    if (window.renderMoonGlobe) window.renderMoonGlobe(date, data.moon)
     renderPlanets(data.planets)
     renderInnerPlanets(data.planets)
     const jupiterData = data.planets.find(p => p.name === 'Jupiter')
     renderJupiterMoons(data.jupiterMoons, jupiterData.sdArcsec / 2)
     const saturnData = data.planets.find(p => p.name === 'Saturn')
     renderSaturn(data.saturnRing, data.saturnMoons, saturnData.sdArcsec / 2)
+    if (window.renderMoonGlobe) window.renderMoonGlobe(date, data.moon)
     if (window.renderJupiterGlobe) window.renderJupiterGlobe(date)
     if (window.renderMarsGlobe) window.renderMarsGlobe(date)
     // renderMarsMoons(data.marsMoons)

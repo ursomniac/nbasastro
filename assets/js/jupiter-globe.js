@@ -125,6 +125,9 @@ function initJupiterGlobe() {
   _renderer.setSize(width, height)
   _renderer.setPixelRatio(window.devicePixelRatio)
 
+  _renderer.toneMapping = THREE.ReinhardToneMapping
+  _renderer.toneMappingExposure = 0.6
+
   _scene  = new THREE.Scene()
   _camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100)
   //_camera.position.z = 2.5
@@ -132,7 +135,27 @@ function initJupiterGlobe() {
 
   const texture  = new THREE.TextureLoader().load(TEXTURE_PATH, renderFrame)
   const geometry = new THREE.SphereGeometry(1, 64, 64)
-  const material = new THREE.MeshStandardMaterial({ map: texture })
+  //const material = new THREE.MeshStandardMaterial({ map: texture })
+  //const material = new THREE.MeshBasicMaterial({ map: texture })
+const material = new THREE.ShaderMaterial({
+  uniforms: { map: { value: texture } },
+  vertexShader: `
+    varying vec2 vUv;
+    void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }
+  `,
+  fragmentShader: `
+    uniform sampler2D map;
+    varying vec2 vUv;
+    void main() {
+      vec4 c = texture2D(map, vUv);
+      vec3 col = (c.rgb - 0.5) * 1.4 + 0.5;
+      float gray = dot(col, vec3(0.299, 0.587, 0.114));
+      col = mix(vec3(gray), col, 1.3);
+      gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
+    }
+  `
+})
+
   _sphere = new THREE.Mesh(geometry, material)
 
   // Tilt and longitude on separate objects so they don't interact
