@@ -103,7 +103,7 @@ function updateMeta(moon, lib) {
   `
 }
 
-function applyState(phase, lib) {
+function applyState(phase, lib, agedays) {
   if (!_sphere || !_camera || !_material) return
 
   // 1. Face centering + libration longitude
@@ -123,7 +123,10 @@ function applyState(phase, lib) {
   // phase=180 (full): sun behind observer → -Z world
   // Our getMoon() phaseAngle: 0=new, 180=full
   const phi = degToRad(phase)
-  const sunWorld = new THREE.Vector3(-Math.sin(phi), 0, -Math.cos(phi))
+  const isWaning = agedays > 14.765
+  const xSign = isWaning ? -1 : 1
+  const sunWorld = new THREE.Vector3(xSign * Math.sin(phi), 0, -Math.cos(phi))
+  //const sunWorld = new THREE.Vector3(-Math.sin(phi), 0, -Math.cos(phi))
 
   // Transform sun direction to view space for the shader
   const sunView = sunWorld.clone().transformDirection(_camera.matrixWorldInverse)
@@ -172,7 +175,7 @@ function initMoonGlobe() {
 
   // Shader material
   const texture = new THREE.TextureLoader().load(TEXTURE_PATH, () => {
-    applyState(phase, lib)
+    applyState(phase, lib, moon.agedays)
     renderFrame()
   })
   texture.colorSpace = THREE.LinearSRGBColorSpace
@@ -192,7 +195,7 @@ function initMoonGlobe() {
   _sphere = new THREE.Mesh(geometry, _material)
   _scene.add(_sphere)
 
-  applyState(phase, lib)
+  applyState(phase, lib, moon.agedays)
 
   window.addEventListener('resize', () => {
     const w = container.clientWidth || 300
@@ -213,7 +216,7 @@ window.renderMoonGlobe = function(date, moon) {
   const astroTime = window.Astronomy.MakeTime(date)
   const lib       = window.Astronomy.Libration(astroTime)
   const phase     = parseFloat(moon.phaseAngle) || 0
-  applyState(phase, lib)
+  applyState(phase, lib, moon.agedays)
   updateMeta(moon, lib)
   renderFrame()
 }

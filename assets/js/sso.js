@@ -145,6 +145,7 @@ function getMoon(jde) {
       phaseAngle: phaseAngleDeg.toFixed(1),
       phaseName: getPhaseName(phaseAngleDeg),
       ageFmt: agedays.toFixed(1) + ' days',
+      agedays: agedays, 
       error: null
     }
   } catch (e) {

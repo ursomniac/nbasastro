@@ -26584,7 +26584,7 @@ void main() {
     <tr><td>Diameter</td><td>${diamArcmin}</td></tr>
   `;
   }
-  function applyState(phase, lib) {
+  function applyState(phase, lib, agedays) {
     if (!_sphere || !_camera || !_material) return;
     _sphere.rotation.set(0, -Math.PI / 2 + degToRad(lib.elon), 0);
     const latRad = degToRad(lib.elat);
@@ -26595,7 +26595,9 @@ void main() {
     );
     _camera.lookAt(0, 0, 0);
     const phi = degToRad(phase);
-    const sunWorld = new Vector3(-Math.sin(phi), 0, -Math.cos(phi));
+    const isWaning = agedays > 14.765;
+    const xSign = isWaning ? -1 : 1;
+    const sunWorld = new Vector3(xSign * Math.sin(phi), 0, -Math.cos(phi));
     const sunView = sunWorld.clone().transformDirection(_camera.matrixWorldInverse);
     _material.uniforms.sunDirection.value = sunView;
   }
@@ -26637,7 +26639,7 @@ void main() {
     const h = 1.05;
     _camera = new OrthographicCamera(-h, h, h, -h, 0.1, 100);
     const texture = new TextureLoader().load(TEXTURE_PATH, () => {
-      applyState(phase, lib);
+      applyState(phase, lib, moon.agedays);
       renderFrame();
     });
     texture.colorSpace = LinearSRGBColorSpace;
@@ -26653,7 +26655,7 @@ void main() {
     const geometry = new SphereGeometry(1, 64, 64);
     _sphere = new Mesh(geometry, _material);
     _scene.add(_sphere);
-    applyState(phase, lib);
+    applyState(phase, lib, moon.agedays);
     window.addEventListener("resize", () => {
       const w = container.clientWidth || 300;
       _renderer.setSize(w, w);
@@ -26670,7 +26672,7 @@ void main() {
     const astroTime = window.Astronomy.MakeTime(date);
     const lib = window.Astronomy.Libration(astroTime);
     const phase = parseFloat(moon.phaseAngle) || 0;
-    applyState(phase, lib);
+    applyState(phase, lib, moon.agedays);
     updateMeta(moon, lib);
     renderFrame();
   };
