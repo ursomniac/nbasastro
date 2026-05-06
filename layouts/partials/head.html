@@ -65,5 +65,22 @@
 <script src="/js/astronomy.js" defer></script>
 <script defer>window.Astronomy = window.exports;</script>
 
+{{/* KATEX - math rendering, articles only */}}
+{{ if .Params.math }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script type="module">
+  import renderMathInElement from "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.mjs";
+  document.addEventListener("DOMContentLoaded", () => {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ]
+    });
+  });
+</script>
+{{ end }}
+
 </head>
+
 

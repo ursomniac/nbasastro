@@ -25,35 +25,35 @@ above/below the North and South Poles.   In the North that location is very clos
 position of Polaris, the "North Star" (Southern Hemisphere observers aren't quite as fortunate:
 the "South Star" is &sigma; (Sigma) Octantis, which is barely visible to the naked eye.
 
-This the system you'll mostly deal with for amateur observations.
+  This the system you'll mostly deal with for amateur observations.
 
 - **Ecliptic**: based on the Earth's orbit around the Sun.  All the planets and the Moon move along the Ecliptic (mostly) though because each planet/Moon has it's own orbital inclination, 
 they might be slightly above or below the Ecliptic.  Like the Equatorial system, there are 
 also North and South Ecliptic "poles" (the North in Draco, and the South in Dorado).
 
-For observing, this is mostly helpful in measuring things like elongations of the planets
-and other solar-system objects (comets and asteroids) from the Sun (how many degrees they are from the Sun's position).  
+  For observing, this is mostly helpful in measuring things like elongations of the planets
+  and other solar-system objects (comets and asteroids) from the Sun (how many degrees they are from the Sun's position).  
 
 - **Galactic**: based on the plane of the Milky Way. 
+
+  For observing we don't think about this too much: but it's a little helpful in understanding
+  why certain types of objects tend to have low "galactic latitudes" or high ones.   
+  Open clusters and most nebulae tend to be in the disk of the galaxy, so you'll find them 
+  closer to the Milky Way;  galaxies are all over, but harder to see if they're at low
+  galactic latitudes: the Milky Way is "in the way"!   
 
 {{< nbas-image src="GalLongLat_ofStar.jpg"
 align="left" width="400" >}}
 
-For observing we don't think about this too much: but it's a little helpful in understanding
-why certain types of objects tend to have low "galactic latitudes" or high ones.   
-Open clusters and most nebulae tend to be in the disk of the galaxy, so you'll find them 
-closer to the Milky Way;  galaxies are all over, but harder to see if they're at low
-galactic latitudes: the Milky Way is "in the way"!   
+  Globular clusters are slightly different:
+  they tend to cluster close to the Milky Way, when you're looking "inward" during the Summer 
+  because you're looking "toward" the center, but above or below the plane.  Since the Sun is
+  out in the spiral arms of the galaxy, these clusters are mostly found surrounding 
+  the Milky Way's bulge. (But there are always exceptions.)
 
-Globular clusters are slightly different:
-they tend to cluster close to the Milky Way, when you're looking "inward" during the Summer 
-because you're looking "toward" the center, but above or below the plane.  Since the Sun is
-out in the spiral arms of the galaxy, these clusters are mostly found surrounding 
-the Milky Way's bulge. (But there are always exceptions.)
-
-The North Galactic Pole is in Coma Berenices, the South in Scluptor, and it's not 
-surprising to find that around those constellations you find many more galaxies then in the
-constellations closer to the Milky Way (though they're there too - just harder to see).
+  The North Galactic Pole is in Coma Berenices, the South in Scluptor, and it's not 
+  surprising to find that around those constellations you find many more galaxies then in the
+  constellations closer to the Milky Way (though they're there too - just harder to see).
 
 ## How they're All Arranged and Defined
 
@@ -80,6 +80,8 @@ With one exception.
 
 Right Ascension is measured in **_hours_** (0h to 24h).   How does THAT work?
 
+{{< clear >}}
+
 ### Why is Right Ascension measured in time and not degrees?
 
 The reason for this is because the Earth is rotating.  Before telescopes with clock 
@@ -97,12 +99,16 @@ But *that's* not right either!   In that 24 hours, the Earth has _also_ moved ar
 a bit, so that if you observed a star at precisely 10:15:27.3 PM on one night, it wouldn't 
 cross at the same time the next night.  In fact, it'd happen 3m 56s earlier.
 
+{{< clear >}}
+
 ### What is the Vernal Equinox?
 
 Latitude is easy because there are specific points for the poles: once you know where 
 they are, you can measure the angular distance from either pole and confidently know
 you latitude.  Just like on the sky with latitudes or declinations.
 
+{{< nbas-image src="Prime-meridian.jpg" width="500" 
+align="right" caption="Wikimedia commons" >}}
 Longitude is different:  there's no specific "zero point" - and basically you have to 
 arbitrarily set one.   On Earth, "zero longitude" is set at a point at the Greenwich 
 Observatory in England (the French also tried to set this at a point in Paris at one 
