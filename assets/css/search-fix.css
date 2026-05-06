@@ -80,3 +80,7 @@ mark {
     overflow-y: auto !important;
 }
 
+/* 8. PLACEHOLDER TEXT READABILITY */
+input.svelte-e9gkc3::placeholder {
+    color: #ffffff !important;
+}

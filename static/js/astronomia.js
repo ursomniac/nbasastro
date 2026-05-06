@@ -71137,7 +71137,7 @@
     const mTotal = (abs - d3) * 60;
     const m17 = Math.floor(mTotal);
     const s2 = ((mTotal - m17) * 60).toFixed(2);
-    return `${sign}${String(d3).padStart(3, "0")}\xB0 ${String(m17).padStart(2, "0")}' ${String(s2).padStart(4, "0")}"`;
+    return `${sign}${d3}\xB0 ${String(m17).padStart(2, "0")}' ${String(s2).padStart(5, "0")}"`;
   }
   function formatRA(rad) {
     const hours = rad * DEG / 15;
