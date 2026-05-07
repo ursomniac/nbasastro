@@ -15,24 +15,35 @@
   {{ $astro := "" }}{{ with resources.Get "calendar/calendar_events.txt" }}{{ $astro = .Content }}{{ end }}
   {{ $alm := "" }}{{ with resources.Get "calendar/calendar_almanac.txt" }}{{ $alm = .Content }}{{ end }}
 
-  {{/* 3. NBAS: Shows all future events */}}
+{{/* 3. NBAS: Shows all future events */}}
   <div id="feed-nbas" class="events-content active">
     {{ if $nbas }}
       {{ range (split (trim $nbas "\n") "\n") }}
         {{ $p := split . " | " }}
         {{ $eDate := time (index $p 0) }}
         {{ if $eDate.After $today }}
+          {{ $tag := index $p 2 }}
           <div class="event-split-row">
-            <div class="event-chron-col">
+            <div class="event-meta-line">
               <span class="event-date">{{ $eDate.Format "Jan 02" }}</span>
               <span class="event-year">{{ $eDate.Format "2006" }}</span>
+              {{ if ne (index $p 1) "--:--" }}
+                <span class="event-time">{{ time.Format "3:04 PM" (printf "2006-01-02T%s:00" (index $p 1)) }}</span>
+              {{ else }}
+                <span class="event-time">All Day</span>
+              {{ end }}
+              {{ if eq $tag "LOCAL" }}
+                <span class="event-badge-regional">Regional</span>
+              {{ else }}
+                <span class="event-badge-nbas">NBAS</span>
+              {{ end }}
             </div>
-            <div class="event-desc-col">
-              <span class="event-time">
-                {{ if ne (index $p 1) "--:--" }}{{ time.Format "3:04 PM" (printf "2006-01-02T%s:00" (index $p 1)) }}{{ else }}All Day{{ end }}
-              </span>
-              <div class="event-text">{{ index $p 2 | safeHTML }}</div>
-            </div>
+            <div class="event-title">{{ index $p 3 | safeHTML }}</div>
+            {{ if index $p 4 }}
+              {{ $fullAddr := index $p 4 }}
+              {{ $shortAddr := index (split $fullAddr ",") 0 }}
+              <div class="event-location">📍 <a class="event-map-link" href="https://www.google.com/maps/search/?api=1&query={{ $fullAddr | urlquery }}" target="_blank" rel="noopener">{{ $shortAddr }} <span class="event-map-arrow">↗</span></a></div>
+            {{ end }}
           </div>
         {{ end }}
       {{ end }}
@@ -102,4 +113,3 @@ function switchEvents(e, t) {
   }
 }
 </script>
-

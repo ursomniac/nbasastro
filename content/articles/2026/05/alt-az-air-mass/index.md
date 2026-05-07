@@ -6,7 +6,6 @@ authors: ["bob-donahue"]
 series: ["how-the-sky-works"]
 knowledgetopics: ["observing"]
 math: true
-draft: true
 ---
 
 ## Introduction

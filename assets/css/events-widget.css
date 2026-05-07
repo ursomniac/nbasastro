@@ -51,6 +51,105 @@
 }
 
 /* NBAS & ASTRO ROW */
+.event-local {
+    border-left: 3px solid var(--text-muted);
+    opacity: 0.85;
+}
+.event-local-badge {
+    font-size: 0.7em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 4px;
+}
+
+/* --- NBAS TAB REDESIGN (scoped, does not affect ASTRO) --- */
+#feed-nbas .event-split-row {
+    padding: 6px 0;
+    border-bottom: 1px solid #333;
+    display: block;
+}
+
+#feed-nbas .event-meta-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    margin-bottom: 3px;
+    overflow: hidden;
+}
+
+#feed-nbas .event-date {
+    color: #ffcc00;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+#feed-nbas .event-year {
+    color: #999;
+    display: inline;
+    font-size: 0.8rem;
+    margin-top: 0;
+}
+
+#feed-nbas .event-time {
+    color: #ccc;
+    display: inline;
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+
+#feed-nbas .event-badge-nbas {
+    background: #ffcc00;
+    color: #0d1626;
+    font-size: 0.65rem;
+    font-weight: bold;
+    padding: 1px 5px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: auto;
+}
+
+#feed-nbas .event-badge-regional {
+    background: #78909c;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: bold;
+    padding: 1px 5px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: auto;
+}
+
+#feed-nbas .event-title {
+    color: #eee;
+    font-size: 0.85rem;
+    margin-bottom: 2px;
+}
+
+#feed-nbas .event-location {
+    color: #999;
+    font-size: 0.75rem;
+    font-style: italic;
+}
+
+#feed-nbas .event-map-link {
+    color: #999 !important;
+    text-decoration: none !important;
+    font-weight: normal !important;
+}
+
+#feed-nbas .event-map-link:hover {
+    color: var(--text-main) !important;
+}
+
+#feed-nbas .event-map-arrow {
+    color: var(--text-muted) !important;
+}
+
 .event-split-row {
     display: flex;
     align-items: flex-start;
@@ -166,5 +265,3 @@
         margin: 2px 0;
     }
 }
-
-
