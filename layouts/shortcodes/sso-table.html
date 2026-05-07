@@ -258,67 +258,259 @@ function renderPlanets(planets) {
     tbody.innerHTML = html || '<tr><td colspan="7">No data</td></tr>'
   }
 
+// ── renderInnerPlanets ─────────────────────────────────────────────────────
+  // Replace lines 261–327 of sso-table.html with this block verbatim.
+  //
+  // PHYSICS
+  // -------
+  // The planet is a sphere lit by a distant Sun.  On the projected disk,
+  // every surface point (x,y) has a 3-D outward normal:
+  //
+  //   N = (x/r, y/r, z/r)   where z = sqrt(r² - x² - y²)
+  //   (canvas x right, canvas y DOWN, z toward observer)
+  //
+  // The point is lit when  dot(N, S) > 0,  where S is the unit vector from
+  // the planet toward the Sun expressed in the same screen-space frame:
+  //
+  //   S = (sin χ,  -cos χ,  cos k)   [NOT normalised, but direction is correct]
+  //
+  //   χ  = position angle of Sun on sky, clockwise from North (= "up" on canvas)
+  //   k  = phase angle (Sun–Planet–Earth), 0° full → 180° new
+  //
+  // The lit/dark boundary (terminator) is where dot(N, S) = 0:
+  //
+  //   sx·x  +  sy·y  +  cos(k)·sqrt(r²-x²-y²)  = 0
+  //
+  // where  sx = sin χ,  sy = -cos χ  (Sun direction in canvas x,y).
+  //
+  // COORDINATE TRICK
+  // ----------------
+  // Decompose (x,y) into components along the Sun direction (u) and
+  // perpendicular to it (v):
+  //
+  //   u = sx·x + sy·y      (positive toward Sun)
+  //   v = -sy·x + sx·y     (perpendicular, right-hand)
+  //
+  // The terminator condition becomes:
+  //
+  //   u_term(v) = -cos(k) · sqrt(r² - v²)
+  //
+  // For each v ∈ [-r, +r], this gives one terminator point.  Lit side is
+  // u > u_term (Sun side).
+  //
+  // RENDERING (analytic path, no per-pixel loop)
+  // --------------------------------------------
+  //   1. Fill full disk with dark colour.
+  //   2. Clip to disk.
+  //   3. Trace the terminator curve from v=-r to v=+r, then close with
+  //      the lit-side arc of the limb, and fill with planet colour.
+  //
+  // POSITION ANGLE CALCULATION
+  // --------------------------
+  // Convert heliocentric ecliptic to geocentric cartesian for planet and Sun.
+  // Project the geocentric Sun vector onto the sky plane (perpendicular to the
+  // line of sight to the planet).  Decompose into North/East sky components.
+  // χ = atan2(East, North) — East of North, clockwise on canvas.
+  // ──────────────────────────────────────────────────────────────────────────
+
   function renderInnerPlanets(planets) {
     const mercury = planets.find(p => p.name === 'Mercury')
     const venus   = planets.find(p => p.name === 'Venus')
 
-    // Fixed scale based on Venus at inferior conjunction max size (~64" diameter)
-    // This never changes so sizes are always comparable across time
+    // Fixed scale: Venus at inferior conjunction ≈ 64″ diameter.
     const VENUS_MAX_ARCSEC = 64
-    const CANVAS_R = 55  // px radius of canvas drawing area
-    const scale = CANVAS_R / (VENUS_MAX_ARCSEC / 2)  // px per arcsec
+    const CANVAS_R = 55
+    const scale    = CANVAS_R / (VENUS_MAX_ARCSEC / 2)
 
+    // ── computeSunPositionAngle ──────────────────────────────────────────────
+    // Returns χ in radians, clockwise from North (canvas "up").
+    function computeSunPositionAngle(p) {
+      function toXYZ(lon, lat, r) {
+        const cosLat = Math.cos(lat)
+        return [
+          r * cosLat * Math.cos(lon),
+          r * cosLat * Math.sin(lon),
+          r * Math.sin(lat)
+        ]
+      }
+
+      const Pe = toXYZ(p.earthLon, p.earthLat, p.earthR)   // Earth heliocentric
+      const Pp = toXYZ(p.helioLon, p.helioLat, p.r)         // Planet heliocentric
+
+      // Geocentric: observer at Earth
+      const gPlanet = [Pp[0]-Pe[0], Pp[1]-Pe[1], Pp[2]-Pe[2]]  // toward planet
+      const gSun    = [-Pe[0], -Pe[1], -Pe[2]]                   // toward Sun
+
+      // Unit line-of-sight vector toward planet
+      const dist = Math.sqrt(gPlanet[0]**2 + gPlanet[1]**2 + gPlanet[2]**2)
+      const los  = [gPlanet[0]/dist, gPlanet[1]/dist, gPlanet[2]/dist]
+
+      // Project Sun vector onto sky plane (subtract component along los)
+      const dotLS = gSun[0]*los[0] + gSun[1]*los[1] + gSun[2]*los[2]
+      const proj  = [
+        gSun[0] - dotLS*los[0],
+        gSun[1] - dotLS*los[1],
+        gSun[2] - dotLS*los[2]
+      ]
+
+      // North basis vector on sky plane: component of ecliptic North (0,0,1)
+      // perpendicular to los.
+      const northRaw = [
+        -los[0]*los[2],
+        -los[1]*los[2],
+         1 - los[2]*los[2]
+      ]
+      const nLen = Math.sqrt(northRaw[0]**2 + northRaw[1]**2 + northRaw[2]**2)
+      const north = nLen > 1e-10
+        ? [northRaw[0]/nLen, northRaw[1]/nLen, northRaw[2]/nLen]
+        : [1, 0, 0]
+
+      // East basis vector: cross(los, north)
+      const east = [
+        los[1]*north[2] - los[2]*north[1],
+        los[2]*north[0] - los[0]*north[2],
+        los[0]*north[1] - los[1]*north[0]
+      ]
+
+      const sunNorth = proj[0]*north[0] + proj[1]*north[1] + proj[2]*north[2]
+      const sunEast  = proj[0]*east[0]  + proj[1]*east[1]  + proj[2]*east[2]
+
+      // χ = atan2(East, North): angle clockwise from North on canvas
+      return Math.atan2(sunEast, sunNorth)
+    }
+
+    // ── drawPhase ────────────────────────────────────────────────────────────
     function drawPhase(canvasId, planet) {
       const canvas = document.getElementById(canvasId)
+      if (!canvas) return
       const ctx = canvas.getContext('2d')
       const W = 160, H = 160
       const cx = W / 2, cy = H / 2
-      const r = (planet.sdArcsec / 2) * scale
 
-      ctx.fillStyle = '#0a0a18'
       ctx.clearRect(0, 0, W, H)
 
-      const illum = parseFloat(planet.illuminationPct) / 100
-      const angle = planet.phaseAngleDeg
+      if (!planet || planet.error) {
+        ctx.fillStyle = '#888'
+        ctx.font = '11px sans-serif'
+        ctx.textAlign = 'center'
+        ctx.fillText('No data', cx, cy)
+        return
+      }
 
-      // Dark disk
+      const r    = Math.max((planet.sdArcsec / 2) * scale, 2)
+      const k    = planet.phaseAngleDeg * Math.PI / 180
+      const chi  = computeSunPositionAngle(planet)
+      const cosK = Math.cos(k)
+
+      // Sun direction in canvas x,y (unit vector, clockwise from up)
+      const sx =  Math.sin(chi)   // canvas x component
+      const sy = -Math.cos(chi)   // canvas y component (negative: North = canvas up)
+
+      // Perpendicular to Sun direction (the "v" axis along the terminator)
+      const px_ = -sy   //  90° CCW from Sun direction
+      const py_ =  sx
+
+      // ── 1. Dark base disk ────────────────────────────────────────────────
       ctx.beginPath()
       ctx.arc(cx, cy, r, 0, Math.PI * 2)
-      ctx.fillStyle = '#222'
+      ctx.fillStyle = planet.name === 'Venus' ? '#120e04' : '#0e0e0d'
       ctx.fill()
 
-      // Lit portion
+      // ── 2. Lit region ────────────────────────────────────────────────────
+      // Trace the terminator curve, then close with the lit-side limb arc.
+      //
+      // Terminator parameterised by v ∈ [-r, +r]:
+      //   u_term(v) = -cosK * sqrt(r² - v²)
+      //
+      // Canvas coords of terminator point:
+      //   x = cx + u_term * sx + v * px_
+      //   y = cy + u_term * sy + v * py_
+      //
+      // At v = ±r the terminator meets the limb.
+
       ctx.save()
       ctx.beginPath()
       ctx.arc(cx, cy, r, 0, Math.PI * 2)
       ctx.clip()
-      const isWaxing = angle < 180
-      const termX = isWaxing ? (1 - 2 * illum) * r : (2 * illum - 1) * r
+
+      const STEPS = 128
       ctx.beginPath()
-      if (isWaxing) {
-        ctx.ellipse(cx + termX, cy, Math.abs(termX) || 1, r, 0, Math.PI / 2, Math.PI * 3 / 2)
-        ctx.arc(cx, cy, r, Math.PI * 3 / 2, Math.PI / 2)
-      } else {
-        ctx.ellipse(cx + termX, cy, Math.abs(termX) || 1, r, 0, Math.PI / 2, Math.PI * 3 / 2)
-        ctx.arc(cx, cy, r, Math.PI / 2, Math.PI * 3 / 2, true)
+
+      // Trace terminator v: -r → +r
+      for (let i = 0; i <= STEPS; i++) {
+        const v     = -r + 2 * r * i / STEPS
+        const uTerm = -cosK * Math.sqrt(Math.max(0, r * r - v * v))
+        const tx_   = cx + uTerm * sx + v * px_
+        const ty_   = cy + uTerm * sy + v * py_
+        if (i === 0) ctx.moveTo(tx_, ty_)
+        else         ctx.lineTo(tx_, ty_)
       }
-      ctx.fillStyle = planet.name === 'Venus' ? '#f5e6c0' : '#d4c8b0'
+
+      // The two endpoints of the terminator on the limb:
+      //   v = +r → canvas angle angTop
+      //   v = -r → canvas angle angBot
+      const angTop = Math.atan2( r * py_,  r * px_)   // v = +r end
+      const angBot = Math.atan2(-r * py_, -r * px_)   // v = -r end
+
+      // Close with the lit-side arc.  The lit side is toward the Sun, so the
+      // arc must pass through the Sun angle on the limb.
+      // Sun limb angle (canvas standard: atan2 from +x axis):
+      const sunLimbAngle = Math.atan2(sy, sx)
+
+      // Determine winding: does the CW arc from angTop to angBot pass through
+      // sunLimbAngle?  If yes, use CW (anticlockwise=false); else use CCW.
+      function cwArcContains(angle, start, end) {
+        const norm = a => ((a % (2*Math.PI)) + 2*Math.PI) % (2*Math.PI)
+        const a = norm(angle - start)
+        const e = norm(end   - start)
+        return a <= e
+      }
+      const goAntiClockwise = !cwArcContains(sunLimbAngle, angTop, angBot)
+      ctx.arc(cx, cy, r, angTop, angBot, goAntiClockwise)
+
+      ctx.closePath()
+
+      // Subtle limb-darkening gradient on the lit side
+      const gx = cx + r * 0.3 * sx
+      const gy = cy + r * 0.3 * sy
+      const grad = ctx.createRadialGradient(gx, gy, r * 0.05, cx, cy, r)
+      if (planet.name === 'Venus') {
+        grad.addColorStop(0,   '#fff8e8')
+        grad.addColorStop(0.5, '#f0dfa0')
+        grad.addColorStop(1,   '#b89040')
+      } else {
+        grad.addColorStop(0,   '#e8e0d0')
+        grad.addColorStop(0.5, '#c8b89a')
+        grad.addColorStop(1,   '#706050')
+      }
+      ctx.fillStyle = grad
       ctx.fill()
       ctx.restore()
 
-      // Outline
+      // ── 3. Limb outline ──────────────────────────────────────────────────
       ctx.beginPath()
       ctx.arc(cx, cy, r, 0, Math.PI * 2)
-      ctx.strokeStyle = '#555'
-      ctx.lineWidth = 1
+      ctx.strokeStyle = 'rgba(255,255,255,0.12)'
+      ctx.lineWidth = 0.8
       ctx.stroke()
     }
 
+    // ── renderInfo ───────────────────────────────────────────────────────────
     function renderInfo(infoId, planet) {
-      document.getElementById(infoId).innerHTML = `
+      const el = document.getElementById(infoId)
+      if (!el) return
+      if (!planet || planet.error) {
+        el.innerHTML = `<p class="sso-error">No data</p>`
+        return
+      }
+      const elong    = planet.elongationDeg
+      const elongStr = Math.abs(elong).toFixed(1) + '° ' + (elong >= 0 ? 'E' : 'W')
+      el.innerHTML = `
         <table class="sso-inner-table">
           <tr><td>Size</td><td>${planet.sdFmt}</td></tr>
           <tr><td>Illumination</td><td>${planet.illuminationPct}%</td></tr>
+          <tr><td>Phase angle</td><td>${planet.phaseAngleDeg.toFixed(1)}°</td></tr>
+          <tr><td>Elongation</td><td>${elongStr}</td></tr>
           <tr><td>Magnitude</td><td>${planet.magFmt}</td></tr>
           <tr><td>Light time</td><td>${planet.lightTimeFmt}</td></tr>
         </table>
@@ -326,10 +518,11 @@ function renderPlanets(planets) {
     }
 
     drawPhase('sso-mercury-canvas', mercury)
-    drawPhase('sso-venus-canvas', venus)
-    renderInfo('sso-mercury-info', mercury)
-    renderInfo('sso-venus-info', venus)
+    drawPhase('sso-venus-canvas',   venus)
+    renderInfo('sso-mercury-info',  mercury)
+    renderInfo('sso-venus-info',    venus)
   }
+
 
 function renderJupiterMoons(moons, jupiterRadiusArcsec) {
   const tbody = document.getElementById('sso-jupiter-rows')

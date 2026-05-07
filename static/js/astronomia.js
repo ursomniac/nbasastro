@@ -71234,7 +71234,7 @@
     { name: "Uranus", vsop: vsop87Buranus_default, vsopD: vsop87Duranus_default, sd0: Uranus },
     { name: "Neptune", vsop: vsop87Bneptune_default, vsopD: vsop87Dneptune_default, sd0: Neptune }
   ];
-  function getPlanets(jde) {
+  function getPlanets(jde, sunRA) {
     const earth2 = new Planet(vsop87Bearth_default);
     const earthD = new Planet(vsop87Dearth_default);
     const earthPos = earthD.position(jde);
@@ -71304,6 +71304,7 @@
           illuminatedFraction,
           illuminationPct: (illuminatedFraction * 100).toFixed(1),
           phaseAngleDeg: phaseAngle4 * DEG,
+          elongationDeg: (base_default.pmod(pos.ra - sunRA + Math.PI, 2 * Math.PI) - Math.PI) * DEG,
           lightTimeFmt,
           helioLon: planetSph.lon,
           // radians, heliocentric ecliptic longitude
@@ -71406,7 +71407,8 @@
     const gst = sidereal_default.apparent(jde);
     const lstSeconds = gst + longitude / 360 * 86400;
     const lstNorm = (lstSeconds % 86400 + 86400) % 86400;
-    const planets = getPlanets(jde);
+    const sun = getSun(jde);
+    const planets = getPlanets(jde, sun.ra);
     const saturnRing = getSaturnRing(jde);
     const jupiterPlanet = planets.find((p) => p.name === "Jupiter");
     const saturnPlanet = planets.find((p) => p.name === "Saturn");
