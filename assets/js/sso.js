@@ -163,7 +163,7 @@ const PLANET_DATA = [
   { name: 'Neptune', vsop: vsop87Bneptune, vsopD: vsop87Dneptune, sd0: NeptuneSD },
 ]
 
-function getPlanets(jde) {
+function getPlanets(jde, sunRA) {
   const earth = new Planet(vsop87Bearth)
   const earthD = new Planet(vsop87Dearth)
   const earthPos = earthD.position(jde)
@@ -226,6 +226,7 @@ function getPlanets(jde) {
         illuminatedFraction,
         illuminationPct: (illuminatedFraction * 100).toFixed(1),
         phaseAngleDeg: phaseAngle * DEG,
+        elongationDeg: (base.pmod(pos.ra - sunRA + Math.PI, 2 * Math.PI) - Math.PI) * DEG,
 	lightTimeFmt,
 	helioLon: planetSph.lon,   // radians, heliocentric ecliptic longitude
 	helioLat: planetSph.lat,   // radians, heliocentric ecliptic latitude
@@ -335,7 +336,8 @@ function getAll(date, longitude = -73.11) {
   const lstSeconds = gst + (longitude / 360) * 86400
   const lstNorm = ((lstSeconds % 86400) + 86400) % 86400
 
-  const planets = getPlanets(jde)
+  const sun = getSun(jde)
+  const planets = getPlanets(jde, sun.ra)
   const saturnRing = getSaturnRing(jde)
 
   const jupiterPlanet = planets.find(p => p.name === 'Jupiter')
