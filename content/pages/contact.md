@@ -6,7 +6,7 @@ date: 2026-04-01
 
 Have a question about the sky or our meetings? 
 
-Email us at [club-email@example.com].
+Email us at nbasastro@gmail.com.
 
 You can also reach us through the North Adams Public Library:
 
