@@ -330,6 +330,7 @@ function renderPlanets(planets) {
     renderInfo('sso-mercury-info', mercury)
     renderInfo('sso-venus-info', venus)
   }
+
 function renderJupiterMoons(moons, jupiterRadiusArcsec) {
   const tbody = document.getElementById('sso-jupiter-rows')
   const canvas = document.getElementById('sso-jupiter-canvas')
@@ -346,7 +347,11 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
 
   // Scale: pixels per arcsecond
   // Callisto is ~26 Rj max, leave 60px margin each side
-  const maxArcsec = Math.max(...moons.map(m => Math.abs(m.x))) * jupiterRadiusArcsec
+  //const maxArcsec = Math.max(...moons.map(m => Math.abs(m.x))) * jupiterRadiusArcsec
+  const maxArcsec = Math.max(
+    Math.max(...moons.map(m => Math.abs(m.x))) * jupiterRadiusArcsec,
+    6 * jupiterRadiusArcsec
+  )
   const scale = (W / 2 - 60) / maxArcsec   // px per arcsec
 
   // Jupiter pixel radius
