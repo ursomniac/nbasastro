@@ -1,0 +1,36 @@
+{{- with .Page.Params.challenge -}}
+{{- $challenge := . -}}
+{{- $pinnedOrder := slice "skill" "mode" "duration" "target" "window" -}}
+{{- $labels := dict "skill" "Skill Level" "mode" "Equipment" "duration" "Time Needed" "target" "Target" "window" "Best Window" -}}
+{{- $skillClass := "" -}}
+{{- with index $challenge "skill" -}}{{- $skillClass = printf "challenge-skill--%s" (. | lower | urlize) -}}{{- end -}}
+<aside class="nbas-spec-box nbas-challenge-box align-right {{ $skillClass }}" data-pagefind-ignore>
+  <h4 class="nbas-spec-title">Sky Challenge</h4>
+  <table class="nbas-spec-table">
+    {{- range $pinnedOrder -}}
+      {{- $key := . -}}
+      {{- $val := index $challenge $key -}}
+      {{- if $val -}}
+        {{- $label := index $labels $key | default (replace $key "_" " " | upper) -}}
+        <tr>
+          <th class="nbas-spec-label">{{ $label }}</th>
+          <td class="nbas-spec-value">
+            {{- if reflect.IsSlice $val -}}{{- range $val -}}{{ . | safeHTML }}<br>{{- end -}}{{- else -}}{{ $val | safeHTML }}{{- end -}}
+          </td>
+        </tr>
+      {{- end -}}
+    {{- end -}}
+    {{- range $k, $v := $challenge -}}
+      {{- if not (in $pinnedOrder $k) -}}
+        {{- $label := index $labels $k | default (replace $k "_" " " | upper) -}}
+        <tr>
+          <th class="nbas-spec-label">{{ $label }}</th>
+          <td class="nbas-spec-value">
+            {{- if reflect.IsSlice $v -}}{{- range $v -}}{{ . | safeHTML }}<br>{{- end -}}{{- else -}}{{ $v | safeHTML }}{{- end -}}
+          </td>
+        </tr>
+      {{- end -}}
+    {{- end -}}
+  </table>
+</aside>
+{{- end -}}

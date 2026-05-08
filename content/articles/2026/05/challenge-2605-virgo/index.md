@@ -9,8 +9,11 @@ draft: true
 constellations: ["Virgo", "Coma Berenices"]
 dso_messier: ["84", "86", "87", "88", "90", "91", "99", "100"]
 dso_ngc: ["4216", "4298", "4302"]
-challenge_skill: ["intermediate"]
-challenge_equipment: ["small_telescope"]
+
+challenge:
+  skill: "intermediate"
+  mode: ["telescope", "imaging-telescope"]
+  duration: "one-night"
 ---
 
 ## Introduction

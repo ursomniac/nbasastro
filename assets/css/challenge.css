@@ -1,0 +1,104 @@
+/*
+  Challenge Specs & Filter UI
+  Add to assets/css/  — include in your CSS bundle in head.html
+  (add to the $style_slice in head.html alongside the other css files)
+
+  Assumes .nbas-spec-box, .nbas-spec-title, .nbas-spec-table,
+  .nbas-spec-label, .nbas-spec-value already exist from object-specs CSS.
+  These rules only add what's specific to the challenge panel and filter bar.
+*/
+
+/* ── Challenge panel ────────────────────────────────────────────────────── */
+
+.nbas-challenge-box {
+  border-top: 3px solid #ffcc00;   /* gold accent, matches your site palette */
+}
+
+.nbas-challenge-box .nbas-spec-title {
+  color: #ffcc00;
+}
+
+/* Optional: skill-level colour coding on the panel border */
+.challenge-skill--beginner    { border-top-color: #4caf50; }
+.challenge-skill--intermediate { border-top-color: #ff9800; }
+.challenge-skill--advanced    { border-top-color: #f44336; }
+
+.challenge-skill--beginner    .nbas-spec-title { color: #4caf50; }
+.challenge-skill--intermediate .nbas-spec-title { color: #ff9800; }
+.challenge-skill--advanced    .nbas-spec-title { color: #f44336; }
+
+
+/* ── Filter bar ─────────────────────────────────────────────────────────── */
+
+.challenge-filter-bar {
+  margin: 0 0 2rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: center;
+}
+
+.challenge-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.challenge-filter-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #aaa;
+  white-space: nowrap;
+}
+
+.challenge-filter-buttons {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.challenge-filter-btn {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.82rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  background: transparent;
+  color: #ccc;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.challenge-filter-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.challenge-filter-btn.active {
+  background: #ffcc00;
+  border-color: #ffcc00;
+  color: #111;
+  font-weight: 600;
+}
+
+.challenge-filter-count {
+  font-size: 0.82rem;
+  color: #888;
+  margin: 0;
+  min-width: 10ch;
+}
+
+/* ── No results message ─────────────────────────────────────────────────── */
+
+.challenge-no-results {
+  text-align: center;
+  color: #888;
+  padding: 2rem 0;
+  font-style: italic;
+}

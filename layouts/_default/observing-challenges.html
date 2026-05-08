@@ -1,0 +1,85 @@
+{{ define "main" }}
+<div class="archive-container">
+  <header class="archive-header">
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{ with .Content }}
+    <div class="article-body">{{ . }}</div>
+    {{ end }}
+  </header>
+
+<div class="challenge-filter-bar" data-pagefind-ignore>
+    <div class="challenge-filter-group">
+      <span class="challenge-filter-label">Skill Level:</span>
+      <div class="challenge-filter-buttons">
+        <button class="challenge-filter-btn active" data-filter="skill" data-value="all">All</button>
+        <button class="challenge-filter-btn" data-filter="skill" data-value="beginner">Beginner</button>
+        <button class="challenge-filter-btn" data-filter="skill" data-value="intermediate">Intermediate</button>
+        <button class="challenge-filter-btn" data-filter="skill" data-value="advanced">Advanced</button>
+      </div>
+    </div>
+    <div class="challenge-filter-group">
+      <span class="challenge-filter-label">Equipment:</span>
+      <div class="challenge-filter-buttons">
+        <button class="challenge-filter-btn active" data-filter="mode" data-value="all">All</button>
+        {{ range .Params.challenge_modes }}
+        <button class="challenge-filter-btn" data-filter="mode" data-value="{{ .value }}">{{ .label }}</button>
+        {{ end }}
+      </div>
+    </div>
+    <p class="challenge-filter-count" id="challenge-count"></p>
+  </div>
+
+  <div class="article-list" id="challenge-list">
+    {{ range (.Paginate (.Pages.ByPublishDate.Reverse)).Pages }}
+    <div class="challenge-card-wrapper"
+         data-skill="{{ .Params.challenge.skill | default "" }}"
+         data-mode="{{ range .Params.challenge.mode }}{{ . }} {{ end }}">
+      {{ partial "article-card.html" (dict "context" . "listContext" $) }}
+    </div>
+    {{ else }}
+    <p class="no-articles-msg">No challenges found.</p>
+    {{ end }}
+  </div>
+
+  <nav class="pagination-container">
+    {{ template "_internal/pagination.html" . }}
+  </nav>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var activeSkill = 'all';
+  var activeMode = 'all';
+
+  function applyFilters() {
+    var cards = document.querySelectorAll('#challenge-list .challenge-card-wrapper');
+    var visible = 0;
+    cards.forEach(function(card) {
+      var skillMatch = activeSkill === 'all' || card.dataset.skill === activeSkill;
+      var modeMatch = activeMode === 'all' || card.dataset.mode.indexOf(activeMode) !== -1;
+      var show = skillMatch && modeMatch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    var countEl = document.getElementById('challenge-count');
+    if (countEl) countEl.textContent = visible + ' challenge' + (visible !== 1 ? 's' : '') + ' shown';
+  }
+
+  document.querySelectorAll('.challenge-filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var filter = this.dataset.filter;
+      var value = this.dataset.value;
+      document.querySelectorAll('.challenge-filter-btn[data-filter="' + filter + '"]').forEach(function(b) {
+        b.classList.remove('active');
+      });
+      this.classList.add('active');
+      if (filter === 'skill') activeSkill = value;
+      if (filter === 'mode') activeMode = value;
+      applyFilters();
+    });
+  });
+
+  applyFilters();
+});
+</script>
+{{ end }}
