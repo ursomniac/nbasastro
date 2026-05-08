@@ -102,3 +102,22 @@
   padding: 2rem 0;
   font-style: italic;
 }
+
+/* ── Series navigation blocks ───────────────────────────────────────────── */
+.series-nav-block {
+  padding: 0.75rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.series-nav-block:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-series-label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.series-nav-block:has(.series-nav-links) + .series-nav-block {
+  margin-top: 0.5rem;
+}
