@@ -44,7 +44,7 @@
             <div class="hub-card">
               <div class="hub-info">
                 <a href="{{ .Page.RelPermalink }}" class="hub-link">{{ .Page.Title }}</a>
-                {{ with .Page.Content }}
+                {{ with .Page.Summary }}
                   <div class="hub-summary">{{ . }}</div>
                 {{ end }}
               </div>
