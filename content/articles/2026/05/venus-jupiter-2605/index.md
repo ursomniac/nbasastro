@@ -1,6 +1,6 @@
 ---
 title: "Venus and Jupiter Inch Closer Together"
-date: 2026-05-05
+date: 2026-05-08
 byline: "The two brightest planets in the early-evening sky"
 authors: ["bob-donahue"]
 series: ["planet-watch", "observing-challenges"]
