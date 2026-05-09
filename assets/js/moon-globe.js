@@ -11,7 +11,7 @@
  * at the terminator and a small earthshine fill on the dark side.
  */
 
-import * as THREE from 'three'
+const THREE = window.THREE
 
 const TEXTURE_PATH  = '/images/planets/2k_moon.jpg'
 const CANVAS_ID     = 'sso-moon-canvas'

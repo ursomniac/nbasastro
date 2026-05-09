@@ -13,7 +13,7 @@
  * Depends on: window.SolarSystem.marsCML(jde) returning { cml, subEarthLat }
  */
 
-import * as THREE from 'three'
+const THREE = window.THREE
 
 // ---------------------------------------------------------------------------
 // MAP CALIBRATION — adjust until known features match Stellarium

@@ -11,7 +11,8 @@
  * window.SolarSystem.jupiterCML(jde) must be available (added to sso.js)
  */
 
-import * as THREE from 'three'
+//import * as THREE from 'three'
+const THREE = window.THREE
 
 // ---------------------------------------------------------------------------
 // GRS CONFIGURATION — update these when new drift data is available
