@@ -16,6 +16,29 @@
   align-items: start;
 }
 
+.sso-grs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.sso-grs-meta {
+  grid-column: 1 / 3;
+}
+
+.sso-grs-right h4 {
+  margin-top: 0;
+}
+.sso-grs-right .sso-note {
+  margin-bottom: 0;
+}
+
+.sso-grs-transits {
+  grid-row: 1 / 3;
+  grid-column: 2;
+}
+
 /* --- Panels --- */
 .sso-panel {
   background: var(--space-blue);

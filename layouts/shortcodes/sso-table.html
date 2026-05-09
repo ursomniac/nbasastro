@@ -90,11 +90,45 @@
     </div>
 
     <!-- Jupiter GRS — half, 2-column key/value meta: no scroll wrapper -->
-    <div class="sso-panel" id="sso-jupiter-globe-panel">
+    <!--div class="sso-panel" id="sso-jupiter-globe-panel">
       <h3>Jupiter</h3>
       <canvas id="jupiter-globe-canvas" width="400" height="400" class="sso-panel-image"></canvas>
       <div id="jupiter-globe-meta"></div>
+    </div-->
+
+<div class="sso-panel sso-full" id="sso-jupiter-globe-panel">
+  <h3>Jupiter — Great Red Spot</h3>
+
+<div class="sso-grs-grid">
+
+  <!-- left column: Globe only -->
+  <div class="sso-grs-globe">
+    <canvas id="jupiter-globe-canvas" width="400" height="400" class="sso-panel-image"></canvas>
+  </div>
+
+  <!-- right column: transits + metadata stacked -->
+  <div class="sso-grs-right">
+    <h4 class="sso-subheading">Upcoming GRS Transits</h4>
+    <p class="sso-note">Shown when Jupiter is above horizon and sky is darker than nautical twilight. Accuracy ±10 min.</p>
+    <div class="sso-table-scroll">
+      <table class="sso-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time (local)</th>
+            <th>Jupiter Alt</th>
+          </tr>
+        </thead>
+        <tbody id="sso-grs-transit-rows">
+          <tr><td colspan="3">Loading...</td></tr>
+        </tbody>
+      </table>
     </div>
+    <!-- <div id="jupiter-globe-meta" style="margin-top: 16px;"></div> -->
+  </div>
+
+</div>
+</div>
 
     <!-- Jupiter System — full, 6 columns: needs scroll wrapper -->
     <div class="sso-panel sso-full" id="sso-jupiter-panel">
@@ -524,6 +558,62 @@ function renderPlanets(planets) {
     renderInfo('sso-venus-info',    venus)
   }
 
+function renderGRSTransits(date, jupiterData) {
+  const tbody = document.getElementById('sso-grs-transit-rows')
+  if (!tbody) return
+
+  const LAT = 42.70 * Math.PI / 180
+  const LON = -73.11
+  const D2R = Math.PI / 180
+
+  function jdFromDate(d) { return d / 86400000 + 2440587.5 }
+
+  function lstDeg(jd) {
+    const T = (jd - 2451545.0) / 36525.0
+    let g = 280.46061837 + 360.98564736629 * (jd - 2451545.0)
+            + 0.000387933 * T * T - T * T * T / 38710000
+    return ((g % 360 + LON) % 360 + 360) % 360
+  }
+
+  function altitudeDeg(raDeg, decDeg, jd) {
+    const lst = lstDeg(jd)
+    const ha  = ((lst - raDeg) % 360 + 360) % 360 * D2R
+    const dec = decDeg * D2R
+    return Math.asin(Math.sin(LAT) * Math.sin(dec) +
+                     Math.cos(LAT) * Math.cos(dec) * Math.cos(ha)) * 180 / Math.PI
+  }
+
+  const candidates = window.SolarSystem.getGRSTransits(date, 25)
+  const jupRaDeg  = jupiterData.ra  * 180 / Math.PI
+  const jupDecDeg = jupiterData.dec * 180 / Math.PI
+
+  const rows = []
+  for (const t of candidates) {
+    const jd = jdFromDate(t)
+    const jde = window.SolarSystem.dateToJDE(t)
+    const sun = window.SolarSystem.getSun(jde)
+    const sunRaDeg  = sun.ra  * 180 / Math.PI
+    const sunDecDeg = sun.dec * 180 / Math.PI
+    const sunAlt = altitudeDeg(sunRaDeg, sunDecDeg, jd)
+    const jupAlt = altitudeDeg(jupRaDeg, jupDecDeg, jd)
+
+    if (sunAlt < -12 && jupAlt > 0) {
+      const dateStr = t.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+      const timeStr = t.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+      rows.push(`<tr>
+        <td>${dateStr}</td>
+        <td>${timeStr}</td>
+        <td>${jupAlt.toFixed(1)}°</td>
+      </tr>`)
+    }
+  }
+
+  tbody.innerHTML = rows.length
+    ? rows.join('')
+    : '<tr><td colspan="3">No visible transits in next 10 days</td></tr>'
+}
+
+
 
 function renderJupiterMoons(moons, jupiterRadiusArcsec) {
   const tbody = document.getElementById('sso-jupiter-rows')
@@ -889,6 +979,7 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
     renderSaturn(data.saturnRing, data.saturnMoons, saturnData.sdArcsec / 2)
     if (window.renderMoonGlobe) window.renderMoonGlobe(date, data.moon)
     if (window.renderJupiterGlobe) window.renderJupiterGlobe(date)
+    renderGRSTransits(date, jupiterData)
     if (window.renderMarsGlobe) window.renderMarsGlobe(date)
     // renderMarsMoons(data.marsMoons)
   }
