@@ -46,6 +46,13 @@ import vsop87Bneptune from 'astronomia/data/vsop87Bneptune'
 
 const DEG = 180 / Math.PI
 
+const GRS_CONFIG = {
+  lon:         81.0,      // System II longitude at epoch (JUPOS 2026-02-01)
+  epochJD:     2461042.5, // JD for 2026-02-01 00:00 UTC
+  driftPerDay: -0.0575,   // degrees/day (negative = westward)
+  // Last updated: 2026-05-09 from jupos.org
+}
+
 function dateToJDE(date) {
   return date.getTime() / 86400000 + 2440587.5
 }
@@ -240,6 +247,39 @@ function getPlanets(jde, sunRA) {
   })
 }
 
+function getGRSTransits(date, count = 10) {
+  const { lon: GRS_LON_EPOCH, epochJD: GRS_LON_EPOCH_JD, driftPerDay: GRS_DRIFT } = GRS_CONFIG
+  const SYS2_RATE = 870.1869147       // degrees per day
+  const TRANSIT_INTERVAL = 360 / SYS2_RATE // days between transits ~0.4135
+
+  function cmlSystem2(jd) {
+    const jup_mean = (jd - 2455636.938) * 360 / 4332.89709
+    const eqn_center = 5.55 * Math.sin(jup_mean * Math.PI / 180)
+    const angle = (jd - 2451870.628) * 360 / 398.884 - eqn_center
+    const correction = 11 * Math.sin(angle * Math.PI / 180)
+                     +  5 * Math.cos(angle * Math.PI / 180)
+                     - 1.25 * Math.cos(jup_mean * Math.PI / 180)
+                     - eqn_center
+    return ((181.62 + SYS2_RATE * jd + correction) % 360 + 360) % 360
+  }
+
+  const jd = dateToJDE(date)
+  const grsLon = ((GRS_LON_EPOCH + GRS_DRIFT * (jd - GRS_LON_EPOCH_JD)) % 360 + 360) % 360
+  const cml = cmlSystem2(jd)
+
+  // Degrees until next transit
+  const degsAhead = ((grsLon - cml) % 360 + 360) % 360
+  const daysToNext = degsAhead / SYS2_RATE
+
+  const transits = []
+  for (let i = 0; i < count; i++) {
+    const transitJD = jd + daysToNext + i * TRANSIT_INTERVAL
+    transits.push(new Date((transitJD - 2440587.5) * 86400000))
+  }
+
+  return transits
+}
+
 // Jupiter moon magnitudes: V = H + 5*log10(r_jupiter * delta_jupiter)
 // r_jupiter = Jupiter's heliocentric distance (AU)
 // delta_jupiter = Jupiter's geocentric distance (AU)
@@ -367,6 +407,8 @@ window.SolarSystem = {
   getAll, getSun, getMoon, getPlanets,
   getJupiterMoons, getSaturnMoons, getSaturnRing,
   dateToJDE, formatRA, formatDeg,
+  GRS_CONFIG,
+  getGRSTransits,
   marsCML: (jde) => {
     const earth = new Planet(vsop87Bearth)
     const marsP = new Planet(vsop87Bmars)

@@ -71126,6 +71126,15 @@
 
   // assets/js/sso.js
   var DEG = 180 / Math.PI;
+  var GRS_CONFIG = {
+    lon: 81,
+    // System II longitude at epoch (JUPOS 2026-02-01)
+    epochJD: 24610425e-1,
+    // JD for 2026-02-01 00:00 UTC
+    driftPerDay: -0.0575
+    // degrees/day (negative = westward)
+    // Last updated: 2026-05-09 from jupos.org
+  };
   function dateToJDE(date) {
     return date.getTime() / 864e5 + 24405875e-1;
   }
@@ -71321,6 +71330,29 @@
       }
     });
   }
+  function getGRSTransits(date, count = 10) {
+    const { lon: GRS_LON_EPOCH, epochJD: GRS_LON_EPOCH_JD, driftPerDay: GRS_DRIFT } = GRS_CONFIG;
+    const SYS2_RATE = 870.1869147;
+    const TRANSIT_INTERVAL = 360 / SYS2_RATE;
+    function cmlSystem2(jd2) {
+      const jup_mean = (jd2 - 2455636938e-3) * 360 / 4332.89709;
+      const eqn_center = 5.55 * Math.sin(jup_mean * Math.PI / 180);
+      const angle = (jd2 - 2451870628e-3) * 360 / 398.884 - eqn_center;
+      const correction = 11 * Math.sin(angle * Math.PI / 180) + 5 * Math.cos(angle * Math.PI / 180) - 1.25 * Math.cos(jup_mean * Math.PI / 180) - eqn_center;
+      return ((181.62 + SYS2_RATE * jd2 + correction) % 360 + 360) % 360;
+    }
+    const jd = dateToJDE(date);
+    const grsLon = ((GRS_LON_EPOCH + GRS_DRIFT * (jd - GRS_LON_EPOCH_JD)) % 360 + 360) % 360;
+    const cml = cmlSystem2(jd);
+    const degsAhead = ((grsLon - cml) % 360 + 360) % 360;
+    const daysToNext = degsAhead / SYS2_RATE;
+    const transits = [];
+    for (let i = 0; i < count; i++) {
+      const transitJD = jd + daysToNext + i * TRANSIT_INTERVAL;
+      transits.push(new Date((transitJD - 24405875e-1) * 864e5));
+    }
+    return transits;
+  }
   function getJupiterMoons(jde, jupiterR, jupiterDelta) {
     const NAMES = ["Io", "Europa", "Ganymede", "Callisto"];
     const H = [-1.68, -1.41, -2.09, -1.05];
@@ -71441,6 +71473,8 @@
     dateToJDE,
     formatRA,
     formatDeg,
+    GRS_CONFIG,
+    getGRSTransits,
     marsCML: (jde) => {
       const earth2 = new Planet(vsop87Bearth_default);
       const marsP = new Planet(vsop87Bmars_default);

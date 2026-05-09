@@ -1,9 +1,6 @@
 (() => {
   // assets/js/jupiter-globe.js
   var THREE = window.THREE;
-  var GRS_LONGITUDE_EPOCH = 85;
-  var GRS_EPOCH_JD = 24610425e-1;
-  var GRS_DRIFT_DEG_PER_DAY = -0.0575;
   var MAP_LONGITUDE_OFFSET = 317.4;
   var TEXTURE_PATH = "/images/planets/cassini_jupiter_20001211.jpg";
   var CANVAS_ID = "jupiter-globe-canvas";
@@ -17,7 +14,8 @@
     return d * Math.PI / 180;
   }
   function grsLongitude(jde) {
-    const lon = GRS_LONGITUDE_EPOCH + GRS_DRIFT_DEG_PER_DAY * (jde - GRS_EPOCH_JD);
+    const cfg = window.SolarSystem.GRS_CONFIG;
+    const lon = cfg.lon + cfg.driftPerDay * (jde - cfg.epochJD);
     return (lon % 360 + 360) % 360;
   }
   function computeSphereRotation(cml, grsLon) {

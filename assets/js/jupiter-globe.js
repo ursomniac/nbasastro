@@ -15,14 +15,6 @@
 const THREE = window.THREE
 
 // ---------------------------------------------------------------------------
-// GRS CONFIGURATION — update these when new drift data is available
-// Source: ~85° on 2026-02-01, drift ~1.75°/month westward (JUPOS)
-// ---------------------------------------------------------------------------
-const GRS_LONGITUDE_EPOCH   = 85.0
-const GRS_EPOCH_JD          = 2461042.5
-const GRS_DRIFT_DEG_PER_DAY = -0.0575
-
-// ---------------------------------------------------------------------------
 // MAP CALIBRATION — align texture longitude 0° with System II 0°
 // Calibration reference: S&T GRS transit 2026-05-03 00:46 UTC
 // At that time CML=84.0°, GRS=78.0°, GRS should appear near center of disk.
@@ -45,7 +37,8 @@ let _sunLight = null
 function degToRad(d) { return d * Math.PI / 180 }
 
 function grsLongitude(jde) {
-  const lon = GRS_LONGITUDE_EPOCH + GRS_DRIFT_DEG_PER_DAY * (jde - GRS_EPOCH_JD)
+  const cfg = window.SolarSystem.GRS_CONFIG
+  const lon = cfg.lon + cfg.driftPerDay * (jde - cfg.epochJD)
   return ((lon % 360) + 360) % 360
 }
 
