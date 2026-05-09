@@ -71126,6 +71126,14 @@
 
   // assets/js/sso.js
   var DEG = 180 / Math.PI;
+  var MARS_FEATURES = [
+    { id: "A", name: "Syrtis Major", lon: 290, lat: 8 },
+    { id: "B", name: "Valles Marineris", lon: 70, lat: -14 },
+    { id: "C", name: "Olympus Mons", lon: 133, lat: 18 },
+    { id: "D", name: "Hellas Basin", lon: 290, lat: -43 },
+    { id: "E", name: "Solis Lacus", lon: 90, lat: -26 },
+    { id: "F", name: "Mare Acidalium", lon: 30, lat: 50 }
+  ];
   var GRS_CONFIG = {
     lon: 81,
     // System II longitude at epoch (JUPOS 2026-02-01)
@@ -71330,6 +71338,34 @@
       }
     });
   }
+  function getMarsFeatureTransits(date) {
+    const STEP_MS = 10 * 60 * 1e3;
+    const MAX_STEPS = 150;
+    const earth2 = new Planet(vsop87Bearth_default);
+    const marsP = new Planet(vsop87Bmars_default);
+    function getCML(jde) {
+      const [DE, DS, \u03C9, P] = mars_default.physical(jde, earth2, marsP);
+      return (\u03C9 * 180 / Math.PI % 360 + 360) % 360;
+    }
+    return MARS_FEATURES.map((f) => {
+      let t = date.getTime();
+      let prevCML = getCML(dateToJDE(new Date(t)));
+      for (let i = 1; i <= MAX_STEPS; i++) {
+        t += STEP_MS;
+        const jde = dateToJDE(new Date(t));
+        const cml = getCML(jde);
+        const prevDiff = ((f.lon - prevCML) % 360 + 360) % 360;
+        const currDiff = ((f.lon - cml) % 360 + 360) % 360;
+        if (prevDiff > 300 && currDiff < 60) {
+          const fraction2 = prevDiff / (prevDiff + (360 - currDiff));
+          const transitTime = new Date(t - STEP_MS + fraction2 * STEP_MS);
+          return { id: f.id, name: f.name, lat: f.lat, lon: f.lon, transitDate: transitTime };
+        }
+        prevCML = cml;
+      }
+      return { id: f.id, name: f.name, lat: f.lat, lon: f.lon, transitDate: null };
+    });
+  }
   function getGRSTransits(date, count = 10) {
     const { lon: GRS_LON_EPOCH, epochJD: GRS_LON_EPOCH_JD, driftPerDay: GRS_DRIFT } = GRS_CONFIG;
     const SYS2_RATE = 870.1869147;
@@ -71473,6 +71509,8 @@
     dateToJDE,
     formatRA,
     formatDeg,
+    MARS_FEATURES,
+    getMarsFeatureTransits,
     GRS_CONFIG,
     getGRSTransits,
     marsCML: (jde) => {

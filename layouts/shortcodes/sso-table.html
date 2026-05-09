@@ -902,52 +902,6 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
     tbody.innerHTML = html
   }
 
-  function renderMarsMoons(moons) {
-    const tbody = document.getElementById('sso-mars-rows')
-    const canvas = document.getElementById('sso-mars-canvas')
-    const ctx = canvas.getContext('2d')
-    const W = 300, H = 100, cx = W / 2, cy = H / 2
-
-    ctx.clearRect(0, 0, W, H)
-
-    // Mars disk
-    ctx.beginPath()
-    ctx.arc(cx, cy, 14, 0, Math.PI * 2)
-    ctx.fillStyle = '#c1440e'
-    ctx.fill()
-
-    const scale = 8
-    const names = ['Phobos', 'Deimos']
-    const colors = ['#bbb', '#999']
-    let html = ''
-
-    if (moons[0] && moons[0].error) {
-      html = `<tr><td colspan="3" class="error">${moons[0].error}</td></tr>`
-    } else {
-      moons.forEach((m, i) => {
-        const px = cx + m.x * scale
-        const py = cy + (i - 0.5) * 18
-
-        ctx.beginPath()
-        ctx.arc(px, py, 3, 0, Math.PI * 2)
-        ctx.fillStyle = colors[i]
-        ctx.fill()
-
-        ctx.fillStyle = '#ccc'
-        ctx.font = '9px sans-serif'
-        ctx.fillText(names[i], px + 4, py + 3)
-
-        const side = m.x < 0 ? 'West' : 'East'
-        html += `<tr>
-          <td>${names[i]}</td>
-          <td>${Math.abs(m.x).toFixed(2)}</td>
-          <td>${side}</td>
-        </tr>`
-      })
-    }
-    tbody.innerHTML = html
-  }
-
   // --- Main calculate function ---
   function calculate() {
     if (typeof window.SolarSystem === 'undefined') {
@@ -981,7 +935,6 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
     if (window.renderJupiterGlobe) window.renderJupiterGlobe(date)
     renderGRSTransits(date, jupiterData)
     if (window.renderMarsGlobe) window.renderMarsGlobe(date)
-    // renderMarsMoons(data.marsMoons)
   }
 
   // Run on load
