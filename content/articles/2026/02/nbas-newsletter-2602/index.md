@@ -122,3 +122,5 @@ remnant cools, it will slowly fade away.
 
 
 {{< clear >}}
+
+{{< newsletter-pdf file="2026-02" >}}

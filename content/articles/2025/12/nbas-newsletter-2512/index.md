@@ -112,3 +112,5 @@ expelled its atmosphere, leaving the hot core) and almost 3 ly
 across!
 
 {{< clear >}}
+
+{{< newsletter-pdf file="2025-12" >}}

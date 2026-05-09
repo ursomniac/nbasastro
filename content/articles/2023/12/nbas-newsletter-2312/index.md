@@ -117,3 +117,4 @@ and far more luminous.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2023-12" >}}

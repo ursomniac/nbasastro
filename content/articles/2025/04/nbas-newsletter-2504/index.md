@@ -115,3 +115,4 @@ North of the “Sickle” asterism in Leo.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2025-04" >}}

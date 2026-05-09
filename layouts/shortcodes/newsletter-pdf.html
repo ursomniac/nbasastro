@@ -1,0 +1,18 @@
+{{ $file := .Get "file" }}
+{{ $pdfName := printf "%s_nbas-newsletter.pdf" $file }}
+
+{{ with .Page.Resources.GetMatch $pdfName }}
+<div class="newsletter-card">
+    <h4 class="newsletter-title">Print this Newsletter</h4>
+    <div class="newsletter-actions">
+      <a href="{{ .RelPermalink }}" target="_blank" class="newsletter-btn">
+        📄 View PDF
+      </a>
+      <a href="{{ .RelPermalink }}" download class="newsletter-btn newsletter-btn-secondary">
+        📥 Download PDF
+      </a>
+    </div>
+</div>
+{{ else }}
+<p class="newsletter-missing">Newsletter PDF not found: {{ $pdfName }}</p>
+{{ end }}

@@ -108,3 +108,4 @@ above the horizon!
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2024-07" >}}

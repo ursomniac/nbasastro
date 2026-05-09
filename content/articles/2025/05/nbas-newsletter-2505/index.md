@@ -103,3 +103,4 @@ makes it comparable to more- popular objects like Messier 61 or Messier 77.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2025-05" >}}

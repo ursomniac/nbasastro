@@ -111,3 +111,4 @@ especially in the spiral arms. The system is 31 Myr away from us.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2025-07" >}}

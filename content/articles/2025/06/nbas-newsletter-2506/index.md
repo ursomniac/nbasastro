@@ -93,3 +93,4 @@ Galaxy 8-11 billion years ago.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2025-06" >}}

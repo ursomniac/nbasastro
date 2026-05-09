@@ -119,3 +119,5 @@ for, along with open cluster NGC 1502 (and Kemble’s Cascade) in the
 neighborhood.
 
 {{< clear >}}
+
+{{< newsletter-pdf file="2025-11" >}}

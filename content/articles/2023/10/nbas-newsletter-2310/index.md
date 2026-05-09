@@ -103,3 +103,4 @@ really exciting! — _Bob D._
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2023-10" >}}

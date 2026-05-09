@@ -89,3 +89,4 @@ dense dust and gas that might be “star-forming cocoons”.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2024-10" >}}

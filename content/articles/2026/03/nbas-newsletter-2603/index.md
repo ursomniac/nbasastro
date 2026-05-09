@@ -138,3 +138,5 @@ galaxy evaded Messier (and for that matter Caldwell). It’s about
 30 Mly away and an outlying member of the Virgo Supercluster.
 
 {{< clear >}}
+
+{{< newsletter-pdf file="2026-03" >}}

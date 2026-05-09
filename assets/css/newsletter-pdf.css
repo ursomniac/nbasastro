@@ -1,0 +1,36 @@
+/* assets/css/newsletter-pdf.css */
+.newsletter-card {
+    display: flex; flex-direction: row;
+    align-items: center; gap: 24px;
+    background: #0b1426; padding: 16px 24px;
+    border-radius: 12px; border: 1px solid #1e3a5f;
+    margin: 24px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    flex-wrap: nowrap;
+}
+.newsletter-icon {
+    font-size: 3em; flex: 0 0 auto;
+    line-height: 1;
+}
+.newsletter-content { flex: 2; min-width: 220px; }
+.newsletter-title {
+    margin: 0; color: #ffffff;
+    font-size: 1.1em; font-weight: 700;
+    white-space: nowrap;
+}
+.newsletter-actions {
+    display: flex; align-items: center;
+    gap: 12px; flex-wrap: nowrap;
+}
+.newsletter-btn {
+    background: #1a2a44;
+    color: #f8d44e !important;
+    border: 1px solid #f8d44e;
+    padding: 12px 24px; border-radius: 6px;
+    text-decoration: none !important; font-weight: 700;
+    display: inline-block; margin: 10px 0;
+    font-family: sans-serif; transition: all 0.2s ease;
+}
+.newsletter-btn:hover { background: #f8d44e; color: #0b1426 !important; }
+.newsletter-link-alt { color: #8a9cb3; text-decoration: underline; font-size: 0.85em; }
+.newsletter-link-alt:hover { color: #f8d44e; }
+.newsletter-missing { color: #e05c5c; font-style: italic; font-size: 0.9em; }

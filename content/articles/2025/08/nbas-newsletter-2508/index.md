@@ -109,3 +109,4 @@ defined “shell”.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2025-08" >}}

@@ -80,3 +80,4 @@ the spiral arms from the disk.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2024-12" >}}

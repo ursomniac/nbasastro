@@ -111,3 +111,4 @@ with this. - _Bob D._
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2023-11" >}}

@@ -102,3 +102,4 @@ It’s 1,753 light years away.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2024-02" >}}

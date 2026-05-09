@@ -103,3 +103,4 @@ star formation.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2025-01" >}}

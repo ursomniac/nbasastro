@@ -107,3 +107,4 @@ many fascinating galaxies in the Spring skies.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2024-04" >}}

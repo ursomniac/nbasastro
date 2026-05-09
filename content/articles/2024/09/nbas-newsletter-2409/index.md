@@ -92,3 +92,5 @@ a hot very young star.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2024-09" >}}
+

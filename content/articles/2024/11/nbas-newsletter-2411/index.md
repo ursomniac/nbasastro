@@ -104,3 +104,4 @@ of finding them!
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2024-11" >}}

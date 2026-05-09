@@ -55,6 +55,12 @@
     <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
   {{ end }}
 {{ end }}
+{{/* for Newsletter PDF viewer */}}
+{{ if .HasShortcode "newsletter-pdf" }}
+  {{ with resources.Get "css/newsletter-pdf.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+  {{ end }}
+{{ end }}
 
 
   {{/* PAGEFIND UI ASSETS */}}

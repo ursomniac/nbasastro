@@ -115,3 +115,4 @@ does look more like a Crab, though that name was already taken!
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2024-08" >}}

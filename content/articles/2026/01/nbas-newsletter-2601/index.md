@@ -125,3 +125,5 @@ M 45 is important because accurate measurements of its distance
 to determine distances of objects in our Galaxy and far beyond!
 
 {{< clear >}}
+
+{{< newsletter-pdf file="2026-01" >}}

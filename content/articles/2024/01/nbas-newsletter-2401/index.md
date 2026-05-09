@@ -113,3 +113,4 @@ are all part of it.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2024-01" >}}

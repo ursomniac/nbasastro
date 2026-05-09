@@ -97,3 +97,4 @@ exposure, and the estimated magnitude is 13.2.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2025-09" >}}

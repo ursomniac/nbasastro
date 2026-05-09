@@ -159,3 +159,4 @@ To help you navigate the night sky this month, we've provided a high-resolution 
 The PNG is great for quick viewing, while the PDF is optimized for sharp home printing.
 
 {{< starmap file="starmap-2605" month="May 2026" >}}
+{{< newsletter-pdf file="2026-05" >}}

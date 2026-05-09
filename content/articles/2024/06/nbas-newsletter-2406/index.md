@@ -104,3 +104,4 @@ part of the Virgo Cluster.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2024-06" >}}

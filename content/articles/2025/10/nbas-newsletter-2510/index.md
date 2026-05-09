@@ -119,3 +119,4 @@ waves (one outward, and one inward), exciting the material.
 
 {{< clear >}}
 
+{{< newsletter-pdf file="2025-10" >}}
