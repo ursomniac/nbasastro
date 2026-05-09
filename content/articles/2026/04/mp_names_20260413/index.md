@@ -24,7 +24,7 @@ This main-belt object, discovered in 1996 by the Near-Earth Asteroid Tracking te
 
 Brucewillis is about 13 km in diameter and orbits the Sun every 5.7 years in a low-eccentricity (e = 0.125) orbit inclined 2° to the ecliptic plane.
 
-[Interactive Orbit Diagram for (9660)](https://www.wgsbn-iau.org/cg-bin/orbit_plotter.html?obj=9660)
+[Interactive Orbit Diagram for (9660)](https://www.wgsbn-iau.org/cgi-bin/orbit_plotter.html?obj=9660)
 
 ### (463368) Eurytus
 
@@ -37,7 +37,7 @@ long for him to get a minor planet.
 
 Eurtyus is about 190 km in diameter and orbits the Sun every 159 years in a moderately-eccentric (e = 0.313) orbit inclined 15° to the ecliptic.
 
-[Interactive Orbit Diagram for (453368)](http://www.wgsbn-iau.org/cg-bin/orbit_plotter.html?obj=463368)
+[Interactive Orbit Diagram for (453368)](http://www.wgsbn-iau.org/cgi-bin/orbit_plotter.html?obj=463368)
 
 ### (533671) Nabu
 
@@ -51,7 +51,7 @@ If you examine the orbit diagram and zoom in towards the Sun, you will see that 
 
 Nabu is about 2 km in diameter and orbits the Sun every 4.9 years in a highly-eccentric (e = 0.895) orbit inclined 24° to the ecliptic plane.
 
-[Interactive Orbit Diagram for (533671)](http://www.wgsbn-iau.org/cg-bin/orbit_plotter.html?obj=533671)
+[Interactive Orbit Diagram for (533671)](http://www.wgsbn-iau.org/cgi-bin/orbit_plotter.html?obj=533671)
 
 ### (721153) Gunda and (721154) Heinz
 
@@ -60,9 +60,9 @@ Nabu is about 2 km in diameter and orbits the Sun every 4.9 years in a highly-ec
 
 These two main-belt objects, discovered on the same night in 2003, were named by the discoverer (Felix Hormuth, a German amateur astronomer) for his mother and father.
 
-Gunda is about 1 km in diameter and orbits the Sun every 5.2 years in a somewhat eccentric (e = 0.207) orbit inclined 15° to the ecliptic plane.  Heinz is about 1 km in diameter and orbits the Sun every 5.3 years in a low-eccentrity (e = 0.119) orbit inclined 13° to the ecliptic plane.
+Gunda is about 1 km in diameter and orbits the Sun every 5.2 years in a somewhat eccentric (e = 0.207) orbit inclined 15° to the ecliptic plane.  Heinz is about 1 km in diameter and orbits the Sun every 5.3 years in a low-eccentricity (e = 0.119) orbit inclined 13° to the ecliptic plane.
 
-[Interactive Orbit Diagram for (721153)](http://www.wgsbn-iau.org/cgi-bin/orbit_plotter.html?obj=721153) [Interactive Orbit Diagram for (721154)](http://www.wgsbn-iau.org/cg-bin/orbit_plotter.html?obj=721154)
+[Interactive Orbit Diagram for (721153)](http://www.wgsbn-iau.org/cgi-bin/orbit_plotter.html?obj=721153) [Interactive Orbit Diagram for (721154)](http://www.wgsbn-iau.org/cgi-bin/orbit_plotter.html?obj=721154)
 
 ### (858334) Gioacchinopecci 
 
@@ -76,7 +76,7 @@ The Carte du Ciel is worthy of a longer article at some point in the future.  Č
 
 Gioacchinopecci is about 700 m in diameter and orbits the Sun every 5.2 years in a low-eccentricity (e = 0.085) orbit inclined 9° to the ecliptic plane.
 
-[Interactive Orbit Diagram for (858334)](http://www.wgsbn-iau.org/cg-bin/orbit_plotter.html?obj=858334)
+[Interactive Orbit Diagram for (858334)](http://www.wgsbn-iau.org/cgi-bin/orbit_plotter.html?obj=858334)
 
 ### (870437) Leilani
 
@@ -87,7 +87,7 @@ Island of Hawaiʻi that suffered extensive destruction during the 2018 Kīlauea 
 
 Leilani is about 700 m in diameter and orbits the Sun every 5.6 years in a low-eccentricity (e = 0.053) orbit inclined 11° to the ecliptic plane.
 
-[Interactive Orbit Diagram for (870437)](http://www.wgsbn-iau.org/cg-bin/orbit_plotter.html?obj=870437)
+[Interactive Orbit Diagram for (870437)](http://www.wgsbn-iau.org/cgi-bin/orbit_plotter.html?obj=870437)
 
 ### Other names
 

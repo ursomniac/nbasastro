@@ -31,7 +31,7 @@ Lawless is about 3 km in diameter and orbits the Sun every 4.0 years in a very-l
 
 {{< nbas-image src="79871.png" align="right" width="300px" caption="(79871) Earthrise orbit" >}}
 
-A somewhat unusual naming.  This object is named after a photograph.  The iconic photograph of Earth taken from lunar orbit by astronaut [William Anders](https://en.wikipedia.org/wiki/William_Anders) during the [Apollo 8](https://en.wikipedia.org/wiki/Apollo_8) mission that was the first to orbit the Moon.  The _Earthrise_ photograph has been credited as one of the inspirations for the first [Earth Day](https://en.wikipedia.org/wiki/Earth_Day) in 1970.  This mid-main-belt object was discovered by the [Catalina Sky Survey](https://en.wikipedia.org/wiki/Catalina_Sky_Survey) at Nount Bigelow.
+A somewhat unusual naming.  This object is named after a photograph.  The iconic photograph of Earth taken from lunar orbit by astronaut [William Anders](https://en.wikipedia.org/wiki/William_Anders) during the [Apollo 8](https://en.wikipedia.org/wiki/Apollo_8) mission that was the first to orbit the Moon.  The _Earthrise_ photograph has been credited as one of the inspirations for the first [Earth Day](https://en.wikipedia.org/wiki/Earth_Day) in 1970.  This mid-main-belt object was discovered by the [Catalina Sky Survey](https://en.wikipedia.org/wiki/Catalina_Sky_Survey) at Mount Bigelow.
 
 Earthrise is about 4 km in diameter and orbits the Sun every 4.2 years in a low-eccentricity (e = 0.070) orbit inclined 22° to the ecliptic plane.
 
@@ -41,7 +41,7 @@ Earthrise is about 4 km in diameter and orbits the Sun every 4.2 years in a low-
 
 {{< nbas-image src="152341.png" align="left" width="300px" caption="(152341) Rupesnigra orbit" >}}
 
-Another unusual naming.  [Rupes Nigra](https://en.wikipedia.org/wiki/Rupes_Nigra) was a black rock believed to be located at either the North Magnetic Pole or the geographical North Pole.  The rock was supposed to be magntic, providing a supposed explanation for wby compasses point north.  The idea came from a now-lost work titled [_Inventio Fortunata_](https://en.wikipedia.org/wiki/Inventio_Fortunata), believed to have been written in the mid-14th century, but lost by the 1490s.  It appeared on maps into the 17th century.  Rupesnigra is an outer-main-belt object discovered by the [Catalina Sky Survey](https://en.wikipedia.org/wiki/Catalina_Sky_Survey) at Nount Bigelow.
+Another unusual naming.  [Rupes Nigra](https://en.wikipedia.org/wiki/Rupes_Nigra) was a black rock believed to be located at either the North Magnetic Pole or the geographical North Pole.  The rock was supposed to be magnetic, providing a supposed explanation for why compasses point north.  The idea came from a now-lost work titled [_Inventio Fortunata_](https://en.wikipedia.org/wiki/Inventio_Fortunata), believed to have been written in the mid-14th century, but lost by the 1490s.  It appeared on maps into the 17th century.  Rupesnigra is an outer-main-belt object discovered by the [Catalina Sky Survey](https://en.wikipedia.org/wiki/Catalina_Sky_Survey) at Mount Bigelow.
 
 Rupesnigra is about 2 km in diameter and orbits the Sun every 5.0 years in a low-eccentricity (e = 0.064) orbit inclined 13° to the ecliptic plane.
 
@@ -51,7 +51,7 @@ Rupesnigra is about 2 km in diameter and orbits the Sun every 5.0 years in a low
 
 {{< nbas-image src="280924.png" align="right" width="300px" caption="(280924) Eurypterus orbit" >}}
 
-This is another unusual naming.  The mid-main-belt object is named after the extinct genus of sea scorpion from the Silurian period, about 430 million years ago.  The species _Eurypterus remipes_, which is the most common _Eurypterus_ species, became the official state fossil of New York in 1984.  The object was discovered in 2006 by the [Cataline Sky Survey](https://en.wikipedia.org/wiki/Catalina_Sky_Survey) at Mount Bigelow.
+This is another unusual naming.  The mid-main-belt object is named after the extinct genus of sea scorpion from the Silurian period, about 430 million years ago.  The species _Eurypterus remipes_, which is the most common _Eurypterus_ species, became the official state fossil of New York in 1984.  The object was discovered in 2006 by the [Catalina Sky Survey](https://en.wikipedia.org/wiki/Catalina_Sky_Survey) at Mount Bigelow.
 
 Eurypterus is about 2 km in diameter and orbits the Sun every 4.4 years in a moderately-eccentric (e = 0.170) orbit inclined 28° to the ecliptic plane.
 
