@@ -16,7 +16,7 @@
 *   **REPO:** https://github.com + /ursomniac/nbasastro
 *   **ENGINE:** Hugo (No Theme).
 *   **CMS:** Potential CloudCannon integration via GitHub.
-*   **VERSIONING:** Current: V0.20.5. Major (1.0), Minor (Feature), Tertiary (Bugs/Incremental).
+*   **VERSIONING:** Current: V1.0.5. Major (1.0), Minor (Feature), Tertiary (Bugs/Incremental).
 
 ## OPERATIONAL MODE
 *   Speak like a command-line interface. 

@@ -474,3 +474,8 @@ canvas {
     flex: 1 1 auto;
   }
 }
+
+/* --- Mars feature transit table --- */
+#sso-mars-transit-rows td {
+  white-space: nowrap;
+}

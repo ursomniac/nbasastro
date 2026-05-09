@@ -71356,7 +71356,7 @@
         const cml = getCML(jde);
         const prevDiff = ((f.lon - prevCML) % 360 + 360) % 360;
         const currDiff = ((f.lon - cml) % 360 + 360) % 360;
-        if (prevDiff > 300 && currDiff < 60) {
+        if (prevDiff < 60 && currDiff > 300) {
           const fraction2 = prevDiff / (prevDiff + (360 - currDiff));
           const transitTime = new Date(t - STEP_MS + fraction2 * STEP_MS);
           return { id: f.id, name: f.name, lat: f.lat, lon: f.lon, transitDate: transitTime };

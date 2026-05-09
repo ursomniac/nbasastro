@@ -82,11 +82,41 @@
       <div id="sso-venus-info"></div>
     </div>
 
-    <!-- Mars — half, 2-column key/value meta: no scroll wrapper -->
-    <div class="sso-panel" id="sso-mars-globe-panel">
-      <h3>Mars</h3>
-      <canvas id="mars-globe-canvas" width="400" height="400" class="sso-panel-image"></canvas>
-      <div id="mars-globe-meta"></div>
+    <!-- Mars — full, 2-column: globe left, feature transits right -->
+    <div class="sso-panel sso-full" id="sso-mars-globe-panel">
+      <h3>Mars — Surface Feature Transits</h3>
+
+      <div class="sso-grs-grid">
+
+        <!-- left column: Globe only -->
+        <div class="sso-grs-globe">
+          <canvas id="mars-globe-canvas" width="400" height="400" class="sso-panel-image"></canvas>
+          <div id="mars-globe-meta"></div>
+        </div>
+
+        <!-- right column: feature transits -->
+        <div class="sso-grs-right">
+          <h4 class="sso-subheading">Next Central Meridian Transits</h4>
+          <p class="sso-note">Next time each feature crosses Mars' central meridian. Accuracy ~4 min.</p>
+          <div class="sso-table-scroll">
+            <table class="sso-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>Lon</th>
+                  <th>Lat</th>
+                  <th>Date</th>
+                  <th>Time (local)</th>
+                </tr>
+              </thead>
+              <tbody id="sso-mars-transit-rows">
+                <tr><td colspan="5">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <!-- Jupiter GRS — half, 2-column key/value meta: no scroll wrapper -->
@@ -613,7 +643,42 @@ function renderGRSTransits(date, jupiterData) {
     : '<tr><td colspan="3">No visible transits in next 10 days</td></tr>'
 }
 
+function renderMarsFeatureTransits(date, marsData) {
+  const tbody = document.getElementById('sso-mars-transit-rows')
+  if (!tbody) return
 
+  let transits
+  try {
+    transits = window.SolarSystem.getMarsFeatureTransits(date)
+  } catch (e) {
+    tbody.innerHTML = `<tr><td colspan="5" class="sso-error">Error: ${e.message}</td></tr>`
+    return
+  }
+
+  const rows = transits.map(f => {
+    const lonStr = f.lon + '°'
+    const latStr = (f.lat >= 0 ? '+' : '') + f.lat + '°'
+    if (!f.transitDate) {
+      return `<tr>
+        <td>${f.name}</td>
+        <td>${lonStr}</td>
+        <td>${latStr}</td>
+        <td colspan="2">—</td>
+      </tr>`
+    }
+    const dateStr = f.transitDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+    const timeStr = f.transitDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+    return `<tr>
+      <td>${f.name}</td>
+      <td>${lonStr}</td>
+      <td>${latStr}</td>
+      <td>${dateStr}</td>
+      <td>${timeStr}</td>
+    </tr>`
+  })
+
+  tbody.innerHTML = rows.join('')
+}
 
 function renderJupiterMoons(moons, jupiterRadiusArcsec) {
   const tbody = document.getElementById('sso-jupiter-rows')
@@ -935,6 +1000,8 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
     if (window.renderJupiterGlobe) window.renderJupiterGlobe(date)
     renderGRSTransits(date, jupiterData)
     if (window.renderMarsGlobe) window.renderMarsGlobe(date)
+    const marsData = data.planets.find(p => p.name === 'Mars')
+    renderMarsFeatureTransits(date, marsData)
   }
 
   // Run on load
