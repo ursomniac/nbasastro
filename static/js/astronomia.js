@@ -71136,16 +71136,16 @@
     const d3 = Math.floor(abs);
     const mTotal = (abs - d3) * 60;
     const m17 = Math.floor(mTotal);
-    const s2 = ((mTotal - m17) * 60).toFixed(2);
-    return `${sign}${d3}\xB0 ${String(m17).padStart(2, "0")}' ${String(s2).padStart(5, "0")}"`;
+    const s2 = ((mTotal - m17) * 60).toFixed(1);
+    return `${sign}${d3}\xB0 ${String(m17).padStart(2, "0")}' ${String(s2).padStart(4, "0")}"`;
   }
   function formatRA(rad) {
     const hours = rad * DEG / 15;
     const h = Math.floor(hours);
     const mTotal = (hours - h) * 60;
     const m17 = Math.floor(mTotal);
-    const s2 = ((mTotal - m17) * 60).toFixed(1);
-    return `${String(h).padStart(2, "0")}h ${String(m17).padStart(2, "0")}m ${String(s2).padStart(4, "0")}s`;
+    const s2 = ((mTotal - m17) * 60).toFixed(2);
+    return `${String(h).padStart(2, "0")}h ${String(m17).padStart(2, "0")}m ${String(s2).padStart(5, "0")}s`;
   }
   function eclToEqu(lon, lat, jde) {
     const e = nutation_default.meanObliquity(jde);

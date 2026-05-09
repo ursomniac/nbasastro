@@ -57,9 +57,8 @@ function formatDeg(rad) {
   const d = Math.floor(abs)
   const mTotal = (abs - d) * 60
   const m = Math.floor(mTotal)
-  const s = ((mTotal - m) * 60).toFixed(2)
-  return `${sign}${d}° ${String(m).padStart(2,'0')}' ${String(s).padStart(5,'0')}"`
-  //return `${sign}${String(d).padStart(3,'0')}° ${String(m).padStart(2,'0')}' ${String(s).padStart(4,'0')}"`
+  const s = ((mTotal - m) * 60).toFixed(1)
+  return `${sign}${d}° ${String(m).padStart(2,'0')}' ${String(s).padStart(4,'0')}"`
 }
 
 function formatRA(rad) {
@@ -67,8 +66,8 @@ function formatRA(rad) {
   const h = Math.floor(hours)
   const mTotal = (hours - h) * 60
   const m = Math.floor(mTotal)
-  const s = ((mTotal - m) * 60).toFixed(1)
-  return `${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(4,'0')}s`
+  const s = ((mTotal - m) * 60).toFixed(2)
+  return `${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(5,'0')}s`
 }
 
 function eclToEqu(lon, lat, jde) {
