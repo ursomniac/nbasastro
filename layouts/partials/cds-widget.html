@@ -1,0 +1,19 @@
+<div class="widget-box">
+    <h3 class="sidebar-heading">Clear Dark Sky</h3>
+	<img src="/cds/arunah-hill-thumb.gif" alt="Arunah Hill Clear Dark Sky forecast" class="cds-thumb">
+    <button class="sky-btn" onclick="document.getElementById('cds-modal').classList.add('open')">
+        Clear Dark Sky Chart ↗
+    </button>
+</div>
+
+<div class="sky-modal-overlay" id="cds-modal" onclick="this.classList.remove('open')">
+    <div class="sky-modal" onclick="event.stopPropagation()">
+        <button class="sky-modal-close" onclick="document.getElementById('cds-modal').classList.remove('open')">✕</button>
+	<img src="/cds/arunah-hill.gif" alt="Arunah Hill Clear Dark Sky forecast" style="width:100%;" />
+        <p style="font-size: 0.8em; color: #8a9cb3; margin-top: 8px;">
+            <a href="https://cleardarksky.com/c/ArunahHMAkey.html" target="_blank" style="color: #f8d44e;">
+                Full chart at ClearDarkSky.com ↗
+            </a>
+        </p>
+    </div>
+</div>

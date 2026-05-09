@@ -36,6 +36,19 @@ jobs:
           curl -s "https://api.n2yo.com/rest/v1/satellite/visualpasses/25544/42.7/-73.11/300/10/40/?apiKey=${N2YO_API_KEY}" \
             -o static/data/iss-passes.json
           echo "ISS passes fetched: $(jq '.info.passescount' static/data/iss-passes.json) passes"
+      - name: Fetch CDS charts
+        run: |
+          mkdir -p static/cds
+          curl -L "https://www.cleardarksky.com/c/ArunahHMAcsk.gif?c=766833" \
+            -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" \
+            -H "Referer: https://www.cleardarksky.com/" \
+            -o static/cds/arunah-hill.gif
+          curl -L "https://www.cleardarksky.com/c/ArunahHMAcs0.gif?1" \
+            -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" \
+            -H "Referer: https://www.cleardarksky.com/" \
+            -o static/cds/arunah-hill-thumb.gif
+          echo "Full: $(wc -c < static/cds/arunah-hill.gif) bytes"
+          echo "Thumb: $(wc -c < static/cds/arunah-hill-thumb.gif) bytes"
       - run: hugo --minify
       - run: npx pagefind --site public
       - uses: actions/upload-pages-artifact@v3
