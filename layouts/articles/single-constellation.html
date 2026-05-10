@@ -34,6 +34,50 @@
 
   <div style="clear: both;"></div>
 
+  {{/* 3. SERIES NAVIGATION */}}
+  {{ if .Params.series }}
+  <hr class="article-separator">
+  <nav class="series-navigation" data-pagefind-ignore>
+    <div class="series-nav-container">
+      <span class="nav-series-label">PART OF SERIES:</span>
+      {{ range .Params.series }}
+        {{ $currentSeries := . }}
+        {{ $termPage := site.GetPage (printf "series/%s" ($currentSeries | urlize)) }}
+        {{ $seriesPages := (where $.Site.RegularPages "Params.series" "intersect" (slice $currentSeries)).ByTitle }}
+        {{ $prev := $seriesPages.Prev $ }}
+        {{ $next := $seriesPages.Next $ }}
+        <div class="series-nav-block">
+          <div class="series-nav-header">
+            <a href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}#{{ end }}" class="facet-badge series-badge {{ $currentSeries | urlize }}">
+              {{ if $termPage }}{{ $termPage.LinkTitle | upper }}{{ else }}{{ $currentSeries | upper }}{{ end }}
+            </a>
+          </div>
+          {{ if or $prev $next }}
+          <div class="series-nav-links">
+            {{ with $next }}
+            <div class="nav-item nav-next">
+              <a href="{{ .RelPermalink }}" class="series-nav-link-custom">
+                <span class="dir-meta">← PREVIOUS</span>
+                <span class="title-meta">{{ .Title }}</span>
+              </a>
+            </div>
+            {{ end }}
+            {{ with $prev }}
+            <div class="nav-item nav-prev">
+              <a href="{{ .RelPermalink }}" class="series-nav-link-custom">
+                <span class="dir-meta">NEXT →</span>
+                <span class="title-meta">{{ .Title }}</span>
+              </a>
+            </div>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </nav>
+  {{ end }}
+
   {{/* 4. RESTORED RELATED CONTENT (Rule #2 Retention) */}}
   <section class="related-articles">
     <h3>Related Content & Observations</h3>
@@ -46,6 +90,6 @@
       {{ end }}
     </div>
   </section>
+
 </article>
 {{ end }}
-

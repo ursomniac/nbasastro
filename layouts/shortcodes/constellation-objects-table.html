@@ -3,7 +3,7 @@
   <table class="nbas-spec-table" style="width: 100%; border-collapse: collapse; margin-top: 15px; background: #0f0f0f;">
     <thead>
       <tr style="background: #1a1a1a; color: #ffcc00; text-align: left;">
-        <th style="padding: 12px; border: 1px solid #333;">Object</th>
+        <th style="padding: 12px; padding-left: 15px !important; border: 1px solid #333;">Object</th>
         <th style="padding: 12px; border: 1px solid #333;">Type</th>
         <th style="padding: 12px; border: 1px solid #333;">Equipment</th>
       </tr>
@@ -11,7 +11,7 @@
     <tbody>
       {{ range .Page.Params.highlights }}
       <tr>
-        <td style="padding: 10px; border: 1px solid #333;"><strong>{{ .name | safeHTML }}</strong></td>
+        <td style="padding: 10px; padding-left: 15px !important; border: 1px solid #333;"><strong>{{ .name | safeHTML }}</strong></td>
         <td style="padding: 10px; border: 1px solid #333;">{{ .type }}</td>
         <td style="padding: 10px; border: 1px solid #333;">{{ .using }}</td>
       </tr>
