@@ -1,0 +1,69 @@
+# .github/workflows/fetch-galilean-events.yml
+# Ticket #22 — Galilean satellite phenomena table
+#
+# Runs nightly at 04:00 UTC (overnight Eastern; data lag of ~1 day is fine for
+# a 15-day window).  Also runnable on-demand via workflow_dispatch, and on
+# push to any file under scripts/fetch_galilean_events.py for easy testing.
+#
+# Required repository variables (Settings → Variables → Actions):
+#   OBSERVER_LAT  — decimal degrees N (e.g. 42.7)
+#   OBSERVER_LON  — decimal degrees, west = negative (e.g. -73.11)
+#
+# Optional variables:
+#   WINDOW_DAYS   — how many days ahead to fetch (default: 15)
+#
+# No secrets needed — all upstream APIs are public.
+
+name: Fetch Galilean satellite events
+
+on:
+  schedule:
+    - cron: '0 4 * * *'          # 04:00 UTC daily
+  workflow_dispatch:              # manual trigger
+  push:
+    paths:
+      - 'scripts/fetch_galilean_events.py'
+      - '.github/workflows/fetch-galilean-events.yml'
+
+permissions:
+  contents: write                 # needed for git push
+
+jobs:
+  fetch:
+    name: Fetch & update galilean-events.json
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      # No third-party Python deps — stdlib only (urllib, json, re, datetime)
+      # If future changes add dependencies, add: pip install -r requirements.txt
+
+      - name: Run fetch script
+        env:
+          OBSERVER_LAT: ${{ vars.OBSERVER_LAT || '42.7' }}
+          OBSERVER_LON: ${{ vars.OBSERVER_LON || '-73.11' }}
+          WINDOW_DAYS:  ${{ vars.WINDOW_DAYS  || '15' }}
+          OUTPUT_PATH:  static/data/galilean-events.json
+        run: python scripts/fetch_galilean_events.py
+
+      - name: Commit JSON if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add static/data/galilean-events.json
+          if git diff --cached --quiet; then
+            echo "No changes to galilean-events.json — nothing to commit."
+          else
+            git commit -m "chore(data): update Galilean satellite events [skip ci]"
+            git push
+          fi
