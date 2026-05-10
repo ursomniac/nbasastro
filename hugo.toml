@@ -6,7 +6,7 @@ title = "Northern Berkshire Astronomical Society"
   subtitle = "Clear Skies over the Berkshires"
   banner = "images/m31_banner.jpg"
   logo = "images/nbas-grey.png"
-  site_version = "v1.0.6"
+  site_version = "v1.0.7"
 
 [frontmatter]
   date = ["lastmod", "date", "publishDate"]

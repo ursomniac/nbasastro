@@ -36,16 +36,16 @@ WINDOW_DAYS  = int(os.environ.get("WINDOW_DAYS", "15"))
 OUTPUT_PATH  = Path(os.environ.get("OUTPUT_PATH",
                     Path(__file__).parent.parent / "static" / "data" / "galilean-events.json"))
 
-# Miriade RTS: body 4 = Jupiter, body 10 = Sun (for twilight)
+# Miriade RTS numeric body codes: 5=Jupiter, 10=Sun
+# Comma must be URL-encoded as %2C in the query string
 RTS_URL = (
     "https://ssp.imcce.fr/webservices/miriade/api/rts.php"
-    "?-body=4,10"
+    "?-body=5"
     "&-nbd={nbd}"
     "&-step=1"
     "&-observer={lon}+{lat}"
     "&-ep={ep}"
     "&-twilight=1"
-    "&-tz=-5"        # EST; offset only used for display — we work in UTC
     "&-mime=json"
     "&-from=SSO-Dashboard-ticket22"
 )
@@ -89,18 +89,17 @@ PLUTO_TYPE_MAP = {
 PLUTO_SAT_MAP = {"I": "Io", "II": "Europa", "III": "Ganymede", "IV": "Callisto"}
 
 DISPLAY_LABELS = {
-    "eclipse":        "Eclipse (by Jupiter)",
-    "occultation":    "Occultation (by Jupiter)",
-    "transit":        "Transit (front of Jupiter)",
-    "shadow_transit": "Shadow Transit",
-    # mutual events — may appear if IMCCE mutual data is included later
+    "eclipse":             "Eclipse (by Jupiter)",
+    "occultation":         "Occultation (by Jupiter)",
+    "transit":             "Transit (front of Jupiter)",
+    "shadow_transit":      "Shadow Transit",
     "mutual_eclipse":      "Mutual Eclipse",
     "mutual_occultation":  "Mutual Occultation",
 }
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
-def fetch_url(url: str, timeout: int = 20) -> bytes | None:
+def fetch_url(url: str, timeout: int = 20):
     """Fetch a URL, returning bytes or None on failure."""
     try:
         req = Request(url, headers={"User-Agent": "SSO-Dashboard/1.0 (ticket#22)"})
@@ -111,14 +110,14 @@ def fetch_url(url: str, timeout: int = 20) -> bytes | None:
         return None
 
 
-def date_window() -> tuple[datetime, datetime]:
+def date_window():
     now = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
     return now, now + timedelta(days=WINDOW_DAYS)
 
 
 # ── Jupiter visibility filter ─────────────────────────────────────────────────
 
-def fetch_jupiter_windows(start: datetime, nbd: int) -> dict[str, dict]:
+def fetch_jupiter_windows(start: datetime, nbd: int):
     """
     Returns {date_str: {"rise_utc": HH:MM, "set_utc": HH:MM,
                          "astro_dusk": HH:MM, "astro_dawn": HH:MM}}
@@ -142,97 +141,162 @@ def fetch_jupiter_windows(start: datetime, nbd: int) -> dict[str, dict]:
         print(f"[WARN] Miriade RTS JSON parse error: {exc}", file=sys.stderr)
         return {}
 
-    windows: dict[str, dict] = {}
+    windows = {}
 
-    # Response structure: {"4": [{date record}, ...], "10": [...]}
-    jup_records = data.get("4", [])
-    sun_records  = data.get("10", [])
+    # Response keys are the numeric body codes as strings: "5"=Jupiter, "10"=Sun
+    jup_records = data.get("5", [])
 
-    # Index Sun records by date for cross-referencing twilight
-    sun_by_date: dict[str, dict] = {}
-    for rec in sun_records:
-        d = rec.get("date", "")
-        sun_by_date[d] = rec
+    def extract_hour(field):
+        """field is either None, a dict, or a list of dicts — handle all cases."""
+        if not field:
+            return None
+        if isinstance(field, list):
+            field = field[0] if field else None
+        if isinstance(field, dict):
+            return field.get("hour", "")
+        return None
 
     for rec in jup_records:
         date_str = rec.get("date", "")
         rising  = rec.get("rising")
         setting = rec.get("setting")
-        if rising is None or setting is None:
-            continue   # Jupiter doesn't rise (conjunction, or circumpolar gap)
+        if not rising or not setting:
+            continue   # Jupiter doesn't rise this day
 
-        rise_h = _hms_to_frac(rising.get("hour", ""))
-        set_h  = _hms_to_frac(setting.get("hour", ""))
-        if rise_h is None or set_h is None:
+        rise_hms = extract_hour(rising)
+        set_hms  = extract_hour(setting)
+        rise_jd  = _hms_to_jd(rise_hms, date_str)
+        set_jd   = _hms_to_jd(set_hms,  date_str)
+        if rise_jd is None or set_jd is None:
             continue
 
-        sun_rec = sun_by_date.get(date_str, {})
-        astro_dusk = _hms_to_frac((sun_rec.get("dusk-astronomical") or {}).get("hour", ""))
-        astro_dawn = _hms_to_frac((sun_rec.get("dawn-astronomical") or {}).get("hour", ""))
+        # If Jupiter sets before it rises on this calendar date, it sets next day
+        if set_jd < rise_jd:
+            set_jd += 1.0
 
-        windows[date_str] = {
-            "rise_h":     rise_h,
-            "set_h":      set_h,
-            "dusk_h":     astro_dusk,   # None if not available
-            "dawn_h":     astro_dawn,
-        }
+        windows[date_str] = (rise_jd, set_jd)
 
     return windows
 
 
-def _hms_to_frac(hms: str) -> float | None:
-    """Convert 'HH:MM' or 'HH:MM:SS' sexagesimal string to fractional hours."""
-    if not hms:
-        return None
-    parts = hms.split(":")
-    try:
-        h = float(parts[0])
-        m = float(parts[1]) if len(parts) > 1 else 0
-        s = float(parts[2]) if len(parts) > 2 else 0
-        return h + m / 60 + s / 3600
-    except (ValueError, IndexError):
-        return None
+
+def _dt_to_jd(dt):
+    """Convert a UTC-aware datetime to Julian Date."""
+    a = (14 - dt.month) // 12
+    y = dt.year + 4800 - a
+    m = dt.month + 12*a - 3
+    jdn = dt.day + (153*m+2)//5 + 365*y + y//4 - y//100 + y//400 - 32045
+    return jdn + (dt.hour - 12)/24.0 + dt.minute/1440.0 + dt.second/86400.0
 
 
-def event_visible(event_utc: datetime, windows: dict) -> bool:
+def _jd_to_dt(jd):
+    """Convert Julian Date to UTC-aware datetime."""
+    return datetime.fromtimestamp((jd - 2440587.5) * 86400, tz=timezone.utc)
+
+
+def _hms_to_jd(hms_str, date_str):
     """
-    Return True if the event's UTC time falls within Jupiter's nightly window
-    (after astronomical dusk AND before astronomical dawn, AND Jupiter is up).
-    If windows dict is empty (RTS unavailable), allow all events through.
+    Convert a Miriade HH:MM time string + a YYYY-MM-DD date string to Julian Date.
+    Both are in true UTC (no timezone offset applied).
+    Returns None if parsing fails.
+    """
+    if not hms_str or not date_str:
+        return None
+    try:
+        dt = datetime.strptime(f"{date_str} {hms_str}", "%Y-%m-%d %H:%M").replace(tzinfo=timezone.utc)
+        return _dt_to_jd(dt)
+    except ValueError:
+        return None
+
+
+def _civil_twilight_jd(date_utc, lat_deg, lon_deg):
+    """
+    Return (jd_dawn, jd_dusk) for civil twilight (Sun at -6 deg) as Julian Dates.
+    Uses Spencer (1971) solar declination — accurate to ~1 min.
+    No timezone arithmetic. No modulo.
+    """
+    import math
+    doy = date_utc.timetuple().tm_yday
+    B = math.radians((360.0/365.0) * (doy - 81))
+    dec = 23.45 * math.sin(B)
+    eot_min = 9.87*math.sin(2*B) - 7.53*math.cos(B) - 1.5*math.sin(B)
+    jd_noon = _dt_to_jd(date_utc.replace(hour=12, minute=0, second=0, microsecond=0))
+    jd_solar_noon = jd_noon + eot_min/1440.0 - lon_deg/360.0
+    lat   = math.radians(lat_deg)
+    dec_r = math.radians(dec)
+    cos_ha = (math.sin(math.radians(-6.0)) - math.sin(lat)*math.sin(dec_r)) /              (math.cos(lat)*math.cos(dec_r))
+    if abs(cos_ha) > 1:
+        return None, None
+    ha_days = math.degrees(math.acos(cos_ha)) / 360.0
+    return jd_solar_noon - ha_days, jd_solar_noon + ha_days   # jd_dawn, jd_dusk
+
+
+def _find_window(jd, windows):
+    """
+    Return the (rise_jd, set_jd, jd_dusk, jd_dawn) tuple for the Jupiter arc
+    that contains jd, or None. Checks today and yesterday's date keys.
+    """
+    dt = _jd_to_dt(jd)
+    for date_str in [
+        dt.strftime("%Y-%m-%d"),
+        (dt - timedelta(days=1)).strftime("%Y-%m-%d"),
+    ]:
+        candidate = windows.get(date_str)
+        if candidate:
+            rise_jd, set_jd = candidate
+            if rise_jd <= jd <= set_jd:
+                rise_date = _jd_to_dt(rise_jd).replace(hour=0, minute=0, second=0, microsecond=0)
+                set_date  = _jd_to_dt(set_jd).replace(hour=0, minute=0, second=0, microsecond=0)
+                _, jd_dusk = _civil_twilight_jd(rise_date, OBSERVER_LAT, OBSERVER_LON)
+                jd_dawn, _ = _civil_twilight_jd(set_date,  OBSERVER_LAT, OBSERVER_LON)
+                return rise_jd, set_jd, jd_dusk, jd_dawn
+    return None
+
+
+def event_visible(start_utc, end_utc, windows):
+    """
+    True if the event overlaps the observable window at all.
+    Observable window = intersection of Jupiter-above-horizon and civil night.
+
+    Overlap test: event_start < obs_end AND event_end > obs_start
+    So an event that starts in twilight but ends in darkness is included,
+    and one that starts before Jupiter sets but finishes after is included.
+
+    end_utc may be None (unpaired event) — treat as a point event at start.
     """
     if not windows:
         return True
 
-    date_str = event_utc.strftime("%Y-%m-%d")
-    win = windows.get(date_str)
-    if win is None:
-        # Try previous calendar day — event near midnight might belong there
-        prev = (event_utc - timedelta(days=1)).strftime("%Y-%m-%d")
-        win = windows.get(prev)
+    jd_start = _dt_to_jd(start_utc)
+    jd_end   = _dt_to_jd(end_utc) if end_utc else jd_start
+
+    # Find the window for the start time; if not found try the end time.
+    win = _find_window(jd_start, windows) or _find_window(jd_end, windows)
     if win is None:
         return False
 
-    event_h = event_utc.hour + event_utc.minute / 60
+    rise_jd, set_jd, jd_dusk, jd_dawn = win
 
-    in_jupiter_window = win["rise_h"] <= event_h <= win["set_h"]
-
-    dusk_h = win["dusk_h"]
-    dawn_h = win["dawn_h"]
-    if dusk_h is not None and dawn_h is not None:
-        # Night wraps midnight: dusk > dawn possible
-        if dusk_h > dawn_h:
-            in_night = event_h >= dusk_h or event_h <= dawn_h
-        else:
-            in_night = dusk_h <= event_h <= dawn_h
+    # Observable window = max(rise, dusk) to min(set, dawn)
+    if jd_dusk is not None and jd_dawn is not None:
+        obs_start = max(rise_jd, jd_dusk)
+        obs_end   = min(set_jd,  jd_dawn)
     else:
-        in_night = True  # Can't determine twilight; don't filter
+        obs_start = rise_jd
+        obs_end   = set_jd
 
-    return in_jupiter_window and in_night
+    if obs_end <= obs_start:
+        return False  # no observable window tonight
+
+    # Overlap: event interval and obs window must intersect
+    return jd_start < obs_end and jd_end > obs_start
+
+
 
 
 # ── IMCCE phenjupiter parser ──────────────────────────────────────────────────
 
-def fetch_imcce_events(start: datetime, end: datetime) -> list[dict] | None:
+def fetch_imcce_events(start: datetime, end: datetime):
     """
     Attempt to download and parse the IMCCE phenjupiter flat-text prediction file.
     Returns a list of raw half-events (each line is one start or end boundary),
@@ -267,7 +331,7 @@ def fetch_imcce_events(start: datetime, end: datetime) -> list[dict] | None:
     return half_events
 
 
-def _parse_imcce_line(line: str, start: datetime, end: datetime) -> dict | None:
+def _parse_imcce_line(line: str, start: datetime, end: datetime):
     """
     Try to parse one line of an IMCCE phenjupiter file.
     Returns a dict with keys: satellite, event_half (e.g. 'eclipse_start'), utc
@@ -314,7 +378,7 @@ def _parse_imcce_line(line: str, start: datetime, end: datetime) -> dict | None:
     return None
 
 
-def pair_imcce_half_events(half_events: list[dict]) -> list[dict]:
+def pair_imcce_half_events(half_events: list):
     """
     Pair start/end half-events into complete event records.
     Strategy: match nearest end to each start within 6 hours, same satellite and base type.
@@ -322,7 +386,14 @@ def pair_imcce_half_events(half_events: list[dict]) -> list[dict]:
     events: list[dict] = []
     used = set()
 
-    base_type = lambda h: h.split("_")[0]   # 'eclipse_start' → 'eclipse'
+    # Strip _start or _end suffix to get base type
+    # e.g. 'shadow_transit_start' → 'shadow_transit', 'eclipse_start' → 'eclipse'
+    def base_type(h):
+        if h.endswith("_start"):
+            return h[:-6]
+        if h.endswith("_end"):
+            return h[:-4]
+        return h
 
     for i, start_ev in enumerate(half_events):
         if i in used:
@@ -361,14 +432,8 @@ def pair_imcce_half_events(half_events: list[dict]) -> list[dict]:
                 "duration_min": dur_min,
             })
         else:
-            # Unpaired start — emit with estimated end unknown
-            events.append({
-                "type":       btype,
-                "satellite":  start_ev["satellite"],
-                "start_utc":  start_ev["utc"].strftime("%Y-%m-%dT%H:%M:%SZ"),
-                "end_utc":    None,
-                "duration_min": None,
-            })
+            # Unpaired start (e.g. occultation that ends outside the window) — skip
+            # rather than show a confusing row with — end time and no duration
             used.add(i)
 
     events.sort(key=lambda e: e["start_utc"])
@@ -377,7 +442,7 @@ def pair_imcce_half_events(half_events: list[dict]) -> list[dict]:
 
 # ── Project Pluto fallback parser ─────────────────────────────────────────────
 
-def fetch_pluto_events(start: datetime, end: datetime) -> list[dict] | None:
+def fetch_pluto_events(start: datetime, end: datetime):
     """
     Scrape and parse projectpluto.com/jevent.htm.
     Format:  "<SAT_ROMAN> <CODE> <phase>: <YYYY> <Mon> <DD> <HH:MM>"
@@ -458,7 +523,11 @@ def main() -> None:
         except (ValueError, TypeError):
             visible_events.append(ev)
             continue
-        if event_visible(ev_utc, windows):
+        try:
+            ev_end_utc = datetime.fromisoformat(ev["end_utc"].replace("Z", "+00:00")) if ev.get("end_utc") else None
+        except (ValueError, TypeError):
+            ev_end_utc = None
+        if event_visible(ev_utc, ev_end_utc, windows):
             visible_events.append(ev)
 
     print(f"[INFO] Events after visibility filter: {len(visible_events)}")

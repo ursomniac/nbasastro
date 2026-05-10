@@ -1,0 +1,109 @@
+{
+  "generated_utc": "2026-05-10T04:56:48Z",
+  "source": "Project-Pluto",
+  "observer": {
+    "lat": 42.7,
+    "lon": -73.11,
+    "note": "Times accurate to ~5 min for observers within ~60 miles of this coordinate"
+  },
+  "window_days": 15,
+  "event_count": 12,
+  "events": [
+    {
+      "type": "eclipse",
+      "satellite": "Callisto",
+      "start_utc": "2026-05-15T20:37:00Z",
+      "end_utc": "2026-05-16T01:10:00Z",
+      "duration_min": 273,
+      "type_label": "Eclipse (by Jupiter)"
+    },
+    {
+      "type": "transit",
+      "satellite": "Ganymede",
+      "start_utc": "2026-05-15T21:37:00Z",
+      "end_utc": "2026-05-16T01:00:00Z",
+      "duration_min": 203,
+      "type_label": "Transit (front of Jupiter)"
+    },
+    {
+      "type": "transit",
+      "satellite": "Europa",
+      "start_utc": "2026-05-16T01:12:00Z",
+      "end_utc": "2026-05-16T04:03:00Z",
+      "duration_min": 171,
+      "type_label": "Transit (front of Jupiter)"
+    },
+    {
+      "type": "shadow_transit",
+      "satellite": "Ganymede",
+      "start_utc": "2026-05-16T01:56:00Z",
+      "end_utc": "2026-05-16T05:26:00Z",
+      "duration_min": 210,
+      "type_label": "Shadow Transit"
+    },
+    {
+      "type": "shadow_transit",
+      "satellite": "Europa",
+      "start_utc": "2026-05-16T03:19:00Z",
+      "end_utc": "2026-05-16T06:11:00Z",
+      "duration_min": 172,
+      "type_label": "Shadow Transit"
+    },
+    {
+      "type": "transit",
+      "satellite": "Io",
+      "start_utc": "2026-05-17T00:16:00Z",
+      "end_utc": "2026-05-17T02:33:00Z",
+      "duration_min": 137,
+      "type_label": "Transit (front of Jupiter)"
+    },
+    {
+      "type": "shadow_transit",
+      "satellite": "Io",
+      "start_utc": "2026-05-17T01:21:00Z",
+      "end_utc": "2026-05-17T03:38:00Z",
+      "duration_min": 137,
+      "type_label": "Shadow Transit"
+    },
+    {
+      "type": "transit",
+      "satellite": "Ganymede",
+      "start_utc": "2026-05-23T01:54:00Z",
+      "end_utc": "2026-05-23T05:19:00Z",
+      "duration_min": 205,
+      "type_label": "Transit (front of Jupiter)"
+    },
+    {
+      "type": "transit",
+      "satellite": "Europa",
+      "start_utc": "2026-05-23T03:56:00Z",
+      "end_utc": "2026-05-23T06:47:00Z",
+      "duration_min": 171,
+      "type_label": "Transit (front of Jupiter)"
+    },
+    {
+      "type": "transit",
+      "satellite": "Callisto",
+      "start_utc": "2026-05-23T22:08:00Z",
+      "end_utc": "2026-05-24T02:26:00Z",
+      "duration_min": 258,
+      "type_label": "Transit (front of Jupiter)"
+    },
+    {
+      "type": "transit",
+      "satellite": "Io",
+      "start_utc": "2026-05-24T02:16:00Z",
+      "end_utc": "2026-05-24T04:33:00Z",
+      "duration_min": 137,
+      "type_label": "Transit (front of Jupiter)"
+    },
+    {
+      "type": "shadow_transit",
+      "satellite": "Io",
+      "start_utc": "2026-05-24T03:16:00Z",
+      "end_utc": "2026-05-24T05:34:00Z",
+      "duration_min": 138,
+      "type_label": "Shadow Transit"
+    }
+  ]
+}

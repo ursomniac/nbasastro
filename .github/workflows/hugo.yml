@@ -36,6 +36,15 @@ jobs:
           curl -s "https://api.n2yo.com/rest/v1/satellite/visualpasses/25544/42.7/-73.11/300/10/40/?apiKey=${N2YO_API_KEY}" \
             -o static/data/iss-passes.json
           echo "ISS passes fetched: $(jq '.info.passescount' static/data/iss-passes.json) passes"
+      - name: Fetch Galilean satellite events
+        run: |
+          mkdir -p static/data
+          python scripts/fetch_galilean_events.py
+        env:
+          OBSERVER_LAT: "42.7"
+          OBSERVER_LON: "-73.11"
+          WINDOW_DAYS: "15"
+          OUTPUT_PATH: "static/data/galilean-events.json"
       - name: Fetch CDS charts
         run: |
           mkdir -p static/cds

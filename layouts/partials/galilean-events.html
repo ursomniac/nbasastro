@@ -1,276 +1,147 @@
 {{/*
   layouts/partials/sso/galilean-events.html
-  Ticket #22 — Galilean satellite phenomena table
+  Ticket #22 — Galilean satellite phenomena panel
 
-  Drop directly after the "Jupiter — Great Red Spot" section in your SSD template.
-  Styled to match the NBAS dark theme (01-variables.css tokens).
-  All IDs/classes namespaced gal-ev-* — zero interference with existing panels.
+  DATA: fetched client-side from /data/galilean-events.json at runtime.
+        Written nightly by GitHub Action → static/data/galilean-events.json.
+        Hugo serves it as a static file. No Hugo build-time data reading.
 
-  Usage:
+  PLACEMENT: inside .sso-grid, after closing </div> of #sso-jupiter-panel.
     {{ partial "sso/galilean-events.html" . }}
 
-  Requires: static/data/galilean-events.json  (written by GitHub Action)
+  STYLES: uses existing sso.css classes (sso-panel, sso-full, sso-table,
+          sso-table-scroll, sso-subheading, sso-note). Only badges and
+          filter pills are scoped here.
 */}}
 
-{{- $data := dict -}}
-{{- with resources.Get "data/galilean-events.json" -}}
-  {{- $data = . | transform.Unmarshal -}}
-{{- else -}}
-  {{- return -}}
-{{- end -}}
+<div class="sso-panel sso-full" id="sso-galilean-panel">
+  <h3>Jupiter — Galilean Satellite Phenomena</h3>
 
-{{- $events  := $data.events  | default slice -}}
-{{- if eq (len $events) 0 }}{{ return }}{{ end -}}
+  <div class="sso-grs-right" style="max-width:100%">
 
-{{- $count   := $data.event_count   | default (len $events) -}}
-{{- $winDays := $data.window_days   | default 15 -}}
-{{- $source  := $data.source        | default "IMCCE" -}}
-{{- $genUTC  := $data.generated_utc | default "" -}}
+    <h4 class="sso-subheading">
+      Upcoming Events
+      <span class="gal-ev-count-badge" id="gal-ev-count-badge"></span>
+    </h4>
 
-{{/* ── Panel — matches the h3 / h4 hierarchy of the GRS section above it ── */}}
-<div class="gal-ev-panel">
+    <p class="sso-note">
+      Shown when Jupiter is above the horizon at night.
+      Times ±5 min within ~60 mi of Adams, MA.
+    </p>
 
-  <h3 id="gal-ev-heading">Jupiter — Galilean Satellite Phenomena</h3>
+    <div class="gal-ev-filters" role="group" aria-label="Filter by event type">
+      <span class="gal-ev-filter-label">Filter:</span>
+      <button class="gal-ev-pill gal-ev-pill--active" data-type="all">All</button>
+      <button class="gal-ev-pill" data-type="eclipse">Eclipse</button>
+      <button class="gal-ev-pill" data-type="occultation">Occultation</button>
+      <button class="gal-ev-pill" data-type="transit">Transit</button>
+      <button class="gal-ev-pill" data-type="shadow_transit">Shadow transit</button>
+      <button class="gal-ev-pill" data-type="mutual_eclipse">Mutual eclipse</button>
+      <button class="gal-ev-pill" data-type="mutual_occultation">Mutual occultation</button>
+    </div>
 
-  <h4>Upcoming Events
-    <span class="gal-ev-count-badge">{{ $count }} in next {{ $winDays }} days</span>
-  </h4>
+    <div class="sso-table-scroll" style="max-height:320px">
+      <table class="sso-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Start (local)</th>
+            <th>End (local)</th>
+            <th>Dur.</th>
+            <th>Satellite</th>
+            <th>Event</th>
+          </tr>
+        </thead>
+        <tbody id="gal-ev-tbody">
+          <tr><td colspan="6">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
 
-  <p class="gal-ev-subtitle">
-    Shown when Jupiter is above the horizon at night. Times ±5 min within ~60 mi of Adams, MA.
-  </p>
+    <p id="gal-ev-overflow" class="sso-note" style="margin-top:.4rem" hidden></p>
 
-  {{/* ── Filter pills ── */}}
-  <div class="gal-ev-filters" role="group" aria-label="Filter by event type">
-    <span class="gal-ev-filter-label">Filter:</span>
-    <button class="gal-ev-pill gal-ev-pill--active" data-type="all">All</button>
-    <button class="gal-ev-pill" data-type="eclipse">Eclipse</button>
-    <button class="gal-ev-pill" data-type="occultation">Occultation</button>
-    <button class="gal-ev-pill" data-type="transit">Transit</button>
-    <button class="gal-ev-pill" data-type="shadow_transit">Shadow transit</button>
-    <button class="gal-ev-pill" data-type="mutual_eclipse">Mutual eclipse</button>
-    <button class="gal-ev-pill" data-type="mutual_occultation">Mutual occultation</button>
+    <p class="sso-note" style="margin-top:.5rem" id="gal-ev-footer" hidden>
+      Source: <a href="https://ssp.imcce.fr" rel="noopener">IMCCE/LTE</a>
+      (NOE-5-2021) &middot;
+      fallback <a href="https://www.projectpluto.com/jevent.htm" rel="noopener">Project Pluto</a>
+      &middot; <code class="gal-ev-src-tag" id="gal-ev-src"></code>
+      &middot; updated <span id="gal-ev-gen"></span>
+    </p>
+
   </div>
-
-  {{/* ── Scrollable table ── */}}
-  <div class="gal-ev-table-wrap">
-    <table class="gal-ev-table">
-      <caption class="gal-ev-sr-only">Galilean satellite phenomena — next {{ $winDays }} days</caption>
-      <thead>
-        <tr>
-          <th scope="col">Date</th>
-          <th scope="col">Start (local)</th>
-          <th scope="col">End (local)</th>
-          <th scope="col">Dur.</th>
-          <th scope="col">Satellite</th>
-          <th scope="col">Event</th>
-        </tr>
-      </thead>
-      <tbody id="gal-ev-tbody">
-        {{- range $events }}
-        <tr class="gal-ev-row" data-type="{{ .type }}">
-          <td class="gal-ev-date"       data-utc="{{ .start_utc }}">{{ .start_utc | dateFormat "Jan 2" }}</td>
-          <td class="gal-ev-time-start" data-utc="{{ .start_utc }}">{{ .start_utc }}</td>
-          <td class="gal-ev-time-end"   data-utc="{{ .end_utc }}">{{ .end_utc }}</td>
-          <td class="gal-ev-dur">
-            {{- with .duration_min }}{{ . }}&thinsp;min{{ else }}&mdash;{{ end -}}
-          </td>
-          <td class="gal-ev-sat">{{ .satellite }}</td>
-          <td class="gal-ev-type-cell">
-            <span class="gal-ev-badge gal-ev-badge--{{ .type | replaceRE "_" "-" }}">
-              {{- .type_label | default (.type | replaceRE "_" " " | title) -}}
-            </span>
-          </td>
-        </tr>
-        {{- end }}
-      </tbody>
-    </table>
-  </div>
-
-  <p id="gal-ev-overflow" class="gal-ev-overflow" hidden></p>
-
-  <p class="gal-ev-footer">
-    Source: <a href="https://ssp.imcce.fr" rel="noopener">IMCCE/LTE</a>
-    (NOE-5-2021) · fallback <a href="https://www.projectpluto.com/jevent.htm" rel="noopener">Project Pluto</a>
-    · <code class="gal-ev-src-tag">{{ $source }}</code>
-    {{- if $genUTC }} · updated {{ $genUTC | dateFormat "Jan 2 15:04 UTC" }}{{ end -}}
-  </p>
-
 </div>
 
-{{/* ════════════════════════════════════════════════════════════════════════════
-     STYLES — keyed off site variables from 01-variables.css.
-     All selectors prefixed gal-ev- so nothing leaks to other panels.
-     Badges use dark-on-dark-tinted colours that stay legible on #0d1421.
-     ════════════════════════════════════════════════════════════════════════════ */}}
 <style>
-/* ── Panel wrapper ── */
-.gal-ev-panel {
-  margin: 0 0 2rem 0;
-}
-
-/* ── h4 with inline count badge ── */
-.gal-ev-panel h4 {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  margin-bottom: 0.25rem;
-}
+/* h4 with inline badge */
+.sso-subheading { display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; }
 .gal-ev-count-badge {
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 0.15rem 0.55rem;
-  border-radius: 20px;
-  background: var(--space-blue, #1a2a44);
-  color: var(--gold-dim, #d4af37);
-  border: 1px solid var(--gold-border, #8e7037);
-  letter-spacing: 0.02em;
-  white-space: nowrap;
+  font-size:.72rem; font-weight:600;
+  padding:.15rem .55rem; border-radius:20px;
+  background:var(--space-blue,#1a2a44);
+  color:var(--gold-dim,#d4af37);
+  border:1px solid var(--gold-border,#8e7037);
+  white-space:nowrap;
 }
 
-/* ── Subtitle — mirrors "Accuracy ±10 min" line in GRS section ── */
-.gal-ev-subtitle {
-  font-size: 0.82rem;
-  color: var(--text-muted, #b0bec5);
-  margin: 0 0 0.75rem 0;
-  font-style: italic;
-}
-
-/* ── Filter pills ── */
+/* Filter pills */
 .gal-ev-filters {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.35rem;
-  margin-bottom: 0.65rem;
+  display:flex; flex-wrap:wrap; align-items:center;
+  gap:.35rem; margin-bottom:.65rem;
 }
-.gal-ev-filter-label {
-  font-size: 0.78rem;
-  color: var(--text-muted, #b0bec5);
-  margin-right: 0.15rem;
-}
+.gal-ev-filter-label { font-size:.78rem; color:var(--text-muted,#b0bec5); margin-right:.15rem; }
 .gal-ev-pill {
-  padding: 0.18rem 0.6rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border: 1px solid var(--border-soft, #3a4a64);
-  border-radius: 20px;
-  background: transparent;
-  color: var(--text-muted, #b0bec5) !important;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
-  text-decoration: none !important;  /* override site global a rule */
+  padding:.18rem .6rem; font-size:.75rem; font-weight:600;
+  border:1px solid var(--border-soft,#3a4a64); border-radius:20px;
+  background:transparent; color:var(--text-muted,#b0bec5) !important;
+  cursor:pointer; transition:background .15s,color .15s,border-color .15s;
+  text-decoration:none !important;
 }
 .gal-ev-pill:hover {
-  background: var(--space-blue, #1a2a44);
-  color: var(--gold-base, #f8d44e) !important;
-  border-color: var(--gold-border, #8e7037);
+  background:var(--space-blue,#1a2a44);
+  color:var(--gold-base,#f8d44e) !important;
+  border-color:var(--gold-border,#8e7037);
 }
 .gal-ev-pill--active {
-  background: var(--space-blue, #1a2a44);
-  color: var(--gold-dim, #d4af37) !important;
-  border-color: var(--gold-border, #8e7037);
+  background:var(--space-blue,#1a2a44);
+  color:var(--gold-dim,#d4af37) !important;
+  border-color:var(--gold-border,#8e7037);
 }
 
-/* ── Scrollable table wrapper ── */
-.gal-ev-table-wrap {
-  overflow-x: auto;
-  max-height: 320px;
-  overflow-y: auto;
-  border: 1px solid var(--border-soft, #3a4a64);
-  border-radius: 4px;
-}
-
-/* ── Table — mirrors .article-body table in tables.css ── */
-.gal-ev-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.845rem;
-  min-width: 520px;
-}
-.gal-ev-table thead {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-.gal-ev-table th {
-  background: var(--space-blue, #1a2a44);
-  color: var(--gold-dim, #d4af37);
-  padding: 10px;
-  border: 1px solid var(--border-soft, #3a4a64);
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-.gal-ev-table td {
-  padding: 8px 10px;
-  border: 1px solid var(--border-soft, #3a4a64);
-  color: var(--text-main, #d1d1d1);
-  white-space: nowrap;
-}
-.gal-ev-table tbody tr:hover td {
-  background: var(--space-blue, #1a2a44);
-}
-
-/* ── Event-type badges — dark-tinted, legible on #0d1421 ── */
+/* Event-type badges */
 .gal-ev-badge {
-  display: inline-block;
-  padding: 0.12rem 0.5rem;
-  border-radius: 3px;
-  font-size: 0.73rem;
-  font-weight: 600;
-  white-space: nowrap;
+  display:inline-block; padding:.12rem .5rem;
+  border-radius:3px; font-size:.73rem; font-weight:600; white-space:nowrap;
 }
-.gal-ev-badge--eclipse            { background:#0e2040; color:#7db8f7; border:1px solid #1e3a6a; }
-.gal-ev-badge--occultation        { background:#1a0e30; color:#b08cf5; border:1px solid #3a1e6a; }
-.gal-ev-badge--transit            { background:#0a2018; color:#4fd1a0; border:1px solid #1a4a34; }
+.gal-ev-badge--eclipse            { background:#0e2040; color:#7db8f7;                border:1px solid #1e3a6a; }
+.gal-ev-badge--occultation        { background:#1a0e30; color:#b08cf5;                border:1px solid #3a1e6a; }
+.gal-ev-badge--transit            { background:#0a2018; color:#4fd1a0;                border:1px solid #1a4a34; }
 .gal-ev-badge--shadow-transit     { background:#2a1e04; color:var(--gold-base,#f8d44e); border:1px solid var(--gold-border,#8e7037); }
-.gal-ev-badge--mutual-eclipse     { background:#2a1004; color:#f4a460; border:1px solid #6a2e10; }
-.gal-ev-badge--mutual-occultation { background:#2a0818; color:#f48aaa; border:1px solid #6a1034; }
+.gal-ev-badge--mutual-eclipse     { background:#2a1004; color:#f4a460;                border:1px solid #6a2e10; }
+.gal-ev-badge--mutual-occultation { background:#2a0818; color:#f48aaa;                border:1px solid #6a1034; }
 
-/* ── Overflow notice ── */
-.gal-ev-overflow {
-  font-size: 0.8rem;
-  color: var(--text-muted, #b0bec5);
-  margin: 0.4rem 0 0;
-}
-
-/* ── Footer ── */
-.gal-ev-footer {
-  font-size: 0.75rem;
-  color: var(--text-muted, #b0bec5);
-  margin: 0.5rem 0 0;
-}
+/* Source tag */
 .gal-ev-src-tag {
-  font-size: 0.72rem;
-  background: var(--space-blue, #1a2a44);
-  color: var(--text-muted, #b0bec5);
-  padding: 0.05rem 0.35rem;
-  border-radius: 3px;
-  border: 1px solid var(--border-soft, #3a4a64);
-}
-
-/* ── Screen-reader only ── */
-.gal-ev-sr-only {
-  position:absolute; width:1px; height:1px; padding:0;
-  margin:-1px; overflow:hidden; clip:rect(0,0,0,0);
-  white-space:nowrap; border:0;
+  font-size:.72rem; background:var(--space-blue,#1a2a44);
+  color:var(--text-muted,#b0bec5); padding:.05rem .35rem;
+  border-radius:3px; border:1px solid var(--border-soft,#3a4a64);
 }
 </style>
 
-{{/* ════════════════════════════════════════════════════════════════════════════
-     JS — self-contained, touches only gal-ev-* elements.
-     1. UTC → local time   2. Filter pills   3. Row collapse / show-all
-     ════════════════════════════════════════════════════════════════════════════ */}}
 <script>
 (function () {
   'use strict';
   var MAX_VISIBLE = 8;
 
-  /* ── UTC → local time ── */
+  var BADGE_CLASS = {
+    eclipse:            'eclipse',
+    occultation:        'occultation',
+    transit:            'transit',
+    shadow_transit:     'shadow-transit',
+    mutual_eclipse:     'mutual-eclipse',
+    mutual_occultation: 'mutual-occultation'
+  };
+
+  /* ── Formatting ── */
   function fmtDate(iso) {
     if (!iso || iso === 'None' || iso === 'null') return '\u2014';
     var d = new Date(iso);
@@ -281,15 +152,37 @@
     var d = new Date(iso);
     return isNaN(d) ? iso : d.toLocaleTimeString(undefined, { hour:'2-digit', minute:'2-digit', timeZoneName:'short' });
   }
-  document.querySelectorAll('.gal-ev-date')      .forEach(function(c){ c.textContent = fmtDate(c.dataset.utc); });
-  document.querySelectorAll('.gal-ev-time-start').forEach(function(c){ c.textContent = fmtTime(c.dataset.utc); });
-  document.querySelectorAll('.gal-ev-time-end')  .forEach(function(c){ c.textContent = fmtTime(c.dataset.utc); });
 
-  /* ── Row overflow ── */
+  /* ── Build table rows from data ── */
+  function buildRows(events) {
+    var tbody = document.getElementById('gal-ev-tbody');
+    if (!events || events.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6">No events visible in the next window.</td></tr>';
+      return;
+    }
+    var html = '';
+    events.forEach(function (ev) {
+      var bc = 'gal-ev-badge gal-ev-badge--' + (BADGE_CLASS[ev.type] || ev.type.replace(/_/g, '-'));
+      var label = ev.type_label || ev.type.replace(/_/g, ' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+      var dur = ev.duration_min != null ? ev.duration_min + '\u202fmin' : '\u2014';
+      html +=
+        '<tr class="gal-ev-row" data-type="' + ev.type + '">' +
+        '<td class="gal-ev-date"       data-utc="' + (ev.start_utc||'') + '">' + fmtDate(ev.start_utc) + '</td>' +
+        '<td class="gal-ev-time-start" data-utc="' + (ev.start_utc||'') + '">' + fmtTime(ev.start_utc) + '</td>' +
+        '<td class="gal-ev-time-end"   data-utc="' + (ev.end_utc||'')   + '">' + fmtTime(ev.end_utc)   + '</td>' +
+        '<td>' + dur + '</td>' +
+        '<td>' + (ev.satellite || '\u2014') + '</td>' +
+        '<td><span class="' + bc + '">' + label + '</span></td>' +
+        '</tr>';
+    });
+    tbody.innerHTML = html;
+  }
+
+  /* ── Row overflow: show MAX_VISIBLE, collapse rest ── */
   function applyOverflow() {
     var all = document.querySelectorAll('#gal-ev-tbody .gal-ev-row');
     var shown = 0, hidden = 0;
-    all.forEach(function(r) {
+    all.forEach(function (r) {
       if (r.dataset.filtered === 'true') return;
       shown++;
       if (shown > MAX_VISIBLE) {
@@ -303,8 +196,8 @@
       notice.hidden = false;
       notice.innerHTML = hidden + ' more event' + (hidden > 1 ? 's' : '') +
         ' in window.\u2002<button class="gal-ev-pill" id="gal-ev-show-all">Show all</button>';
-      document.getElementById('gal-ev-show-all').addEventListener('click', function() {
-        document.querySelectorAll('[data-overflow="true"]').forEach(function(r){
+      document.getElementById('gal-ev-show-all').addEventListener('click', function () {
+        document.querySelectorAll('[data-overflow="true"]').forEach(function (r) {
           r.style.display = ''; delete r.dataset.overflow;
         });
         notice.hidden = true;
@@ -316,29 +209,63 @@
 
   /* ── Filter pills ── */
   function applyFilter(type) {
-    document.querySelectorAll('#gal-ev-tbody .gal-ev-row').forEach(function(r) {
+    document.querySelectorAll('#gal-ev-tbody .gal-ev-row').forEach(function (r) {
       var hide = type !== 'all' && r.dataset.type !== type;
       r.dataset.filtered = hide ? 'true' : 'false';
       r.style.display = hide ? 'none' : '';
       delete r.dataset.overflow;
     });
     applyOverflow();
-    document.querySelectorAll('.gal-ev-pill[data-type]').forEach(function(b){
+    document.querySelectorAll('.gal-ev-pill[data-type]').forEach(function (b) {
       b.classList.toggle('gal-ev-pill--active', b.dataset.type === type);
     });
   }
 
-  document.querySelectorAll('.gal-ev-pill[data-type]').forEach(function(btn){
-    btn.addEventListener('click', function(){ applyFilter(btn.dataset.type); });
+  document.querySelectorAll('.gal-ev-pill[data-type]').forEach(function (btn) {
+    btn.addEventListener('click', function () { applyFilter(btn.dataset.type); });
   });
 
-  /* Hide pills for types absent from this run's data */
-  var present = new Set();
-  document.querySelectorAll('#gal-ev-tbody .gal-ev-row').forEach(function(r){ present.add(r.dataset.type); });
-  document.querySelectorAll('.gal-ev-pill[data-type]').forEach(function(b){
-    if (b.dataset.type !== 'all' && !present.has(b.dataset.type)) b.style.display = 'none';
-  });
+  /* ── Main: fetch JSON, render ── */
+  fetch('/data/galilean-events.json')
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      var events = data.events || [];
 
-  applyOverflow();
+      buildRows(events);
+
+      /* Count badge */
+      var badge = document.getElementById('gal-ev-count-badge');
+      if (badge) badge.textContent = (data.event_count || events.length) + ' in next ' + (data.window_days || 15) + ' days';
+
+      /* Hide filter pills for types not in this run's data */
+      var present = new Set(events.map(function (e) { return e.type; }));
+      document.querySelectorAll('.gal-ev-pill[data-type]').forEach(function (b) {
+        if (b.dataset.type !== 'all' && !present.has(b.dataset.type)) b.style.display = 'none';
+      });
+
+      applyOverflow();
+
+      /* Footer */
+      var footer = document.getElementById('gal-ev-footer');
+      if (footer) {
+        footer.hidden = false;
+        var src = document.getElementById('gal-ev-src');
+        var gen = document.getElementById('gal-ev-gen');
+        if (src) src.textContent = data.source || '—';
+        if (gen && data.generated_utc) {
+          var d = new Date(data.generated_utc);
+          gen.textContent = isNaN(d) ? data.generated_utc :
+            d.toLocaleString(undefined, { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', timeZoneName:'short' });
+        }
+      }
+    })
+    .catch(function (err) {
+      document.getElementById('gal-ev-tbody').innerHTML =
+        '<tr><td colspan="6" class="sso-error">Could not load event data: ' + err.message + '</td></tr>';
+    });
+
 }());
 </script>
