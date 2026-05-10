@@ -438,13 +438,61 @@
 }
 
 /* --- Canvas defaults --- */
-canvas {
+canvas:not(.mars-marker-overlay) {
   border-radius: 6px;
   background: var(--deep-bg);
 }
 
 #sso-jupiter-canvas { width: 100%; height: auto; }
 #sso-saturn-canvas  { width: 100%; height: auto; }
+
+/* --- Mars globe overlay --- */
+.mars-globe-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+  line-height: 0;
+  /* Height is set by the globe canvas via aspect-ratio.
+     The marker canvas is absolute inside it. */
+}
+
+.mars-globe-wrap #mars-globe-canvas {
+  display: block;
+  width: 100% !important;
+  height: auto !important;   /* safe: CSS display size only; WebGL buffer is set in JS */
+  aspect-ratio: 1 / 1;
+}
+
+/* The blanket .sso-panel canvas rule would set height:auto on the marker canvas
+   too — that's fine for a 2D canvas. But we need it to fill the wrap absolutely. */
+.mars-marker-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;  /* fill the wrap, not auto */
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.mars-globe-wrap:hover .mars-marker-overlay {
+  pointer-events: auto;
+}
+
+/* --- Mars feature transit table --- */
+#sso-mars-transit-rows td {
+  white-space: nowrap;
+}
+
+/* --- Mars feature id column --- */
+.mars-feature-id {
+  color: var(--gold-base) !important;
+  font-weight: 700;
+  font-family: monospace;
+  text-align: center;
+  white-space: nowrap;
+  padding-right: 4px !important;
+}
 
 /* --- Errors --- */
 .error, .sso-error { color: #f88; }
@@ -473,9 +521,4 @@ canvas {
     max-width: 100%;
     flex: 1 1 auto;
   }
-}
-
-/* --- Mars feature transit table --- */
-#sso-mars-transit-rows td {
-  white-space: nowrap;
 }

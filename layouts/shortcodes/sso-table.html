@@ -90,7 +90,10 @@
 
         <!-- left column: Globe only -->
         <div class="sso-grs-globe">
-          <canvas id="mars-globe-canvas" width="400" height="400" class="sso-panel-image"></canvas>
+          <div class="mars-globe-wrap">
+	    <canvas id="mars-globe-canvas" width="400" height="400"></canvas>
+            <canvas id="mars-marker-canvas" class="mars-marker-overlay"></canvas>
+          </div>
           <div id="mars-globe-meta"></div>
         </div>
 
@@ -102,6 +105,7 @@
             <table class="sso-table">
               <thead>
                 <tr>
+                  <th></th>
                   <th>Feature</th>
                   <th>Lon</th>
                   <th>Lat</th>
@@ -660,6 +664,7 @@ function renderMarsFeatureTransits(date, marsData) {
     const latStr = (f.lat >= 0 ? '+' : '') + f.lat + '°'
     if (!f.transitDate) {
       return `<tr>
+        <td class="mars-feature-id">${f.id}</td>
         <td>${f.name}</td>
         <td>${lonStr}</td>
         <td>${latStr}</td>
@@ -669,6 +674,7 @@ function renderMarsFeatureTransits(date, marsData) {
     const dateStr = f.transitDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
     const timeStr = f.transitDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
     return `<tr>
+      <td class="mars-feature-id">${f.id}</td>
       <td>${f.name}</td>
       <td>${lonStr}</td>
       <td>${latStr}</td>
