@@ -94,19 +94,21 @@
       const pad = 5;
       ctx.font = "12px sans-serif";
       const tw = ctx.measureText(f.name).width;
-      const bx = f.x + 10;
-      const by = f.y - 20;
       const bw = tw + pad * 2;
       const bh = 20;
+      const nearRight = f.x + 10 + bw > W;
+      const nearTop = f.y - 20 < 0;
+      const bx = nearRight ? f.x - 10 - bw : f.x + 10;
+      const by = nearTop ? f.y + 5 : f.y - 20;
       ctx.save();
       ctx.fillStyle = "rgba(0,0,0,0.75)";
       ctx.beginPath();
       ctx.roundRect(bx, by, bw, bh, 3);
       ctx.fill();
       ctx.fillStyle = "#ffffff";
-      ctx.textAlign = "left";
+      ctx.textAlign = nearRight ? "right" : "left";
       ctx.textBaseline = "middle";
-      ctx.fillText(f.name, bx + pad, by + bh / 2);
+      ctx.fillText(f.name, nearRight ? bx + bw - pad : bx + pad, by + bh / 2);
       ctx.restore();
     }
   }
