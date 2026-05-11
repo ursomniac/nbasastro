@@ -3,220 +3,436 @@
 
 <div class="sso-wrapper">
 
-  <div class="sso-grid">
+  {{/* ── Accordion styles ────────────────────────────────────────────────── */}}
+  <style>
+  .sso-accordion-section {
+    margin-bottom: .5rem;
+  }
 
-    <!-- Epoch — full -->
-    <div class="sso-panel sso-full" id="sso-info-panel">
-      <h3>Epoch</h3>
-      <div class="sso-controls">
-        <label for="sso-datetime">Date/Time (local):</label>
-        <input type="datetime-local" id="sso-datetime">
-        <button id="sso-now-btn">Now</button>
-        <button id="sso-calc-btn">Calculate</button>
-      </div>
-      <!-- 2-column key/value: no scroll wrapper needed -->
-      <table class="sso-table">
-        <tbody id="sso-info-rows"><tr><td colspan="2">Loading...</td></tr></tbody>
-      </table>
-    </div>
+  .sso-accordion-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .65rem 1rem;
+    background: var(--space-blue, #1a2a44);
+    border: 1px solid var(--border-soft, #3a4a64);
+    border-radius: 6px;
+    color: var(--gold-dim, #d4af37);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    cursor: pointer;
+    text-align: left;
+    transition: background .15s, border-color .15s;
+    /* override site global <a> / <button> rules */
+    text-decoration: none !important;
+  }
+  .sso-accordion-header:hover {
+    background: #223354;
+    border-color: var(--gold-border, #8e7037);
+  }
 
-    <!-- Planets — full, 6 columns: needs scroll wrapper -->
-    <div class="sso-panel sso-full" id="sso-planets-panel">
-      <h3>Planet Positions</h3>
-      <div class="sso-table-scroll">
+  .sso-accordion-symbol {
+    font-size: 1.4rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .sso-accordion-label {
+    flex: 1;
+  }
+
+  .sso-accordion-chevron {
+    font-size: .9rem;
+    color: var(--text-muted, #b0bec5);
+    transition: transform .25s;
+    flex-shrink: 0;
+  }
+  .sso-accordion-header[aria-expanded="true"] .sso-accordion-chevron {
+    transform: rotate(180deg);
+  }
+
+  .sso-accordion-body {
+    overflow: hidden;
+    transition: max-height .3s ease, opacity .3s ease;
+    max-height: 0;
+    opacity: 0;
+  }
+  .sso-accordion-body.sso-acc-open {
+    max-height: 9999px;   /* large enough for any content */
+    opacity: 1;
+  }
+
+  /* Always-visible epoch section — no toggle */
+  .sso-epoch-section {
+    margin-bottom: .5rem;
+  }
+  </style>
+
+  {{/* ══════════════════════════════════════════════════════════════════════
+       1. EPOCH — always visible, no accordion
+       ══════════════════════════════════════════════════════════════════════ */}}
+  <div class="sso-epoch-section">
+    <div class="sso-grid">
+      <div class="sso-panel sso-full" id="sso-info-panel">
+        <h3>Epoch</h3>
+        <div class="sso-controls">
+          <label for="sso-datetime">Date/Time (local):</label>
+          <input type="datetime-local" id="sso-datetime">
+          <button id="sso-now-btn">Now</button>
+          <button id="sso-calc-btn">Calculate</button>
+        </div>
         <table class="sso-table">
-          <thead>
-            <tr>
-              <th>Planet</th>
-              <th>RA</th>
-              <th>Dec</th>
-              <th>Con.</th>
-              <th>Dist. (AU)</th>
-              <th>Ang.<br>Size</th>
-              <th>Mag.</th>
-            </tr>
-          </thead>
-          <tbody id="sso-planet-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
+          <tbody id="sso-info-rows"><tr><td colspan="2">Loading...</td></tr></tbody>
         </table>
       </div>
     </div>
+  </div>
 
-    <!-- Sun — half, 2-column key/value: no scroll wrapper -->
-    <div class="sso-panel" id="sso-sun-panel">
-      <h3>Sun</h3>
-      <a href="https://soho.nascom.nasa.gov/data/realtime-images.html" target="_blank">
-        <img src="https://sohowww.nascom.nasa.gov/data/realtime/hmi_igr/1024/latest.jpg"
-             alt="Current Sunspots (SOHO/SDO)"
-             class="sso-panel-image">
-      </a>
-      <p class="sso-image-caption">HMI Intensitygram — click for full res</p>
-      <table class="sso-table">
-        <tbody id="sso-sun-rows"><tr><td colspan="2">Loading...</td></tr></tbody>
-      </table>
-    </div>
-
-    <!-- Moon — half, 2-column key/value: no scroll wrapper -->
-    <div class="sso-panel" id="sso-moon-panel">
-      <h3>Moon</h3>
-      <div id="sso-moon-canvas" class="sso-panel-image-wrap"></div>
-      <table class="sso-table">
-        <tbody id="sso-moon-rows"><tr><td colspan="2">Loading...</td></tr></tbody>
-      </table>
-    </div>
-
-    <!-- Mercury — half -->
-    <div class="sso-panel" id="sso-mercury-panel">
-      <h3>Mercury</h3>
-      <div class="sso-panel-image-wrap">
-        <canvas id="sso-mercury-canvas" width="160" height="160" class="sso-phase-canvas"></canvas>
-      </div>
-      <div id="sso-mercury-info"></div>
-    </div>
-
-    <!-- Venus — half -->
-    <div class="sso-panel" id="sso-venus-panel">
-      <h3>Venus</h3>
-      <div class="sso-panel-image-wrap">
-        <canvas id="sso-venus-canvas" width="160" height="160" class="sso-phase-canvas"></canvas>
-      </div>
-      <div id="sso-venus-info"></div>
-    </div>
-
-    <!-- Mars — full, 2-column: globe left, feature transits right -->
-    <div class="sso-panel sso-full" id="sso-mars-globe-panel">
-      <h3>Mars — Surface Feature Transits</h3>
-
-      <div class="sso-grs-grid">
-
-        <!-- left column: Globe only -->
-        <div class="sso-grs-globe">
-          <div class="mars-globe-wrap">
-	    <canvas id="mars-globe-canvas" width="400" height="400"></canvas>
-            <canvas id="mars-marker-canvas" class="mars-marker-overlay"></canvas>
-          </div>
-          <div id="mars-globe-meta"></div>
-        </div>
-
-        <!-- right column: feature transits -->
-        <div class="sso-grs-right">
-          <h4 class="sso-subheading">Next Central Meridian Transits</h4>
-          <p class="sso-note">Next time each feature crosses Mars' central meridian. Accuracy ~4 min.</p>
+  {{/* ══════════════════════════════════════════════════════════════════════
+       2. PLANETS ☿♀♂♃♄⛢♆ — open by default
+       ══════════════════════════════════════════════════════════════════════ */}}
+  <div class="sso-accordion-section" id="acc-planets">
+    <button class="sso-accordion-header" aria-expanded="true" aria-controls="acc-planets-body">
+      <span class="sso-accordion-symbol">🪐</span>
+      <span class="sso-accordion-label">Planet Positions</span>
+      <span class="sso-accordion-chevron">▼</span>
+    </button>
+    <div class="sso-accordion-body sso-acc-open" id="acc-planets-body">
+      <div class="sso-grid">
+        <div class="sso-panel sso-full" id="sso-planets-panel">
+          <h3>Planet Positions</h3>
           <div class="sso-table-scroll">
             <table class="sso-table">
               <thead>
                 <tr>
-                  <th></th>
-                  <th>Feature</th>
-                  <th>Lon</th>
-                  <th>Lat</th>
-                  <th>Date</th>
-                  <th>Time (local)</th>
+                  <th>Planet</th>
+                  <th>RA</th>
+                  <th>Dec</th>
+                  <th>Con.</th>
+                  <th>Dist. (AU)</th>
+                  <th>Ang.<br>Size</th>
+                  <th>Mag.</th>
                 </tr>
               </thead>
-              <tbody id="sso-mars-transit-rows">
-                <tr><td colspan="5">Loading...</td></tr>
-              </tbody>
+              <tbody id="sso-planet-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{/* ══════════════════════════════════════════════════════════════════════
+       3. SUN & MOON ☉☽ — collapsed by default
+       ══════════════════════════════════════════════════════════════════════ */}}
+  <div class="sso-accordion-section" id="acc-sunmoon">
+    <button class="sso-accordion-header" aria-expanded="false" aria-controls="acc-sunmoon-body">
+      <span class="sso-accordion-symbol">☉ ☽</span>
+      <span class="sso-accordion-label">Sun &amp; Moon</span>
+      <span class="sso-accordion-chevron">▼</span>
+    </button>
+    <div class="sso-accordion-body" id="acc-sunmoon-body">
+      <div class="sso-grid">
+
+        <div class="sso-panel" id="sso-sun-panel">
+          <h3>Sun</h3>
+          <a href="https://soho.nascom.nasa.gov/data/realtime-images.html" target="_blank">
+            <img src="https://sohowww.nascom.nasa.gov/data/realtime/hmi_igr/1024/latest.jpg"
+                 alt="Current Sunspots (SOHO/SDO)"
+                 class="sso-panel-image">
+          </a>
+          <p class="sso-image-caption">HMI Intensitygram — click for full res</p>
+          <table class="sso-table">
+            <tbody id="sso-sun-rows"><tr><td colspan="2">Loading...</td></tr></tbody>
+          </table>
+        </div>
+
+        <div class="sso-panel" id="sso-moon-panel">
+          <h3>Moon</h3>
+          <div id="sso-moon-canvas" class="sso-panel-image-wrap"></div>
+          <table class="sso-table">
+            <tbody id="sso-moon-rows"><tr><td colspan="2">Loading...</td></tr></tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {{/* ══════════════════════════════════════════════════════════════════════
+       4. INNER PLANETS ☿♀ — collapsed by default
+       ══════════════════════════════════════════════════════════════════════ */}}
+  <div class="sso-accordion-section" id="acc-inner">
+    <button class="sso-accordion-header" aria-expanded="false" aria-controls="acc-inner-body">
+      <span class="sso-accordion-symbol">☿ ♀</span>
+      <span class="sso-accordion-label">Inner Planets</span>
+      <span class="sso-accordion-chevron">▼</span>
+    </button>
+    <div class="sso-accordion-body" id="acc-inner-body">
+      <div class="sso-grid">
+
+        <div class="sso-panel" id="sso-mercury-panel">
+          <h3>Mercury</h3>
+          <div class="sso-panel-image-wrap">
+            <canvas id="sso-mercury-canvas" width="160" height="160" class="sso-phase-canvas"></canvas>
+          </div>
+          <div id="sso-mercury-info"></div>
+        </div>
+
+        <div class="sso-panel" id="sso-venus-panel">
+          <h3>Venus</h3>
+          <div class="sso-panel-image-wrap">
+            <canvas id="sso-venus-canvas" width="160" height="160" class="sso-phase-canvas"></canvas>
+          </div>
+          <div id="sso-venus-info"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {{/* ══════════════════════════════════════════════════════════════════════
+       5. MARS ♂ — collapsed by default
+       ══════════════════════════════════════════════════════════════════════ */}}
+  <div class="sso-accordion-section" id="acc-mars">
+    <button class="sso-accordion-header" aria-expanded="false" aria-controls="acc-mars-body">
+      <span class="sso-accordion-symbol">♂</span>
+      <span class="sso-accordion-label">Mars</span>
+      <span class="sso-accordion-chevron">▼</span>
+    </button>
+    <div class="sso-accordion-body" id="acc-mars-body">
+      <div class="sso-grid">
+
+        <div class="sso-panel sso-full" id="sso-mars-globe-panel">
+          <h3>Mars — Surface Feature Transits</h3>
+          <div class="sso-grs-grid">
+            <div class="sso-grs-globe">
+              <div class="mars-globe-wrap">
+                <canvas id="mars-globe-canvas" width="400" height="400"></canvas>
+                <canvas id="mars-marker-canvas" class="mars-marker-overlay"></canvas>
+              </div>
+              <div id="mars-globe-meta"></div>
+            </div>
+            <div class="sso-grs-right">
+              <h4 class="sso-subheading">Next Central Meridian Transits</h4>
+              <p class="sso-note">Next time each feature crosses Mars' central meridian. Accuracy ~4 min.</p>
+              <div class="sso-table-scroll">
+                <table class="sso-table">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Feature</th>
+                      <th>Lon</th>
+                      <th>Lat</th>
+                      <th>Date</th>
+                      <th>Time (local)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sso-mars-transit-rows">
+                    <tr><td colspan="5">Loading...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {{/* ══════════════════════════════════════════════════════════════════════
+       6. JUPITER ♃ — collapsed by default
+       ══════════════════════════════════════════════════════════════════════ */}}
+  <div class="sso-accordion-section" id="acc-jupiter">
+    <button class="sso-accordion-header" aria-expanded="false" aria-controls="acc-jupiter-body">
+      <span class="sso-accordion-symbol">♃</span>
+      <span class="sso-accordion-label">Jupiter</span>
+      <span class="sso-accordion-chevron">▼</span>
+    </button>
+    <div class="sso-accordion-body" id="acc-jupiter-body">
+      <div class="sso-grid">
+
+        <div class="sso-panel sso-full" id="sso-jupiter-globe-panel">
+          <h3>Jupiter — Great Red Spot</h3>
+          <div class="sso-grs-grid">
+            <div class="sso-grs-globe">
+              <canvas id="jupiter-globe-canvas" width="400" height="400" class="sso-panel-image"></canvas>
+            </div>
+            <div class="sso-grs-right">
+              <h4 class="sso-subheading">Upcoming GRS Transits</h4>
+              <p class="sso-note">Shown when Jupiter is above horizon and sky is darker than nautical twilight. Accuracy ±10 min.</p>
+              <div class="sso-table-scroll">
+                <table class="sso-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Time (local)</th>
+                      <th>Jupiter Alt</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sso-grs-transit-rows">
+                    <tr><td colspan="3">Loading...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sso-panel sso-full" id="sso-jupiter-panel">
+          <h3>Jupiter System</h3>
+          <canvas id="sso-jupiter-canvas" width="800" height="200" class="sso-panel-image"></canvas>
+          <p class="sso-system-caption">Label above: moon is behind the planet. Label below: moon is in front.</p>
+          <div class="sso-table-scroll">
+            <table class="sso-table">
+              <thead>
+                <tr>
+                  <th>Moon</th>
+                  <th>X (R<sub>♃</sub> / &quot;)</th>
+                  <th>Y (R<sub>♃</sub> / &quot;)</th>
+                  <th>Z (R<sub>♃</sub>)</th>
+                  <th>Offset</th>
+                  <th>Mag.</th>
+                </tr>
+              </thead>
+              <tbody id="sso-jupiter-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        {{ partial "galilean-events" . }}
+
+      </div>
+    </div>
+  </div>
+
+  {{/* ══════════════════════════════════════════════════════════════════════
+       7. SATURN ♄ — collapsed by default
+       ══════════════════════════════════════════════════════════════════════ */}}
+  <div class="sso-accordion-section" id="acc-saturn">
+    <button class="sso-accordion-header" aria-expanded="false" aria-controls="acc-saturn-body">
+      <span class="sso-accordion-symbol">♄</span>
+      <span class="sso-accordion-label">Saturn</span>
+      <span class="sso-accordion-chevron">▼</span>
+    </button>
+    <div class="sso-accordion-body" id="acc-saturn-body">
+      <div class="sso-grid">
+
+        <div class="sso-panel sso-full" id="sso-saturn-panel">
+          <h3>Saturn System</h3>
+          <canvas id="sso-saturn-canvas" width="800" height="120" class="sso-panel-image"></canvas>
+          <p id="sso-saturn-ring-info"></p>
+          <p class="sso-system-caption">Label above: moon is behind the planet. Label below: moon is in front.</p>
+          <div class="sso-table-scroll">
+            <table class="sso-table">
+              <thead>
+                <tr>
+                  <th>Moon</th>
+                  <th>X (R<sub>♄</sub> / &quot;)</th>
+                  <th>Y (R<sub>♄</sub> / &quot;)</th>
+                  <th>Z (R<sub>♄</sub>)</th>
+                  <th>Offset</th>
+                  <th>Mag</th>
+                </tr>
+              </thead>
+              <tbody id="sso-saturn-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
             </table>
           </div>
         </div>
 
       </div>
     </div>
-
-    <!-- Jupiter GRS — half, 2-column key/value meta: no scroll wrapper -->
-    <!--div class="sso-panel" id="sso-jupiter-globe-panel">
-      <h3>Jupiter</h3>
-      <canvas id="jupiter-globe-canvas" width="400" height="400" class="sso-panel-image"></canvas>
-      <div id="jupiter-globe-meta"></div>
-    </div-->
-
-<div class="sso-panel sso-full" id="sso-jupiter-globe-panel">
-  <h3>Jupiter — Great Red Spot</h3>
-
-<div class="sso-grs-grid">
-
-  <!-- left column: Globe only -->
-  <div class="sso-grs-globe">
-    <canvas id="jupiter-globe-canvas" width="400" height="400" class="sso-panel-image"></canvas>
   </div>
 
-  <!-- right column: transits + metadata stacked -->
-  <div class="sso-grs-right">
-    <h4 class="sso-subheading">Upcoming GRS Transits</h4>
-    <p class="sso-note">Shown when Jupiter is above horizon and sky is darker than nautical twilight. Accuracy ±10 min.</p>
-    <div class="sso-table-scroll">
-      <table class="sso-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Time (local)</th>
-            <th>Jupiter Alt</th>
-          </tr>
-        </thead>
-        <tbody id="sso-grs-transit-rows">
-          <tr><td colspan="3">Loading...</td></tr>
-        </tbody>
-      </table>
+  {{/* ══════════════════════════════════════════════════════════════════════
+       8. COMETS ☄ — collapsed by default
+       ══════════════════════════════════════════════════════════════════════ */}}
+  <div class="sso-accordion-section" id="acc-comets">
+    <button class="sso-accordion-header" aria-expanded="false" aria-controls="acc-comets-body">
+      <span class="sso-accordion-symbol">☄</span>
+      <span class="sso-accordion-label">Comets</span>
+      <span class="sso-accordion-chevron">▼</span>
+    </button>
+    <div class="sso-accordion-body" id="acc-comets-body">
+      <div class="sso-grid">
+        {{ partial "comets" . }}
+      </div>
     </div>
-    <!-- <div id="jupiter-globe-meta" style="margin-top: 16px;"></div> -->
   </div>
 
-</div>
-</div>
-
-    <!-- Jupiter System — full, 6 columns: needs scroll wrapper -->
-    <div class="sso-panel sso-full" id="sso-jupiter-panel">
-      <h3>Jupiter System</h3>
-      <canvas id="sso-jupiter-canvas" width="800" height="200" class="sso-panel-image"></canvas>
-      <p class="sso-system-caption">Label above: moon is behind the planet. Label below: moon is in front.</p>
-      <div class="sso-table-scroll">
-        <table class="sso-table">
-          <thead>
-            <tr>
-              <th>Moon</th>
-              <th>X (R<sub>♃</sub> / &quot;)</th>
-              <th>Y (R<sub>♃</sub> / &quot;)</th>
-              <th>Z (R<sub>♃</sub>)</th>
-              <th>Offset</th>
-              <th>Mag.</th>
-            </tr>
-          </thead>
-          <tbody id="sso-jupiter-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
-        </table>
-      </div>
-    </div>
-
-<!-- Galilean Satellite Phenomena -->
-	{{ partial "galilean-events" . }}
-
-    <!-- Saturn System — full, 6 columns: needs scroll wrapper -->
-    <div class="sso-panel sso-full" id="sso-saturn-panel">
-      <h3>Saturn System</h3>
-      <canvas id="sso-saturn-canvas" width="800" height="120" class="sso-panel-image"></canvas>
-      <p id="sso-saturn-ring-info"></p>
-      <p class="sso-system-caption">Label above: moon is behind the planet. Label below: moon is in front.</p>
-      <div class="sso-table-scroll">
-        <table class="sso-table">
-          <thead>
-            <tr>
-              <th>Moon</th>
-              <th>X (R<sub>♄</sub> / &quot;)</th>
-              <th>Y (R<sub>♄</sub> / &quot;)</th>
-              <th>Z (R<sub>♄</sub>)</th>
-              <th>Offset</th>
-              <th>Mag</th>
-            </tr>
-          </thead>
-          <tbody id="sso-saturn-rows"><tr><td colspan="6">Loading...</td></tr></tbody>
-        </table>
-      </div>
-    </div>
-
-<!-- Comets -->
-	{{ partial "comets" . }}
-
-  </div><!-- .sso-grid -->
 </div><!-- .sso-wrapper -->
+
+{{/* ── Accordion JS ─────────────────────────────────────────────────────────
+     Self-contained. Uses localStorage to persist open/closed state.
+     Touches only .sso-accordion-* elements.
+     ──────────────────────────────────────────────────────────────────────── */}}
+<script>
+(function () {
+  'use strict';
+
+  var STORAGE_KEY = 'sso-accordion-state';
+  var DEFAULT_OPEN = { 'acc-planets': true };
+
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : DEFAULT_OPEN;
+    } catch (e) {
+      return DEFAULT_OPEN;
+    }
+  }
+
+  function saveState(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function openSection(btn, body) {
+    btn.setAttribute('aria-expanded', 'true');
+    body.classList.add('sso-acc-open');
+  }
+
+  function closeSection(btn, body) {
+    btn.setAttribute('aria-expanded', 'false');
+    body.classList.remove('sso-acc-open');
+  }
+
+  // Apply persisted state, then wire up toggle buttons
+  var state = loadState();
+
+  document.querySelectorAll('.sso-accordion-section').forEach(function (section) {
+    var id  = section.id;
+    var btn  = section.querySelector('.sso-accordion-header');
+    var body = section.querySelector('.sso-accordion-body');
+    if (!btn || !body) return;
+
+    // Apply state: persisted value takes precedence, else DEFAULT_OPEN
+    var isOpen = id in state ? state[id] : (DEFAULT_OPEN[id] || false);
+    if (isOpen) {
+      openSection(btn, body);
+    } else {
+      closeSection(btn, body);
+    }
+
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      if (open) {
+        closeSection(btn, body);
+        state[id] = false;
+      } else {
+        openSection(btn, body);
+        state[id] = true;
+      }
+      saveState(state);
+    });
+  });
+
+}());
+</script>
+
+{{/* ── All existing JS below — unchanged ─────────────────────────────────── */}}
 
 <script src="{{ "js/three.js" | relURL }}"></script>
 <script src="{{ "js/moon-globe.js" | relURL }}"></script>
