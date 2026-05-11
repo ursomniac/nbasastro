@@ -45,6 +45,13 @@ jobs:
           OBSERVER_LON: "-73.11"
           WINDOW_DAYS: "15"
           OUTPUT_PATH: "static/data/galilean-events.json"
+      - name: Fetch comet ephemerides
+        run: |
+          pip install pyyaml --break-system-packages
+          mkdir -p static/data/comets
+          python scripts/fetch_comet_ephemerides.py
+        env:
+          WINDOW_DAYS: "30"
       - name: Fetch CDS charts
         run: |
           mkdir -p static/cds

@@ -1,0 +1,492 @@
+{{/*
+  layouts/partials/sso/comets.html
+  Ticket #28 — SSO Comet Panel
+
+  PLACEMENT: in sso-table.html, after Saturn System panel, before .sso-grid closes.
+    {{ partial "sso/comets.html" . }}
+
+  DATA: fetched client-side from /data/comets/index.json at runtime.
+        Individual ephemeris files at /data/comets/<slug>.json.
+        Written nightly by scripts/fetch_comet_ephemerides.py.
+
+  MODAL: uses native <dialog> element with showModal() / close().
+         No z-index hacks, no hidden attribute, no DOM moves needed.
+
+  DATE PICKER: listens for 'sso:datechange' custom event dispatched by
+               calculate() in sso-table.html.
+*/}}
+
+<div class="sso-panel sso-full" id="sso-comet-panel">
+  <h3>Comets</h3>
+
+  <p class="sso-note">
+    Positions interpolated to selected epoch from 30-day JPL Horizons ephemerides.
+    Magnitudes are estimates — comet brightness can vary significantly from predictions.
+  </p>
+
+  <div class="sso-table-scroll">
+    <table class="sso-table" id="cmt-table">
+      <thead>
+        <tr>
+          <th>Comet</th>
+          <th style="text-align:right">Mag.</th>
+          <th>RA</th>
+          <th>Dec</th>
+          <th>Const.</th>
+          <th style="text-align:right">Elong.</th>
+          <th>Sky</th>
+          <th>Motion</th>
+          <th>Ephem.</th>
+        </tr>
+      </thead>
+      <tbody id="cmt-tbody">
+        <tr><td colspan="9">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="sso-note" style="margin-top:.5rem">
+    Source: <a href="https://ssd.jpl.nasa.gov/horizons/" rel="noopener">JPL Horizons</a>
+    &middot; updated nightly
+    &middot; <span id="cmt-generated">—</span>
+  </p>
+</div>
+
+<!-- Native dialog — showModal() handles backdrop, z-index, focus trap, ESC key -->
+<dialog id="cmt-dialog" class="cmt-dialog">
+  <div class="cmt-dlg-header">
+    <div>
+      <h4 class="cmt-dlg-title" id="cmt-dlg-title">Comet Ephemeris</h4>
+      <div id="cmt-dlg-meta" class="cmt-dlg-meta"></div>
+    </div>
+    <button class="cmt-dlg-close" id="cmt-dlg-close" aria-label="Close">&times;</button>
+  </div>
+
+  <div id="cmt-dlg-warning" class="cmt-dlg-warning" style="display:none"></div>
+  <div id="cmt-dlg-note"    class="cmt-dlg-note"    style="display:none"></div>
+
+  <div class="cmt-dlg-table-wrap">
+    <table class="sso-table comet-modal-table">
+      <thead>
+        <tr>
+          <th>Date<br>(UTC)</th>
+          <th>RA</th>
+          <th>Dec</th>
+          <th style="text-align:right">T<br>mag</th>
+          <th style="text-align:right">N<br>mag</th>
+          <th style="text-align:right">r<br>(AU)</th>
+          <th style="text-align:right">Δ<br>(AU)</th>
+          <th style="text-align:right">Elong.</th>
+          <th>Sky</th>
+          <th style="text-align:right">Phase</th>
+          <th>Con.</th>
+          <th style="min-width:5rem">Daily<br>Motion</th>
+        </tr>
+      </thead>
+      <tbody id="cmt-dlg-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="cmt-dlg-key">
+    <span class="cmt-key-label">Key:</span>
+    <span><strong>T-mag</strong> total magnitude</span>
+    <span><strong>N-mag</strong> nuclear magnitude</span>
+    <span><strong>r</strong> heliocentric dist.</span>
+    <span><strong>Δ</strong> Earth dist.</span>
+    <span><strong>Elong.</strong> solar elongation</span>
+    <span><strong>Sky</strong> morning/evening sky</span>
+    <span><strong>Phase</strong> phase angle</span>
+    <span><strong>Daily Motion</strong> °/day — <span style="color:#4fd1a0">green</span> &lt;0.1, <span style="color:#f8d44e">amber</span> 0.1–1.0, <span style="color:#f48a6a">red</span> &gt;1.0</span>
+  </div>
+  <p class="sso-note" style="margin-top:.5rem">
+    Data: <a href="https://ssd.jpl.nasa.gov/horizons/" rel="noopener">JPL Horizons</a>
+    (geocentric, ICRF J2000).
+    Comet magnitudes use the IAU T-mag model and may differ from actual brightness.
+  </p>
+</dialog>
+
+<style>
+/* Motion badges */
+.cmt-motion { display:inline-block; padding:.1rem .45rem; border-radius:3px; font-size:.75rem; font-weight:600; white-space:nowrap; }
+.cmt-motion--slow   { background:#0a2018; color:#4fd1a0; border:1px solid #1a4a34; }
+.cmt-motion--medium { background:#2a1e04; color:var(--gold-base,#f8d44e); border:1px solid var(--gold-border,#8e7037); }
+.cmt-motion--fast   { background:#2a0a04; color:#f48a6a; border:1px solid #6a2010; }
+
+/* Sky badges */
+.cmt-sky { display:inline-block; padding:.1rem .45rem; border-radius:3px; font-size:.75rem; font-weight:600; }
+.cmt-sky--morning { background:#0e2040; color:#7db8f7; border:1px solid #1e3a6a; }
+.cmt-sky--evening { background:#1a0e30; color:#b08cf5; border:1px solid #3a1e6a; }
+
+/* Details button */
+.cmt-ephem-btn {
+  padding:.15rem .5rem; font-size:.75rem; font-weight:600;
+  border:1px solid var(--border-soft,#3a4a64); border-radius:3px;
+  background:transparent; color:var(--text-muted,#b0bec5) !important;
+  cursor:pointer; text-decoration:none !important;
+  transition:background .15s,color .15s;
+}
+.cmt-ephem-btn:hover {
+  background:var(--space-blue,#1a2a44);
+  color:var(--gold-base,#f8d44e) !important;
+  border-color:var(--gold-border,#8e7037);
+}
+
+/* Out-of-range rows */
+.cmt-row--outofrange td { opacity:.55; }
+
+/* Native dialog */
+.cmt-dialog {
+  background: var(--space-blue,#1a2a44);
+  color: var(--text-main,#d1d1d1);
+  border: 1px solid var(--border-soft,#3a4a64);
+  border-radius: 6px;
+  width: min(1000px, 92vw);
+  max-height: 82vh;
+  padding: 1.25rem;
+  margin: auto;
+}
+.cmt-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+.cmt-dialog::backdrop {
+  background: rgba(0,0,0,.78);
+}
+
+.cmt-dlg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: .75rem;
+}
+.cmt-dlg-title { margin:0 0 .2rem; color:var(--gold-dim,#d4af37); font-size:1rem; }
+.cmt-dlg-meta  { font-size:.8rem; color:var(--text-muted,#b0bec5); }
+
+.cmt-dlg-close {
+  flex-shrink:0; background:transparent; border:1px solid var(--border-soft,#3a4a64);
+  border-radius:4px; color:var(--text-muted,#b0bec5); font-size:1.4rem;
+  cursor:pointer; line-height:1; padding:.25rem .6rem;
+  transition: color .15s, border-color .15s;
+}
+.cmt-dlg-close:hover { color:var(--text-pure,#fff); border-color:var(--text-muted,#b0bec5); }
+
+.cmt-dlg-warning {
+  background:#2a1004; border:1px solid #6a2e10; color:#f4a460;
+  border-radius:4px; padding:.4rem .75rem; font-size:.82rem; margin-bottom:.5rem;
+}
+
+
+.cmt-dlg-table-wrap {
+  overflow: auto;
+  flex: 1;
+  border: 1px solid var(--border-soft,#3a4a64);
+  border-radius: 4px;
+}
+.cmt-dlg-table-wrap .sso-table { min-width: 1000px; }
+.cmt-dlg-table-wrap .sso-table th,
+.cmt-dlg-table-wrap .sso-table td { padding: 5px 6px; }
+
+.cmt-dlg-row--current td {
+  background: rgba(255,255,255,.06);
+  font-weight: 600;
+}
+
+/* Meta line */
+.cmt-dlg-meta { font-size:.88rem; display:flex; flex-wrap:wrap; align-items:baseline; gap:.1rem .3rem; margin-top:.2rem; }
+.cmt-meta-item { display:inline-flex; align-items:baseline; gap:.3rem; }
+.cmt-meta-label { color:var(--text-muted,#b0bec5); font-size:.82rem; }
+.cmt-meta-val   { color:var(--gold-dim,#d4af37); font-weight:600; font-size:.88rem; }
+.cmt-meta-sep   { color:var(--border-soft,#3a4a64); padding:0 .4rem; }
+
+/* Note block */
+.cmt-dlg-note {
+  background:var(--deep-bg,#0d1421); border:1px solid var(--border-soft,#3a4a64);
+  color:var(--text-main,#d1d1d1); border-radius:4px;
+  padding:.6rem .75rem; font-size:.9rem; margin-bottom:.5rem; line-height:1.5;
+}
+.cmt-note-label {
+  color:var(--gold-dim,#d4af37); font-weight:700; margin-right:.35rem;
+}
+
+/* Column key */
+.cmt-dlg-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .2rem 1.25rem;
+  font-size: .78rem;
+  color: var(--text-muted,#b0bec5);
+  margin-top: .75rem;
+  padding-top: .5rem;
+  border-top: 1px solid var(--border-soft,#3a4a64);
+}
+.cmt-key-label {
+  color: var(--gold-dim,#d4af37);
+  font-weight: 700;
+  margin-right: .25rem;
+}
+.cmt-dlg-key strong { color: var(--text-main,#d1d1d1); }
+#cmt-table th, .comet-modal-table th { text-align: center !important; }
+table.comet-modal-table { width: 95%; }
+table.comet-modal-table td { padding: 4px 12px !important; }
+</style>
+
+<script>
+(function () {
+  'use strict';
+
+  var cometData   = [];
+  var currentDate = new Date();
+  var dialog      = document.getElementById('cmt-dialog');
+
+  /* ── Helpers ── */
+  function slugify(designation) {
+    return designation.toLowerCase().replace(/[^a-z0-9]/g, '');
+  }
+
+  function fmtMag(v)  { return v != null ? v.toFixed(1) : '—'; }
+  function fmtAU(v)   { return v != null ? v.toFixed(3) : '—'; }
+  function fmtDeg1(v) { return v != null ? v.toFixed(1) + '°' : '—'; }
+
+  function motionBadge(deg) {
+    if (deg == null) return '—';
+    var cls = deg < 0.1 ? 'slow' : deg < 1.0 ? 'medium' : 'fast';
+    return '<span class="cmt-motion cmt-motion--' + cls + '">' + deg.toFixed(3) + '°/d</span>';
+  }
+
+  function skyBadge(pos) {
+    if (!pos) return '—';
+    return '<span class="cmt-sky cmt-sky--' + pos + '">' +
+           (pos === 'morning' ? '🌅 Morning' : '🌆 Evening') + '</span>';
+  }
+
+  function degToHMS(deg) {
+    var h = deg / 15, hh = Math.floor(h);
+    var mm = Math.floor((h - hh) * 60);
+    var ss = ((h - hh - mm / 60) * 3600).toFixed(0);
+    return (hh<10?'0':'') + hh + 'h ' + (mm<10?'0':'') + mm + 'm ' + ss + 's';
+  }
+
+  function degToDMS(deg) {
+    var sign = deg < 0 ? '-' : '+', abs = Math.abs(deg);
+    var dd = Math.floor(abs), mm = ((abs - dd) * 60).toFixed(1);
+    return sign + (dd<10?'0':'') + dd + '° ' + (mm<10?'0':'') + mm + '\'';
+  }
+
+  // Format raw Horizons HMS string "HH MM SS.ss" → "HHh MMm SS.ss s"
+  function fmtHMS(raw) {
+    if (!raw) return '—';
+    var p = raw.trim().split(/\s+/);
+    if (p.length < 3) return raw;
+    return p[0] + 'h ' + p[1] + 'm ' + p[2] + 's';
+  }
+
+  // Format raw Horizons DMS string "sDD MM SS.s" → "sDD° MM' SS.s""
+  function fmtDMS(raw) {
+    if (!raw) return '—';
+    var p = raw.trim().split(/\s+/);
+    if (p.length < 3) return raw;
+    return p[0] + '° ' + p[1] + '\' ' + p[2] + '"';
+  }
+
+  function fmtDateShort(isoStr) {
+    if (!isoStr) return '—';
+    var d = new Date(isoStr);
+    return isNaN(d) ? isoStr : d.toLocaleDateString(undefined, { month:'short', day:'numeric' });
+  }
+
+  /* ── Interpolate ephemeris to targetDate ── */
+  function interpolate(ephemeris, targetDate) {
+    if (!ephemeris || !ephemeris.length) return null;
+    var target = targetDate.getTime();
+    var first  = new Date(ephemeris[0].date_utc).getTime();
+    var last   = new Date(ephemeris[ephemeris.length-1].date_utc).getTime();
+    var oor = false, clamped = target;
+    if (target <= first) { clamped = first; oor = target < first; }
+    else if (target >= last) { clamped = last; oor = target > last; }
+
+    var i = 0;
+    while (i < ephemeris.length-1 &&
+           new Date(ephemeris[i+1].date_utc).getTime() <= clamped) i++;
+
+    if (i >= ephemeris.length-1) {
+      var last_row = ephemeris[ephemeris.length-1];
+      return Object.assign({}, last_row, { outOfRange:oor,
+        clampedTo: oor ? fmtDateShort(last_row.date_utc) : null });
+    }
+
+    var r0 = ephemeris[i], r1 = ephemeris[i+1];
+    var t0 = new Date(r0.date_utc).getTime(), t1 = new Date(r1.date_utc).getTime();
+    var frac = t1 > t0 ? (clamped - t0) / (t1 - t0) : 0;
+
+    function lerp(a, b) {
+      if (a == null || b == null) return a != null ? a : b;
+      return a + (b - a) * frac;
+    }
+
+    var ra0 = r0.ra_deg, ra1 = r1.ra_deg;
+    if (Math.abs(ra1 - ra0) > 180) { if (ra1 > ra0) ra0 += 360; else ra1 += 360; }
+
+    return {
+      ra_deg:             lerp(ra0, ra1) % 360,
+      dec_deg:            lerp(r0.dec_deg, r1.dec_deg),
+      t_mag:              lerp(r0.t_mag,   r1.t_mag),
+      elong_deg:          lerp(r0.elong_deg, r1.elong_deg),
+      sky_position:       r0.sky_position,
+      constellation:      r0.constellation,
+      motion_deg_per_day: lerp(r0.motion_deg_per_day, r1.motion_deg_per_day),
+      outOfRange:         oor,
+      clampedTo:          oor ? fmtDateShort(new Date(clamped).toISOString()) : null,
+    };
+  }
+
+  /* ── Render primary table ── */
+  function renderTable() {
+    var tbody = document.getElementById('cmt-tbody');
+    if (!cometData.length) {
+      tbody.innerHTML = '<tr><td colspan="9">No comet data available.</td></tr>';
+      return;
+    }
+    var html = '';
+    cometData.forEach(function (comet) {
+      var row  = interpolate(comet.ephemeris, currentDate);
+      if (!row) return;
+      var slug = slugify(comet.designation);
+      var name = (comet.name || comet.designation) + ' (' + comet.designation + ')';
+      var clampNote = row.outOfRange
+        ? '<br><small style="color:var(--gold-base,#f8d44e)">⚠ Nearest: ' + row.clampedTo + '</small>' : '';
+      html +=
+        '<tr class="' + (row.outOfRange ? 'cmt-row--outofrange' : '') + '">' +
+        '<td>' + name + clampNote + '</td>' +
+        '<td style="text-align:right">' + fmtMag(row.t_mag) + '</td>' +
+        '<td style="white-space:nowrap">' + (row.ra_deg  != null ? degToHMS(row.ra_deg)  : '—') + '</td>' +
+        '<td style="white-space:nowrap">' + (row.dec_deg != null ? degToDMS(row.dec_deg) : '—') + '</td>' +
+        '<td>' + (row.constellation || '—') + '</td>' +
+        '<td style="text-align:right">' + fmtDeg1(row.elong_deg) + '</td>' +
+        '<td>' + skyBadge(row.sky_position) + '</td>' +
+        '<td>' + motionBadge(row.motion_deg_per_day) + '</td>' +
+        '<td><button class="cmt-ephem-btn" data-slug="' + slug + '">Details</button></td>' +
+        '</tr>';
+    });
+    tbody.innerHTML = html || '<tr><td colspan="9">No comets to display.</td></tr>';
+  }
+
+  /* ── Open modal ── */
+  function openModal(slug) {
+    var comet = cometData.find(function (c) { return slugify(c.designation) === slug; });
+    if (!comet) { console.warn('cmt: no comet for slug:', slug); return; }
+
+    document.getElementById('cmt-dlg-title').textContent =
+      (comet.name || comet.designation) + ' (' + comet.designation + ') — 30-day Ephemeris';
+
+    function metaItem(label, val) {
+      return '<span class="cmt-meta-item"><span class="cmt-meta-label">' + label + '</span>'
+           + '<span class="cmt-meta-val">' + val + '</span></span>';
+    }
+    var metaParts = [];
+    if (comet.type)            metaParts.push(metaItem('Type', comet.type));
+    if (comet.perihelion_date) metaParts.push(metaItem('Perihelion', comet.perihelion_date));
+    if (comet.perihelion_au)   metaParts.push(metaItem('q', comet.perihelion_au + ' AU'));
+    if (comet.peak_magnitude)  metaParts.push(metaItem('Est. peak', comet.peak_magnitude + ' mag'));
+    if (comet.discovery_year)  metaParts.push(metaItem('Discovered', comet.discovery_year));
+    if (comet.binocular)       metaParts.push('<span class="cmt-meta-val">🔭 Binocular</span>');
+    document.getElementById('cmt-dlg-meta').innerHTML = metaParts.join('<span class="cmt-meta-sep">·</span>');
+
+    var warnEl = document.getElementById('cmt-dlg-warning');
+    warnEl.textContent = comet.warning ? '⚠ ' + comet.warning : '';
+    warnEl.style.display = comet.warning ? '' : 'none';
+
+    var noteEl = document.getElementById('cmt-dlg-note');
+    if (comet.note) {
+      noteEl.innerHTML = '<span class="cmt-note-label">Description:</span> ' + comet.note;
+      noteEl.style.display = '';
+    } else {
+      noteEl.style.display = 'none';
+    }
+
+    var now = currentDate.getTime();
+    var html = '';
+    comet.ephemeris.forEach(function (row) {
+      var isCur  = Math.abs(new Date(row.date_utc).getTime() - now) < 43200000;
+      var motCls = row.motion_deg_per_day == null ? '' :
+                   row.motion_deg_per_day < 0.1   ? 'cmt-motion--slow' :
+                   row.motion_deg_per_day < 1.0   ? 'cmt-motion--medium' : 'cmt-motion--fast';
+      html +=
+        '<tr class="' + (isCur ? 'cmt-dlg-row--current' : '') + '">' +
+        '<td>' + fmtDateShort(row.date_utc) + '</td>' +
+        '<td style="white-space:nowrap">' + fmtHMS(row.ra_hms)  + '</td>' +
+        '<td style="white-space:nowrap">' + fmtDMS(row.dec_dms) + '</td>' +
+        '<td style="text-align:right">' + fmtMag(row.t_mag)  + '</td>' +
+        '<td style="text-align:right">' + fmtMag(row.n_mag)  + '</td>' +
+        '<td style="text-align:right">' + fmtAU(row.r_au)    + '</td>' +
+        '<td style="text-align:right">' + fmtAU(row.delta_au) + '</td>' +
+        '<td style="text-align:right">' + fmtDeg1(row.elong_deg) + '</td>' +
+        '<td style="white-space:nowrap">' + (row.sky_position === 'morning' ? 'Morning' : row.sky_position === 'evening' ? 'Evening' : '—') + '</td>' +
+        '<td style="text-align:right">' + fmtDeg1(row.phase_deg) + '</td>' +
+        '<td>' + (row.constellation || '—') + '</td>' +
+        '<td>' + (row.motion_deg_per_day != null
+          ? '<span class="cmt-motion ' + motCls + '">' + row.motion_deg_per_day.toFixed(3) + '°</span>'
+          : '—') + '</td>' +
+        '</tr>';
+    });
+    document.getElementById('cmt-dlg-tbody').innerHTML = html;
+
+    dialog.showModal();
+  }
+
+  /* ── Close modal ── */
+  document.getElementById('cmt-dlg-close').addEventListener('click', function (e) {
+    e.stopPropagation();
+    dialog.close();
+  });
+
+  // Click on ::backdrop closes dialog (e.target is the dialog itself, not a child)
+  dialog.addEventListener('click', function (e) {
+    if (e.target === dialog) dialog.close();
+  });
+
+  /* ── Event delegation on tbody — survives innerHTML re-renders ── */
+  document.getElementById('cmt-tbody').addEventListener('click', function (e) {
+    var btn = e.target.closest('.cmt-ephem-btn');
+    if (btn) openModal(btn.dataset.slug);
+  });
+
+  /* ── Date picker integration ── */
+  document.addEventListener('sso:datechange', function (e) {
+    if (e.detail && e.detail.date) {
+      currentDate = new Date(e.detail.date);
+      renderTable();
+    }
+  });
+
+  /* ── Load data ── */
+  fetch('/data/comets/index.json')
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (index) {
+      var gen = document.getElementById('cmt-generated');
+      if (gen && index.generated_utc) {
+        var d = new Date(index.generated_utc);
+        gen.textContent = 'updated ' + d.toLocaleString(undefined, {
+          month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', timeZoneName:'short'
+        });
+      }
+      return Promise.all(index.comets.map(function (entry) {
+        return fetch(entry.ephemeris_file)
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .catch(function () { return null; });
+      }));
+    })
+    .then(function (results) {
+      cometData = results.filter(Boolean);
+      renderTable();
+    })
+    .catch(function (err) {
+      document.getElementById('cmt-tbody').innerHTML =
+        '<tr><td colspan="9" class="sso-error">Could not load comet data: ' + err.message + '</td></tr>';
+    });
+
+}());
+</script>

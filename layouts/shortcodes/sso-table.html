@@ -212,6 +212,9 @@
       </div>
     </div>
 
+<!-- Comets -->
+	{{ partial "comets" . }}
+
   </div><!-- .sso-grid -->
 </div><!-- .sso-wrapper -->
 
@@ -1011,6 +1014,7 @@ function renderJupiterMoons(moons, jupiterRadiusArcsec) {
     if (window.renderMarsGlobe) window.renderMarsGlobe(date)
     const marsData = data.planets.find(p => p.name === 'Mars')
     renderMarsFeatureTransits(date, marsData)
+    document.dispatchEvent(new CustomEvent('sso:datechange', { detail: { date: date } }))
   }
 
   // Run on load

@@ -1,0 +1,117 @@
+{
+  "generated_utc": "2026-05-11T01:24:11Z",
+  "window_days": 30,
+  "comet_count": 5,
+  "comets": [
+    {
+      "designation": "C/2025 R3",
+      "name": "PanSTARRS",
+      "type": "long-period",
+      "slug": "c2025r3",
+      "ephemeris_file": "/data/comets/c2025r3.json",
+      "binocular": true,
+      "telescope_required": false,
+      "peak_magnitude": 8.0,
+      "perihelion_date": "2026-04-19",
+      "warning": "Now fading and moving south. Northern hemisphere observers may lose it soon.",
+      "note": "Past perihelion and fading. Moving into southern sky — increasingly difficult from northern latitudes. Still worth tracking as it recedes.",
+      "current": {
+        "date_utc": "2026-05-11T00:00:00Z",
+        "ra_hms": "05 33 47.60",
+        "dec_dms": "-07 37 19.0",
+        "t_mag": 9.82,
+        "elong_deg": 43.6076,
+        "sky_position": "evening",
+        "constellation": "Ori"
+      }
+    },
+    {
+      "designation": "10P",
+      "name": "Tempel 2",
+      "type": "short-period",
+      "slug": "10p",
+      "ephemeris_file": "/data/comets/10p.json",
+      "binocular": true,
+      "telescope_required": false,
+      "peak_magnitude": 7.0,
+      "perihelion_date": "2026-07-25",
+      "warning": null,
+      "note": "Short-period comet returning on schedule. Expected to peak July–August 2026 in Aquarius. Closest approach to Earth around August 3 at ~0.42 AU. Nucleus approximately 10.5 km diameter. A reliable performer.",
+      "current": {
+        "date_utc": "2026-05-11T00:00:00Z",
+        "ra_hms": "19 31 04.80",
+        "dec_dms": "-08 26 23.5",
+        "t_mag": 15.558,
+        "elong_deg": 116.0422,
+        "sky_position": "morning",
+        "constellation": "Aql"
+      }
+    },
+    {
+      "designation": "169P",
+      "name": "NEAT",
+      "type": "short-period",
+      "slug": "169p",
+      "ephemeris_file": "/data/comets/169p.json",
+      "binocular": false,
+      "telescope_required": true,
+      "peak_magnitude": 11.0,
+      "perihelion_date": "2026-08-25",
+      "warning": "Telescopic object — magnitude 10 to 12. Will move closer to Sun through September.",
+      "note": "Parent body of the Alpha Capricornid meteor shower. Evening sky object in August 2026, best seen from northern hemisphere early in the month before it closes on the Sun. Telescopic target only.",
+      "current": {
+        "date_utc": "2026-05-11T00:00:00Z",
+        "ra_hms": "19 27 01.05",
+        "dec_dms": "-04 57 06.3",
+        "t_mag": 18.885,
+        "elong_deg": 116.019,
+        "sky_position": "morning",
+        "constellation": "Aql"
+      }
+    },
+    {
+      "designation": "2P",
+      "name": "Encke",
+      "type": "short-period",
+      "slug": "2p",
+      "ephemeris_file": "/data/comets/2p.json",
+      "binocular": true,
+      "telescope_required": false,
+      "peak_magnitude": 6.0,
+      "perihelion_date": "2027-02-07",
+      "warning": "Not yet observable — brightening from December 2026.",
+      "note": "One of the most famous short-period comets, orbital period ~3.3 years. Parent body of the Taurid meteor showers. Begins brightening December 2026, peaks late January to mid-February 2027. Good binocular object at maximum. Not yet visible — included for advance planning.",
+      "current": {
+        "date_utc": "2026-05-11T00:00:00Z",
+        "ra_hms": "00 31 17.33",
+        "dec_dms": "+07 38 37.0",
+        "t_mag": 20.878,
+        "elong_deg": 39.9249,
+        "sky_position": "morning",
+        "constellation": "Psc"
+      }
+    },
+    {
+      "designation": "88P",
+      "name": "Howell",
+      "type": "short-period",
+      "slug": "88p",
+      "ephemeris_file": "/data/comets/88p.json",
+      "binocular": false,
+      "telescope_required": true,
+      "peak_magnitude": 10.0,
+      "perihelion_date": "2026-03-18",
+      "warning": "Past perihelion and fading — currently around magnitude 14. Challenging target requiring large aperture.",
+      "note": "Discovered by Ellen Howell in 1981. Orbital period 5.5 years. Passed perihelion March 18, 2026 and now fading. Currently in Aquarius/Capricornus region. Requires at least a 6-inch telescope. Good test target for the panel during initial development.",
+      "current": {
+        "date_utc": "2026-05-11T00:00:00Z",
+        "ra_hms": "00 13 19.24",
+        "dec_dms": "-02 09 32.8",
+        "t_mag": 14.961,
+        "elong_deg": 47.8523,
+        "sky_position": "morning",
+        "constellation": "Psc"
+      }
+    }
+  ]
+}
