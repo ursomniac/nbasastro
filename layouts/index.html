@@ -1,5 +1,4 @@
 {{ define "main" }}
-
 {{/* 1. IDENTITY SECTION */}}
 <h2 class="section-title">Welcome to the NBAS Website</h2>
 <div class="welcome-panel">
@@ -8,17 +7,18 @@ Northern Berkshire's home for amateur astronomy — whatever your experience, yo
     </p>
     {{ partial "social-share.html" . }}
 </div>
-
 {{/* 2. NEWSFLASH SECTION */}}
 {{ partial "news_logic.html" . }}
-
 {{/* 3. ARTICLE LIST SECTION */}}
 <h2 class="section-title">Latest from the NBAS</h2>
 <div class="article-list">
-    {{ $all_posts := where .Site.RegularPages "Section" "in" (slice "articles" "constellations") }}
+    {{ $all_posts := where .Site.RegularPages "Section" "in" (slice "articles" "constellations" "quizzes") }}
     {{ range first 10 ($all_posts.ByPublishDate.Reverse) }}
-        {{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
+        {{ if eq .Section "quizzes" }}
+            {{ partial "quiz-card.html" (dict "context" .) }}
+        {{ else }}
+            {{ partial "article-card.html" (dict "context" . "catalogPage" false) }}
+        {{ end }}
     {{ end }}
 </div>
 {{ end }}
-

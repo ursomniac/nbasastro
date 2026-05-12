@@ -1,59 +1,55 @@
 {{ define "main" }}
 <div class="archive-container">
     <header class="archive-header">
-
-<h1 class="page-title">
-  {{ if eq .Kind "taxonomy" }}
-    {{/* This is the Category list (e.g., /stars_multiple/) */}}
-    {{ .LinkTitle }}
-  {{ else if eq .Kind "term" }}
-    {{/* This is a specific Item list (e.g., /stars_multiple/sirius/) */}}
-    {{ .Title }}
-  {{ else }}
-    {{ .Title }}
-  {{ end }}
-</h1>
-
-
+        <h1 class="page-title">
+          {{ if eq .Kind "taxonomy" }}
+            {{ .LinkTitle }}
+          {{ else if eq .Kind "term" }}
+            {{ .Title }}
+          {{ else }}
+            {{ .Title }}
+          {{ end }}
+        </h1>
         {{ with .Params.description }}
         <p class="page-subtitle">{{ . }}</p>
         {{ end }}
     </header>
 
-    {{/* V0.11.1: EXPLORE TOPICS FILTER (Restricted to Articles) */}}
-	{{ if or (eq .Section "articles") (eq .Kind "taxonomy") (eq .Kind "term") }}
-	<div class="nbas-filter-bar" data-pagefind-ignore>
-    	<span class="filter-label">Explore Series:</span>
-    	<select id="series-select" class="series-dropdown" onchange="window.location.href=this.value;">
-        	<option value="">-- Select --</option>
-        	<option value="{{ "/articles/" | relURL }}">All Articles</option>
-        	{{ range $name, $taxonomy := .Site.Taxonomies.series }}
-            	<option value="{{ "/series/" | relURL }}{{ $name | urlize }}/" {{ if eq $.Title ($name | humanize) }}selected{{ end }}>
-                {{ $name | humanize }} ({{ $taxonomy.Count }})
-            	</option>
-        	{{ end }}
-    	</select>
-	</div>
-	{{ end }}
+    {{/* EXPLORE TOPICS FILTER (Restricted to Articles + Quizzes) */}}
+    {{ if or (eq .Section "articles") (eq .Section "quizzes") (eq .Kind "taxonomy") (eq .Kind "term") }}
+    <div class="nbas-filter-bar" data-pagefind-ignore>
+        <span class="filter-label">Explore Series:</span>
+        <select id="series-select" class="series-dropdown" onchange="window.location.href=this.value;">
+            <option value="">-- Select --</option>
+            <option value="{{ "/articles/" | relURL }}">All Articles</option>
+            {{ range $name, $taxonomy := .Site.Taxonomies.series }}
+                <option value="{{ "/series/" | relURL }}{{ $name | urlize }}/" {{ if eq $.Title ($name | humanize) }}selected{{ end }}>
+                    {{ $name | humanize }} ({{ $taxonomy.Count }})
+                </option>
+            {{ end }}
+        </select>
+    </div>
+    {{ end }}
 
-<div class="article-list">
-  {{/* Define which pages to show: current section + constellations sub-folder */}}
-  {{ $pages := .Pages }}
-  {{ if eq .Section "articles" }}
-    {{ $pages = where .Site.RegularPages "Section" "in" (slice "articles" "constellations") }}
-  {{ end }}
+    <div class="article-list">
+      {{ $pages := .Pages }}
+      {{ if eq .Section "articles" }}
+        {{ $pages = where .Site.RegularPages "Section" "in" (slice "articles" "constellations" "quizzes") }}
+      {{ end }}
 
-  {{/* Run the paginator on that specific set of pages */}}
-  {{ range (.Paginate ($pages.ByPublishDate.Reverse)).Pages }}
-    {{/* partial "article-card.html" (dict "context" . "catalogPage" false) */}}
-	{{ partial "article-card.html" (dict "context" . "listContext" $) }}
-  {{ else }}
-    <p class="no-articles-msg">No articles found in this subset.</p>
-  {{ end }}
-</div>
+      {{ range (.Paginate ($pages.ByPublishDate.Reverse)).Pages }}
+        {{ if eq .Section "quizzes" }}
+          {{ partial "quiz-card.html" (dict "context" .) }}
+        {{ else }}
+          {{ partial "article-card.html" (dict "context" . "listContext" $) }}
+        {{ end }}
+      {{ else }}
+        <p class="no-articles-msg">No articles found in this subset.</p>
+      {{ end }}
+    </div>
 
-<nav class="pagination-container">
-  {{ template "_internal/pagination.html" . }}
-</nav>
+    <nav class="pagination-container">
+      {{ template "_internal/pagination.html" . }}
+    </nav>
 </div>
 {{ end }}

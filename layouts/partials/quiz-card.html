@@ -1,0 +1,71 @@
+{{/*
+  layouts/partials/quiz-card.html
+
+  Uses the same article-card.html structure and feature-icon.html partial
+  for the thumbnail so it renders identically to article cards.
+*/}}
+
+{{ $page := .context }}
+
+<div class="article-card">
+
+  {{/* Thumbnail — same as article-card.html */}}
+  <div class="card-feature-icon">
+    {{ partial "feature-icon.html" $page }}
+  </div>
+
+  <div class="card-content">
+
+    {{/* Series badges */}}
+    {{ with $page.Params.series }}
+    <div class="card-facets">
+      {{ range . }}
+        {{ $termPage := site.GetPage (printf "series/%s" (. | urlize)) }}
+        <a href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}#{{ end }}"
+           class="facet-badge series-badge {{ . | urlize }}">
+          {{ if $termPage }}{{ $termPage.LinkTitle }}{{ else }}{{ . | humanize }}{{ end }}
+        </a>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    {{/* Title */}}
+    <a href="{{ $page.RelPermalink }}" class="card-title-link">
+      <h2 class="card-title">{{ $page.Title }}</h2>
+    </a>
+
+    {{/* Author | Date */}}
+    <div class="card-metadata">
+      By&nbsp;
+      {{- if $page.Params.authors -}}
+        {{- range $i, $a := $page.Params.authors -}}
+          {{- if $i }}, {{ end -}}
+          {{- $p := site.GetPage (printf "authors/%s" ($a | urlize)) -}}
+          {{- if $p -}}
+            <a href="{{ $p.RelPermalink }}" class="author-link">{{ $p.Title }}</a>
+          {{- else -}}
+            <span class="author-plain">{{ $a | replaceRE "-" " " | title | replaceRE "Nbas" "NBAS" }}</span>
+          {{- end -}}
+        {{- end -}}
+      {{- else -}}
+        <span class="author-plain">NBAS Staff</span>
+      {{- end }} | {{ $page.PublishDate.Format "Jan 2, 2006" }}
+    </div>
+
+    {{/* Description */}}
+    {{ with $page.Description }}
+    <p class="card-byline">{{ . }}</p>
+    {{ end }}
+
+    {{/* Level badge — inline styles so it works on any page without a global stylesheet dependency */}}
+    {{ with $page.Params.level }}
+    {{ $bg    := "#2a1e04" }}
+    {{ $color := "#f8d44e" }}
+    {{ $border := "#8e7037" }}
+    {{ if eq . "beginner"     }}{{ $bg = "#0a2018" }}{{ $color = "#4fd1a0" }}{{ $border = "#1a4a34" }}{{ end }}
+    {{ if eq . "expert"       }}{{ $bg = "#2a0a04" }}{{ $color = "#f48a6a" }}{{ $border = "#6a2010" }}{{ end }}
+    <div class="card-metadata">Skill Level:&nbsp;<span style="display:inline-block;padding:.2rem .65rem;border-radius:3px;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:{{ $bg }};color:{{ $color }};border:1px solid {{ $border }};">{{ . | title }}</span></div>
+    {{ end }}
+
+  </div>
+</div>

@@ -17,8 +17,9 @@ position in the sky relative to the horizon.
 ## Altitude and Azimuth
 
 {{< nbas-image src="horizontal-coordinate-system.png" width=500 align="right" >}}
-Just like the other coordinate systems we've discussed ([Coordinates Systems in the Sky
-]({{ relref "articles/2026/05/coordinates-systems-in-the-sky/" >}}), there's also the 
+Just like the other coordinate systems we've discussed in the article 
+[Coordinate Systems in the Sky]({{< relref "articles/2026/05/coordinate-systems/index.md" >}}),
+there's also the 
 _Horizontal_ coordinate system, defined by _altitude_ and _azimuth_.
 
 Unlike the others, this system is completely dependent on the observer's location, and

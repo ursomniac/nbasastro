@@ -1,0 +1,119 @@
+{{ define "main" }}
+<div class="archive-container">
+
+  <header class="archive-header">
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{ with .Description }}
+    <p class="page-subtitle">{{ . }}</p>
+    {{ end }}
+  </header>
+
+  {{/* ── Level filter ── */}}
+  <div class="nbas-filter-bar" data-pagefind-ignore>
+    <span class="filter-label">Filter by level:</span>
+    <select id="level-select" class="series-dropdown"
+            onchange="filterQuizCards(this.value)">
+      <option value="">All levels</option>
+      <option value="beginner">Beginner</option>
+      <option value="intermediate">Intermediate</option>
+      <option value="expert">Expert</option>
+    </select>
+  </div>
+
+  {{/* ── Quiz grid ── */}}
+  <div class="quiz-list" id="quiz-list">
+    {{ range (.Pages.ByPublishDate.Reverse) }}
+      <div class="quiz-list-item" data-level="{{ .Params.level | default "" }}">
+        {{ partial "quiz-card.html" (dict "context" .) }}
+      </div>
+    {{ else }}
+      <p class="no-articles-msg">No quizzes found.</p>
+    {{ end }}
+  </div>
+
+</div>
+
+<script>
+function filterQuizCards(level) {
+  document.querySelectorAll('#quiz-list .quiz-list-item').forEach(function(item) {
+    if (!level || item.dataset.level === level) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+</script>
+
+<style>
+.quiz-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* ── Quiz card ── */
+.quiz-card {
+  background: var(--card-bg, #131929);
+  border: 1px solid var(--card-border, #1e2a3d);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.quiz-card:hover {
+  border-color: var(--accent, #5b9bd5);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.quiz-card-thumb-link { display: block; }
+.quiz-card-thumb {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: #0a0e1a;
+}
+.quiz-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.quiz-card:hover .quiz-card-thumb img {
+  transform: scale(1.04);
+}
+
+.quiz-card-body {
+  padding: 1rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.quiz-card-description {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-muted, #8a9bb5);
+  margin: 0;
+  flex: 1;
+}
+
+/* Level badge — reuse single.html definitions already in the page */
+.nbas-quiz-level-badge {
+  display: inline-block;
+  padding: .2rem .65rem;
+  border-radius: 3px;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  align-self: flex-start;
+}
+.nbas-quiz-level-badge--beginner     { background:#0a2018; color:#4fd1a0; border:1px solid #1a4a34; }
+.nbas-quiz-level-badge--intermediate { background:#2a1e04; color:var(--gold-base,#f8d44e); border:1px solid var(--gold-border,#8e7037); }
+.nbas-quiz-level-badge--expert       { background:#2a0a04; color:#f48a6a; border:1px solid #6a2010; }
+</style>
+{{ end }}

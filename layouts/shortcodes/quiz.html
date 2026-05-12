@@ -1,0 +1,306 @@
+{{/*
+  layouts/shortcodes/quiz.html
+
+  Shell shortcode. Reads quiz.* from front matter, renders the chrome
+  (progress bar, end screen), dispatches question HTML to a renderer
+  partial, then emits the shared state-machine JS.
+
+  Front matter shape:
+    quiz:
+      renderer:      "identify-image"   ← selects layouts/partials/quiz/<renderer>.html
+      passing_score: 70                 ← integer percentage, default 60
+      questions:
+        - id: 1
+          text: "..."
+          image: "filename.jpg"         ← optional (renderer-dependent)
+          answers:
+            - text: "..."
+              image: "filename.jpg"     ← optional (renderer-dependent)
+              correct: true|false
+              explanation: "..."
+*/}}
+
+{{ $quiz      := .Page.Params.quiz }}
+{{ $renderer  := $quiz.renderer      | default "identify-image" }}
+{{ $passScore := $quiz.passing_score | default 60 }}
+{{ $questions := $quiz.questions }}
+{{ $totalQ    := len $questions }}
+{{ $quizID    := printf "nbas-quiz-%s" (.Page.File.UniqueID | default "1") }}
+
+<div class="nbas-quiz" id="{{ $quizID }}"
+     data-quiz-type="{{ $renderer }}"
+     data-pass-score="{{ $passScore }}">
+
+  {{/* ── Progress bar ── */}}
+  <div class="nbas-quiz-progress">
+    <span class="nbas-quiz-progress-label">
+      Question <span data-current>1</span> of <span data-total>{{ $totalQ }}</span>
+    </span>
+    <div class="nbas-quiz-progress-bar-wrap">
+      <div class="nbas-quiz-progress-bar" style="width:0%"></div>
+    </div>
+    <span class="nbas-quiz-score-label">Score: <span data-score>0</span></span>
+  </div>
+
+  {{/* ── Questions — delegated to renderer partial ── */}}
+  {{ range $qi, $q := $questions }}
+    {{ $isFirst := eq $qi 0 }}
+    {{ $isLast  := eq $qi (sub $totalQ 1) }}
+
+    {{ partial (printf "quiz/%s.html" $renderer) (dict
+        "Page"    $.Page
+        "Q"       $q
+        "Qi"      $qi
+        "IsFirst" $isFirst
+        "IsLast"  $isLast
+    ) }}
+  {{ end }}
+
+  {{/* ── End screen ── */}}
+  <div class="nbas-quiz-end">
+    <div class="nbas-quiz-end-score"></div>
+    <div class="nbas-quiz-end-label"></div>
+    <div class="nbas-quiz-end-result"></div>
+    <button class="nbas-quiz-restart">Try Again</button>
+  </div>
+
+</div>{{/* .nbas-quiz */}}
+
+{{/* ── State machine JS ── */}}
+<script>
+(function () {
+  'use strict';
+
+  (document.readyState === 'loading')
+    ? document.addEventListener('DOMContentLoaded', init)
+    : init();
+
+  function init() {
+    var container = document.getElementById('{{ $quizID }}');
+    if (!container || container.dataset.quizInit) return;
+    container.dataset.quizInit = '1';
+    initQuiz(container);
+  }
+
+  function initQuiz(container) {
+
+    // ── DOM refs ─────────────────────────────────────────────────────────
+    var questionEls  = Array.from(container.querySelectorAll('.nbas-quiz-question'));
+    var progressBar  = container.querySelector('.nbas-quiz-progress-bar');
+    var labelCurrent = container.querySelector('[data-current]');
+    var labelTotal   = container.querySelector('[data-total]');
+    var labelScore   = container.querySelector('[data-score]');
+    var endScreen    = container.querySelector('.nbas-quiz-end');
+    var endScore     = container.querySelector('.nbas-quiz-end-score');
+    var endLabel     = container.querySelector('.nbas-quiz-end-label');
+    var endResult    = container.querySelector('.nbas-quiz-end-result');
+    var restartBtn   = container.querySelector('.nbas-quiz-restart');
+    var passScore    = parseInt(container.dataset.passScore, 10) || 60;
+    var totalQ       = questionEls.length;
+
+    if (labelTotal) labelTotal.textContent = totalQ;
+
+    // ── State ────────────────────────────────────────────────────────────
+    var state;
+
+    function buildState() {
+      return {
+        currentQ : 0,
+        score    : 0,
+        questions: questionEls.map(function () {
+          return { answered: false, lockedOut: false };
+        })
+      };
+    }
+
+    // ── Boot ─────────────────────────────────────────────────────────────
+    function boot() {
+      state = buildState();
+
+      questionEls.forEach(function (qEl, qi) {
+        qEl.querySelectorAll('.nbas-quiz-answer').forEach(function (panel) {
+          panel.addEventListener('click', function () { onAnswerClick(qi, panel); });
+        });
+        var nextBtn = qEl.querySelector('.nbas-quiz-next');
+        if (nextBtn) nextBtn.addEventListener('click', function () { onNextClick(qi); });
+      });
+
+      restartBtn.addEventListener('click', restart);
+      renderAll();
+    }
+
+    // ── Handlers ─────────────────────────────────────────────────────────
+
+    function onAnswerClick(qi, panel) {
+      var qs = state.questions[qi];
+      if (qs.lockedOut) return;
+
+      var isCorrect  = panel.dataset.correct === 'true';
+      var firstClick = !qs.answered;
+
+      if (firstClick && isCorrect) state.score++;
+      if (firstClick) qs.answered = true;
+
+      renderAfterClick(qi, panel, isCorrect);
+    }
+
+    function onNextClick(qi) {
+      var qs = state.questions[qi];
+      if (!qs.answered) return;
+
+      qs.lockedOut = true;
+      questionEls[qi].querySelectorAll('.nbas-quiz-answer').forEach(function (p) {
+        p.classList.add('nbas-quiz-answer--locked');
+      });
+
+      if (qi === totalQ - 1) {
+        renderEndScreen();
+      } else {
+        state.currentQ = qi + 1;
+        renderAll();
+      }
+      scrollToQuiz();
+    }
+
+    function restart() {
+      questionEls.forEach(function (qEl) {
+        qEl.querySelectorAll('.nbas-quiz-answer').forEach(function (p) {
+          p.classList.remove(
+            'nbas-quiz-answer--correct',
+            'nbas-quiz-answer--incorrect',
+            'nbas-quiz-answer--locked'
+          );
+        });
+        var exp  = qEl.querySelector('.nbas-quiz-explanation');
+        var next = qEl.querySelector('.nbas-quiz-next');
+        if (exp)  exp.classList.remove('nbas-quiz-explanation--visible');
+        if (next) next.classList.remove('nbas-quiz-next--visible');
+      });
+      endScreen.classList.remove('nbas-quiz-end--visible');
+      state = buildState();
+      renderAll();
+      scrollToQuiz();
+    }
+
+    // ── Scroll ────────────────────────────────────────────────────────────
+    // Target the level badge in the page header (sits above the quiz body),
+    // falling back to the quiz container itself if the badge isn't present.
+    function scrollToQuiz() {
+      var target = document.querySelector('.nbas-quiz-level-badge') || container;
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ── Render: full reset (boot / Next / restart) ────────────────────────
+    function renderAll() {
+      questionEls.forEach(function (qEl, qi) {
+        qEl.classList.toggle('nbas-quiz-active', qi === state.currentQ);
+      });
+      var pct = Math.round((state.currentQ / totalQ) * 100);
+      if (progressBar)  progressBar.style.width = pct + '%';
+      if (labelCurrent) labelCurrent.textContent = state.currentQ + 1;
+      if (labelScore)   labelScore.textContent   = state.score;
+      endScreen.classList.remove('nbas-quiz-end--visible');
+    }
+
+    // ── Render: after an answer click ─────────────────────────────────────
+    //
+    // Panel colouring rules:
+    //   - Correct panel → always green once user has answered (permanent)
+    //   - The wrong panel just clicked → red
+    //   - All other wrong panels → clear any previous red
+    //
+    // Explanation panel:
+    //   - Always shows the clicked panel's data (image, name, explanation)
+    //   - Uses data-imgsrc; never queries the child <img>
+    //   - Hides the image cell if data-imgsrc is empty (e.g. Iapetus)
+    //
+    function renderAfterClick(qi, clickedPanel, isCorrect) {
+      var qEl    = questionEls[qi];
+      var panels = Array.from(qEl.querySelectorAll('.nbas-quiz-answer'));
+
+      panels.forEach(function (p) {
+        if (p.dataset.correct === 'true') {
+          p.classList.add('nbas-quiz-answer--correct');
+          p.classList.remove('nbas-quiz-answer--incorrect');
+        } else if (p === clickedPanel) {
+          p.classList.add('nbas-quiz-answer--incorrect');
+        } else {
+          p.classList.remove('nbas-quiz-answer--incorrect');
+        }
+      });
+
+      // Explanation
+      var exp = qEl.querySelector('.nbas-quiz-explanation');
+      if (exp) {
+        var expImgWrap = exp.querySelector('.nbas-quiz-explanation-img');
+        var expImg     = exp.querySelector('.nbas-quiz-explanation-img img');
+        var expName    = exp.querySelector('.nbas-quiz-explanation-name');
+        var expText    = exp.querySelector('.nbas-quiz-explanation-text');
+        var expPrmp    = exp.querySelector('.nbas-quiz-explanation-prompt');
+
+        // Image cell: hide entirely if no src (e.g. Iapetus has no image)
+        var imgsrc = clickedPanel.dataset.imgsrc || '';
+        if (expImgWrap) expImgWrap.style.display = imgsrc ? '' : 'none';
+        if (expImg)  { expImg.src = imgsrc; expImg.alt = clickedPanel.dataset.name || ''; }
+
+        if (expName) expName.textContent = clickedPanel.dataset.name || '';
+
+        // Wrap the first word of the explanation in a styled span so
+        // "Correct!" / the opening word is visually prominent.
+        if (expText) {
+          var raw = clickedPanel.dataset.explanation || '';
+          var sp  = raw.indexOf(' ');
+          function esc(s) {
+            return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+          }
+          if (sp > -1) {
+            expText.innerHTML =
+              '<span class="nbas-result-label">' + esc(raw.slice(0, sp)) + '</span>' +
+              esc(raw.slice(sp));
+          } else {
+            expText.textContent = raw;
+          }
+        }
+
+        if (expPrmp) expPrmp.textContent = isCorrect
+          ? 'Click others to learn more'
+          : 'Try again or explore';
+
+        // Toggle correct/incorrect modifier for colour theming
+        exp.classList.remove('nbas-quiz-explanation--correct', 'nbas-quiz-explanation--incorrect');
+        exp.classList.add(isCorrect ? 'nbas-quiz-explanation--correct' : 'nbas-quiz-explanation--incorrect');
+        exp.classList.add('nbas-quiz-explanation--visible');
+      }
+
+      var nextBtn = qEl.querySelector('.nbas-quiz-next');
+      if (nextBtn) nextBtn.classList.add('nbas-quiz-next--visible');
+
+      if (labelScore) labelScore.textContent = state.score;
+    }
+
+    // ── End screen ────────────────────────────────────────────────────────
+    function renderEndScreen() {
+      questionEls.forEach(function (qEl) {
+        qEl.classList.remove('nbas-quiz-active');
+      });
+      endScreen.classList.add('nbas-quiz-end--visible');
+
+      var pct  = Math.round((state.score / totalQ) * 100);
+      var pass = pct >= passScore;
+
+      endScore.textContent  = state.score + '/' + totalQ;
+      endLabel.textContent  = pct + '% correct';
+      endResult.textContent = pass ? '✓ Passed' : '✗ Keep exploring';
+      endResult.className   = 'nbas-quiz-end-result ' +
+        (pass ? 'nbas-quiz-end-result--pass' : 'nbas-quiz-end-result--fail');
+
+      if (progressBar)  progressBar.style.width   = '100%';
+      if (labelCurrent) labelCurrent.textContent  = totalQ;
+      if (labelScore)   labelScore.textContent    = state.score;
+    }
+
+    boot();
+  }
+
+})();
+</script>

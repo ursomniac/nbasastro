@@ -1,0 +1,75 @@
+{{/*
+  layouts/partials/quiz/identify-image.html
+
+  Renderer: question has an image, each answer has an image (may be absent).
+
+  Context (passed from quiz.html shortcode):
+    .Page    — the Hugo page (for Resources.GetMatch)
+    .Q       — the question map from front matter
+    .Qi      — zero-based question index
+    .IsFirst — bool
+    .IsLast  — bool
+
+  Answer data attributes consumed by the shared JS state machine:
+    data-correct      "true" | "false"
+    data-name         answer text
+    data-explanation  explanation text
+    data-imgsrc       resolved image URL, or "" if no image
+*/}}
+
+{{ $page    := .Page }}
+{{ $q       := .Q }}
+{{ $qi      := .Qi }}
+{{ $isFirst := .IsFirst }}
+{{ $isLast  := .IsLast }}
+
+{{ $mysteryImg := $page.Resources.GetMatch $q.image }}
+
+<div class="nbas-quiz-question{{ if $isFirst }} nbas-quiz-active{{ end }}"
+     data-question="{{ $qi }}">
+
+  {{/* ── Question image (centered; JS never touches this) ── */}}
+  {{ with $mysteryImg }}
+    <div class="nbas-quiz-mystery-wrap">
+      <img src="{{ .RelPermalink }}" alt="{{ $q.text }}">
+    </div>
+  {{ end }}
+
+  {{/* ── Question text ── */}}
+  <p class="nbas-quiz-prompt">{{ $q.text }}</p>
+
+  {{/* ── Answer panels (2×2 grid) ── */}}
+  <div class="nbas-quiz-answers">
+    {{ range $q.answers }}
+      {{ $ansImg  := $page.Resources.GetMatch .image }}
+      {{ $imgsrc  := "" }}
+      {{ with $ansImg }}{{ $imgsrc = .RelPermalink }}{{ end }}
+
+      <button class="nbas-quiz-answer"
+              data-correct="{{ .correct }}"
+              data-name="{{ .text }}"
+              data-explanation="{{ .explanation }}"
+              data-imgsrc="{{ $imgsrc }}">
+        <div class="nbas-quiz-answer-name">{{ .text }}</div>
+      </button>
+    {{ end }}
+  </div>
+
+  {{/* ── Explanation panel (JS populates; hidden until first click) ── */}}
+  <div class="nbas-quiz-explanation">
+    <div class="nbas-quiz-explanation-inner">
+      <div class="nbas-quiz-explanation-img"><img src="" alt=""></div>
+      <div class="nbas-quiz-explanation-body">
+        <div class="nbas-quiz-explanation-name"></div>
+        <div class="nbas-quiz-explanation-text"></div>
+        <div class="nbas-quiz-explanation-prompt"></div>
+      </div>
+    </div>
+  </div>
+
+  {{/* ── Next / Finish button (hidden until first click) ── */}}
+  <button class="nbas-quiz-next">
+    {{ if $isLast }}Finish Quiz →{{ else }}Next Question →{{ end }}
+  </button>
+
+</div>{{/* .nbas-quiz-question */}}

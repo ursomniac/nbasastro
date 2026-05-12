@@ -5,7 +5,6 @@
     {{ if in $t "nbas" }}NBAS Newsletter{{ else if eq $t "series" }}Article Series{{ else }}{{ .Title | title }}{{ end }}
   </h1>
   <hr class="section-divider">
-
   <div class="list-container">
     {{ if eq .Kind "taxonomy" }}
       {{ if eq .Data.Plural "tags" }}
@@ -54,10 +53,14 @@
         </div>
       {{ end }}
     {{ else }}
-      {{/* Term View: The Article Listings */}}
+      {{/* Term View: Article listings — dispatch on section for quiz cards */}}
       {{ $currentTerm := .Data.Term }}
       {{ range .Pages }}
-        {{ partial "article-card.html" (dict "context" . "currentTerm" $currentTerm "catalogPage" false) }}
+        {{ if eq .Section "quizzes" }}
+          {{ partial "quiz-card.html" (dict "context" .) }}
+        {{ else }}
+          {{ partial "article-card.html" (dict "context" . "currentTerm" $currentTerm "catalogPage" false) }}
+        {{ end }}
       {{ end }}
     {{ end }}
   </div>

@@ -1,0 +1,118 @@
+{{ define "main" }}
+<article class="nbas-quiz-page" data-pagefind-body>
+
+  <header class="nbas-quiz-header">
+
+    {{/* Level badge */}}
+    {{ with .Params.level }}
+    <div class="nbas-quiz-level-badge nbas-quiz-level-badge--{{ . }}">
+      {{ . | title }}
+    </div>
+    {{ end }}
+
+    <h1 class="nbas-quiz-title">{{ .Title }}</h1>
+
+    {{ with .Description }}
+    <p class="nbas-quiz-description">{{ . }}</p>
+    {{ end }}
+
+    {{/* Series breadcrumb */}}
+    {{ with .Params.series }}
+    <div class="nbas-quiz-series" data-pagefind-ignore>
+      {{ range . }}
+        {{ $termPage := site.GetPage (printf "series/%s" (. | urlize)) }}
+        <a href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}#{{ end }}"
+           class="facet-badge series-badge {{ . | urlize }}">
+          {{ if $termPage }}{{ $termPage.LinkTitle | upper }}{{ else }}{{ . | humanize | upper }}{{ end }}
+        </a>
+      {{ end }}
+    </div>
+    {{ end }}
+
+  </header>
+
+  {{/* Quiz shortcode output */}}
+  <div class="nbas-quiz-body">
+    {{ .Content }}
+  </div>
+
+  {{/* Series navigation — prev/next quiz */}}
+  {{ if .Params.series }}
+  <hr class="article-separator">
+  <nav class="series-navigation" data-pagefind-ignore>
+    <div class="series-nav-container">
+      <span class="nav-series-label">MORE QUIZZES:</span>
+      {{ range .Params.series }}
+        {{ $currentSeries := . }}
+        {{ $termPage    := site.GetPage (printf "series/%s" ($currentSeries | urlize)) }}
+        {{ $seriesPages := (where $.Site.RegularPages "Params.series" "intersect" (slice $currentSeries)).ByTitle }}
+        {{ $prev := $seriesPages.Prev $ }}
+        {{ $next := $seriesPages.Next $ }}
+        <div class="series-nav-block">
+          <div class="series-nav-header">
+            <a href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}#{{ end }}"
+               class="facet-badge series-badge {{ $currentSeries | urlize }}">
+              All Quizzes
+            </a>
+          </div>
+          {{ if or $prev $next }}
+          <div class="series-nav-links">
+            {{ with $next }}
+            <div class="nav-item nav-next">
+              <a href="{{ .RelPermalink }}" class="series-nav-link-custom">
+                <span class="dir-meta">← PREVIOUS</span>
+                <span class="title-meta">{{ .Title }}</span>
+              </a>
+            </div>
+            {{ end }}
+            {{ with $prev }}
+            <div class="nav-item nav-prev">
+              <a href="{{ .RelPermalink }}" class="series-nav-link-custom">
+                <span class="dir-meta">NEXT →</span>
+                <span class="title-meta">{{ .Title }}</span>
+              </a>
+            </div>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </nav>
+  {{ end }}
+
+</article>
+
+<style>
+/* ── Quiz page header ── */
+.nbas-quiz-header {
+  margin-bottom: 1.5rem;
+}
+.nbas-quiz-title {
+  margin: .5rem 0 .25rem;
+}
+.nbas-quiz-description {
+  color: var(--text-muted, #b0bec5);
+  font-size: .95rem;
+  margin: .25rem 0 .75rem;
+}
+.nbas-quiz-series {
+  margin-bottom: .5rem;
+}
+
+/* Level badges */
+.nbas-quiz-level-badge {
+  display: inline-block;
+  padding: .2rem .65rem;
+  border-radius: 3px;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: .5rem;
+}
+.nbas-quiz-level-badge--beginner     { background:#0a2018; color:#4fd1a0; border:1px solid #1a4a34; }
+.nbas-quiz-level-badge--intermediate { background:#2a1e04; color:var(--gold-base,#f8d44e); border:1px solid var(--gold-border,#8e7037); }
+.nbas-quiz-level-badge--expert       { background:#2a0a04; color:#f48a6a; border:1px solid #6a2010; }
+</style>
+{{ end }}
