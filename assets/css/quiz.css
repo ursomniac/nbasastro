@@ -323,3 +323,24 @@
     width: 100%;
   }
 }
+
+/* ── choose-image renderer: answer panels with images ─────────────────────── */
+
+.nbas-quiz-answer--has-image {
+  flex-direction: column;
+  padding: 0;
+  text-align: center;
+  min-height: auto;
+}
+
+.nbas-quiz-answer--has-image img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.nbas-quiz-answer--has-image .nbas-quiz-answer-name {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+}
