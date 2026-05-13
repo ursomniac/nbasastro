@@ -245,20 +245,12 @@
 
         if (expName) expName.textContent = clickedPanel.dataset.name || '';
 
-        // Wrap the first word of the explanation in a styled span so
-        // "Correct!" / the opening word is visually prominent.
         if (expText) {
-          var raw = clickedPanel.dataset.explanation || '';
-          var sp  = raw.indexOf(' ');
-          function esc(s) {
-            return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-          }
-          if (sp > -1) {
-            expText.innerHTML =
-              '<span class="nbas-result-label">' + esc(raw.slice(0, sp)) + '</span>' +
-              esc(raw.slice(sp));
+          var expSpan = clickedPanel.querySelector('.nbas-quiz-answer-explanation');
+          if (expSpan) {
+            expText.innerHTML = expSpan.innerHTML;
           } else {
-            expText.textContent = raw;
+            expText.textContent = clickedPanel.dataset.explanation || '';
           }
         }
 

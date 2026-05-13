@@ -335,8 +335,9 @@
 
 .nbas-quiz-answer--has-image img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: 160px;
+  object-fit: contain;
+  background: #000;
   display: block;
 }
 
