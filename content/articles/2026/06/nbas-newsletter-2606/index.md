@@ -6,7 +6,6 @@ series: ["nbas-newsletter"]
 byline: "NBAS officers, the NBAS website, and the beginning of Summer"
 tags: []
 dso_messier: ["8"]
-draft: true
 ---
 
 {{< newsletter-stats
