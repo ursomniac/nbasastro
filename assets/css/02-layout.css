@@ -67,6 +67,10 @@ a:hover {
     box-sizing: border-box;
 }
 
+.nbas-header .branding h1 {
+    font-family: 'Marcellus', serif;
+}
+
 .nbas-logo {
     height: auto;
     max-height: 165px;

@@ -1,0 +1,70 @@
+<style>
+.sb7-wrap { width:100%; background:#111e30; overflow:hidden; position:relative; font-family:'Barlow Condensed',sans-serif; border-top:2px solid #f8d44e; border-bottom:2px solid #f8d44e; margin-bottom:1.5rem; }
+.sb7-wrap *, .sb7-wrap *::before, .sb7-wrap *::after { box-sizing:border-box; }
+.sb7-stars { position:absolute; inset:0; pointer-events:none; }
+.sb7-inner { position:relative; z-index:2; display:flex; align-items:center; padding:12px 20px; gap:16px; flex-wrap:nowrap; }
+.sb7-logo { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+.sb7-acronym { font-family:'Marcellus',serif; font-size:32px; color:#f8d44e; line-height:1; letter-spacing:0.04em; }
+.sb7-divider { width:1px; height:36px; background:#2a3a54; flex-shrink:0; }
+.sb7-text { flex-shrink:0; }
+.sb7-kicker { font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#8a9cb3; font-weight:600; margin:0 0 2px; }
+.sb7-headline { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:700; color:#ffffff; margin:0; line-height:1; }
+.sb7-headline em { color:#f8d44e; font-style:normal; }
+.sb7-items { display:flex; align-items:center; flex:1; justify-content:center; gap:0; }
+.sb7-item { font-family:'Barlow Condensed',sans-serif; font-size:15px; color:#c0cfe0; font-weight:400; white-space:nowrap; padding:0 12px; border-right:1px solid #3a4a64; }
+.sb7-item:last-child { border-right:none; }
+.sb7-cta { display:inline-block; padding:8px 20px; background:transparent; color:#f8d44e; border:2px solid #f8d44e; border-radius:4px; font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; text-decoration:none !important; flex-shrink:0; white-space:nowrap; transition:background 0.2s, color 0.2s; }
+.sb7-cta:hover { background:#f8d44e; color:#0d1421 !important; }
+@media(max-width:640px){ .sb7-items,.sb7-divider{display:none;} .sb7-inner{flex-wrap:wrap; gap:10px;} }
+</style>
+
+<div class="sb7-wrap">
+  <canvas class="sb7-stars" id="sb7c"></canvas>
+  <div class="sb7-inner">
+
+    <div class="sb7-logo">
+      <svg width="28" height="32" viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="16,2 17.5,7 22,7 18.5,10 20,15 16,12 12,15 13.5,10 10,7 14.5,7" fill="#ffffff" opacity="0.95"/>
+        <polygon points="6,18 7,21.5 10.5,21.5 7.8,23.5 8.8,27 6,25 3.2,27 4.2,23.5 1.5,21.5 5,21.5" fill="#c8d8e8" opacity="0.8"/>
+        <polygon points="26,22 26.8,24.8 29.5,24.8 27.4,26.4 28.2,29 26,27.5 23.8,29 24.6,26.4 22.5,24.8 25.2,24.8" fill="#a0b8cc" opacity="0.65"/>
+      </svg>
+      <div class="sb7-acronym">NBAS</div>
+    </div>
+
+    <div class="sb7-divider"></div>
+
+    <div class="sb7-text">
+      <p class="sb7-kicker">Official Swag Store</p>
+      <p class="sb7-headline">Wear Your <em>Passion</em></p>
+    </div>
+
+    <div class="sb7-divider"></div>
+
+    <div class="sb7-items">
+      <span class="sb7-item">T-Shirts</span>
+      <span class="sb7-item">Hoodies</span>
+      <span class="sb7-item">Sweatshirts</span>
+      <span class="sb7-item">Mugs</span>
+      <span class="sb7-item">&amp; More</span>
+    </div>
+
+    <a class="sb7-cta" href="https://nbas-shop.fourthwall.com/" target="_blank" rel="noopener">Shop Now</a>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var c=document.getElementById('sb7c'),ctx=c.getContext('2d');
+  function draw(){
+    c.width=c.offsetWidth; c.height=c.offsetHeight;
+    for(var i=0;i<70;i++){
+      ctx.beginPath();
+      ctx.arc(Math.random()*c.width,Math.random()*c.height,Math.random()*1.2,0,Math.PI*2);
+      ctx.fillStyle='rgba(248,212,78,'+(Math.random()*0.4+0.08)+')';
+      ctx.fill();
+    }
+  }
+  draw(); window.addEventListener('resize',draw);
+})();
+</script>
