@@ -21,12 +21,12 @@ profile_data:
 stars_bright: ["Arcturus"]
 stars_multiple: ["Izar"]
 dso_caldwell: ["45"]
-dso_ngc: ["5428", "5466", "5529"]
+dso_ngc: ["5248", "5466", "5529"]
 dso_other: ["Hickson 73"]
 
 # The 6 Objects of Interest
 highlights:
-  - name: "Caldwell 45 (NGC 5428)"
+  - name: "Caldwell 45 (NGC 5248)"
     type: "Intermediate Galaxy"
     using: "Medium Telescope"
   - name: "NGC 5466"

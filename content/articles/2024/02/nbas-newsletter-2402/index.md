@@ -8,7 +8,7 @@ tags: []
 
 # Taxonomy refs4
 dso_caldwell: ["25", "39"]
-dso_ngc: ["2392", "2420", "2416", "2419"]
+dso_ngc: ["2392", "2420", "2146", "2419"]
 dso_other: ["Barnard 33"]
 ---
 
