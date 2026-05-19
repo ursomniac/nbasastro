@@ -1,0 +1,26 @@
+{{ define "main" }}
+<article class="nbas-article">
+
+  <nav class="outreach-subnav">
+    {{ if .Parent.IsHome }}
+      <a href="{{ .RelPermalink }}" class="active">{{ .Title }}</a>
+      {{ range .Sections.ByWeight }}
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{ end }}
+    {{ else }}
+      <a href="{{ .Parent.RelPermalink }}">{{ .Parent.Title }}</a>
+      {{ range .Parent.Sections.ByWeight }}
+        <a href="{{ .RelPermalink }}"{{ if eq .RelPermalink $.RelPermalink }} class="active"{{ end }}>{{ .Title }}</a>
+      {{ end }}
+    {{ end }}
+  </nav>
+
+  <h1 class="article-title">{{ .Title }}</h1>
+  <hr class="article-separator">
+
+  <div class="article-body">
+    {{ .Content }}
+  </div>
+
+</article>
+{{ end }}

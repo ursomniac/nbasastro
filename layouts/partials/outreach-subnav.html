@@ -1,0 +1,6 @@
+<nav class="outreach-subnav">
+  <a href="{{ .Parent.RelPermalink }}">{{ .Parent.Title }}</a>
+  {{ range .Parent.Sections.ByWeight }}
+    <a href="{{ .RelPermalink }}"{{ if eq .RelPermalink $.RelPermalink }} class="active"{{ end }}>{{ .Title }}</a>
+  {{ end }}
+</nav>

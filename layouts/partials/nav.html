@@ -13,6 +13,7 @@
       
       {{ $announcements := 0 }}{{ with index .Site.Taxonomies.series "nbas-announcements" }}{{ $announcements = .Count }}{{ end }}
       <a href="{{ if gt $announcements 0 }}/series/nbas-announcements/{{ else }}#{{ end }}" class="{{ if eq $announcements 0 }}nav-disabled{{ end }}">Announcements</a>
+      <a href="/outreach/">Outreach</a>
       <a href="/about/">About Us</a>
       <a href="/faq/">FAQ</a>
     </div>

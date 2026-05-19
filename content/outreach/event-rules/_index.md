@@ -1,7 +1,8 @@
 ---
 title: "NBAS Event Rules"
 date: "2026-05-10"
-draft: "true"
+description: "Rules and guidelines for attending our public events.  (Printable)"
+weight: 3
 ---
 ---
 _Northern Berkshire's home for amateur astronomy — whatever your experience, you belong under our skies!_
