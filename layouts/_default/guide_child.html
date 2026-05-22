@@ -1,0 +1,55 @@
+{{ define "main" }}
+<article class="nbas-article">
+
+  {{/* SUBNAV */}}
+  <nav class="guide-subnav">
+    <a href="{{ .Parent.RelPermalink }}">{{ with .Parent.Params.navtext }}{{ . }}{{ else }}{{ .Parent.Title }}{{ end }}</a>
+    {{ range .Parent.RegularPagesRecursive.ByWeight }}
+      <a href="{{ .RelPermalink }}"{{ if eq .RelPermalink $.RelPermalink }} class="active"{{ end }}>{{ with .Params.navtext }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
+    {{ end }}
+  </nav>
+
+  {{/* SERIES LABEL */}}
+  {{ with .Params.series }}
+  <div class="article-series-label">
+    {{ range . }}
+      {{ $termPage := site.GetPage (printf "series/%s" (. | urlize)) }}
+      <a href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}#{{ end }}" class="series-link">
+        {{ if $termPage }}{{ $termPage.LinkTitle | upper }}{{ else }}{{ . | humanize | upper }}{{ end }}
+      </a>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  <h1 class="article-title">{{ .Title }}</h1>
+
+  {{/* METADATA */}}
+  <div class="article-metadata">
+    <span>By {{ if .Params.authors }}
+      {{ range $index, $author := .Params.authors }}
+        {{ if $index }}, {{ end }}
+        {{- $p := site.GetPage (printf "authors/%s" ($author | urlize)) -}}
+        <a href="{{ if $p }}{{ $p.RelPermalink }}{{ else }}#{{ end }}">
+          {{- if $p }}{{ $p.Title }}{{ else }}{{ $author | replace "-" " " | title | replace "Nbas" "NBAS" }}{{ end -}}
+        </a>
+      {{ end }}
+    {{ else }}
+      NBAS Staff
+    {{ end }}
+    </span> | <time datetime="{{ .Date.Format "2006-01-02" }}">
+      {{ if not .Date.IsZero }}Published: {{ .Date.Format "January 2, 2006" }}{{ else }}Date TBD{{ end }}
+    </time>
+  </div>
+
+  {{ with .Params.byline }}
+  <div class="article-byline">{{ . }}</div>
+  {{ end }}
+
+  <hr class="article-separator">
+
+  <div class="article-body">
+    {{ .Content }}
+  </div>
+
+</article>
+{{ end }}

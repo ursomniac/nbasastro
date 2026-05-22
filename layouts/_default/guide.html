@@ -1,0 +1,37 @@
+{{ define "main" }}
+<article class="nbas-article">
+
+  <nav class="guide-subnav">
+    {{ if .Params.guide_child }}
+      <a href="{{ .Parent.RelPermalink }}">{{ with .Parent.Params.navtext }}{{ . }}{{ else }}{{ .Parent.Title }}{{ end }}</a>
+      {{ range .Parent.RegularPagesRecursive.ByWeight }}
+        <a href="{{ .RelPermalink }}"{{ if eq .RelPermalink $.RelPermalink }} class="active"{{ end }}>{{ with .Params.navtext }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
+      {{ end }}
+    {{ else }}
+      <a href="{{ .RelPermalink }}" class="active">{{ with .Params.navtext }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
+      {{ range .RegularPagesRecursive.ByWeight }}
+        <a href="{{ .RelPermalink }}">{{ with .Params.navtext }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
+      {{ end }}
+    {{ end }}
+  </nav>
+
+  <h1 class="article-title">{{ .Title }}</h1>
+  <hr class="article-separator">
+
+  <div class="article-body">
+    {{ .Content }}
+  </div>
+
+  {{ if not .Params.guide_child }}
+  <div class="guide-page-list">
+    {{ range .RegularPagesRecursive.ByWeight }}
+    <div class="guide-page-item">
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+
+</article>
+{{ end }}

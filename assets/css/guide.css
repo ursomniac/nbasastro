@@ -1,0 +1,77 @@
+/* --- GUIDE LAYOUT (reusable section-with-child-pages pattern) --- */
+
+/* Subnav - matches outreach-subnav pattern */
+.guide-subnav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 2rem;
+    padding: 0.75rem 1rem;
+    background: var(--space-blue);
+    border: 1px solid var(--border-soft);
+    border-left: 4px solid var(--gold-base);
+    border-radius: 4px;
+    flex-wrap: wrap;
+}
+
+.guide-subnav a {
+    color: var(--gold-link) !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+    font-size: 0.85rem;
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: background 0.2s ease;
+}
+
+.guide-subnav a:hover {
+    background: rgba(248, 212, 78, 0.15);
+}
+
+.guide-subnav a.active {
+    background: rgba(248, 212, 78, 0.15);
+    color: var(--gold-base) !important;
+    text-decoration: underline !important;
+}
+
+/* Page list */
+.guide-page-list {
+    margin-top: 2rem;
+    border-left: 4px solid var(--gold-base);
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.guide-page-item {
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.guide-page-item:last-child {
+    border-bottom: none;
+}
+
+.guide-page-item h2 {
+    margin: 0 0 0.4rem 0;
+    font-size: 1.2rem;
+}
+
+.guide-page-item h2 a {
+    color: var(--gold-link) !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+}
+
+.guide-page-item h2 a:hover {
+    color: var(--gold-base) !important;
+    text-decoration: underline !important;
+}
+
+.guide-page-item p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    font-weight: normal;
+}

@@ -39,9 +39,9 @@ title = "Northern Berkshire Astronomical Society"
   dso_ngc      = "dso_ngc"
   dso_other    = "dso_other"
 
-
 [permalinks]
   articles = "/articles/:year/:month/:title/"
+  guides = "/guides/:sections[1:]/:contentbasename/"
   pages = "/:contentbasename/"
 
 [related]

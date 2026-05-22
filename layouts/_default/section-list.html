@@ -1,0 +1,23 @@
+{{ define "main" }}
+<article class="nbas-article">
+
+  <h1 class="article-title">{{ .Title }}</h1>
+  <hr class="article-separator">
+
+  {{ with .Content }}
+  <div class="article-body">
+    {{ . }}
+  </div>
+  {{ end }}
+
+  <div class="guide-page-list">
+    {{ range .Sections.ByWeight }}
+    <div class="guide-page-item">
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </div>
+    {{ end }}
+  </div>
+
+</article>
+{{ end }}
