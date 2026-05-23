@@ -260,7 +260,7 @@
           <div class="sso-grs-grid">
             <div class="sso-grs-globe">
 		<div class="jupiter-globe-wrap">
-              <canvas id="jupiter-globe-canvas" width="400" height="400" class="sso-panel-image"></canvas>
+              <canvas id="jupiter-globe-canvas" width="400" height="400" ></canvas>
 		</div>
             </div>
             <div class="sso-grs-right">
@@ -391,10 +391,11 @@
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
   }
 
-  function openSection(btn, body) {
-    btn.setAttribute('aria-expanded', 'true');
-    body.classList.add('sso-acc-open');
-  }
+function openSection(btn, body) {
+  btn.setAttribute('aria-expanded', 'true');
+  body.classList.add('sso-acc-open');
+}
+
 
   function closeSection(btn, body) {
     btn.setAttribute('aria-expanded', 'false');

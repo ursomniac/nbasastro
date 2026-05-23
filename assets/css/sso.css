@@ -205,8 +205,10 @@
 }
 
 .jupiter-globe-wrap canvas {
-  width: 100%;
-  height: auto;
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 1 / 1;
 }
 
 /* --- Planet Positions table: cols 2–6 are numbers --- */
@@ -514,8 +516,8 @@ canvas:not(.mars-marker-overlay) {
    ============================================================ */
 @media (max-width: 768px) {
 
-  /* Stack two-column grid to single column */
-  .sso-grid {
+  .sso-grid,
+  .sso-grs-grid {
     grid-template-columns: 1fr;
   }
 

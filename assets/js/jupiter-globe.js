@@ -112,8 +112,8 @@ function initJupiterGlobe() {
   const cml    = window.SolarSystem.jupiterCML(jde).sysii
   const grsLon = grsLongitude(jde)
 
-  const width  = canvas.clientWidth  || 400
-  const height = canvas.clientHeight || 400
+  const width  = canvas.offsetWidth  || canvas.width  || 400
+  const height = canvas.offsetHeight || canvas.height || 400
 
   _renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
   _renderer.setSize(width, height)
@@ -166,8 +166,10 @@ const material = new THREE.ShaderMaterial({
   _scene.add(_sunLight)
 
   window.addEventListener('resize', () => {
-    _renderer.setSize(canvas.clientWidth, canvas.clientHeight)
-    _camera.aspect = canvas.clientWidth / canvas.clientHeight
+    const w = canvas.offsetWidth  || canvas.width
+    const h = canvas.offsetHeight || canvas.height
+    _renderer.setSize(w, h)
+    _camera.aspect = w / h
     _camera.updateProjectionMatrix()
     renderFrame()
   })
