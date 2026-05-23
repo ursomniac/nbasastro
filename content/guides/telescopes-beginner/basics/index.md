@@ -5,7 +5,7 @@ guide_child: true
 build:
   list: local
 description: "The key concepts and terms you need to understand before shopping for a telescope — aperture, focal length, magnification, and more."
-date: 2026-06-01
+date: 2026-06-05
 navtext: "The Basics"
 weight: 5
 series:
