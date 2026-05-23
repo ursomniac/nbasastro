@@ -4,7 +4,7 @@ date: 2026-05-23
 authors: ["bob-donahue"]
 byline: "Bringing Astronomy to Everyone"
 knowledgetopics: ["outreach"]
-thumbnail: "tts-book.webp"
+thumbnail: "tts-book.png"
 ---
 
 Last week I attended a workshop at the Springfield Science Museum
@@ -14,19 +14,30 @@ thought much about — and partly as a representative of NBAS, because
 this kind of community networking is part of what we're trying to
 do as a club.
 
+{{< nbas-gallery style="carousel" size="400px" >}}
+
+noreen_jenny.jpg | Author Noreen Grice and Organizer Jenny Powers |
+panel1.jpg | Engaging with "Touch the Stars"
+panel2.jpg | Learning about accessibility
+{{< /nbas-gallery >}}
+
 I'm glad I went.
 
 ## Touch the Stars
 
+{{< nbas-image src="youcando_logo.jpg" width="200" align="left" >}}
 The workshop was led by **Noreen Grice**, author of 
-[*Touch the Stars*](https://www.youcandoastronomy.com/) 
-as well as several other accessible astronomy books. 
+[*Touch the Stars*](https://shop.nbp.org/products/touch-the-stars-fifth-edition) 
+as well as several other accessible astronomy books all presented on
+the "[You Can Do Astronomy](https://www.youcandoastronomy.com/) " 
+website. 
 What she has produced is remarkable: a
 book that conveys astronomy to visually impaired readers not just
 through Braille text, but through nearly 20 raised images — tactile
 illustrations of solar system objects, eclipses, and deep-sky objects
 that a reader can actually *feel*.
 
+{{< nbas-image src="tts-book.png" size="300" align="right" >}}
 Copies of the book were available at the workshop, and holding one
 brought home something I hadn't fully appreciated before: how much
 of our communication about astronomy is purely visual.  We talk
@@ -36,11 +47,10 @@ what we mean. Noreen's work asks what it looks like to build that
 understanding through touch instead, and the answer is genuinely
 impressive.
 
-author.jpeg
-
-{{< nbas-gallery size="325px" style="grid" >}}
+{{< nbas-gallery size="325px" style="grid" 
+title="Examples of Raised Relief Diagrams in \"Touch the Stars\"" >}}
 tts/moon-phase.jpeg | Phases of the Moon |
-tts/jupiter.jpeg | Jupiter and the Great Red Spot |
+tts/jupiter.png | Jupiter and the Great Red Spot |
 tts/saturn.jpeg | Saturn and rings to scale |
 tts/orion.jpeg | the stars of Orion |
 tts/lyra.jpeg | Lyra and the Ring Nebula |
@@ -53,7 +63,8 @@ What was also impressive was that just outside of the room where
 the workshop was held at the Springfield Science Museum, were exhibits 
 on the Moon and meteorites that directly put this into action:
 
-{{< nbas-gallery size="450px" style="carousel" >}}
+{{< nbas-gallery size="450px" style="carousel" 
+title="Tactile Exhibits at the Museum" >}}
 tts/moon-globe.jpeg | Moon globe | 
 tts/moon-tycho.jpeg | Description of the Tycho crater |
 {{< /nbas-gallery >}}
