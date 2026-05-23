@@ -197,6 +197,18 @@
   color: var(--text-pure);
 }
 
+.jupiter-globe-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.jupiter-globe-wrap canvas {
+  width: 100%;
+  height: auto;
+}
+
 /* --- Planet Positions table: cols 2–6 are numbers --- */
 #sso-planet-rows td:first-child {
   color: var(--text-pure);
