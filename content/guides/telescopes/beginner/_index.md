@@ -2,6 +2,9 @@
 title: "A Beginner's Guide to Telescopes"
 navtext: "Guide"
 layout: guide
+build:
+  list: true
+  render: always
 cascade:
 - build:
     list: local

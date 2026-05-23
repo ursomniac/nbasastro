@@ -11,6 +11,16 @@
     1. Scan history for redundant suggestions.
     2. If persistent, immediately generate a Markdown summary of current progress and trigger a session restart.
 
+## ABSOLUTE MANDATES
+These are NEVER TO BE VIOLATED.
+1. DO NOT GUESS.  ALWAYS:
+   * Research 
+   * Test possible solutions
+   * THEN and ONLY THEN present the solution to the user with evidence ready if requested.
+2. DO NOT MAKE SHORTCUTS
+   * ONLY show partial code if the code is complete - NEVER put in "(existing code)" or "..."
+3. ASK FOR CLARIFICATIONS if your solution will rely on guessing!
+
 ## PROJECT PARAMETERS
 *   **ROOT:** https://nbasastro.org + /
 *   **REPO:** https://github.com + /ursomniac/nbasastro

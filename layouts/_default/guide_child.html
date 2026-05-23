@@ -1,7 +1,6 @@
 {{ define "main" }}
 <article class="nbas-article">
 
-  {{/* SUBNAV */}}
   <nav class="guide-subnav">
     <a href="{{ .Parent.RelPermalink }}">{{ with .Parent.Params.navtext }}{{ . }}{{ else }}{{ .Parent.Title }}{{ end }}</a>
     {{ range .Parent.RegularPagesRecursive.ByWeight }}
