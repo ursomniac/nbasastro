@@ -14,6 +14,7 @@ authors: []
 series: ['getting-started']
 knowledgetopics: ['tech']
 description: "Information you want when considering a telescope!"
+byline: "Information you want when considering a telescope!"
 tags: []
 ---
 

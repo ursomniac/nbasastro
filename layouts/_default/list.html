@@ -34,7 +34,10 @@
     <div class="article-list">
       {{ $pages := .Pages }}
       {{ if eq .Section "articles" }}
-        {{ $pages = where .Site.RegularPages "Section" "in" (slice "articles" "constellations" "quizzes") }}
+
+        {{/* $pages = where .Site.RegularPages "Section" "in" (slice "articles" "constellations" "quizzes") */}}
+{{ $guides := where .Site.Pages "Params.layout" "guide" }}
+{{ $pages = union (where .Site.RegularPages "Section" "in" (slice "articles" "constellations" "quizzes")) $guides }}
       {{ end }}
 
       {{ range (.Paginate ($pages.ByPublishDate.Reverse)).Pages }}
