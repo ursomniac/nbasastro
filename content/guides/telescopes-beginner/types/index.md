@@ -1,6 +1,9 @@
 ---
 title: "Telescopes: Types"
-navtext: "Types"
+navtext: "Telescope Types"
+guide_child: true
+build:
+  list: local
 description: "The optical configurations you'll encounter with amateur telescopes — what they are, what they're good at, and the tradeoffs of each."
 date: 2026-06-05
 weight: 10

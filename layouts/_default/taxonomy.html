@@ -47,7 +47,7 @@
                   <div class="hub-summary">{{ . }}</div>
                 {{ end }}
               </div>
-              <span class="hub-count">{{ .Count }} Articles</span>
+<span class="hub-count">{{ len (where .Pages "Params.layout" "ne" "guide_child") }} Articles</span>
             </div>
           {{ end }}
         </div>
@@ -55,13 +55,13 @@
     {{ else }}
       {{/* Term View: Article listings — dispatch on section for quiz cards */}}
       {{ $currentTerm := .Data.Term }}
-      {{ range .Pages }}
-        {{ if eq .Section "quizzes" }}
-          {{ partial "quiz-card.html" (dict "context" .) }}
-        {{ else }}
-          {{ partial "article-card.html" (dict "context" . "currentTerm" $currentTerm "catalogPage" false) }}
-        {{ end }}
-      {{ end }}
+	{{ range where .Pages "Params.layout" "ne" "guide_child" }}
+  	  {{ if eq .Section "quizzes" }}
+    	    {{ partial "quiz-card.html" (dict "context" .) }}
+  	  {{ else }}
+    	    {{ partial "article-card.html" (dict "context" . "currentTerm" $currentTerm "catalogPage" false) }}
+  	  {{ end }}
+	{{ end }}
     {{ end }}
   </div>
 </section>

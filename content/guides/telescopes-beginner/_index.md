@@ -7,7 +7,7 @@ build:
   render: always
 cascade:
 - build:
-    list: local
+    list: false
     render: always
 date: 2026-06-05
 authors: []

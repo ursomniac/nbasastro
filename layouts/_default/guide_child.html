@@ -2,10 +2,19 @@
 <article class="nbas-article">
 
   <nav class="guide-subnav">
-    <a href="{{ .Parent.RelPermalink }}">{{ with .Parent.Params.navtext }}{{ . }}{{ else }}{{ .Parent.Title }}{{ end }}</a>
-    {{ range .Parent.RegularPagesRecursive.ByWeight }}
-      <a href="{{ .RelPermalink }}"{{ if eq .RelPermalink $.RelPermalink }} class="active"{{ end }}>{{ with .Params.navtext }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
-    {{ end }}
+    <input type="checkbox" id="guide-subnav-toggle" class="guide-subnav-toggle">
+    <a href="{{ .Parent.RelPermalink }}" class="guide-subnav-title">{{ .Parent.Title }}</a>
+    <div class="guide-subnav-dropdown">
+      <label for="guide-subnav-toggle" class="guide-subnav-trigger">
+        {{ with .Params.navtext }}{{ . }}{{ else }}{{ .Title }}{{ end }} ▾
+      </label>
+      <div class="guide-subnav-menu">
+        <a href="{{ .Parent.RelPermalink }}">{{ with .Parent.Params.navtext }}{{ . }}{{ else }}{{ .Parent.Title }}{{ end }}</a>
+        {{ range .Parent.RegularPagesRecursive.ByWeight }}
+          <a href="{{ .RelPermalink }}"{{ if eq .RelPermalink $.RelPermalink }} class="active"{{ end }}>{{ with .Params.navtext }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
+        {{ end }}
+      </div>
+    </div>
   </nav>
 
   {{/* SERIES LABEL */}}

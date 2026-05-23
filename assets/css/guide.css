@@ -1,39 +1,107 @@
 /* --- GUIDE LAYOUT (reusable section-with-child-pages pattern) --- */
 
-/* Subnav - matches outreach-subnav pattern */
+/* Subnav */
 .guide-subnav {
     display: flex;
-    gap: 8px;
-    margin-bottom: 2rem;
-    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 1rem;
+    padding: 8px 14px;
     background: var(--space-blue);
     border: 1px solid var(--border-soft);
     border-left: 4px solid var(--gold-base);
     border-radius: 4px;
-    flex-wrap: wrap;
+    margin-bottom: 2rem;
 }
 
-.guide-subnav a {
-    color: var(--gold-link) !important;
+.guide-subnav-toggle {
+    display: none;
+}
+
+.guide-subnav-title {
+    color: var(--text-muted) !important;
     text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.guide-subnav-title:hover {
+    color: var(--gold-base) !important;
+}
+
+.guide-subnav-dropdown {
+    position: relative;
+}
+
+.guide-subnav-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    min-width: 220px;
+    background: var(--deep-bg);
+    border: 1px solid var(--gold-border);
+    border-radius: 3px;
+    color: var(--gold-link) !important;
     font-weight: 700 !important;
     font-size: 0.85rem;
-    padding: 4px 10px;
-    border-radius: 3px;
-    transition: background 0.2s ease;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    text-decoration: none !important;
+    box-sizing: border-box;
 }
 
-.guide-subnav a:hover {
-    background: rgba(248, 212, 78, 0.15);
-}
-
-.guide-subnav a.active {
-    background: rgba(248, 212, 78, 0.15);
+.guide-subnav-trigger:hover {
+    border-color: var(--gold-base);
     color: var(--gold-base) !important;
+}
+
+.guide-subnav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    background: var(--deep-bg);
+border: 1px solid var(--gold-base);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    min-width: 220px;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+.guide-subnav-toggle:checked ~ .guide-subnav-dropdown .guide-subnav-menu {
+    display: block;
+}
+
+.guide-subnav-menu a {
+    display: block;
+    padding: 8px 16px;
+    color: var(--gold-link) !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.guide-subnav-menu a:last-child {
+    border-bottom: none;
+}
+
+.guide-subnav-menu a:hover {
+    background: rgba(248, 212, 78, 0.1);
+    color: var(--gold-base) !important;
+}
+
+.guide-subnav-menu a.active {
+    color: var(--gold-base) !important;
+    background: rgba(248, 212, 78, 0.08);
     text-decoration: underline !important;
 }
 
-/* Page list */
+/* Page list on hub page */
 .guide-page-list {
     margin-top: 2rem;
     border-left: 4px solid var(--gold-base);

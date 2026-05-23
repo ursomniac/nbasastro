@@ -2,17 +2,19 @@
 <article class="nbas-article">
 
   <nav class="guide-subnav">
-    {{ if .Params.guide_child }}
-      <a href="{{ .Parent.RelPermalink }}">{{ with .Parent.Params.navtext }}{{ . }}{{ else }}{{ .Parent.Title }}{{ end }}</a>
-      {{ range .Parent.RegularPagesRecursive.ByWeight }}
-        <a href="{{ .RelPermalink }}"{{ if eq .RelPermalink $.RelPermalink }} class="active"{{ end }}>{{ with .Params.navtext }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
-      {{ end }}
-    {{ else }}
-      <a href="{{ .RelPermalink }}" class="active">{{ with .Params.navtext }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
-      {{ range .RegularPagesRecursive.ByWeight }}
-        <a href="{{ .RelPermalink }}">{{ with .Params.navtext }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
-      {{ end }}
-    {{ end }}
+    <input type="checkbox" id="guide-subnav-toggle" class="guide-subnav-toggle">
+    <a href="{{ .RelPermalink }}" class="guide-subnav-title">{{ .Title }}</a>
+    <div class="guide-subnav-dropdown">
+      <label for="guide-subnav-toggle" class="guide-subnav-trigger">
+        {{ with .Params.navtext }}{{ . }}{{ else }}Guide{{ end }} ▾
+      </label>
+      <div class="guide-subnav-menu">
+        <a href="{{ .RelPermalink }}" class="active">{{ with .Params.navtext }}{{ . }}{{ else }}Overview{{ end }}</a>
+        {{ range .RegularPagesRecursive.ByWeight }}
+          <a href="{{ .RelPermalink }}">{{ with .Params.navtext }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
+        {{ end }}
+      </div>
+    </div>
   </nav>
 
   <h1 class="article-title">{{ .Title }}</h1>
@@ -22,7 +24,6 @@
     {{ .Content }}
   </div>
 
-  {{ if not .Params.guide_child }}
   <div class="guide-page-list">
     {{ range .RegularPagesRecursive.ByWeight }}
     <div class="guide-page-item">
@@ -31,7 +32,6 @@
     </div>
     {{ end }}
   </div>
-  {{ end }}
 
 </article>
 {{ end }}
