@@ -1,6 +1,6 @@
 ---
 title: "September 2025 Newsletter"
-date: "2025-09-03"
+date: 2025-09-03
 authors: []
 series: ["nbas-newsletter"]
 byline: "Fall open clusters, NBAS Public Observing"

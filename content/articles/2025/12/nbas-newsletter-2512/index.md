@@ -1,6 +1,6 @@
 ---
 title: "December 2025 Newsletter"
-date: "2025-12-03"
+date: 2025-12-03
 authors: []
 series: ["nbas-newsletter"]
 byline: "Jupiter, the Geminids, and T CrB."

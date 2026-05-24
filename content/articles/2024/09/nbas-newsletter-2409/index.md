@@ -1,6 +1,6 @@
 ---
 title: "September 2024 Newsletter"
-date: "2024-09-04"
+date: 2024-09-04
 authors: []
 series: ["nbas-newsletter"]
 byline: "NBAS anniversary, lunar eclipse and more"

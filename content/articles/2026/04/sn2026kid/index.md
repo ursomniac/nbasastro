@@ -1,7 +1,7 @@
 ---
 title: "SN 2026kid in NGC 5907 (Draco)"
 thumbnail: "icon.jpg"
-date: "2026-04-26"
+date: 2026-04-26
 authors: ['bob-donahue']
 series: ["supernova-watch"]
 byline: "A new SN in a bright, large, edge-on galaxy in Draco"

@@ -1,6 +1,6 @@
 ---
 title: "May 2024 Newsletter"
-date: "2024-05-01"
+date: 2024-05-01
 authors: []
 series: ["nbas-newsletter"]
 byline: "2024 Eclipse recap, Galaxy Season"

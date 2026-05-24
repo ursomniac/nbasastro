@@ -1,6 +1,6 @@
 ---
 title: "May 2025 Newsletter"
-date: "2025-05-07"
+date: 2025-05-07
 authors: []
 series: ["nbas-newsletter"]
 byline: "Mars, the Moon and Praesepe"

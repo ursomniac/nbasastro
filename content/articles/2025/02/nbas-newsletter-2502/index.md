@@ -1,6 +1,6 @@
 ---
 title: "February 2025 Newsletter"
-date: "2025-02-02"
+date: 2025-02-02
 authors: []
 series: ["nbas-newsletter"]
 byline: "Uranus challenge, winter open clusters"

@@ -1,6 +1,6 @@
 ---
 title: "May Challenge: Galaxies in the Virgo Cluster"
-date: "2026-05-10"
+date: 2026-05-10
 byline: "10 Galaxies to find in Virgo"
 authors: ["bob-donahue"]
 series: ["observing-challenges"]

@@ -1,6 +1,6 @@
 ---
 title: "October 2025 Newsletter"
-date: "2025-10-01"
+date: 2025-10-01
 authors: []
 series: ["nbas-newsletter"]
 byline: "Fall objets, Dwarf Planets, Orionids"

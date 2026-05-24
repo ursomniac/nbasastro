@@ -1,6 +1,6 @@
 ---
 title: "August 2024 Newsletter"
-date: "2024-08-07"
+date: 2024-08-07
 authors: []
 series: ["nbas-newsletter"]
 byline: "Perseids, Saturn, and Neptune"

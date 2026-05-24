@@ -1,6 +1,6 @@
 ---
 title: "NBAS Event Rules"
-date: "2026-05-10"
+date: 2026-05-10
 description: "Rules and guidelines for attending our public events.  (Printable)"
 weight: 3
 ---

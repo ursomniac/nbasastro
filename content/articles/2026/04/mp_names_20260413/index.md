@@ -1,6 +1,6 @@
 ---
 title: "Interesting New Asteroid Names (2026 April 13)"
-date: "2026-04-26"
+date: 2026-04-26
 byline: "A look at (potentially) interesting new names of asteroids."
 authors: ["gareth-williams"]
 series: ["Gareth Talks about Asteroids"]

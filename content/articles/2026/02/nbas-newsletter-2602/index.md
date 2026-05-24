@@ -1,6 +1,6 @@
 ---
 title: "February 2026 Newsletter"
-date: "2026-02-04"
+date: 2026-02-04
 authors: []
 series: ["nbas-newsletter"]
 byline: "All about Jupiter!  Mercury appears briefly."

@@ -1,6 +1,6 @@
 ---
 title: "July 2024 Newsletter"
-date: "2024-07-03"
+date: 2024-07-03
 authors: []
 series: ["nbas-newsletter"]
 byline: "Summer Triangle, and Beta Lyrae"

@@ -1,6 +1,6 @@
 ---
 title: "October 2024 Newsletter"
-date: "2024-10-02"
+date: 2024-10-02
 authors: []
 series: ["nbas-newsletter"]
 byline: "Orionids, catching a comet, Binocular tour"

@@ -1,6 +1,6 @@
 ---
 title: "November 2024 Newsletter"
-date: "2024-11-06"
+date: 2024-11-06
 authors: []
 series: ["nbas-newsletter"]
 byline: "Twilight inner planets, looking around Perseus"

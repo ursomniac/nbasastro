@@ -1,6 +1,6 @@
 ---
 title: "March 2024 Newsletter"
-date: "2024-03-06"
+date: 2024-03-06
 authors: []
 series: ["nbas-newsletter"]
 byline: "Spring, Ursa Major"

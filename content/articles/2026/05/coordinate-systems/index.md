@@ -1,6 +1,6 @@
 ---
 title: "Coordinates Systems in the Sky"
-date: "2026-05-05"
+date: 2026-05-05
 byline: "The different coordinate systems and what they're used for"
 authors: ["bob-donahue"]
 series: ["how-the-sky-works"]

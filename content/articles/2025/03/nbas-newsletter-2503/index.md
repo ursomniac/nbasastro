@@ -1,6 +1,6 @@
 ---
 title: "March 2025 Newsletter"
-date: "2025-03-02"
+date: 2025-03-02
 authors: []
 series: ["nbas-newsletter"]
 byline: "Galaxy Seasion, Messier Marathon"

@@ -1,6 +1,6 @@
 ---
 title: "December 2024 Newsletter"
-date: "2024-12-04"
+date: 2024-12-04
 authors: []
 series: ["nbas-newsletter"]
 byline: "Venus and the Moon, and poking around Taurus"

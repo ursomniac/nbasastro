@@ -1,6 +1,6 @@
 ---
 title: "May 2026 Newsletter"
-date: "2026-05-01"
+date: 2026-05-01
 authors: []
 series: ["nbas-newsletter"]
 byline: "Venus, Jupiter, Spring meteors, and a pit-stop at Mars"

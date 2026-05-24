@@ -1,6 +1,6 @@
 ---
 title: "Altitude, Azimuth, and Air Mass"
-date: "2026-05-15"
+date: 2026-05-15
 byline: "Three angles that affect observing"
 authors: ["bob-donahue"]
 series: ["how-the-sky-works"]

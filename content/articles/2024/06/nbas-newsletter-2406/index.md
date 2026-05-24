@@ -1,6 +1,6 @@
 ---
 title: "June 2024 Newsletter"
-date: "2024-06-05"
+date: 2024-06-05
 authors: []
 series: ["nbas-newsletter"]
 byline: "Incoming Comet, T CrB"

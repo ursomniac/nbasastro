@@ -1,6 +1,6 @@
 ---
 title: "January 2026 Newsletter"
-date: "2026-01-07"
+date: 2026-01-07
 authors: []
 series: ["nbas-newsletter"]
 byline: "Comparing supergiant stars: Betelgeuse and Rigel"

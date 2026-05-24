@@ -1,6 +1,6 @@
 ---
 title: "April 2024 Newsletter"
-date: "2024-04-03"
+date: 2024-04-03
 authors: []
 series: ["nbas-newsletter"]
 byline: "2024 Eclipse, three comets"

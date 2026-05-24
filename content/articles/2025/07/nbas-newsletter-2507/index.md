@@ -1,6 +1,6 @@
 ---
 title: "July 2025 Newsletter"
-date: "2025-07-02"
+date: 2025-07-02
 authors: []
 series: ["nbas-newsletter"]
 byline: "Venus and Uranus meet, checking ut Scorpius"

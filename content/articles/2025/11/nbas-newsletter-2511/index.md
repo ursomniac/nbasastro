@@ -1,6 +1,6 @@
 ---
 title: "November 2025 Newsletter"
-date: "2025-11-05"
+date: 2025-11-05
 authors: []
 series: ["nbas-newsletter"]
 byline: "Fall Galaxy challenges; Leonids, Uranus"

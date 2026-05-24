@@ -1,6 +1,6 @@
 ---
 title: "August 2025 Newsletter"
-date: "2025-08-06"
+date: 2025-08-06
 authors: []
 series: ["nbas-newsletter"]
 byline: "Planet close approaches! The Teaspoon asterism"

@@ -1,6 +1,6 @@
 ---
 title: "February 2024 Newsletter"
-date: "2024-02-07"
+date: 2024-02-07
 authors: []
 series: ["nbas-newsletter"]
 byline: "Spring, overhead DSOs"

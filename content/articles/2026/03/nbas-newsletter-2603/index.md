@@ -1,6 +1,6 @@
 ---
 title: "March 2026 Newsletter"
-date: "2026-03-04"
+date: 2026-03-04
 authors: []
 series: ["nbas-newsletter"]
 byline: "Exploring stellar remnants and protostars in nebulae"

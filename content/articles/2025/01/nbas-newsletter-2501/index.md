@@ -1,6 +1,6 @@
 ---
 title: "January 2025 Newsletter"
-date: "2025-01-08"
+date: 2025-01-08
 authors: []
 series: ["nbas-newsletter"]
 byline: "Looking at Mars, and poking around Gemini"

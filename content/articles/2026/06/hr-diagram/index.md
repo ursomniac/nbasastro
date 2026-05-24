@@ -1,6 +1,6 @@
 ---
 title: "The Hertzsprung-Russell Diagram"
-date: 2026-06-04
+date: 2026-06-12
 authors: ["bob-donahue"]
 byline: "Stellar Astronomy's \"Swiss Army Knife\""
 knowledgetopics: ["astronomy"]
