@@ -1,6 +1,6 @@
-HUGO_VERSION = "0.160.1"
 [build]
   command = ""
   publish = "public"
   ignore = "exit 1"
-
+[build.environment]
+  HUGO_VERSION = "0.160.1"
