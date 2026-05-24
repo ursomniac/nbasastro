@@ -5,6 +5,7 @@ authors: ["bob-donahue"]
 byline: "Stellar Astronomy's \"Swiss Army Knife\""
 knowledgetopics: ["astronomy"]
 tags: ["stellar-evolution", "white-dwarfs", "giant-stars", "main-sequence stars"]
+thumbnail: "icon.png"
 ---
 ## Introduction
 
