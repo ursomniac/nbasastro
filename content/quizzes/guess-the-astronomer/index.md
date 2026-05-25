@@ -6,7 +6,7 @@ series: ["astronomy-quiz"]
 knowledgetopics: ["quizzes"]
 level: "intermediate"
 description: "Match the discoverer with their discovery!"
-thumbnail: "gal-moons.jpg"
+thumbnail: "icon.jpeg"
 quiz:
   passing_score: 80
   scoring: "first-only"
