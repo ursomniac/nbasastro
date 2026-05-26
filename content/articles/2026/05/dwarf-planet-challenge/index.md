@@ -6,6 +6,7 @@ authors: ["bob-donahue"]
 series: ["observing-challenges", "smart-scopes"]
 knowledgetopics: ["observing"]
 sso_planets: ["Haumea", "Makemake"]
+thumbnail: "icon.webp"
 
 challenge:
   skill: "advanced"
