@@ -11,6 +11,9 @@ title = "Northern Berkshire Astronomical Society"
 [frontmatter]
   date = ["lastmod", "date", "publishDate"]
 
+[pagination]
+  pagerSize = 20
+
 [taxonomies]
   author = "authors"
   tag = "tags"

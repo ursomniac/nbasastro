@@ -5,7 +5,7 @@ date: 2026-04-15
 authors: ["bob-donahue"]
 byline: "The Blaze Star prepares to erupt!"
 tags: ["Variable Star", "Nova"]
-categories: ["Deep Sky"]
+series: ["closer-look"]
 feature_image: "t-crb-nova.jpg"
 description: "A look at the upcoming eruption of the famous recurring nova in Corona Borealis."
 

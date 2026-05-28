@@ -19,7 +19,7 @@ Northern Berkshire's home for amateur astronomy — whatever your experience, yo
 {{ $guides := where .Site.Pages "Params.layout" "guide" }}
 {{ $all_posts := union (where .Site.RegularPages "Section" "in" (slice "articles" "constellations" "quizzes")) $guides }}
 
-    {{ range first 10 ($all_posts.ByPublishDate.Reverse) }}
+    {{ range first 20 ($all_posts.ByPublishDate.Reverse) }}
         {{ if eq .Section "quizzes" }}
             {{ partial "quiz-card.html" (dict "context" .) }}
         {{ else }}
