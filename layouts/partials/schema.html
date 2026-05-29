@@ -1,12 +1,10 @@
 {{/* ============================================================
-     SCHEMA.ORG JSON-LD — NBAS
-     Add this partial just before </head> in layouts/partials/head.html
-     via: {{ partial "schema.html" . }}
+     SCHEMA.ORG JSON-LD — NBAS v2
+     layouts/partials/schema.html
      ============================================================ */}}
 
 {{/* ----------------------------------------------------------
      1. ORGANIZATION — fires on every page
-     Tells Google who NBAS is, where we are, what we do
      ---------------------------------------------------------- */}}
 <script type="application/ld+json">
 {
@@ -35,7 +33,8 @@
     "geoRadius": "80000"
   },
   "sameAs": [
-    "https://www.facebook.com/groups/nberkastro/"
+    "https://www.facebook.com/groups/nberkastro/",
+    "https://reddit.com/u/NBASAstro"
   ],
   "contactPoint": {
     "@type": "ContactPoint",
@@ -52,21 +51,32 @@
   ]
 }
 </script>
+<!-- ISPAGE: {{ .IsPage }} KIND: {{ .Kind }} -->
 
 {{/* ----------------------------------------------------------
      2. ARTICLE — fires only on single article pages
-     Pulls from Hugo front matter automatically
      ---------------------------------------------------------- */}}
-{{ if and .IsPage (eq .Type "articles") }}
+{{ if .IsPage }}
+{{/* Look up author data from authors content */}}
+{{ $authorName := "" }}
+{{ $authorURL := "" }}
+{{ with .Params.authors }}
+  {{ $slug := index . 0 }}
+  {{ $authorPage := site.GetPage (printf "/authors/%s" $slug) }}
+  {{ with $authorPage }}
+    {{ $authorName = .Title }}
+    {{ $authorURL = .Permalink }}
+  {{ end }}
+{{ end }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": {{ .Title | jsonify }},
   "description": {{ with .Description }}{{ . | jsonify }}{{ else }}{{ .Summary | plainify | jsonify }}{{ end }},
-  "url": {{ .Permalink | jsonify }},
-  "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
-  "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "url": {{ .Permalink }},
+  "datePublished": {{ .Date.Format "2006-01-02" | jsonify }},
+  "dateModified": {{ .Lastmod.Format "2006-01-02" | jsonify }},
   {{ with .Params.thumbnail }}
   "image": {{ (path.Join $.File.Dir . ) | absURL | jsonify }},
   {{ else }}
@@ -81,27 +91,17 @@
       "url": "https://nbasastro.org/images/logo-grey.png"
     }
   },
-  {{ with .Params.authors }}
-  "author": [
-    {{ range $i, $a := . }}{{ if $i }},{{ end }}
-    {
-      "@type": "Person",
-      "name": {{ $a | jsonify }}
-    }
-    {{ end }}
-  ],
-  {{ else }}
   "author": {
-    "@type": "Organization",
-    "name": "Northern Berkshire Astronomical Society"
+    "@type": "Person",
+    "name": {{ if $authorName }}{{ $authorName }}{{ else }}"Northern Berkshire Astronomical Society"{{ end }}{{ if $authorURL }},
+    "url": {{ $authorURL | jsonify }}{{ end }}
   },
-  {{ end }}
   {{ with .Params.tags }}
   "keywords": {{ . | jsonify }},
   {{ end }}
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": {{ .Permalink | jsonify }}
+    "@id": {{ .Permalink }}
   },
   "about": {
     "@type": "Thing",
@@ -113,9 +113,9 @@
 {{ end }}
 
 {{/* ----------------------------------------------------------
-     3. CONSTELLATION pages — fires on constellation content
+     3. CONSTELLATION pages
      ---------------------------------------------------------- */}}
-{{ if and .IsPage (eq .Type "constellations") }}
+{{ if .IsPage }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -123,8 +123,8 @@
   "headline": {{ .Title | jsonify }},
   "description": {{ with .Description }}{{ . | jsonify }}{{ else }}{{ .Summary | plainify | jsonify }}{{ end }},
   "url": {{ .Permalink | jsonify }},
-  "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
-  "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "datePublished": {{ .Date.Format "2006-01-02" | jsonify }},
+  "dateModified": {{ .Lastmod.Format "2006-01-02" | jsonify }},
   "publisher": {
     "@type": "Organization",
     "name": "Northern Berkshire Astronomical Society",
@@ -141,9 +141,9 @@
 {{ end }}
 
 {{/* ----------------------------------------------------------
-     4. EVENTS — fires on event pages
+     4. EVENTS
      ---------------------------------------------------------- */}}
-{{ if and .IsPage (eq .Type "events") }}
+{{ if .IsPage }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -151,7 +151,7 @@
   "name": {{ .Title | jsonify }},
   "description": {{ with .Description }}{{ . | jsonify }}{{ else }}{{ .Summary | plainify | jsonify }}{{ end }},
   "url": {{ .Permalink | jsonify }},
-  "startDate": {{ .Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "startDate": {{ .Date.Format "2006-01-02" | jsonify }},
   "organizer": {
     "@type": "Organization",
     "name": "Northern Berkshire Astronomical Society",
