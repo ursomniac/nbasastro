@@ -32,26 +32,26 @@
 
 
   {{/* CSS BUNDLING & CACHE BUSTING */}}
-  {{- $style_slice := slice 
-      (resources.Get "css/01-variables.css") 
-      (resources.Get "css/02-layout.css") 
-      (resources.Get "css/navbar.css") 
-      (resources.Get "css/hero.css") 
+  {{- $style_slice := slice
+      (resources.Get "css/01-variables.css")
+      (resources.Get "css/02-layout.css")
+      (resources.Get "css/navbar.css")
+      (resources.Get "css/hero.css")
       (resources.Get "css/galleries.css")
       (resources.Get "css/members.css")
       (resources.Get "css/search-fix.css")
-      (resources.Get "css/cards.css") 
-      (resources.Get "css/content.css") 
-      (resources.Get "css/tables.css") 
+      (resources.Get "css/cards.css")
+      (resources.Get "css/content.css")
+      (resources.Get "css/tables.css")
       (resources.Get "css/object-specs.css")
       (resources.Get "css/challenge.css")
-      (resources.Get "css/authors.css") 
-      (resources.Get "css/hubs.css") 
-      (resources.Get "css/guide.css") 
+      (resources.Get "css/authors.css")
+      (resources.Get "css/hubs.css")
+      (resources.Get "css/guide.css")
       (resources.Get "css/quiz.css")
       (resources.Get "css/starmap.css")
   -}}
-  
+
   {{- $styles := $style_slice | resources.Concat "css/main.css" | minify | fingerprint -}}
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
 
@@ -105,6 +105,5 @@
 
   gtag('config', 'G-Z1GR5QBJ2R');
 </script>
+{{ partial "schema.html" . }}
 </head>
-
-

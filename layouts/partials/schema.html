@@ -1,0 +1,177 @@
+{{/* ============================================================
+     SCHEMA.ORG JSON-LD — NBAS
+     Add this partial just before </head> in layouts/partials/head.html
+     via: {{ partial "schema.html" . }}
+     ============================================================ */}}
+
+{{/* ----------------------------------------------------------
+     1. ORGANIZATION — fires on every page
+     Tells Google who NBAS is, where we are, what we do
+     ---------------------------------------------------------- */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Northern Berkshire Astronomical Society",
+  "alternateName": "NBAS",
+  "url": "https://nbasastro.org",
+  "logo": "https://nbasastro.org/images/logo-grey.png",
+  "description": "Northern Berkshire's home for amateur astronomy — whatever your experience, you belong under our skies.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "74 Church Street",
+    "addressLocality": "North Adams",
+    "addressRegion": "MA",
+    "postalCode": "01247",
+    "addressCountry": "US"
+  },
+  "areaServed": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": 42.700,
+      "longitude": -73.117
+    },
+    "geoRadius": "80000"
+  },
+  "sameAs": [
+    "https://www.facebook.com/groups/nberkastro/"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "general inquiry",
+    "url": "https://nbasastro.org/contact/"
+  },
+  "knowsAbout": [
+    "Amateur astronomy",
+    "Stargazing",
+    "Astrophotography",
+    "Night sky observation",
+    "Constellations",
+    "Berkshire County dark skies"
+  ]
+}
+</script>
+
+{{/* ----------------------------------------------------------
+     2. ARTICLE — fires only on single article pages
+     Pulls from Hugo front matter automatically
+     ---------------------------------------------------------- */}}
+{{ if and .IsPage (eq .Type "articles") }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ with .Description }}{{ . | jsonify }}{{ else }}{{ .Summary | plainify | jsonify }}{{ end }},
+  "url": {{ .Permalink | jsonify }},
+  "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  {{ with .Params.thumbnail }}
+  "image": {{ (path.Join $.File.Dir . ) | absURL | jsonify }},
+  {{ else }}
+  "image": "https://nbasastro.org/images/og-default.jpg",
+  {{ end }}
+  "publisher": {
+    "@type": "Organization",
+    "name": "Northern Berkshire Astronomical Society",
+    "url": "https://nbasastro.org",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nbasastro.org/images/logo-grey.png"
+    }
+  },
+  {{ with .Params.authors }}
+  "author": [
+    {{ range $i, $a := . }}{{ if $i }},{{ end }}
+    {
+      "@type": "Person",
+      "name": {{ $a | jsonify }}
+    }
+    {{ end }}
+  ],
+  {{ else }}
+  "author": {
+    "@type": "Organization",
+    "name": "Northern Berkshire Astronomical Society"
+  },
+  {{ end }}
+  {{ with .Params.tags }}
+  "keywords": {{ . | jsonify }},
+  {{ end }}
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink | jsonify }}
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Astronomy",
+    "description": "Amateur astronomy and night sky observation in the Northern Berkshire region of Massachusetts"
+  }
+}
+</script>
+{{ end }}
+
+{{/* ----------------------------------------------------------
+     3. CONSTELLATION pages — fires on constellation content
+     ---------------------------------------------------------- */}}
+{{ if and .IsPage (eq .Type "constellations") }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ with .Description }}{{ . | jsonify }}{{ else }}{{ .Summary | plainify | jsonify }}{{ end }},
+  "url": {{ .Permalink | jsonify }},
+  "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Northern Berkshire Astronomical Society",
+    "url": "https://nbasastro.org"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": {{ .Title | jsonify }},
+    "description": "Constellation guide for observers in the Northern Berkshire region of Massachusetts"
+  },
+  "keywords": ["constellation", "stargazing", "night sky", "astronomy", "Berkshires", "North Adams", "Massachusetts"]
+}
+</script>
+{{ end }}
+
+{{/* ----------------------------------------------------------
+     4. EVENTS — fires on event pages
+     ---------------------------------------------------------- */}}
+{{ if and .IsPage (eq .Type "events") }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": {{ .Title | jsonify }},
+  "description": {{ with .Description }}{{ . | jsonify }}{{ else }}{{ .Summary | plainify | jsonify }}{{ end }},
+  "url": {{ .Permalink | jsonify }},
+  "startDate": {{ .Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "organizer": {
+    "@type": "Organization",
+    "name": "Northern Berkshire Astronomical Society",
+    "url": "https://nbasastro.org"
+  },
+  "location": {
+    "@type": "Place",
+    "name": "North Adams Public Library",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "74 Church Street",
+      "addressLocality": "North Adams",
+      "addressRegion": "MA",
+      "postalCode": "01247",
+      "addressCountry": "US"
+    }
+  },
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "isAccessibleForFree": true
+}
+</script>
+{{ end }}

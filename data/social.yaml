@@ -2,6 +2,10 @@
   icon: "facebook"
   url: "https://www.facebook.com/groups/nberkastro"
   active: true
+- name: "Reddit"
+  icon: "reddit"
+  url: "https://reddit.com/u/NBASAstro"
+  active: true
 - name: "Email"
   icon: "envelope"
   url: "mailto:info@nbasastro.org"
