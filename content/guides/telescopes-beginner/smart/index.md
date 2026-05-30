@@ -1,5 +1,6 @@
 ---
 title: "Telescopes: 'Smart' Scopes"
+byline: "A different philosophy about what a telescope is for"
 navtext: "Smart Scopes"
 description: "Smart telescopes — what they are, what they produce, and why they represent a genuinely exciting new way to engage with astronomy."
 date: 2026-06-05

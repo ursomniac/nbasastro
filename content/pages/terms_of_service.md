@@ -1,5 +1,6 @@
 ---
 title: "Terms of Service"
+byline: "Terms governing use of the NBAS website and its content"
 description: "Our history and mission"
 date: 2026-04-01
 ---

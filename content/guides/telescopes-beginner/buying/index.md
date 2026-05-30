@@ -1,5 +1,6 @@
 ---
 title: "Telescopes: General Buying Guide"
+byline:  "Practical advice for turning everything you've learned into a purchase"
 navtext: "Buying Guide"
 description: "How to buy your first telescope — setting a budget, avoiding common mistakes, and making a decision you won't regret."
 date: 2026-06-05

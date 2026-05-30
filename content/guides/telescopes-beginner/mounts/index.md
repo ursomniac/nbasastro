@@ -1,6 +1,7 @@
 ---
 title: "Telescopes: Mounts"
 navtext: "Mounts"
+byline: "The part nobody talks about until it ruins their night"
 description: "Understanding telescope mounts — the part that holds your telescope steady and determines how you move it across the sky."
 date: 2026-06-05
 weight: 20

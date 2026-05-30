@@ -1,5 +1,6 @@
 ---
 title: "Contact Us"
+byline: "Reach us by email or through the North Adams Public Library"
 description: "Get in touch"
 date: 2026-04-01
 ---

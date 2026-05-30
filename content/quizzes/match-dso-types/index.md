@@ -1,5 +1,6 @@
 ---
 title: "Identify types of Deep Sky Objects!"
+byline: "Can you identify these types of deep sky objects?"
 date: 2026-05-19
 authors: ["nbas-staff"]
 series: ["astronomy-quiz"]

@@ -1,5 +1,6 @@
 ---
 title: "Telescopes: Other Gear"
+byline:  "The accessories worth having, in order of priority"
 navtext: "Other Gear"
 description: "The accessories worth having alongside your telescope — from essential first purchases to useful additions as your observing develops."
 date: 2026-06-05

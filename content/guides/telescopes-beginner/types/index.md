@@ -1,5 +1,6 @@
 ---
 title: "Telescopes: Types"
+byline: "Refractors, reflectors, and compounds — the tradeoffs of each"
 navtext: "Telescope Types"
 guide_child: true
 build:

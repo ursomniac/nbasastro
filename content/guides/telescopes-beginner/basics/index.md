@@ -1,5 +1,6 @@
 ---
 title: "Telescopes: The Basics"
+byline: "The fundamental concepts every telescope buyer needs to understand"
 layout: guide_child
 guide_child: true
 build:

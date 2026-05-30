@@ -1,5 +1,6 @@
 ---
 title: "Guess the Planet!"
+byline: "Match each planet to one of its characteristics"
 date: 2026-05-26
 authors: ["nbas-staff"]
 series: ["astronomy-quiz"]

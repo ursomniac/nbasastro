@@ -1,5 +1,6 @@
 ---
 title: "Privacy Policy"
+byline: "We collect no data, use no cookies, and track nobody"
 description: "Privacy Policy for the NBAS Website"
 date: 2026-04-01
 ---

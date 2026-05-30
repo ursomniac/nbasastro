@@ -1,5 +1,6 @@
 ---
 title: "About the NBAS"
+byline: "Founded in 2023 to bring together astronomy enthusiasts in Northern Berkshire"
 description: "Our history and mission"
 date: 2026-04-01
 ---

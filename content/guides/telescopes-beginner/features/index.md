@@ -1,5 +1,6 @@
 ---
 title: "Telescopes: Features"
+byline: "What separates a satisfying telescope purchase from a frustrating one"
 navtext: "Features"
 description: "Features to look for when buying a telescope — from finder scopes and focusers to smartphone integration and clock drives."
 date: 2026-06-05

@@ -1,5 +1,6 @@
 ---
 title: "Guess the Astronomer!"
+byline:  "Match the discoverer with their discovery"
 date: 2026-06-02
 authors: ["nbas-staff"]
 series: ["astronomy-quiz"]

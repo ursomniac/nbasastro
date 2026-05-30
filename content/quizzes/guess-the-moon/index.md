@@ -1,5 +1,6 @@
 ---
 title: "Guess the Moon!"
+byline: "Can you identify these moons of our solar system?"
 date: 2026-05-12
 authors: ["nbas-staff"]
 series: ["astronomy-quiz"]

@@ -1,5 +1,6 @@
 ---
 title: "FAQs"
+byline: "Common questions about joining, meetings, and getting started"
 description: "Q&A about the NBAS"
 date: 2026-04-01
 ---

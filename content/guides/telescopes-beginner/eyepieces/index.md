@@ -1,5 +1,6 @@
 ---
 title: "Telescopes: Eyepieces"
+byline: "The part of your setup most worth spending money on"
 navtext: "Eyepieces"
 description: "Understanding eyepieces — the most underrated part of your telescope setup, and the one most worth spending money on."
 date: 2026-06-05
