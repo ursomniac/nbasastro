@@ -1,6 +1,7 @@
 ---
 title: "September 2025 Newsletter"
 date: 2025-09-03
+description: "Join us at Mt. Greylock Visitor's Center on September 26th for our first public observing event, featuring telescopes and a lecture on the history of constel..."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Fall open clusters, NBAS Public Observing"

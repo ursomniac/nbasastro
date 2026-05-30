@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Pegasus"]
 byline: "Perseus's Pony"
-description: "Things to learn about the Pegasus constellation"
+description: "Learn about the mythological origins and deep-sky objects in the constellation Pegasus, including its connection to Greek mythology and notable galaxy clusters."
 thumbnail: "icon.jpg"
 
 profile_data:

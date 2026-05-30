@@ -1,6 +1,7 @@
 ---
 title: "January 2025 Newsletter"
 date: 2025-01-08
+description: "Learn about Mars' opposition in January 2025 and why it's not ideal for observing the planet, plus discover other celestial objects to find in Gemini."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Looking at Mars, and poking around Gemini"

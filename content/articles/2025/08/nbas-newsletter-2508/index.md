@@ -1,6 +1,7 @@
 ---
 title: "August 2025 Newsletter"
 date: 2025-08-06
+description: "Get up early on August 12th and see Jupiter and Venus just 0.5° apart in Gemini, with Mercury and the Moon joining in on the 19th."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Planet close approaches! The Teaspoon asterism"

@@ -1,6 +1,7 @@
 ---
 title: "February 2025 Newsletter"
 date: 2025-02-02
+description: "Find Uranus in plain sight near the Pleiades cluster with binoculars or small telescope and discover nearby open clusters in Taurus and Monoceros."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Uranus challenge, winter open clusters"

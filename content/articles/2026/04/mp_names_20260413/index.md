@@ -1,6 +1,7 @@
 ---
 title: "Interesting New Asteroid Names (2026 April 13)"
 date: 2026-04-26
+description: "Learn about new asteroid names announced by the International Astronomical Union's Working Group Small Bodies Nomenclature, including Bruce Willis and Eurytus."
 byline: "A look at (potentially) interesting new names of asteroids."
 authors: ["gareth-williams"]
 series: ["Gareth Talks about Asteroids"]

@@ -1,6 +1,7 @@
 ---
 title: "May 2024 Newsletter"
 date: 2024-05-01
+description: "Learn about the eclipse event, galaxy season, and stunning celestial objects visible with small telescopes in May's clear skies."
 authors: []
 series: ["nbas-newsletter"]
 byline: "2024 Eclipse recap, Galaxy Season"

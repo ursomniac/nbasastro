@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Hercules"]
 byline: "The mythical strongman in the sky"
-description: "Things to learn about the Hercules constellation"
+description: "Learn about Hercules, one of the 48 constellations, and its mythological origins, including its association with Greek hero Heracles and the story behind its..."
 thumbnail: "icon.jpg"
 
 profile_data:

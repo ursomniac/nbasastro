@@ -1,6 +1,7 @@
 ---
 title: "April 2026 Newsletter"
 date: 2026-04-01
+description: "Catch Comet C2025 R3 as it approaches perihelion, visible in binoculars by April 19th."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Comet C/2025 R3 at Perihelion, Lyrids, and the return of Venus!"

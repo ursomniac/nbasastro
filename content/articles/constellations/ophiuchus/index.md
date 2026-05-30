@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Ophiuchus"]
 byline: "The 13th Ecliptical Constellation"
-description: "Things to learn about the Ophiuchus constellation"
+description: "Learn about Ophiuchus, an ancient constellation with roots in Greek and Babylonian mythology, featuring a serpent-bearer legend and notable astronomical events."
 thumbnail: "icon.jpg"
 
 profile_data:

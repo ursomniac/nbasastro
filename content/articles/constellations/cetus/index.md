@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Cetus"]
 byline: "A whale of a constellation"
-description: "Things to learn about the Cetus constellation"
+description: "Learn about Cetus, the sea monster constellation, and its connections to ancient mythology and astronomy."
 thumbnail: "icon.jpg"
 
 profile_data:

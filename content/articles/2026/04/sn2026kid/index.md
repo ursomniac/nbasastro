@@ -2,6 +2,7 @@
 title: "SN 2026kid in NGC 5907 (Draco)"
 thumbnail: "icon.jpg"
 date: 2026-04-26
+description: "Learn how to spot SN 2026kid in NGC 5907, an edge-on galaxy with a newly discovered supernova, and contribute to accurate models of these explosive events."
 authors: ['bob-donahue']
 series: ["supernova-watch"]
 byline: "A new SN in a bright, large, edge-on galaxy in Draco"

@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Gemini"]
 byline: "Anchored by the mythological twins Castor and Pollux"
-description: "Things to learn about the Gemini constellation"
+description: "Learn about the mythological origins of Gemini, one of Ptolemy's original constellations, and its prominent placement in the March evening sky."
 thumbnail: "icon.jpg"
 
 profile_data:

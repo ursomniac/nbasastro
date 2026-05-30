@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Cepheus"]
 byline: "King of his own house!"
-description: "Things to learn about the Cepheus constellation"
+description: "Learn about Cepheus, one of the oldest constellations, and its fascinating history, including its connections to other now-defunct constellations."
 thumbnail: "icon.jpg"
 
 profile_data:

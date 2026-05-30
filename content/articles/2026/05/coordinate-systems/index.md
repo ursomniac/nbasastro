@@ -1,6 +1,7 @@
 ---
 title: "Coordinates Systems in the Sky"
 date: 2026-05-05
+description: "Learn about three key coordinate systems used in astronomy, including Equatorial, Ecliptic, and Galactic."
 byline: "The different coordinate systems and what they're used for"
 authors: ["bob-donahue"]
 series: ["how-the-sky-works"]

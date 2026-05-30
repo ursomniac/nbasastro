@@ -1,6 +1,7 @@
 ---
 title: "March 2026 Newsletter"
 date: 2026-03-04
+description: "Learn about the fascinating remnants of massive stars: white dwarfs, pulsars, and what happens when they exhaust their fuel in the late winter sky."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Exploring stellar remnants and protostars in nebulae"

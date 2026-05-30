@@ -7,7 +7,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Andromeda"]
 byline: "All about this Fall constellation, and the most famous galaxy"
-description: "Things to learn about the Andromeda constellation"
+description: "Learn about the mythological origins of the Andromeda constellation and its connection to ancient Greek legends, as well as its modern-day astronomical signi..."
 thumbnail: "icon.jpg"
 
 profile_data:

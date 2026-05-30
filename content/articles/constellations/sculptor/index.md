@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Sculptor"]
 byline: "Home to the South Galactic Pole"
-description: "Things to learn about the Sculptor constellation"
+description: "Learn about the history and hidden gems of Sculptor, one of 14 constellations added by Nicolas Louis de Lacaille in 1751, including many galaxies to spot."
 thumbnail: "icon.jpg"
 
 profile_data:

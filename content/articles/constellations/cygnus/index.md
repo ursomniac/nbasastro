@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Cygnus"]
 byline: "Flying down the Milky Way"
-description: "Things to learn about the Cygnus constellation"
+description: "Learn about the majestic Cygnus constellation, its mythological connections, and the fascinating star Deneb, a blue supergiant 2600 light years away."
 thumbnail: "icon.jpg"
 
 profile_data:

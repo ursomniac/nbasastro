@@ -1,6 +1,7 @@
 ---
 title: "May Challenge: Galaxies in the Virgo Cluster"
 date: 2026-05-10
+description: "Find 10 galaxies within the Virgo cluster using small telescopes, including ellipticals and spirals with varying sizes and distances."
 byline: "10 Galaxies to find in Virgo"
 authors: ["bob-donahue"]
 series: ["observing-challenges"]

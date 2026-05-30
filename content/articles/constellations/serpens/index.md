@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Serpens"]
 byline: "The only non-contiguous constellation"
-description: "Things to learn about the Serpens constellation"
+description: "Learn about Serpens, the only constellation split into two parts, its mythological significance and how it's associated with rebirth and healthcare."
 thumbnail: "icon.jpg"
 
 profile_data:

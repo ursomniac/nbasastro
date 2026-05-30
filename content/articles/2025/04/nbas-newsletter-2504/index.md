@@ -1,6 +1,7 @@
 ---
 title: "April 2025 Newsletter"
 date: 2025-04-02
+description: "Get ready for celestial events: T CrB's potential eruption and a rare triple conjunction between Venus, Saturn, and the crescent Moon in April."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Mars, the Moon and Praesepe"

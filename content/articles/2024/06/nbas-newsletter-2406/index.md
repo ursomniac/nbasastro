@@ -1,6 +1,7 @@
 ---
 title: "June 2024 Newsletter"
 date: 2024-06-05
+description: "Learn about two fascinating celestial events in June's night sky: a potentially spectacular comet and a rare recurrent nova that could outshine nearby stars."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Incoming Comet, T CrB"

@@ -1,6 +1,7 @@
 ---
 title: "July 2024 Newsletter"
 date: 2024-07-03
+description: "Learn about the Summer Triangle's brightest stars — Vega, Altair, and Deneb — and the secrets of Beta Lyrae, an eclipsing binary star system."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Summer Triangle, and Beta Lyrae"

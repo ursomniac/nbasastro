@@ -1,6 +1,7 @@
 ---
 title: "November 2023 Newsletter"
 date: 2023-11-01
+description: "Catch meteors from Orionids, Taurids and Leonids in November's eastern sky, plus spot Andromeda, Triangulum and The Pleiades with binoculars."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Fall objects in binoculars"

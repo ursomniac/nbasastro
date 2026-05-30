@@ -1,6 +1,7 @@
 ---
 title: "Touch the Stars"
 date: 2026-05-23
+description: "Learn how accessible astronomy books are changing the way visually impaired people experience the universe with tactile illustrations and Braille text."
 authors: ["bob-donahue"]
 byline: "Bringing Astronomy to Everyone"
 knowledgetopics: ["outreach"]

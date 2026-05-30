@@ -1,6 +1,7 @@
 ---
 title: "May 2026 Newsletter"
 date: 2026-05-01
+description: "Watch Venus and Jupiter converge in the Western sky, with the Moon passing between them on May 20th. Learn when to spot these celestial events."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Venus, Jupiter, Spring meteors, and a pit-stop at Mars"

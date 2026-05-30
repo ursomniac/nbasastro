@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Auriga"]
 byline: "Location of the Galactic Anticenter"
-description: "Things to learn about the Auriga constellation"
+description: "Learn about the history and mythology behind the constellation Auriga, including its association with Erichthonius and St. Jerome."
 thumbnail: "icon.jpg"
 
 profile_data:

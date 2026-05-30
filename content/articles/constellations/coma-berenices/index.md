@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Coma Berenices"]
 byline: "The only constellation named after an historical figure"
-description: "Things to learn about the Coma Berenices constellation"
+description: "Learn about Berenice's Hair, a constellation named after an ancient queen's sacrifice, and discover its significance in astronomy and history."
 thumbnail: "icon.jpg"
 
 profile_data:

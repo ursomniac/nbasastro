@@ -1,6 +1,7 @@
 ---
 title: "December 2025 Newsletter"
 date: 2025-12-03
+description: "Catch Jupiter in the evening sky through January and learn about its retrograde motion and visible features. Plus, don't miss the Geminid meteor shower peaki..."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Jupiter, the Geminids, and T CrB."

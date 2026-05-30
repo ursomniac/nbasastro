@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Monoceros"]
 byline: "Constellation going back to at least the 17th century"
-description: "Things to learn about the Monoceros constellation"
+description: "Learn about the hidden treasures of the Monoceros constellation, including star clusters and nebulae often overlooked by nearby bright stars."
 thumbnail: "icon.jpg"
 
 profile_data:

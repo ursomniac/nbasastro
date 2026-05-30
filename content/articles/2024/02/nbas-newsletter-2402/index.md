@@ -1,6 +1,7 @@
 ---
 title: "February 2024 Newsletter"
 date: 2024-02-07
+description: "Get ready for spring in the sky: learn about new objects to observe and exciting deep-sky targets in Gemini, Cancer, Camelopardalis, and Lynx."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Spring, overhead DSOs"

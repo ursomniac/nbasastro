@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Scutum"]
 byline: "The only \"political\" constellation"
-description: "Things to learn about the Scutum constellation"
+description: "Learn about Scutum, a constellation created in honor of Polish royalty, featuring deep-sky objects like Messier 11 and M 26."
 thumbnail: "icon.jpg"
 
 profile_data:

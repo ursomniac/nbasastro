@@ -6,7 +6,7 @@ authors: ["bob-donahue"]
 byline: "Finding DSOs in DSOs"
 tags: ["Local Group"]
 constellations: ["Andromeda"]
-description: "I am a test article..."
+description: "Learn how to identify clusters in the Andromeda Galaxy using your own telescope images, even with smaller scopes like 50mm."
 
 dso_messier: ["31", "32", "110"]
 dso_ngc: ["206", "224"]

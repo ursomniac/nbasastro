@@ -7,7 +7,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Leo Minor"]
 byline: "Introduced by Johannes Hevelius in 1687"
-description: "Things to learn about the Leo Minor constellation"
+description: "Learn about Leo Minor, one of the lesser-known constellations introduced in 1687 by Hevelius, and its fascinating history as part of defunct constellation Jo..."
 thumbnail: "icon.jpg"
 
 profile_data:

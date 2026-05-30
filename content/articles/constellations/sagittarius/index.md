@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Sagittarius"]
 byline: "Looking to the center of our Galaxy"
-description: "Things to learn about the Sagittarius constellation"
+description: "Learn about the origins and mythology behind the constellation Sagittarius, including its connection to Greek heroes and ancient astronomical traditions."
 thumbnail: "icon.jpg"
 
 profile_data:

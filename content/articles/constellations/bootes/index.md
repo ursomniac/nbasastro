@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Boötes"]
 byline: "Follower of the Bear"
-description: "Things to learn about the Boötes constellation"
+description: "Learn about the mythological stories behind the constellation Boötes, including its various interpretations and connections to ancient Greek gods and goddesses."
 thumbnail: "icon.jpg"
 
 profile_data:

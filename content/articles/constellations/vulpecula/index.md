@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Vulpecula"]
 byline: "Another constellation added by Hevelius in 1690"
-description: "Things to learn about the Vulpecula constellation"
+description: "Learn about the history behind the minor constellation Vulpecula, introduced by Hevelius in 1687, and its unique place among the Summer Triangle constellations."
 thumbnail: "icon.jpg"
 
 profile_data:

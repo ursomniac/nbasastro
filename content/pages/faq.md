@@ -1,7 +1,7 @@
 ---
 title: "FAQs"
 byline: "Common questions about joining, meetings, and getting started"
-description: "Q&A about the NBAS"
+description: "Get answers to your astronomy questions: learn about membership, events, and more with our club's FAQs section."
 date: 2026-04-01
 ---
 

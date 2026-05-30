@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Triangulum"]
 byline: "Deltoton to the Greeks"
-description: "Things to learn about the Triangulum constellation"
+description: "Learn about the history and stars of Triangulum, one of the smallest but most fascinating constellations in the night sky."
 thumbnail: "icon.jpg"
 
 profile_data:

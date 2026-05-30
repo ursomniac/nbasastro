@@ -1,6 +1,7 @@
 ---
 title: "July 2025 Newsletter"
 date: 2025-07-02
+description: "Learn about celestial events in July, including Jupiter and Uranus near the Pleiades, the S. Delta Aquarid Meteor Shower, and Scorpius' southern horizon obje..."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Venus and Uranus meet, checking ut Scorpius"

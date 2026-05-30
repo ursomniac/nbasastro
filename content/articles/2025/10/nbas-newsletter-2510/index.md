@@ -1,6 +1,7 @@
 ---
 title: "October 2025 Newsletter"
 date: 2025-10-01
+description: "Learn about the best deep-sky objects to observe in the Fall sky, from galaxies and nebulae to open clusters and globular clusters."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Fall objets, Dwarf Planets, Orionids"

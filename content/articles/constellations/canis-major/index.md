@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Canis Major"]
 byline: "Hosts the brightest star in the sky"
-description: "Things to learn about the Canis Major constellation"
+description: "Learn about the ancient mythologies and astronomical significance of Canis Major, one of Ptolemy's original constellations."
 thumbnail: "icon.jpg"
 
 profile_data:

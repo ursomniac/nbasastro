@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Orion"]
 byline: "One of the most recognized constellations"
-description: "Things to learn about the Orion constellation"
+description: "Learn about the mythology and astronomy behind the iconic constellation Orion, its fascinating objects, and its connection to our galaxy's structure."
 thumbnail: "icon.jpg"
 
 profile_data:

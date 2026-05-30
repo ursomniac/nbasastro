@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Canes Venatici"]
 byline: "The only constellation named after an historical figure"
-description: "Things to learn about the Canes Venatici constellation"
+description: "Learn about the history and astronomy of the Canes Venatici constellation, featuring bright galaxies and a notable double star system."
 thumbnail: "icon.jpg"
 
 profile_data:

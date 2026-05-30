@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Lynx"]
 byline: "Added by Heveleus in 1687"
-description: "Things to learn about the Lynx constellation"
+description: "Learn about the Lynx constellation, introduced by Polish astronomer Hevelius in the late 17th century as a lynx-eyed challenge."
 thumbnail: "icon.jpg"
 
 profile_data:

@@ -1,6 +1,7 @@
 ---
 title: "March 2025 Newsletter"
 date: 2025-03-02
+description: "Learn about upcoming astronomical events, including the total lunar eclipse on March 14th and the Messier Marathon challenge."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Galaxy Seasion, Messier Marathon"

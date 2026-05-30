@@ -1,6 +1,7 @@
 ---
 title: "October 2024 Newsletter"
 date: 2024-10-02
+description: "Learn about the Orionid meteor shower, spot Venus and a possible comet in the evening sky, and discover open clusters and galaxies with binoculars."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Orionids, catching a comet, Binocular tour"

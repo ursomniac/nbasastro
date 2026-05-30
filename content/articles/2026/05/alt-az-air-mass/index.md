@@ -1,6 +1,7 @@
 ---
 title: "Altitude, Azimuth, and Air Mass"
 date: 2026-05-15
+description: "Learn how altitude and azimuth help you locate objects in the sky relative to your location and time of year."
 byline: "Three angles that affect observing"
 authors: ["bob-donahue"]
 series: ["how-the-sky-works"]

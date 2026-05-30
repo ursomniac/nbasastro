@@ -1,6 +1,7 @@
 ---
 title: "July 2026: Milky Way Binocular Tour"
 date: 2026-06-20
+description: "Join our Summer Milky Way binocular tour, starting with Deneb in Cygnus, and follow the birds through Aquila, Scutum, Serpens, Sagittarius, and Scorpius."
 authors: ["bob-donahue"]
 series: ["whats-up-in-the-sky"]
 byline: "Discover the Summer Milky Way: clusters, nebulae, and the center of the Galaxy!"

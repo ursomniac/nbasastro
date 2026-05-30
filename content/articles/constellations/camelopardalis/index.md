@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Camelopardalis"]
 byline: "A faint circumpolar constellation from the 17th century"
-description: "Things to learn about the Camelopardalis constellation"
+description: "Learn about Camelopardalis, one of eight constellations introduced by Petrus Plancius in 1612, and discover its unique history and characteristics."
 thumbnail: "icon.jpg"
 
 profile_data:

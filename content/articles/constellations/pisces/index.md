@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Pisces"]
 byline: "Present home to the vernal equinox"
-description: "Things to learn about the Pisces constellation"
+description: "Learn about the ancient Greek legend behind the two fish of Pisces, and discover its connections to other water constellations in the Fall sky."
 thumbnail: "icon.jpg"
 
 profile_data:

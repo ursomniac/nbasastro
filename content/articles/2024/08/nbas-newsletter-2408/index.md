@@ -1,6 +1,7 @@
 ---
 title: "August 2024 Newsletter"
 date: 2024-08-07
+description: "Get ready for the Perseid meteor shower's peak in mid-August, with dozens of meteors visible per hour, and learn about Saturn's return to evening skies."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Perseids, Saturn, and Neptune"

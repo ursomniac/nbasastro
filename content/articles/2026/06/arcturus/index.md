@@ -1,6 +1,7 @@
 ---
 title: "Arcturus: Guardian of the Bear"
 date: 2026-06-01
+description: "Learn about Arcturus, the brightest star in the spring sky and its connection to ancient Greek mythology and astronomy history."
 authors: ["bob-donahue"]
 byline: "The brightest star in the Northern Hemisphere"
 series: ["closer-look"]

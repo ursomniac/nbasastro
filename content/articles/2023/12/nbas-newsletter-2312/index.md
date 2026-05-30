@@ -1,6 +1,7 @@
 ---
 title: "December 2023 Newsletter"
 date: 2023-12-06
+description: "Learn about the longest nights of the year, the Geminid meteor shower, and hidden star clusters visible in binoculars or telescopes."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Winter soltices, open cluster pictograms"

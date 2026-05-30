@@ -1,6 +1,7 @@
 ---
 title: "Smart Scope Challenge: Haumea and Makemake"
 date: 2026-05-28
+description: "Learn how to observe Haumea and Makemake, two of the brightest dwarf planets in our solar system, using your smart scope."
 byline: "Two dwarf planets near opposition"
 authors: ["bob-donahue"]
 series: ["observing-challenges", "smart-scopes"]

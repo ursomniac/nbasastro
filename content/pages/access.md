@@ -1,7 +1,7 @@
 ---
 title: "Accessibility"
 byline:  "Our commitment to making this site available to everyone"
-description: "Our goals for accessiblity"
+description: "Learn about our commitment to making astronomy accessible to everyone, regardless of ability or technology."
 date: 2026-04-01
 ---
 Last Updated: 1 April 2026

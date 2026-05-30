@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Leo"]
 byline: "Gateway constellation to Spring"
-description: "Things to learn about the Leo constellation"
+description: "Learn about the constellation Leo and its deep-sky objects, including galaxies like the Leo Triplet and Copeland's Septet."
 thumbnail: "icon.jpg"
 
 profile_data:

@@ -1,6 +1,7 @@
 ---
 title: "January 2024 Newsletter"
 date: 2024-01-03
+description: "Learn about upcoming celestial events and explore winter's best star clusters and nebulae in our January newsletter."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Winter Nebulae"

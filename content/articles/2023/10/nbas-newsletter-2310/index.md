@@ -1,6 +1,7 @@
 ---
 title: "October 2023 Newsletter"
 date: 2023-10-04
+description: "Learn about our astronomy group's first meeting, upcoming events and exhibitions, including a partial annular solar eclipse on October 14th."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Welcome! Space art! Partial Solar Eclipse"

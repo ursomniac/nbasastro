@@ -1,6 +1,7 @@
 ---
 title: "May 2025 Newsletter"
 date: 2025-05-07
+description: "Learn about celestial events in May, including Mars' passage through a star cluster, a lunar occultation, and stunning galaxy views south of Spica."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Mars, the Moon and Praesepe"

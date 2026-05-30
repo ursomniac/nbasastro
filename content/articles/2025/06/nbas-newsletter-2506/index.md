@@ -1,6 +1,7 @@
 ---
 title: "June 2025 Newsletter"
 date: 2025-06-04
+description: "Learn about the Milky Way's return to the Summer sky, Mercury's challenge on June 27th, and Mars' striking passage near Regulus in Leo."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Venus and Uranus meet, checking ut Scorpius"

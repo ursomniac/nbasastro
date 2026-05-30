@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["astronomy-quiz"]
 knowledgetopics: ["quizzes"]
 level: "intermediate"
-description: "Match the discoverer with their discovery!"
+description: "Eight questions matching famous astronomers to their discoveries — from sunspots to galaxies. How many can you get right?"
 thumbnail: "icon.jpeg"
 quiz:
   passing_score: 80

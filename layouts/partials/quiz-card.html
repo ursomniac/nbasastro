@@ -52,10 +52,12 @@
       {{- end }} | {{ $page.PublishDate.Format "Jan 2, 2006" }}
     </div>
 
-    {{/* Description */}}
-    {{ with $page.Description }}
+{{/* Byline — falls back to description if no byline */}}
+    {{ with $page.Params.byline }}
     <p class="card-byline">{{ . }}</p>
-    {{ end }}
+    {{ else }}{{ with $page.Description }}
+    <p class="card-byline">{{ . }}</p>
+    {{ end }}{{ end }}
 
     {{/* Level badge — inline styles so it works on any page without a global stylesheet dependency */}}
     {{ with $page.Params.level }}

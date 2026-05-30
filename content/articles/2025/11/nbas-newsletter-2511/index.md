@@ -1,6 +1,7 @@
 ---
 title: "November 2025 Newsletter"
 date: 2025-11-05
+description: "Learn about the lesser-known galaxy-laden constellations visible in autumn skies, including Pegasus, Sculptor, Fornax and Eridanus."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Fall Galaxy challenges; Leonids, Uranus"

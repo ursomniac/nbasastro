@@ -1,6 +1,7 @@
 ---
 title: "November 2024 Newsletter"
 date: 2024-11-06
+description: "Catch inner planets Venus and Mercury low in the southwest after sunset, and learn about upcoming meteor showers and star clusters visible around Perseus."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Twilight inner planets, looking around Perseus"

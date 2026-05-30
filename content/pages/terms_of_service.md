@@ -1,7 +1,7 @@
 ---
 title: "Terms of Service"
 byline: "Terms governing use of the NBAS website and its content"
-description: "Our history and mission"
+description: "Understand our website's rules and guidelines, including intellectual property rights and liability limitations."
 date: 2026-04-01
 ---
 

@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Draco"]
 byline: "Separator of the Bears"
-description: "Things to learn about the Draco constellation"
+description: "Learn about the ancient mythology behind the constellation Draco, including its various dragon interpretations from Greek to Egyptian cultures."
 thumbnail: "icon.jpg"
 
 profile_data:

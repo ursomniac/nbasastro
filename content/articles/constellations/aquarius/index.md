@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Aquarius"]
 byline: "One of the \"Water\" constellations."
-description: "Things to learn about the Aquarius constellation"
+description: "Learn about the ancient associations and mythology behind the constellation Aquarius, including its connection to floods and the Nile River."
 thumbnail: "icon.jpg"
 
 profile_data:

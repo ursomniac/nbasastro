@@ -1,6 +1,7 @@
 ---
 title: "March 2024 Newsletter"
 date: 2024-03-06
+description: "Spring astronomy guide: Learn about March's celestial events, including the solar eclipse and how to spot galaxies in Ursa Major."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Spring, Ursa Major"

@@ -1,6 +1,7 @@
 ---
 title: "September 2024 Newsletter"
 date: 2024-09-04
+description: "Celebrate our first anniversary and learn what to expect from the night sky in September, including partial lunar eclipses, planetary alignments, and more."
 authors: []
 series: ["nbas-newsletter"]
 byline: "NBAS anniversary, lunar eclipse and more"

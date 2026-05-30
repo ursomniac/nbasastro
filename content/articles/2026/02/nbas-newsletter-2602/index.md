@@ -1,6 +1,7 @@
 ---
 title: "February 2026 Newsletter"
 date: 2026-02-04
+description: "Catch Jupiter's iconic Great Red Spot in February, learn transit times and witness the planet's moon shadow."
 authors: []
 series: ["nbas-newsletter"]
 byline: "All about Jupiter!  Mercury appears briefly."

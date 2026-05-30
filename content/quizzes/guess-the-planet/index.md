@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["astronomy-quiz"]
 knowledgetopics: ["quizzes"]
 level: "beginner"
-description: "Match the planet up with one of its characteristics!"
+description: "Eight questions matching planets to their characteristics — from density to moons to rings. How well do you know our solar system?"
 thumbnail: "earth.jpg"
 quiz:
   passing_score: 80

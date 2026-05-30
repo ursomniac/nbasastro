@@ -1,6 +1,7 @@
 ---
 title: "January 2026 Newsletter"
 date: 2026-01-07
+description: "Learn about the fascinating similarities and differences between Betelgeuse and Rigel, two supergiant stars in Orion's constellation."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Comparing supergiant stars: Betelgeuse and Rigel"

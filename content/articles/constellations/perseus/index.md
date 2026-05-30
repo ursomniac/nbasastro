@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Perseus"]
 byline: "Ancient constellation from Greek mythology"
-description: "Things to learn about the Perseus constellation"
+description: "Learn about the rich history and astronomical wonders of Perseus, including its mythological significance, deep-sky objects, and spectacular meteor showers."
 thumbnail: "icon.jpg"
 
 profile_data:

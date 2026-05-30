@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Libra"]
 byline: "The only Ecliptic constellation that's an inanimate object"
-description: "Things to learn about the Libra constellation"
+description: "Learn about the mysterious history and significance of Libra, the only zodiac constellation representing an object, not a creature or person."
 thumbnail: "icon.jpg"
 
 profile_data:

@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Scorpius"]
 byline: "The celestial arachnid holding the Milky Way’s heart in its sting."
-description: "Things to learn about the Scorpius constellation"
+description: "Learn about the ancient constellation Scorpius, its mythological origins and how to spot it in the night sky with bright red Antares as your guide."
 thumbnail: "icon.jpg"
 
 profile_data:

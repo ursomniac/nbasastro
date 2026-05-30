@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Cancer"]
 byline: "The dimmest constellation in the Zodiac"
-description: "Things to learn about the Cancer constellation"
+description: "Learn about the constellation Cancer, its mythological significance and notable star clusters like the Beehive and Golden-Eye."
 thumbnail: "icon.jpg"
 
 profile_data:

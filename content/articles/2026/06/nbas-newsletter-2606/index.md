@@ -1,6 +1,7 @@
 ---
 title: "June 2026 Newsletter"
 date: 2026-06-01
+description: "Meet the NBAS officers, learn about our new website, and get ready for summer observing in the Northern Berkshires."
 authors: []
 series: ["nbas-newsletter"]
 byline: "NBAS officers, the NBAS website, and the beginning of Summer"

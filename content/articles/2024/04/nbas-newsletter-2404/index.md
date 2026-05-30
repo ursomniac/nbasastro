@@ -1,6 +1,7 @@
 ---
 title: "April 2024 Newsletter"
 date: 2024-04-03
+description: "Learn about the nearly-total Solar Eclipse on April 8th and how to safely observe it from North Adams. Plus, find out which comets are visible in the April s..."
 authors: []
 series: ["nbas-newsletter"]
 byline: "2024 Eclipse, three comets"

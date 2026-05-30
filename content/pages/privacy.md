@@ -1,7 +1,7 @@
 ---
 title: "Privacy Policy"
 byline: "We collect no data, use no cookies, and track nobody"
-description: "Privacy Policy for the NBAS Website"
+description: "Our website respects your online privacy with no data collection, cookies, or tracking technologies used to monitor your activity."
 date: 2026-04-01
 ---
 # Privacy Policy for the NBAS Website

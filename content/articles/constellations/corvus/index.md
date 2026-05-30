@@ -6,7 +6,7 @@ authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Corvus"]
 byline: "Apollo's raven"
-description: "Things to learn about the Corvus constellation"
+description: "Learn about the ancient Greek legends behind the constellation Corvus, its history, and fascinating connections to other constellations in our night sky."
 thumbnail: "icon.jpg"
 
 profile_data:

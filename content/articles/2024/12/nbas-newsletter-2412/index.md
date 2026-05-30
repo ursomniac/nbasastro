@@ -1,6 +1,7 @@
 ---
 title: "December 2024 Newsletter"
 date: 2024-12-04
+description: "Catch the Moon's close pass with Venus on Dec 4th and spot brighter meteors during the Gemini meteor shower, peaking on Dec 13th."
 authors: []
 series: ["nbas-newsletter"]
 byline: "Venus and the Moon, and poking around Taurus"
