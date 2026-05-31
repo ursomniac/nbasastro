@@ -152,3 +152,69 @@ h1.article-title {
     margin-bottom: 10px;
 }
 
+
+/* Pinned and event card styles */
+.card-pinned {
+  position: relative;
+  padding: 35px 15px 15px 15px; /* top clears the absolute pin-badge; sides/bottom give breathing room inside the border */
+}
+.card-event {
+  border: 2px solid #2288cc;
+  border-radius: 6px;
+}
+.card-featured {
+  border: 2px solid #6a5719;
+  border-radius: 6px;
+}
+.pin-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin: 0;
+}
+.pin-badge-event {
+  background: #2288cc;
+  color: #ffffff;
+}
+.pin-badge-featured {
+  background: #6a5719;
+  color: #ffffff;
+}
+.card-event-date {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e8503a;
+  margin: 4px 0;
+}
+
+/* --- PIN STRIP: badge + event meta across the top of pinned cards --- */
+.pin-strip {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pin-strip .pin-badge {
+  position: static; /* override the old absolute positioning — strip handles placement */
+  flex-shrink: 0;
+}
+
+.pin-strip-meta {
+  font-size: 0.75rem;
+  color: #dddddd;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}

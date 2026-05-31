@@ -53,9 +53,9 @@
 </script>
 
 {{/* ----------------------------------------------------------
-     2. ARTICLE - fires on single pages only
+     2. ARTICLE - fires on single pages that have no event_date
      ---------------------------------------------------------- */}}
-{{ if eq .Kind "page" }}
+{{ if and (eq .Kind "page") (not .Params.event_date) }}
 
 {{ $authorName := "" }}
 {{ $authorURL := "" }}
@@ -111,6 +111,83 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "{{ .Permalink }}"
+  }
+}
+</script>
+{{ end }}
+
+{{/* ----------------------------------------------------------
+     3. EVENT - fires when event_date is present in front matter
+     ---------------------------------------------------------- */}}
+{{ if and (eq .Kind "page") .Params.event_date }}
+
+{{ $image := "https://nbasastro.org/images/og-default.jpg" }}
+{{ with .Params.thumbnail }}
+  {{ if strings.HasPrefix . "http" }}
+    {{ $image = . }}
+  {{ else }}
+    {{ $image = (path.Join $.File.Dir .) | absURL }}
+  {{ end }}
+{{ end }}
+
+{{ $description := .Plain | truncate 200 }}
+{{ with .Params.description }}{{ $description = . }}{{ end }}
+
+{{ $startDate := .Params.event_date }}
+{{ $endDate := .Params.event_date }}
+{{ with .Params.event_end }}{{ $endDate = . }}{{ end }}
+
+{{ $locationName := "North Adams Public Library" }}
+{{ with .Params.event_location }}{{ $locationName = . }}{{ end }}
+
+{{ $locationStreet := "74 Church Street" }}
+{{ with .Params.event_street }}{{ $locationStreet = . }}{{ end }}
+
+{{ $locationCity := "North Adams" }}
+{{ with .Params.event_city }}{{ $locationCity = . }}{{ end }}
+
+{{ $locationZip := "01247" }}
+{{ with .Params.event_zip }}{{ $locationZip = . }}{{ end }}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "{{ .Title | htmlEscape }}",
+  "description": "{{ $description | htmlEscape }}",
+  "url": "{{ .Permalink }}",
+  "startDate": "{{ $startDate }}",
+  "endDate": "{{ $endDate }}",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "image": "{{ $image }}",
+  "location": {
+    "@type": "Place",
+    "name": "{{ $locationName }}",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ $locationStreet }}",
+      "addressLocality": "{{ $locationCity }}",
+      "addressRegion": "MA",
+      "postalCode": "{{ $locationZip }}",
+      "addressCountry": "US"
+    }
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": 0,
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "{{ .Permalink }}"
+  },
+  "performer": {
+    "@type": "Organization",
+    "name": "Northern Berkshire Astronomical Society"
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "Northern Berkshire Astronomical Society",
+    "url": "https://nbasastro.org"
   }
 }
 </script>

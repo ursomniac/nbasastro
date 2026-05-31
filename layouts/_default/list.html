@@ -34,13 +34,29 @@
     <div class="article-list">
       {{ $pages := .Pages }}
       {{ if eq .Section "articles" }}
-
-        {{/* $pages = where .Site.RegularPages "Section" "in" (slice "articles" "constellations" "quizzes") */}}
-{{ $guides := where .Site.Pages "Params.layout" "guide" }}
-{{ $pages = union (where .Site.RegularPages "Section" "in" (slice "articles" "constellations" "quizzes")) $guides }}
+        {{ $guides := where .Site.Pages "Params.layout" "guide" }}
+        {{ $pages = union (where .Site.RegularPages "Section" "in" (slice "articles" "constellations" "quizzes")) $guides }}
       {{ end }}
 
-      {{ range (.Paginate ($pages.ByPublishDate.Reverse)).Pages }}
+      {{/* Sort all pages by date descending first */}}
+      {{ $sorted := $pages.ByPublishDate.Reverse }}
+
+      {{/* Now separate pinned from normal, preserving date order within each group */}}
+      {{ $now := now }}
+      {{ $pinned := slice }}
+      {{ $normal := slice }}
+      {{ range $sorted }}
+        {{ if and .Params.pin_until (gt (.Params.pin_until | time) $now) }}
+          {{ $pinned = $pinned | append . }}
+        {{ else }}
+          {{ $normal = $normal | append . }}
+        {{ end }}
+      {{ end }}
+
+      {{/* Combine: pinned first, then normal - both already date-sorted */}}
+      {{ $combined := $pinned | append $normal }}
+
+      {{ range (.Paginate $combined).Pages }}
         {{ if eq .Section "quizzes" }}
           {{ partial "quiz-card.html" (dict "context" .) }}
         {{ else }}

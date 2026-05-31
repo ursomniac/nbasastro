@@ -1,6 +1,7 @@
 ---
 title: "Venus and Jupiter Inch Closer Together"
 date: 2026-05-08
+pin_until: 2026-06-10
 description: "See Venus and Jupiter's rare close encounter in the early-evening sky over the next few weeks."
 byline: "The two brightest planets in the early-evening sky"
 authors: ["bob-donahue"]

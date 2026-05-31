@@ -1,4 +1,32 @@
-<div class="article-card">
+{{/* ----------------------------------------------------------
+     Determine pin/event state for badge and border
+     ---------------------------------------------------------- */}}
+{{ $now := now }}
+{{ $isPinned := and .context.Params.pin_until (gt (.context.Params.pin_until | time) $now) }}
+{{ $isEvent := .context.Params.event_date }}
+
+{{ $cardClass := "article-card" }}
+{{ if and $isPinned $isEvent }}
+  {{ $cardClass = "article-card card-pinned card-event" }}
+{{ else if $isPinned }}
+  {{ $cardClass = "article-card card-pinned card-featured" }}
+{{ end }}
+
+<div class="{{ $cardClass }}">
+
+  {{/* Pin strip: badge + optional location + optional date */}}
+  {{ if and $isPinned $isEvent }}
+  <div class="pin-strip">
+    <span class="pin-badge pin-badge-event">Upcoming Event</span>
+    {{ with .context.Params.event_location }}<span class="pin-strip-meta">📍 {{ . }}</span>{{ end }}
+    {{ with .context.Params.event_date }}<span class="pin-strip-meta">🗓 {{ . | time | time.Format "January 2, 2006 · 3:04 PM" }}</span>{{ end }}
+  </div>
+  {{ else if $isPinned }}
+  <div class="pin-strip">
+    <span class="pin-badge pin-badge-featured">Featured</span>
+  </div>
+  {{ end }}
+
   <div class="card-feature-icon">
     {{ partial "feature-icon.html" .context }}
   </div>
@@ -19,26 +47,30 @@
       <h2 class="card-title">{{ .context.Title }}</h2>
     </a>
 
-    {{/* 2. OBJECT DATA (V0.19 FLAT SCHEMA) */}}
+    {{/* 2. OBJECT DATA - only render if there is something to show */}}
+    {{ $starKeys := slice "stars_variable" "stars_nearby" "stars_bright" "stars_multiple" "stars_exotic" "stars_exoplanet" }}
+    {{ $allStars := slice }}
+    {{ range $starKeys }}
+      {{ with index $.context.Params . }}{{ $allStars = $allStars | append . }}{{ end }}
+    {{ end }}
+    {{ $allStars = uniq $allStars }}
 
-      <div class="card-object-matches {{ with .context }}{{ if ne .Kind "term" }}non-explorer-hidden{{ end }}{{ end }}">
-
-      {{/* STARS: Aggregated */}}
-      {{ $starKeys := slice "stars_variable" "stars_nearby" "stars_bright" "stars_multiple" "stars_exotic" "stars_exoplanet" }}
-      {{ $allStars := slice }}
-      {{ range $starKeys }}
-        {{ with index $.context.Params . }}{{ $allStars = $allStars | append . }}{{ end }}
+    {{ $objKeys := dict "sso_planets" "PLANETS" "sso_meteors" "METEORS" "sso_comets" "COMETS" "sso_asteroids" "ASTEROIDS" "dso_messier" "MESSIER" "dso_caldwell" "CALDWELL" "dso_ngc" "NGC" "dso_other" "OTHER" }}
+    {{ $hasObjects := gt (len $allStars) 0 }}
+    {{ if not $hasObjects }}
+      {{ range $key, $label := $objKeys }}
+        {{ with index $.context.Params $key }}{{ $hasObjects = true }}{{ end }}
       {{ end }}
-      {{ with uniq $allStars }}
+    {{ end }}
+
+    {{ if $hasObjects }}
+    <div class="card-object-matches {{ with .context }}{{ if ne .Kind "term" }}non-explorer-hidden{{ end }}{{ end }}">
+      {{ with $allStars }}
         <div class="match-row">
           <span class="match-label">STARS:</span>
           <span class="match-value">{{ delimit . ", " }}</span>
         </div>
       {{ end }}
-
-      {{/* SSO & DSO: Direct Mapping */}}
-      {{ $objKeys := dict "sso_planets" "PLANETS" "sso_meteors" "METEORS" "sso_comets" "COMETS" "sso_asteroids" "ASTEROIDS" "dso_messier" "MESSIER" "dso_caldwell" "CALDWELL" "dso_ngc" "NGC" "dso_other" "OTHER" }}
-      
       {{ range $key, $label := $objKeys }}
         {{ with index $.context.Params $key }}
           <div class="match-row">
@@ -46,30 +78,27 @@
             <span class="match-value">{{ delimit . ", " }}</span>
           </div>
         {{ end }}
-      {{ end }} {{/* CORRECTED: Removed 'range' from the end tag */}}
+      {{ end }}
     </div>
-
-
+    {{ end }}
 
     {{/* 3. METADATA */}}
-<div class="card-metadata">
-  By&nbsp;
-  {{- if .context.Params.authors -}}
-    {{- range $i, $a := .context.Params.authors -}}
-      {{- if $i }}, {{ end -}}
-      {{- $p := site.GetPage (printf "authors/%s" ($a | urlize)) -}}
-      {{- if $p -}}
-        <a href="{{ $p.RelPermalink }}" class="author-link">{{ $p.Title }}</a>
+    <div class="card-metadata">
+      By&nbsp;
+      {{- if .context.Params.authors -}}
+        {{- range $i, $a := .context.Params.authors -}}
+          {{- if $i }}, {{ end -}}
+          {{- $p := site.GetPage (printf "authors/%s" ($a | urlize)) -}}
+          {{- if $p -}}
+            <a href="{{ $p.RelPermalink }}" class="author-link">{{ $p.Title }}</a>
+          {{- else -}}
+            <span class="author-plain">{{ $a | replaceRE "-" " " | title | replaceRE "Nbas" "NBAS" }}</span>
+          {{- end -}}
+        {{- end -}}
       {{- else -}}
-        <span class="author-plain">{{ $a | replaceRE "-" " " | title | replaceRE "Nbas" "NBAS" }}</span>
-      {{- end -}}
-    {{- end -}}
-  {{- else -}}
-    <span class="author-plain">NBAS</span>
-  {{- end }} | {{ .context.PublishDate.Format "Jan 2, 2006" }}
-</div>
-
-
+        <span class="author-plain">NBAS</span>
+      {{- end }} | {{ .context.PublishDate.Format "Jan 2, 2006" }}
+    </div>
 
     {{ with .context.Params.byline }}
     <p class="card-byline">{{ . }}</p>
@@ -85,4 +114,3 @@
     {{ end }}
   </div>
 </div>
-
