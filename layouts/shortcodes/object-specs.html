@@ -1,7 +1,11 @@
 {{- $align := .Get "align" | default "right" -}}
+{{- $name := .Get "name" | default (.Page.Params.object_info.name | default "") -}}
 {{- with .Page.Params.object_info -}}
 <aside class="nbas-spec-box align-{{ $align }}" data-pagefind-ignore>
   <h4 class="nbas-spec-title">Object Specs</h4>
+  {{- if $name -}}
+  <p class="nbas-spec-name">{{ $name }}</p>
+  {{- end -}}
   <table class="nbas-spec-table">
     {{- range $k, $v := . -}}
     <tr>
@@ -18,4 +22,3 @@
   </table>
 </aside>
 {{- end -}}
-
