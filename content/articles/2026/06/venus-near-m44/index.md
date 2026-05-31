@@ -6,9 +6,9 @@ description: "Catch Venus as it passes above the Beehive Cluster, Messier 44, on
 authors: ["bob-donahue"]
 byline: "Venus (and the Moon) encounter one of the brightest star clusters"
 series: ["planet-watch"]
-thumbnail: "icon.jpg"
+thumbnail: "icon.png"
 sso_planets: ["Venus"]
-dso_messier: ["M 44"]
+dso_messier: ["44"]
 
 object_info:
   object_type: "Open Cluster"
