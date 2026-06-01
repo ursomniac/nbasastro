@@ -31,6 +31,7 @@ title = "Northern Berkshire Astronomical Society"
     ["images/banner/ngc-5466.jpg",   50, 55, 100],  # shift up + right
     ["images/banner/ngc-5907.jpg",   50, 50, 100],  # compress + shift right
     ["images/banner/ngc-6334.jpg",   50, 50, 100],  # shift right
+    ["images/banner/ngc-6520.jpg",   50, 50, 100],  # zoom in
     ["images/banner/ngc-6559.jpg",   50, 65, 100],  # shift up
     ["images/banner/ngc-7000.jpg",   50, 60, 100],  # compress
     ["images/banner/ngc-7789.jpg",   50, 45, 100],  # shift right
@@ -40,7 +41,6 @@ title = "Northern Berkshire Astronomical Society"
     ["images/banner/trifid.jpg",     50, 15, 100],  # shift down
     ["images/banner/veil.jpg",       50, 50, 100],  # compress
     ["images/banner/whirlpool.jpg",  50, 50, 125],  # zoom in
-    ["images/banner/ngc-6520.jpg",   50, 50, 100],  # zoom in
   ]
 
 [frontmatter]
