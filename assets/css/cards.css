@@ -218,3 +218,13 @@ h1.article-title {
   font-weight: 700;
   letter-spacing: 0.03em;
 }
+
+/* Add to end of cards.css */
+
+/* Event meta (location + date) inside card-content, below the badge zone */
+.card-event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}

@@ -14,12 +14,10 @@
 
 <div class="{{ $cardClass }}">
 
-  {{/* Pin strip: badge + optional location + optional date */}}
+  {{/* Pin strip: badge only — event meta moved into card-content */}}
   {{ if and $isPinned $isEvent }}
   <div class="pin-strip">
     <span class="pin-badge pin-badge-event">Upcoming Event</span>
-    {{ with .context.Params.event_location }}<span class="pin-strip-meta">📍 {{ . }}</span>{{ end }}
-    {{ with .context.Params.event_date }}<span class="pin-strip-meta">🗓 {{ . | time | time.Format "January 2, 2006 · 3:04 PM" }}</span>{{ end }}
   </div>
   {{ else if $isPinned }}
   <div class="pin-strip">
@@ -31,6 +29,15 @@
     {{ partial "feature-icon.html" .context }}
   </div>
   <div class="card-content">
+
+    {{/* Event meta: location + date, sits inside content column */}}
+    {{ if and $isPinned $isEvent }}
+    <div class="card-event-meta">
+      {{ with .context.Params.event_location }}<span class="pin-strip-meta">📍 {{ . }}</span>{{ end }}
+      {{ with .context.Params.event_date }}<span class="pin-strip-meta">🗓 {{ . | time | time.Format "January 2, 2006 · 3:04 PM" }}</span>{{ end }}
+    </div>
+    {{ end }}
+
     {{/* 1. SERIES BADGES */}}
     {{ with .context.Params.series }}
     <div class="card-facets">
