@@ -56,29 +56,6 @@ a:hover {
 }
 
 /* --- 3. SITE SHELL --- */
-.nbas-header {
-    background: var(--space-blue) url('/images/m31_banner.jpg') no-repeat center 45%;
-    background-size: cover;
-    min-height: 180px;
-    height: auto;
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.nbas-header .branding h1 {
-    font-family: 'Marcellus', serif;
-}
-
-.nbas-logo {
-    height: auto;
-    max-height: 165px;
-    width: auto;
-    flex-shrink: 0;
-    margin-right: 20px;
-}
-
 .nbas-container {
     max-width: 1250px;
     margin: 0 auto;
@@ -465,43 +442,6 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-    /* 1. Ensure the banner container can grow with the text */
-    .nbas-banner, .site-header { 
-        height: auto !important;
-        padding: 20px 10px !important;
-        display: flex !important;
-        flex-direction: column !important; /* Stack logo and text if needed */
-        align-items: center !important;
-    }
-
-    /* 2. Shrink and center the Title */
-    .site-title {
-        font-size: 1.3rem !important; 
-        letter-spacing: 0.5px !important;
-        line-height: 1.1 !important;
-        margin: 10px 0 !important;
-        text-align: center !important;
-        width: 100% !important;
-    }
-
-    /* 3. Fix the Subtitle overlap */
-    .site-subtitle {
-        position: static !important; /* Remove any absolute positioning */
-        font-size: 0.9rem !important;
-        margin-top: 5px !important;
-        display: block !important;
-        width: 100% !important;
-        text-align: center !important;
-    }
-
-    /* 4. Constrain the Logo so it doesn't push text out */
-    header-logo, .nbas-logo-img  {
-        width: 100px !important;
-        max-width: 100px !important;
-        flex: none;
-        margin: 0 auto 10px auto !important;
-    }
-
   /* Target the container that holds both the article and the sidebar */
   .main-content-wrapper { 
     display: flex;
@@ -561,22 +501,6 @@ a:hover {
    }
 }
 
-/* --- V0.15.3: MOBILE HEADER REFINEMENT --- */
-@media (max-width: 480px) {
-    .site-title { /* Or the specific class for your header text */
-        font-size: 1.4rem !important; /* Scale down to prevent bleed */
-        line-height: 1.2 !important;
-        margin-top: 10px !important;
-    }
-    
-    .site-subtitle {
-        font-size: 0.85rem !important;
-    }
-    
-    .header-logo { /* Ensure logo shrinks slightly to allow text space */
-        max-width: 80px !important;
-    }
-}
 
 /* --- V0.15.3: MOBILE FOOTER REFINEMENT --- */
 @media (max-width: 600px) {

@@ -1,14 +1,32 @@
-<!-- V0.14.4: BASEOF HEADER REFACTOR -->
+<!-- V0.16: SPLIT BANNER HEADER — background-image div with per-image position/size -->
 {{ with resources.Get "css/events-widget.css" | minify }}
   <link rel="stylesheet" href="{{ .RelPermalink }}">
 {{ end }}
 
+{{/* Pick a random banner from the map table in hugo.toml */}}
+{{- $map := .Site.Params.banner_map -}}
+{{- $entry := index $map (mod now.UnixNano (len $map)) -}}
+{{- $src   := index $entry 0 -}}
+{{- $posX  := index $entry 1 -}}
+{{- $posY  := index $entry 2 -}}
+{{- $scale := index $entry 3 -}}
+
 <header class="nbas-header" data-pagefind-ignore="all">
-  <a href="/">
-    <img src="/images/logo-grey.png" class="nbas-logo" alt="NBAS Logo">
-  </a>
-  <div class="branding">
-    <h1>{{ .Site.Title }}</h1>
-    <p>{{ .Site.Params.subtitle }}</p>
+
+  <!-- LEFT: solid dark background with logo and branding -->
+  <div class="nbas-header-left">
+    <a href="/">
+      <img src="/images/logo-grey.png" class="nbas-logo" alt="NBAS Logo">
+    </a>
+    <div class="branding">
+      <h1>{{ .Site.Title }}</h1>
+      <p>{{ .Site.Params.tagline }}</p>
+    </div>
   </div>
+
+  <!-- RIGHT: banner image div, position and size from banner_map -->
+  <div class="nbas-header-right">
+    <div class="nbas-banner-bg" style="background-image: url('/{{ $src }}'); background-position: {{ $posX }}% {{ $posY }}%; background-size: {{ $scale }}%;"></div>
+  </div>
+
 </header>

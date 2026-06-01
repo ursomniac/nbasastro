@@ -3,10 +3,45 @@ languageCode = "en-us"
 title = "Northern Berkshire Astronomical Society"
 
 [params]
-  subtitle = "Clear Skies over the Berkshires"
-  banner = "images/m31_banner.jpg"
+  tagline = "Whatever your experience, you belong under our skies."
   logo = "images/nbas-grey.png"
-  site_version = "v1.1.3"
+  site_version = "v1.1.4"
+
+  # Banner image map: [filename, X%, Y%, scale%]
+  # X: 0=left 50=center 100=right
+  # Y: 0=top  50=center 100=bottom
+  # scale: 100=fill frame, 75=zoom out (show more), 125=zoom in
+  banner_map = [
+    ["images/banner/c-12.jpg",       50, 50, 100],  # OK
+    ["images/banner/c-23.jpg",       50, 50, 100],  # OK
+    ["images/banner/c-30.jpg",       50, 50, 100],  # OK
+    ["images/banner/c-65.jpg",       50, 50, 100],  # OK
+    ["images/banner/c2023-a3.jpg",   50, 50, 100],  # OK
+    ["images/banner/dumbbell.jpg",   50, 65, 100],  # shift right + up
+    ["images/banner/eagle.jpg",      50, 60, 100],  # shift up
+    ["images/banner/fish.jpg",       65, 50, 100],  # shift right
+    ["images/banner/heart.jpg",      50, 55, 100],  # compress
+    ["images/banner/iris.jpg",       50, 50, 100],  # compress
+    ["images/banner/m-31.jpg",       50, 25, 100],  # shift down
+    ["images/banner/m-33.jpg",       50, 50, 100],  # compress + shift right
+    ["images/banner/m-38.jpg",       50, 50, 100],  # shift right
+    ["images/banner/m-55.jpg",       50, 50, 100],  # shift right
+    ["images/banner/m-92.jpg",       50, 50, 100],  # shift right
+    ["images/banner/ngc-2264.jpg",   50, 70, 100],  # shift up
+    ["images/banner/ngc-5466.jpg",   50, 55, 100],  # shift up + right
+    ["images/banner/ngc-5907.jpg",   50, 50, 100],  # compress + shift right
+    ["images/banner/ngc-6334.jpg",   50, 50, 100],  # shift right
+    ["images/banner/ngc-6559.jpg",   50, 65, 100],  # shift up
+    ["images/banner/ngc-7000.jpg",   50, 60, 100],  # compress
+    ["images/banner/ngc-7789.jpg",   50, 45, 100],  # shift right
+    ["images/banner/pleiades.jpg",   50, 60, 100],  # compress + shift up
+    ["images/banner/rosette.jpg",    50, 50, 100],  # compress
+    ["images/banner/soul.jpg",       50, 50, 100],  # OK
+    ["images/banner/trifid.jpg",     50, 15, 100],  # shift down
+    ["images/banner/veil.jpg",       50, 50, 100],  # compress
+    ["images/banner/whirlpool.jpg",  50, 50, 125],  # zoom in
+    ["images/banner/ngc-6520.jpg",   50, 50, 100],  # zoom in
+  ]
 
 [frontmatter]
   date = ["lastmod", "date", "publishDate"]
@@ -20,7 +55,6 @@ title = "Northern Berkshire Astronomical Society"
   series = "series"
   constellation = "constellations"
   knowledgetopics = "knowledgetopics"
-
 
   # STARS
   stars_variable = "stars_variable"
@@ -54,11 +88,11 @@ title = "Northern Berkshire Astronomical Society"
 
   [[related.indices]]
     name = "series"
-    weight = 100  # A shared series is a perfect match
+    weight = 100
 
   [[related.indices]]
     name = "tags"
-    weight = 100   # Shared tags are a strong match
+    weight = 100
 
 [markup]
   [markup.goldmark]

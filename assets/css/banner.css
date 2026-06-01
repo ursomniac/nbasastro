@@ -1,0 +1,120 @@
+/* ============================================================
+   NBAS BANNER / SITE HEADER
+   Extracted from 02-layout.css — owns all .nbas-header styles
+   ============================================================ */
+
+/* --- HEADER SHELL --- */
+.nbas-header {
+    display: flex;
+    align-items: stretch;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* --- LEFT PANEL: solid dark background, logo + branding --- */
+.nbas-header-left {
+    background: var(--deep-bg);
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+/* --- RIGHT PANEL: banner image as background-image div --- */
+.nbas-header-right {
+    flex: 1;
+    position: relative;
+    min-width: 0;
+}
+
+/* Gradient fade: solid deep-bg on left → transparent on right */
+.nbas-header-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        #0d1421 0%,
+        transparent 30%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* The image div — background-image, position, size set inline by template */
+.nbas-banner-bg {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    /* background-image, background-position, background-size set inline */
+}
+
+/* --- LOGO --- */
+.nbas-logo {
+    height: auto;
+    max-height: 145px;
+    width: auto;
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+/* --- BRANDING: title + tagline --- */
+.nbas-header .branding {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.nbas-header .branding h1 {
+    font-family: 'Marcellus', serif;
+    margin: 0 0 6px 0;
+    font-size: 1.8rem;
+    line-height: 1.1;
+}
+
+.nbas-header .branding p {
+    margin: 0;
+    font-size: 1rem;
+    color: #8a9cb3;
+    font-style: italic;
+    line-height: 1.3;
+}
+
+/* --- RESPONSIVE: mobile stacks vertically, image hidden --- */
+@media (max-width: 768px) {
+    .nbas-header {
+        flex-direction: column;
+    }
+
+    .nbas-header-left {
+        padding: 15px 10px;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .nbas-header-right {
+        display: none;
+    }
+
+    .nbas-logo {
+        max-height: 80px;
+        margin-right: 12px;
+    }
+
+    .nbas-header .branding h1 {
+        font-size: 1.3rem;
+    }
+
+    .nbas-header .branding p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nbas-header .branding h1 {
+        font-size: 1.1rem;
+    }
+}
