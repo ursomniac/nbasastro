@@ -1,0 +1,24 @@
+/* --- SERIES PAGES --- */
+
+/* Intro box: appears on individual series pages above the article list.
+   Contains the series mission statement / longer description.
+   Card-level description (short blurb) lives only on /series/ listing cards. */
+.series-intro-box {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-soft);
+    border-left: 3px solid var(--gold-base);
+    border-radius: 4px;
+    padding: 18px 22px;
+    margin: 0 0 28px 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.series-intro-box p {
+    margin: 0 0 0.75em 0;
+}
+
+.series-intro-box p:last-child {
+    margin-bottom: 0;
+}

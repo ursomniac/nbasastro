@@ -1,0 +1,68 @@
+{{/* layouts/series/term.html
+     Handles: /series/getting-started/, /series/smart-scopes/, etc.
+     Shows series title, optional byline, optional description, optional body content,
+     then lists all articles in the series.
+     Safe to edit — does NOT affect list.html or any other section.
+*/}}
+{{ define "main" }}
+<div class="archive-container">
+  <header class="archive-header">
+    <h1 class="page-title">{{ .Title }}</h1>
+
+  </header>
+
+  {{/* Body content: series intro box — card description goes to /series/ listing only */}}
+  {{ with .Content }}
+  <div class="series-intro-box">{{ . }}</div>
+  {{ end }}
+
+  {{/* Series filter dropdown */}}
+  <div class="nbas-filter-bar" data-pagefind-ignore>
+    <span class="filter-label">Explore Series:</span>
+    <select id="series-select" class="series-dropdown" onchange="window.location.href=this.value;">
+      <option value="">-- Select --</option>
+      <option value="{{ "/articles/" | relURL }}">All Articles</option>
+      {{ range $name, $taxonomy := .Site.Taxonomies.series }}
+        <option value="{{ "/series/" | relURL }}{{ $name | urlize }}/"
+          {{ if eq $.Title ($name | humanize) }}selected{{ end }}>
+          {{ $name | humanize }} ({{ $taxonomy.Count }})
+        </option>
+      {{ end }}
+    </select>
+  </div>
+
+  {{/* Article list */}}
+  <div class="article-list">
+    {{ $currentTerm := .Data.Term }}
+    {{ $pages := where .Pages "Params.layout" "ne" "guide_child" }}
+    {{ $sorted := $pages.ByPublishDate.Reverse }}
+
+    {{/* Separate pinned from normal */}}
+    {{ $now := now }}
+    {{ $pinned := slice }}
+    {{ $normal := slice }}
+    {{ range $sorted }}
+      {{ if and .Params.pin_until (gt (.Params.pin_until | time) $now) }}
+        {{ $pinned = $pinned | append . }}
+      {{ else }}
+        {{ $normal = $normal | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $combined := $pinned | append $normal }}
+
+    {{ range (.Paginate $combined).Pages }}
+      {{ if eq .Section "quizzes" }}
+        {{ partial "quiz-card.html" (dict "context" .) }}
+      {{ else }}
+        {{ partial "article-card.html" (dict "context" . "currentTerm" $currentTerm "catalogPage" false) }}
+      {{ end }}
+    {{ else }}
+      <p class="no-articles-msg">No articles found in this series.</p>
+    {{ end }}
+  </div>
+
+  <nav class="pagination-container">
+    {{ template "_internal/pagination.html" . }}
+  </nav>
+</div>
+{{ end }}

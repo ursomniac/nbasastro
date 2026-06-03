@@ -1,0 +1,27 @@
+{{/* layouts/series/taxonomy.html
+     Handles: /series/
+     Shows each series as a card: title, description (from front matter), article count.
+     Uses .Page.Params.description per Hugo taxonomy metadata docs.
+     Safe — does NOT affect tags, authors, or any other taxonomy.
+*/}}
+{{ define "main" }}
+<section class="nbas-series-list">
+  <h1>Article Series</h1>
+  <hr class="section-divider">
+  <div class="list-container">
+    <div class="hub-grid">
+      {{ range .Data.Terms }}
+        <div class="hub-card">
+          <div class="hub-info">
+            <a href="{{ .Page.RelPermalink }}" class="hub-link">{{ .Page.Title }}</a>
+            {{ with .Page.Description }}
+              <div class="hub-summary">{{ . }}</div>
+            {{ end }}
+          </div>
+          <span class="hub-count">{{ len (where .Pages "Params.layout" "ne" "guide_child") }} Articles</span>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
