@@ -1,0 +1,7 @@
+Star        | SpTtype | logL | x   | y   |
+Sun         | G2 V    |  0.0 | 462 | 354 |
+Sirius A    | A1 V    |  1.4 | 310 | 279 |
+Rigel       | B8 Ia   |  5.2 | 258 |  46 |
+Betelgeuse  | M2 Ia   |  5.0 | 635 |  57 |
+Barnards    | M4 V    | -1.8 | 650 | 475 |
+Sirius B    | DA      | -2.5 | 175 | 516 |

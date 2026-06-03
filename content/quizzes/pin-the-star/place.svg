@@ -1,0 +1,4 @@
+{{/* layouts/shortcodes/hr-star.html */}}
+{{ $svg := readFile "static/images/hr-quiz/hr-diagram.svg" }}
+{{ $marker := printf `<circle cx="%s" cy="%s" r="10" fill="none" stroke="#ff4444" stroke-width="2.5"/><line x1="%s" y1="%s" x2="%s" y2="%s" stroke="#ff4444" stroke-width="1.5"/>` (.Get "cx") (.Get "cy") (.Get "cx") (add (.Get "cy" | int) -18 | string) (.Get "cx") (add (.Get "cy" | int) 18 | string) }}
+{{ replace $svg "</svg>" (printf "%s</svg>" $marker) | safeHTML }}
