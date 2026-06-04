@@ -15,10 +15,20 @@ then wondering "when will they come back?"
 
 ## Say Goodbye! to Venus and Jupiter
 
+{{< nbas-gallery style="grid" size="350px" >}}
+0629-2130-jupiter-venus.png | Venus and Jupiter in late June
+venus-telescope.png | Venus in a telescope
+{{< /nbas-gallery >}}
+
 While Venus and Jupiter put on a great show in the May and June evening
-sky, Jupiter disappears behind the Sun 
+sky, Jupiter disappears behind the Sun by July.  Here's the view at 9:30 PM on the 29th - Jupiter is still (barely) over the horizon - but will largely be out of reach to most observers.  Venus is still visible - briefly - it'll be setting after 10:30 PM (EDT) but will be very close to the horizon.   Telescopically it's still in its gibbous phase.   It will become larger and more crescent-like through the rest of the summer but will get harder to observe as it gets closer to the Sun.
 
 ## Say Hello! to Saturn and Neptune
+
+{{< nbas-gallery style="grid" size="350px" >}}
+neptune1.png
+saturn-track copy.png
+{{< /nbas-gallery >}}
 
 Saturn and Neptune have been running through a series of conjunctions
 the last year, but Saturn is now drifting eastward away from faint
