@@ -1,186 +1,105 @@
 ---
 title: "Pin the Star on the HR Diagram"
-byline:  "Identify where stars fit in"
+byline: "Place each star in its correct location on the H–R Diagram"
 date: 2026-06-16
 authors: ["nbas-staff"]
 series: ["astronomy-quiz"]
 knowledgetopics: ["quizzes"]
 level: "intermediate"
-description: ""
-thumbnail: "icon.jpeg"
+description: "Twelve stars, one diagram. Can you place each one in its correct location on the Hertzsprung–Russell Diagram?"
+thumbnail: "icon.png"
 quiz:
   passing_score: 80
   scoring: "first-only"
-  renderer: "identify-image"
-  questions:
-
-    - id: 1
-      text: "I discovered that sunspots were depressions and not \"clouds\" on the surface of the Sun."
-      image: "sunspots.jpeg"
-      answers:
-        - text: "Maria Mitchell"
-          image: "maria-mitchell.jpeg"
-          correct: true
-          explanation: "Maria Mitchell was a pioneering American astronomer, who had her own observatory on Nantucket, and taught at Vassar college.  She started observing the Sun daily in 1868 and determined the physical nature of sunspots."
-        - text: "Richard Carrington"
-          image: "richard_carrington.jpg"
-          correct: false
-          explanation: "Carrington measured the surface differential rotation of the Sun looking at the change of latitude of sunspots over the 11-yr sunspot cycle."
-        - text: "Heinrich Schwabe"
-          image: "Samuel_Heinrich_Schwabe.jpg"
-          correct: false
-          explanation: "Heinrich Schwabe was the first to determine the 11-year sunspot cycle."
-        - text: "Galileo Galilei"
-          image: "galileo.jpg"
-          correct: false
-          explanation: "Galileo made early observations of the Sun, but imagined they were clouds."
-
-    - id: 2
-      text: "I discovered 4 moons of Saturn: Tethys, Dione, Iapetus, and Rhea"
-      image: "cassini_moons.webp"
-      answers:
-        - text: "Christiaan Huygens"
-          image: "huygens.jpeg"
-          correct: false
-          explanation: "Huygens did discover Titan in 1655 - and resolved the true nature of Saturn's rings."
-        - text: "Jeremiah Horrocks"
-          image: "jeremiah_horrocks.jpg"
-          correct: false
-          explanation: "Jeremiah Horrocks demonstrated the Moon's orbit around the Earth was an ellipse, and predicted and observed the Transit of Venus in 16349."
-        - text: "Giovanni Cassini"
-          image: "cassini.jpeg"
-          correct: true
-          explanation: "Between 1671 and 1684, Cassini found these four moons orbiting Saturn.  After this, no moons were discovered for 100 years!  He also found the Cassini Division in the rings."
-        - text: "Maria Cunitz"
-          image: "maria-cunitz.jpg"
-          correct: false
-          explanation: "Maria Cunitz refined Kepler's mathematics, correcting errors and created the most accurate predictions of the positions of the planets for this era."
-
-    - id: 3
-      text: "Herschel discovered Uranus in 1781.  Who holds the record for observing Uranus before then, but completely failed to recognize it as a planet 12 times?"
-      image: "34_tauri.jpg"
-      answers:
-        - text: "Pierre Charles Le Monnier"
-          image: "le-monnier.jpg"
-          correct: true
-          explanation: "Observed Uranus 12 times over 19 years.  He actually observed Uranus four nights in a row, but when it was at it's orbital turning point, so didn't notice it moved."
-        - text: "John Flamsteed"
-          image: "john-flamsteed.jpeg"
-          correct: false
-          explanation: "Flamsteed recorded Uranus in 1690, mistaking it for a star which he added to his atlas as 34 Tauri."
-        - text: "Tobias Mayer"
-          image: "tobias-mayer.jpeg"
-          correct: false
-          explanation: "Recorded Uranus in observations in 1756, but didn't recognize it as a planet."
-        - text: "James Bradley"
-          image: "james-bradley.jpeg"
-          correct: false
-          explanation: "Saw Uranus three times between 1748 and 1753 in Capricornus and Aquarius without recognizing it was the same object."
-
-    - id: 4
-      text: "I discovered a planet, which then wasn't a planet, but is now a planet again."
-      image: "ceres.jpg"
-      answers:
-        - text: "Edmond Modeste Lescarbault"
-          image: "edmond-modeste-lescarbault.jpeg"
-          correct: false
-          explanation: "Thought he had seen the planet Vulcan crossing the disk of the Sun in 1859."
-        - text: "Heinrich Olbers"
-          image: "heinrich-olbers.jpg"
-          correct: false
-          explanation: "Olbers discovered Pallas in 1802 and Vesta in 1807.  At first they and Juno were listed as planets (although Herschel argued they were not), until being reclassified as asteroids."
-        - text: "William Lassell"
-          image: "william-lassell.jpg"
-          correct: false
-          explanation: "Lassell discovered Triton orbiting Neptune in 1846, which probably is a captured dwarf planet from the Kuiper Belt."
-        - text: "Giuseppe Piazzi"
-          image: "giuseppe-piazzi.jpg"
-          correct: true
-          explanation: "Ceres was first classified as a planet, then was determined to be an asteroid, then recently as the only dwarf planet not in the Kuiper belt."
-
-    - id: 5
-      text: "I discovered Proxima Centauri, the closest star to the Sun."
-      image: "proxima-centauri.jpg"
-      answers:
-        - text: "Thomas Henderson"
-          image: "thomas-henderson.jpg"
-          correct: false
-          explanation: "He first measured the parallax of Alpha Centauri in the 1830s, but wasn't aware of the trinary nature of the star."
-        - text: "Edward Emerson Barnard"
-          image: "ee-barnard.jpeg"
-          correct: false
-          explanation: "Discovered Barnard's star which has the highest measured proper motion, but is actually the 4th closest star to the Sun."
-        - text: "Robert Innes"
-          image: "robert-innes.jpeg"
-          correct: true
-          explanation: "Discovered in 1915.  Innes also was the first person to see the Great January Comet of 1910."
-        - text: "Friedrich Bessel"
-          image: "friedrich-wilhelm-bessel.jpg"
-          correct: false
-          explanation: "Bessel is credited with the first published measurement of stellar parallax (61 Cygni) in 1838."
-
-    - id: 6
-      text: "My observations of the timing of eclipses of Io proved that light travels as a finite speed."
-      image: "jupiter-diagram.jpg"
-      answers:
-        - text: "Christiaan Huygens"
-          image: "huygens.jpeg"
-          correct: false
-          explanation: "Used Rømer's data to calculate the speed of light (about 30% off)"
-        - text: "Giovanni Cassini"
-          image: "cassini.jpeg"
-          correct: false
-          explanation: "Cassini didn't think that light had a finite speed, and blamed the observed time shifts on errors in the moon's orbit instead."
-        - text: "Robert Hooke"
-          image: "robert-hooke.jpg"
-          correct: false
-          explanation: "Hooke also didn't believe Rømer's proof the light had a finite measurable speed, instead thinking that light should be instantaneous."
-        - text: "Ole Rømer"
-          image: "ole-romer.jpg"
-          correct: true
-          explanation: "Noticed in 1676 that eclipses occur later when Earth is moving away from Jupiter, but earlier when Earth is moving closer."
-
-    - id: 7
-      text: "Until my discovery, it was thought we couldn't know what stars were made of!"
-      image: "solar-spectrum.jpg"
-      answers:
-        - text: "Joseph von Fraunhofer"
-          image: "joseph-von-fraunhofer.jpg"
-          correct: false
-          explanation: "Mapped and cataloged those lines in the solar spectrum.  and that stars had a different spectrum than the Sun, but wasn't aware of what physically caused them."
-        - text: "Gustav Robert Kirchhoff"
-          image: "gustav-robert-kirchhoff.jpg"
-          correct: true
-          explanation: "In 1859, showed that burning elements on Earth produces a spectrum that could be used as fingerprints for specifically identifying the elements of stars and the Sun."
-        - text: "William Huggins"
-          image: "william-huggins.jpg"
-          correct: false
-          explanation: "The \"father of stellar spectroscopy\" obtaining spectra of stars and nabulae in the 1860s, but was applying the laboratory physics that Kirchhoff and Bunsen had demonstrated."
-        - text: "Angelo Secchi"
-          image: "angelo-secchi.jpg"
-          correct: false
-          explanation: "Created the first spectral classification for stars in the late 1860s.  It would be later improved by Williamina Fleming in 1890, and then further by Antonia Maury and Annie Jump Cannon in 1901."
-
-    - id: 8
-      text: "I solved a long-standing mystery about Saturn's rings.  I proved they couldn't be a solid or liquid sheet without breaking up under gravity, and instead must be countless, tiny particles orbiting the planet."
-      image: "saturn.jpg"
-      answers:
-        - text: "Pierre-Simon Laplace"
-          image: "pierre-simon-laplace.jpg"
-          correct: false
-          explanation: "He understood that the ring couldn't be completely solid, but suggested a system of multiple, solid, non-uniform rings."
-        - text: "James Clerk Maxwell"
-          image: "james-clerk-maxwell.jpg"
-          correct: true
-          explanation: "This earned him the Adams Prize in 1859, and was directly confirmed by the Voyager images in 1980.  But the ring particles are not in stable orbits and will vanish over the next 300 million years."
-        - text: "Urbain Le Verrier"
-          image: "urbain-leverrier.jpg"
-          correct: false
-          explanation: "Calculated orbits of the planets, and especially predicting the pre-discovery location of Neptune, but didn't have a theory on the nature of Saturn's rings."
-        - text: "Lord Kelvin (William Thomson)"
-          image: "lord-kelvin.jpg"
-          correct: false
-          explanation: "Studied fluid dynamics, thermodynamics, and the stability of mechanical systems, but Saturn was not of his objects of interest."
-
+  renderer: "drop-on-image"
+  image: "hr-diagram.svg"
+  image_width: 820
+  image_height: 700
+  items:
+    - id: sun
+      name: "The Sun"
+      hint: "Center of our solar system"
+    - id: proxima
+      name: "Proxima Centauri"
+      hint: "Discovered in 1915 by Robert Innes"
+    - id: siriusb
+      name: "Sirius B"
+      hint: "First white dwarf identified, 1862"
+    - id: vega
+      name: "Vega"
+      hint: "First star to be photographed, 1850"
+    - id: arcturus
+      name: "Arcturus"
+      hint: "Visible to the naked eye in daylight"
+    - id: mira
+      name: "Mira"
+      hint: "First variable star discovered, 1596"
+    - id: spica
+      name: "Spica"
+      hint: "Helped Hipparchus discover the precession of the equinoxes"
+    - id: cygni61
+      name: "61 Cygni"
+      hint: "First star to have its distance measured by parallax, 1838"
+    - id: polaris
+      name: "Polaris"
+      hint: "Currently within 0.7° of the North Celestial Pole"
+    - id: alamaaz
+      name: "Al Maaz (ε Aur)"
+      hint: "One of the longest-period eclipsing binaries known"
+    - id: rigel
+      name: "Rigel"
+      hint: "Approximately 860 light-years away"
+    - id: antares
+      name: "Antares"
+      hint: "Its name means 'rival of Mars'"
+  zones:
+    - correct: sun
+      x: 458
+      y: 354
+      explanation: "The Sun sits squarely in the middle of the main sequence — average temperature, average luminosity. Every other star on this diagram is defined in terms of how it differs from the Sun."
+    - correct: proxima
+      x: 668
+      y: 505
+      explanation: "Red dwarfs like Proxima are the most common stars in the galaxy — perhaps 70% of all stars — but so faint that none are visible to the naked eye. Proxima has enough fuel to burn for another four trillion years."
+    - correct: siriusb
+      x: 190
+      y: 530
+      explanation: "Despite having a surface temperature hotter than the Sun, Sirius B is thousands of times dimmer — compressed to roughly Earth's size. This is the eventual fate of most stars: the outer layers drift away, leaving behind a slowly cooling white dwarf."
+    - correct: vega
+      x: 302
+      y: 269
+      explanation: "A-type stars like Vega are hotter and more luminous than the Sun, but they burn through their fuel faster — Vega will exhaust its hydrogen in about a billion years, compared to the Sun's ten-billion-year supply."
+    - correct: arcturus
+      x: 520
+      y: 250
+      explanation: "Arcturus has already left the main sequence. After exhausting the hydrogen in its core, it expanded to about 25 times the Sun's diameter. Stars like the Sun follow the same path eventually, swelling into giants before shedding their outer layers."
+    - correct: mira
+      x: 703
+      y: 171
+      explanation: "Mira is an AGB (asymptotic giant branch) star — a red giant in the late stages of its life, pulsating and shedding material into space. Its exact position on the diagram shifts slightly as it brightens and dims over its 332-day period."
+    - correct: spica
+      x: 192
+      y: 162
+      explanation: "At the top of the main sequence, Spica burns at nearly 25,000K and is about 2,000 times more luminous than the Sun. It's spending its fuel so rapidly that its entire main-sequence lifespan will last only a few hundred million years."
+    - correct: cygni61
+      x: 540
+      y: 382
+      explanation: "61 Cygni is a K-type dwarf — cooler and dimmer than the Sun but otherwise unremarkable. What makes it historically significant: in 1838, Friedrich Bessel measured its parallax, making it the first star beyond the Sun to have its distance determined."
+    - correct: polaris
+      x: 395
+      y: 156
+      explanation: "Polaris isn't on the main sequence — it's a supergiant that has evolved well beyond that stage. It's also a Cepheid variable, pulsating with a period of about four days, which is how astronomers independently confirm its distance."
+    - correct: alamaaz
+      x: 375
+      y: 84
+      explanation: "Al Maaz is a luminous F supergiant in one of the strangest binary systems known. Every 27 years, its companion — a massive disk surrounding another star — eclipses it for about two years. It is one of the longest-period eclipsing binaries known."
+    - correct: rigel
+      x: 230
+      y: 79
+      explanation: "Rigel is a blue supergiant burning at roughly 12,000K and outshining the Sun by about 120,000 times. Despite being only around 8 million years old, it's already nearing the end of its life and will almost certainly explode as a supernova within the next few million years."
+    - correct: antares
+      x: 608
+      y: 103
+      explanation: "Antares is a red supergiant so large that if placed at the center of our solar system, its surface would extend beyond Jupiter's orbit. Like Rigel, it is near the end of its life and will eventually explode as a supernova."
 ---
-{{< quiz >}}
+{{< quiz-drop-on-image >}}

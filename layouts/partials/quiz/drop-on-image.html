@@ -1,0 +1,392 @@
+{{/*
+  layouts/partials/quiz/drop-on-image.html
+  ────────────────────────────────────────
+  Generic "place items on an image" quiz.
+
+  Reads from .Page.Params.quiz:
+    image        : page resource filename (svg or raster)
+    image_width  : original image width in px (default 820)
+    image_height : original image height in px (default 700)
+    items[]      : id, name, hint (hint stored in data attr only)
+    zones[]      : correct (= item id), x, y, explanation
+    passing_score: 0–100 (default 80)
+    scoring      : "first-only" | "all-attempts" (default first-only)
+
+  Layout:
+    [Explanation panel — always visible, top]
+    [2×N card grid | diagram with drop zones]
+    [Reset / score]
+*/}}
+
+{{ $quiz  := .Page.Params.quiz }}
+{{ $items := $quiz.items }}
+{{ $zones := $quiz.zones }}
+{{ $imgW  := $quiz.image_width  | default 820 }}
+{{ $imgH  := $quiz.image_height | default 700 }}
+{{ $pass  := $quiz.passing_score | default 80 }}
+{{ $img   := .Page.Resources.GetMatch $quiz.image }}
+
+<div class="doi-quiz" data-pagefind-ignore>
+<style>
+.doi-quiz { font-family: Georgia, 'Times New Roman', serif; color: #ccd6e8; }
+
+/* ── Feedback panel (always visible) ── */
+.doi-feedback {
+  min-height: 72px;
+  padding: 10px 14px;
+  background: #07111e;
+  border: 1.5px solid #1e3050;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  transition: border-color 0.2s;
+}
+.doi-feedback.doi-fb-correct { border-color: #44ee88; }
+.doi-feedback.doi-fb-wrong   { border-color: #ee5544; }
+.doi-feedback-header {
+  font-size: 0.88rem;
+  font-weight: bold;
+  color: #8899bb;
+  margin-bottom: 4px;
+}
+.doi-feedback.doi-fb-correct .doi-feedback-header { color: #44ee88; }
+.doi-feedback.doi-fb-wrong   .doi-feedback-header { color: #ee7766; }
+.doi-feedback-body {
+  font-size: 0.82rem;
+  color: #8899bb;
+  line-height: 1.55;
+}
+.doi-feedback.doi-fb-correct .doi-feedback-body,
+.doi-feedback.doi-fb-wrong   .doi-feedback-body { color: #aabbcc; }
+
+/* ── Main layout ── */
+.doi-layout {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* ── Card panel: 2-column grid ── */
+.doi-card-panel { width: 200px; flex-shrink: 0; }
+.doi-card-panel h3 {
+  color: #c5a059;
+  font-size: 0.8rem;
+  margin-bottom: 7px;
+  border-bottom: 1px solid #2a3a52;
+  padding-bottom: 4px;
+}
+.doi-cards-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+.doi-card {
+  background: #0d1e35;
+  border: 1.5px solid #2a3a52;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.8rem;   /* fixed 2-line height */
+  transition: border-color 0.12s, background 0.12s, box-shadow 0.12s;
+  user-select: none;
+}
+.doi-card:hover:not(.doi-placed):not(.doi-correct-card) {
+  border-color: #c5a059;
+  background: #142030;
+}
+.doi-card.doi-selected {
+  border-color: #ffdd44;
+  background: #1a2e4a;
+  box-shadow: 0 0 7px rgba(255,221,68,0.22);
+}
+.doi-card.doi-placed        { opacity: 0.3; cursor: default; pointer-events: none; }
+.doi-card.doi-correct-card  { border-color: #44ee88; opacity: 1; cursor: default; pointer-events: none; }
+.doi-card.doi-wrong-flash   { border-color: #ee4444; }
+.doi-card-name { font-size: 0.78rem; color: #ddeeff; font-weight: bold; line-height: 1.25; text-align: center; }
+
+/* ── Diagram ── */
+.doi-diagram-wrapper { flex: 1; position: relative; line-height: 0; }
+.doi-image { width: 100%; height: auto; display: block; border-radius: 4px; }
+
+/* ── Drop zones ── */
+.doi-zone {
+  position: absolute;
+  width: 7%;
+  height: 0;
+  padding-bottom: 7%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  border: 2.5px dashed #4a7aaa;
+  background: rgba(30,60,100,0.15);
+  cursor: pointer;
+  z-index: 10;
+  transition: border-color 0.15s, background 0.15s;
+  box-sizing: border-box;
+}
+.doi-zone:hover:not(.doi-zone-correct) {
+  border-color: #ffdd44;
+  background: rgba(255,221,68,0.1);
+}
+.doi-zone.doi-zone-correct {
+  border-style: solid;
+  border-color: #44ee88;
+  background: rgba(68,238,136,0.12);
+  cursor: default;
+}
+.doi-zone.doi-zone-wrong-flash {
+  border-color: #ee4444;
+  background: rgba(238,68,68,0.15);
+}
+.doi-zone-lbl {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: #6a8aaa;
+  font-size: 0.72rem;
+  font-family: sans-serif;
+  pointer-events: none;
+  text-align: center;
+  width: 90%;
+  overflow: hidden;
+}
+.doi-zone.doi-zone-correct .doi-zone-lbl { color: #44ee88; font-size: 0.6rem; }
+
+/* ── Controls ── */
+.doi-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.doi-btn {
+  background: #1a3a5a;
+  border: 1.5px solid #3a6a9a;
+  color: #c5a059;
+  padding: 6px 14px;
+  border-radius: 5px;
+  font-family: Georgia, serif;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+.doi-btn:hover { background: #2a4a7a; border-color: #c5a059; }
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .doi-layout { flex-direction: column; }
+  .doi-card-panel { width: 100%; }
+  .doi-zone { width: 9%; padding-bottom: 9%; }
+}
+</style>
+
+{{/* ── Feedback panel (top, always visible) ── */}}
+<div class="doi-feedback" id="doi-feedback">
+  <div class="doi-feedback-header" id="doi-fb-header">Select a star, then click where it belongs on the diagram.</div>
+  <div class="doi-feedback-body"   id="doi-fb-body"></div>
+</div>
+
+<div class="doi-layout">
+
+  {{/* ── Card panel ── */}}
+  <div class="doi-card-panel">
+    <h3>Stars to Place</h3>
+    <div class="doi-cards-inner" id="doi-cards">
+      {{ range $items }}
+      <div class="doi-card" data-item-id="{{ .id }}" data-item-name="{{ .name }}">
+        <div class="doi-card-name">{{ .name }}</div>
+      </div>
+      {{ end }}
+    </div>
+    <div class="doi-controls">
+      <button class="doi-btn" id="doi-reset">Start Over</button>
+    </div>
+  </div>
+
+  {{/* ── Diagram + zones ── */}}
+  <div class="doi-diagram-wrapper" id="doi-wrapper">
+    {{ with $img }}
+    <img src="{{ .RelPermalink }}" class="doi-image" id="doi-image"
+         alt="Quiz diagram" draggable="false">
+    {{ else }}
+    <p style="color:#ee4444">Image not found: {{ $quiz.image }}</p>
+    {{ end }}
+
+    {{ range $zones }}
+    {{ $correctId := .correct }}
+    {{ $correctName := $correctId }}
+    {{ range $items }}{{ if eq .id $correctId }}{{ $correctName = .name }}{{ end }}{{ end }}
+    {{ $xpct := (div (mul (float .x) 100.0) (float $imgW)) }}
+    {{ $ypct := (div (mul (float .y) 100.0) (float $imgH)) }}
+    <div class="doi-zone"
+         data-correct="{{ $correctId }}"
+         data-correct-name="{{ $correctName }}"
+         data-explanation="{{ .explanation }}"
+         style="left:{{ printf "%.2f" $xpct }}%; top:{{ printf "%.2f" $ypct }}%;">
+      <span class="doi-zone-lbl">?</span>
+    </div>
+    {{ end }}
+  </div>
+
+</div>{{/* end .doi-layout */}}
+
+<script>
+(function () {
+  'use strict';
+
+  // ── Data from Hugo (built via range to guarantee JS array) ────────────────
+  const items = [{{ range $items -}}
+    {"id":{{ .id | jsonify }},"name":{{ .name | jsonify }}},
+  {{- end }}];
+
+  // ── State ─────────────────────────────────────────────────────────────────
+  let selectedId = null;
+  let correctSet = new Set();
+
+  // ── DOM ───────────────────────────────────────────────────────────────────
+  const cardEls  = document.querySelectorAll('.doi-card');
+  const zoneEls  = document.querySelectorAll('.doi-zone');
+  const feedback = document.getElementById('doi-feedback');
+  const fbHeader = document.getElementById('doi-fb-header');
+  const fbBody   = document.getElementById('doi-fb-body');
+
+  function itemById(id) {
+    return items.find(i => i.id === id);
+  }
+
+  // ── Feedback helpers ──────────────────────────────────────────────────────
+  function setFeedback(type, header, body) {
+    feedback.className = 'doi-feedback' + (type ? ' doi-fb-' + type : '');
+    fbHeader.textContent = header;
+    fbBody.textContent   = body || '';
+  }
+
+  function clearFeedback() {
+    setFeedback('', 'Now click where this star belongs on the diagram.', '');
+  }
+
+  function neutralFeedback() {
+    setFeedback('', 'Select a star, then click where it belongs on the diagram.', '');
+  }
+
+  // ── Card interaction ──────────────────────────────────────────────────────
+  cardEls.forEach(card => {
+    card.addEventListener('click', () => {
+      const id = card.dataset.itemId;
+      if (card.classList.contains('doi-placed') ||
+          card.classList.contains('doi-correct-card')) return;
+
+      if (selectedId === id) {
+        selectedId = null;
+        neutralFeedback();
+      } else {
+        selectedId = id;
+        clearFeedback();
+      }
+      refreshCards();
+    });
+  });
+
+  function refreshCards() {
+    cardEls.forEach(c => {
+      if (c.classList.contains('doi-correct-card') ||
+          c.classList.contains('doi-placed')) return;
+      c.classList.toggle('doi-selected', c.dataset.itemId === selectedId);
+    });
+  }
+
+  // ── Zone interaction ──────────────────────────────────────────────────────
+  zoneEls.forEach(zone => {
+    zone.addEventListener('click', () => {
+      if (!selectedId) return;
+      if (zone.classList.contains('doi-zone-correct')) return;
+
+      const correctId   = zone.dataset.correct;
+      const correctName = zone.dataset.correctName || correctId;
+      const explanation = zone.dataset.explanation;
+      const isCorrect   = (selectedId === correctId);
+      const card        = document.querySelector(`.doi-card[data-item-id="${selectedId}"]`);
+      const starName    = card ? card.dataset.itemName : selectedId;
+
+      if (isCorrect) {
+        // ── Correct ──────────────────────────────────────────────────────
+        zone.classList.add('doi-zone-correct');
+        zone.querySelector('.doi-zone-lbl').textContent = shortName(starName);
+
+        if (card) { card.classList.remove('doi-selected'); card.classList.add('doi-placed', 'doi-correct-card'); }
+
+        correctSet.add(selectedId);
+        selectedId = null;
+        setFeedback('correct', '✓ ' + starName + ' — correct!', explanation);
+        if (correctSet.size === items.length) {
+          setFeedback('correct', '✓ All stars placed!', 'Well done — you\'ve placed every star on the diagram.');
+        }
+
+      } else {
+        // ── Wrong ────────────────────────────────────────────────────────
+        // Flash zone
+        zone.classList.add('doi-zone-wrong-flash');
+        setTimeout(() => zone.classList.remove('doi-zone-wrong-flash'), 600);
+
+        // Flash card
+        if (card) {
+          card.classList.add('doi-wrong-flash');
+          setTimeout(() => card.classList.remove('doi-wrong-flash'), 700);
+        }
+
+        setFeedback('wrong',
+          '✗ Not quite — that zone belongs to ' + correctName + '.',
+          explanation);
+        // Keep selectedId — let user try another zone
+      }
+    });
+
+    // Hover: show zone ring more clearly when a card is selected
+    zone.addEventListener('mouseenter', () => {
+      if (selectedId && !zone.classList.contains('doi-zone-correct')) {
+        zone.style.borderStyle = 'solid';
+      }
+    });
+    zone.addEventListener('mouseleave', () => {
+      if (!zone.classList.contains('doi-zone-correct')) {
+        zone.style.borderStyle = '';
+      }
+    });
+  });
+
+  // ── Helpers ───────────────────────────────────────────────────────────────
+  function shortName(name) {
+    const map = {
+      'The Sun': 'Sun', 'Proxima Centauri': 'Proxima',
+      'Al Maaz (ε Aur)': 'Al Maaz', '61 Cygni': '61 Cyg'
+    };
+    return map[name] || name.split(' ')[0];
+  }
+
+  // ── Reset ─────────────────────────────────────────────────────────────────
+  document.getElementById('doi-reset').addEventListener('click', () => {
+    selectedId    = null;
+    correctSet = new Set();
+
+    cardEls.forEach(c => {
+      c.classList.remove('doi-selected','doi-placed','doi-correct-card','doi-wrong-flash');
+    });
+    zoneEls.forEach(z => {
+      z.classList.remove('doi-zone-correct','doi-zone-wrong-flash');
+      z.style.borderStyle = '';
+      z.querySelector('.doi-zone-lbl').textContent = '?';
+    });
+
+    scoreEl.style.display = 'none';
+    neutralFeedback();
+  });
+
+  // ── Boot ──────────────────────────────────────────────────────────────────
+  neutralFeedback();
+
+})();
+</script>
+
+</div>{{/* end .doi-quiz */}}
