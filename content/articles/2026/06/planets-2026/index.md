@@ -7,6 +7,7 @@ byline: "What's in store for the planets Summer/Fall 2026"
 thumbnail: "icon.png"
 series: ["planet-watch"]
 ---
+
 ## Introduction
 
 The dizzying orbital motions of the eight primary planets
