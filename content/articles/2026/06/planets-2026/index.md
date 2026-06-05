@@ -1,6 +1,7 @@
 ---
 title: "Planets: Goodbyes and Hellos"
 date: 2026-06-27
+description: "Jupiter and Venus fade from view this summer while Saturn, Mars, and Uranus take the stage — including a 336-year-old mystery. Planet guide, summer/fall 2026."
 authors: ["bob-donahue"]
 byline: "What's in store for the planets Summer/Fall 2026"
 thumbnail: "icon.png"
