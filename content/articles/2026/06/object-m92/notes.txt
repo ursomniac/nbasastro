@@ -1,0 +1,150 @@
+---
+title: "Messier 92: The \"Other\" Hercules Cluster"
+date: 2026-06-22
+description: ""
+byline: "Frequently overlooked, but interesting in its own right"
+series: ["closer-look"]
+thumbnail: "icon.jpg"
+sso_messier: ["92"]
+
+object_info:
+  object_type: "Globular Cluster"
+  constellation: "Hercules"
+  coordinates:
+    - "RA 17h 17m 07s"
+    - "Dec +43° 08′ 12″"
+  magnitude: "6.5"
+  angular_size: "14′"
+  morphological_type: "III"
+  age: "14.2 ± 1.2 Gyr"
+  origin: "Gaia-Enceladus"
+  discoverer: "Johann Elert Bode (1777)"
+  diameter: "108 ly"
+  mass: "330k M☉"
+---
+
+Notes:
+
+- Herschel resolved it into stars 1783
+- naked eye under very good conditions
+- nebulous smudge even in LP skies
+- one of the oldest clusters
+- 16 kly above the GP
+- 26.7 kly from the Sun
+- slightly flat (0.88 ratio)
+- will be close to the NCP ~16000 CE
+- two stellar populations
+
+
+Gaia-Enceladus - about 10 Gyr ago, massive collision and merger of a dwarf galaxy.  (M 2, 13, 30, 56, 75 also and others).
+
+### Prompt:
+"When you stack your frames or look through the eyepiece at M92, don't just appreciate the sparkle. Notice how abruptly the core compresses compared to M13—that is the physics of gravitational collapse at work. Look at the outermost fringes for slight distortions; you are seeing the gravitational scars left behind from its eviction from the Gaia-Enceladus galaxy."
+
+1. Features typing it to GLobular Clusters
+
+- The Dense, Luminous Core: Point to the ultra-bright, crowded center. This shows gravitational mass segregation. Over billions of years, the heaviest stars sank toward the exact geometric center, while lighter stars were pushed outward.
+
+- The Spherical Halo: Trace the overall circular boundary of the cluster. Globular clusters are bound together by their own internal gravity, creating a perfect sphere. This contrasts sharply with "open clusters" (like the Pleiades), which are loose, irregular, and easily torn apart by the Milky Way.
+
+- The Missing Massive Stars: Notice that you cannot see any brilliant, massive blue stars like Vega or Sirius. Because M92 is ancient, all its high-mass stars burned through their fuel and died billions of years ago. The universe hasn't allowed any fresh star formation here due to a lack of interstellar gas.
+
+2. Features Revealing its Relation to the Universe
+
+- The Amber/Red Giants: Point out the brightest individual stars scattered across the image, which glow with a distinct yellow, orange, or reddish tint. These are red giants. They are low-mass stars nearing the end of their lives. Their abundance tells us the cluster is nearly as old as the universe itself—roughly 13.8 billion years old.
+
+- Faint, Pale Background Stars: Look at the thousands of tiny, dim stars making up the bulk of the background. These are low-mass main-sequence stars. They are highly "metal-poor," meaning they lack elements heavier than hydrogen and helium. This proves they formed before early supernovae could enrich the universe with metals.
+
+3. Uniqueness
+
+- The Highly Dense "Compressed" Core: If you compare M92 to a cluster like M13, its center is exceptionally compact. M92 is on the verge of "core collapse." The intense gravitational interaction of its tightly packed stellar population has concentrated an immense amount of mass into a tiny area.3. Uniqueness
+
+- Blue Stragglers: Look closely at the dense central regions for a few rare, bright blue stars that look out of place. Because M92 came from the chaotic environment of the Gaia-Enceladus dwarf galaxy and possesses a tightly packed core, stars physically collide or transfer mass. These blue stragglers are older stars that "vampirized" material from a neighbor, making them look younger and bluer than they actually are.
+
+- Lack of Extended Tidal Tails: Unlike some Milky Way native clusters that are being stretched into long lines of stars by our galaxy's gravity, M92 looks relatively clean and contained. This is because its highly eccentric orbit keeps it out in the galactic halo most of the time, only occasionally plunging through the destructive inner disc of the Milky Way.
+
+---
+
+1. The Asymmetry: Evidence of Galactic Tides
+
+- What to tell them to look for: Look closely at the very outer edges of the cluster. Instead of a perfectly uniform, smooth fade into the background, the outermost stars appear slightly elongated or "breathed out" along a specific axis.
+
+- The Story It Tells: This subtle stretching is the physical signature of the Milky Way’s gravity pulling at M92. Because it was ripped from the Gaia-Enceladus galaxy and is on a wildly eccentric orbit, it plunges through our galaxy’s intense gravitational field. Your readers are seeing the slow, structural dismantling of the cluster in real time—stars being gently teased away to join the Milky Way's halo.
+
+2. The Core Blending: A Portrait of Extreme Density
+
+- What to tell them to look for: Compare an image of M92 to one of M13 using the same equipment. In M13, stars can often be resolved deep into the center. In M92, the core collapses into a solid, impenetrable ball of light much faster.
+
+- The Story It Tells: This isn't just an overexposure issue; it's a structural feature. M92 has an exceptionally high central density and is considered a "post-core-collapse" candidate. Over billions of years, a process called dynamical relaxation caused the heavier stars to lose energy and sink to the exact center. When members image that solid white core, they are seeing a region of space so tightly packed that stars are practically jostling for room—a density unmatched by its more famous neighbor, M13.
+
+3. The "Grain" and Color Gradient: Reading the Universe's Age
+
+- What to tell them to look for: Look at the texture or "grain" of the cluster outside the core. In amateur images and smart scopes, notice how the brightest individual stars resolved on the fringes have a distinctly yellowish-orange hue, while the background "haze" of unresolved stars is pale or slightly blue.
+
+- The Story It Tells: This gradient is a physical clock. The bright orange points are Red Giants—ancient, low-mass stars on life support. The lack of brilliant, distinct blue stars on the outskirts tells us that star formation ceased here over 13 billion years ago. The structural "grain" your readers are capturing proves they are looking at a closed ecosystem that ran out of raw star-making gas before the Milky Way even finished forming.
+
+(The Article begins here)
+## Introduction
+
+Messier 92 is a fairly bright globular cluster.  If you're fortunately to 
+be in a dark sky location, in the early summer, it reaches almost overhead
+in the evening sky and can be glimpsed with the naked eye (it's easier in
+binoculars).   But why is this cluster generally overlooked?  It's because
+it's not far from _another_ bright globular cluster, Messier 13 - "The Great
+Hercules Cluster" and because of that, Messier 92 doesn't even have a popular
+name - maybe we should call it "The Other Hercules Cluster".
+
+## History
+
+Despite its brightness, it was discovered long after other similar clusters,
+like Messier objects 22, 5, 13, and 4, not to mention the Southern Hemisphere
+clusters, &omega; (Omega) Centauri and 47 Tucanae (who both were listed as
+stars before their true nature was discerned).
+
+{{< nbas-image src="bode.jpg" width="350" align="right"
+caption="Johann Elert Bode (1747-1826)" >}}
+
+It wasn't until 1779 that it was recorded by the German astronomer 
+Johann Elert Bode, then
+examined by Messier, who added it to his list of 'fuzzy "nebulae" that aren't
+comets' (since his focus was on comet discovery).   William Herschel's
+observations in 1783 resolved it into stars.
+
+## Finding M 92
+
+M 92 is between the northern stars of the "Keystone" asterism in Hercules
+and the stars of the head of Draco.
+
+## Globular Clusters: Ancient Relics
+
+Globular Clusters are **old** measured ages almost rival the estimated
+age of the Universe: 13.7 Gyr.  We can estimate this from looking at the
+Color-Magnitude Diagram of the cluster: 
+
+## Many Globulars Didn't Form with the Milky Way
+
+## Examining M 92 
+
+{{< nbas-image src="m_92-seestar-16m.jpg" 
+caption="M 92 with a Seestar S50, 16m exposure" >}}
+
+Here's an image I took with one of my "smart" scopes.
+Even after only a few minutes, you can see hundreds of stars, and
+looking closely we can see some of the features and properties 
+of this cluster.
+
+## Examining the Stars of M 92
+
+{{< src="cmd.png" width="500" align="left" 
+caption="The color-magnitude diagram for M 92" >}}
+
+(notes)
+- All the stars with a mass more than 80% of the mass of the Sun
+have burned up its core hydrogen and evolved into giant stars.
+Some have even gone all the way to become white dwarfs.   The plot
+only shows a few from the GAIA data, many other fainter ones evaded
+detection.
+
+- A star with the same mass as the Sun evolved off the Main Sequence
+at least 8-9 Gyr ago.  
+
