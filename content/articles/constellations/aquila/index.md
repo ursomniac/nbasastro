@@ -7,7 +7,7 @@ series: ["constellation-highlights"]
 constellations: ["Aquila"]
 byline: "The only non-contiguous constellation"
 description: "Things to learn about the Aquila constellation"
-thumbnail: "icon.jpg"
+thumbnail: "icon.png"
 
 profile_data:
   "Abbreviation": AQL

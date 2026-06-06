@@ -1,7 +1,7 @@
 ---
 title: "Messier 92: The \"Other\" Hercules Cluster"
 date: 2026-06-22
-description: ""
+description: "Born in another galaxy and older than the Milky Way itself, M 92 is Hercules' most overlooked globular cluster — and in 14,000 years, it'll be our North Star."
 byline: "Frequently overlooked, but interesting in its own right"
 series: ["closer-look"]
 thumbnail: "icon.jpg"
