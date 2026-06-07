@@ -2,7 +2,8 @@
 
 {{/* ── Find the current (next upcoming) map ────────────────────────────── */}}
 {{ $today   := now.Format "2006-01-02" }}
-{{ $maps    := .Site.Data.starmaps.maps }}
+{{ $cutoff  := now | dateModify "-336h" | time.Format "2006-01-02" }}{{/* 14 days ago */}}
+{{ $maps    := where .Site.Data.starmaps.maps "date" ">=" $cutoff }}
 {{ $current := index $maps (sub (len $maps) 1) }}
 {{ $found   := false }}
 {{ range $maps }}
