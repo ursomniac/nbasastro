@@ -145,3 +145,6 @@
   }
 }
 
+.dropdown-content a:hover {
+    background: rgba(248, 212, 78, 0.15) !important;
+}
