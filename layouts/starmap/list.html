@@ -1,0 +1,239 @@
+{{ define "main" }}
+
+{{/* ── Find the current (next upcoming) map ────────────────────────────── */}}
+{{ $today   := now.Format "2006-01-02" }}
+{{ $cutoff  := now.AddDate 0 0 -14 | time.Format "2006-01-02" }}{{/* 14 days ago */}}
+{{ $maps    := where .Site.Data.starmaps.maps "date" ">=" $cutoff }}
+{{ $current := index $maps (sub (len $maps) 1) }}
+{{ $found   := false }}
+{{ range $maps }}
+  {{ if and (not $found) (ge .date $today) }}
+    {{ $current = . }}
+    {{ $found = true }}
+  {{ end }}
+{{ end }}
+
+<style>
+.sm-page-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+.sm-page-desc {
+  color: #8a9cb3;
+  font-size: 0.95rem;
+  margin: 0 0 1.5rem;
+  font-family: sans-serif;
+}
+.sm-map-wrap {
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+.sm-map-wrap img {
+  max-width: 100%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+}
+.sm-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.sm-selector-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: sans-serif;
+  font-size: 0.95rem;
+}
+.sm-selector-wrap label {
+  font-weight: 600;
+  color: #8a9cb3;
+}
+.sm-selector-wrap select {
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid #3a4a5a;
+  background: #1e2a38;
+  color: #dce8f4;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.sm-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.sm-howto {
+  margin-top: 2rem;
+  border-top: 1px solid #2a3a4a;
+  padding-top: 1rem;
+}
+.sm-howto h3 {
+  font-size: 1rem;
+  color: #8a9cb3;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+  font-family: sans-serif;
+}
+.sm-howto details {
+  margin-bottom: 0.6rem;
+  border: 1px solid #2a3a4a;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.sm-howto details summary {
+  padding: 0.7rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  font-family: sans-serif;
+  font-size: 0.95rem;
+}
+.sm-howto details summary::-webkit-details-marker { display: none; }
+.sm-howto details summary::before {
+  content: "▶ ";
+  font-size: 0.7em;
+  opacity: 0.6;
+}
+.sm-howto details[open] summary::before { content: "▼ "; }
+.sm-howto details .sm-howto-body {
+  padding: 0.75rem 1rem 1rem;
+  font-size: 0.92rem;
+  font-family: sans-serif;
+  line-height: 1.65;
+  border-top: 1px solid #2a3a4a;
+  color: #c0d0e0;
+}
+.sm-howto details .sm-howto-body ul {
+  margin: 0.5rem 0 0 1.2rem;
+  padding: 0;
+}
+.sm-howto details .sm-howto-body li { margin-bottom: 0.35rem; }
+</style>
+
+<h1 class="sm-page-title">{{ .Title }}</h1>
+<p class="sm-page-desc">{{ .Description }}</p>
+
+{{/* ── Map image ────────────────────────────────────────────────────────── */}}
+<div class="sm-map-wrap">
+  <img id="sm-img"
+       src="/starmap/{{ $current.date }}.png"
+       alt="Star map for {{ $current.label }}, {{ $current.time }}">
+</div>
+
+{{/* ── Controls: week selector + download buttons ─────────────────────── */}}
+<div class="sm-controls">
+
+  <div class="sm-selector-wrap">
+    <label for="sm-week">Week:</label>
+    <select id="sm-week" onchange="smSelect(this.value)">
+      {{ $prevMonth := "" }}
+      {{ range $maps }}
+        {{ $month := .date | time.Format "January 2006" }}
+        {{ if ne $month $prevMonth }}
+          {{ if $prevMonth }}</optgroup>{{ end }}
+          <optgroup label="{{ $month }}">
+          {{ $prevMonth = $month }}
+        {{ end }}
+        <option value="{{ .date }}"{{ if eq .date $current.date }} selected{{ end }}>
+          {{- .label }} · {{ .time -}}
+        </option>
+      {{ end }}
+      {{ if $prevMonth }}</optgroup>{{ end }}
+    </select>
+  </div>
+
+  <div class="sm-buttons">
+    <a id="sm-pdf"
+       href="/starmap/{{ $current.date }}.pdf"
+       class="starmap-btn"
+       target="_blank">📥 Download PDF (Print Ready)</a>
+    <a id="sm-png"
+       href="/starmap/{{ $current.date }}.png"
+       class="starmap-link-alt"
+       target="_blank">View Full PNG</a>
+  </div>
+
+</div>
+
+{{/* ── How-to accordion ─────────────────────────────────────────────────── */}}
+<div class="sm-howto">
+  <h3>Using This Map</h3>
+
+  <details>
+    <summary>How to read a star map</summary>
+    <div class="sm-howto-body">
+      <p>The map shows the entire sky as if you were lying on your back looking straight up.
+         The edge of the circle is your horizon; the center is directly overhead (the zenith).</p>
+      <ul>
+        <li>Hold the map so the compass direction you are facing points away from you —
+            if you're facing south, rotate the map so <strong>S</strong> is at the bottom.</li>
+        <li><strong>North</strong> is always toward Polaris, the North Star, which sits near
+            the center-top of the map (it barely moves all night).</li>
+        <li>East and West are swapped compared to a ground map — because you're looking up,
+            not down.</li>
+        <li>The map is set for {{ $current.time }} on {{ $current.label }}.
+            Stars rise in the east and set in the west as the night progresses.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>What the symbols mean</summary>
+    <div class="sm-howto-body">
+      <ul>
+        <li><strong>Dot size = brightness.</strong> Larger dots are brighter stars.
+            The brightest stars are also labeled by name.</li>
+        <li><strong>Blue lines</strong> connect stars into the familiar constellation patterns
+            (stick figures).</li>
+        <li><strong>Grey constellation labels</strong> (e.g., ORION, CASSIOPEIA) name
+            the constellation region, not just the stick figure.</li>
+        <li><strong>Orange/yellow circles</strong> are planets — they move week to week,
+            which is why they're labeled distinctly.</li>
+        <li><strong>Light blue cloud</strong> running diagonally across the map is
+            the Milky Way — our galaxy seen edge-on.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Using it outside</summary>
+    <div class="sm-howto-body">
+      <ul>
+        <li><strong>Let your eyes dark-adapt.</strong> Stay away from bright lights for
+            15–20 minutes. Your eyes become dramatically more sensitive in the dark.</li>
+        <li><strong>Use a red light</strong> to read the map. Red light (a red-filtered
+            flashlight or a dim phone screen with a red filter app) preserves your night vision.
+            White light resets your adaptation.</li>
+        <li><strong>Start with the bright stuff.</strong> Find one or two labeled bright stars
+            first to orient yourself, then work outward to fainter objects.</li>
+        <li><strong>Hold the map overhead</strong> with the appropriate compass direction
+            pointing away from you, or lay it flat and look up.</li>
+        <li>In summer, wait until the time shown on the map — it stays light late and the
+            sky needs to fully darken.</li>
+        <li>Our skies in North Adams are Bortle 4 — dark enough to see the Milky Way
+            on clear, moonless nights.</li>
+      </ul>
+    </div>
+  </details>
+
+</div>
+
+{{/* ── Client-side week switcher ────────────────────────────────────────── */}}
+<script>
+function smSelect(date) {
+  document.getElementById('sm-img').src  = '/starmap/' + date + '.png';
+  document.getElementById('sm-pdf').href = '/starmap/' + date + '.pdf';
+  document.getElementById('sm-png').href = '/starmap/' + date + '.png';
+  // Update alt text
+  var sel = document.getElementById('sm-week');
+  var opt = sel.options[sel.selectedIndex];
+  document.getElementById('sm-img').alt = 'Star map for ' + opt.text;
+}
+</script>
+
+{{ end }}

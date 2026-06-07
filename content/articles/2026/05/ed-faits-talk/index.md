@@ -4,7 +4,7 @@ date: 2026-05-30
 pin_until: 2026-08-05
 event_date: 2026-08-05T18:00:00-04:00
 event_location: North Adams Public Library
-description: "test"
+description: "Learn about the history of our changing understanding of planets, Pluto's fascinating story, and what lies beyond our solar system in this engaging talk by Ed Faits."
 byline: "Guest speaker Ed Faits talks about the planets"
 series: ["nbas-announcements"]
 ---

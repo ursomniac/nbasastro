@@ -7,10 +7,10 @@
     <div class="dropdown-content">
       {{ $newsletters := 0 }}{{ with index .Site.Taxonomies.series "nbas-newsletter" }}{{ $newsletters = .Count }}{{ end }}
       <a href="{{ if gt $newsletters 0 }}/series/nbas-newsletter/{{ else }}#{{ end }}" class="{{ if eq $newsletters 0 }}nav-disabled{{ end }}">Newsletters</a>
-      
+
       {{ $events := 0 }}{{ with index .Site.Taxonomies.series "nbas-events" }}{{ $events = .Count }}{{ end }}
       <a href="{{ if gt $events 0 }}/series/nbas-events/{{ else }}#{{ end }}" class="{{ if eq $events 0 }}nav-disabled{{ end }}">Events</a>
-      
+
       {{ $announcements := 0 }}{{ with index .Site.Taxonomies.series "nbas-announcements" }}{{ $announcements = .Count }}{{ end }}
       <a href="{{ if gt $announcements 0 }}/series/nbas-announcements/{{ else }}#{{ end }}" class="{{ if eq $announcements 0 }}nav-disabled{{ end }}">Announcements</a>
       <a href="/outreach/">Outreach</a>
@@ -18,11 +18,21 @@
       <a href="/faq/">FAQ</a>
     </div>
   </div>
+
   <div class="nav-item"><a href="/articles/">All Articles</a></div>
-  <div class="nav-item"><a href="/series/">Series</a></div>
-  <div class="nav-item"><a href="/tags/">Tags</a></div>
+
+  <!-- BROWSE DROPDOWN (replaces standalone Series + Tags) -->
+  <div class="nav-item nbas-dropdown">
+    <button class="dropbtn">Browse ▾</button>
+    <div class="dropdown-content">
+      <a href="/series/">Series</a>
+      <a href="/tags/">Tags</a>
+    </div>
+  </div>
+
   <div class="nav-item"><a href="/constellations/">Constellations</a></div>
   <!-- HUB LINKS (Replacement for Dropdowns) -->
   <div class="nav-item"><a href="/explorer/">Astro Explorer</a></div>
   <div class="nav-item"><a href="/knowledge-hub/">Knowledge Hub</a></div>
+  <div class="nav-item"><a href="/starmap/">Starmap</a></div>
 </nav>
