@@ -1,7 +1,7 @@
 ---
 title: "Weekly Starmaps Now Available!"
 date: 2026-06-07
-description: "test"
+description: "Get weekly star maps showing constellations and planets in the evening sky.  Great for leaning the night sky and keeping track of the changing seasons."
 byline: "Keep up to date with the changing sky using our printable starmaps"
 series: ["nbas-announcements"]
 ---
