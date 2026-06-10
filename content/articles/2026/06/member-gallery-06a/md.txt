@@ -1,0 +1,9 @@
+object: "M 13"
+exposure_time: 44 * 30s = 22m
+telescope: S30
+image: bf-m_13.png
+
+object: "M 27"
+exposure_time: 40 * 30s = 20m
+telescopes: 30
+image: bf-m_27.png

@@ -1,0 +1,74 @@
+{{- $src        := .Get "src" -}}
+{{- $title      := .Get "title" -}}
+{{- $author     := .Get "author" -}}
+{{- $telescope  := .Get "telescope" -}}
+{{- $exposure   := .Get "exposure_time" -}}
+{{- $frames     := .Get "frames" -}}
+{{- $when       := .Get "when" -}}
+{{- $where      := .Get "where" -}}
+{{- $object     := .Get "object" -}}
+
+{{- $knownOrder := slice
+    (dict "key" "telescope"     "label" "Scope")
+    (dict "key" "exposure_time" "label" "Exposure")
+    (dict "key" "frames"        "label" "Frames")
+    (dict "key" "filter"        "label" "Filter")
+    (dict "key" "when"          "label" "Date")
+    (dict "key" "where"         "label" "Location")
+    (dict "key" "object"        "label" "Object")
+-}}
+{{- $knownKeys := slice "src" "title" "author" "telescope" "exposure_time" "frames" "filter" "when" "where" "object" -}}
+
+{{- $isLandscape := false -}}
+{{- $img := .Page.Resources.GetMatch $src -}}
+{{- if $img -}}
+  {{- if gt $img.Width $img.Height -}}{{- $isLandscape = true -}}{{- end -}}
+{{- end -}}
+
+<div class="member-image{{ if $isLandscape }} member-image--landscape{{ end }}">
+
+  <div class="member-image__media">
+    <a href="{{ $src }}" target="_blank" rel="noopener">
+      <img src="{{ $src }}" alt="{{ $title }}" loading="lazy">
+    </a>
+  </div>
+
+  <div class="member-image__details">
+
+    {{ with $title }}
+      <h3 class="member-image__title">{{ . }}</h3>
+    {{ end }}
+
+    {{ with $author }}
+      <div class="member-image__contributor">
+        <span class="member-image__contributor-label">Image by</span>
+        <a class="member-image__contributor-name" href="/contributors/{{ $author | urlize }}/">{{ $author }}</a>
+      </div>
+    {{ end }}
+
+    <dl class="member-image__meta">
+      {{ range $knownOrder }}
+        {{- $label := .label -}}
+        {{- $val := $.Get .key -}}
+        {{ if $val }}
+          <dt>{{ $label }}</dt>
+          <dd>{{ $val }}</dd>
+        {{ end }}
+      {{ end }}
+      {{ range $k, $v := .Params }}
+        {{ if not (in $knownKeys $k) }}
+          <dt>{{ $k | title }}</dt>
+          <dd>{{ $v }}</dd>
+        {{ end }}
+      {{ end }}
+    </dl>
+
+    {{ with .Inner }}
+      <div class="member-image__commentary">
+        {{ . | markdownify }}
+      </div>
+    {{ end }}
+
+  </div>
+
+</div>

@@ -55,6 +55,7 @@ title = "Northern Berkshire Astronomical Society"
   series = "series"
   constellation = "constellations"
   knowledgetopics = "knowledgetopics"
+  contributor = "contributors"
 
   # STARS
   stars_variable = "stars_variable"

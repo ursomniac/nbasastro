@@ -1,0 +1,118 @@
+/* member-image shortcode */
+
+.member-image {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding: 1rem 1rem 1rem 0;
+  border: 1px solid var(--border-soft);
+  border-left: 4px solid var(--gold-border);
+  border-radius: 6px;
+  background-color: var(--space-blue);
+}
+
+.member-image__media {
+  flex: 0 0 auto;
+  width: 350px;
+  max-width: 100%;
+}
+
+.member-image__media a {
+  display: block;
+}
+
+.member-image__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.member-image__details {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding-top: 0.25rem;
+}
+
+.member-image__title {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-pure);
+}
+
+.member-image__contributor {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.member-image__contributor-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.member-image__contributor-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold-base) !important;
+  text-decoration: none !important;
+}
+
+.member-image__contributor-name:hover {
+  color: var(--text-pure) !important;
+}
+
+.member-image__meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.75rem;
+  row-gap: 0.2rem;
+  margin: 0;
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border-soft);
+  padding-top: 0.6rem;
+}
+
+.member-image__meta dt {
+  font-weight: 600;
+  color: var(--gold-dim);
+  white-space: nowrap;
+}
+
+.member-image__meta dd {
+  margin: 0;
+  color: var(--text-main);
+}
+
+.member-image__commentary {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-soft);
+  padding-top: 0.75rem;
+}
+
+/* Landscape images: stack automatically */
+.member-image--landscape {
+  padding-left: 1rem;
+}
+
+.member-image--landscape .member-image__media {
+  width: 100%;
+}
+
+/* Mobile: stack everything */
+@media (max-width: 600px) {
+  .member-image {
+    padding-left: 1rem;
+  }
+  .member-image__media {
+    width: 100%;
+  }
+}
