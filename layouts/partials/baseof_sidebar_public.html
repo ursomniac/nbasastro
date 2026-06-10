@@ -18,6 +18,8 @@
         <h3 class="sidebar-heading">Calendar</h3>
         {{ partial "unified-events.html" . (now.Format "2006-01-02") }}
 
+	{{ partial "members-skies-widget.html" . }}
+
 	<div class="widget-box">
 	    <h3 class="sidebar-heading">Solar System</h3>
             {{ partial "ssd-widget.html" . }}
