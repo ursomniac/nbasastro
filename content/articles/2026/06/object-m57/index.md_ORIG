@@ -1,0 +1,73 @@
+---
+title: "Messier 57: Ghostly Smoke Ring"
+date: 2026-06-29
+description: ""
+byline: ""
+series: ["closer-look"]
+thumbnail: "icon.jpg"
+sso_messier: ["57"]
+
+object_info:
+  object_type: "Planetary Nebula"
+  constellation: "Lyra"
+  coordinates:
+    - "RA 18h 53m 35s"
+    - "Dec +33° 01′ 45″"
+  magnitude: "8.8"
+  angular_size: "3.0′ x 2.4′"
+  morphological_type: "IV+III"
+  discoverer: "Charles Messier (1779)"
+  diameter: "4.6 ly"
+  distance: "2570 ly"
+---
+
+## Introduction
+
+## Discovery
+{{< object-specs align="right" >}}
+{{< nbas-image src="Charles_Messier.jpg" align="right" width="300" >}}
+
+The Ring Nebula was discovered in January 1779 by Charles Messier.
+At the time, anything that wasn't stellar-like was described as "nebulae"
+without any understanding of what any of them might be: it was generally
+thought that they were just clouds (which some of them are, of course).
+
+Messier wasn't even trying to find nebulae: his passion was comets, and 
+the only reason he created his catalog was to mark things that weren't
+comets, presumably to avoid the embarrassment of announcing a new "comet"
+that actually wasn't.
+
+Following up on his discovery, another comet hunter, Antoine Darquier de Pellepoix noted that the nebula was about the same size as Jupiter in the sky (it's actually somewhat larger), and round, which might've been how these objects became known as "planetary nebulae" even though they have nothing whatsoever to do with planets.
+
+
+## Finding M 57
+
+{{< nbas-image src="m57-finder.png" align="left" width="450" >}}
+
+The Ring Nebula is one of the easier objects to find in Messier's catalog,
+since it lies almost midway between two bright stars:  &beta; Lyrae (Sheliak) to the West, and &gamma; Lyrae to the East are only 2° apart, so even in a small telescope, you'll notice something "fuzzy" in between them.
+
+Larger telescopes or imaging telescopes are needed to show more structure, and to resolve the central star - a white dwarf (mag 15.8).
+
+{{< clear >}}
+
+## Planetary Nebulae
+
+### Why They Form
+
+### They Don't Last (Very) Long
+
+## What You're Seeing in Your Image
+{{< nbas-image src="m_57-92U-PIXRCAGRAXGHS-square.jpg" >}}
+
+### The Colors
+
+### Orientation 
+
+### The Central Star
+
+### Is it a Binary System?
+
+### Measuring the Age
+
+## Wrap-Up (getting the "Experience" aspect)

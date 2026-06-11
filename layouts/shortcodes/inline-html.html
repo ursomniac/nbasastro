@@ -1,0 +1,7 @@
+{{- $src := .Get "src" -}}
+{{- $file := .Page.Resources.GetMatch $src -}}
+{{- if $file -}}
+<div class="interactive-embed">
+{{ $file.Content | safeHTML }}
+</div>
+{{- end -}}

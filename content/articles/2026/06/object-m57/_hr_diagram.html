@@ -1,0 +1,155 @@
+<style>
+.hr-wrap{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+.hr-btn{background:transparent;border:1px solid rgba(128,128,128,0.3);border-radius:6px;padding:5px 14px;font-size:12px;color:#888;cursor:pointer;transition:all .15s;}
+.hr-btn.hr-active{background:rgba(128,128,128,0.12);color:#222;border-color:rgba(128,128,128,0.5);}
+.hr-btn:hover{background:rgba(128,128,128,0.1);}
+.hr-info{margin-top:8px;padding:10px 14px;background:rgba(128,128,128,0.08);border-radius:6px;font-size:13px;color:#666;min-height:44px;line-height:1.5;}
+.hr-info strong{color:#222;}
+.hr-spec{margin-top:10px;position:relative;height:26px;border-radius:4px;overflow:hidden;}
+.hr-spec-labels{display:flex;justify-content:space-around;align-items:center;position:absolute;inset:0;}
+.hr-spec-label{font-size:11px;font-weight:600;color:#1a1917;}
+.hr-axis{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-top:3px;padding:0 2px;}
+</style>
+
+<div class="hr-wrap">
+  <div style="display:flex;gap:8px;margin-bottom:10px;">
+    <button class="hr-btn hr-active" id="hr-btn-1" onclick="hrShowTrack(1)">1 M&#9737;</button>
+    <button class="hr-btn" id="hr-btn-2" onclick="hrShowTrack(2)">2 M&#9737;</button>
+  </div>
+  <div style="position:relative;width:100%;height:420px;">
+    <canvas id="hrCanvas"></canvas>
+  </div>
+  <div class="hr-info" id="hrPhaseInfo">Hover over the track to see phase details.</div>
+  <div class="hr-spec">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,#9bb0ff,#aabfff,#cad7ff,#f8f7ff,#fff4ea,#ffd2a1,#ffcc6f,#ff9966,#ff3333);"></div>
+    <div class="hr-spec-labels">
+      <span class="hr-spec-label">O</span><span class="hr-spec-label">B</span><span class="hr-spec-label">A</span>
+      <span class="hr-spec-label">F</span><span class="hr-spec-label">G</span><span class="hr-spec-label">K</span><span class="hr-spec-label">M</span>
+    </div>
+  </div>
+  <div class="hr-axis"><span>&larr; hot (100,000 K)</span><span>cool (3,000 K) &rarr;</span></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+(function(){
+const isDark=matchMedia('(prefers-color-scheme: dark)').matches;
+const gc=isDark?'rgba(255,255,255,0.06)':'rgba(0,0,0,0.05)';
+const tc=isDark?'#9c9a92':'#73726c';
+const tp=isDark?'#e8e6de':'#1a1917';
+function lT(T){return Math.log10(T);}
+function lL(L){return Math.log10(L);}
+const XMIN=lT(2800),XMAX=lT(120000),YMIN=lT(0.004),YMAX=lT(15000);
+const ms=[];
+for(let i=0;i<=40;i++){const f=i/40;ms.push({x:Math.log10(2800)+f*(Math.log10(50000)-Math.log10(2800)),y:-2.5+f*8.2});}
+const track1=[
+  {x:lT(5770),y:lL(1),phase:'Main sequence (ZAMS)',info:'The Sun spends ~10 billion years on the main sequence, fusing hydrogen in its core. ZAMS luminosity 1 L☉, T 5,770 K.'},
+  {x:lT(5900),y:lL(1.8),phase:'Late main sequence',info:'As hydrogen depletes the core slowly contracts; luminosity rises ~70% over the Sun\'s main-sequence lifetime.'},
+  {x:lT(5400),y:lL(3.5),phase:'Subgiant branch',info:'Hydrogen shell burning begins outside the inert helium core. The star swells and cools, leaving the main sequence.'},
+  {x:lT(4600),y:lL(15),phase:'Red giant branch',info:'The convective envelope deepens; the star balloons to tens of solar radii as luminosity climbs the RGB.'},
+  {x:lT(4000),y:lL(80),phase:'RGB tip / helium flash',info:'At ~80 L☉ the degenerate helium core ignites explosively (the helium flash). Radius ~100 solar radii.'},
+  {x:lT(4900),y:lL(50),phase:'Horizontal branch',info:'Helium core burning stabilises the star for ~100 Myr. Position on the HB depends on mass loss during RGB.'},
+  {x:lT(4300),y:lL(200),phase:'Asymptotic giant branch',info:'Helium shell ignites outside the CO core. The star climbs the AGB, becoming a red giant again.'},
+  {x:lT(3500),y:lL(3500),phase:'AGB tip / thermal pulses',info:'Thermal pulses drive strong stellar winds, shedding the outer envelope. The future planetary nebula is being ejected.'},
+  {x:lT(80000),y:lL(1500),phase:'Planetary nebula phase',info:'The hot stellar remnant ionises the ejected shell — this is what creates M57. The star crosses the HR diagram in ~1,000 years.'},
+  {x:lT(25000),y:lL(0.01),phase:'White dwarf',info:'~0.6 solar masses, Earth-sized. The cooling white dwarf visible at the centre of M57. It will cool for billions of years.'},
+];
+const track2=[
+  {x:lT(9000),y:lL(18),phase:'Main sequence (ZAMS)',info:'A 2 solar mass star sits higher and hotter on the main sequence: ~18 L☉, T 9,000 K. Main-sequence lifetime ~1 Gyr.'},
+  {x:lT(8000),y:lL(28),phase:'Late main sequence',info:'More massive stars have convective cores; hydrogen is exhausted more uniformly, leading to faster evolution off the MS.'},
+  {x:lT(6500),y:lL(55),phase:'Subgiant branch',info:'Shell hydrogen burning begins. The 2 solar mass star crosses the subgiant branch more rapidly than a solar-mass star.'},
+  {x:lT(4800),y:lL(200),phase:'Red giant branch',info:'More massive stars reach higher luminosities before helium ignition (no degenerate flash — ignition is quiescent).'},
+  {x:lT(5200),y:lL(60),phase:'Horizontal branch / clump',info:'Helium core burning. More massive stars settle in the red clump. May cross the Cepheid instability strip.'},
+  {x:lT(4000),y:lL(1500),phase:'Asymptotic giant branch',info:'Double shell burning. Stronger stellar winds than a 1 solar mass star; more mass is shed.'},
+  {x:lT(3400),y:lL(8000),phase:'AGB tip / mass loss',info:'Energetic thermal pulses shed a more massive envelope, producing a larger, brighter planetary nebula.'},
+  {x:lT(100000),y:lL(4000),phase:'Planetary nebula phase',info:'Hotter, more luminous remnant ionises a more energetic nebula than the 1 solar mass case.'},
+  {x:lT(40000),y:lL(0.1),phase:'White dwarf',info:'~0.8 solar masses — hotter and slightly more massive than the 1 solar mass remnant. Same fate, faster timeline.'},
+];
+let hrCurrentTrack=1;
+const labelMap={
+  'Main sequence (ZAMS)':{ox:6,oy:-10,text:'Main sequence'},
+  'RGB tip / helium flash':{ox:-118,oy:-10,text:'Red giant branch'},
+  'Horizontal branch':{ox:6,oy:14,text:'Horizontal branch'},
+  'AGB tip / thermal pulses':{ox:6,oy:-10,text:'AGB'},
+  'Planetary nebula phase':{ox:6,oy:-10,text:'Planetary nebula'},
+  'White dwarf':{ox:6,oy:14,text:'White dwarf'},
+  'Horizontal branch / clump':{ox:6,oy:14,text:'Horizontal branch'},
+  'AGB tip / mass loss':{ox:6,oy:-10,text:'AGB'},
+};
+const labelPlugin={id:'hrPhaseLabels',afterDatasetsDraw(chart){
+  const {ctx,scales:{x,y}}=chart;
+  const track=hrCurrentTrack===1?track1:track2;
+  const col=hrCurrentTrack===1?'#5DCAA5':'#EF9F27';
+  const drawn=new Set();
+  track.forEach(pt=>{
+    const cfg=labelMap[pt.phase];
+    if(!cfg||drawn.has(cfg.text))return;
+    const px=x.getPixelForValue(pt.x),py=y.getPixelForValue(pt.y);
+    if(px<chart.chartArea.left-10||px>chart.chartArea.right+10||py<chart.chartArea.top||py>chart.chartArea.bottom)return;
+    drawn.add(cfg.text);
+    ctx.save();ctx.font='500 11px -apple-system,sans-serif';ctx.fillStyle=col;ctx.textAlign='left';
+    ctx.fillText(cfg.text,px+cfg.ox,py+cfg.oy);ctx.restore();
+  });
+  ctx.save();ctx.font='italic 11px -apple-system,sans-serif';
+  ctx.fillStyle=isDark?'rgba(255,255,255,0.18)':'rgba(0,0,0,0.14)';ctx.textAlign='center';
+  [{text:'Giants',lx:lT(4200),ly:lL(300)},{text:'White dwarfs',lx:lT(18000),ly:lL(0.006)}].forEach(r=>{
+    const px=x.getPixelForValue(r.lx),py=y.getPixelForValue(r.ly);
+    if(px>chart.chartArea.left&&px<chart.chartArea.right&&py>chart.chartArea.top&&py<chart.chartArea.bottom)ctx.fillText(r.text,px,py);
+  });
+  ctx.restore();
+}};
+const canvas=document.getElementById('hrCanvas');
+const ctx2=canvas.getContext('2d');
+const hrChart=new Chart(ctx2,{type:'scatter',data:{datasets:[
+  {label:'Main sequence',data:ms,showLine:true,borderColor:isDark?'rgba(255,255,255,0.08)':'rgba(0,0,0,0.07)',borderWidth:20,pointRadius:0,tension:0.4,fill:false,order:10},
+  {label:'Track',data:track1,showLine:true,borderColor:'#5DCAA5',borderWidth:2.5,
+   pointRadius:track1.map((_,i)=>(i===0||i===track1.length-1)?7:4),
+   pointBackgroundColor:track1.map((_,i)=>(i===0||i===track1.length-1)?'#5DCAA5':'transparent'),
+   pointBorderColor:'#5DCAA5',pointBorderWidth:2,tension:0.3,fill:false,order:1},
+]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:200},
+  plugins:{legend:{display:false},tooltip:{callbacks:{
+    title:(items)=>{const d=items[0].raw;return d.phase||'';},
+    label:(item)=>{const d=item.raw;if(!d.info)return '';
+      const words=d.info.split(' ');const lines=[];let line='';
+      words.forEach(w=>{if((line+w).length>44){lines.push(line.trim());line='';}line+=w+' ';});
+      if(line.trim())lines.push(line.trim());return lines;}
+  },displayColors:false,backgroundColor:isDark?'#2c2c2a':'#fff',
+  borderColor:isDark?'rgba(255,255,255,0.15)':'rgba(0,0,0,0.1)',borderWidth:1,
+  titleColor:tp,bodyColor:tc,padding:10,bodyFont:{size:12},titleFont:{size:13,weight:'500'},maxWidth:280}},
+  scales:{
+    x:{reverse:true,min:XMIN,max:XMAX,grid:{color:gc},
+      ticks:{color:tc,font:{size:11},maxTicksLimit:12,callback:(v)=>{
+        const T=Math.pow(10,v);
+        const ticks=[3000,4000,5000,6000,8000,10000,15000,20000,30000,50000,100000];
+        const nearest=ticks.reduce((a,b)=>Math.abs(b-T)<Math.abs(a-T)?b:a);
+        if(Math.abs(T-nearest)/nearest>0.05)return '';
+        return nearest>=1000?(nearest/1000)+'k':nearest;}},
+      title:{display:true,text:'Surface temperature (K)',color:tc,font:{size:11}}},
+    y:{min:YMIN,max:YMAX,grid:{color:gc},
+      ticks:{color:tc,font:{size:11},maxTicksLimit:8,callback:(v)=>{
+        const map={'-2':'0.01','-1':'0.1','0':'1 L\u2609','1':'10','2':'100','3':'1,000','4':'10,000'};
+        return map[v.toFixed(0)]||'';}},
+      title:{display:true,text:'Luminosity (L\u2609)',color:tc,font:{size:11}}},
+  },
+  onHover:(e,els)=>{
+    canvas.style.cursor=(els.length&&els[0].datasetIndex===1)?'pointer':'default';
+    if(els.length&&els[0].datasetIndex===1){
+      const d=hrChart.data.datasets[1].data[els[0].index];
+      if(d&&d.phase)document.getElementById('hrPhaseInfo').innerHTML='<strong>'+d.phase+'</strong> \u2014 '+d.info;
+    }
+  }},plugins:[labelPlugin]});
+window.hrShowTrack=function(n){
+  hrCurrentTrack=n;
+  const track=n===1?track1:track2;
+  const col=n===1?'#5DCAA5':'#EF9F27';
+  hrChart.data.datasets[1].data=track;
+  hrChart.data.datasets[1].borderColor=col;
+  hrChart.data.datasets[1].pointBorderColor=col;
+  hrChart.data.datasets[1].pointBackgroundColor=track.map((_,i)=>(i===0||i===track.length-1)?col:'transparent');
+  hrChart.update();
+  document.getElementById('hr-btn-1').classList.toggle('hr-active',n===1);
+  document.getElementById('hr-btn-2').classList.toggle('hr-active',n===2);
+  document.getElementById('hrPhaseInfo').textContent='Hover over the track to see phase details.';
+};
+})();
+</script>
