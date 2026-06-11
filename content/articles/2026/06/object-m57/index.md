@@ -1,8 +1,8 @@
 ---
 title: "Messier 57: Ghostly Smoke Ring"
 date: 2026-06-29
-description: ""
-byline: ""
+description: "M57 is one of the night sky's most iconic objects — but what you're seeing is an illusion. Explore the true structure, colors, and stellar physics of the Ring Nebula."
+byline: "A smoke ring that is more than meets the eye"
 series: ["closer-look"]
 thumbnail: "icon.jpg"
 sso_messier: ["57"]
