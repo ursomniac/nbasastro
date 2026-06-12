@@ -100,6 +100,9 @@ title = "Northern Berkshire Astronomical Society"
     [markup.goldmark.renderer]
       unsafe = true
 
+[security]
+  allowContent = ['! ^text/html$', '^text/html$']
+
 [[cascade]]
   [cascade.target]
     path = "{/dso_messier/**,/dso_caldwell/**,/dso_ngc/**,/dso_other/**,/sso_planets/**,/sso_comets/**,/sso_asteroids/**,/sso_meteors/**,/stars_bright/**,/stars_nearby/**,/stars_variable/**,/stars_multiple/**,/stars_exotic/**,/stars_exoplanet/**}"
