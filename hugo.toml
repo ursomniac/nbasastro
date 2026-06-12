@@ -101,7 +101,8 @@ title = "Northern Berkshire Astronomical Society"
       unsafe = true
 
 [security]
-  allowContent = ['! ^text/html$', '^text/html$']
+  allowContent = ['.*']
+  enableInlineShortcodes = true
 
 [[cascade]]
   [cascade.target]
