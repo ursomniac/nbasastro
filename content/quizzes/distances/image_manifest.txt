@@ -1,0 +1,112 @@
+# Distances Quiz — Required Images
+
+Format: `identify-image` — the question shows a mystery image; answers are text labels;
+clicking an answer reveals an explanation image in the panel below.
+
+32 unique image files total (some reused across questions).
+
+---
+
+## Q1 — Halley's aphelion (YOUR Q1, already specified)
+
+| File | Role | Subject |
+|------|------|---------|
+| `Edmund_Halley.jpg` | question | Portrait of Edmond Halley |
+| `2P-Encke.jpg` | answer (4.1 AU) | 2P/Encke comet |
+| `1P-Halley.jpg` | answer (35 AU ✓) | 1P/Halley comet |
+| `3I-Atlas.jpg` | answer (none) | 3I/ATLAS interstellar object |
+| `C2014_UN271.png` | answer (55,000 AU) | C/2014 UN271 Bernardinelli-Bernstein |
+
+---
+
+## Q2 — Hot Jupiter orbital distance
+
+| File | Role | Subject |
+|------|------|---------|
+| `51-pegasi-b.jpg` | question + answer (0.052 AU ✓) | Artist's conception of 51 Pegasi b or system |
+| `55-cancri-e.jpg` | answer (0.015 AU) | Artist's conception of 55 Cancri e (lava world) |
+| `mercury.jpg` | answer (0.39 AU) | Mercury (spacecraft image — MESSENGER or BepiColombo) |
+| `jupiter.jpg` | answer (5.2 AU) | Jupiter (Hubble or JunoCam) |
+
+---
+
+## Q3 — Metis / Roche limit
+
+| File | Role | Subject |
+|------|------|---------|
+| `metis-moon.jpg` | question + answer (128,000 km ✓) | Metis — elongated ~60 km body (Galileo or Voyager) |
+| `jupiter-surface.jpg` | answer (71,500 km) | Jupiter cloud tops close-up (Juno) |
+| `jupiter-main-ring.jpg` | answer (175,000 km) | Jupiter's main ring (Galileo backlit image) |
+| `io-moon.jpg` | answer (422,000 km) | Io with active volcanism (Galileo or Juno) |
+
+---
+
+## Q4 — Proxima Centauri distance
+
+| File | Role | Subject |
+|------|------|---------|
+| `proxima-centauri.jpg` | question + answer (4.24 ly ✓) | Hubble image of Proxima Centauri |
+| `barnards-star.jpg` | answer (5.96 ly) | Barnard's Star (proper motion sequence if available) |
+| `sirius.jpg` | answer (8.6 ly) | Sirius with Sirius B companion (Hubble) or wide field |
+| `tau-ceti.jpg` | answer (11.9 ly) | Tau Ceti — artist's conception of system or ground image |
+
+---
+
+## Q5 — Nearest planetary nebula
+
+| File | Role | Subject |
+|------|------|---------|
+| `helix-nebula.jpg` | question + answer (655 ly ✓) | Helix Nebula (ESO/Hubble mosaic) |
+| `dumbbell-nebula.jpg` | answer (1,360 ly) | Dumbbell Nebula M27 |
+| `ring-nebula.jpg` | answer (2,300 ly) | Ring Nebula M57 |
+| `cats-eye-nebula.jpg` | answer (3,300 ly) | Cat's Eye Nebula NGC 6543 (Hubble concentric shells image) |
+
+---
+
+## Q6 — Virgo Cluster distance
+
+| File | Role | Subject |
+|------|------|---------|
+| `m87-jet.jpg` | question | M87 jet (Hubble — the famous one-sided jet) |
+| `large-magellanic-cloud.jpg` | answer (160,000 ly) | LMC wide-field with Tarantula Nebula |
+| `andromeda-m31.jpg` | answer (2.5 million ly) | M31 Andromeda Galaxy |
+| `m81-bodes.jpg` | answer (10.7 million ly) | M81/M82 pair (Bode's Galaxy + Cigar Galaxy) |
+| `m87-virgo.jpg` | answer (53.8 million ly ✓) | M87 or Virgo Cluster field (EHT black hole image works well) |
+
+---
+
+## Q7 — Distance to galactic center
+
+| File | Role | Subject |
+|------|------|---------|
+| `sagittarius-a-eht.jpg` | question + answer (27,000 ly ✓) | EHT image of Sgr A* (2022) — or Chandra/VLA galactic center |
+| `ngc-6397.jpg` | answer (7,800 ly) | NGC 6397 resolved globular cluster (Hubble) |
+| `omega-centauri.jpg` | answer (17,000 ly) | Omega Centauri (NGC 5139) — any resolved image |
+| `large-magellanic-cloud.jpg` | answer (160,000 ly) | **Reuse from Q6** |
+
+---
+
+## Q8 — Nearest open cluster
+
+| File | Role | Subject |
+|------|------|---------|
+| `hyades-cluster.jpg` | question + answer (153 ly ✓) | Wide-field Hyades in Taurus showing V-shape |
+| `aldebaran.jpg` | answer (65 ly) | Aldebaran — orange giant star image |
+| `pleiades-m45.jpg` | answer (444 ly) | Pleiades with blue reflection nebula |
+| `m4-globular.jpg` | answer (6,500 ly) | M4 resolved globular (Hubble) |
+
+---
+
+## File count
+
+| Q | New files | Reused |
+|---|-----------|--------|
+| 1 | 5 | — |
+| 2 | 3 | 1 (`51-pegasi-b.jpg`) |
+| 3 | 3 | 1 (`metis-moon.jpg`) |
+| 4 | 3 | 1 (`proxima-centauri.jpg`) |
+| 5 | 3 | 1 (`helix-nebula.jpg`) |
+| 6 | 4 | 1 (`m87-jet.jpg` as question) |
+| 7 | 3 | 2 (`sagittarius-a-eht.jpg` + `large-magellanic-cloud.jpg`) |
+| 8 | 3 | 1 (`hyades-cluster.jpg`) |
+| **Total** | **27 new** | **5 reused = 32 slots** |
