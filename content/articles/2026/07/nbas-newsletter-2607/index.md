@@ -1,10 +1,10 @@
 ---
 title: "July 2026 Newsletter"
 date: 2026-07-01
-description: ""
+description: "NBAS July 2026 newsletter: Mars meets Uranus on July 4th, a talk on planetary history, dark nebulae in Scutum, and the July starmap."
 authors: []
 series: ["nbas-newsletter"]
-byline: ""
+byline: "Mars meets Uranus, Ed Faits presents \"The Wanderers,\" and dark nebulae in the Summer Milky Way."
 tags: []
 dso_other: ["Barnard 113", "Barnard 107", "Barnard 110"]
 
