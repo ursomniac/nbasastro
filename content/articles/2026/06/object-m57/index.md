@@ -5,7 +5,7 @@ description: "M57 is one of the night sky's most iconic objects — but what you
 byline: "A smoke ring that is more than meets the eye"
 series: ["closer-look"]
 thumbnail: "icon.jpg"
-sso_messier: ["57"]
+dso_messier: ["57"]
 
 object_info:
   object_type: "Planetary Nebula"

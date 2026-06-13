@@ -5,7 +5,7 @@ description: "Born in another galaxy and older than the Milky Way itself, M 92 i
 byline: "Frequently overlooked, but interesting in its own right"
 series: ["closer-look"]
 thumbnail: "icon.jpg"
-sso_messier: ["92"]
+dso_messier: ["92"]
 
 object_info:
   object_type: "Globular Cluster"

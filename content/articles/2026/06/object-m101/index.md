@@ -5,7 +5,7 @@ description: "At 250,000 light years across, the Pinwheel Galaxy dwarfs our Milk
 byline: "A \"Grand Design\" Spiral next to the Big Dipper"
 series: ["closer-look"]
 thumbnail: "icon.jpg"
-sso_messier: ["101"]
+dso_messier: ["101"]
 
 object_info:
   object_type: "Spiral Galaxy"
