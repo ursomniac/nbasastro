@@ -58,7 +58,7 @@ come up over the horizon.  So we'll never get to see the Magellanic Clouds, or t
 Cross, or Alpha Centauri. 😕   (But our Southern Hemisphere counterparts never get to see
 the Big Dipper, either.)
 
-## Airmass
+## Air Mass
 
 {{< nbas-image src="Air-Mass-Angles-01-1.jpg" width=500 align="right" >}}
 You may have noticed that objects closer to the horizon are dimmer than overhead, or that
@@ -91,12 +91,12 @@ objects to appear fainter.   How much fainter?  On average for visual observing 
 objects like nebulae and galaxies, it can have a profound effect.   
 
 So your 3rd magnitude star only 15° above the horizon will be almost a magnitude fainter
-then if it's overhead.  And that's assuming completely dark skies:  light domes from cities,
+than if it's overhead.  And that's assuming completely dark skies:  light domes from cities,
 and light pollution overall will decrease that more.
 
 It's also wavelength
-dependent:  blue light suffers great extinction than red;  you already see this with 
-every sunrise and sunset with the red solar disk as it huge the horizon.  Blue and violet
+dependent:  blue light suffers greater extinction than red;  you already see this with 
+every sunrise and sunset with the red solar disk as it hugs the horizon.  Blue and violet
 light scatter more in the atmosphere (Rayleigh scattering) - it's why the sky is blue - and
 it's also way distant objects like mountains or city skyscapers look bluish.
 

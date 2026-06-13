@@ -74,6 +74,12 @@
     <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
   {{ end }}
 {{ end }}
+{{/* for Newsletter print layout */}}
+{{ if .HasShortcode "newsletter-stats" }}
+  {{ with resources.Get "css/newsletter-print.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" media="print" integrity="{{ .Data.Integrity }}">
+  {{ end }}
+{{ end }}
 
 
   {{/* PAGEFIND UI ASSETS */}}

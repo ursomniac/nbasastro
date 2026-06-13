@@ -1,13 +1,20 @@
 {{ $filePrefix := .Get "file" | default "starmap" }}
 {{ $month := .Get "month" | default "This Month" }}
+{{ $invert := not (eq (.Get "invert" | default "true") "false") }}
 
 <div class="starmap-card">
   <div class="starmap-thumb-link">
     {{ with .Page.Resources.GetMatch (printf "*%s*.png" $filePrefix) }}
-      {{ $inverted := . | images.Filter images.Invert }}
-      <a href="{{ .RelPermalink }}" target="_blank">
-        <img src="{{ $inverted.RelPermalink }}" class="starmap-thumb" alt="Starmap Preview">
-      </a>
+      {{ if $invert }}
+        {{ $inverted := . | images.Filter images.Invert }}
+        <a href="{{ .RelPermalink }}" target="_blank">
+          <img src="{{ $inverted.RelPermalink }}" class="starmap-thumb" alt="Starmap Preview">
+        </a>
+      {{ else }}
+        <a href="{{ .RelPermalink }}" target="_blank">
+          <img src="{{ .RelPermalink }}" class="starmap-thumb" alt="Starmap Preview">
+        </a>
+      {{ end }}
     {{ end }}
   </div>
 
@@ -30,4 +37,3 @@
     </div>
   </div>
 </div>
-
