@@ -7,7 +7,7 @@ series: ["astronomy-quiz"]
 knowledgetopics: ["quizzes"]
 level: "intermediate"
 description: "Eight questions showing something about the distances of astronomical objects"
-thumbnail: "icon.jpeg"
+thumbnail: "m-81.jpg"
 quiz:
   passing_score: 80
   scoring: "first-only"
