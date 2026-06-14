@@ -5,8 +5,8 @@ date: 2026-07-01
 authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Aquila"]
-byline: "The only non-contiguous constellation"
-description: "Things to learn about the Aquila constellation"
+byline: ""
+description: ""
 thumbnail: "icon.png"
 
 profile_data:
@@ -14,16 +14,14 @@ profile_data:
   "Genitive": Aquilae
   "Best Viewed": Summer
   "Hemisphere": Equatorial
-  "Brightest Star": Altair (α) Aquilae"
-  "Area": 652 sq degrees (22rd)
+  "Brightest Star": "Altair (α) Aquilae"
+  "Area": 652 sq degrees (22nd)
 
 # Taxonomy refs:
-dso_ngc: ["6709", "6751", "6781", "6772"]
+dso_ngc: ["6709", "6751", "6781", "6772", "6814"]
 dso_other: ["B 143"]
-stars_bright: ["Altair"]
-stars_bearby: ["Altair"]
 
-# The 6 Objects of Interest
+# Objects of Interest
 highlights:
   - name: "NGC 6781"
     type: "Planetary Nebula"
@@ -40,174 +38,96 @@ highlights:
   - name: "NGC 6772"
     type: "Planetary Nebula"
     using: "Medium/Imaging Telescope"
-  - name: "Altair"
-    type: "Nearby Star"
-    using: "Naked Eye"
+  - name: "NGC 6814"
+    type: "Spiral Galaxy"
+    using: "Medium/Imaging Telescope"
 ---
 
 ## The Eagle
 
-Serpens is the only constellation that is split into two parts, an
-effect of the International Astronomical Union’s “formalization”
-of the 88 constellations in the 1920s. Each part has a name: Serpens
-Caput, “the head of the snake” is the western half; Serpens Cauda
-“the tail of the snake” is the eastern half. In between is Ophiuchus,
-the Serpent Bearer - Oφιϛ in Greek (or Ophis in Latin) meaning
-“serpent”.
-
-{{< nbas-image src="hist_SER.jpg" width="450" align="right"
+{{< nbas-image src="hist_AQL.jpg" width="550" align="left"
 caption="From _Urania's Mirror_, c. 1825" >}}
+Aquila's history as a constellation reaches as far back as the Greeks: both Eudoxus and Aratus mentioned it in their writings and it was one of the 48 constellations listed by Ptolemy in the _Almagest_.   The Romans also saw it as a bird, but instead of an eagle, it was sometimes "the Flying Vulture", and not the _only_ vulture in the sky - Lyra was _Vultur Cadens_ - "the Swooping Vulture".  As an eagle though it was typically depicted as holding Zeus's (or Jupiter's) thunderbolts.
 
-Mythologically, Serpens is being held by the healer Asclepius
-(represented by Ophiuchus) and today, that association is seen in
-the “Rod of Ascelpius” as a symbol for healthcare. Why a snake?
-Their shedding of their skin was seen as a symbol of rebirth.
-
-{{< nbas-image src="rod-asclepius.webp" width="200" align="left" >}}
-In terms of “ex”-constellations, we have Taurus Poniatowski -
-“Poniatowski’s Bull” created in 1777 by Martin Poczobut (1728–1810),
-the rector of Vilnius University to honor Stanislaus Poniatowski,
-the King of Poland and Grand Duke of Lithuania. Here, the collection
-of 4th magnitude stars bears a resemblance to the Hyades in Taurus
-(though much fainter), and the bull is part of the Poniatowski
-family coat of arms.
-
-Tucked away in this (now) asterism is the second closest star system
-in the sky, Barnard’s Star. 5.96 light years away.  
+The southern part of Aquila for a time was reformed as the now-extinct "constellation" of Antinoüs - the lover of Hadrian (who drowned in the Nile), introduced in 130 CE.   Interestingly, it was mentioned by Ptolemy in the _Almagest_ not as a constellation but an asterism though it was included in various star atlases up to the 19th century.  However, it did not "make the cut" when the International Astronomical Union defined the "official" list of 88 constellations in 1922.
 
 {{< clear >}}
 
-## Maps of Serpens
-{{< nbas-image src="SERCD.jpeg" caption="Map of Serpens Cauda" >}}
-{{< nbas-image src="SERCP.jpeg" caption="Map of Serpens Caput" >}}
+## Map of Aquila
+{{< nbas-image src="AQL.gif" caption="Map of Aquila" >}}
 
-Serpens is one the constellations whose “stick figure” somewhat
-resembles what it represents. You can make out the head, just below
-the Northern Crown, and follow it to and across Ophiuchus picking
-up the trail of stars of the tail in the East alongside Aquila. As
-for deep-sky objects, Serpens Caput has more galaxies (since we’re
-further away from the obscuring haze of the plane of the Galaxy),
-where in Serpens Cauda, we see more star clusters and nebulae:
-globular clusters adorn both “sides”.
+The Milky Way extends through the Western Half of Aquila, and the celestial equator bisects it.  Therefore, it's not surprising that most of the deep-sky objects are types found close to the plane of the Galaxy: planetary nebulae, dark nebulae, and open star clusters.   A few globular clusters are there too that are closer to the Galactic Plane than most.   
 
-The brightest star, Alpha (α) Serpentis, “Unukalhai” (Arabic: “the
-serpent’s neck) is an ordinary red-giant star. Just NE of it is the
-mag 4.4 star Lambda (λ) Ser, only 39 light years from the Sun hosting
-a “hot Neptune” exoplanet (13.6 M⊕).
+### Variable Star &eta; Aquilae
+{{< nbas-image src="eta_aql_comp.png" width="400px" align="left" >}}
+{{< nbas-image src="eta-aql-phase.png" width="400px" align="left" >}}
+{{< clear >}}
 
-On the “tail” side the brightest star is Eta (η) Serpentis - another
-3rd magnitude red giant star. The SE corner of the constellation
-borders Scutum (another constellation honoring a Polish king) and
-Sagittarius, and has several nebulae (Messier 16 being the most
-famous) and star clusters.
+&eta; (Eta) Aquilae is one of the brighter Cepheid variable stars.  It pulses with a period of 7.18 days and ranges between magnitudes 3.5 and 4.4.  This is something you can track with the naked eye if you have patience.
+Once you've located the star, you can use the other stars in Aquila to estimate its brightness to within ~0.1 magnitudes following its cyclic brightening and dimming.
+
+
 
 {{< constellation-objects-table >}}
 
-### Summer Rose Cluster
-
-{{< nbas-image src="m_5-93S-PIXRCAGRAXGHS-square.jpg" width="400" align="right"
+### Snowglobe in Space
+{{< nbas-image width="400" align="right"
+src="ngc_6781-92U-PIXRCAGRAXGHS-square.jpg"
 caption="Bob Donahue, NBAS" >}}
 
-This globular is a nice object - under very dark skies it is visible
-to the naked eye as a faint patch just next to 5 Ser, and findable
-with binoculars. In a small telescope, it’s a bright glow a little
-“shaggy” around the edges. Larger telescopes resolve it well with
-the outlier stars making it look slightly asymmetrical. Imaging
-scopes will show both hot blue stars and cooler red giants.
+Also known as the "Snowglobe Nebula" (with other foreground stars being the "snowflakes", it has the distinctive colors like the Ring Nebula but is more opaque in the center.  Like the Ring Nebula we're looking at it pole-on:  the nebular shell is really hourglass-shaped;  if we were viewing it from another place in the galaxy it might look more like the Dumbbell Nebula in Vulpecula.   
+
+The very faint central star expelled its atmosphere about 8,000 years ago and is probably part of a binary star system.  
 
 {{< clear >}}
 
-### The Eagle Nebula
+### Barnard's "E"
 
-{{< nbas-image src="m_16-92U-PIXRCAABEGHS-full.jpg"
-width="500" align="left" caption="Bob Donahue, NBAS" >}}
+{{< nbas-image src="b_143-92S-PIXRCAGRAXGHS-full.jpg" fullsize="true"
+caption="Bob Donahue, NBAS" >}}
 
-This is a large star-forming region with the cluster NGC 6611, and
-observing it, you can tell it’s very dynamic: the nebula shows a
-great amount of structure with the center dark region giving it
-it’s name, looking like an eagle with extended talons. This region
-was made famous by _Hubble_ with the “Pillars of Creation” image -
-dark clouds harboring stellar nurseries, sculpted by the winds from
-the hot young stars in the cluster. The hot cluster stars are very
-young: only 1-2 Myr old: stellar “infants”. 
-
+Dark Nebulae abound in Aquila and the constellations surrounding it (Scutum, Cygnus).   While generally overlooked, when you take the time to examine them, they're fascinating, with complex shapes.   The top parts of the "E" are made up of the darker Barnard 143, while the bottom part is Barnard 142:  these two nebula are not physically connected, though they're both about 2,000 light years away.   
+These nebulae occur throughout the Galactic disk, and are a prominent feature with several edge-on galaxies, like M 104 "the Sombrero" in Virgo.
 
 {{< clear >}}
 
-### "Blinking" Galaxy
+### Dandelion Puffball
 
-{{< nbas-image src="ngc_6118-93U-PIXRCAGRAXGHS-square.jpg"
+{{< nbas-image src="ngc_6751-93U-PIXRCAABEGHS-square.jpg"
+width="380" align="left"
+caption="Bob Donahue, NBAS | eQuinox 2 image, 33 min" >}}
+{{< nbas-image src="NGC6751-HST.jpeg" width="400" align="left"
+caption="HST image" >}}
+{{< clear >}}
+
+Another smaller planetary nebula is NGC 6751 the "Dandelion Puffball", also known as the "Glowing Eye" Nebula.   It's about 6500 light years away and about 0.8 ly across.  It has a very complicated structure (as seen in the HST image) with the hotter gas (blue) overlaid with cooler (red) streamers that are in the foreground (you have to imagine this in three dimensions).
+
+## Flying Unicorn Cluster
+
+{{< nbas-image src="ngc_6709-92U-PIXRCAGRAXGHS-square.jpg"
+width="400" align="left" caption="Bob Donahue, NBAS" >}}
+
+Aside from planetary nebulae (of which Aquila has many), there are a few
+star clusters.  NGC 6709 is moderately aged for an open cluster (about 150 Myr)
+about the same age as the Pleiades.  It looks very different because it so much further away: about 3,500 light years.  This cluster looks best with low magnification.
+
+{{< clear >}}
+
+## Very Elliptical Planetary
+
+{{< nbas-image src="ngc_6772-92U-PIXRCAGRAXGHS-square.jpg"
 width="400" align="right" caption="Bob Donahue, NBAS" >}}
 
-70 Myr away, this elongated “Grand Design” spiral is a challenge
-for observers who report that in the eyepiece it “blinks” in and
-out view. Imaging scopes will definitely show it is elongated (tilted
-to our line of sight), with a bright core, and - given enough
-exposure time - start to bring out the spiral arms.
-
-This galaxy is one to monitor for supernovae - two have been seen
-in the past few years. 
+Most planetary nebulae are only a few thousand years old.  NGC 6772 is interesting because it's a bit older: about 11,000 years.   It was discovered by William Herschel in 1784.  Unlike other popular planetaries, like the Ring Nebula, the shape of this one is distorted: this is probably due to the expanding gas colliding and interacting with the interstellar medium.
 
 {{< clear >}}
 
-### Seyfert's Sextet
+### An Extra-Galactic Oddball
+{{< nbas-image src="ngc_6814-93U-PIXRCAABEGHS-square.jpg"
+width="400" align="left" caption="Bob Donahue, NBAS" >}}
 
-{{< nbas-image src="hcg_79_map.png" width="400" align="right" >}}
+A galaxy?  In Aquila?  It's rare to find galaxies so close to the Milky Way, although this one does have a galactic latitude of +10° putting it at the edge of the "Zone of Avoidance".   Of course there are galaxies all over the sky, but the Milky Way blocks almost all of them from view.   
 
-These interacting galaxies (NGC 6027) are ~200 Mly away (except for
-“e” on the map: that galaxy is over 900 Mly distant, the spiral in
-the _HST_ image). The 6th “galaxy” (unlabeled, top-left) is actually
-part of “b”.    
-{{< nbas-image src="Seyfert_Sextet_full.jpg"
-width="300" align="left" caption="_Hubble Space Telescope_" >}}
+NGC 6814 is a nice face-on galaxy with four arms tightly wound around the core.  It's a nice object (esp. with imagers) if you want to take a break from the Summer's parade of nebulae and clusters.
 
-These galaxies are in a long process of gravitational interactions,
-bending and twisting them, until - eventually - they will become a
-large elliptical.  You’ll need a larger-aperture telescope to detect
-them: images might have better luck, though the whole “7”-shaped
-assemblage is also small, only about 2’ from end to end.
-
-{{< clear >}}
-
-### Wallflower Globular
-
-{{< nbas-image src="ngc_6539-92U-PIXRCAGRAXGHS-square.jpg"
-width="400" align="right" caption="Bob Donahue, NBAS" >}}
-
-Here’s another example of a DSO that is bright, yet neither Messier
-nor Herschel noticed it - it wasn’t “discovered” until 1856! Yet,
-it is reachable even in small telescopes as a “broadly concentrated
-spot” or a “diffuse glow”. It’s located in the outer parts of the
-Galactic bulge, but being only 7° from the plane of the Galaxy, its
-light is attenuated and reddened by foreground galactic dust.
-
-{{< clear >}}
-
-### The Death Star?
-
-{{< nbas-image src="gj_710-map copy.png"
-width="400" align="right" caption="Finder chart for GJ 710" >}}
-
-An unassuming 9th magnitude late K-type dwarf (only slightly more than half the
-Sun’s mass and radius, and one-tenth the luminosity is presently
-62 ly away. You can find it 1° NNW of the 3rd magnitude star Eta (&eta;)
-Serpentis.
-
-However, it’s extremely important because it actually poses a threat
-to our Solar System. This star is heading toward us at 14.5 km/s,
-and in about 1,300,000 years will pass While even that number doesn’t
-sound particularly close (it’s ~360 times the distance to Neptune),
-it is well within the Oort Cloud, and this passage may very well
-be the closest encounter experienced by the Sun in its entire
-lifetime, and possibly in its future.
-
-{{< nbas-image src="gliese-710-path-1.png" fullwidth="true" >}}
-
-What’s the threat? Penetrating the Oort Cloud will have enormous
-effect: it will disrupt orbits, sending showers of comets into the
-inner Solar System for millions of years afterwards, increasing the
-chances of a major impact event. Observers at that time would see
-naked- eye comets almost monthly.
-
-{{< clear >}}
 
