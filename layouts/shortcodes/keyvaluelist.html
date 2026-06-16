@@ -1,0 +1,13 @@
+<dl class="meta">
+  {{ $lines := split .Inner "\n" }}
+  {{ range $lines }}
+    {{ $line := trim . " \r" }}
+    {{ $parts := split $line ": " }}
+    {{ if ge (len $parts) 2 }}
+      <div class="meta__row">
+        <dt>{{ index $parts 0 }}</dt>
+        <dd>{{ delimit (after 1 $parts) ": " }}</dd>
+      </div>
+    {{ end }}
+  {{ end }}
+</dl>

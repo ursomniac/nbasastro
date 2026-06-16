@@ -1,0 +1,32 @@
+.meta {
+  margin: 1.5rem 0;
+  border-left: 2px solid var(--border-soft);
+  padding-left: 1rem;
+}
+
+.meta__row {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.meta__row:last-child {
+  border-bottom: none;
+}
+
+.meta__row dt {
+  color: var(--gold-dim);
+  font-weight: bold;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+}
+
+.meta__row dd {
+  margin: 0;
+  color: var(--text-main);
+}
