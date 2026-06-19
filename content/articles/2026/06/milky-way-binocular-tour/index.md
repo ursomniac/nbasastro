@@ -30,7 +30,7 @@ or an app that will align you with the sky (more modern).
 
 ## Follow the Birds!  
 
-{{< nbas-image src="summer-triangle.jpg" width="500" align="right"  >}}
+{{< nbas-image src="summer-triangle2.jpg" fullwidth="true" >}}
 
 To start, locate the bright star Deneb (it's part of the Summer Triangle
 of bright stars).   Deneb is the bright star in Cygnus, the constellation

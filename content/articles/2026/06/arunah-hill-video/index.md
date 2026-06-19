@@ -18,15 +18,15 @@ At a recent NBAS Members observing session, Michael Archer set up his cameras to
 title="Milky Way over Springfield, MA" caption="Michael Archer, NBAS" >}}
 
 {{< keyvaluelist >}}
-Capture Date: 2026-06-14
-Capture Time: 00:58:17 to 01:03:00, 11 frame pano
+Capture Date: 13-14 June 2026
+Capture Time: 21:48 to 01:20, 558 frame video
 Location: Arunah Hill, Cummington, Hampshire County, MA
 Camera: Nikon Z9
-Lens: Nikkor Z 20mm f/1.8
+Lens: Nikkor Z 14-24mm f/2.8
 Exposure: 15 seconds
 F-Number: f/2.8
-ISO: 6400
+ISO: 4000
 {{< /keyvaluelist >}}
 
 Creator Michael Archer's notes:
-> _"11 portrait orientation images stitched into a 2.5:1 ration panorama using Adobe Lightroom. My first time at Arunah Hill. Unbelievable amount of light pollution from Springfield, MA. "_
+> _558 images at a cinematic aspect ratio of 2.39:1, played at 59.97 frames per second in HDR. Video created using Adobe Premiere Pro. My first time at Arunah Hill._
