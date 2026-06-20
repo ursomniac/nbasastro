@@ -4,6 +4,7 @@ date: 2026-06-12
 description: "Learn how the Hertzsprung-Russell diagram revolutionized our understanding of stars, from its flawed beginnings to its current role as a cosmic family tree."
 authors: ["bob-donahue"]
 byline: "Stellar Astronomy's \"Swiss Army Knife\""
+series: ["astronomical-frameworks"]
 knowledgetopics: ["astronomy"]
 tags: ["stellar-evolution", "white-dwarfs", "giant-stars", "main-sequence stars"]
 thumbnail: "icon.png"

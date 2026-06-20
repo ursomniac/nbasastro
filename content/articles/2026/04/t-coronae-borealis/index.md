@@ -6,7 +6,6 @@ authors: ["bob-donahue"]
 byline: "The Blaze Star prepares to erupt!"
 tags: ["Variable Star", "Nova"]
 series: ["closer-look"]
-feature_image: "t-crb-nova.jpg"
 description: "A look at the upcoming eruption of the famous recurring nova in Corona Borealis."
 
 # Metadata Panel Data

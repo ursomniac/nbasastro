@@ -4,6 +4,7 @@ date: 2026-07-02
 description: "Vega, Deneb, and Altair look like three equally bright points of light in the summer sky. Up close, they couldn't be more different — and that's the whole point."
 byline: "Comparing the bright stars Vega, Deneb, and Altair"
 tags: ["summer triangle"]
+series: ["wider-view"]
 thumbnail: "icon.png"
 stars_bright: ["Vega", "Deneb", "Altair"]
 stars_nearby: ["Vega", "Altair"]

@@ -4,6 +4,7 @@ thumbnail: "m31_thumb.jpg"
 date: 2026-04-23
 authors: ["bob-donahue"]
 byline: "Finding DSOs in DSOs"
+series: ["wider-view"]
 tags: ["Local Group"]
 constellations: ["Andromeda"]
 description: "Learn how to identify clusters in the Andromeda Galaxy using your own telescope images, even with smaller scopes like 50mm."

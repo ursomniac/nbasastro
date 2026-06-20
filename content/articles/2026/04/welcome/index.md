@@ -3,7 +3,7 @@ title: "Welcome to our new NBAS Website"
 thumbnail: "NAPL-small.jpg"
 date: 2026-05-05
 description: "138"
-author: "NBAS Staff"
+author: ["NBAS Staff"]
 byline: "A new way to stay connected with the stars in the Northern Berkshires."
 series: ["nbas-announcements"]
 draft: false
