@@ -3,16 +3,24 @@
 {{- $fullWidth := eq (.Get "fullwidth") "true" -}}
 {{/* Resize: 1200px for full-width to ensure clarity; otherwise use provided width or default 600px */}}
 {{- $w := cond $fullWidth "1200" (.Get "width" | default (.Get "size" | default "600") | strings.TrimSuffix "px") -}}
+{{- $expandSrc := .Get "expand" -}}
 
-<figure class="nbas-media-container align-{{ $align }} {{ if $fullWidth }}full-width{{ end }}" 
+<figure class="nbas-media-container align-{{ $align }} {{ if $fullWidth }}full-width{{ end }}"
         style="{{ if $fullWidth }}width: 100%;{{ else }}width: {{ $w }}px;{{ end }} max-width: 100%; margin: 2rem auto;">
   {{- with $image -}}
     {{- $scaled := .Resize (printf "%sx" $w) -}}
-    <a href="{{ .RelPermalink }}" target="_blank">
-      <img src="{{ $scaled.RelPermalink }}" 
-           width="{{ $scaled.Width }}" 
-           height="{{ $scaled.Height }}" 
-           class="nbas-media-img" 
+    {{/* Build the click-through href.
+         If expand= is given, link to that file in the same page bundle directory.
+         Otherwise link to the full-resolution src file (original behavior). */}}
+    {{- $href := .RelPermalink -}}
+    {{- if $expandSrc -}}
+      {{- $href = printf "%s/%s" ($.Page.RelPermalink | strings.TrimSuffix "/") $expandSrc -}}
+    {{- end -}}
+    <a href="{{ $href }}" target="_blank">
+      <img src="{{ $scaled.RelPermalink }}"
+           width="{{ $scaled.Width }}"
+           height="{{ $scaled.Height }}"
+           class="nbas-media-img"
            style="width: 100%; height: auto; display: block;">
     </a>
   {{- else -}}
@@ -24,4 +32,3 @@
     </figcaption>
   {{- end -}}
 </figure>
-

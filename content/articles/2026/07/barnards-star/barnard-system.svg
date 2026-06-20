@@ -1,0 +1,137 @@
+<svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" font-family="DejaVu Sans, sans-serif">
+  <!-- Background -->
+  <rect width="720" height="400" fill="#111827" rx="6"/>
+  <rect width="718" height="398" x="1" y="1" fill="none" stroke="#4a6080" stroke-width="1" rx="5"/>
+
+  <!-- Star field -->
+  <circle cx="50"  cy="60"  r="0.9" fill="#fff" opacity="0.2"/>
+  <circle cx="140" cy="35"  r="0.7" fill="#fff" opacity="0.18"/>
+  <circle cx="190" cy="80"  r="1.0" fill="#fff" opacity="0.15"/>
+  <circle cx="320" cy="22"  r="0.8" fill="#fff" opacity="0.2"/>
+  <circle cx="80"  cy="330" r="0.7" fill="#fff" opacity="0.15"/>
+  <circle cx="110" cy="280" r="0.9" fill="#fff" opacity="0.18"/>
+  <circle cx="340" cy="360" r="0.8" fill="#fff" opacity="0.12"/>
+
+  <!-- Title -->
+  <text x="360" y="24" text-anchor="middle" fill="#d8e8f8" font-size="15" font-weight="bold">Barnard's Star Planetary System</text>
+  <text x="360" y="42" text-anchor="middle" fill="#8aaccc" font-size="11" font-style="italic">Top-down orbital view · orbit radii to scale via Kepler's 3rd law · dot size ∝ (min. mass)^(1/3)</text>
+
+  <!-- Divider between orbital diagram and right panel -->
+  <line x1="435" y1="55" x2="435" y2="385" stroke="#2d3f55" stroke-width="1"/>
+
+  <!-- ═══ ORBITAL DIAGRAM (center: 220, 225) ═══ -->
+
+  <!-- HZ shading: green annulus outside r=160, clipped to diagram.
+       Draw using mask: fill whole area green, punch out r=160 inner circle. -->
+  <defs>
+    <mask id="hz-ring">
+      <rect width="720" height="400" fill="white"/>
+      <circle cx="185" cy="225" r="160" fill="black"/>
+    </mask>
+    <!-- Radial gradient for star glow -->
+    <radialGradient id="star-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ffaa55" stop-opacity="1"/>
+      <stop offset="60%"  stop-color="#dd5500" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#aa3300" stop-opacity="1"/>
+    </radialGradient>
+  </defs>
+
+  <!-- HZ shaded region (behind orbit lines) -->
+  <circle cx="185" cy="225" r="310" fill="#004400" opacity="0.25" mask="url(#hz-ring)"/>
+
+  <!-- Orbit rings: d=61px, b=74px, c=89px, e=123px -->
+  <circle cx="185" cy="225" r="61"  fill="none" stroke="#5a7a9a" stroke-width="0.8"/>
+  <circle cx="185" cy="225" r="74"  fill="none" stroke="#5a7a9a" stroke-width="0.8"/>
+  <circle cx="185" cy="225" r="89"  fill="none" stroke="#5a7a9a" stroke-width="0.8"/>
+  <circle cx="185" cy="225" r="123" fill="none" stroke="#5a7a9a" stroke-width="0.8"/>
+
+  <!-- HZ inner-edge circle: dashed green -->
+  <circle cx="185" cy="225" r="160" fill="none" stroke="#44cc44" stroke-width="1.3" stroke-dasharray="6 4"/>
+
+  <!-- HZ label — upper-right of circle, clear of right panel -->
+  <text x="290" y="100" fill="#44cc44" font-size="12" text-anchor="start">← HZ inner edge</text>
+  <text x="308" y="115" fill="#44cc44" font-size="11" text-anchor="start">(0.049 AU / 10 d)</text>
+
+  <!-- Star glow halo -->
+  <circle cx="185" cy="225" r="22" fill="#662200" opacity="0.3"/>
+  <!-- Star body -->
+  <circle cx="185" cy="225" r="11" fill="url(#star-glow)"/>
+  <!-- Star label below -->
+  <text x="185" y="252" text-anchor="middle" fill="#ffbb88" font-size="12" font-weight="bold">Barnard's Star</text>
+  <text x="185" y="266" text-anchor="middle" fill="#c49070" font-size="11">M4V · 0.16 M☉</text>
+
+  <!-- Planet dots (angles: d=55°, b=160°, c=245°, e=330°) -->
+  <!-- Barnard d: r=61, θ=55° → (185+35.0, 225-50.0) = (220, 175), planet r_dot=6 -->
+  <circle cx="220" cy="175" r="6" fill="#c8aa80"/>
+  <text x="229" y="172" fill="#d0c0a0" font-size="12" text-anchor="start">d</text>
+
+  <!-- Barnard b: r=74, θ=160° → (185-69.5, 225-25.3) = (115.5, 200), planet r_dot=7 -->
+  <circle cx="116" cy="200" r="7" fill="#c8aa80"/>
+  <text x="106" y="197" fill="#d0c0a0" font-size="12" text-anchor="end">b</text>
+
+  <!-- Barnard c: r=89, θ=245° → (185-37.6, 225+80.7) = (147, 306), planet r_dot=7 -->
+  <circle cx="147" cy="306" r="7" fill="#c8aa80"/>
+  <text x="147" y="322" fill="#d0c0a0" font-size="12" text-anchor="middle">c</text>
+
+  <!-- Barnard e: r=123, θ=330° → (185+106.6, 225+61.5) = (292, 287), planet r_dot=6 -->
+  <circle cx="292" cy="287" r="6" fill="#c8aa80"/>
+  <text x="301" y="284" fill="#d0c0a0" font-size="12" text-anchor="start">e</text>
+
+  <!-- ═══ RIGHT DATA PANEL (x=448+) ═══ -->
+
+  <!-- Panel header -->
+  <text x="448" y="72"  fill="#d8e8f8" font-size="13" font-weight="bold">Planet</text>
+  <text x="556" y="72"  fill="#d8e8f8" font-size="13" font-weight="bold">Period</text>
+  <text x="624" y="72"  fill="#d8e8f8" font-size="13" font-weight="bold">Min. mass</text>
+  <line x1="445" y1="79" x2="715" y2="79" stroke="#4a6080" stroke-width="1"/>
+
+  <!-- Row: Barnard d -->
+  <circle cx="453" cy="93" r="5" fill="#c8aa80"/>
+  <text x="463" y="97"  fill="#c0d0e0" font-size="12">Barnard d</text>
+  <text x="556" y="97"  fill="#c0d0e0" font-size="12">2.34 d</text>
+  <text x="624" y="97"  fill="#c0d0e0" font-size="12">~0.19 M⊕</text>
+
+  <!-- Row: Barnard b -->
+  <circle cx="453" cy="113" r="6" fill="#c8aa80"/>
+  <text x="463" y="117" fill="#c0d0e0" font-size="12">Barnard b</text>
+  <text x="556" y="117" fill="#c0d0e0" font-size="12">3.15 d</text>
+  <text x="624" y="117" fill="#c0d0e0" font-size="12">~0.30–0.37 M⊕</text>
+
+  <!-- Row: Barnard c -->
+  <circle cx="453" cy="133" r="6" fill="#c8aa80"/>
+  <text x="463" y="137" fill="#c0d0e0" font-size="12">Barnard c</text>
+  <text x="556" y="137" fill="#c0d0e0" font-size="12">4.12 d</text>
+  <text x="624" y="137" fill="#c0d0e0" font-size="12">~0.34 M⊕</text>
+
+  <!-- Row: Barnard e -->
+  <circle cx="453" cy="153" r="5" fill="#c8aa80"/>
+  <text x="463" y="157" fill="#c0d0e0" font-size="12">Barnard e</text>
+  <text x="556" y="157" fill="#c0d0e0" font-size="12">6.74 d</text>
+  <text x="624" y="157" fill="#c0d0e0" font-size="12">~0.19 M⊕</text>
+
+  <line x1="445" y1="167" x2="715" y2="167" stroke="#4a6080" stroke-width="1"/>
+
+  <!-- Habitable zone block -->
+  <text x="448" y="184" fill="#44cc44" font-size="13" font-weight="bold">Habitable zone</text>
+  <text x="448" y="200" fill="#9ab4cc" font-size="12">10–42 day orbits (0.049–0.128 AU)</text>
+  <text x="448" y="216" fill="#9ab4cc" font-size="12">Inner edge shown (dashed green).</text>
+  <text x="448" y="232" fill="#9ab4cc" font-size="12">Outer edge is 2.6× farther — off scale.</text>
+  <text x="448" y="248" fill="#9ab4cc" font-size="12">All four planets orbit well inside the HZ.</text>
+
+  <line x1="445" y1="258" x2="715" y2="258" stroke="#4a6080" stroke-width="1"/>
+
+  <!-- Star/system info -->
+  <text x="448" y="275" fill="#c0d0e0" font-size="12">Distance:  5.96 ly (1.83 pc)</text>
+  <text x="448" y="291" fill="#c0d0e0" font-size="12">Star age:  ~10 Gyr</text>
+  <text x="448" y="307" fill="#c0d0e0" font-size="12">Spectral:  M4V · 0.19 R☉</text>
+
+  <line x1="445" y1="317" x2="715" y2="317" stroke="#4a6080" stroke-width="1"/>
+
+  <!-- M⊕rcury comparison note -->
+  <text x="448" y="334" fill="#7a95aa" font-size="11" font-style="italic">M⊕rcury orbits at 0.387 AU — 8× the</text>
+  <text x="448" y="348" fill="#7a95aa" font-size="11" font-style="italic">radius of Barnard e, far off this scale.</text>
+
+  <!-- Scale note -->
+  <text x="448" y="371" fill="#7a95aa" font-size="11">Scale: 3,244 px/AU</text>
+  <text x="448" y="385" fill="#7a95aa" font-size="11">Planets confirmed 2024–2025</text>
+</svg>

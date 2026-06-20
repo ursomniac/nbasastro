@@ -1,0 +1,98 @@
+<svg viewBox="0 0 750 345" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, 'Times New Roman', serif">
+  <!-- Dark navy background -->
+  <rect width="750" height="345" fill="#111827" rx="6"/>
+  <rect width="748" height="343" x="1" y="1" fill="none" stroke="#4a6080" stroke-width="1" rx="5"/>
+
+  <!-- Faint star field -->
+  <circle cx="45"  cy="55"  r="1"   fill="#fff" opacity="0.25"/>
+  <circle cx="160" cy="30"  r="0.8" fill="#fff" opacity="0.2"/>
+  <circle cx="230" cy="70"  r="1.1" fill="#fff" opacity="0.18"/>
+  <circle cx="480" cy="42"  r="0.9" fill="#fff" opacity="0.2"/>
+  <circle cx="570" cy="25"  r="0.7" fill="#fff" opacity="0.15"/>
+  <circle cx="710" cy="60"  r="1"   fill="#fff" opacity="0.2"/>
+  <circle cx="40"  cy="290" r="0.8" fill="#fff" opacity="0.15"/>
+  <circle cx="720" cy="278" r="0.9" fill="#fff" opacity="0.18"/>
+
+  <!-- Title -->
+  <text x="375" y="26" text-anchor="middle" fill="#d8e8f8" font-size="15" font-weight="bold">Astrometric Microlensing — The 2035 Barnard's Star Event</text>
+  <!-- Subtitle -->
+  <text x="375" y="44" text-anchor="middle" fill="#9ab4cc" font-size="12" font-style="italic">Shift between apparent and true position encodes Barnard's Star's mass directly</text>
+
+  <!-- True (straight) path — dashed gray: Earth → true star -->
+  <line x1="110" y1="168" x2="580" y2="179" stroke="#607080" stroke-width="1.1" stroke-dasharray="5 4"/>
+
+  <!-- Line of sight to apparent position — dashed blue -->
+  <line x1="110" y1="165" x2="580" y2="122" stroke="#6699ee" stroke-width="1.2" stroke-dasharray="7 4" opacity="0.85"/>
+
+  <!-- Bent light rays — amber -->
+  <path d="M 587,116 Q 355,148 110,162" fill="none" stroke="#e09030" stroke-width="2.2" opacity="0.9"/>
+  <path d="M 587,128 Q 355,156 110,174" fill="none" stroke="#e09030" stroke-width="2.2" opacity="0.9"/>
+
+  <!-- Bent light path label -->
+  <text x="235" y="133" fill="#d08828" font-size="12" text-anchor="middle">bent light path</text>
+
+  <!-- Earth -->
+  <circle cx="90" cy="168" r="20" fill="#1a3a6a" opacity="0.95"/>
+  <circle cx="90" cy="168" r="20" fill="none" stroke="#5588dd" stroke-width="1.5"/>
+  <text x="90" y="173" text-anchor="middle" fill="white" font-size="14">🌍</text>
+  <text x="90" y="202" text-anchor="middle" fill="#d0e8ff" font-size="13" font-weight="bold">Earth</text>
+  <text x="90" y="217" text-anchor="middle" fill="#9ab4cc" font-size="12">(observer)</text>
+
+  <!-- Barnard's Star -->
+  <circle cx="355" cy="170" r="22" fill="#bb3d00"/>
+  <circle cx="355" cy="170" r="30" fill="none" stroke="#cc5500" stroke-width="6" opacity="0.15"/>
+  <text x="355" y="213" text-anchor="middle" fill="#ffbb99" font-size="13" font-weight="bold">Barnard's Star</text>
+  <text x="355" y="228" text-anchor="middle" fill="#c49070" font-size="12">(gravitational lens)</text>
+
+  <!-- Background star: TRUE position — dashed circle, on axis -->
+  <circle cx="590" cy="179" r="10" fill="none" stroke="#7090a8" stroke-width="1.5" stroke-dasharray="4 2.5"/>
+  <!-- True position labels BELOW the star -->
+  <text x="590" y="205" text-anchor="middle" fill="#aabbcc" font-size="12">True position</text>
+  <text x="590" y="219" text-anchor="middle" fill="#aabbcc" font-size="12">(unobservable)</text>
+  <!-- 335 mas note below true star labels, well clear of Barnard's Star labels -->
+  <text x="590" y="235" text-anchor="middle" fill="#7a95a8" font-size="11" font-style="italic">min. sep. 335 mas (2035)</text>
+
+  <!-- Background star: APPARENT position — solid blue, shifted up -->
+  <circle cx="590" cy="122" r="10" fill="#4477dd"/>
+  <circle cx="590" cy="122" r="14" fill="none" stroke="#6699ff" stroke-width="1" opacity="0.5"/>
+  <!-- Apparent position labels ABOVE the star — clear gap -->
+  <text x="590" y="97"  text-anchor="middle" fill="#b8ccff" font-size="12">(shifted toward lens)</text>
+  <text x="590" y="110" text-anchor="middle" fill="#d0e0ff" font-size="13" font-weight="bold">Apparent position</text>
+
+  <!-- Shift arrow — to the RIGHT of both stars at x=608 -->
+  <!-- Arrow from apparent bottom (122+10=132) to true top (179-10=169) -->
+  <defs>
+    <marker id="arr-up" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+      <path d="M0,6 L3,0 L6,6 Z" fill="#ff5533"/>
+    </marker>
+    <marker id="arr-dn" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+      <path d="M0,0 L3,6 L6,0 Z" fill="#ff5533"/>
+    </marker>
+  </defs>
+  <line x1="608" y1="132" x2="608" y2="169" stroke="#ff5533" stroke-width="2"
+        marker-start="url(#arr-up)" marker-end="url(#arr-dn)"/>
+  <!-- Hairline connectors -->
+  <line x1="600" y1="132" x2="608" y2="132" stroke="#ff5533" stroke-width="1" opacity="0.5"/>
+  <line x1="600" y1="169" x2="608" y2="169" stroke="#ff5533" stroke-width="1" opacity="0.5"/>
+  <!-- Arrow labels to the RIGHT — fits within 750px viewBox -->
+  <text x="615" y="148" fill="#ff6644" font-size="13" text-anchor="start" font-weight="bold">2.43 mas</text>
+  <text x="615" y="163" fill="#ff8866" font-size="12" text-anchor="start">positional shift</text>
+
+  <!-- Distance bracket: Earth ↔ Barnard's Star -->
+  <line x1="110" y1="252" x2="333" y2="252" stroke="#607080" stroke-width="1"/>
+  <line x1="110" y1="247" x2="110" y2="257" stroke="#607080" stroke-width="1"/>
+  <line x1="333" y1="247" x2="333" y2="257" stroke="#607080" stroke-width="1"/>
+  <text x="222" y="268" text-anchor="middle" fill="#aabbcc" font-size="12">1.83 pc (6 light-years)</text>
+
+  <!-- Legend box — wide enough to contain all text inside it -->
+  <!-- First row ends at ~x=420; italic row: "Shift exaggerated..." ~55 chars × 6.5px = 358px from x=30 → x=388 -->
+  <!-- Box right edge: 18+440=458, safely contains both rows -->
+  <rect x="18" y="280" width="440" height="50" rx="3" fill="#0d1520" stroke="#4a6080" stroke-width="1"/>
+  <line x1="30" y1="297" x2="58" y2="297" stroke="#e09030" stroke-width="2.2"/>
+  <text x="64"  y="301" fill="#c8d8d8" font-size="12">Bent light path</text>
+  <line x1="158" y1="297" x2="186" y2="297" stroke="#607080" stroke-width="1.1" stroke-dasharray="5 4"/>
+  <text x="192" y="301" fill="#c8d8d8" font-size="12">True (straight) path</text>
+  <line x1="306" y1="297" x2="334" y2="297" stroke="#6699ee" stroke-width="1.2" stroke-dasharray="7 4" opacity="0.9"/>
+  <text x="340" y="301" fill="#c8d8d8" font-size="12">Line of sight</text>
+  <text x="30"  y="320" fill="#8a9daa" font-size="11" font-style="italic">Shift exaggerated — actual: 2.43 mas vs. 335 mas separation</text>
+</svg>
