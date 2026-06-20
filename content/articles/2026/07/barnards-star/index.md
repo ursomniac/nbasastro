@@ -4,7 +4,7 @@ date: 2026-07-06
 description: "Too faint to see by eye, Barnard's Star holds a speed record, a century of false planet claims, and a payoff for anyone patient enough to wait."
 byline: "A faint red dwarf with the most famous wobble in astronomy"
 series: ["closer-look"]
-thumbnail: "icon.jpg"
+thumbnail: "icon.png"
 stars_nearby: ["Barnard's Star"]
 
 object_info:
