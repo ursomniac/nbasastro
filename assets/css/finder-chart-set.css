@@ -1,0 +1,86 @@
+/* ── finder-chart-set shortcode styles ──────────────────────────────────────
+   Add to your site's main stylesheet (or a shortcode-specific CSS file).
+   Existing classes from the Barnard article (.sm-buttons, .starmap-btn,
+   .starmap-link-alt) are reused — only the grid / card classes are new.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.finder-chart-set {
+  margin: 2rem 0 3rem;
+}
+
+.finder-chart-intro {
+  color: #555;
+  margin-bottom: 1.25rem;
+  max-width: 72ch;
+}
+
+/* Responsive grid: 3 cols on desktop, 2 on tablet, 1 on mobile */
+.finder-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+/* Card */
+.finder-chart-card {
+  border: 1px solid #f8d44e;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .15s ease;
+}
+
+.finder-chart-card:hover {
+  box-shadow: 0 3px 10px rgba(0,0,0,.12);
+}
+
+/* Thumbnail */
+.finder-chart-thumb-link {
+  display: block;
+  overflow: hidden;
+}
+
+.finder-chart-thumb {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform .2s ease;
+}
+
+.finder-chart-thumb-link:hover .finder-chart-thumb {
+  transform: scale(1.02);
+}
+
+/* Card body */
+.finder-chart-card-body {
+  padding: .75rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  flex: 1;
+}
+
+.finder-chart-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #111;
+}
+
+.finder-chart-caption {
+  font-size: .82rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* Push buttons to bottom of card */
+.finder-chart-card-body .sm-buttons {
+  margin-top: auto;
+  padding-top: .5rem;
+}
+
+.finder-chart-link {
+  color: #0d1421 !important;
+}

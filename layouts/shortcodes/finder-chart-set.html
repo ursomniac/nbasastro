@@ -1,0 +1,31 @@
+{{/*
+  finder-chart-set shortcode
+  Reads finder_charts from page front matter. See article-additions.md.
+*/}}
+{{ $data := .Page.Params.finder_charts }}
+{{ if $data }}
+{{ $charts := $data.charts }}
+
+<div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin:1.5rem 0;">
+  {{ range $charts }}
+  <div style="display:flex; flex-direction:column; border:1px solid #ddd; border-radius:6px; overflow:hidden; background:#fff;">
+
+    <a href="{{ .png }}" target="_blank">
+      <img src="{{ .raw }}" alt="Finder chart for {{ .name }}"
+           style="width:100%; height:auto; display:block;">
+    </a>
+
+    <div style="padding:.75rem 1rem 1rem; display:flex; flex-direction:column; gap:.3rem; flex:1;">
+      <strong class="finder-chart-link">{{ .name }}</strong>
+      {{ with .caption }}<span style="font-size:.83rem; color:#666;">{{ . }}</span>{{ end }}
+      <div class="sm-buttons" style="margin-top:auto; padding-top:.5rem;">
+        <a href="{{ .pdf }}" class="starmap-btn" target="_blank" download="{{ .pdf }}">📥 Download PDF</a>
+        <a href="{{ .png }}" class="starmap-link-alt finder-chart-link" target="_blank">View PNG</a>
+      </div>
+    </div>
+
+  </div>
+  {{ end }}
+</div>
+
+{{ end }}
