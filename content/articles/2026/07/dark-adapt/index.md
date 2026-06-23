@@ -1,6 +1,6 @@
 ---
 title: "Look Away to See More: Dark Adaptation and Averted Vision"
-date: 2026-07-13
+date: 2026-07-16
 description: "Dark sky adaptation and averted vision are two techniques every observer needs to know — and the eye anatomy that explains why they work."
 byline: "The faintest objects at the eyepiece aren't invisible. You're just looking at them with the wrong part of your eye."
 series: ["getting-started"]
