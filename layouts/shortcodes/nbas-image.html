@@ -8,7 +8,7 @@
 <figure class="nbas-media-container align-{{ $align }} {{ if $fullWidth }}full-width{{ end }}"
         style="{{ if $fullWidth }}width: 100%;{{ else }}width: {{ $w }}px;{{ end }} max-width: 100%; margin: 2rem auto;">
   {{- with $image -}}
-    {{- $scaled := .Resize (printf "%sx" $w) -}}
+    {{- $isSVG := eq .MediaType.SubType "svg" -}}
     {{/* Build the click-through href.
          If expand= is given, link to that file in the same page bundle directory.
          Otherwise link to the full-resolution src file (original behavior). */}}
@@ -17,11 +17,23 @@
       {{- $href = printf "%s/%s" ($.Page.RelPermalink | strings.TrimSuffix "/") $expandSrc -}}
     {{- end -}}
     <a href="{{ $href }}" target="_blank">
-      <img src="{{ $scaled.RelPermalink }}"
-           width="{{ $scaled.Width }}"
-           height="{{ $scaled.Height }}"
-           class="nbas-media-img"
-           style="width: 100%; height: auto; display: block;">
+      {{- if $isSVG -}}
+        {{/* SVGs are already vector/scalable -- Hugo's .Resize is a
+             raster-image operation and panics on SVG resources, so skip
+             it entirely and let the <img> width/height attributes (and
+             the figure's own width style, set above) handle sizing. */}}
+        <img src="{{ .RelPermalink }}"
+             width="{{ $w }}"
+             class="nbas-media-img"
+             style="width: 100%; height: auto; display: block;">
+      {{- else -}}
+        {{- $scaled := .Resize (printf "%sx" $w) -}}
+        <img src="{{ $scaled.RelPermalink }}"
+             width="{{ $scaled.Width }}"
+             height="{{ $scaled.Height }}"
+             class="nbas-media-img"
+             style="width: 100%; height: auto; display: block;">
+      {{- end -}}
     </a>
   {{- else -}}
     <p class="nbas-image-error">Image "{{ $.Get "src" }}" not found.</p>

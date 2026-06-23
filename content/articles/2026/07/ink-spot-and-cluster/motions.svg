@@ -1,0 +1,87 @@
+<svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#5b9bd9"/>
+    </marker>
+    <marker id="arrowGrey" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#9a9a9a"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="600" fill="#0d1422"/>
+
+  <text x="450" y="40" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="700" fill="#e8edf7">
+    Same sightline, different speeds
+  </text>
+
+  <!-- Earth, fixed reference point at left for both timelines -->
+  <g transform="translate(70,290)">
+    <circle r="13" fill="#3a4a63"/>
+    <circle r="13" fill="none" stroke="#7d93b8" stroke-width="1.5"/>
+    <text x="0" y="34" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#9fb0cc">Earth</text>
+  </g>
+
+  <!-- ············ TODAY (top row) ············ -->
+  <text x="120" y="120" font-family="sans-serif" font-size="14" font-weight="600" fill="#cdd9ee">Today</text>
+  <line x1="60" y1="150" x2="840" y2="150" stroke="#2a3550" stroke-width="1"/>
+
+  <!-- sightline from Earth to the (overlapping) pair, today -->
+  <line x1="70" y1="180" x2="430" y2="180" stroke="#465879" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- cluster marker, today -->
+  <circle cx="430" cy="180" r="14" fill="none" stroke="#FFD700" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="430" y="155" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#FFD700">NGC 6520</text>
+
+  <!-- nebula marker, today (overlapping the cluster's position) -->
+  <ellipse cx="442" cy="188" rx="13" ry="10" fill="#3a3a3a" stroke="#888" stroke-width="1.5"/>
+  <text x="442" y="216" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#aaaaaa">Barnard 86</text>
+
+  <text x="650" y="180" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9fb0cc">
+    Same distance, same direction from Earth —
+  </text>
+  <text x="650" y="198" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9fb0cc">
+    nearly on top of each other in the sky
+  </text>
+
+  <!-- ············ VELOCITY VECTORS (middle row) ············ -->
+  <text x="120" y="270" font-family="sans-serif" font-size="14" font-weight="600" fill="#cdd9ee">Radial velocity (heliocentric)</text>
+  <line x1="60" y1="295" x2="840" y2="295" stroke="#2a3550" stroke-width="1"/>
+
+  <!-- common starting point -->
+  <circle cx="430" cy="345" r="5" fill="#cccccc"/>
+
+  <!-- cluster velocity vector: -29 km/s, moving toward Earth (left) -->
+  <line x1="430" y1="345" x2="180" y2="345" stroke="#5b9bd9" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <text x="300" y="330" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#5b9bd9">NGC 6520: −29 km/s</text>
+
+  <!-- nebula velocity vector: ~0 km/s. Drawn as a short but clearly
+       visible vector (not a near-zero stub) so it reads as "real but
+       small" rather than as a rendering glitch. -->
+  <line x1="430" y1="345" x2="475" y2="345" stroke="#9a9a9a" stroke-width="3" marker-end="url(#arrowGrey)"/>
+  <text x="430" y="375" text-anchor="start" font-family="sans-serif" font-size="13" font-weight="600" fill="#9a9a9a">Barnard 86: ≈0 km/s</text>
+
+  <text x="650" y="300" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9fb0cc">The cluster's stars are speeding toward us;</text>
+  <text x="650" y="318" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9fb0cc">the cloud is, by comparison, nearly standing still</text>
+
+  <!-- ············ SINCE FORMATION (bottom row) ············ -->
+  <text x="120" y="430" font-family="sans-serif" font-size="14" font-weight="600" fill="#cdd9ee">Over the cluster's ~60 Myr lifetime</text>
+  <line x1="60" y1="455" x2="840" y2="455" stroke="#2a3550" stroke-width="1"/>
+
+  <!-- drift result: nebula stays put (relatively), cluster has moved
+       about 1.8 kpc — shown schematically as a wide separation, with a
+       bracket measuring the gap -->
+  <circle cx="280" cy="505" r="14" fill="none" stroke="#FFD700" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="280" y="530" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#FFD700">NGC 6520 (drifted)</text>
+
+  <ellipse cx="700" cy="505" rx="13" ry="10" fill="#3a3a3a" stroke="#888" stroke-width="1.5"/>
+  <text x="700" y="530" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#aaaaaa">Barnard 86 (~unmoved)</text>
+
+  <line x1="294" y1="505" x2="687" y2="505" stroke="#5b6878" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="294" y1="495" x2="294" y2="515" stroke="#5b6878" stroke-width="1"/>
+  <line x1="687" y1="495" x2="687" y2="515" stroke="#5b6878" stroke-width="1"/>
+  <text x="490" y="485" text-anchor="middle" font-family="sans-serif" font-size="12" font-style="italic" fill="#7d8aa3">~1.8 kpc of relative drift</text>
+
+  <text x="450" y="575" text-anchor="middle" font-family="sans-serif" font-size="13" font-style="italic" fill="#6f82a8">
+    Not to scale. Drift shown is along the line of sight, not lateral motion.
+  </text>
+</svg>
