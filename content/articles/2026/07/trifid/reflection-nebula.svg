@@ -1,0 +1,111 @@
+<svg viewBox="0 0 580 290" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+
+  <rect width="580" height="290" fill="#060c18"/>
+
+  <defs>
+    <!-- Layered blue glow (three overlapping gradients) -->
+    <radialGradient id="bglow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#77aaff" stop-opacity="0.65"/>
+      <stop offset="40%"  stop-color="#4477ee" stop-opacity="0.40"/>
+      <stop offset="100%" stop-color="#2244cc" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bglow2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#5588ff" stop-opacity="0.35"/>
+      <stop offset="55%"  stop-color="#3355cc" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#1133aa" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bglow3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#4466ee" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#112288" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Dust cloud fill (grey-blue) -->
+    <radialGradient id="dustFill" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#99aacc" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#667799" stop-opacity="0.10"/>
+    </radialGradient>
+    <!-- Star (warm, not extremely hot) -->
+    <radialGradient id="warmStar" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ffffff"/>
+      <stop offset="40%"  stop-color="#ffffe8" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffffe8" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Blur filter for nebulosity -->
+    <filter id="blueBlur" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <!-- Arrow markers -->
+    <marker id="whtArr2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0,1 L0,6 L6.5,3.5 z" fill="#889977"/>
+    </marker>
+    <marker id="blueArr2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0,1 L0,6 L6.5,3.5 z" fill="#4488ff"/>
+    </marker>
+    <marker id="redArr2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0,1 L0,6 L6.5,3.5 z" fill="#884422"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="290" y="22" fill="#c5a059" font-size="14" font-weight="bold" text-anchor="middle">Reflection Nebula</text>
+
+  <!-- === BLUE GLOW (three layers, centered on dust cloud at 310,152) === -->
+  <!-- Blurred outer haze -->
+  <circle cx="310" cy="152" r="120" fill="#3355cc" fill-opacity="0.10" filter="url(#blueBlur)"/>
+  <!-- Gradient layers -->
+  <circle cx="310" cy="152" r="46"  fill="url(#bglow1)"/>
+  <circle cx="310" cy="152" r="85"  fill="url(#bglow2)"/>
+  <circle cx="310" cy="152" r="120" fill="url(#bglow3)"/>
+
+  <!-- Dust cloud (visible grain-cloud shape over the glow) -->
+  <ellipse cx="310" cy="152" rx="58" ry="44" fill="url(#dustFill)"/>
+  <!-- Grain texture marks -->
+  <g fill="none" stroke="#8899bb" stroke-width="0.9" opacity="0.55">
+    <ellipse cx="288" cy="146" rx="7"  ry="2.5" transform="rotate(-18 288 146)"/>
+    <ellipse cx="318" cy="155" rx="8"  ry="2.5" transform="rotate(10 318 155)"/>
+    <ellipse cx="337" cy="143" rx="6"  ry="2"   transform="rotate(-28 337 143)"/>
+    <ellipse cx="296" cy="165" rx="6"  ry="2"   transform="rotate(22 296 165)"/>
+    <ellipse cx="328" cy="163" rx="7"  ry="2.5" transform="rotate(-8 328 163)"/>
+  </g>
+  <text x="310" y="170" fill="#aabbdd" font-size="10" text-anchor="middle" font-style="italic">dust grains</text>
+
+  <!-- Illuminating star (upper-left, not centered) -->
+  <!-- Star at (95,85), glow r=18, core r=7 -->
+  <circle cx="95" cy="85" r="18" fill="url(#warmStar)"/>
+  <circle cx="95" cy="85" r="7"  fill="#ffffff"/>
+
+  <!-- Starlight arrow: (108,95) → (250,135)
+       (computed: near edge of dust ellipse along line from star to cloud center) -->
+  <line x1="108" y1="95" x2="248" y2="133" stroke="#889966" stroke-width="1.8" marker-end="url(#whtArr2)"/>
+  <!-- "starlight" label at midpoint (178,114) minus 8px = y=106 -->
+  <text x="178" y="106" fill="#778855" font-size="10" text-anchor="middle">starlight</text>
+
+  <!-- Blue scatter arrows (4 directions from cloud surface) -->
+  <!-- Up: (310,108)→(310,50); "blue" at (318,47) -->
+  <line x1="310" y1="108" x2="310" y2="52" stroke="#4488ff" stroke-width="2.2" marker-end="url(#blueArr2)"/>
+  <text x="318" y="50" fill="#4488ff" font-size="11">blue</text>
+
+  <!-- Up-right: (352,118)→(408,72); "blue" at (413,70) -->
+  <line x1="352" y1="118" x2="406" y2="74" stroke="#4488ff" stroke-width="2.2" marker-end="url(#blueArr2)"/>
+  <text x="412" y="72" fill="#4488ff" font-size="11">blue</text>
+
+  <!-- Right: (368,152)→(446,152); "blue" at (451,150) -->
+  <line x1="368" y1="152" x2="444" y2="152" stroke="#4488ff" stroke-width="2.2" marker-end="url(#blueArr2)"/>
+  <text x="450" y="150" fill="#4488ff" font-size="11">blue</text>
+
+  <!-- Down-right: (352,186)→(408,230); "blue" at (413,232) -->
+  <line x1="352" y1="186" x2="406" y2="228" stroke="#4488ff" stroke-width="2.2" marker-end="url(#blueArr2)"/>
+  <text x="413" y="232" fill="#4488ff" font-size="11">blue</text>
+
+  <!-- Red "passes through": continues in SAME direction as incoming starlight (from star to cloud)
+       Direction: (310-95, 152-85) = (215, 67), normalized ≈ (0.955, 0.298)
+       Far-side cloud exit ≈ (372,175). Continue 80px in same direction → (448, 199) -->
+  <line x1="374" y1="177" x2="446" y2="198" stroke="#884422" stroke-width="1.5"
+        stroke-dasharray="5,3" marker-end="url(#redArr2)" opacity="0.65"/>
+  <text x="450" y="196" fill="#884422" font-size="9">red</text>
+  <text x="450" y="208" fill="#663311" font-size="9" opacity="0.8">(passes through)</text>
+
+  <!-- Bottom explanation -->
+  <text x="290" y="258" fill="#99aadd" font-size="11" text-anchor="middle">Dust scatters blue wavelengths in all directions; red mostly passes through.</text>
+  <text x="290" y="274" fill="#4488ff" font-size="11" text-anchor="middle">The cloud glows blue with borrowed, scattered light — same physics as the blue sky.</text>
+
+</svg>
