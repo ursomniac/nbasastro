@@ -1,0 +1,118 @@
+<svg viewBox="0 0 580 420" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect width="580" height="420" fill="#0a0f1a"/>
+
+  <!-- Plot area: x=80–500, y=40–290 -->
+  <rect x="80" y="40" width="420" height="250" fill="#060b14"/>
+  <rect x="80" y="40" width="420" height="250" fill="none" stroke="#2a3a50" stroke-width="1.5"/>
+
+  <!--
+    X: age 10–80 → x = 80 + (age-10)/70 * 420
+    10→80, 20→140, 30→200, 40→260, 50→320, 60→380, 70→440, 80→500
+
+    Y: pupil diameter 3–9mm (top=large)
+    y = 290 − (mm-3)/6 * 250
+    3mm→290, 4mm→248, 5mm→207, 6mm→165, 7mm→123, 8mm→82, 9mm→40
+  -->
+
+  <!-- Grid -->
+  <g stroke="#1a2535" stroke-width="0.8">
+    <line x1="80"  y1="82"  x2="500" y2="82"/>   <!-- 8mm -->
+    <line x1="80"  y1="123" x2="500" y2="123"/>  <!-- 7mm -->
+    <line x1="80"  y1="165" x2="500" y2="165"/>  <!-- 6mm -->
+    <line x1="80"  y1="207" x2="500" y2="207"/>  <!-- 5mm -->
+    <line x1="80"  y1="248" x2="500" y2="248"/>  <!-- 4mm -->
+    <line x1="140" y1="40"  x2="140" y2="290"/>
+    <line x1="200" y1="40"  x2="200" y2="290"/>
+    <line x1="260" y1="40"  x2="260" y2="290"/>
+    <line x1="320" y1="40"  x2="320" y2="290"/>
+    <line x1="380" y1="40"  x2="380" y2="290"/>
+    <line x1="440" y1="40"  x2="440" y2="290"/>
+  </g>
+
+  <!-- X axis labels -->
+  <g fill="#667788" font-size="12" text-anchor="middle">
+    <text x="80"  y="308">10</text>
+    <text x="140" y="308">20</text>
+    <text x="200" y="308">30</text>
+    <text x="260" y="308">40</text>
+    <text x="320" y="308">50</text>
+    <text x="380" y="308">60</text>
+    <text x="440" y="308">70</text>
+    <text x="500" y="308">80</text>
+  </g>
+  <text x="290" y="328" fill="#8899aa" font-size="13" text-anchor="middle">Age (years)</text>
+
+  <!-- Y axis labels -->
+  <g fill="#667788" font-size="12" text-anchor="end">
+    <text x="74" y="86">8 mm</text>
+    <text x="74" y="127">7 mm</text>
+    <text x="74" y="169">6 mm</text>
+    <text x="74" y="211">5 mm</text>
+    <text x="74" y="252">4 mm</text>
+    <text x="74" y="294">3 mm</text>
+  </g>
+  <text transform="translate(22,165) rotate(-90)" fill="#8899aa" font-size="13" text-anchor="middle">Max. dark-adapted pupil diameter</text>
+
+  <!-- Pupil diameter curve (Winn et al. / Stanley & Davies approximation)
+       Age 10: ~8.0mm → y=82
+       Age 20: ~7.5mm → y=103
+       Age 30: ~6.5mm → y=144
+       Age 40: ~5.8mm → y=173
+       Age 50: ~5.2mm → y=198
+       Age 60: ~4.7mm → y=219
+       Age 70: ~4.3mm → y=236
+       Age 80: ~4.0mm → y=248
+  -->
+  <polyline
+    points="80,82 140,103 200,144 260,173 320,198 380,219 440,236 500,248"
+    fill="none" stroke="#aaddff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Shaded area under curve (just visual) -->
+  <polygon
+    points="80,82 140,103 200,144 260,173 320,198 380,219 440,236 500,248 500,290 80,290"
+    fill="#aaddff" opacity="0.06"/>
+
+  <!-- Exit pupil reference lines -->
+  <!-- Common exit pupils: 7mm, 5mm, 2mm shown as horizontal dashed lines -->
+  <!-- Already shown by grid; add labels in right margin -->
+
+  <!-- 7mm exit pupil — useful only for young observers -->
+  <line x1="80" y1="123" x2="500" y2="123" stroke="#446688" stroke-width="1" stroke-dasharray="6,4"/>
+
+  <!-- Annotations: all placed in right margin or in clear zones -->
+
+  <!-- The pupil curve itself: label at the upper-left end where there's space above the curve -->
+  <!-- At x=80, curve is at y=82. Label in clear space above: but that's the top of the plot.
+       Put label BELOW the curve end, in clear space. At x=80, y=82. Below = higher y. Put label at y=100
+       but that's on the curve. Instead put label box to the right, in the mid-plot zone. -->
+
+  <!-- At x=200 (age 30), curve is at y=144. Below curve (y>144) and above grid line (y<165) is a narrow band.
+       Actually best to label the curve with an arrow from the right margin. -->
+
+  <!-- Label the curve via an annotation line from right margin -->
+  <text x="507" y="236" fill="#aaddff" font-size="12">← max. dark-</text>
+  <text x="507" y="250" fill="#aaddff" font-size="12">  adapted pupil</text>
+
+  <!-- Exit pupil reference: label in right margin for 7mm line -->
+  <text x="507" y="120" fill="#446688" font-size="11">← 7mm exit pupil</text>
+  <text x="507" y="133" fill="#334455" font-size="10">  (low magnification)</text>
+
+  <!-- 5mm reference -->
+  <text x="507" y="204" fill="#335566" font-size="11">← 5mm exit pupil</text>
+
+  <!-- Callout: where the curve crosses the 7mm and 5mm lines -->
+  <!-- 7mm → age ~20: curve crosses at x=140 -->
+  <circle cx="140" cy="123" r="4" fill="#446688"/>
+  <line x1="140" y1="123" x2="140" y2="109" stroke="#446688" stroke-width="1"/>
+  <text x="140" y="104" fill="#446688" font-size="10" text-anchor="middle">age ~20</text>
+
+  <!-- 5mm → age ~52: interpolate 198+(207-198)*(52-50)/(10) = ~ 200 at age~51, x≈320+6=326 -->
+  <circle cx="326" cy="207" r="4" fill="#335566"/>
+  <line x1="326" y1="207" x2="326" y2="193" stroke="#335566" stroke-width="1"/>
+  <text x="326" y="188" fill="#335566" font-size="10" text-anchor="middle">age ~50</text>
+
+  <!-- Title -->
+  <text x="290" y="360" fill="#c5a059" font-size="14" font-weight="bold" text-anchor="middle">Maximum Dark-Adapted Pupil Diameter vs. Age</text>
+  <text x="290" y="380" fill="#667788" font-size="11" text-anchor="middle">A 7mm exit-pupil eyepiece delivers its full light to a 20-year-old eye; an older observer needs higher magnification to match it.</text>
+  <text x="290" y="398" fill="#445566" font-size="10" text-anchor="middle">After Winn et al. (1994) and Stanley &amp; Davies (1995)</text>
+</svg>

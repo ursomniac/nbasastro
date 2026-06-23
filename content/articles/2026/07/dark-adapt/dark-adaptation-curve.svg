@@ -1,0 +1,72 @@
+<svg viewBox="0 0 580 420" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect width="580" height="420" fill="#0a0f1a"/>
+
+  <!-- Plot area: x=80–520, y=40–300 -->
+  <rect x="80" y="40" width="440" height="260" fill="#060b14"/>
+  <rect x="80" y="40" width="440" height="260" fill="none" stroke="#2a3a50" stroke-width="1.5"/>
+
+  <!-- Grid lines -->
+  <g stroke="#1a2535" stroke-width="0.8">
+    <line x1="80"  y1="105" x2="520" y2="105"/>
+    <line x1="80"  y1="170" x2="520" y2="170"/>
+    <line x1="80"  y1="235" x2="520" y2="235"/>
+    <line x1="168" y1="40"  x2="168" y2="300"/>
+    <line x1="256" y1="40"  x2="256" y2="300"/>
+    <line x1="344" y1="40"  x2="344" y2="300"/>
+    <line x1="432" y1="40"  x2="432" y2="300"/>
+  </g>
+
+  <!-- X axis labels -->
+  <g fill="#667788" font-size="12" text-anchor="middle">
+    <text x="80"  y="318">0</text>
+    <text x="168" y="318">5</text>
+    <text x="256" y="318">10</text>
+    <text x="344" y="318">20</text>
+    <text x="432" y="318">30</text>
+    <text x="520" y="318">40</text>
+  </g>
+  <text x="300" y="338" fill="#8899aa" font-size="13" text-anchor="middle">Minutes in the dark</text>
+
+  <!-- Y axis: top = most sensitive -->
+  <g fill="#667788" font-size="11" text-anchor="end">
+    <text x="74" y="44">high</text>
+    <text x="74" y="304">low</text>
+  </g>
+  <text transform="translate(20,170) rotate(-90)" fill="#8899aa" font-size="13" text-anchor="middle">Eye sensitivity</text>
+
+  <!-- CONE curve: quick improvement, levels off ~7 min
+       (80,268) → (168,188) → (256,165) → (344,160) → (520,158) -->
+  <polyline
+    points="80,268 120,228 168,192 210,172 256,165 300,161 344,159 432,158 520,157"
+    fill="none" stroke="#ffcc44" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ROD curve: slow start, steep improvement from ~10 min, plateaus ~35 min
+       (80,268) → (168,258) → (256,230) → (290,190) → (310,150) → (344,105) → (432,58) → (520,48) -->
+  <polyline
+    points="80,268 130,263 168,255 210,240 240,218 256,200 278,170 300,140 320,112 344,90 390,62 432,52 476,47 520,45"
+    fill="none" stroke="#6699ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Rod-phase onset: vertical dashed line at x=256 (10 min) -->
+  <line x1="256" y1="40" x2="256" y2="300" stroke="#446644" stroke-width="1.2" stroke-dasharray="5,4"/>
+  <!-- "rod phase begins" label inside plot: curves are at y=165+ here, so y=62 is clear -->
+  <text x="263" y="62" fill="#558855" font-size="11">rod phase begins</text>
+
+  <!-- ── ALL LABELS IN CLEAR SPACE ── -->
+
+  <!-- Legend: horizontal row BELOW plot area, grouped so translate(x,y) moves everything -->
+  <g transform="translate(130, 358)">
+    <line x1="0" y1="6" x2="28" y2="6" stroke="#6699ff" stroke-width="2.5"/>
+    <text x="34" y="10" fill="#6699ff" font-size="12">Rods (night vision)</text>
+    <line x1="190" y1="6" x2="218" y2="6" stroke="#ffcc44" stroke-width="2.5"/>
+    <text x="224" y="10" fill="#ffcc44" font-size="12">Cones (color vision)</text>
+  </g>
+
+
+  <!-- "Lights off" label: to the right of the starting point, in lower-left area -->
+  <!-- At x=80, both curves are at y=268. Put label at x=90, y=290 – below both curves. -->
+  <text x="90" y="292" fill="#556677" font-size="11">← lights off</text>
+
+  <!-- Title and caption: pushed down so legend (text baseline y=368) clears title (top y=378) -->
+  <text x="300" y="392" fill="#c5a059" font-size="14" font-weight="bold" text-anchor="middle">Dark Adaptation</text>
+  <text x="300" y="410" fill="#667788" font-size="11" text-anchor="middle">Rods continue improving for 30+ minutes. A single white light resets the clock.</text>
+</svg>
