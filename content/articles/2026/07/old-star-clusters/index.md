@@ -5,6 +5,7 @@ description: "Most open clusters dissolve within a few hundred million years. A 
 byline: "Open clusters are typically younger than 1-2 billion years, but a few are much older."
 series: ["wider-view"]
 thumbnail: "icon.png"
+banner: "banner.jpeg"
 
 dso_caldwell: ["1"]
 dso_messier: ["67"]

@@ -6,6 +6,7 @@ byline: "Comparing the bright stars Vega, Deneb, and Altair"
 tags: ["summer triangle"]
 series: ["wider-view"]
 thumbnail: "icon.png"
+banner: "map.png"
 stars_bright: ["Vega", "Deneb", "Altair"]
 stars_nearby: ["Vega", "Altair"]
 ---

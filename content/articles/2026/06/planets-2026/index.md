@@ -5,6 +5,7 @@ description: "Jupiter and Venus fade from view this summer while Saturn, Mars, a
 authors: ["bob-donahue"]
 byline: "What's in store for the planets Summer/Fall 2026"
 thumbnail: "icon.png"
+banner: "banner.png"
 series: ["planet-watch"]
 ---
 

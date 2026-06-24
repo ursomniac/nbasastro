@@ -7,6 +7,7 @@ byline: "The brightest star in the Northern Hemisphere"
 series: ["closer-look"]
 tags: ["giant-stars"]
 thumbnail: "icon.jpg"
+banner: "banner.png"
 stars_bright: ["Arcturus"]
 
 object_info:

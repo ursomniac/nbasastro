@@ -5,6 +5,7 @@ description: "NGC 6520 and Barnard 86 sit side by side in Sagittarius, long assu
 byline: "A cluster, a shadow, and an argument that isn't settled"
 series: ["closer-look"]
 thumbnail: "icon.jpg"
+banner: "banner.jpg"
 dso_ngc: ["6520"]
 dso_other: ["Barnard 86"]
 

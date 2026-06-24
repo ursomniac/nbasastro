@@ -7,6 +7,7 @@ authors: ["bob-donahue"]
 byline: "Venus (and the Moon) encounter one of the brightest star clusters"
 series: ["planet-watch"]
 thumbnail: "icon.png"
+banner: "banner.png"
 sso_planets: ["Venus"]
 dso_messier: ["44"]
 

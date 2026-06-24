@@ -5,6 +5,7 @@ description: "The Trifid Nebula is the only bright showpiece object that display
 byline: "Most nebulae are one thing. The Trifid is three — and each happens for a completely different reason."
 series: ["closer-look"]
 thumbnail: "icon.jpg"
+banner: "banner.jpg"
 dso_messier: ["20"]
 
 object_info:

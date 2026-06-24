@@ -5,6 +5,7 @@ description: "Dark sky adaptation and averted vision are two techniques every ob
 byline: "The faintest objects at the eyepiece aren't invisible. You're just looking at them with the wrong part of your eye."
 series: ["getting-started"]
 thumbnail: "icon.jpg"
+banner: "banner.png"
 ---
 
 ## The Trick That Feels Wrong

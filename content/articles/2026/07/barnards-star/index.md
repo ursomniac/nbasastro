@@ -5,6 +5,7 @@ description: "Too faint to see by eye, Barnard's Star holds a speed record, a ce
 byline: "A faint red dwarf with the most famous wobble in astronomy"
 series: ["closer-look"]
 thumbnail: "icon.png"
+banner: "banner.png"
 stars_nearby: ["Barnard's Star"]
 
 object_info:

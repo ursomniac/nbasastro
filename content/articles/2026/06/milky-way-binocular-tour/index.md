@@ -7,6 +7,7 @@ series: ["whats-up-in-the-sky"]
 byline: "Discover the Summer Milky Way: clusters, nebulae, and the center of the Galaxy!"
 tags: []
 thumbnail: "icon2.png"
+banner: "banner.jpg"
 dso_messier: ["6", "7", "11", "17"]
 dso_other: ["Cr 399"]
 stars_bright: ["Deneb", "Antares", "Altair"]
