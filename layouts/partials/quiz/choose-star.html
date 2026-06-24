@@ -1,0 +1,89 @@
+{{/*
+  layouts/partials/quiz/choose-star.html
+
+  Renderer: optional context image + question text; each answer is a star thumbnail + name panel.
+  Combines the optional top image from identify-image with the image-panel answers of choose-image.
+
+  Context (passed from quiz.html shortcode):
+    .Page    — the Hugo page (for Resources.GetMatch)
+    .Q       — the question map from front matter
+    .Qi      — zero-based question index
+    .IsFirst — bool
+    .IsLast  — bool
+
+  Question front matter:
+    image:   (optional) page-resource filename for a context image shown above the prompt.
+             Omit the field entirely to show the question text only.
+
+  Answer front matter:
+    image:        page-resource filename for the star thumbnail panel
+    text:         star or object name displayed below the thumbnail
+    correct:      true | false
+    explanation:  markdown string; displayed in the explanation panel after a click
+
+  Answer data attributes consumed by the shared JS state machine:
+    data-correct      "true" | "false"
+    data-name         answer text
+    data-imgsrc       resolved image URL, or "" if resource not found
+    (explanation is stored in a hidden <span> and read by JS)
+*/}}
+
+{{ $page    := .Page }}
+{{ $q       := .Q }}
+{{ $qi      := .Qi }}
+{{ $isFirst := .IsFirst }}
+{{ $isLast  := .IsLast }}
+
+<div class="nbas-quiz-question{{ if $isFirst }} nbas-quiz-active{{ end }}"
+     data-question="{{ $qi }}">
+
+  {{/* ── Optional context image — present only when question has an `image` field ── */}}
+  {{ if $q.image }}
+    {{ with $page.Resources.GetMatch $q.image }}
+      <div class="nbas-quiz-mystery-wrap">
+        <img src="{{ .RelPermalink }}" alt="{{ $q.text }}">
+      </div>
+    {{ end }}
+  {{ end }}
+
+  {{/* ── Question text ── */}}
+  <p class="nbas-quiz-prompt">{{ $q.text }}</p>
+
+  {{/* ── 2×2 answer panels: star thumbnail + name ── */}}
+  <div class="nbas-quiz-answers">
+    {{ range $q.answers }}
+      {{ $ansImg := $page.Resources.GetMatch .image }}
+      {{ $imgsrc := "" }}
+      {{ with $ansImg }}{{ $imgsrc = .RelPermalink }}{{ end }}
+
+      <button class="nbas-quiz-answer nbas-quiz-answer--has-image"
+              data-correct="{{ .correct }}"
+              data-name="{{ .text }}"
+              data-imgsrc="{{ $imgsrc }}">
+        {{ with $ansImg }}
+          <img src="{{ .RelPermalink }}" alt="{{ $.text }}">
+        {{ end }}
+        <div class="nbas-quiz-answer-name">{{ .text }}</div>
+        <span class="nbas-quiz-answer-explanation" hidden>{{ .explanation | markdownify }}</span>
+      </button>
+    {{ end }}
+  </div>
+
+  {{/* ── Explanation panel (JS populates; hidden until first click) ── */}}
+  <div class="nbas-quiz-explanation">
+    <div class="nbas-quiz-explanation-inner">
+      <div class="nbas-quiz-explanation-img"><img src="" alt=""></div>
+      <div class="nbas-quiz-explanation-body">
+        <div class="nbas-quiz-explanation-name"></div>
+        <div class="nbas-quiz-explanation-text"></div>
+        <div class="nbas-quiz-explanation-prompt"></div>
+      </div>
+    </div>
+  </div>
+
+  {{/* ── Next / Finish button (hidden until first click) ── */}}
+  <button class="nbas-quiz-next">
+    {{ if $isLast }}Finish Quiz →{{ else }}Next Question →{{ end }}
+  </button>
+
+</div>{{/* .nbas-quiz-question */}}
