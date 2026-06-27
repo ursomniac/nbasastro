@@ -1,31 +1,51 @@
 {{/*
   finder-chart-set shortcode
   Reads finder_charts from page front matter. See article-additions.md.
+
+  Optional parameter:
+    align="left|right"  — floats the block beside content (max-width 42%).
+                          Omit entirely for a full-width inline block.
+
+  Existing uses with no parameters are fully backward-compatible.
 */}}
-{{ $data := .Page.Params.finder_charts }}
+{{ $data   := .Page.Params.finder_charts }}
+{{ $align  := .Get "align" }}
 {{ if $data }}
 {{ $charts := $data.charts }}
 
-<div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin:1.5rem 0;">
-  {{ range $charts }}
-  <div style="display:flex; flex-direction:column; border:1px solid #ddd; border-radius:6px; overflow:hidden; background:#fff;">
+{{ if eq $align "right" }}
+<div style="float:right; clear:right; margin:0 0 1.5rem 1.5rem; width:42%; min-width:260px;">
+{{ else if eq $align "left" }}
+<div style="float:left; clear:left; margin:0 1.5rem 1.5rem 0; width:42%; min-width:260px;">
+{{ else }}
+{{ $cols := 3 }}{{ if eq (len $charts) 1 }}{{ $cols = 1 }}{{ end }}
+<div style="display:grid; grid-template-columns:repeat({{ $cols }},minmax(0,1fr)); gap:1rem; margin:1.5rem 0;">
+{{ end }}
 
-    <a href="{{ .png }}" target="_blank">
-      <img src="{{ .raw }}" alt="Finder chart for {{ .name }}"
+  {{ range $charts }}
+  <figure style="margin:0; border:1px solid #ddd; border-radius:6px; overflow:hidden; background:#fff; display:flex; flex-direction:column;">
+
+    <div style="padding:.45rem 1rem; background:#f4f4f4; border-bottom:1px solid #e0e0e0;">
+      <strong style="font-size:.88rem; letter-spacing:.01em;">Finder Chart — {{ .name }}</strong>
+    </div>
+
+    <a href="{{ .png }}" target="_blank" title="View full-size PNG">
+      <img src="{{ .raw }}" alt="Finder chart: {{ .name }}"
            style="width:100%; height:auto; display:block;">
     </a>
 
-    <div style="padding:.75rem 1rem 1rem; display:flex; flex-direction:column; gap:.3rem; flex:1;">
-      <strong class="finder-chart-link">{{ .name }}</strong>
-      {{ with .caption }}<span style="font-size:.83rem; color:#666;">{{ . }}</span>{{ end }}
-      <div class="sm-buttons" style="margin-top:auto; padding-top:.5rem;">
+    <figcaption style="padding:.6rem 1rem .85rem; display:flex; flex-direction:column; gap:.35rem; flex:1;">
+      {{ with .caption }}
+      <span style="font-size:.82rem; color:#666; line-height:1.4;">{{ . }}</span>
+      {{ end }}
+      <div class="sm-buttons" style="margin-top:auto; padding-top:.4rem; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;">
         <a href="{{ .pdf }}" class="starmap-btn" target="_blank" download="{{ .pdf }}">📥 Download PDF</a>
         <a href="{{ .png }}" class="starmap-link-alt finder-chart-link" target="_blank">View PNG</a>
       </div>
-    </div>
+    </figcaption>
 
-  </div>
+  </figure>
   {{ end }}
-</div>
 
+</div>
 {{ end }}
