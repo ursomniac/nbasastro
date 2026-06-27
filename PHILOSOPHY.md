@@ -146,3 +146,81 @@ keep the following in mind:
 - The reader is an adult who is choosing to spend their time here. Treat them accordingly.
 - When in doubt: does this help someone understand the sky better, or experience it more fully?
   If yes, it probably belongs. If no, reconsider.
+
+## Series Considerations
+
+Note on "sporadic" series: the cadence for article release is to have at least two articles per week:  one on Mondays (ACL articles) and one on Thrursdays (basically most of the "sporadic" ones).  
+
+Other articles (Watch!, events, announcements) can happen on any day depending on their timeliness.
+
+NBAS Newsletters are released to coincide with the club meeting dates.
+
+### A Closer Look (ACL)
+
+This series focuses on a single object.   Aside from doing what other sites do: mostly just list facts and figures, we want to emphasize the *experience* of observing this object.   I typically add one of my own images, and a finder chart but we want to spend time taking a real "closer look" at the object - finding the features that make it interesting and giving the reader a clear indication of why it's interesting.   The idea is that when they go to look at it themselves, they now can appreciate it more from the provided context.   The takeaway is that no matter how they're observing - they're seeing the same object that was observed for many decades, sometimes with very meager telescopes, and over that time our understanding has increased.
+
+Every object has a *story*;  we want to tell those stories.
+
+Frequency: Weekly (Mondays)
+
+### A Wider View (AWV)
+
+This is similar to ACL but looks at a set of class of objects.  It can get a little more technical/geeky than ACL because now we get to delve into the underlying physics and astronomy.   But overall the goals are the same: e.g., you're not just looking at some globular cluster to "check it off of a list" but that each one of them is part of a *larger* story, and comparing them enlightens us to the bigger picture.
+
+Frequency: monthly, in most months
+
+### What's Up in the Sky (WUS)
+
+This is a monthly article (intended to be with a companion video mini-lecture, but I haven't done that yet), outlining events or general observing for the following month.
+
+Again the focus is "hey these things are happening and are interesting - go check them out".
+
+Frequency: monthly (3rd Thu), intended for the following month (e.g., July's WUS covers August, etc.)
+
+### Getting Started (GS)
+
+These articles are for the beginner or the novice to the topic covered (so it might not be "complete beginner" overall - one intended guide will be on post-processing of image stacks from smart telecopes.
+
+Frequency: sporadic.
+
+### How the Sky Works (HSW)
+
+These articles describe some of the observing concepts, e.g., "coordinate systems and why 'longitude' is 'right ascension' and expressed in hours, not degrees".They're short "How to's" or "Why" articles to make some of the concepts of astronomy simplfied and understandable.
+
+These topics are typically related to observing and how to observe.
+
+Frequency: sporadic
+
+### Astronomical Frameworks (AF)
+
+These articles describe  underlying concepts and frameworks in astronomy, e.g. "What is a color index", or "how does the magnitude system work" or "why do we measure distances in light years and in parsecs - and what is a parsec anyway"
+
+Frequency: sporadic
+
+### Constellation Highlights (CH)
+
+This takes a constellation, gives some of the history and mythology, looks at the map, and gives short descriptions of a few deep-sky objects (DSO).
+
+In 2028 we'll run out of constellations that are visible from the Northern Hemisphere.  The plan is to then go back and start over, and improve upon the pages (adding/refining objects) and re-publish them.
+
+Frequency: monthly (1st of the month)
+
+### Observing Challenges (OC)
+
+These are challenges - either an object or a set of objects for the reader to try out.  The mode ranges from naked eye to imaging (e.g., following the Venus/Jupiter conjunction can be done with the naked eye;  finding Pluto with your smart scope uses imaging).
+
+The goal here is to promote the *experience* for the user, and to help focus their development by giving them attainable goals.
+
+Frequency: sporadic
+
+### Astronomy Quizzes (AQ)
+
+Short (8-12 questions) on some topic.   The goal here is learning, not scoring (i.e., if you guess wrong you get an explanation, and you can always click on all the answers to get more information).  Skill is beginner/intermediate/expert,
+
+Frequency: monthly (3rd Tuesday)
+
+### Historical Perspectives (HP)
+
+These articles talk about the history of astronomy: biographies, inventions, etc.
+
+Frequency: sporadic
