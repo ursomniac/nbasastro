@@ -34,7 +34,7 @@ object_info:
 
 ## Introduction
 
-Point your telescope at the border between Cygnus and Cepheus on any clear summer night and you'll find a face-on spiral galaxy glowing at around magnitude 9. It doesn't look especially dramatic at first — a soft, mottled glow with hints of structure. But NGC 6946 has a resume that no other galaxy in the sky can match.
+Point your telescope at the border between Cygnus and Cepheus on any clear summer night and you'll find a face-on spiral galaxy glowing at around magnitude 9. It doesn't look especially dramatic at first — a soft, mottled glow with hints of structure. But NGC 6946 has a record that no other galaxy in the sky can match.
 
 Since 1917, ten confirmed supernovae have been observed within it. Ten. The next most supernova-productive galaxy on record isn't close. Astronomers have taken to calling it "The Fireworks Galaxy," and the nickname is earned.
 
@@ -52,6 +52,8 @@ NGC 6946 was discovered by William Herschel on September 9, 1798 — fourteen ye
 
 Instead it sits in the Caldwell catalog as C 12, one of the more spectacular omissions from the Messier list — not because it isn't worth cataloguing, but simply because of when it was found.
 
+Herschel saw what every visual observer since has seen: a faint, diffuse glow, slightly brighter at the center, with no obvious structure. That's still what you'll see through a small telescope tonight. What's changed is everything we now know about what that glow contains.
+
 ---
 
 ## A Star-Forming Machine
@@ -66,9 +68,7 @@ caption="NGC 6946 in a deep broadband composite. The pink and red amorphous patc
 
 The professional composite at right makes the scale of the activity impossible to miss. The pink and red amorphous patches are the same HII regions shown at far greater depth and in narrowband light that isolates hydrogen-alpha emission — the characteristic glow of ionized gas. Features that appear as subtle knots in a broadband amateur image become unmistakable here. The spiral arms are not smooth; they're almost continuously studded with these regions, one after another, for tens of thousands of light years.
 
-That density of star formation is the direct explanation for the supernova record. Massive stars — the ones that end in supernovae — live fast and die young. A star of 20 or 25 solar masses will burn through its fuel in only a few million years, then detonate. A galaxy that produces more massive stars produces more supernovae, as reliably as cause produces effect.
-
-The Milky Way manages roughly one supernova per century. NGC 6946 has averaged one per decade since we've been watching. It's a different category of object — not in size (it's comparable to our own galaxy at around 75,000 light years across), but in energetic output and the sheer violence of its stellar lifecycle.
+NGC 6946 is forming stars at a rate several times higher than the Milky Way — and that is the direct cause of its supernova record. Massive stars — the ones that end in supernovae — live fast and die young. A star of 20 or 25 solar masses will burn through its fuel in only a few million years, then detonate. A galaxy that produces more massive stars produces more supernovae, as reliably as cause produces effect. The Milky Way manages roughly one supernova per century. NGC 6946 has averaged one per decade since we've been watching.
 
 ---
 
@@ -93,7 +93,7 @@ Ten supernovae in one galaxy across one century of observation is a number that 
 
 {{< /article-table >}}
 
-A few things stand out in this list. First, the gap between 1980 and 2002: twenty-two years with nothing detected. SN 2002hh was heavily obscured by dust in the galaxy's disk — its intrinsic brightness was reduced by about 3.5 magnitudes. It's a reasonable bet that other supernovae occurred in that window and were hidden entirely. The true count may be higher than ten.
+A few things stand out in this list. First, the gap between 1980 and 2002: twenty-two years with nothing detected. SN 2002hh was heavily obscured by dust in the galaxy's disk — its intrinsic brightness was reduced by about 3.5 magnitudes, roughly 25 times fainter than it would otherwise have appeared. It's a reasonable bet that other supernovae occurred in that window and were hidden entirely. The true count may be higher than ten.
 
 Second: SN 2017eaw was discovered by Patrick Wiggins, an amateur astronomer in Utah, just two days after the explosion. This galaxy rewards watching.
 
@@ -116,6 +116,8 @@ Whether or not this specific case is confirmed, the broader implication stands: 
 
 ## What You're Looking At
 
+The following features are revealed by imaging rather than visual observation — but knowing they're there changes what you're seeing when you look.
+
 {{< nbas-image src="hodge-me.jpg" fullwidth="true"
 caption="NGC 6946 with Hodge's Complex marked." >}}
 
@@ -124,11 +126,12 @@ caption="NGC 6946 with Hodge's Complex marked." >}}
 {{< nbas-image src="red-ellipse.png" width="400" align="left"
 caption="Efremov, Yu. (2017). Unusual Objects in the Spiral Galaxy NGC 6946. Open Astronomy. 25. 10.1515/astro-2017-0255." >}}
 
-At the outer periphery of the galaxy's disk — beyond where the main spiral structure fades — lies an object called the Red Ellipse. It's a large bubble roughly 300 parsecs (nearly 1,000 light years) across, distinctly elliptical in shape. It was originally thought to be a supernova remnant, and at that scale it would be among the largest ever identified. More recent analysis suggests it may instead be a *super-bubble*: a cavity carved out by the combined stellar winds and multiple supernova explosions from a massive open cluster. Either way, it is itself evidence of the same furious stellar activity responsible for the galaxy's supernova record. It's not easily visible in amateur images without narrowband filtering — don't look for it in a standard color image.
+At the outer periphery of the galaxy's disk — beyond where the main spiral structure fades — lies an object called the Red Ellipse. It's a large bubble roughly 300 parsecs (nearly 1,000 light years) across, distinctly elliptical in shape. It was originally thought to be a supernova remnant, and at that scale it would be among the largest ever identified. More recent analysis suggests it may instead be a *super-bubble*: a cavity carved out by the combined stellar winds and multiple supernova explosions from a massive open cluster. Either way, it is itself evidence of the same furious stellar activity responsible for the galaxy's supernova record. This one is for the narrowband imager — it won't show in a standard broadband exposure.
 
 ### Hodge's Complex
 
-{{< nbas-image src="hodge.jpg" width="400" align="right" caption="HST image" >}}
+{{< nbas-image src="hodge.jpg" width="400" align="right"
+caption="Hodge's Complex in NGC 6946 (HST). The concentration of young, luminous stars south of the galaxy's nucleus has been reinterpreted as a possible interacting dwarf galaxy rather than a stellar complex within NGC 6946 itself." >}}
 
 About 5 kiloparsecs (roughly 16,000 light years) south of the galaxy's nucleus sits a peculiar structure first identified by astronomer Paul Hodge in 1967. For decades it was classified as an unusually large, young stellar complex — a supercluster containing about two dozen smaller clusters and many exceptionally luminous young stars. In 2017 it was reconsidered: the current interpretation is that it may be a small dwarf galaxy interacting with NGC 6946, its stars superimposed on the outer disk rather than embedded within it. If so, that gravitational interaction could itself be a contributor to the elevated star-formation rate in the southwestern regions of the disk — a small cosmic collision slowly turning up the star-formation dial. This remains an open question.
 
@@ -136,17 +139,19 @@ About 5 kiloparsecs (roughly 16,000 light years) south of the galaxy's nucleus s
 
 ## Finding and Observing It
 
-NGC 6946 sits almost exactly on the Cygnus/Cepheus border, about 2.5° southwest of the open cluster NGC 6939 — and both fit comfortably in a low-power eyepiece field, which makes the cluster a natural starting point for star-hopping to the galaxy. It's best placed in late summer and autumn in the northern hemisphere, transiting high in the northeast.
+{{< nbas-image src="stellarium.png" fullwidth="true" >}}
 
-A note on NGC 6939: the two objects share a line of sight, not a location. The cluster lies roughly 4,000 light years away, entirely within our own Milky Way. NGC 6946 is some 22 million light years beyond it. The apparent proximity is coincidental — NGC 6939 is a foreground object, unrelated to the galaxy in every physical sense. That said, it's a fine target in its own right: a rich, well-resolved cluster of around 80 stars, roughly 1.3 billion years old, and a useful contrast with the diffuse glow of the galaxy beside it. Seeing both in the same field makes the depth of the universe briefly concrete — one object is a neighborhood of stars; the other is an entire galaxy sitting behind it.
+NGC 6946 sits almost exactly on the Cygnus/Cepheus border, about 2.5° southwest of the open cluster NGC 6939. A convenient starting point is η Cephei (Eta Cephei), a 3rd-magnitude star roughly 2–3° to the north. Drop southwest from η Cep and both NGC 6939 and NGC 6946 come into view — they fit comfortably in a low-power eyepiece field, which makes the cluster a natural stepping-stone to the galaxy.
 
-The rich stellar foreground visible in the galaxy image is not coincidental: NGC 6946 lies only about 10–20° from the galactic plane, meaning you're looking through a dense layer of Milky Way stars to reach it. This foreground also contributes to the distance uncertainty — dust in our own galaxy complicates the measurement, which is why published distances for this galaxy range from around 10 to 22 million light years.
+A note on NGC 6939: the two objects share a line of sight, not a location. The cluster lies roughly 4,000 light years away, entirely within our own Milky Way. NGC 6946 is some 22 million light years beyond it. The apparent proximity is coincidental — NGC 6939 is a foreground object, unrelated to the galaxy in every physical sense. That said, it's a fine target in its own right: a rich, well-resolved cluster of around 80 stars, roughly 1.3 billion years old. Seeing both in the same field makes the depth of the universe briefly concrete — one object is a nearby neighborhood of stars; the other is an entire galaxy sitting behind it.
+
+NGC 6946 is best placed in late summer and autumn in the northern hemisphere, transiting high in the northeast. Note that it lies only about 10–20° from the galactic plane, which means you're looking through a dense layer of Milky Way stars to reach it — that crowded foreground is not part of the galaxy. It also contributes to the distance uncertainty: dust in our own galaxy complicates the measurement, which is why published distances range from around 10 to 22 million light years.
 
 {{< finder-chart-set >}}
 
-Through a small telescope (3–4"), NGC 6946 appears as a soft, slightly oval glow, noticeably brighter at the center. The low surface brightness means dark skies matter considerably more than aperture. An 8" telescope under good conditions will begin to show the mottled texture of the disk. Larger Dobsonians reveal the spiral arm structure directly, and the brighter HII knots begin to stand out.
+Through a small telescope (3–4"), NGC 6946 appears as a soft, slightly oval glow, noticeably brighter at the center. Low surface brightness is the defining observing challenge — dark skies matter considerably more than aperture here. An 8" telescope under good conditions will begin to show the mottled texture of the disk. Larger Dobsonians reveal the spiral arm structure directly, and the brighter HII knots begin to stand out. Those knots, faint as they are at the eyepiece, are the same stellar nurseries driving the galaxy's supernova rate.
 
-In a smart scope, this is a genuinely rewarding target. Even short exposures reveal the blue star-forming regions and hint at the spiral structure. Longer sessions of 30–60 minutes will show the asymmetry in the arms and some of the brighter complexes in the disk. It's not as immediately dramatic as M101 — the arms are less symmetric and the surface brightness less uniform — but it rewards attention precisely because there's so much going on.
+In a smart scope, this is a genuinely rewarding target. Even short exposures reveal the blue star-forming regions and hint at the spiral structure. Longer sessions of 30–60 minutes will show the asymmetry in the arms and some of the brighter complexes in the disk. It's not as immediately dramatic as M101 — the arms are less symmetric and the surface brightness less uniform — but it rewards attention precisely because there's so much going on beneath the surface.
 
 ---
 
