@@ -39,6 +39,8 @@ Manage your expectations, then go anyway. Once you've seen a bright Perseid fire
 
 The Perseids are the oldest reliably recorded meteor shower in history. Chinese astronomers documented the annual "rain of stars" from Perseus as early as 36 BC, and observations appear regularly in Korean and European records across the following two millennia. The shower has been falling every August for as long as people have been writing down what they saw in the sky.
 
+{{< nbas-image src="799_109P_24_11_92.jpg" fullwidth="true"
+caption="http://www.astrostudio.at/2_Bright%20Comets.php?img=images/2_Bright%20Comets/799_109P_24_11_92.jpg, Comet 109P/Swift-Tuttle taken by Gerald Rhemann in Lower Austria, 24-Nov-1992, used with permission." >}}
 The source, Comet 109P/Swift-Tuttle, is a significant piece of ice and rock — its nucleus is about 26 kilometers across, considerably larger than Halley's Comet. It was independently discovered in 1862 by Lewis Swift (July 16) and Horace Tuttle (July 19), and four years later Giovanni Schiaparelli figured out that the Perseids and the comet shared the same orbit. This was one of the first demonstrations that meteor showers come from comets.
 
 Swift-Tuttle orbits the Sun roughly every 133 years. It last swung through the inner solar system in 1992 — the first return since its discovery — and when orbital calculations came back, there was briefly a concern: it appeared to have a small but real chance of hitting Earth on its 2126 return. Further refinement ruled that out. The 2126 perihelion will be a close pass, not a collision, and the comet will be spectacular. The next Perseid peak after *that* return will see dramatically elevated rates as fresh material floods the debris stream.
