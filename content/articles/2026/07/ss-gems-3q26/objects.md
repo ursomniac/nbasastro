@@ -1,0 +1,16 @@
+C 27     | neb   | Cyg |  c_27-93-PIXRCAABEGHS-LP-square.jpg
+C 33+34  | VEIL  | Cyg |  c_33-92T-PIXRCAABEGHS-square.jpg
+C 57     | DwIrr | Sgr |  c_57_92U-PIXRCAGRAXGHS-square.jpg
+DWB 111  | EmNeb | Cyg |  dwb_111-93T-PIXRCADBEGHS-LP-square.jpg
+IC 1295  | PN    | Sct |  ic_1295-93U-PIXRCAABEGHS-square.jpg
+IC 1311  | Ocl   | Cyg |  ic_1311-92S-PIXRCADBEGHS-square.jpg
+M 55     | GC    | Sgr |  m_55-92U-PIXRCAABEGHS-square.jpg
+M 75     | GC    | Sgr |  m_75-92U-PIXRCAGRAXGHS-square.jpg
+NGC 6217 | Gal   | UMi |  ngc__6217-93U-PIXRCAABEGHS-square.jpg
+NGC 6559 | Neb   | Sgr |  ngc_6559-92S-LP-PIXRCAABEGHS-square.jpg
+NGC 6772 | PN    | Aql |  ngc_6772-92U-PIXRCAGRAXGHS-square.jpg
+NGC 6781 | PN    | Aql |  ngc_6781-92U-PIXRCAGRAXGHS-square.jpg
+NGC 6814 | Gal   | Aql |  ngc_6814-93U-PIXRCAABEGHS-square.jpg
+NGC 6819 | Ocl   | Cyg |  ngc_6819-92S-PIXRCAGRAXGHS-square.jpg
+NGC 6894 | PN    | Cyg |  ngc_6894-93U-PIXRCAABEGHS-square_xNudb8R.jpg
+NGC 7048 | PN    | Cyg |  ngc_7048-92U-PIXRCAGRAXGHS-square.jpg
