@@ -55,13 +55,15 @@ More striking is its inclination: 113 degrees. Any inclination above 90 degrees 
 
 The high inclination also means the comet's orbit is nearly perpendicular to the plane of the solar system. The standard top-down diagram of the solar system — everything orbiting in a neat flat disk — gives a completely wrong picture of how Swift-Tuttle moves. It barely touches that disk. It spends most of its orbit well above or below the ecliptic plane, crossing through the inner solar system almost like a needle passing through a page.
 
-{{< nbas-image src="orbit-inner.jpg" caption="Swift-Tuttle's orbit (white) against the inner planets — the steep inclination relative to the ecliptic plane is immediately apparent. Mercury (pink), Venus (purple), Earth (blue), Mars (red)." >}}
+The interactive below makes the geometry tangible. Drag to rotate, scroll to zoom — tilt the view and the inclination becomes immediately obvious.
 
-*NASA/JPL Small Bodies viewer*
+<iframe 
+  src="https://www.wgsbn-iau.org/cgi-bin/orbit_plotter_t.html?obj=109P"
+  width="100%" height="500" 
+  style="border:none;">
+</iframe>
 
-{{< nbas-image src="orbit-full.jpg" caption="The full extent of Swift-Tuttle's orbit, reaching well beyond Neptune at aphelion. It spends most of its 133-year period in the deep outer solar system." >}}
-
-*NASA/JPL Small Bodies viewer*
+*109P/Swift-Tuttle orbit viewer. [NASA/JPL Small Bodies viewer](https://www.wgsbn-iau.org/) via WGSBN-IAU.*
 
 Where did it come from? Almost certainly the Oort Cloud — the vast, spherical shell of icy bodies in the far outer solar system. Objects there can be nudged inward over millions of years by gravitational interactions: a passing star, the galactic tide, or a close encounter with a giant planet during an earlier pass through the inner solar system. The retrograde inclination is the key clue. Comets that have been repeatedly shaped by Jupiter encounters tend to end up in prograde, low-inclination orbits. A retrograde, steeply inclined orbit like Swift-Tuttle's suggests something that arrived from the Oort Cloud with its original trajectory largely intact, modified just enough to settle into a regular 133-year period. The exact history isn't known — and may never be.
 
