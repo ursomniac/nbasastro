@@ -28,7 +28,7 @@
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}Northern Berkshire's home for amateur astronomy — whatever your experience, you belong under our skies.{{ end }}{{ end }}">
 
 {{ if .Params.banner }}
-  <meta property="og:image" content="{{ (path.Join .File.Dir .Params.banner) | absURL }}">
+  <meta property="og:image" content="{{ printf "%s%s" .Permalink .Params.banner }}">
 {{ else if .Params.thumbnail }}
   <meta property="og:image" content="{{ (path.Join .File.Dir .Params.thumbnail) | absURL }}">
 {{ else }}
