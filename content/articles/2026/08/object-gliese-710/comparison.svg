@@ -1,0 +1,40 @@
+<svg viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" width="800" height="430">
+<defs>
+<radialGradient id="sunGrad" cx="40%" cy="35%" r="65%">
+  <stop offset="0%"   stop-color="#fff5c0"/>
+  <stop offset="50%"  stop-color="#ffe866"/>
+  <stop offset="100%" stop-color="#ffcc00" stop-opacity="0.9"/>
+</radialGradient>
+<radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+  <stop offset="55%"  stop-color="#ffcc00" stop-opacity="0.22"/>
+  <stop offset="100%" stop-color="#ffcc00" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="glGrad" cx="40%" cy="35%" r="65%">
+  <stop offset="0%"   stop-color="#ffcb80"/>
+  <stop offset="50%"  stop-color="#ff9d3b"/>
+  <stop offset="100%" stop-color="#e07020" stop-opacity="0.9"/>
+</radialGradient>
+<radialGradient id="glGlow" cx="50%" cy="50%" r="50%">
+  <stop offset="55%"  stop-color="#ff9d3b" stop-opacity="0.2"/>
+  <stop offset="100%" stop-color="#ff9d3b" stop-opacity="0"/>
+</radialGradient>
+</defs>
+<rect width="800" height="430" fill="#0d1421"/>
+<text x="400" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#f8d44e" font-family="Georgia,serif">Size and Color Comparison</text>
+<text x="400" y="52" text-anchor="middle" font-size="12" fill="#b0bec5">The Sun vs. Gliese 710 — to scale</text>
+<circle cx="210" cy="175" r="160" fill="url(#sunGlow)"/>
+<circle cx="210" cy="175" r="105" fill="url(#sunGrad)"/>
+<circle cx="590" cy="175" r="110" fill="url(#glGlow)"/>
+<circle cx="590" cy="175" r="70" fill="url(#glGrad)"/>
+<text x="400" y="183" text-anchor="middle" font-size="24" fill="#78909c" font-style="italic">vs.</text>
+<text x="210" y="302" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">The Sun</text>
+<text x="210" y="332" text-anchor="middle" font-size="11" fill="#78909c">Spectral type</text><text x="210" y="349" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">G2 V</text>
+<text x="210" y="370" text-anchor="middle" font-size="11" fill="#78909c">Temperature</text><text x="210" y="387" text-anchor="middle" font-size="13" font-weight="bold" fill="#d1d1d1">5,778 K</text>
+<text x="210" y="408" text-anchor="middle" font-size="11" fill="#78909c">Mass</text><text x="210" y="425" text-anchor="middle" font-size="13" font-weight="bold" fill="#d1d1d1">1.00 M☉</text>
+<text x="210" y="446" text-anchor="middle" font-size="11" fill="#78909c">Luminosity</text><text x="210" y="463" text-anchor="middle" font-size="13" font-weight="bold" fill="#d1d1d1">1.00 L☉</text>
+<text x="590" y="302" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">Gliese 710</text>
+<text x="590" y="332" text-anchor="middle" font-size="11" fill="#78909c">Spectral type</text><text x="590" y="349" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">K7 V</text>
+<text x="590" y="370" text-anchor="middle" font-size="11" fill="#78909c">Temperature</text><text x="590" y="387" text-anchor="middle" font-size="13" font-weight="bold" fill="#d1d1d1">~4,250 K</text>
+<text x="590" y="408" text-anchor="middle" font-size="11" fill="#78909c">Mass</text><text x="590" y="425" text-anchor="middle" font-size="13" font-weight="bold" fill="#d1d1d1">~0.60 M☉</text>
+<text x="590" y="446" text-anchor="middle" font-size="11" fill="#78909c">Luminosity</text><text x="590" y="463" text-anchor="middle" font-size="13" font-weight="bold" fill="#d1d1d1">~0.037 L☉</text>
+</svg>

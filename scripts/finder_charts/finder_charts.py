@@ -86,6 +86,8 @@ OBJECT_STYLES = {
     "galaxy_barred":     {"shape": "ellipse",      "color": "#9933CC", "dashed": False},
     "galaxy_dwarf_irr":  {"shape": "ellipse",      "color": "#3366DD", "dashed": False},
     "planetary_nebula":  {"shape": "double_circle","color": "#33CCCC", "dashed": False},
+    # star: small circle with inward N/S/E/W ticks (classic finder-chart reticle)
+    "star":              {"shape": "star_target",  "color": "#FF6600", "dashed": False},
 }
 
 
@@ -116,6 +118,12 @@ SIMBAD_OTYPE_MAP = {
     "QSO": "galaxy",  "H2G": "galaxy", "SBG": "galaxy", "bCG": "galaxy",
     "EmG": "galaxy",  "LSB": "galaxy", "BiC": "galaxy", "BLL": "galaxy",
     "LIN": "galaxy",  "cD":  "galaxy",
+    # Stars — single, multiple, variable, proper-motion, spectral subtypes, etc.
+    "*":   "star",   "**":  "star",   "V*":  "star",   "PM*": "star",
+    "HB*": "star",   "RG*": "star",   "sg*": "star",   "SB*": "star",
+    "BY*": "star",   "RS*": "star",   "LP*": "star",   "s*r": "star",
+    "EB*": "star",   "Al*": "star",   "bL*": "star",   "WU*": "star",
+    "K*":  "star",   "G*":  "star",   "MS*": "star",   "su*": "star",
 }
 
 
@@ -206,6 +214,8 @@ def resolve_simbad(names: list) -> list:
 
         if shape in ("circle", "circle_plus"):
             t["size_amin"] = maj or 5.0
+        elif shape == "star_target":
+            t["size_amin"] = 10.0   # fixed reticle ring radius (arcmin)
         elif shape in ("rect", "ellipse"):
             t["width_amin"]  = maj  or 10.0
             t["height_amin"] = mino or (maj * 0.5 if maj else 5.0)
@@ -229,6 +239,28 @@ def resolve_simbad(names: list) -> list:
 # ─────────────────────────────────────────────────────────────────────────────
 
 FIELDS = [
+    {
+        "chart_name": "gliese_710",
+        "title": "Gliese 710 — Future Stellar Visitor",
+        "info": "Ser · mag 9.65 · K7 V · closest stellar approach in ~1.29 Myr",
+        "fov_deg": 4.5,
+        "mag_limit": 10.5,
+        "fetch_stars": True,
+        "star_labels": True,
+        "star_size_min": 4.0,   # faint stars still visible at mag 10.5
+        "targets": [
+            {
+                "name": "Gliese 710",
+                "label": "Gliese 710",
+                # RA 19h 05m 29s → 19*15 + 5*0.25 + 29/240 = 286.371°
+                # Dec −01° 58′ 57″ → −(1 + 58/60 + 57/3600) = −1.982°
+                "ra": 286.371,
+                "dec": -1.982,
+                "object_type": "star",
+                "size_amin": 10.0,    # reticle ring radius
+            },
+        ],
+    },
     {
         "chart_name": "inkspot",
         "title": 'NGC 6520 ("Dead Man\'s Chest") & Barnard 86 ("the Ink Spot")',
@@ -255,19 +287,21 @@ FIELDS = [
     },
 ]
 
-MAG_LIMIT   = 12.0
-FOV_PADDING = 3.0   # finder charts need plenty of context around targets
-FOV_MIN_DEG = 2.0   # never show less than 2° so observers can navigate
-SCALE       = 2048 / 4096
+MAG_LIMIT     = 12.0
+STAR_SIZE_MIN = 3.0   # minimum marker size in points — faint stars are otherwise invisible
+FOV_PADDING   = 3.0   # finder charts need plenty of context around targets
+FOV_MIN_DEG   = 2.0   # never show less than 2° so observers can navigate
+SCALE         = 2048 / 4096
 
 
 # ─────────────────────────────────────────────────────────────────────────────
 #  Helpers
 # ─────────────────────────────────────────────────────────────────────────────
 
-def marker_size(mag: float) -> float:
+def marker_size(mag: float, size_min: float = STAR_SIZE_MIN) -> float:
     # Scale: mag 1 ≈ 28, mag 6 ≈ 8, mag 10 ≈ 3, mag 12 ≈ 2
-    return 30.0 * (10.0 ** (-0.12 * mag))
+    # size_min floor prevents faint stars from becoming invisible dots
+    return max(size_min, 30.0 * (10.0 ** (-0.12 * mag)))
 
 
 def slug(name: str) -> str:
@@ -281,6 +315,8 @@ def target_radius_deg(t: dict) -> float:
     shape = style_for(t["object_type"])["shape"]
     if shape in ("circle", "circle_plus"):
         return t["size_amin"] / 60.0 / 2.0
+    if shape == "star_target":
+        return t.get("size_amin", 10.0) / 60.0
     if shape in ("rect", "ellipse"):
         return max(t["width_amin"], t["height_amin"]) / 60.0 / 2.0
     if shape == "double_circle":
@@ -479,6 +515,26 @@ def add_overlay_double_circle(img_path, ax_pos, cx_ax, cy_ax, r_ax, color):
     res.save(img_path)
 
 
+def add_overlay_star_target(img_path, ax_pos, cx_ax, cy_ax, r_ax, color):
+    """Small circle with inward N/S/E/W tick marks — classic finder-chart reticle."""
+    al, ar, at, ab, img = _ax_to_px(img_path, ax_pos)
+    W, H = img.size; aw, ah = ar-al, ab-at
+    cx = al + cx_ax * aw
+    cy = ab - cy_ax * ah
+    r  = r_ax * ah
+    tick = r * 0.40   # inward tick length = 40% of radius
+    rgb  = _hex_to_rgb(color)
+    res  = Image.open(img_path)
+    d    = ImageDraw.Draw(res)
+    _solid(d, _circle_pts(cx, cy, r), rgb)
+    lw = 5
+    d.line([(cx,       cy - r),        (cx,       cy - r + tick)], fill=rgb, width=lw)  # N
+    d.line([(cx,       cy + r),        (cx,       cy + r - tick)], fill=rgb, width=lw)  # S
+    d.line([(cx - r,   cy),            (cx - r + tick, cy)],       fill=rgb, width=lw)  # E
+    d.line([(cx + r,   cy),            (cx + r - tick, cy)],       fill=rgb, width=lw)  # W
+    res.save(img_path)
+
+
 def add_overlay_rect(img_path, ax_pos, cx_ax, cy_ax,
                      w_ax, h_ax, angle_deg, color, dashed):
     al, ar, at, ab, img = _ax_to_px(img_path, ax_pos)
@@ -567,6 +623,9 @@ def render_target_overlay(img_path, ax_pos, t, ra_bounds, proj_ctx=None):
     elif shape == "circle_plus":
         add_overlay_circle(img_path,ax_pos,cx_ax,cy_ax,
                            t["size_amin"]/60/2*spd, color,dashed,bisect=True)
+    elif shape == "star_target":
+        add_overlay_star_target(img_path,ax_pos,cx_ax,cy_ax,
+                                t.get("size_amin",10.0)/60*spd, color)
     elif shape == "double_circle":
         add_overlay_double_circle(img_path,ax_pos,cx_ax,cy_ax,
                                   t["height_amin"]/60/2*spd, color)
@@ -806,14 +865,43 @@ def apply_branding(raw_png, out_stem, title, subtitle):
 #  Chart builders
 # ─────────────────────────────────────────────────────────────────────────────
 
-def _star_markers(p, df):
+def _star_markers(p, df, size_min: float = STAR_SIZE_MIN):
     for _, row in df.sort_values("magnitude", ascending=False).iterrows():
         mag = float(row["magnitude"])
         p.marker(ra=float(row["ra"]), dec=float(row["dec"]),
                  skip_bounds_check=True,
-                 style={"marker": {"size": marker_size(mag), "symbol": "circle",
+                 style={"marker": {"size": marker_size(mag, size_min), "symbol": "circle",
                                    "fill": "full", "color": "#000000",
                                    "edge_color": None, "alpha": 0.9, "zorder": 50}})
+
+
+def _nice_ra_ticks(ra_min_deg, ra_max_deg, target_n=5):
+    """RA gridline positions (degrees), snapped to standard RA-minute boundaries.
+    Starplot divides by 15 before calling ra_formatter_fn, so we work in
+    RA-minutes (1 RA-min = 0.25°) to ensure labels land on round clock values."""
+    span_min = (ra_max_deg - ra_min_deg) * 4.0   # degrees → RA minutes
+    nice_min = [1, 2, 5, 10, 15, 20, 30, 60, 120]
+    step_min = next((s for s in nice_min if span_min / s <= target_n), 120)
+    step_deg = step_min / 4.0                     # RA minutes → degrees
+    first = math.ceil(ra_min_deg / step_deg) * step_deg
+    ticks, t = [], first
+    while t <= ra_max_deg + 1e-9:
+        ticks.append(round(t, 8))
+        t += step_deg
+    return ticks
+
+
+def _nice_dec_ticks(dec_min, dec_max, target_n=5):
+    """Dec gridline positions (degrees), snapped to standard degree boundaries."""
+    span = dec_max - dec_min
+    nice_deg = [0.25, 0.5, 1.0, 2.0, 5.0, 10.0, 15.0, 30.0]
+    step = next((s for s in nice_deg if span / s <= target_n), 30.0)
+    first = math.ceil(dec_min / step) * step
+    ticks, t = [], first
+    while t <= dec_max + 1e-9:
+        ticks.append(round(t, 8))
+        t += step
+    return ticks
 
 
 def _mag_legend(fig, mag_limit):
@@ -863,14 +951,20 @@ def make_raw_chart(field, out_path):
                 ra_min=ra_min, ra_max=ra_max,
                 dec_min=dec_min, dec_max=dec_max,
                 style=style, resolution=2048)
-    _star_markers(p, df)
+    size_min = field.get("star_size_min", STAR_SIZE_MIN)
+    _star_markers(p, df, size_min)
 
-    n = 5
-    ra_step  = (ra_max  - ra_min)  / (n - 1)
-    dec_step = (dec_max - dec_min) / (n - 1)
+    if field.get("star_labels", False):
+        try:
+            p.bayer_labels()
+            p.flamsteed_labels()
+            print("   Bayer + Flamsteed labels added")
+        except Exception as exc:
+            print(f"   WARNING: star labels skipped: {exc}")
+
     p.gridlines(tick_marks=True,
-                ra_locations =[ra_min  + ra_step  * i for i in range(n)],
-                dec_locations=[dec_min + dec_step * i for i in range(n)],
+                ra_locations =_nice_ra_ticks(ra_min,  ra_max),
+                dec_locations=_nice_dec_ticks(dec_min, dec_max),
                 ra_formatter_fn=ra_fmt, dec_formatter_fn=dec_fmt)
     _mag_legend(p.fig, ml)
     p.export(out_path, padding=0.3)
@@ -912,10 +1006,20 @@ def make_raw_chart_stereonorth(field, out_path):
     xn,yn = p._proj.transform_point(ra0,dec0+half,p._crs)
     r = math.sqrt((xn-xc)**2+(yn-yc)**2)
     p.ax.set_xlim(xc-r,xc+r); p.ax.set_ylim(yc-r,yc+r)
-    _star_markers(p, df)
+    size_min = field.get("star_size_min", STAR_SIZE_MIN)
+    _star_markers(p, df, size_min)
+
+    if field.get("star_labels", False):
+        try:
+            p.bayer_labels()
+            p.flamsteed_labels()
+            print("   Bayer + Flamsteed labels added")
+        except Exception as exc:
+            print(f"   WARNING: star labels skipped: {exc}")
+
     p.gridlines(tick_marks=False,
-                ra_locations=list(range(0,360,15)),
-                dec_locations=[round(dec0-half+half*2*i/6,2) for i in range(7)],
+                ra_locations =_nice_ra_ticks(ra0 - half, ra0 + half),
+                dec_locations=_nice_dec_ticks(dec0 - half, dec0 + half),
                 ra_formatter_fn=ra_fmt, dec_formatter_fn=dec_fmt)
     _mag_legend(p.fig, ml)
     p.export(out_path, padding=0.3)
@@ -969,8 +1073,14 @@ assets (place alongside this script):
     parser.add_argument("--mag-limit",  type=float, default=MAG_LIMIT,
                         dest="mag_limit",
                         help=f"Star fetch limit (default: {MAG_LIMIT})")
-    parser.add_argument("--no-stars",   action="store_true", dest="no_stars",
+    parser.add_argument("--no-stars",    action="store_true", dest="no_stars",
                         help="Skip Vizier star fetch")
+    parser.add_argument("--star-labels",   action="store_true", dest="star_labels",
+                        help="Add Bayer (Greek letter) and Flamsteed number labels")
+    parser.add_argument("--min-star-size", type=float, default=STAR_SIZE_MIN,
+                        dest="min_star_size",
+                        help=f"Minimum star marker size in points (default: {STAR_SIZE_MIN}; "
+                             f"increase to make faint stars more visible)")
     parser.add_argument("--output-dir", default=None, dest="output_dir",
                         help="Output directory (default: script directory)")
     parser.add_argument("--projection",
@@ -1000,8 +1110,10 @@ assets (place alongside this script):
             "info":        args.info,
             "fov_deg":     args.fov,
             "mag_limit":   args.mag_limit,
-            "fetch_stars": not args.no_stars,
-            "targets":     targets,
+            "fetch_stars":   not args.no_stars,
+            "star_labels":   args.star_labels,
+            "star_size_min": args.min_star_size,
+            "targets":       targets,
         }
         if args.projection:
             field["projection"] = args.projection
