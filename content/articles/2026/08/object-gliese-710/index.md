@@ -5,8 +5,8 @@ authors: ["bob-donahue"]
 description: "Gliese 710 will penetrate the inner Oort Cloud in 1.29 million years — the closest stellar encounter we've ever been able to document."
 byline: "An unremarkable star with the most remarkable itinerary in the galaxy."
 series: ["closer-look"]
-thumbnail: "icon.jpg"
-banner: "banner.jpg"
+thumbnail: "icon.png"
+banner: "banner.png"
 stars_nearby: ["Gliese 710"]
 
 finder_charts:
