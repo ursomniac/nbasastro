@@ -5,8 +5,8 @@ date: 2026-07-01
 authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Aquila"]
-byline: ""
-description: ""
+description: "Explore Aquila the Eagle: planetary nebulae like the Snowglobe and Dandelion Puffball, dark nebulae, star clusters, and the galaxy NGC 6814."
+byline: "The Eagle of summer skies, packed with planetary nebulae, dark nebulae, and a face-on spiral galaxy."
 thumbnail: "icon.png"
 
 profile_data:
