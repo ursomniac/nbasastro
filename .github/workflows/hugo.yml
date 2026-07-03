@@ -65,6 +65,15 @@ jobs:
             -o static/cds/arunah-hill-thumb.gif
           echo "Full: $(wc -c < static/cds/arunah-hill.gif) bytes"
           echo "Thumb: $(wc -c < static/cds/arunah-hill-thumb.gif) bytes"
+      - name: Cache starplot catalog data
+        uses: actions/cache@v4
+        with:
+          path: scripts/starmaps/finder_charts
+          key: starplot-catalogs-v1
+      - name: Generate current + upcoming starmaps
+        run: |
+          pip install skyfield starplot pillow reportlab pyyaml resvg_py --break-system-packages
+          python scripts/starmaps/generate.py --slots --output static/starmap
       - run: hugo --minify
       - run: npx pagefind --site public
       - uses: actions/upload-pages-artifact@v3
