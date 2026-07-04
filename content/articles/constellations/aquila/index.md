@@ -7,7 +7,7 @@ series: ["constellation-highlights"]
 constellations: ["Aquila"]
 description: "Explore Aquila the Eagle: planetary nebulae like the Snowglobe and Dandelion Puffball, dark nebulae, star clusters, and the galaxy NGC 6814."
 byline: "The Eagle of summer skies, packed with planetary nebulae, dark nebulae, and a face-on spiral galaxy."
-thumbnail: "icon.png"
+thumbnail: "icon.jpg"
 
 profile_data:
   "Abbreviation": AQL
@@ -59,8 +59,8 @@ The southern part of Aquila for a time was reformed as the now-extinct "constell
 The Milky Way extends through the Western Half of Aquila, and the celestial equator bisects it.  Therefore, it's not surprising that most of the deep-sky objects are types found close to the plane of the Galaxy: planetary nebulae, dark nebulae, and open star clusters.   A few globular clusters are there too that are closer to the Galactic Plane than most.   
 
 ### Variable Star &eta; Aquilae
-{{< nbas-image src="eta_aql_comp.png" width="400px" align="left" >}}
-{{< nbas-image src="eta-aql-phase.png" width="400px" align="left" >}}
+{{< nbas-image src="eta_aql_comp.jpg" width="400px" align="left" >}}
+{{< nbas-image src="eta-aql-phase.jpg" width="400px" align="left" >}}
 {{< clear >}}
 
 &eta; (Eta) Aquilae is one of the brighter Cepheid variable stars.  It pulses with a period of 7.18 days and ranges between magnitudes 3.5 and 4.4.  This is something you can track with the naked eye if you have patience.

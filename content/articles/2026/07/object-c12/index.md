@@ -12,8 +12,8 @@ dso_ngc: ["6946"]
 finder_charts:
   charts:
     - name: "NGC 6946 & NGC 6939"
-      raw: "ngc_6946_raw.png"
-      png: "ngc_6946.png"
+      raw: "ngc_6946_raw.jpg"
+      png: "ngc_6946.jpg"
       pdf: "ngc_6946.pdf"
       caption: "NGC 6946 (Fireworks Galaxy) and open cluster NGC 6939. FOV ~8°."
 
@@ -63,7 +63,7 @@ caption="NGC 6946. Bob Donahue, NBAS, eQuinox 2, 40 min" >}}
 
 Even in a 40-minute exposure like the one above, the structure of NGC 6946 is striking: a bright core surrounded by a disk speckled with brighter, slightly blue-white knots. Those knots are not individual stars — they're HII regions, vast clouds of hydrogen gas energized by newly-formed massive stars burning at temperatures many times hotter than the Sun. Each one is a stellar nursery, a place where stars are actively being born.
 
-{{< nbas-image src="spitzer.jpeg" align="right" width="450"
+{{< nbas-image src="spitzer.jpg" align="right" width="450"
 caption="NGC 6946 in a deep broadband composite. The pink and red amorphous patches throughout the spiral arms are HII regions in hydrogen-alpha emission — the same features visible as blue-white knots in the image above. NASA, ESA, STScI / R. Gendler / Subaru Telescope (NAOJ)" >}}
 
 The professional composite at right makes the scale of the activity impossible to miss. The pink and red amorphous patches are the same HII regions shown at far greater depth and in narrowband light that isolates hydrogen-alpha emission — the characteristic glow of ionized gas. Features that appear as subtle knots in a broadband amateur image become unmistakable here. The spiral arms are not smooth; they're almost continuously studded with these regions, one after another, for tens of thousands of light years.
@@ -123,7 +123,7 @@ caption="NGC 6946 with Hodge's Complex marked." >}}
 
 ### The Red Ellipse
 
-{{< nbas-image src="red-ellipse.png" width="400" align="left"
+{{< nbas-image src="red-ellipse.jpg" width="400" align="left"
 caption="Efremov, Yu. (2017). Unusual Objects in the Spiral Galaxy NGC 6946. Open Astronomy. 25. 10.1515/astro-2017-0255." >}}
 
 At the outer periphery of the galaxy's disk — beyond where the main spiral structure fades — lies an object called the Red Ellipse. It's a large bubble roughly 300 parsecs (nearly 1,000 light years) across, distinctly elliptical in shape. It was originally thought to be a supernova remnant, and at that scale it would be among the largest ever identified. More recent analysis suggests it may instead be a *super-bubble*: a cavity carved out by the combined stellar winds and multiple supernova explosions from a massive open cluster. Either way, it is itself evidence of the same furious stellar activity responsible for the galaxy's supernova record. This one is for the narrowband imager — it won't show in a standard broadband exposure.
@@ -139,7 +139,7 @@ About 5 kiloparsecs (roughly 16,000 light years) south of the galaxy's nucleus s
 
 ## Finding and Observing It
 
-{{< nbas-image src="stellarium.png" fullwidth="true" >}}
+{{< nbas-image src="stellarium.jpg" fullwidth="true" >}}
 
 NGC 6946 sits almost exactly on the Cygnus/Cepheus border, about 2.5° southwest of the open cluster NGC 6939. A convenient starting point is η Cephei (Eta Cephei), a 3rd-magnitude star roughly 2–3° to the north. Drop southwest from η Cep and both NGC 6939 and NGC 6946 come into view — they fit comfortably in a low-power eyepiece field, which makes the cluster a natural stepping-stone to the galaxy.
 

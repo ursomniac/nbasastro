@@ -21,38 +21,38 @@ finder_charts:
     with the cluster boundary marked.
   charts:
     - name: "Berkeley 17"
-      raw:     "B17/berkeley_17_raw.png"
-      png:     "B17/berkeley_17.png"
+      raw:     "B17/berkeley_17_raw.jpg"
+      png:     "B17/berkeley_17.jpg"
       pdf:     "B17/berkeley_17.pdf"
       caption: "Aur · 8.5′ cluster · ~10–12.6 Gyr"
     - name: "NGC 6791"
-      raw:     "N6791/ngc_6791_raw.png"
-      png:     "N6791/ngc_6791.png"
+      raw:     "N6791/ngc_6791_raw.jpg"
+      png:     "N6791/ngc_6791.jpg"
       pdf:     "N6791/ngc_6791.pdf"
       caption: "Lyr · 8.2′ cluster · ~8–9.5 Gyr"
     - name: "Berkeley 32"
-      raw:     "B32/berkeley_32_raw.png"
-      png:     "B32/berkeley_32.png"
+      raw:     "B32/berkeley_32_raw.jpg"
+      png:     "B32/berkeley_32.jpg"
       pdf:     "B32/berkeley_32.pdf"
       caption: "Mon · 7.6′ cluster · ~7.2 Gyr"
     - name: "NGC 188"
-      raw:     "N188/ngc_188_raw.png"
-      png:     "N188/ngc_188.png"
+      raw:     "N188/ngc_188_raw.jpg"
+      png:     "N188/ngc_188.jpg"
       pdf:     "N188/ngc_188.pdf"
       caption: "Cep · 32.6′ cluster · ~6.4–7.2 Gyr"
     - name: "King 2"
-      raw:     "K2/king_2_raw.png"
-      png:     "K2/king_2.png"
+      raw:     "K2/king_2_raw.jpg"
+      png:     "K2/king_2.jpg"
       pdf:     "K2/king_2.pdf"
       caption: "Cas · 6.1′ cluster · ~5.6 Gyr"
     - name: "NGC 2243"
-      raw:     "N2243/ngc_2243_raw.png"
-      png:     "N2243/ngc_2243.png"
+      raw:     "N2243/ngc_2243_raw.jpg"
+      png:     "N2243/ngc_2243.jpg"
       pdf:     "N2243/ngc_2243.pdf"
       caption: "CMa · 5.5′ cluster · ~5.6 Gyr"
     - name: "M 67"
-      raw:     "M67/m_67_raw.png"
-      png:     "M67/m_67.png"
+      raw:     "M67/m_67_raw.jpg"
+      png:     "M67/m_67.jpg"
       pdf:     "M67/m_67.pdf"
       caption: "Cnc · 25′ cluster · ~3.2–5.0 Gyr"
 
@@ -126,7 +126,7 @@ evaporating from a puddle. Massive clusters resist this longer
 because their deeper gravity well requires more energy to escape.
 Small clusters evaporate relatively quickly.
 
-{{< nbas-image src="histogram.png" width="500" align="right" 
+{{< nbas-image src="histogram.jpg" width="500" align="right" 
 caption="Distribution of open cluster ages (log Age)" >}}
 
 The survivors among old open clusters share a common profile: they
@@ -187,7 +187,7 @@ Berkeley 17), even stars like the Sun have evolved into red giants.
 
 ### Berkeley 17
 
-{{< nbas-image src="B17/berk_17-stellarium.png" width="450" align="right" caption="Stellarium, DSS" >}}
+{{< nbas-image src="B17/berk_17-stellarium.jpg" width="450" align="right" caption="Stellarium, DSS" >}}
 
 Berkeley 17 is located in a place you wouldn't expect: it's located in the constellation Auriga,
 close to the location of the galactic anticenter - the direction opposite the galactic core (in
@@ -204,7 +204,7 @@ before the solar system's raw materials had been through enough
 stellar generations to acquire the chemistry life would eventually
 require.
 
-{{< nbas-image src="B17/berk_17-cmd.png" width="450" align="right" caption="The CMD for Berkeley 17, showing it's extreme age: even a star like the Sun (B-V = 0.66) has evolved to a red giant" >}}
+{{< nbas-image src="B17/berk_17-cmd.jpg" width="450" align="right" caption="The CMD for Berkeley 17, showing it's extreme age: even a star like the Sun (B-V = 0.66) has evolved to a red giant" >}}
 
 It survives, almost certainly, because of where it lives. Berkeley
 17 sits at the outer edge of the disk, far from the galaxy's crowded
@@ -237,7 +237,7 @@ metal-poor, because they formed before successive generations of
 supernovae had enriched the interstellar medium. NGC 6791 didn't
 get that memo.
 
-{{< nbas-image width="400" align="right" src="N6791/ngc6791-cmd.png" 
+{{< nbas-image width="400" align="right" src="N6791/ngc6791-cmd.jpg" 
 caption="NGC 6791 color-magnitude diagram" >}}
 
 What happened? One compelling hypothesis is that NGC 6791 formed
@@ -278,7 +278,7 @@ find it on any clear night of the year.
 
 {{< clear >}}
 
-{{< nbas-image width="400" align="right" src="N188/ngc_188-cmd.png"
+{{< nbas-image width="400" align="right" src="N188/ngc_188-cmd.jpg"
 caption="NGC 188 color-magnitude diagram" >}}
 
 Its age is estimated at around 6.4 to 7 billion years, making it
@@ -305,7 +305,7 @@ makes it findable almost any night of the year.
 
 ### Berkeley 32
 
-{{< nbas-image src="B32/berk_32-stellarium.png" width="380" align="right"
+{{< nbas-image src="B32/berk_32-stellarium.jpg" width="380" align="right"
 caption="Stellarium/DSS rendering" >}}
 {{< nbas-image src="B32/berk_32-cmd.webp" width="350" align="right"
 caption="Berkeley 32 color-magnitude diagram" >}}
@@ -327,7 +327,7 @@ of years in a galactic neighborhood that didn't much bother it.
 
 ### King 2
 
-{{< nbas-image src="K2/king_2-stellarium.png" width="380" align="right" caption="Stellarium/DSS rendering" >}}
+{{< nbas-image src="K2/king_2-stellarium.jpg" width="380" align="right" caption="Stellarium/DSS rendering" >}}
 {{< nbas-image src="K2/king-2-cmd.webp" width="325" align="right" caption="King 2 color-magnitude diagram" >}}
 {{< clear >}}
 
@@ -439,7 +439,7 @@ It's also the luckiest.
 
 ## A Note on Globular Clusters
 
-{{< nbas-image src="glob-hist.png" width="500" align="right" >}}
+{{< nbas-image src="glob-hist.jpg" width="500" align="right" >}}
 
 The oldest open clusters on this list — Berkeley 17 at perhaps 10
 to 12 billion years, NGC 6791 at 8 to 9 — approach the ages of
