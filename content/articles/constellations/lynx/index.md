@@ -154,7 +154,7 @@ get the name “The Bat Signal” galaxy! 
 ### Purgathofer-Weinberger 1
 
 
-{{< nbas-image src="pw_1.png" width="400" align="left" >}}
+{{< nbas-image src="pw_1.jpg" width="400" align="left" >}}
 
 This is one of the faintest PNs known to exist. And compared to
 most PNs it’s very large (20’ - about 1/2 the size of the Moon) and
@@ -167,7 +167,7 @@ typically takes a few hours of narrow- band (Ha+O III) imaging.
 
 ### Galactic Headphones
 
-{{< nbas-image src="jones_1.png" >}}
+{{< nbas-image src="jones_1.jpg" >}}
 
 Another faint (though more doable) challenge — is 
 Jones-Emberson 1 (PK 164+31.1) — also a faint planetary nebula 

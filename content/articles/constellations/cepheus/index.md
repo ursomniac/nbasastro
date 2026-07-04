@@ -90,7 +90,7 @@ from Cygnus over to Cassiopeia: thus there are many open clusters,
 and nebulae of all types: emission nebulae, reflection nebulae, and
 dark nebulae, and a few planetary nebulae.
 
-{{< nbas-image src="precession.png" align="right" width="500" >}}
+{{< nbas-image src="precession.jpg" align="right" width="500" >}}
 Alderamin (α, Alpha Cep) is the brightest star (mag 2.44). Mu (μ)
 Cephei is Herschel’s “Garnet Star” and so large, in our Solar System
 would extend out beyond Jupiter! It’s not the only noticeably “ruddy”
@@ -174,13 +174,13 @@ by almost a magnitude. It’s almost known as the “Arrowhead” Cluster. 
 
 ### Important Variable Star
 
-{{< nbas-image src="test_starmap.png" width="350" align="right" >}}
+{{< nbas-image src="test_starmap.jpg" width="350" align="right" >}}
 Cepheus’s 6th brightest star, δ (Delta, despite being the fourth
 Greek letter) is a variable star whose changes in brightness you
 can follow with the naked eye (or binoculars). It pulsates over a
 period of 5.37 days varying in brightness from mag 3.5 to 4.4.
 
-{{< nbas-image src="DeltaCephei_LC_2016.png" width="300" align="left" >}}
+{{< nbas-image src="DeltaCephei_LC_2016.jpg" width="300" align="left" >}}
 Using this chart, you can compare the brightness of δ Cep to nearby
 stars in Cepheus and Lacerta.
 

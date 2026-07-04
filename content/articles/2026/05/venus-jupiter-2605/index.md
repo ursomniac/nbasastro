@@ -39,7 +39,7 @@ Over the next few weeks, you can track them easily after sunset: Jupiter is
 in Gemini, and Venus in Taurus, but every night they'll become closer and 
 closer until June 8th/9th when they'll get be at their closest: only 1.5°.
 
-{{< nbas-image src="orbits.png" fullwidth=true >}}
+{{< nbas-image src="orbits.jpg" fullwidth=true >}}
 
 While it looks like they're getting really "close together" in fact they're very far 
 apart in space:  Venus in early May is about 130 million miles from the Earth (it can 
@@ -55,11 +55,11 @@ Castor and Pollux - the brightest two stars in Gemini - above Jupiter.
 Here's a few images showing what to expect taken every week:
 
 {{< nbas-gallery style="carousel" title="Venus Meets Jupiter!" size="300px" >}}
-260509-31d.png | May 9th, 9PM | 31° apart 
-260516-24d.png | May 16th, 9PM | 24° apart
-260523-17d.png | May 23rd, 9PM | 17° apart
-260530-10d.png | May 30th, 9PM | 10° apart
-260608-90m.png | June 8th, 9PM | 1.5° apart!
+260509-31d.jpg | May 9th, 9PM | 31° apart 
+260516-24d.jpg | May 16th, 9PM | 24° apart
+260523-17d.jpg | May 23rd, 9PM | 17° apart
+260530-10d.jpg | May 30th, 9PM | 10° apart
+260608-90m.jpg | June 8th, 9PM | 1.5° apart!
 {{< /nbas-gallery >}}
 
 {{< clear >}}
@@ -80,8 +80,8 @@ As the two planets get closer to minimum separation, you can see them both
 either with binoculars, or with a very low power eyepiece (magnification 20x).
 
 {{< nbas-gallery style="grid" size="300px" >}}
-binoc-view.png | Binocular View | 7x35
-telview-16x.png | Telescope View | 20x 
+binoc-view.jpg | Binocular View | 7x35
+telview-16x.jpg | Telescope View | 20x 
 {{< /nbas-gallery >}}
 
 Of course even in a small telescope, you can also see the changing of
@@ -91,7 +91,7 @@ passes Jupiter in the sky, and is swinging around in its orbit, that phase will 
 
 ## Wait!  There's more!
 
-{{< nbas-image src="mercury.png" width="250" align="right" 
+{{< nbas-image src="mercury.jpg" width="250" align="right" 
  caption="Mercury on June 8th, only 10° from the horizon at 9 PM!" >}}
 You _might_ have noticed that starting late May, _another_ planet starts creeping up over the horizon!
 Yes, **Mercury** also makes an appearance!   This is a **real** challenge to find, since it's only a

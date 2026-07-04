@@ -79,7 +79,7 @@ checkout. And of course Saturn is located amongst them!
 
 ## Map of Pisces
 
-{{< nbas-image src="PSC.png" caption="Map of Pisces" >}}
+{{< nbas-image src="PSC.jpg" caption="Map of Pisces" >}}
 
 Pisces is both an Ecliptic and Equatorial constellation (the other
 is Virgo) — at least for now. The intersection of the two “great

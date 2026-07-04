@@ -92,7 +92,7 @@ the lion’s head”, ζ “the braid” (referring to the lion’s mane).
 The Coma cluster has hundreds of galaxies, mostly ellipticals and lenticulars. 
 Two are moderately bright: the rest small and faint but make a fun challenge.
 
-{{< nbas-image src="coma_cluster.png" >}}
+{{< nbas-image src="coma_cluster.jpg" >}}
 
 {{< clear >}}
 

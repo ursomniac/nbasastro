@@ -6,7 +6,7 @@ authors: ["bob-donahue"]
 byline: "Bringing Astronomy to Everyone"
 series: ["outreach-and-education"]
 knowledgetopics: ["outreach"]
-thumbnail: "tts-book.png"
+thumbnail: "tts-book.jpg"
 ---
 
 Last week I attended a workshop at the Springfield Science Museum
@@ -39,7 +39,7 @@ through Braille text, but through nearly 20 raised images — tactile
 illustrations of solar system objects, eclipses, and deep-sky objects
 that a reader can actually *feel*.
 
-{{< nbas-image src="tts-book.png" size="300" align="right" >}}
+{{< nbas-image src="tts-book.jpg" size="300" align="right" >}}
 Copies of the book were available at the workshop, and holding one
 brought home something I hadn't fully appreciated before: how much
 of our communication about astronomy is purely visual.  We talk
@@ -56,7 +56,7 @@ tts/jupiter.png | Jupiter and the Great Red Spot |
 tts/saturn.jpeg | Saturn and rings to scale |
 tts/orion.jpeg | the stars of Orion |
 tts/lyra.jpeg | Lyra and the Ring Nebula |
-tts/galaxy.jpeg | The structure of a Spiral Galaxy |
+tts/galaxy.jpg | The structure of a Spiral Galaxy |
 {{< /nbas-gallery >}}
 
 ## Accessibility in Action: The Springfield Science Museum
@@ -67,8 +67,8 @@ on the Moon and meteorites that directly put this into action:
 
 {{< nbas-gallery size="450px" style="carousel" 
 title="Tactile Exhibits at the Museum" >}}
-tts/moon-globe.jpeg | Moon globe | 
-tts/moon-tycho.jpeg | Description of the Tycho crater |
+tts/moon-globe.jpg | Moon globe | 
+tts/moon-tycho.jpg | Description of the Tycho crater |
 {{< /nbas-gallery >}}
 
 What's important to notice here is that it's not an "either/or"
