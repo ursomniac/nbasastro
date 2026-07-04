@@ -7,7 +7,7 @@ series: ["constellation-highlights"]
 constellations: ["Draco"]
 byline: "Separator of the Bears"
 description: "Learn about the ancient mythology behind the constellation Draco, including its various dragon interpretations from Greek to Egyptian cultures."
-thumbnail: "icon.jpg"
+thumbnail: "icon.webp"
 
 profile_data:
   "Abbreviation": DRA
@@ -52,7 +52,7 @@ One of Ptolemy’s original 48 constellations, Draco obligingly lives
 up to its name, snaking around the northern sky, around the Little
 Bear (Ursa Minor) separating it from the Greater Bear (Ursa Major).
 
-{{< nbas-image src="hist_DRA.jpg" width="550" align="right" 
+{{< nbas-image src="hist_DRA.webp" width="550" align="right" 
 caption="From _Urania's Mirror_, c. 1825" >}}
  
 The Greeks identified it with several different dragons in their
@@ -104,7 +104,7 @@ is Sigma Octantis - very faint - barely visible to the naked eye. 
 ### Cat's Eye
 
 
-{{< nbas-image src="c_6-92U-PIXRCAGRAXGHS-closeup.jpg" width="400" align="left"
+{{< nbas-image src="c_6-92U-PIXRCAGRAXGHS-closeup.webp" width="400" align="left"
 caption="Bob Donahue, NBAS" >}}
 
 3300 light years away, and only 1000 years ago, the star at the
@@ -119,7 +119,7 @@ ejections starting 15,000 years ago.
 
 ### Elusive Edge-On
 
-{{< nbas-image src="NGC4236_JeffJohnson.jpeg" width="400" align="right" >}}
+{{< nbas-image src="NGC4236_JeffJohnson.webp" width="400" align="right" >}}
 
 An outlying member of the M81/M82 group, this galaxy is somewhat
 nearby: only 11.7 Mly distant. Its structure is largely hidden from
@@ -132,7 +132,7 @@ M 82.
 
 ### Messier's Missing Spindle
 
-{{< nbas-image src="m_102-92U-PIXRCAGRAXGHS-square.jpg" width="400" align="left" 
+{{< nbas-image src="m_102-92U-PIXRCAGRAXGHS-square.webp" width="400" align="left" 
 caption="Bob Donahue, NBAS" >}}
 
 Another edge-on spiral (with a very thin dust lane) this object’s
@@ -145,7 +145,7 @@ this galaxy added to “fill in the blank” later. It’s 44.7 Mly away. 
 
 ### Draco Trio
 
-{{< nbas-image src="ngc_5982-field.png" width="400" align="right" >}}
+{{< nbas-image src="ngc_5982-field.webp" width="400" align="right" >}}
 
 This triplet has three very different looking galaxies in the same
 field of view: NGC 5982 is an elliptical, NGC 5981 is edge-on, and
@@ -157,7 +157,7 @@ aren’t actually a physical group. 
 
 ### Tadpole Galaxy
 
-{{< nbas-image src="UGC_10214HST.jpg" width="400" align="left" 
+{{< nbas-image src="UGC_10214HST.webp" width="400" align="left" 
 caption="Hubble Space Telescope" >}}
 
 Arp 188 (UGC 10214) is an example of a disrupted galaxy showing the
@@ -172,7 +172,7 @@ new stars).
 
 ### Ex-Pole Star
 
-{{< nbas-image src="precession.png" width="500" align="right" >}}
+{{< nbas-image src="precession.webp" width="500" align="right" >}}
 
 This otherwise unremarkable 3rd magnitude star has an interesting
 history. 5,000 years ago it was the Pole Star! 

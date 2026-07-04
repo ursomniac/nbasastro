@@ -24,6 +24,14 @@ Usage:
   python scripts/media_efficiency.py <article-dir> --fix --format webp --ceiling 1600 --quality 82
 
 Requires: Pillow (already in requirements.txt)
+
+NOTE: stop `hugo server` (or anything else watching this directory) before
+running --fix. --fix deletes/renames files one at a time, and a live-reload
+watcher can catch the directory mid-change (old file gone, new file not
+indexed yet) and throw a spurious template error, e.g. Resize failing on a
+resource that briefly doesn't match anything. The files themselves are fine
+once --fix finishes; it's purely a live-watcher timing issue. Restart the
+server (or run a clean one-shot `hugo --minify`) after --fix completes.
 """
 
 import argparse
@@ -148,7 +156,7 @@ def analyze_image(path):
     return info
 
 
-def classify(path, rel, refs, ceiling):
+def classify(path, rel, refs, ceiling, target_format):
     ext = path.suffix.lower()
     fname = rel
     referenced_via = refs.get(fname, [])
@@ -201,13 +209,21 @@ def classify(path, rel, refs, ceiling):
     if oversized:
         flags.append(f"OVERSIZED ({long_edge}px > {ceiling}px)")
 
+    # "format-inefficient" is relative to the target format for *this run*,
+    # not an absolute property of the file. A resized, no-alpha JPEG passes
+    # cleanly when target_format=jpeg, but is still ~50% larger than it would
+    # be as WebP (measured directly on this site's own images) - so it must
+    # be flagged when target_format=webp, or a fully "--fix"'d, all-JPEG
+    # article looks falsely clean forever and that saving is never surfaced.
+    target_fmt_name = "JPEG" if target_format == "jpeg" else "WEBP"
+    convertible_from = {"PNG", "BMP", "TIFF", "JPEG", "WEBP"} - {target_fmt_name}
     format_inefficient = (
-        info["format"] in ("PNG", "BMP", "TIFF")
+        info["format"] in convertible_from
         and not info["has_alpha"]
         and not info["is_animated"]
     )
     if format_inefficient:
-        flags.append(f"FORMAT ({info['format']} photo with no alpha - JPEG/WebP would be smaller)")
+        flags.append(f"FORMAT ({info['format']} with no alpha - {target_fmt_name} would be smaller)")
 
     if info["is_animated"]:
         flags.append("ANIMATED (left alone)")
@@ -322,7 +338,7 @@ def main():
     for fname in backstop_hits:
         refs.setdefault(fname, []).append("other-literal")
 
-    records = [classify(p, rel, refs, args.ceiling) for p, rel in media_files]
+    records = [classify(p, rel, refs, args.ceiling, args.format) for p, rel in media_files]
 
     total_before = sum(r["size"] for r in records)
     print(f"Directory: {directory}")

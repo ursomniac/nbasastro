@@ -7,7 +7,7 @@ series: ["constellation-highlights"]
 constellations: ["Triangulum"]
 byline: "Deltoton to the Greeks"
 description: "Learn about the history and stars of Triangulum, one of the smallest but most fascinating constellations in the night sky."
-thumbnail: "icon.jpg"
+thumbnail: "icon.webp"
 
 profile_data:
   "Abbreviation": TRI
@@ -57,7 +57,7 @@ the Romans, even as late as the 17th century (such as “Triangulus
 Septentrionalis” to distinguish it from the (then) new Southern
 constellation of Triangulum Australe).
 
-{{< nbas-image src="hist_TRI.jpg" align="right" width="400"
+{{< nbas-image src="hist_TRI.webp" align="right" width="400"
 caption="From _Urania's Mirror_, c. 1825" >}}
 
 As if one triangle wasn’t enough, Hevelius added a second triangle
@@ -73,7 +73,7 @@ has given the system the name “Triminus” to acknowledge the
 
 ## Map of Triangulum
 
-{{< nbas-image src="TRI.jpg" caption="Map of Triangulum" >}}
+{{< nbas-image src="TRI.webp" caption="Map of Triangulum" >}}
 
 The thin triangle is made up of the constellation’s three brightest
 stars. Beta (β - newly named “Alaybasan”) is the brightest at
@@ -107,7 +107,7 @@ easier in darker locations.
 
 ### Triangulum Galaxy
 
-{{< nbas-image src="m_33-93T-PIXRCADBEGHS-square.jpg" fullwidth="true"
+{{< nbas-image src="m_33-93T-PIXRCADBEGHS-square.webp" fullwidth="true"
 caption="Bob Donahue, NBAS" >}}
 
 If you have dark skies, M 33 is a showpiece. It’s only 70% the size
@@ -121,7 +121,7 @@ spirals, there does not appear to be a central black hole. 
 
 ### Embedded Star-Forming Region
 
-{{< nbas-image src="ngc_604.jpg" width="400" align="right"
+{{< nbas-image src="ngc_604.webp" width="400" align="right"
 caption="Bob Donahue, NBAS" >}}
 
 Another challenge is to look for NGC 604 - a star forming region
@@ -136,7 +136,7 @@ between mag 13–14): so additional challenges to undertake!   
 
 ### Binary Galaxy Pair
 
-{{< nbas-image src="ngc672.jpg" width="400" align="left" >}}
+{{< nbas-image src="ngc672.webp" width="400" align="left" >}}
 
 NGC 672 and IC 1727 are an interactive pair of not-so distant
 galaxies (23 Mly), but they’re only ~70 kly apart (just over a third
@@ -148,7 +148,7 @@ earlier interactions with NGC 672.
 
 ### A Little Umbrella
 
-{{< nbas-image src="cr_21-93S-PIXRCAABEGHS-square.jpg" width="400" align="right" 
+{{< nbas-image src="cr_21-93S-PIXRCAABEGHS-square.webp" width="400" align="right" 
 caption="Bob Donahue, NBAS" >}}
 
 Slightly more than 1/2° SE from NGC 672 is a little clump of about
@@ -163,7 +163,7 @@ stellar colors, and is easy to find. 
 
 ### Amatha Galaxy
 
-{{< nbas-image src="ngc_925-92U-PIXRCAGRAXGHS-square.jpg" width="400" align="left"  
+{{< nbas-image src="ngc_925-92U-PIXRCAGRAXGHS-square.webp" width="400" align="left"  
 caption="Bob Donahue, NBAS" >}}
 
 While this somewhat nearby (30 Mly) galaxy is only 10th magnitude,
@@ -179,7 +179,7 @@ very loosely-wound spiral arms.
 
 ### Another Barred Spiral for Comparison
 
-{{< nbas-image src="ngc_784-92U-PIXRCAGRAXGHS-grey-square.jpg" width="400" align="right"
+{{< nbas-image src="ngc_784-92U-PIXRCAGRAXGHS-grey-square.webp" width="400" align="right"
 caption="Bob Donahue, NBAS" >}}
 
 Next, we have NGC 784. It is very similar to NGC 925: highly inclined,

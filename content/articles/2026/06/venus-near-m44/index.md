@@ -6,8 +6,8 @@ description: "Catch Venus as it passes above the Beehive Cluster, Messier 44, on
 authors: ["bob-donahue"]
 byline: "Venus (and the Moon) encounter one of the brightest star clusters"
 series: ["planet-watch"]
-thumbnail: "icon.png"
-banner: "banner.png"
+thumbnail: "icon.webp"
+banner: "banner.webp"
 sso_planets: ["Venus"]
 dso_messier: ["44"]
 
@@ -44,7 +44,7 @@ in small telescopes.
 Venus makes its closest approach on the evening of June 19th, and with
 binoculars you'll be able to track its approach:
 
-{{< nbas-image src="venus-path-annotated.png" fullwidth="true" >}}
+{{< nbas-image src="venus-path-annotated.webp" fullwidth="true" >}}
 
 ## The Moon Gets There First!
 
@@ -56,9 +56,9 @@ it's a little darker and the Moon is still in the eastern part of the
 cluster.
 
 {{< nbas-gallery style="carousel" size="300px" >}}
-moon-10pm.png | 10 PM EDT
+moon-10pm.webp | 10 PM EDT
 06180130-moon-80mm+25mm.png | View in a small telescope
-06180130-moon-binoc.png | View in binoculars
+06180130-moon-binoc.webp | View in binoculars
 {{< /nbas-gallery >}}
 
 ## Venus Arrives!
@@ -68,8 +68,8 @@ it's a sight.
 
 
 {{< nbas-gallery style="grid" size="300px" >}}
-80mm+25mm.png | View in a telescope
-binoc.png | View in binoculars
+80mm+25mm.webp | View in a telescope
+binoc.webp | View in binoculars
 {{< /nbas-gallery >}}
 
 {{< nbas-image src="venus-tel.png" width="350" align="right" >}}
@@ -83,7 +83,7 @@ after which it will once again become a "morning star" in the early AM
 sky.
 
 {{< clear >}}
-{{< nbas-image src="s30-frame.png" width="350" align="right" >}}
+{{< nbas-image src="s30-frame.webp" width="350" align="right" >}}
 For people with smart scopes - especially the Seestar S30 - you might be
 able to fit the cluster and the planet in the same field of view!  The image shows the alignment with an equatorial mount.   If you're working with an alt/az mount, it might be rotated, but you should still be able to capture both objects.
 

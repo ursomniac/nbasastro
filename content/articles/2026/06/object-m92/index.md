@@ -4,8 +4,8 @@ date: 2026-06-22
 description: "Born in another galaxy and older than the Milky Way itself, M 92 is Hercules' most overlooked globular cluster — and in 14,000 years, it'll be our North Star."
 byline: "Frequently overlooked, but interesting in its own right"
 series: ["closer-look"]
-thumbnail: "icon.jpg"
-banner: "banner.jpg"
+thumbnail: "icon.webp"
+banner: "banner.webp"
 dso_messier: ["92"]
 
 object_info:
@@ -32,14 +32,14 @@ Simple: it lives in the shadow of its famous neighbor. Messier 13, "The Great He
 
 ## A Belated Discovery
 
-{{< nbas-image src="bode.jpg" width="250" align="right"
+{{< nbas-image src="bode.webp" width="250" align="right"
 caption="Johann Elert Bode (1747-1826)" >}}
 
 For a cluster this bright, M 92 was surprisingly late to be noticed. Clusters like M 13, M 5, M 4, and the great southern showpieces Omega Centauri and 47 Tucanae were all catalogued first — some of them mistaken for stars until someone looked more carefully. It wasn't until 1777 that German astronomer Johann Elert Bode recorded M 92, and a few years later Charles Messier added it to his famous list of "fuzzy things that aren't comets." William Herschel, with his more powerful telescope, resolved it into individual stars in 1783. And then, for the most part, the world moved on to its neighbor and forgot about it.
 
 ## Finding M 92
 
-{{< nbas-image src="m92-finder.png" >}}
+{{< nbas-image src="m92-finder.webp" >}}
 
 M 92 lies between the northern stars of the "Keystone" asterism — the four-star trapezoid that forms the body of Hercules — and the head of Draco. On a dark summer night at mid-northern latitudes, Hercules climbs nearly overhead, and M 92 is well-placed for hours. Sweeping from the Keystone northward, you'll hit a faint smudge even in light-polluted skies. In a small scope, a soft glow with a brighter core. In a larger one, a brilliant, tightly-packed ball of stars, its dense center compressing into a blaze of light.
 
@@ -47,7 +47,7 @@ M 92 lies between the northern stars of the "Keystone" asterism — the four-sta
 
 Globular clusters are among the oldest structures we know of. Unlike the loose, temporary associations of stars that populate the disk of the Milky Way as open clusters, globulars are self-contained, gravitationally-bound spheres — sometimes with hundreds of thousands of stars held tightly together across a space of 50–200 light years. They formed when the universe was very young, before most of the heavy elements we take for granted (carbon, iron, oxygen) had been forged in stellar furnaces and scattered by supernovae. The stars within them are therefore "metal-poor" in astronomer's parlance — made almost entirely of hydrogen and helium, the original stuff of the Big Bang.
 
-{{< nbas-image src="cmd.png" width="500" align="left" 
+{{< nbas-image src="cmd.webp" width="500" align="left" 
 caption="Color-magnitude diagram of M 92" >}}
 
 We can read a cluster's age from its Color-Magnitude Diagram: a plot of each star's brightness against its color. In a young cluster (like the Pleiades), brilliant blue stars dominate. In an old one, those massive stars have long since burned out, leaving only the long-lived low-mass stars, many of which have now swelled into orange and red giants. M 92's diagram tells a stark story: at an estimated **14.2 billion years old** (give or take 1.2 billion), it is one of the oldest known globular clusters.
@@ -71,7 +71,7 @@ This means M 92 did not form here. It formed in another galaxy, orbited there fo
 
 ## What You're Seeing in Your Image
 
-{{< nbas-image src="m_92-seestar-16m.jpg"
+{{< nbas-image src="m_92-seestar-16m.webp"
 caption="M 92 with a Seestar S50, 16m exposure" >}}
 
 If you have a smart scope, M 92 is an easy target: even a short exposure reveals a surprising amount of information, and therefore much of its "story".   Here's what to look for:
@@ -86,7 +86,7 @@ The brightest individual stars you can resolve — scattered across the frame, d
 
 ### The Outer Fringe
 
-{{< nbas-image src="m92-stream.jpg" 
+{{< nbas-image src="m92-stream.webp" 
 caption="Evidence showing the tidal streams in the halo originating with M 92">}}
 
 Look at the very edge of the cluster, where stars fade into the background. Rather than a perfectly smooth, uniform taper, the outermost stars show a subtle elongation or asymmetry. This is the Milky Way's gravity at work — our galaxy's tidal forces gently tugging at the outer layers of M 92, teasing individual stars away into the galactic halo. You are watching, in the long slow frame of astronomical time, the gradual dismantling of a cluster that outlived its home galaxy.
@@ -95,7 +95,7 @@ Look at the very edge of the cluster, where stars fade into the background. Rath
 
 ### The Blue Stragglers
 
-{{< nbas-image src="blue-stragglers.jpg" width="500" align="right"
+{{< nbas-image src="blue-stragglers.webp" width="500" align="right"
 caption="Two ways that are thought to create a blue straggler star" >}}
 In the dense central region, look for a handful of stars that appear unexpectedly blue — brighter and bluer than they "should" be given the cluster's age. These *blue stragglers* are stars that have stolen mass from a neighbor, or even physically merged with one, appearing rejuvenated compared to their true age. M 92's compact core makes stellar collisions and mass transfer more common, producing more of these oddities than you'd find in a looser cluster.
 

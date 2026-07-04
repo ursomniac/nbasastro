@@ -7,7 +7,7 @@ series: ["constellation-highlights"]
 constellations: ["Perseus"]
 byline: "Ancient constellation from Greek mythology"
 description: "Learn about the rich history and astronomical wonders of Perseus, including its mythological significance, deep-sky objects, and spectacular meteor showers."
-thumbnail: "icon.jpg"
+thumbnail: "icon.webp"
 
 profile_data:
   "Abbreviation": PER
@@ -55,7 +55,7 @@ sacrificed to Cetus the sea monster, returning from slaying Medusa. In the sky
 he’s depicted wielding his sword and holding the head of the Gorgon. In Babylonia he’s
 the constellation of the “Old Man”.
 
-{{< nbas-image src="hist_PER.jpg" align="right" width="500" 
+{{< nbas-image src="hist_PER.webp" align="right" width="500" 
 caption="Depiction of _Perseus_ from Urania’s Mirror, c. 1825"
 >}}
 
@@ -77,9 +77,9 @@ the comet Swift-Tuttle and have been observed for two millennia (at least).
 
 ## Map of Perseus
 
-{{< nbas-image src="map-PER.gif" caption="Map of Perseus" >}}
+{{< nbas-image src="map-PER.webp" caption="Map of Perseus" >}}
 
-{{< nbas-image src="mwg.png" width="400" align="right" >}}
+{{< nbas-image src="mwg.webp" width="400" align="right" >}}
 
 Perseus’ stars form two long trails of moderately bright
 stars, traced outward from Mirfak: the “head” points to
@@ -97,7 +97,7 @@ Sagittarius); the anti-center is in nearby Auriga.
 {{< constellation-objects-table >}}
 
 ### The Double Cluster
-{{< nbas-image src="double_cluster.jpg" width="400" align="left" >}}
+{{< nbas-image src="double_cluster.webp" width="400" align="left" >}}
 
 The most famous deep-sky object in Perseus, it is two young (14
 Myr old) clusters that actually are close together (only about 200
@@ -110,7 +110,7 @@ Cassiopeia by eye or with binoculars.
 
 ### The Little Dumbbell Nebula
 
-{{< nbas-image src="m_76-92U-PIXRCAGRAXGHS-square.jpg" width="400" align="right" 
+{{< nbas-image src="m_76-92U-PIXRCAGRAXGHS-square.webp" width="400" align="right" 
 caption="Bob Donahue, NBAS">}}
 
 Discovered in 1780 by Méchain, and included by Messier in
@@ -125,7 +125,7 @@ a binary system.
 
 ### A Starfish of Stars
 
-{{< nbas-image src="ngc_1245-92S-PIXRCAGRAXGHS-square.jpg" width="400" align="left" caption="Bob Donahue, NBAS" >}}
+{{< nbas-image src="ngc_1245-92S-PIXRCAGRAXGHS-square.webp" width="400" align="left" caption="Bob Donahue, NBAS" >}}
 
 Nestled in the center of Perseus is an open cluster that isn’t well-
 known. What makes the cluster notable is its shape: a five-pointed
@@ -137,7 +137,7 @@ making it a bit of an oddity.
 
 ### The California Nebula
 
-{{< nbas-image src="ngc_1499.jpg" width="500" align="right" >}}
+{{< nbas-image src="ngc_1499.webp" width="500" align="right" >}}
 
 The large (2.5-degrees) nebula is 1,000 light years
 from Earth. named because its shape is similar to
@@ -153,7 +153,7 @@ Persei exciting the hydrogen atoms in the nebula.
 
 ### A Cluster of Galaxies
 
-{{< nbas-image src="perseus_a-view.png" width="400" align="left" 
+{{< nbas-image src="perseus_a-view.webp" width="400" align="left" 
 caption="Stellarium image" >}}
 
 Just 2° NE of Algol, is Caldwell 24/NGC 1275 =
@@ -172,7 +172,7 @@ telescope and 17mm eyepiece.
 
 ### The "Demon" Star
 
-{{< nbas-image src="algol_diagram.jpg" width="500" align="right" >}}
+{{< nbas-image src="algol_diagram.webp" width="500" align="right" >}}
 
 Finally, a variable star. Algol is an eclipsing binary star, with a
 hot blue star eclipsed by a cooler K sub giant every 2.867
@@ -183,7 +183,7 @@ comparing Algol to Gamma Andromedae (also mag 2.1), Epsilon Per
 (2.9) and Kappa Per (3.8).  
 
 {{< clear >}}
-{{< nbas-image src="algol_chart.jpg" width="350" align="left" >}}
+{{< nbas-image src="algol_chart.webp" width="350" align="left" >}}
 
 Algol is just under 100 light years from the Sun, however it passed
 with 10 light years of the solar system about 7 million years ago
