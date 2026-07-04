@@ -308,6 +308,46 @@ def _build_pdf(chart_img, out_path, date_str, time_str):
     c.save()
 
 
+# ── Cross-platform font resolution ─────────────────────────────────────────
+# generate.py was written and only ever run locally on macOS until this
+# branch's CI step (hugo.yml, ubuntu-latest) started actually executing it in
+# a real pipeline. The original hardcoded macOS system-font paths silently
+# fell back to PIL's tiny fixed-size default font on Linux (ImageFont.
+# truetype raises OSError there, caught and swallowed). Candidate lists try
+# macOS first (unchanged local behavior), then the common Ubuntu locations --
+# Liberation Sans (metric-compatible with Arial, installed explicitly in
+# hugo.yml's CI step below to guarantee it exists rather than hoping the
+# runner image happens to include it) and DejaVu Sans as a second fallback.
+BOLD_FONT_CANDIDATES = [
+    '/System/Library/Fonts/Supplemental/Arial Bold.ttf',
+    '/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf',
+    '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
+]
+REGULAR_FONT_CANDIDATES = [
+    '/System/Library/Fonts/Supplemental/Arial.ttf',
+    '/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf',
+    '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
+]
+ITALIC_FONT_CANDIDATES = [
+    '/System/Library/Fonts/Supplemental/Arial Italic.ttf',
+    '/usr/share/fonts/truetype/liberation/LiberationSans-Italic.ttf',
+    '/usr/share/fonts/truetype/dejavu/DejaVuSans-Oblique.ttf',
+]
+
+
+def _load_font(candidates, size):
+    """Try font file paths in order, returning the first that loads at the
+    given size. Only falls back to PIL's tiny fixed-size default font if
+    NONE of the candidates exist -- which should no longer happen given the
+    explicit font install in hugo.yml's CI step."""
+    for path in candidates:
+        try:
+            return ImageFont.truetype(path, size)
+        except OSError:
+            continue
+    return ImageFont.load_default()
+
+
 def _composite_chart(chart, bg_color, title, label):
     """
     Composite a raw chart export into a fully-branded canvas: header band
@@ -323,14 +363,8 @@ def _composite_chart(chart, bg_color, title, label):
     canvas.paste(chart, (0, HDR))
 
     draw = ImageDraw.Draw(canvas)
-    FONT      = '/System/Library/Fonts/Supplemental/Arial Bold.ttf'
-    FONT_REG  = '/System/Library/Fonts/Supplemental/Arial.ttf'
-    FONT_ITAL = '/System/Library/Fonts/Supplemental/Arial Italic.ttf'
-    try:
-        title_font = ImageFont.truetype(FONT,     W // 28)
-        label_font = ImageFont.truetype(FONT_REG, W // 38)
-    except OSError:
-        title_font = label_font = ImageFont.load_default()
+    title_font = _load_font(BOLD_FONT_CANDIDATES, W // 28)
+    label_font = _load_font(REGULAR_FONT_CANDIDATES, W // 38)
 
     draw.text((W // 2, HDR * 1 // 3), title,
               font=title_font, fill='white', anchor='mm')
@@ -351,12 +385,9 @@ def _composite_chart(chart, bg_color, title, label):
         qy = footer_top + (FTR - qr.height) // 2
         canvas.paste(qr, (W - pad - qr.width, qy), qr)
 
-    try:
-        org_font = ImageFont.truetype(FONT,      W // 34)
-        url_font = ImageFont.truetype(FONT_REG,  W // 42)
-        tag_font = ImageFont.truetype(FONT_ITAL, W // 46)
-    except OSError:
-        org_font = url_font = tag_font = ImageFont.load_default()
+    org_font = _load_font(BOLD_FONT_CANDIDATES, W // 34)
+    url_font = _load_font(REGULAR_FONT_CANDIDATES, W // 42)
+    tag_font = _load_font(ITALIC_FONT_CANDIDATES, W // 46)
 
     text_x   = pad * 2 + box
     text_mid = footer_top + FTR // 2
