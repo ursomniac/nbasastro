@@ -1,0 +1,114 @@
+{{ define "main" }}
+
+{{/* ── Tier 1: evergreen monthly reference charts ──────────────────────── */}}
+{{/* Filenames are fully predictable (generate.py --evergreen), so no       */}}
+{{/* sidecar data file is needed here -- unlike tier 2/3, these never       */}}
+{{/* change on a schedule, so there's nothing that needs a "current" state. */}}
+
+<style>
+.sm-page-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+.sm-page-desc {
+  color: #8a9cb3;
+  font-size: 0.95rem;
+  margin: 0 0 1.2rem;
+  font-family: sans-serif;
+}
+.sm-back-link {
+  margin: 0 0 1.5rem;
+  font-family: sans-serif;
+  font-size: 0.95rem;
+}
+.sm-ref-toggle {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.3rem;
+}
+.sm-ref-toggle-btn {
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #3a4a5a;
+  background: #1e2a38;
+  color: #8a9cb3;
+  cursor: pointer;
+}
+.sm-ref-toggle-btn.active {
+  background: #2a5ba8;
+  border-color: #2a5ba8;
+  color: #ffffff;
+}
+.sm-ref-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+.sm-ref-card {
+  text-align: center;
+}
+.sm-ref-card a {
+  display: block;
+}
+.sm-ref-card img {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.sm-ref-card .sm-ref-label {
+  margin-top: 0.5rem;
+  font-family: sans-serif;
+  font-weight: 600;
+  color: var(--gold-base);
+}
+</style>
+
+<h1 class="sm-page-title">{{ .Title }}</h1>
+<p class="sm-page-desc">{{ .Description }}</p>
+
+<p class="sm-back-link">
+  <a href="{{ "starmap/" | relURL }}" class="starmap-link-alt">← Back to this week's starmap</a>
+</p>
+
+<div class="sm-ref-toggle">
+  <button type="button" id="sm-ref-btn-dark" class="sm-ref-toggle-btn active" onclick="smRefToggle(true)">Light on Dark</button>
+  <button type="button" id="sm-ref-btn-light" class="sm-ref-toggle-btn" onclick="smRefToggle(false)">Dark on Light</button>
+</div>
+
+<div class="sm-ref-grid">
+  {{ $months := slice "jan" "feb" "mar" "apr" "may" "jun" "jul" "aug" "sep" "oct" "nov" "dec" }}
+  {{ $monthNames := slice "January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December" }}
+  {{ range $idx, $abbr := $months }}
+    {{ $num := printf "%02d" (add $idx 1) }}
+    {{ $slug := printf "%s-%s" $num $abbr }}
+    {{ $monthName := index $monthNames $idx }}
+    {{ $light := printf "/starmap/evergreen/starmap-%s-light.jpg" $slug }}
+    {{ $dark := printf "/starmap/evergreen/starmap-%s-dark.jpg" $slug }}
+    <div class="sm-ref-card">
+      <a class="sm-ref-link" href="{{ $dark }}" data-light="{{ $light }}" data-dark="{{ $dark }}" target="_blank">
+        <img class="sm-ref-img" src="{{ $dark }}" data-light="{{ $light }}" data-dark="{{ $dark }}"
+             alt="Reference star chart for {{ $monthName }} (no planets)">
+      </a>
+      <div class="sm-ref-label">{{ $monthName }}</div>
+    </div>
+  {{ end }}
+</div>
+
+<script>
+function smRefToggle(dark) {
+  document.querySelectorAll('.sm-ref-img').forEach(function (img) {
+    img.src = dark ? img.dataset.dark : img.dataset.light;
+  });
+  document.querySelectorAll('.sm-ref-link').forEach(function (a) {
+    a.href = dark ? a.dataset.dark : a.dataset.light;
+  });
+  document.getElementById('sm-ref-btn-dark').classList.toggle('active', dark);
+  document.getElementById('sm-ref-btn-light').classList.toggle('active', !dark);
+}
+</script>
+
+{{ end }}

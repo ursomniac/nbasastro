@@ -79,7 +79,7 @@ QR_PATH   = ASSETS / "nbas-qrcode.svg"
 # still drives the currently-deployed list.html template with the old flat
 # schema. Writing tier-3 slot data to a separate path means running --slots
 # today can't break the live site; list.html gets cut over in a later step.
-SIDECAR_PATH = Path(__file__).parent.parent / "data" / "starmap_slots.yaml"
+SIDECAR_PATH = Path(__file__).parent.parent.parent / "data" / "starmap_slots.yaml"
 
 TIER3_SLOT_COUNT   = 5   # current + next 4, per issue #36 ("4-6 week buffer")
 EVERGREEN_MONTH_DAY = 15  # anchor day-of-month for tier-1 reference charts

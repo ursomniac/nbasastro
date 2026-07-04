@@ -1,39 +1,44 @@
-{{ $filePrefix := .Get "file" | default "starmap" }}
-{{ $month := .Get "month" | default "This Month" }}
-{{ $invert := not (eq (.Get "invert" | default "true") "false") }}
+{{/* Newsletter starmap card, per issue #37.
+     No more per-newsletter bundled starmap PNG/PDF. Always references the
+     canonical tier-1 evergreen chart (generate.py --evergreen, issue #36)
+     for THIS PAGE's own month, derived from the page's date, not passed
+     in as a parameter. Old file/month/invert shortcode params are no
+     longer read; existing calls in past newsletters keep working unchanged
+     since unused params are simply ignored, per #37: "existing newsletter
+     articles do not need to be hand-edited; only the shortcode template
+     changes."
+
+     Print-ready download links straight to the JPG rather than a bundled
+     PDF twin, per issue #36's documented principle: a single-page PDF that
+     exists only to be a printable copy of one image is redundant once the
+     image itself is print-quality — browsers can print an image directly. */}}
+
+{{ $slug := printf "%02d-%s" (int .Page.Date.Month) (lower (.Page.Date.Format "Jan")) }}
+{{ $monthName := .Page.Date.Format "January 2006" }}
+{{ $light := printf "/starmap/evergreen/starmap-%s-light.jpg" $slug }}
 
 <div class="starmap-card">
   <div class="starmap-thumb-link">
-    {{ with .Page.Resources.GetMatch (printf "*%s*.png" $filePrefix) }}
-      {{ if $invert }}
-        {{ $inverted := . | images.Filter images.Invert }}
-        <a href="{{ .RelPermalink }}" target="_blank">
-          <img src="{{ $inverted.RelPermalink }}" class="starmap-thumb" alt="Starmap Preview">
-        </a>
-      {{ else }}
-        <a href="{{ .RelPermalink }}" target="_blank">
-          <img src="{{ .RelPermalink }}" class="starmap-thumb" alt="Starmap Preview">
-        </a>
-      {{ end }}
-    {{ end }}
+    <a href="{{ $light | relURL }}" target="_blank">
+      <img src="{{ $light | relURL }}" class="starmap-thumb"
+           alt="Reference starmap for {{ $monthName }} (no planets)">
+    </a>
   </div>
 
   <div class="starmap-content">
-    <h4 class="starmap-title">{{ $month }} Starmap</h4>
-    <p style="font-size: 0.9em; color: #8a9cb3; margin-bottom: 15px; font-family: sans-serif;">Optimized for sharp home printing:</p>
-    
-    {{ with .Page.Resources.GetMatch (printf "%s*.pdf" $filePrefix) }}
-    <a href="{{ .RelPermalink }}" target="_blank" class="starmap-btn">
-      📥 Download PDF (Print Ready)
+    <h4 class="starmap-title">{{ $monthName }} Reference Starmap</h4>
+    <p style="font-size: 0.9em; color: #8a9cb3; margin-bottom: 15px; font-family: sans-serif;">
+      Reference chart (no planets) — optimized for sharp home printing.
+    </p>
+
+    <a href="{{ $light | relURL }}" target="_blank" class="starmap-btn">
+      📥 Download Chart (Print Ready)
     </a>
-    {{ end }}
-    
+
     <div style="margin-top: 8px;">
-        {{ with .Page.Resources.GetMatch (printf "%s*.png" $filePrefix) }}
-        <a href="{{ .RelPermalink }}" target="_blank" class="starmap-link-alt">
-          View Original PNG (Dark on Light)
-        </a>
-        {{ end }}
+      <a href="{{ "starmap/" | relURL }}" class="starmap-link-alt">
+        See this week's sky with planets →
+      </a>
     </div>
   </div>
 </div>

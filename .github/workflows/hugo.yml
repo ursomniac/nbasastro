@@ -73,7 +73,7 @@ jobs:
       - name: Generate current + upcoming starmaps
         run: |
           pip install skyfield starplot pillow reportlab pyyaml resvg_py --break-system-packages
-          python scripts/starmaps/generate.py --slots --output static/starmap
+          python scripts/starmaps/generate.py --slots --output static/starmap --pdf
       - run: hugo --minify
       - run: npx pagefind --site public
       - uses: actions/upload-pages-artifact@v3

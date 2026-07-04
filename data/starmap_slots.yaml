@@ -1,0 +1,31 @@
+slots:
+- slot: starmap-slot1
+  date: '2026-07-08'
+  label: 8 Jul 2026
+  time: 10:30 PM EDT
+  jpg: starmap-slot1.jpg
+  pdf: starmap-slot1.pdf
+- slot: starmap-slot2
+  date: '2026-07-15'
+  label: 15 Jul 2026
+  time: 10:30 PM EDT
+  jpg: starmap-slot2.jpg
+  pdf: null
+- slot: starmap-slot3
+  date: '2026-07-22'
+  label: 22 Jul 2026
+  time: 10:30 PM EDT
+  jpg: starmap-slot3.jpg
+  pdf: null
+- slot: starmap-slot4
+  date: '2026-07-29'
+  label: 29 Jul 2026
+  time: 10:30 PM EDT
+  jpg: starmap-slot4.jpg
+  pdf: null
+- slot: starmap-slot5
+  date: '2026-08-05'
+  label: 5 Aug 2026
+  time: 10:30 PM EDT
+  jpg: starmap-slot5.jpg
+  pdf: null
