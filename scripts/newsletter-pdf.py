@@ -12,7 +12,7 @@ Example:
         content/articles/2026/07/nbas-newsletter-2607/
 
 Requirements:
-    pip install playwright python-frontmatter pypdf
+    pip install playwright python-frontmatter
     playwright install chromium
 """
 
@@ -25,7 +25,6 @@ from datetime import date
 
 import frontmatter
 from playwright.sync_api import sync_playwright
-from pypdf import PdfWriter, PdfReader
 
 
 # ── Volume/Issue calculation ─────────────────────────────────────
@@ -677,7 +676,9 @@ def generate_pdf(url: str, output_dir: str) -> None:
                     }}
                     h2.insertAdjacentHTML('afterend', `
                         <div class="starmap-note">
-                            <p>&#x2728; The Monthly Starmap for {calendar.month_name[issue_date.month]} {issue_date.year} is attached as the next page of this newsletter.</p>
+                            <p>&#x2728; For {calendar.month_name[issue_date.month]}'s star chart, visit
+                            nbasastro.org/starmap/ (this week, with planets) or
+                            nbasastro.org/starmap/reference/ (any night, any year, no planets).</p>
                         </div>
                     `);
                 }}
@@ -720,28 +721,12 @@ def generate_pdf(url: str, output_dir: str) -> None:
 
         browser.close()
 
-    # ── Append starmap PDF if present ───────────────────────────
-    year_short   = str(issue_date.year)[2:]
-    month_str    = f"{issue_date.month:02d}"
-    starmap_name = f"starmap-{year_short}{month_str}.pdf"
-    starmap_path = output_path / starmap_name
-
-    writer = PdfWriter()
-    reader = PdfReader(str(temp_pdf_path))
-    for pg in reader.pages:
-        writer.add_page(pg)
-
-    if starmap_path.exists():
-        print(f"  Appending starmap: {starmap_name}")
-        for pg in PdfReader(str(starmap_path)).pages:
-            writer.add_page(pg)
-    else:
-        print(f"  No starmap found at {starmap_path} — skipping")
-
-    with open(pdf_path, "wb") as f:
-        writer.write(f)
-
-    temp_pdf_path.unlink()
+    # ── No starmap PDF appended, per issue #37 ──────────────────
+    # The newsletter no longer bundles or appends a per-newsletter starmap
+    # PDF. The in-content note above points readers to nbasastro.org/starmap/
+    # instead, so the newsletter PDF stays exactly the size of the article
+    # content itself.
+    temp_pdf_path.rename(pdf_path)
     print(f"  Done: {pdf_filename}")
 
 

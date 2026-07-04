@@ -1,17 +1,14 @@
 {{ define "main" }}
 
-{{/* ── Find the current (next upcoming) map ────────────────────────────── */}}
-{{ $today   := now.Format "2006-01-02" }}
-{{ $cutoff  := now.AddDate 0 0 -14 | time.Format "2006-01-02" }}{{/* 14 days ago */}}
-{{ $maps    := where .Site.Data.starmaps.maps "date" ">=" $cutoff }}
-{{ $current := index $maps (sub (len $maps) 1) }}
-{{ $found   := false }}
-{{ range $maps }}
-  {{ if and (not $found) (ge .date $today) }}
-    {{ $current = . }}
-    {{ $found = true }}
-  {{ end }}
-{{ end }}
+{{/* ── Tier 2/3 data: current (slot 1) + rolling buffer, from generate.py's ── */}}
+{{/* ── sidecar file. No date-comparison logic needed here anymore --        */}}
+{{/* ── generate.py always writes the true "current" week as slot 1 at      */}}
+{{/* ── build time, and the site rebuilds nightly, so slot 1 stays fresh.   */}}
+{{ $slotsData := .Site.Data.starmap_slots }}
+{{ $slots := slice }}
+{{ if $slotsData }}{{ $slots = $slotsData.slots }}{{ end }}
+{{ $current := "" }}
+{{ if gt (len $slots) 0 }}{{ $current = index $slots 0 }}{{ end }}
 
 <style>
 .sm-page-title {
@@ -22,8 +19,41 @@
 .sm-page-desc {
   color: #8a9cb3;
   font-size: 0.95rem;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1rem;
   font-family: sans-serif;
+}
+.sm-ref-teaser {
+  margin: 0 0 1.8rem;
+  padding: 1rem;
+  border: 1px solid #3a4a5a;
+  border-radius: 8px;
+  background: #1e2a38;
+}
+.sm-ref-teaser-title {
+  font-size: 1rem;
+  margin: 0 0 0.3rem;
+  color: #dce8f4;
+  font-family: sans-serif;
+}
+.sm-ref-teaser-desc {
+  font-size: 0.88rem;
+  color: #8a9cb3;
+  margin: 0 0 0.8rem;
+  line-height: 1.5;
+  font-family: sans-serif;
+}
+.sm-ref-teaser-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
+}
+.sm-ref-teaser-grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
 }
 .sm-map-wrap {
   text-align: center;
@@ -65,6 +95,14 @@
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+}
+.sm-empty {
+  font-family: sans-serif;
+  color: #8a9cb3;
+  border: 1px dashed #3a4a5a;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
 }
 .sm-howto {
   margin-top: 2rem;
@@ -118,10 +156,23 @@
 <h1 class="sm-page-title">{{ .Title }}</h1>
 <p class="sm-page-desc">{{ .Description }}</p>
 
+{{ if not $current }}
+
+<div class="sm-empty">
+  No current/upcoming starmap data found yet. This page reads
+  <code>data/starmap_slots.yaml</code>, which <code>generate.py --slots</code>
+  writes automatically as part of the nightly build. If you're running
+  <code>hugo server</code> locally without having run that first, this is
+  expected — run <code>python scripts/starmaps/generate.py --slots --output static/starmap</code>
+  and rebuild.
+</div>
+
+{{ else }}
+
 {{/* ── Map image ────────────────────────────────────────────────────────── */}}
 <div class="sm-map-wrap">
   <img id="sm-img"
-       src="/starmap/{{ $current.date }}.png"
+       src="/starmap/{{ $current.jpg }}"
        alt="Star map for {{ $current.label }}, {{ $current.time }}">
 </div>
 
@@ -130,34 +181,50 @@
 
   <div class="sm-selector-wrap">
     <label for="sm-week">Week:</label>
-    <select id="sm-week" onchange="smSelect(this.value)">
-      {{ $prevMonth := "" }}
-      {{ range $maps }}
-        {{ $month := .date | time.Format "January 2006" }}
-        {{ if ne $month $prevMonth }}
-          {{ if $prevMonth }}</optgroup>{{ end }}
-          <optgroup label="{{ $month }}">
-          {{ $prevMonth = $month }}
-        {{ end }}
-        <option value="{{ .date }}"{{ if eq .date $current.date }} selected{{ end }}>
-          {{- .label }} · {{ .time -}}
-        </option>
+    <select id="sm-week" onchange="smSelect()">
+      {{ range $i, $s := $slots }}
+      <option value="{{ $s.slot }}"
+              data-jpg="{{ $s.jpg }}"
+              data-pdf="{{ $s.pdf | default "" }}"
+              data-label="{{ $s.label }}"
+              data-time="{{ $s.time }}"
+              {{ if eq $i 0 }}selected{{ end }}>
+        {{- if eq $i 0 }}Current · {{ end -}}
+        {{ $s.label }} · {{ $s.time }}
+      </option>
       {{ end }}
-      {{ if $prevMonth }}</optgroup>{{ end }}
     </select>
   </div>
 
   <div class="sm-buttons">
     <a id="sm-pdf"
-       href="/starmap/{{ $current.date }}.pdf"
+       href="/starmap/{{ $current.pdf }}"
        class="starmap-btn"
-       target="_blank">📥 Download PDF (Print Ready)</a>
-    <a id="sm-png"
-       href="/starmap/{{ $current.date }}.png"
+       target="_blank"
+       {{ if not $current.pdf }}style="display:none;"{{ end }}>📥 Download PDF (Print Ready)</a>
+    <a id="sm-jpg"
+       href="/starmap/{{ $current.jpg }}"
        class="starmap-link-alt"
-       target="_blank">View Full PNG</a>
+       target="_blank">View Full Image</a>
   </div>
 
+</div>
+
+{{/* ── Monthly reference charts teaser: a grid of thumbnails (one per      ── */}}
+{{/* ── month), styled deliberately unlike the single current-week map      ── */}}
+{{/* ── above, so it reads immediately as "browse by month" navigation      ── */}}
+{{/* ── rather than a second copy of the same UI. The whole grid links out. ── */}}
+{{ $refMonths := slice "01-jan" "02-feb" "03-mar" "04-apr" "05-may" "06-jun" "07-jul" "08-aug" "09-sep" "10-oct" "11-nov" "12-dec" }}
+<div class="sm-ref-teaser">
+  <h3 class="sm-ref-teaser-title">Monthly Star Charts</h3>
+  <p class="sm-ref-teaser-desc">A reference chart for every month, without planets — accurate
+     any year. The map above is just for this week.</p>
+  <a href="{{ "starmap/reference/" | relURL }}" class="sm-ref-teaser-grid">
+    {{ range $refMonths }}
+    <img src="{{ printf "/starmap/evergreen/starmap-%s-dark.jpg" . }}" alt="">
+    {{ end }}
+  </a>
+  <a href="{{ "starmap/reference/" | relURL }}" class="starmap-btn">Browse All Months →</a>
 </div>
 
 {{/* ── How-to accordion ─────────────────────────────────────────────────── */}}
@@ -168,16 +235,16 @@
     <summary>How to read a star map</summary>
     <div class="sm-howto-body">
       <p>The map shows the entire sky as if you were lying on your back looking straight up.
-         The edge of the circle is your horizon; the center is directly overhead (the zenith).</p>
+      The edge of the circle is your horizon; the center is directly overhead (the zenith).</p>
       <ul>
         <li>Hold the map so the compass direction you are facing points away from you —
-            if you're facing south, rotate the map so <strong>S</strong> is at the bottom.</li>
+        if you're facing south, rotate the map so <strong>S</strong> is at the bottom.</li>
         <li><strong>North</strong> is always toward Polaris, the North Star, which sits near
-            the center-top of the map (it barely moves all night).</li>
+        the center-top of the map (it barely moves all night).</li>
         <li>East and West are swapped compared to a ground map — because you're looking up,
-            not down.</li>
+        not down.</li>
         <li>The map is set for {{ $current.time }} on {{ $current.label }}.
-            Stars rise in the east and set in the west as the night progresses.</li>
+        Stars rise in the east and set in the west as the night progresses.</li>
       </ul>
     </div>
   </details>
@@ -187,15 +254,15 @@
     <div class="sm-howto-body">
       <ul>
         <li><strong>Dot size = brightness.</strong> Larger dots are brighter stars.
-            The brightest stars are also labeled by name.</li>
+        The brightest stars are also labeled by name.</li>
         <li><strong>Blue lines</strong> connect stars into the familiar constellation patterns
-            (stick figures).</li>
+        (stick figures).</li>
         <li><strong>Grey constellation labels</strong> (e.g., ORION, CASSIOPEIA) name
-            the constellation region, not just the stick figure.</li>
+        the constellation region, not just the stick figure.</li>
         <li><strong>Orange/yellow circles</strong> are planets — they move week to week,
-            which is why they're labeled distinctly.</li>
+        which is why they're labeled distinctly.</li>
         <li><strong>Light blue cloud</strong> running diagonally across the map is
-            the Milky Way — our galaxy seen edge-on.</li>
+        the Milky Way — our galaxy seen edge-on.</li>
       </ul>
     </div>
   </details>
@@ -205,18 +272,18 @@
     <div class="sm-howto-body">
       <ul>
         <li><strong>Let your eyes dark-adapt.</strong> Stay away from bright lights for
-            15–20 minutes. Your eyes become dramatically more sensitive in the dark.</li>
+        15–20 minutes. Your eyes become dramatically more sensitive in the dark.</li>
         <li><strong>Use a red light</strong> to read the map. Red light (a red-filtered
-            flashlight or a dim phone screen with a red filter app) preserves your night vision.
-            White light resets your adaptation.</li>
+        flashlight or a dim phone screen with a red filter app) preserves your night vision.
+        White light resets your adaptation.</li>
         <li><strong>Start with the bright stuff.</strong> Find one or two labeled bright stars
-            first to orient yourself, then work outward to fainter objects.</li>
+        first to orient yourself, then work outward to fainter objects.</li>
         <li><strong>Hold the map overhead</strong> with the appropriate compass direction
-            pointing away from you, or lay it flat and look up.</li>
+        pointing away from you, or lay it flat and look up.</li>
         <li>In summer, wait until the time shown on the map — it stays light late and the
-            sky needs to fully darken.</li>
+        sky needs to fully darken.</li>
         <li>Our skies in North Adams are Bortle 4 — dark enough to see the Milky Way
-            on clear, moonless nights.</li>
+        on clear, moonless nights.</li>
       </ul>
     </div>
   </details>
@@ -225,15 +292,26 @@
 
 {{/* ── Client-side week switcher ────────────────────────────────────────── */}}
 <script>
-function smSelect(date) {
-  document.getElementById('sm-img').src  = '/starmap/' + date + '.png';
-  document.getElementById('sm-pdf').href = '/starmap/' + date + '.pdf';
-  document.getElementById('sm-png').href = '/starmap/' + date + '.png';
-  // Update alt text
+function smSelect() {
   var sel = document.getElementById('sm-week');
   var opt = sel.options[sel.selectedIndex];
-  document.getElementById('sm-img').alt = 'Star map for ' + opt.text;
+  var jpg = opt.dataset.jpg;
+  var pdf = opt.dataset.pdf;
+
+  document.getElementById('sm-img').src = '/starmap/' + jpg;
+  document.getElementById('sm-img').alt = 'Star map for ' + opt.dataset.label + ', ' + opt.dataset.time;
+  document.getElementById('sm-jpg').href = '/starmap/' + jpg;
+
+  var pdfBtn = document.getElementById('sm-pdf');
+  if (pdf) {
+    pdfBtn.href = '/starmap/' + pdf;
+    pdfBtn.style.display = '';
+  } else {
+    pdfBtn.style.display = 'none';
+  }
 }
 </script>
+
+{{ end }}
 
 {{ end }}

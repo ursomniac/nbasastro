@@ -7,3 +7,6 @@ resources/
 public/
 **/.DS_Store
 iss-passes.json
+__pycache__/
+*.pyc
+node_modules/
