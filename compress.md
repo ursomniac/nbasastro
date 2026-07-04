@@ -28,9 +28,10 @@ this sandbox has no Hugo binary, no external network, no git push credentials, a
 4. [x] Committed steps 2+3 as one isolated hygiene commit: 7f14797
        "HYGIENE: untrack __pycache__, fix .gitignore, fix corrupted shebang in smoke_test.py"
        Confirmed via `git log -1` on your machine.
-5. [ ] Your call, separate from this branch: node_modules (1,357 files) is tracked in git,
-       traced to commit 3ddd2c8/ea54cb8, predates this branch, also present on main. Not part
-       of this plan unless you want it added as its own step — flagging only, not scheduled.
+5. [x] node_modules (1,357 files, predates this branch, traced to 3ddd2c8/ea54cb8) — confirmed
+       no CI dependency on it being tracked (hugo.yml only runs `npx pagefind`, which
+       auto-installs). Added to .gitignore, untracked via `git rm -r --cached`, committed
+       separately (a26aa53). Will be gone from the active repo once this branch merges.
 
 ## PHASE 2 — Verify each existing piece in isolation (done)
 6. [x] generate.py: actually executed on your machine (not just read/compiled) —
@@ -131,7 +132,12 @@ this sandbox has no Hugo binary, no external network, no git push credentials, a
   the case this needs real investigation as its own project, not a source-image resize.
 
 ## PHASE 5 — Integration (only after every step above is done and verified — not before)
-16. [ ] Final full-branch check: `git status` clean, every box above checked, no open decisions.
+16. [x] Final full-branch check done. All committed: 7f14797 (hygiene), 7be3a35 (main starmap
+        refactor + #37 work), a26aa53 (node_modules untrack). Confirmed via `git log --oneline`
+        on your machine — matches expected history exactly, main untouched at 4fb0efd. No open
+        decisions remain (only the two explicitly-deferred future items: node_modules history
+        cleanup — not needed, already untracked — and the newsletter-PDF file-size problem,
+        which is its own future project).
 17. [ ] YOU push starmap2 to GitHub (I have no push credentials — confirmed by trying).
 18. [ ] Open the PR, watch the first Actions run specifically for the new "Generate current +
         upcoming starmaps" step — this is the first real-world test of generate.py's actual
