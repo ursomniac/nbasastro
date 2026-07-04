@@ -138,7 +138,11 @@ this sandbox has no Hugo binary, no external network, no git push credentials, a
         decisions remain (only the two explicitly-deferred future items: node_modules history
         cleanup — not needed, already untracked — and the newsletter-PDF file-size problem,
         which is its own future project).
-17. [ ] YOU push starmap2 to GitHub (I have no push credentials — confirmed by trying).
+17. [x] Pushed starmap2 to GitHub. Succeeded — GitHub warned about 2 large pre-existing files
+        (spatial.duckdb_extension 61MB, stars.bigksy parquet 51MB, both added in 8870a32, before
+        this session started, confirmed via git log). Both under GitHub's 100MB hard limit, only
+        over the 50MB advisory. Not copied into public/, don't affect deployed site size. Not a
+        blocker; candidate for the same future media/size initiative (Git LFS) if desired later.
 18. [ ] Open the PR, watch the first Actions run specifically for the new "Generate current +
         upcoming starmaps" step — this is the first real-world test of generate.py's actual
         dependencies in a clean CI environment.
