@@ -1,4 +1,4 @@
-a#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Smoke test for generate.py's compositing/branding/JPEG logic, bypassing the
 real starplot render (which needs a JPL ephemeris download this sandbox can't
