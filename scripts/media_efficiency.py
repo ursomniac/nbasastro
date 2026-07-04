@@ -254,7 +254,13 @@ def build_fix_plan(path, record, ceiling, target_format, quality):
 
 
 def rewrite_index_references(index_path, index_text, old_name, new_name):
-    updated = index_text.replace(old_name, new_name)
+    """Replace old_name with new_name, but only whole-token matches - not
+    where old_name occurs merely as a substring of a different, longer
+    filename (e.g. "80mm+25mm.png" inside "06180130-moon-80mm+25mm.png").
+    A blind str.replace() would corrupt that unrelated file's reference."""
+    boundary = r"[\w./+-]"
+    pattern = re.compile(r"(?<!" + boundary + r")" + re.escape(old_name) + r"(?!" + boundary + r")")
+    updated = pattern.sub(new_name.replace("\\", "\\\\"), index_text)
     index_path.write_text(updated, encoding="utf-8")
     return updated
 

@@ -51,6 +51,7 @@ def dir_breakdown(directory):
     pdfs = 0
     other = 0
     file_count = 0
+    image_count = 0
     for p in directory.rglob("*"):
         if not p.is_file():
             continue
@@ -60,6 +61,7 @@ def dir_breakdown(directory):
         ext = p.suffix.lower()
         if ext in IMAGE_EXTS:
             images += size
+            image_count += 1
         elif ext in PDF_EXTS:
             pdfs += size
         else:
@@ -71,6 +73,8 @@ def dir_breakdown(directory):
         "pdfs": pdfs,
         "other": other,
         "file_count": file_count,
+        "image_count": image_count,
+        "avg_image": (images / image_count) if image_count else 0,
     }
 
 
@@ -107,18 +111,32 @@ def main():
     print(f"Root: {root}")
     print(f"Bundles scanned: {len(results)}   Combined size: {human_size(grand_total)}")
     print(f"Showing top {min(args.top, len(results))} by size")
-    print("-" * 100)
-    print(f"{'directory':<55} {'total':>9} {'images':>9} {'pdfs':>9} {'other':>9} {'files':>6}")
-    print("-" * 100)
+    print("-" * 110)
+    print(f"{'directory':<55} {'total':>9} {'images':>9} {'pdfs':>9} {'other':>9} {'files':>6} {'avg/img':>9}")
+    print("-" * 110)
     for r in results[: args.top]:
         rel = r["path"].relative_to(root.parent) if root.parent in r["path"].parents else r["path"]
+        avg_str = human_size(r["avg_image"]) if r["image_count"] else "-"
         print(
             f"{str(rel):<55} {human_size(r['total']):>9} {human_size(r['images']):>9} "
-            f"{human_size(r['pdfs']):>9} {human_size(r['other']):>9} {r['file_count']:>6}"
+            f"{human_size(r['pdfs']):>9} {human_size(r['other']):>9} {r['file_count']:>6} {avg_str:>9}"
         )
-    print("-" * 100)
+    print("-" * 110)
     over_goal = [r for r in results if r["total"] > 2_000_000]
     print(f"{len(over_goal)} of {len(results)} bundles exceed the 2MB goal (combined {human_size(sum(r['total'] for r in over_goal))})")
+    print("(total size alone conflates 'many efficient images' with 'bloated images' - see")
+    print(" the ranking below, sorted by average size per image instead, to tell them apart)")
+
+    by_avg = [r for r in results if r["image_count"] > 0]
+    by_avg.sort(key=lambda r: r["avg_image"], reverse=True)
+    print()
+    print(f"Same bundles, ranked by average size per image (top {min(args.top, len(by_avg))}):")
+    print("-" * 80)
+    print(f"{'directory':<55} {'avg/img':>9} {'images':>6}")
+    print("-" * 80)
+    for r in by_avg[: args.top]:
+        rel = r["path"].relative_to(root.parent) if root.parent in r["path"].parents else r["path"]
+        print(f"{str(rel):<55} {human_size(r['avg_image']):>9} {r['image_count']:>6}")
 
 
 if __name__ == "__main__":

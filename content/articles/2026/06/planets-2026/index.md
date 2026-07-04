@@ -4,8 +4,8 @@ date: 2026-06-25
 description: "Jupiter and Venus fade from view this summer while Saturn, Mars, and Uranus take the stage — including a 336-year-old mystery. Planet guide, summer/fall 2026."
 authors: ["bob-donahue"]
 byline: "What's in store for the planets Summer/Fall 2026"
-thumbnail: "icon.png"
-banner: "banner.png"
+thumbnail: "icon.jpg"
+banner: "banner.jpg"
 series: ["planet-watch"]
 ---
 
@@ -20,8 +20,8 @@ then wondering "when will they come back?"
 ## Say Goodbye! to Venus and Jupiter
 
 {{< nbas-gallery style="grid" size="350px" >}}
-0629-2130-jupiter-venus.png | Venus and Jupiter in late June
-venus-telescope.png | Venus in a telescope
+0629-2130-jupiter-venus.jpg | Venus and Jupiter in late June
+venus-telescope.jpg | Venus in a telescope
 {{< /nbas-gallery >}}
 
 If you've been enjoying that brilliant pair hanging in the western sky after sunset, take a good look now — Jupiter is almost gone. By July it disappears behind the Sun entirely, and won't be back in the evening sky until late in the year. Catch it while you can: on the 29th at 9:30 PM it's barely above the horizon, already fading into the twilight glow.
@@ -31,13 +31,13 @@ Venus lingers a little longer. It's still setting after 10:30 PM through early s
 ## Say Hello! to Saturn and Neptune
 
 {{< nbas-gallery style="grid" size="350px" >}}
-neptune1.png
-saturn-track copy.png
+neptune1.jpg
+saturn-track copy.jpg
 {{< /nbas-gallery >}}
 
 Saturn is back. After spending time as a morning object, it's now rising earlier each evening and making itself at home in the fall sky. Better still: if you've looked at Saturn over the last couple of years and wondered why the famous rings seemed so thin, this year they're opening back up again, tilted more toward us and unmistakable even in a small telescope. It's worth pulling out the eyepiece just for that.
 
-{{< nbas-image src="saturn.png" width="400" align="right" >}}
+{{< nbas-image src="saturn.jpg" width="400" align="right" >}}
 
 For the rest of this year, Saturn is mostly in Cetus and Pisces.
 Why Cetus?  This is an artifact of the IAU's definition of 
@@ -91,8 +91,8 @@ forgot about. That's a rare kind of connection.
 ## Mars **and** Uranus
 
 {{< nbas-gallery style="grid" size="350px" title="Mars and Uranus - July 4, 4:30 AM" >}}
-binoc-mars-uranus.png | Mars with Uranus just above it, and the Pleiades | 7 x35 binocular view
-60x-mars-uranus.png | Mars and Uranus in a small telescope | 60x magnification |
+binoc-mars-uranus.jpg | Mars with Uranus just above it, and the Pleiades | 7 x35 binocular view
+60x-mars-uranus.jpg | Mars and Uranus in a small telescope | 60x magnification |
 {{< /nbas-gallery >}}
 
 Before Uranus becomes an evening object though, there's an early-morning

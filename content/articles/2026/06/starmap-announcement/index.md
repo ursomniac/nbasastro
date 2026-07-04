@@ -7,7 +7,7 @@ series: ["nbas-announcements"]
 ---
 
 ## New Feature: Weekly Starmaps!
-{{< nbas-image src="2026-06-10.png" >}}
+{{< nbas-image src="2026-06-10.jpg" >}}
 
 We're pleased to announce this new feature: weekly star maps showing the positions of the constellations and what planets are "up".
 
