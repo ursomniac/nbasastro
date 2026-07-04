@@ -6,7 +6,7 @@ byline: "Everyone talks about Bortle. Here's what it actually means — and what
 authors: ["bob-donahue"]
 series: ["how-the-sky-works"]
 knowledgetopics: ["observing"]
-banner: "banner.png"
+banner: "banner.jpg"
 thumbnail: "icon.jpg"
 ---
 
@@ -135,7 +135,7 @@ Here is the point that almost never gets stated plainly: **a single Bortle numbe
 
 The Bortle scale was originally intended to characterize the sky at the zenith, or the overall quality of the sky above roughly 45° altitude. But an all-sky map tells a very different story. Look at the polar projection view for any of our Berkshire observing sites, with zenith at center and horizon at the rim. The zenith reads one thing; the horizon reads something completely different.
 
-{{< nbas-image src="lightpollution-regional.png" fullwidth="true"
+{{< nbas-image src="lightpollution-regional.jpg" fullwidth="true"
 caption="Light pollution across western New England and eastern New York (lightpollutionmap.info, VIIRS data). Albany dominates the west; Springfield anchors the southeast; Pittsfield is a significant local source in the center. The dark green corridor through the Berkshire highlands and southern Vermont is the territory our sites occupy." >}}
 
 The regional picture explains the all-sky patterns. Three major sources — Albany to the west, Pittsfield in the center, Springfield to the southeast — hem in the entire region. What varies from site to site is how much terrain shielding each location gets from each source.
@@ -150,7 +150,7 @@ The practical result: terrain shielding can reduce a dome by 30–50% and may ma
 
 Windsor Peak sits at modest elevation with nearly 360° of open horizon. With no terrain to intercept any direction, the map shows the underlying pollution field unmodified.
 
-{{< nbas-image src="allsky-windsor-peak.png"
+{{< nbas-image src="allsky-windsor-peak.jpg"
 caption="Windsor Peak, Windsor, MA. Zenith: 21.61 mag/arcsec² (VIIRS model). Source: lightpollutionmap.info, 2024." >}}
 
 The result is a smooth radial gradient — uniformly dark at zenith, uniformly compromised at every point on the horizon. Pittsfield is the worst direction (SSW, Az 205°). The zenith may say 21.61, but the horizon in that direction is reading several magnitudes brighter. Anyone pointing a telescope toward Sagittarius or toward the southwest is observing in a much worse sky than the zenith number implies.
@@ -159,7 +159,7 @@ The result is a smooth radial gradient — uniformly dark at zenith, uniformly c
 
 Arunah Hill in Cummington has a nearly identical zenith reading to Windsor Peak (21.64 vs. 21.61) but a completely different all-sky pattern.
 
-{{< nbas-image src="allsky-arunah-hill.png"
+{{< nbas-image src="allsky-arunah-hill.jpg"
 caption="Arunah Hill, Cummington, MA. Zenith: 21.64 mag/arcsec² (VIIRS model). Source: lightpollutionmap.info, 2024." >}}
 
 The southeastern horizon collapses to around 18.96 mag/arcsec² — Springfield's direction — but that spike is tightly localized. Hills to the south and southeast intercept the direct component of Springfield's dome before it reaches the observing field. The asymmetry is the terrain shielding made visible. Without it, the all-sky mean would be dramatically worse; with it, the mean is 21.46 — nearly three magnitudes better than the rim alone would predict.
@@ -168,7 +168,7 @@ The same zenith reading, very different usable sky.
 
 The Readsboro site in southern Vermont adds distance to the shielding equation.
 
-{{< nbas-image src="allsky-readsboro-vt.png"
+{{< nbas-image src="allsky-readsboro-vt.jpg"
 caption="NBAS site near Readsboro, VT. Zenith: 21.77 mag/arcsec² (VIIRS model). Source: lightpollutionmap.info, 2024." >}}
 
 The map is almost entirely in the blue-green band — the best of the group. Even the worst direction (SE horizon, ~20.38 mag/arcsec²) stays in the green range. Springfield is visible as a slight warm patch at 90 miles out but cannot dominate from that distance.
@@ -179,7 +179,7 @@ The map is almost entirely in the blue-green band — the best of the group. Eve
 
 It's one of the most common questions we hear, and it makes intuitive sense: Greylock is the highest point in Massachusetts at 1,062 meters. Higher means darker, right?
 
-{{< nbas-image src="allsky-north-adams-williamstown.png"
+{{< nbas-image src="allsky-north-adams-williamstown.jpg"
 caption="North Adams / Williamstown area (186 m). Zenith: 21.20 mag/arcsec² (VIIRS model). Albany's dome dominates the western horizon. Source: lightpollutionmap.info, 2025." >}}
 
 Start with the baseline. North Adams and Williamstown, at the base of Greylock, sit at about 186 meters. The all-sky map is uniformly yellow-orange from horizon to horizon.
@@ -188,7 +188,7 @@ There is no green in that map. Albany — only about 50 km to the west — domin
 
 Now drive up to the summit.
 
-{{< nbas-image src="allsky-mt-greylock.png"
+{{< nbas-image src="allsky-mt-greylock.jpg"
 caption="Mt. Greylock summit (1,062 m). Zenith: 21.46 mag/arcsec². The summit gains 0.26 mag/arcsec² over the base — but loses all terrain shielding. Source: lightpollutionmap.info, 2025." >}}
 
 The summit map shows a perfectly smooth, radial gradient — the same signature as an open site with no terrain help at all. From 1,062 meters, Albany, Springfield, Pittsfield, Worcester, and the Route 2 corridor all have a direct line of sight to the observer. *There is no terrain to block any of them, because you are above the terrain.*
@@ -224,7 +224,7 @@ Transparency — how well the atmosphere transmits light — affects sky brightn
 
 Seasonally, our Berkshire sites consistently read darker in summer than in winter by roughly half a magnitude — a real, measurable shift driven mostly by snow cover. Snow has high reflectivity (albedo around 0.8, compared to 0.1 for bare soil or pavement). Streetlights and fixtures that normally send downward light into dark asphalt suddenly find that light bouncing back upward into the sky. A city that produces a certain amount of skyglow in October produces significantly more in January, with no change to the fixtures themselves.
 
-{{< nbas-image src="ts-windsor-peak.png" fullwidth="true"
+{{< nbas-image src="ts-windsor-peak.jpg" fullwidth="true"
 caption="The author's SQM measurements from Windsor Peak: red ×'s are when the Moon was above the horizon; the dashed line near the bottom is the VIIRS satellite prediction — which the instrument never reaches, reflecting the consistent 0.3–0.5 mag/arcsec² offset between model and ground measurement. Seasonal variation is apparent in the dark-sky readings." >}}
 
 The gap between the dashed line and the actual readings is the satellite-vs-ground offset discussed above — visible here in three years of real data.

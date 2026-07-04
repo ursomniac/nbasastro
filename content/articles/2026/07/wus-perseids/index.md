@@ -6,7 +6,7 @@ series: ["whats-up-in-the-sky"]
 knowledgetopics: ["observing-guides"]
 description: "2026 Perseids peak August 12–13 under a new moon — perfect dark skies all night. What to expect, when to watch, and why you need a lawn chair."
 thumbnail: "thumbnail.jpg"
-banner: "banner.png"
+banner: "banner.jpg"
 sso_meteors: ["Perseids"]
 ---
 
@@ -89,7 +89,7 @@ The predicted peak is around 14:53 UTC on August 13th — late night August 12th
 
 The best hours any night are from midnight through astronomical dawn (around 4–5 AM local time). Two things happen after midnight that matter enormously.
 
-{{< nbas-image src="debris.png" align="right" width="380" >}}
+{{< nbas-image src="debris.jpg" align="right" width="380" >}}
 
 First: the radiant rises higher in the sky, so meteors travel longer paths across your field of view, producing longer, more dramatic trails. Second — and this is the physics that makes the difference — after midnight you're on the *forward-facing side* of Earth, sweeping directly into the debris stream rather than letting it catch up to you. It's the difference between a car driving into rain versus sitting still. Rates from midnight to 4 AM can be two to three times higher than rates at 10 PM. The radiant (the direction the debris is coming from) breaks the horizon after midnight, which is why the Perseids appear highest in the pre-dawn sky.
 
@@ -97,7 +97,7 @@ First: the radiant rises higher in the sky, so meteors travel longer paths acros
 
 ## Where to Look
 
-{{< nbas-image src="radiant-08130300.png" >}}
+{{< nbas-image src="radiant-08130300.jpg" >}}
 
 The radiant — the point in Perseus from which all Perseids appear to originate — rises in the northeast around 10–11 PM and climbs toward the top of the sky by dawn. Its exact position is near the famous Double Cluster (h and χ Persei), a pair of open clusters visible to the naked eye from a dark site and striking in binoculars.
 

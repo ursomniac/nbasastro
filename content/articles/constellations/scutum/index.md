@@ -51,7 +51,7 @@ highlights:
 
 “Most Serene, Most Powerful, and Most Invincible, John III, King of Poland.” begins the dedication by Hevelius in his 1687 Uranographia, which included several “new” constellations - including “Scutum Sobiescianum”: the “Shield of Sobieski”, the ruling family in Poland.
 
-{{< nbas-image src="hist_SCT.png" fullwidth="true"
+{{< nbas-image src="hist_SCT.jpg" fullwidth="true"
 caption="From _Firmamentum Sobiescianum sive Uranographia_, c. 1687" >}}
 
 This of course was one of several “new” constellations which were
@@ -161,7 +161,7 @@ at the bottom of Cygnus.  In binoculars it really stands out.
 
 ### Wildly Pulsating Star
 
-{{< nbas-image src="DeltaSctLightCurve.png" width="500" align="right" >}}
+{{< nbas-image src="DeltaSctLightCurve.jpg" width="500" align="right" >}}
 
 200 light years from the Sun is an interesting variable star - the
 fifth brightest star in Scutum. Unlike many pulsating stars like
