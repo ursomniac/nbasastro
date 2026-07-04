@@ -4,8 +4,8 @@ date: 2026-06-29
 description: "M57 is one of the night sky's most iconic objects — but what you're seeing is an illusion. Explore the true structure, colors, and stellar physics of the Ring Nebula."
 byline: "A smoke ring that is more than meets the eye"
 series: ["closer-look"]
-thumbnail: "icon.jpg"
-banner: "banner.jpg"
+thumbnail: "icon.webp"
+banner: "banner.webp"
 dso_messier: ["57"]
 
 object_info:
@@ -30,7 +30,7 @@ But here's the thing: while the "smoke ring" appearance is unmistakable, it's on
 
 ## Discovery
 {{< object-specs align="right" >}}
-{{< nbas-image src="Charles_Messier.jpg" align="right" width="300" >}}
+{{< nbas-image src="Charles_Messier.webp" align="right" width="300" >}}
 
 The Ring Nebula was discovered in January 1779 by Charles Messier. At the time, anything that wasn't stellar-like was described as "nebulae" without any understanding of what any of them might be: it was generally thought that they were just clouds (which some of them are, of course).
 
@@ -42,7 +42,7 @@ It was William Herschel who first suggested the term "planetary nebula" formally
 
 ## Finding M 57
 
-{{< nbas-image src="m57-finder.png" align="left" width="450" >}}
+{{< nbas-image src="m57-finder.webp" align="left" width="450" >}}
 
 The Ring Nebula is one of the easier objects to find in Messier's catalog. It lies almost exactly midway between two bright stars: β (Beta) Lyrae (Sheliak) to the west and γ (Gamma) Lyrae (Sulafat) to the east — only about 2° apart. Even at low magnification, you'll notice something distinctly "fuzzy" between them that refuses to resolve into a star. That's your target.
 
@@ -51,7 +51,7 @@ At higher magnification the ring shape becomes apparent. A 4-inch telescope will
 {{< clear >}}
 
 ## What You're Seeing in Your Image
-{{< nbas-image src="m_57-92U-PIXRCAGRAXGHS-square.jpg" >}}
+{{< nbas-image src="m_57-92U-PIXRCAGRAXGHS-square.webp" >}}
 
 If you have a smart scope, the Ring Nebula is an easy target (because it's bright) though slightly challenging (because it's somewhat small).  But even exposure times of a few minutes is enough to exceed visual observations.
 
@@ -72,9 +72,9 @@ Now look at that image again. It looks like a ring — a cosmic smoke ring hangi
 What you're actually seeing is a barrel-shaped cloud of gas roughly 4.6 light years across, and you happen to be looking straight down one end of it. The "ring" is the walls of that barrel, and the darker center is simply the more-hollow interior — the mouth of the barrel opening toward you across 2,570 light years of space.
 
 {{< nbas-gallery style="carousel" size="300px" title="Other Bright Planetary NEbulae">}}
-m_27-93U-PIXRCAABEGHS-square.jpg | Messier 27 | Seeing the barrel from the side
-Caldwell_74=NGC_3132.jpeg | NGC 3432 | Partially looking down the barrel
-HST-catseye.jpg | NGC 6543 | Extremely complex
+m_27-93U-PIXRCAABEGHS-square.webp | Messier 27 | Seeing the barrel from the side
+Caldwell_74=NGC_3132.webp | NGC 3432 | Partially looking down the barrel
+HST-catseye.webp | NGC 6543 | Extremely complex
 {{< /nbas-gallery >}}
 
 {{< nbas-image src="pn_orientation.png" width="450" align="left"
@@ -111,7 +111,7 @@ That white dwarf is doing all the work. Its fierce ultraviolet output is what io
 
 ### Is it a Binary System?
 
-{{< nbas-image src="jwst-m_57.png" width="400" align="left" >}}
+{{< nbas-image src="jwst-m_57.webp" width="400" align="left" >}}
 
 Look at this image taken by the  James Webb Space Telescope. Beyond the main ring, faint filamentary structures extend outward into the surrounding space — and buried in that data are clues that M57 may not have been formed by a single star acting alone.
 

@@ -6,7 +6,7 @@ authors: ["bob-donahue"]
 byline: "Bringing Astronomy to Everyone"
 series: ["outreach-and-education"]
 knowledgetopics: ["outreach"]
-thumbnail: "tts-book.jpg"
+thumbnail: "tts-book.webp"
 ---
 
 Last week I attended a workshop at the Springfield Science Museum
@@ -18,16 +18,16 @@ do as a club.
 
 {{< nbas-gallery style="carousel" size="400px" >}}
 
-noreen_jenny.jpg | Author Noreen Grice and Organizer Jenny Powers |
-panel1.jpg | Engaging with "Touch the Stars"
-panel2.jpg | Learning about accessibility
+noreen_jenny.webp | Author Noreen Grice and Organizer Jenny Powers |
+panel1.webp | Engaging with "Touch the Stars"
+panel2.webp | Learning about accessibility
 {{< /nbas-gallery >}}
 
 I'm glad I went.
 
 ## Touch the Stars
 
-{{< nbas-image src="youcando_logo.jpg" width="200" align="left" >}}
+{{< nbas-image src="youcando_logo.webp" width="200" align="left" >}}
 The workshop was led by **Noreen Grice**, author of 
 [*Touch the Stars*](https://shop.nbp.org/products/touch-the-stars-fifth-edition) 
 as well as several other accessible astronomy books all presented on
@@ -39,7 +39,7 @@ through Braille text, but through nearly 20 raised images — tactile
 illustrations of solar system objects, eclipses, and deep-sky objects
 that a reader can actually *feel*.
 
-{{< nbas-image src="tts-book.jpg" size="300" align="right" >}}
+{{< nbas-image src="tts-book.webp" size="300" align="right" >}}
 Copies of the book were available at the workshop, and holding one
 brought home something I hadn't fully appreciated before: how much
 of our communication about astronomy is purely visual.  We talk
@@ -51,12 +51,12 @@ impressive.
 
 {{< nbas-gallery size="325px" style="grid" 
 title="Examples of Raised Relief Diagrams in \"Touch the Stars\"" >}}
-tts/moon-phase.jpeg | Phases of the Moon |
+tts/moon-phase.webp | Phases of the Moon |
 tts/jupiter.png | Jupiter and the Great Red Spot |
-tts/saturn.jpeg | Saturn and rings to scale |
-tts/orion.jpeg | the stars of Orion |
-tts/lyra.jpeg | Lyra and the Ring Nebula |
-tts/galaxy.jpg | The structure of a Spiral Galaxy |
+tts/saturn.webp | Saturn and rings to scale |
+tts/orion.webp | the stars of Orion |
+tts/lyra.webp | Lyra and the Ring Nebula |
+tts/galaxy.webp | The structure of a Spiral Galaxy |
 {{< /nbas-gallery >}}
 
 ## Accessibility in Action: The Springfield Science Museum
@@ -67,8 +67,8 @@ on the Moon and meteorites that directly put this into action:
 
 {{< nbas-gallery size="450px" style="carousel" 
 title="Tactile Exhibits at the Museum" >}}
-tts/moon-globe.jpg | Moon globe | 
-tts/moon-tycho.jpg | Description of the Tycho crater |
+tts/moon-globe.webp | Moon globe | 
+tts/moon-tycho.webp | Description of the Tycho crater |
 {{< /nbas-gallery >}}
 
 What's important to notice here is that it's not an "either/or"

@@ -7,7 +7,7 @@ series: ["constellation-highlights"]
 constellations: ["Cetus"]
 byline: "A whale of a constellation"
 description: "Learn about Cetus, the sea monster constellation, and its connections to ancient mythology and astronomy."
-thumbnail: "icon.jpg"
+thumbnail: "icon.webp"
 
 profile_data:
   "Abbreviation": CET
@@ -59,7 +59,7 @@ Piscis Austrinis) and Eridanus the River.
 
 {{< clear >}}
 
-{{< nbas-image src="hist_CET.jpg" width="550" align="right" 
+{{< nbas-image src="hist_CET.webp" width="550" align="right" 
 caption="From _Urania's Mirror_, c. 1825" >}}
 
 
@@ -103,7 +103,7 @@ limb of the Sun can trespass into Cetus for about one day a year.)
 ### The Squid
 
 
-{{< nbas-image src="m-77-92U-PIX+RCA+GRAX+GHS-square.jpg" width="400" align="left" 
+{{< nbas-image src="m-77-92U-PIX+RCA+GRAX+GHS-square.webp" width="400" align="left" 
 caption="Bob Donahue, NBAS" >}}
 
 Messier 77 is 47 Mly from the Sun, about 170 kly across.  It has
@@ -117,7 +117,7 @@ details of the structure.
 
 ### The Claw
 
-{{< nbas-image src="c_62-92U-PIX+RCA+DBE+GHS-square.jpg" width="400" align="right" 
+{{< nbas-image src="c_62-92U-PIX+RCA+DBE+GHS-square.webp" width="400" align="right" 
 caption="Bob Donahue, NBAS" >}}
 
 Closer to the Sun (only 11 Mly) is NGC 247 - the “Claw Galaxy”.  It
@@ -130,7 +130,7 @@ Chain: a line of five fainter and smaller background galaxies (mag
 
 ### The Skull
 
-{{< nbas-image src="c_56-92U-PIX+RCA+GRAX+GHS-square.jpg" width="400" align="left" 
+{{< nbas-image src="c_56-92U-PIX+RCA+GRAX+GHS-square.webp" width="400" align="left" 
 caption="Bob Donahue, NBAS" >}}
 
 A 12th magnitude white dwarf star illuminates the planetary nebula
@@ -145,7 +145,7 @@ with a narrow-band O III filter),
 ### WLM
 
  
-{{< nbas-image src="pgc_143=wlm-92U-PIX+RCA+DBE+GHS-square-filtered.jpg" width="400" align="right"
+{{< nbas-image src="pgc_143=wlm-92U-PIX+RCA+DBE+GHS-square-filtered.webp" width="400" align="right"
 caption="Bob Donahue, NBAS" >}}
 
 This irregular galaxy is on the fringes of the Local Group about 3 Mly away.   Because of its comparative isolation, it has managed to avoid being cannibalized by other local galaxies.   It is also rotating asymmetrically: one side moving faster than the other, which might mean it is passing through a denser medium.     It has just one globular cluster - WLM-1 - mag 16) - identified on the image to left.
@@ -155,7 +155,7 @@ This irregular galaxy is on the fringes of the Local Group about 3 Mly away.   B
 ### Another Dim Neighbor
 
 
-{{< nbas-image src="c_51-92U-PIX+RCA+GRAX+GHS-square.jpg" width="400" align="left" 
+{{< nbas-image src="c_51-92U-PIX+RCA+GRAX+GHS-square.webp" width="400" align="left" 
 caption="Bob Donahue, NBAS" >}}
 
 Another irregular dwarf galaxy in Cetus, also in the Local Group
@@ -169,7 +169,7 @@ our line of sight).
 
 ### Mira
 
-{{< nbas-image src="Mira_light_curve.jpg" >}}
+{{< nbas-image src="Mira_light_curve.webp" >}}
 
 One of the first variable stars recognized, Mira is a binary star
 with a red giant and white dwarf pair.   As Mira loses mass, some
@@ -177,7 +177,7 @@ of that is accretes onto the companion.   As a system they’re about
 70 AU apart - the rest forming a tail 13 ly long formed over
 millennia.   
 
-{{< nbas-image src="symbiotic_star_2.jpg" width="300" align="left" >}}
+{{< nbas-image src="symbiotic_star_2.webp" width="300" align="left" >}}
 
 Mira is the archetype of the long-period pulsating
 variables.   Over the cycle of pulsation, it varies in size from

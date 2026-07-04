@@ -7,7 +7,7 @@ series: ["constellation-highlights"]
 constellations: ["Ophiuchus"]
 byline: "The 13th Ecliptical Constellation"
 description: "Learn about Ophiuchus, an ancient constellation with roots in Greek and Babylonian mythology, featuring a serpent-bearer legend and notable astronomical events."
-thumbnail: "icon.jpg"
+thumbnail: "icon.webp"
 
 profile_data:
   "Abbreviation": OPH
@@ -57,7 +57,7 @@ serpent god, half-human with snakes for legs. In
 fact the name is a Latinized version of the
 earlier Greek _Ophioūkhos_ (serpent-bearer).
 
-{{< nbas-image src="hist_OPH.jpg" width="550" align="right" 
+{{< nbas-image src="hist_OPH.webp" width="550" align="right" 
 caption="From _Urania's Mirror_, c. 1825" >}}
  
 
@@ -104,7 +104,7 @@ Constellation”.
 
 ### One of Many Globulars
 
-{{< nbas-image src="m_10-92S-PIXRCAGRAXGHS-square.jpg" width="400" align="left"
+{{< nbas-image src="m_10-92S-PIXRCAGRAXGHS-square.webp" width="400" align="left"
 caption="Bob Donahue, NBAS" >}}
 
 While there are many globular clusters to see, M 10 has the largest
@@ -119,7 +119,7 @@ appear to have been formed along with the Milky Way galaxy.
 
 ### Dark Pipe
 
-{{< nbas-image src="pipe.jpg" width="400" align="right" >}}
+{{< nbas-image src="pipe.webp" width="400" align="right" >}}
 
 This large dark nebula is located between the “tip” of the Teapot
 asterism (Kaus Borealis) and Antares, just below θ (theta) Oph. In
@@ -131,7 +131,7 @@ telescope eyepiece against some of the brightest parts of the Milky Way.
 
 ### Summer Beehive
 
-{{< nbas-image src="ic_4665-dss2.jpg" width="400" align="left" 
+{{< nbas-image src="ic_4665-dss2.webp" width="400" align="left" 
 caption="DSS2 Image" >}}
 
 This somewhat sparse open Cluster is just 1° NE of β (beta) Ophiuchi.
@@ -147,7 +147,7 @@ individual formation - so there’s a (very slow) collision going happening! 
 
 ### Widespreaed Nebulosity
 
-{{< nbas-image src="rho_oph.png" width="400" align="right" >}}
+{{< nbas-image src="rho_oph.webp" width="400" align="right" >}}
 
 The ρ Ophiuchi complex is one of the closest star-formation region
 (460 ly) to the Solar System. It spans a large (4&frac12;°x6&frac12;°) swath
@@ -159,7 +159,7 @@ stunning: best captured with camera and tracking mount.     
 
 ### Unexpected Galaxy
 
-{{< nbas-image src="ngc_6384-92U-PIXRCAGRAXGHS-full.jpg" width="400" align="left" 
+{{< nbas-image src="ngc_6384-92U-PIXRCAGRAXGHS-full.webp" width="400" align="left" 
 caption="Bob Donahue, NBAS" >}}
 
 In terms of deep-sky objects, Ophiuchus isn’t known for galaxies,
@@ -171,7 +171,7 @@ distant, and slightly smaller than our Milky Way.   
 
 ### Exoplanet System Neighbor
 
-{{< nbas-image src="barnards_star.jpg" width="500" align="right" >}}
+{{< nbas-image src="barnards_star.webp" width="500" align="right" >}}
 
 The 2nd closest star system to the Sun, (4th closest star; 6 ly
 distant) Barnard’s Star - like many of the Sun’s closest neighbors

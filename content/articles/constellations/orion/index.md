@@ -7,7 +7,7 @@ series: ["constellation-highlights"]
 constellations: ["Orion"]
 byline: "One of the most recognized constellations"
 description: "Learn about the mythology and astronomy behind the iconic constellation Orion, its fascinating objects, and its connection to our galaxy's structure."
-thumbnail: "icon.jpg"
+thumbnail: "icon.webp"
 
 profile_data:
   "Abbreviation": ORI
@@ -62,7 +62,7 @@ and why Ophiuchus is between them. 
 
 {{< clear >}}
 
-{{< nbas-image src="hist_ORI.jpg" width="400" align="right" 
+{{< nbas-image src="hist_ORI.webp" width="400" align="right" 
 caption="From _Urania's Mirror_, c. 1825" >}}
 
 There is almost nowhere in this constellation
@@ -108,7 +108,7 @@ of stars, Meissa being the brightest. 
 
 ### The Great Nebula
 
-{{< nbas-image src="m_4243-92U-PIXRCANBEGHS.jpg" width="400" align="left" 
+{{< nbas-image src="m_4243-92U-PIXRCANBEGHS.webp" width="400" align="left" 
 caption="Bob Donahue, NBAS" >}}
 
 M 42 and M 43 are two of the most-observed objects in the Sky: the
@@ -123,7 +123,7 @@ have been cataloged within the nebula.
 ### Cosmic Flame
 
 
-{{< nbas-image src="ngc_2024-92U-PIXRCADBEGHS-square.jpg" width="400" align="right" 
+{{< nbas-image src="ngc_2024-92U-PIXRCADBEGHS-square.webp" width="400" align="right" 
 caption="Bob Donahue, NBAS" >}}
 
 Next to the Horsehead Nebula is the Flame Nebula also part of the
@@ -137,7 +137,7 @@ maple leaf) shape. 
 ### The "37" Cluster
 
 
-{{< nbas-image src="ngc_2169-92U-PIXRCAGRAXGHS-full.jpg" width="400" align="left" 
+{{< nbas-image src="ngc_2169-92U-PIXRCAGRAXGHS-full.webp" width="400" align="left" 
 caption="Bob Donahue, NBAS" >}}
 
 This loose star cluster (in Orion’s elbow) is not part of the Orion
@@ -152,7 +152,7 @@ dissipate over time.
 
 ### The Horsehead Nebula
 
-{{< nbas-image src="b_33-92U-PIXRCAABEGHS-square.jpg" width="400" align="right"
+{{< nbas-image src="b_33-92U-PIXRCAABEGHS-square.webp" width="400" align="right"
 caption="Bob Donahue, NBAS" >}}
 
 This small dark nebula is a favorite challenge for amateurs. It’s
@@ -164,7 +164,7 @@ all part of the expansive Orion complex.   
 
 ### Boogeyman
 
-{{< nbas-image src="bogeyman.jpg" width="400" align="left" >}}
+{{< nbas-image src="bogeyman.webp" width="400" align="left" >}}
 
 Another dark nebula situated roughly mid-way between Alnitak and
 Betelgeuse, and part of the Orion complex (and Barnard’s Loop) is
@@ -176,7 +176,7 @@ details, but it’s very striking and - frankly menacing!   
 
 ### Betelgeuse
 
-{{< nbas-image src="betelgeuse.jpg" width="400" align="right" >}}
+{{< nbas-image src="betelgeuse.webp" width="400" align="right" >}}
 
 A red supergiant, and although it has the designation α (alpha),
 is slightly fainter than Rigel (β Orionis). It had a radius of ~700x

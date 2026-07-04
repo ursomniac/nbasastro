@@ -6,7 +6,7 @@ description: ""
 authors: ["bob-donahue"]
 byline: "Late-afternoon event, observable with binoculars"
 series: ["planet-watch"]
-thumbnail: "icon.png"
+thumbnail: "icon.jpg"
 sso_planets: ["Venus"]
 ---
 
@@ -18,8 +18,8 @@ sso_planets: ["Venus"]
 On the afternoon of **June 17, 2026**, the crescent Moon will pass directly in front of Venus in a rare daytime celestial event known as an **occultation**. Beginning at approximately **2:47 PM**, Venus will slip behind the Moon's dark (unlit) limb — disappearing almost instantaneously, as the Moon has no atmosphere to cause a gradual fade. The planet will remain hidden for just over two and a half hours before reappearing from behind the Moon's bright limb at approximately **5:14 PM**, popping back into view just as sharply as it vanished.
 
 {{< nbas-gallery style="grid" size="360px" >}}
-1-1547.png | 3:47 PM | Venus encounters the Moon's dark side 
-4-1714.png | 5:14 PM | Venus re-emerges against the thin crescent
+1-1547.jpg | 3:47 PM | Venus encounters the Moon's dark side 
+4-1714.jpg | 5:14 PM | Venus re-emerges against the thin crescent
 {{< /nbas-gallery >}}
 
 What makes this occultation particularly striking is that it takes place in broad daylight. Both the crescent Moon and brilliant Venus will be visible against a blue sky — Venus shines brightly enough to be seen with the naked eye in daylight if you know exactly where to look, and binoculars or a small telescope will make the event unmistakable. The Stellarium simulations below show the geometry at first and last contact: Venus approaching the dark limb before disappearance, and re-emerging above the Moon's bright northern horn at egress.

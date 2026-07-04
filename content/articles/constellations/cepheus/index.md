@@ -7,7 +7,7 @@ series: ["constellation-highlights"]
 constellations: ["Cepheus"]
 byline: "King of his own house!"
 description: "Learn about Cepheus, one of the oldest constellations, and its fascinating history, including its connections to other now-defunct constellations."
-thumbnail: "icon.jpg"
+thumbnail: "icon.webp"
 
 profile_data:
   "Abbreviation": CEP
@@ -52,7 +52,7 @@ legend among the constellations. It’s the most northern constellation,
 aside from Ursa Minor, and has been in the list of constellations
 for millennia, included in Ptolemy’s Almagest.
 
-{{< nbas-image src="hist_CEP.jpg" align="right" width="400"
+{{< nbas-image src="hist_CEP.webp" align="right" width="400"
 caption="From _Urania's Mirror_, c. 1825" >}}
 
 Before the conclusive reckoning of the “official” list of constellations,
@@ -90,7 +90,7 @@ from Cygnus over to Cassiopeia: thus there are many open clusters,
 and nebulae of all types: emission nebulae, reflection nebulae, and
 dark nebulae, and a few planetary nebulae.
 
-{{< nbas-image src="precession.jpg" align="right" width="500" >}}
+{{< nbas-image src="precession.webp" align="right" width="500" >}}
 Alderamin (α, Alpha Cep) is the brightest star (mag 2.44). Mu (μ)
 Cephei is Herschel’s “Garnet Star” and so large, in our Solar System
 would extend out beyond Jupiter! It’s not the only noticeably “ruddy”
@@ -111,7 +111,7 @@ in another ~2000 years.
 
 ### Very Old Star Cluster
 
-{{< nbas-image src="c_1-92S-PIXRCAGRAXGHS-square.jpg" width="400" align="left"
+{{< nbas-image src="c_1-92S-PIXRCAGRAXGHS-square.webp" width="400" align="left"
 caption="Bob Donahue, NBAS" >}}
 
 The open cluster closest to the celestial North Pole, which is why
@@ -126,7 +126,7 @@ center than is the Sun.
 
 ### Iris Nebula
 
-{{< nbas-image src="c_4-93TM-PIXRCADBEGHS-square.jpg " width="400" align="right"
+{{< nbas-image src="c_4-93TM-PIXRCADBEGHS-square.webp " width="400" align="right"
 caption="Bob Donahue, NBAS" >}}
 
 The massive binary HD 200775 (mag 7.4), 1,350 ly away illuminates
@@ -141,14 +141,14 @@ surrounding the nebula. 
 
 ### Elephant's Trunk
 
-{{< nbas-image src="ic_1396-93T-PIXRCAABEGHS-LP-mosaic-cropped.jpg " 
+{{< nbas-image src="ic_1396-93T-PIXRCAABEGHS-LP-mosaic-cropped.webp " 
 width="400" align="left" caption="Bob Donahue, NBAS" >}}
 
 Almost 3,000 ly distant, this very complex nebulosity (this image only has the central part) is about 15-20 ly across. One curious feature (at about 1 o’clock in the image) is the “Elephant’s Trunk” a dark globule (that might coalesce and form a new star).
 
 {{< clear >}}
 
-{{< nbas-image src="sh2_136-92U-PIXRCAABEGHS-full.jpg" width="400" align="right" 
+{{< nbas-image src="sh2_136-92U-PIXRCAABEGHS-full.webp" width="400" align="right" 
 caption="Bob Donahue, NBAS" >}}
 
 This eerie nebulosity is not only ghost-like, it almost looks organic
@@ -162,7 +162,7 @@ the time it takes to bring out all of the smoky detail.
 
 ### Dormouse Cluster
 
-{{< nbas-image src="ngc_7510-92U-PIXRCAABEGHS-square.jpg" width="400" align="left"  
+{{< nbas-image src="ngc_7510-92U-PIXRCAABEGHS-square.webp" width="400" align="left"  
 caption="Bob Donahue, NBAS" >}}
 
 This irregularly-shaped star cluster — like most open clusters —
@@ -174,19 +174,19 @@ by almost a magnitude. It’s almost known as the “Arrowhead” Cluster. 
 
 ### Important Variable Star
 
-{{< nbas-image src="test_starmap.jpg" width="350" align="right" >}}
+{{< nbas-image src="test_starmap.webp" width="350" align="right" >}}
 Cepheus’s 6th brightest star, δ (Delta, despite being the fourth
 Greek letter) is a variable star whose changes in brightness you
 can follow with the naked eye (or binoculars). It pulsates over a
 period of 5.37 days varying in brightness from mag 3.5 to 4.4.
 
-{{< nbas-image src="DeltaCephei_LC_2016.jpg" width="300" align="left" >}}
+{{< nbas-image src="DeltaCephei_LC_2016.webp" width="300" align="left" >}}
 Using this chart, you can compare the brightness of δ Cep to nearby
 stars in Cepheus and Lacerta.
 
 {{< clear >}}
 
-{{< nbas-image src="maslumcep.jpeg" width="400" align="left" >}}
+{{< nbas-image src="maslumcep.webp" width="400" align="left" >}}
 Why Cepheid variables are important is their relationship between
 their pulsation period and their intrinsic brightness. When Hubble
 first identified a Cepheid variable in the Andromeda Galaxy, he was
