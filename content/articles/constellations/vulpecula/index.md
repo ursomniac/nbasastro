@@ -63,7 +63,7 @@ but were referenced to its imagined rendition in the sky: all the
 the source for many added constellations though most didn’t survive
 the test of time.
 
-{{< nbas-image src="hevelius_large.png" fullwidth="true"
+{{< nbas-image src="hevelius_large.jpg" fullwidth="true"
 caption="From _Firmamentum Sobiescianum sive Uranographia_, c. 1687" >}}
 
 So thus it was for Vulpecula. There isn’t any mythology involved,

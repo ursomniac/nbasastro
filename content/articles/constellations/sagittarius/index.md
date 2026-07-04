@@ -55,7 +55,7 @@ Orion.
 
 {{< clear >}}
 
-{{< nbas-image src="hist_SGR.png" width="550" align="right" 
+{{< nbas-image src="hist_SGR.jpg" width="550" align="right" 
 caption="From _Urania's Mirror_, c. 1825" >}}
 
 In Greek mythology, Sagittarius is usually identified as a centaur:
@@ -133,7 +133,7 @@ scattered by grains of dust.
 
 ### Crackerjack Cluster
 
-{{< nbas-image src="GJJC1=PK9-7-257.png" width="200" align="right" caption="Bob Donahue, NBAS">}}
+{{< nbas-image src="GJJC1=PK9-7-257.jpg" width="200" align="right" caption="Bob Donahue, NBAS">}}
 {{< nbas-image src="m_22-92U-PIXRCAGRAXGHS-square.jpg" width="400" align="left" 
 caption="Bob Donahue, NBAS">}}
 

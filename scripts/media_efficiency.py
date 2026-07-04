@@ -42,7 +42,7 @@ DEFAULT_CEILING = 1600  # long-edge px ceiling for click-through originals
 DEFAULT_QUALITY = 82
 DEFAULT_FORMAT = "jpeg"  # safe default; --format webp is opt-in
 
-SHORTCODE_TAG_RE = re.compile(r"\{\{[%<]\s*(nbas-image|nbas-gallery)\s+(.*?)\s*/?\s*[%>]\}\}", re.DOTALL)
+SHORTCODE_TAG_RE = re.compile(r"\{\{[%<]\s*(nbas-image|nbas-gallery|newsletter-pdf)\s+(.*?)\s*/?\s*[%>]\}\}", re.DOTALL)
 GALLERY_BLOCK_RE = re.compile(
     r"\{\{[%<]\s*nbas-gallery[^%>]*[%>]\}\}(.*?)\{\{[%<]\s*/\s*nbas-gallery\s*[%>]\}\}",
     re.DOTALL,
@@ -76,6 +76,15 @@ def parse_references(index_text):
                 add(attrs["src"], "nbas-image")
             if "expand" in attrs:
                 add(attrs["expand"], "expand")
+        elif tag == "newsletter-pdf":
+            # layouts/shortcodes/newsletter-pdf.html builds its filename
+            # programmatically: printf "%s_nbas-newsletter.pdf" (.Get "file").
+            # The literal filename never appears in index.md text - only the
+            # "file" prefix does - so this must be reconstructed the same way
+            # the template does it, or the PDF looks unreferenced and gets
+            # deleted by --fix even though the page actively serves it.
+            if "file" in attrs:
+                add(f"{attrs['file']}_nbas-newsletter.pdf", "newsletter-pdf")
         # nbas-gallery attrs (style/size/title) carry no filenames; handled below via block body
 
     for m in GALLERY_BLOCK_RE.finditer(index_text):
@@ -348,16 +357,19 @@ def main():
     text = index_text
     total_saved = 0
 
-    if unreferenced:
-        print(f"\nUnreferenced files ({len(unreferenced)}):")
-        for r in unreferenced:
+    unreferenced_pdfs = [r for r in unreferenced if r["format"] == "PDF"]
+    unreferenced_other = [r for r in unreferenced if r["format"] != "PDF"]
+
+    if unreferenced_other:
+        print(f"\nUnreferenced files ({len(unreferenced_other)}):")
+        for r in unreferenced_other:
             print(f"  {r['file']}  ({human_size(r['size'])})")
         proceed = args.yes
         if not proceed:
             ans = input("Delete these unreferenced files? [y/N]: ").strip().lower()
             proceed = ans == "y"
         if proceed:
-            for r in unreferenced:
+            for r in unreferenced_other:
                 fp = directory / r["file"]
                 size = fp.stat().st_size
                 if safe_unlink(fp):
@@ -365,6 +377,28 @@ def main():
                     print(f"  deleted {r['file']}")
         else:
             print("  skipped deletion")
+
+    if unreferenced_pdfs:
+        # PDFs get a separate, always-interactive confirmation - even under
+        # --yes. A real PDF was deleted this way once already: a shortcode
+        # (newsletter-pdf) built its filename programmatically instead of
+        # writing it literally in index.md, so it looked unreferenced when
+        # it wasn't. This script's detection can't be assumed complete for
+        # every custom shortcode, so PDFs (standalone documents, not
+        # regeneratable like a resized image) always get a human's eyes on
+        # them before deletion, one at a time.
+        print(f"\nUnreferenced PDFs ({len(unreferenced_pdfs)}) - PDFs are never auto-deleted, even with --yes:")
+        for r in unreferenced_pdfs:
+            print(f"  {r['file']}  ({human_size(r['size'])})")
+            ans = input(f"  Really delete {r['file']}? Double-check it isn't pulled in by a shortcode with a computed filename. [y/N]: ").strip().lower()
+            if ans == "y":
+                fp = directory / r["file"]
+                size = fp.stat().st_size
+                if safe_unlink(fp):
+                    total_saved += size
+                    print(f"  deleted {r['file']}")
+            else:
+                print(f"  skipped {r['file']}")
 
     for r in fixable:
         fp = directory / r["file"]

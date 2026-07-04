@@ -23,10 +23,10 @@ pdf:
       - "North Adams Public Library"
 
   images:
-    mars-20260704-0800.png:
+    mars-20260704-0800.jpg:
       max-height: 300
       brightness: 1.1
-    mars-uranus-eyepiece.png:
+    mars-uranus-eyepiece.jpg:
       width: 220
       brightness: 2.0
     sct-dark-s30-37m.jpg:
@@ -61,7 +61,7 @@ pdf:
 
 ## 🌞 Mars Meets Uranus 
 
-{{< nbas-image src="mars-20260704-0800.png" align="right" width="500"
+{{< nbas-image src="mars-20260704-0800.jpg" align="right" width="500"
 caption="Mars in Taurus, 4 AM EDT, 4-Jul-2026" >}}
 On the morning of the 4th of July, Mars passes Uranus by only 7.1' (0.12°) far closer than the Venus/Jupiter appulse we saw in June.
 
@@ -69,7 +69,7 @@ At 4 AM EDT, Mars is above the horizon and nicely placed between the Hyades and 
 
 Telescopically, it's one of the worst times to view the planet: it's on the other side of the solar system from us (2.1 AU = 195 million miles), but in a telescope, you'll see it there at magnitude 1.4 with a 6th magnitude "star" to the NE: that's Uranus.
 
-{{< nbas-image src="mars-uranus-eyepiece.png" width="450" align="right" caption="Magnification: 200x" >}}
+{{< nbas-image src="mars-uranus-eyepiece.jpg" width="450" align="right" caption="Magnification: 200x" >}}
 Though Mars is brighter by about a factor of 100, in terms of angular size, they're not that different:  Uranus has an angular diameter of only 3.5",
 but Mars at its distance isn't much better: just 4.5".
 It will take high magnification and good seeing to perceive them as a little red ball and a little green ball!
