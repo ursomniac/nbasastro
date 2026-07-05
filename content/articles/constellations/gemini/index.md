@@ -7,7 +7,7 @@ series: ["constellation-highlights"]
 constellations: ["Gemini"]
 byline: "Anchored by the mythological twins Castor and Pollux"
 description: "Learn about the mythological origins of Gemini, one of Ptolemy's original constellations, and its prominent placement in the March evening sky."
-thumbnail: "icon.jpg"
+thumbnail: "icon.webp"
 
 profile_data:
   "Abbreviation": GEM
@@ -57,7 +57,7 @@ Leda’s husband). Castor, therefore being mortal - died, and Pollux
 begged Zeus to give him immortality in the sky - which he did -
 uniting them together in the heavens. 
 
-{{< nbas-image src="hist_GEM.jpg" width="550" align="right" 
+{{< nbas-image src="hist_GEM.webp" width="550" align="right" 
 caption="From _Urania's Mirror_, c. 1825" >}}
  
 For Northern Hemisphere observers, Gemini marks the point where the
@@ -91,7 +91,7 @@ and Canis Minor.  
 ### Interesting Variable Star: Eta (&eta;) Geminorum
 
 
-{{< nbas-image src="EtaGemLightCurve.png" width="300" align="left" >}}
+{{< nbas-image src="EtaGemLightCurve.webp" width="300" align="left" >}}
 
 The star Propus (η = Eta Gem), is a somewhat complicated variable
 star. It’s a triple system with two stars (Aa and Ab) orbiting each
@@ -102,13 +102,13 @@ mag roughly every 234 days. The third star (B; still only 1.4” from
 the others - or about 150 AU at its distance of 350 ly) orbits the
 close binary stars taking over 700 yr to do so.
 
-{{< nbas-image src="etagem.jpg" align="left" >}}
+{{< nbas-image src="etagem.webp" align="left" >}}
 
 {{< constellation-objects-table >}}
 
 ### The "Other" Double Cluster
 
-{{< nbas-image src="m_35-92S-PIXRCAGRAXGHS-full-rotated.jpg" 
+{{< nbas-image src="m_35-92S-PIXRCAGRAXGHS-full-rotated.webp" 
 caption="Bob Donahue, NBAS" >}}
 
 At Castor’s foot is Messier 35 “the Show Buckle Cluster” a typical
@@ -124,7 +124,7 @@ Sun are starting to evolve to their red giant phase.
 
 ### Jellyfish
 
-{{< nbas-image src="ic_443-92U-PIXRCADBEGHS-square.jpg" width="400" align="right" 
+{{< nbas-image src="ic_443-92U-PIXRCADBEGHS-square.webp" width="400" align="right" 
 caption="Bob Donahue, NBAS" >}}
 
 This cluster is smaller (only 15 ly across) but is 10x older than
@@ -136,7 +136,7 @@ Herschel who discovered it in 1783. either NGC 2360 or Caldwell 58. 
 
 ### Ghostly Clown Face
 
-{{< nbas-image src="c_39-92U-PIXRCAGRAX-GHS-square.jpg" width="400" align="left" 
+{{< nbas-image src="c_39-92U-PIXRCAGRAX-GHS-square.webp" width="400" align="left" 
 caption="Bob Donahue, NBAS" >}}
 
 This nebula gets its name from its double-shell structure and resembles a face peeking out of a hood. This object is small (only 48” wide) and requires magnification to resolve. It is 6500 ly distant and 20,000 AU across, having formed about 10 kyr ago.
@@ -146,7 +146,7 @@ This nebula gets its name from its double-shell structure and resembles a face p
 ### Celestial Ant
 
 
-{{< nbas-image src="NGC_2371_legacy_dr10.jpg" width="400" align="right" >}}
+{{< nbas-image src="NGC_2371_legacy_dr10.webp" width="400" align="right" >}}
 
 Also known as the Peanut or “Double Bubble” this dual-lobed planetary
 nebula is quite different than most of the other more- famous objects
@@ -162,7 +162,7 @@ leaving the hot core of the central star.
 
 ### Twinkling Comet Cluster
 
-{{< nbas-image src="ngc_2420-92U-PIXRCAGRAXGHS-square.jpg" width="400" align="left" 
+{{< nbas-image src="ngc_2420-92U-PIXRCAGRAXGHS-square.webp" width="400" align="left" 
 caption="Bob Donahue, NBAS" >}}
 
 NGC 2420 is another older-than-average cluster - about the same as
@@ -173,7 +173,7 @@ than the Sun (which might help explain its longevity).
 
 ### Castor: A Sextuple Star System
 
-{{< nbas-image src="castor.jpg" >}}
+{{< nbas-image src="castor.webp" >}}
 
 Castor is also a sextuple star system (49 ly away) with three visible
 components, each of which a spectroscopic binary pair. Castor AB
@@ -182,7 +182,7 @@ resolvable under steady skies. These two stars (and their invisible
 red-dwarf companions) have a 459-year orbital period and the visual
 separation varies between 2” and 6.5” (currently it’s about 6”). 
 
-{{< nbas-image src="YYGemLightCurve.png" width="500" align="left" >}}
+{{< nbas-image src="YYGemLightCurve.webp" width="500" align="left" >}}
 
 Castor C is 1.2° away and is the variable star YY Gem showing
 variations from stellar activity (of both stars) and from eclipses

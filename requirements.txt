@@ -4,6 +4,7 @@ click==8.1.8
 greenlet==3.2.5
 icalendar==6.3.2
 idna==3.12
+pikepdf==9.11.0
 pillow==11.3.0
 playwright==1.60.0
 pyee==13.0.1

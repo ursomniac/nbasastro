@@ -12,10 +12,29 @@ Example:
         content/articles/2026/07/nbas-newsletter-2607/
 
 Requirements:
-    pip install playwright python-frontmatter
+    pip install playwright python-frontmatter pikepdf
     playwright install chromium
+
+Image size note:
+    Chromium's page.pdf() doesn't embed your source image files - it
+    rasterizes whatever's on the rendered page and re-encodes it as a
+    lossless raw bitmap. That means the source image's format/compression
+    (JPEG, WebP, PNG - doesn't matter) is discarded before the PDF step ever
+    happens, and a full-width image gets rasterized at ~300 DPI regardless
+    of its native resolution, which is where most of the file size comes
+    from. So there is no "set up efficient source images and it stays
+    efficient" option here - the bloat is structural to how Chromium prints
+    a page to PDF, not a property of the source files.
+    recompress_pdf_images() below runs automatically after every PDF is
+    generated: it finds each raw/lossless embedded image, downsamples
+    anything above IMAGE_MAX_LONG_EDGE, and re-encodes as JPEG - but only
+    keeps the JPEG version if it's actually smaller than the original (a
+    few small graphics, like icons, compress worse as JPEG and are left
+    untouched). No per-image configuration is required; this is not tunable
+    per run by design, so nobody has to remember to do it.
 """
 
+import io
 import sys
 import re
 import calendar
@@ -24,7 +43,74 @@ from pathlib import Path
 from datetime import date
 
 import frontmatter
+import pikepdf
+from PIL import Image
 from playwright.sync_api import sync_playwright
+
+IMAGE_MAX_LONG_EDGE = 1500
+IMAGE_JPEG_QUALITY = 82
+
+
+def recompress_pdf_images(pdf_path: Path, max_long_edge: int = IMAGE_MAX_LONG_EDGE, quality: int = IMAGE_JPEG_QUALITY) -> None:
+    """Downsample and JPEG-recompress every raw/lossless image embedded in a
+    PDF, in place. Images with real alpha transparency are left untouched
+    (JPEG has no alpha channel). Any image where the JPEG version isn't
+    actually smaller is left untouched too, so this can never make an
+    individual image bigger. Runs automatically - no configuration needed."""
+    pdf = pikepdf.open(pdf_path, allow_overwriting_input=True)
+    touched = 0
+    saved_bytes = 0
+
+    for page in pdf.pages:
+        if "/Resources" not in page or "/XObject" not in page["/Resources"]:
+            continue
+        for name, xobj in page["/Resources"]["/XObject"].items():
+            if xobj.get("/Subtype") != "/Image":
+                continue
+            if str(xobj.get("/Filter")) != "/FlateDecode":
+                continue  # already compressed (e.g. DCTDecode/JPEG) - nothing to gain
+
+            try:
+                pil = pikepdf.PdfImage(xobj).as_pil_image()
+            except Exception:
+                continue  # unusual colorspace/encoding - leave it alone rather than guess
+
+            w, h = pil.size
+            has_alpha = pil.mode in ("RGBA", "LA")
+            real_alpha = False
+            if has_alpha:
+                real_alpha = pil.convert("RGBA").getchannel("A").getextrema()[0] < 255
+            if real_alpha:
+                continue  # would need to preserve transparency; JPEG can't, so skip
+
+            long_edge = max(w, h)
+            if long_edge > max_long_edge:
+                scale = max_long_edge / float(long_edge)
+                pil = pil.resize((max(1, int(w * scale)), max(1, int(h * scale))), Image.LANCZOS)
+
+            rgb = pil.convert("RGB")
+            buf = io.BytesIO()
+            rgb.save(buf, "JPEG", quality=quality, optimize=True)
+            jpeg_bytes = buf.getvalue()
+
+            old_len = int(xobj.get("/Length", 0))
+            if len(jpeg_bytes) >= old_len:
+                continue  # JPEG isn't actually smaller for this one - leave it alone
+
+            xobj.write(jpeg_bytes, filter=pikepdf.Name("/DCTDecode"))
+            xobj["/Width"] = rgb.width
+            xobj["/Height"] = rgb.height
+            xobj["/ColorSpace"] = pikepdf.Name("/DeviceRGB")
+            xobj["/BitsPerComponent"] = 8
+            if "/SMask" in xobj:
+                del xobj["/SMask"]
+
+            touched += 1
+            saved_bytes += old_len - len(jpeg_bytes)
+
+    pdf.save(pdf_path)
+    pdf.close()
+    print(f"  Recompressed {touched} image(s), saved {saved_bytes / 1024 / 1024:.2f} MB")
 
 
 # ── Volume/Issue calculation ─────────────────────────────────────
@@ -726,6 +812,9 @@ def generate_pdf(url: str, output_dir: str) -> None:
     # PDF. The in-content note above points readers to nbasastro.org/starmap/
     # instead, so the newsletter PDF stays exactly the size of the article
     # content itself.
+    print("  Recompressing embedded images...")
+    recompress_pdf_images(temp_pdf_path)
+
     temp_pdf_path.rename(pdf_path)
     print(f"  Done: {pdf_filename}")
 

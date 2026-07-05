@@ -47,7 +47,7 @@ This comet starts out faint, but has the chance it might be visible in binocular
 
 It’s an early-morning comet in the N Hemisphere the figure above is the for 4 AM (EDT): twilight begins around 4:30 AM and sunrise is just after 6 AM, so you’ll have a narrow window to look for it!
 
-{{< nbas-image src="pth.png"
+{{< nbas-image src="pth.webp"
 	alt="Path through Pegasus" 
 	caption="The Path of the Comet April 2026" 
 >}}
@@ -80,7 +80,7 @@ By the end of April you can see both Venus and Jupiter in theWest - this is the 
 
 ## This Month's Image
 
-{{< nbas-image src="reg_dw-93U-PIXRCADBEGHS-square.jpg"
+{{< nbas-image src="reg_dw-93U-PIXRCADBEGHS-square.webp"
 	alt="Regulus Dwarf Galaxy" caption="Bob Donahue, NBAS" >}}
 
 Sometimes just seeing anything on the image is the challenge! Here,
