@@ -13,47 +13,27 @@ dso_ngc: ["188", "2243", "6791"]
 dso_other: ["Berkeley 17", "Berkeley 32", "King 2"]
 
 finder_charts:
-  title: "Finder Charts for these Clusters"
-  intro: >
-    NBAS-branded finder charts for all of the open clusters covered in this article.
-    Click any thumbnail to open the full branded PNG; use the PDF link for
-    a print-ready chart. Each chart shows stars to V ≤ 12 over a 3° field
-    with the cluster boundary marked.
   charts:
     - name: "Berkeley 17"
-      raw:     "B17/berkeley_17_raw.webp"
-      png:     "B17/berkeley_17.webp"
-      pdf:     "B17/berkeley_17.pdf"
+      image:   "printable/berkeley_17.jpg"
       caption: "Aur · 8.5′ cluster · ~10–12.6 Gyr"
     - name: "NGC 6791"
-      raw:     "N6791/ngc_6791_raw.webp"
-      png:     "N6791/ngc_6791.webp"
-      pdf:     "N6791/ngc_6791.pdf"
+      image:   "printable/ngc_6791.jpg"
       caption: "Lyr · 8.2′ cluster · ~8–9.5 Gyr"
     - name: "Berkeley 32"
-      raw:     "B32/berkeley_32_raw.webp"
-      png:     "B32/berkeley_32.webp"
-      pdf:     "B32/berkeley_32.pdf"
+      image:   "printable/berkeley_32.jpg"
       caption: "Mon · 7.6′ cluster · ~7.2 Gyr"
     - name: "NGC 188"
-      raw:     "N188/ngc_188_raw.webp"
-      png:     "N188/ngc_188.webp"
-      pdf:     "N188/ngc_188.pdf"
+      image:   "printable/ngc_188.jpg"
       caption: "Cep · 32.6′ cluster · ~6.4–7.2 Gyr"
     - name: "King 2"
-      raw:     "K2/king_2_raw.webp"
-      png:     "K2/king_2.webp"
-      pdf:     "K2/king_2.pdf"
+      image:   "printable/king_2.jpg"
       caption: "Cas · 6.1′ cluster · ~5.6 Gyr"
     - name: "NGC 2243"
-      raw:     "N2243/ngc_2243_raw.webp"
-      png:     "N2243/ngc_2243.webp"
-      pdf:     "N2243/ngc_2243.pdf"
+      image:   "printable/ngc_2243.jpg"
       caption: "CMa · 5.5′ cluster · ~5.6 Gyr"
     - name: "M 67"
-      raw:     "M67/m_67_raw.webp"
-      png:     "M67/m_67.webp"
-      pdf:     "M67/m_67.pdf"
+      image:   "printable/m_67.jpg"
       caption: "Cnc · 25′ cluster · ~3.2–5.0 Gyr"
 
 ---

@@ -2,7 +2,24 @@
 
 Goal: mirror the starmap pattern. One branded JPG per finder chart, no separate PDF, kept printable.
 
-## Current state (as of 2026-07-04)
+## STATUS: Done, as of 2026-07-05
+
+All items in the work breakdown below are complete:
+- `finder_charts.py` rewritten: single branded JPG output (`_make_branded_jpg`, replacing `_make_png`/`_make_pdf`), raw chart is now a transient tempfile (never written into the output dir), `--output-dir` points directly at `<article-dir>/finder/`. Also: removed the legacy `FIELDS`/`--fields` mode, fixed a real bug in the high-declination (StereoNorth) path near the pole, added brightest/faintest-aware star marker sizing, and pointed the shared ephemeris at `scripts/assets/de421.bsp` (deduped from a separate copy that used to live in this script's own directory).
+- `finder-chart-set.html` rewritten: single branded image display (like `nbas-image`), no PDF/PNG buttons, reads `{name, image, caption}` per chart. **Not verified against a real Hugo build** — no Hugo binary available in the session sandbox that did this work. Worth a `hugo server` sanity check before trusting it live.
+- Frontmatter shape settled: `{name, image, caption}` per chart, dropping `raw`/`png`/`pdf`. The `title`/`intro` top-level fields some articles had were dropped too — turned out the old shortcode never actually read them, so they were dead frontmatter.
+- All 4 existing articles migrated (`object-c12`, `object-gliese-710`, `ink-spot-and-cluster`, `old-star-clusters` — 10 chart entries total across the four, since `old-star-clusters` has 7). Migration was done as a **repackage**, not a regeneration: existing branded PNG/WebP charts were converted to JPG via PIL and moved into each article's new `finder/` subdirectory; old `raw`/`pdf`/branded-original files deleted. The underlying star data and chart layout are unchanged from before — this only changed the storage/output format. (Note: at migration time, contrary to what this doc previously said, all 4 articles' frontmatter still had the full `raw`/`png`/`pdf` fields intact and matching files on disk — no drift was actually present by the time this was tackled.)
+
+Also since done:
+- Directory renamed `finder/` → `printable/` across all 4 migrated articles (Bob's naming choice — reads better for a directory whose defining property is "stays real-format/full-res for printing," not "only used by finder charts").
+- `media_efficiency.py` now auto-exempts any directory named `printable` (constant `DEFAULT_PRINT_DIR`, overridable via `--print-dir NAME`, disable entirely with `--no-print-dir-skip`) from resize/reformat — verified against both `object-c12` (1 exempt file) and `old-star-clusters` (7 exempt files across subdirectories, while confirming the *other* WebP images living in those same subdirectories, e.g. CMD diagrams, still get normal FORMAT flagging — the match is scoped to the directory name, not "any file near a chart"). UNREFERENCED checking still runs on printable/ contents; only OVERSIZED/FORMAT/fixability are skipped.
+
+Remaining, deliberately not done here:
+- Regenerating any of the 4 charts for real (new star fetch, new branding pass) — the session that did this migration had no network access to SIMBAD/Vizier, so only repackaging was possible. If you want fresh charts (e.g. to pick up the new adaptive marker sizing), run `finder_charts.py --objects ...` locally.
+
+## Original planning notes (superseded by STATUS above, kept for history)
+
+### Current state (as of 2026-07-04)
 
 **Generator**: `scripts/finder_charts/finder_charts.py`
 - `make_raw_chart()` / `make_raw_chart_stereonorth()` produce an unbranded intermediate: `{slug}_raw.png`

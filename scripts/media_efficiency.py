@@ -50,6 +50,17 @@ DEFAULT_CEILING = 1600  # long-edge px ceiling for click-through originals
 DEFAULT_QUALITY = 82
 DEFAULT_FORMAT = "jpeg"  # safe default; --format webp is opt-in
 
+# Any directory with this name, anywhere under the article bundle, is
+# treated as "printable" content (finder charts today, possibly other
+# print-ready material later) and is exempt from resize/reformat by
+# default -- these need to stay full-resolution, real-format (not WebP,
+# which many viewers/printers choke on) files. It's still scanned for
+# UNREFERENCED files like everything else; only the oversized/format-
+# inefficient resize/reformat pipeline skips it. Override the name with
+# --print-dir, or turn the skip off entirely with --no-print-dir-skip if
+# you genuinely want this content resized/reformatted too.
+DEFAULT_PRINT_DIR = "printable"
+
 SHORTCODE_TAG_RE = re.compile(r"\{\{[%<]\s*(nbas-image|nbas-gallery|newsletter-pdf)\s+(.*?)\s*/?\s*[%>]\}\}", re.DOTALL)
 GALLERY_BLOCK_RE = re.compile(
     r"\{\{[%<]\s*nbas-gallery[^%>]*[%>]\}\}(.*?)\{\{[%<]\s*/\s*nbas-gallery\s*[%>]\}\}",
@@ -156,11 +167,12 @@ def analyze_image(path):
     return info
 
 
-def classify(path, rel, refs, ceiling, target_format):
+def classify(path, rel, refs, ceiling, target_format, in_print_dir=False):
     ext = path.suffix.lower()
     fname = rel
     referenced_via = refs.get(fname, [])
     flags = []
+    print_note = ["PRINTABLE (exempt from resize/reformat)"] if in_print_dir else []
 
     if ext in OTHER_TRACKED_EXTS:
         if not referenced_via:
@@ -171,7 +183,7 @@ def classify(path, rel, refs, ceiling, target_format):
             "dims": None,
             "format": ext.lstrip(".").upper(),
             "referenced_via": referenced_via,
-            "flags": flags,
+            "flags": flags + print_note,
             "fixable": False,
         }
 
@@ -184,7 +196,7 @@ def classify(path, rel, refs, ceiling, target_format):
             "dims": None,
             "format": "SVG",
             "referenced_via": referenced_via,
-            "flags": flags,
+            "flags": flags + print_note,
             "fixable": False,
         }
 
@@ -197,12 +209,30 @@ def classify(path, rel, refs, ceiling, target_format):
             "dims": None,
             "format": ext.lstrip(".").upper(),
             "referenced_via": referenced_via,
-            "flags": flags,
+            "flags": flags + print_note,
             "fixable": False,
         }
 
     if not referenced_via:
         flags.append("UNREFERENCED")
+
+    # Files under a printable/ (or --print-dir) directory are exempt from
+    # the resize/reformat pipeline entirely -- they still get an
+    # UNREFERENCED check above (orphaned files are orphaned regardless of
+    # where they live), but are never flagged OVERSIZED/FORMAT and can
+    # never end up in the --fix list.
+    if in_print_dir:
+        return {
+            "file": fname,
+            "size": info["size"],
+            "dims": (info["width"], info["height"]),
+            "format": info["format"],
+            "referenced_via": referenced_via,
+            "flags": flags + print_note,
+            "fixable": False,
+            "has_alpha": info["has_alpha"],
+            "is_animated": info["is_animated"],
+        }
 
     long_edge = max(info["width"], info["height"])
     oversized = long_edge > ceiling
@@ -308,6 +338,14 @@ def main():
     ap.add_argument("--ceiling", type=int, default=DEFAULT_CEILING, help=f"long-edge px ceiling for originals (default {DEFAULT_CEILING})")
     ap.add_argument("--quality", type=int, default=DEFAULT_QUALITY, help=f"JPEG/WebP quality (default {DEFAULT_QUALITY})")
     ap.add_argument("--format", choices=["jpeg", "webp"], default=DEFAULT_FORMAT, help=f"target format for format-inefficient/oversized photos (default {DEFAULT_FORMAT})")
+    ap.add_argument("--print-dir", default=DEFAULT_PRINT_DIR, dest="print_dir",
+                     help=f"directory name (anywhere under the bundle) auto-exempted from "
+                          f"resize/reformat -- still checked for UNREFERENCED files "
+                          f"(default: {DEFAULT_PRINT_DIR!r})")
+    ap.add_argument("--no-print-dir-skip", action="store_true", dest="no_print_dir_skip",
+                     help="disable the printable-directory exemption entirely and treat "
+                          "everything the same (only needed if you actually want that "
+                          "content resized/reformatted too)")
     args = ap.parse_args()
 
     directory = Path(args.directory).resolve()
@@ -338,7 +376,19 @@ def main():
     for fname in backstop_hits:
         refs.setdefault(fname, []).append("other-literal")
 
-    records = [classify(p, rel, refs, args.ceiling, args.format) for p, rel in media_files]
+    def is_in_print_dir(rel):
+        if args.no_print_dir_skip:
+            return False
+        return args.print_dir in Path(rel).parts[:-1]
+
+    records = [
+        classify(p, rel, refs, args.ceiling, args.format, in_print_dir=is_in_print_dir(rel))
+        for p, rel in media_files
+    ]
+    print_dir_hits = [r for r in records if any(f.startswith("PRINTABLE") for f in r["flags"])]
+    if print_dir_hits and not args.no_print_dir_skip:
+        print(f"Printable dir exemption: {len(print_dir_hits)} file(s) under '{args.print_dir}/' "
+              f"skipped for resize/reformat (--no-print-dir-skip to disable)")
 
     total_before = sum(r["size"] for r in records)
     print(f"Directory: {directory}")
@@ -373,8 +423,36 @@ def main():
     text = index_text
     total_saved = 0
 
-    unreferenced_pdfs = [r for r in unreferenced if r["format"] == "PDF"]
-    unreferenced_other = [r for r in unreferenced if r["format"] != "PDF"]
+    def _is_printable(r):
+        return any(f.startswith("PRINTABLE") for f in r["flags"])
+
+    unreferenced_printable = [r for r in unreferenced if _is_printable(r)]
+    unreferenced_pdfs      = [r for r in unreferenced if r["format"] == "PDF" and not _is_printable(r)]
+    unreferenced_other     = [r for r in unreferenced if r["format"] != "PDF" and not _is_printable(r)]
+
+    if unreferenced_printable:
+        # Printable-dir content (finder charts etc.) is generated first and
+        # wired into frontmatter second -- there's a real, normal window
+        # where a brand-new chart sits on disk unreferenced simply because
+        # index.md hasn't been updated yet, not because it's actually
+        # orphaned. Bundling it into the general unreferenced-files bulk
+        # delete (which can run under --yes) would delete freshly-generated
+        # charts before anyone gets a chance to wire them in. So: same
+        # never-auto-deleted, one-at-a-time treatment as PDFs.
+        print(f"\nUnreferenced printable/ files ({len(unreferenced_printable)}) - never auto-deleted, even with --yes:")
+        print("  (this often just means the chart was generated but not yet added to")
+        print("   finder_charts.charts[].image in frontmatter -- check that before deleting)")
+        for r in unreferenced_printable:
+            print(f"  {r['file']}  ({human_size(r['size'])})")
+            ans = input(f"  Really delete {r['file']}? [y/N]: ").strip().lower()
+            if ans == "y":
+                fp = directory / r["file"]
+                size = fp.stat().st_size
+                if safe_unlink(fp):
+                    total_saved += size
+                    print(f"  deleted {r['file']}")
+            else:
+                print(f"  skipped {r['file']}")
 
     if unreferenced_other:
         print(f"\nUnreferenced files ({len(unreferenced_other)}):")

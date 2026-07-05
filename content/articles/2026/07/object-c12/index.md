@@ -12,9 +12,7 @@ dso_ngc: ["6946"]
 finder_charts:
   charts:
     - name: "NGC 6946 & NGC 6939"
-      raw: "ngc_6946_raw.jpg"
-      png: "ngc_6946.jpg"
-      pdf: "ngc_6946.pdf"
+      image: "printable/ngc_6946.jpg"
       caption: "NGC 6946 (Fireworks Galaxy) and open cluster NGC 6939. FOV ~8°."
 
 object_info:

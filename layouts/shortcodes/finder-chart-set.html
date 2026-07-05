@@ -1,12 +1,19 @@
 {{/*
   finder-chart-set shortcode
-  Reads finder_charts from page front matter. See article-additions.md.
+
+  Reads finder_charts.charts[] from page front matter. Each entry:
+    - name:    display name for the chart header
+    - image:   path (relative to this page bundle) to the single
+               NBAS-branded finder chart JPG -- conventionally under
+               printable/, e.g. "printable/ngc_6946.jpg" (that directory
+               name is also what media_efficiency.py auto-skips for
+               resize/reformat -- see --print-dir). There is no separate
+               raw/PNG/PDF anymore; see FINDER_CHART_PLAN.md.
+    - caption: optional caption text (markdown allowed)
 
   Optional parameter:
     align="left|right"  — floats the block beside content (max-width 42%).
                           Omit entirely for a full-width inline block.
-
-  Existing uses with no parameters are fully backward-compatible.
 */}}
 {{ $data   := .Page.Params.finder_charts }}
 {{ $align  := .Get "align" }}
@@ -23,26 +30,30 @@
 {{ end }}
 
   {{ range $charts }}
+  {{ $name    := .name }}
+  {{ $imgPath := .image }}
+  {{ $caption := .caption }}
+  {{ $img     := $.Page.Resources.GetMatch $imgPath }}
   <figure style="margin:0; border:1px solid #ddd; border-radius:6px; overflow:hidden; background:#fff; display:flex; flex-direction:column;">
 
     <div style="padding:.45rem 1rem; background:#f4f4f4; border-bottom:1px solid #e0e0e0;">
-      <strong style="font-size:.88rem; letter-spacing:.01em;">Finder Chart — {{ .name }}</strong>
+      <strong style="font-size:.88rem; letter-spacing:.01em;">Finder Chart — {{ $name }}</strong>
     </div>
 
-    <a href="{{ .png }}" target="_blank" title="View full-size PNG">
-      <img src="{{ .raw }}" alt="Finder chart: {{ .name }}"
+    {{ with $img }}
+    <a href="{{ .RelPermalink }}" target="_blank" title="View full-size finder chart">
+      <img src="{{ .RelPermalink }}" alt="Finder chart: {{ $name }}"
            style="width:100%; height:auto; display:block;">
     </a>
+    {{ else }}
+    <p style="padding:1rem; color:#a00;">Finder chart image "{{ $imgPath }}" not found.</p>
+    {{ end }}
 
-    <figcaption style="padding:.6rem 1rem .85rem; display:flex; flex-direction:column; gap:.35rem; flex:1;">
-      {{ with .caption }}
-      <span style="font-size:.82rem; color:#666; line-height:1.4;">{{ . }}</span>
-      {{ end }}
-      <div class="sm-buttons" style="margin-top:auto; padding-top:.4rem; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;">
-        <a href="{{ .pdf }}" class="starmap-btn" target="_blank" download="{{ .pdf }}">📥 Download PDF</a>
-        <a href="{{ .png }}" class="starmap-link-alt finder-chart-link" target="_blank">View PNG</a>
-      </div>
+    {{ with $caption }}
+    <figcaption style="padding:.6rem 1rem .85rem; font-size:.82rem; color:#666; line-height:1.4;">
+      {{ . | markdownify }}
     </figcaption>
+    {{ end }}
 
   </figure>
   {{ end }}

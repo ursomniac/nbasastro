@@ -2,8 +2,9 @@
 """
 NBAS Finder Chart Generator
 =============================
-Generates PNG + PDF finder charts.  Each field can contain one or more
-target objects sharing a single frame.
+Generates a single branded JPG finder chart per field (no separate raw PNG
+or PDF kept around -- mirrors the starmap pattern). Each field can contain
+one or more target objects sharing a single frame.
 
 Overlay style is driven by OBJECT TYPE:
 
@@ -24,9 +25,6 @@ Usage
   python finder_charts.py --objects "NGC 6520" "Barnard 86" --chart-name inkspot
   python finder_charts.py --objects "M 57" --fov 1.5 --mag-limit 13
 
-  # Run the hard-coded FIELDS list (legacy mode):
-  python finder_charts.py --fields
-
   # Geometry self-test (no network or starplot needed):
   python finder_charts.py --selftest
 
@@ -35,17 +33,29 @@ Usage
   --title TEXT          chart title (default: object names joined with " & ")
   --info TEXT           extra text appended to subtitle
   --fov DEG             explicit FOV in degrees (default: auto from object sizes)
-  --mag-limit MAG       star fetch depth (default: 12.0)
-  --no-stars            skip Vizier star fetch
+  --mag-limit MAG       star depth (default: 12.0); capped at 11.0 in practice --
+                        see star source note below
+  --no-stars            skip star plotting entirely
   --output-dir DIR      where to write output (default: same dir as this script)
   --projection {Mercator,StereoNorth}  (default: auto; StereoNorth if dec > 75)
+
+Star source: stars are plotted from the local BigSky catalog already used by
+scripts/starmaps/generate.py (via starplot's own stars() method and the
+STARPLOT_DATA_PATH env var set at the top of this file) -- not a live
+Vizier/NOMAD query. This was a deliberate change after a live-fetch
+approach proved unreliable (server-side empty responses, timeouts, a
+filter+truncation interaction that silently zeroed out real results) and,
+separately, after discovering the per-star p.marker() loop it used for
+rendering never actually displayed markers at all. A dormant fetch_stars()
+(live Vizier) function is still defined in this file but not called by the
+default path.
 
 Assets (same directory as this script):
   nbas-logo.svg
   nbas-qrcode.svg
 
 Requirements:
-  pip install starplot astroquery astropy pandas pillow reportlab cairosvg \\
+  pip install starplot astroquery astropy pandas pillow cairosvg \\
       numpy --break-system-packages
 """
 
@@ -54,7 +64,29 @@ import io
 import math
 import os
 import sys
+import tempfile
 import warnings
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+
+# scripts/starmaps/finder_charts/ is a self-contained local data bundle
+# (BigSky star catalog, the duckdb "spatial" extension pre-downloaded,
+# constellations/Milky Way outlines, its own de421.bsp) that
+# scripts/starmaps/generate.py already points starplot at via this exact
+# env var, and that pipeline runs reliably with zero network access at
+# render time. finder_charts.py previously did its own thing instead: a
+# hand-rolled live Vizier/NOMAD fetch plus a per-star marker() loop for
+# rendering. That turned out to be broken on two independent counts --
+# the live query was unreliable (see fetch_stars() below), and marker()
+# turned out not to be the right API for bulk star plotting at all: stars
+# were being fetched successfully but never actually appearing on the
+# rendered chart. starplot's own stars() method (used by generate.py) is
+# the documented, correct way to do this, and it's what's used now.
+# MUST be set before starplot is imported anywhere (starplot reads this
+# once at import time) -- hence this sits above every other import here.
+STARPLOT_SHARED_DATA_DIR = os.path.normpath(
+    os.path.join(HERE, "..", "starmaps", "finder_charts"))
+os.environ.setdefault("STARPLOT_DATA_PATH", STARPLOT_SHARED_DATA_DIR)
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -63,9 +95,26 @@ from PIL import Image, ImageDraw
 
 warnings.filterwarnings("ignore")
 
-HERE     = os.path.dirname(os.path.abspath(__file__))
-LOGO_PNG = os.path.join(HERE, "nbas-logo.png")
-QR_SVG   = os.path.join(HERE, "nbas-qrcode.svg")
+LOGO_PNG  = os.path.join(HERE, "nbas-logo.png")
+QR_SVG    = os.path.join(HERE, "nbas-qrcode.svg")
+# Shared across scripts/finder_charts and scripts/starmaps -- lives once in
+# scripts/assets rather than as a separate copy under each script directory.
+# Passed explicitly to MapPlot(ephemeris=...) rather than relying on
+# skyfield's default loader, which resolves bare filenames against the
+# process's cwd rather than this script's directory.
+EPHEMERIS = os.path.normpath(os.path.join(HERE, "..", "assets", "de421.bsp"))
+
+# Same local BigSky (mag<=11) catalog scripts/starmaps/generate.py already
+# uses, resolved automatically by starplot itself once STARPLOT_DATA_PATH
+# (above) points at its directory -- this constant is only needed here for
+# fetch_stars_local()'s own direct pandas read (used to compute real
+# min/max magnitude for the adaptive size_fn and the custom legend, kept
+# in sync with what stars() actually renders). Left in its existing
+# location under scripts/starmaps/ rather than deduped into scripts/assets/
+# (like de421.bsp was) -- that would mean touching scripts/starmaps/
+# generate.py too, which is explicitly out of scope for this session.
+LOCAL_STAR_CATALOG = os.path.join(STARPLOT_SHARED_DATA_DIR, "stars.bigksy.0.1.3.mag11.parquet")
+LOCAL_STAR_CATALOG_MAG_LIMIT = 11.0
 
 ORG_NAME = "Northern Berkshire Astronomical Society"
 SITE_URL = "nbasastro.org"
@@ -87,7 +136,7 @@ OBJECT_STYLES = {
     "galaxy_dwarf_irr":  {"shape": "ellipse",      "color": "#3366DD", "dashed": False},
     "planetary_nebula":  {"shape": "double_circle","color": "#33CCCC", "dashed": False},
     # star: small circle with inward N/S/E/W ticks (classic finder-chart reticle)
-    "star":              {"shape": "star_target",  "color": "#FF6600", "dashed": False},
+    "star":              {"shape": "star_target",  "color": "#3366FF", "dashed": False},
 }
 
 
@@ -124,6 +173,12 @@ SIMBAD_OTYPE_MAP = {
     "BY*": "star",   "RS*": "star",   "LP*": "star",   "s*r": "star",
     "EB*": "star",   "Al*": "star",   "bL*": "star",   "WU*": "star",
     "K*":  "star",   "G*":  "star",   "MS*": "star",   "su*": "star",
+    # X-ray binaries and related compact-object systems -- what's actually
+    # findable at the eyepiece/in an image is the optical companion star
+    # (e.g. HDE 226868 for Cygnus X-1), so these should render with the
+    # small star-reticle style, not the open-cluster dashed circle.
+    "HXB": "star",   "LXB": "star",   "XB*": "star",   "X":   "star",
+    "Psr": "star",   "Pu*": "star",   "No*": "star",   "WD*": "star",
 }
 
 
@@ -215,7 +270,13 @@ def resolve_simbad(names: list) -> list:
         if shape in ("circle", "circle_plus"):
             t["size_amin"] = maj or 5.0
         elif shape == "star_target":
-            t["size_amin"] = 10.0   # fixed reticle ring radius (arcmin)
+            # Fixed reticle ring radius (arcmin) -- a point-source marker,
+            # not a real angular size, so this is purely cosmetic. Was
+            # 10.0' (20' diameter), which visibly outsized real deep-sky
+            # object outlines in the same field (e.g. a 16'x9' nebula) and
+            # read as "the star matters more than the nebula" -- shrunk so
+            # it reads as a locator mark, not a competing shape.
+            t["size_amin"] = 3.0
         elif shape in ("rect", "ellipse"):
             t["width_amin"]  = maj  or 10.0
             t["height_amin"] = mino or (maj * 0.5 if maj else 5.0)
@@ -234,74 +295,106 @@ def resolve_simbad(names: list) -> list:
     return targets
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-#  Hard-coded field definitions  (used by --fields)
-# ─────────────────────────────────────────────────────────────────────────────
-
-FIELDS = [
-    {
-        "chart_name": "gliese_710",
-        "title": "Gliese 710 — Future Stellar Visitor",
-        "info": "Ser · mag 9.65 · K7 V · closest stellar approach in ~1.29 Myr",
-        "fov_deg": 4.5,
-        "mag_limit": 10.5,
-        "fetch_stars": True,
-        "star_labels": True,
-        "star_size_min": 4.0,   # faint stars still visible at mag 10.5
-        "targets": [
-            {
-                "name": "Gliese 710",
-                "label": "Gliese 710",
-                # RA 19h 05m 29s → 19*15 + 5*0.25 + 29/240 = 286.371°
-                # Dec −01° 58′ 57″ → −(1 + 58/60 + 57/3600) = −1.982°
-                "ra": 286.371,
-                "dec": -1.982,
-                "object_type": "star",
-                "size_amin": 10.0,    # reticle ring radius
-            },
-        ],
-    },
-    {
-        "chart_name": "inkspot",
-        "title": 'NGC 6520 ("Dead Man\'s Chest") & Barnard 86 ("the Ink Spot")',
-        "info": "Sgr · ~6 kly · cluster ~150 Myr · B86 a candidate birth cloud",
-        "fov_deg": None,
-        "mag_limit": 12.0,
-        "fetch_stars": True,
-        "targets": [
-            {
-                "name": 'NGC 6520 ("Dead Man\'s Chest")',
-                "label": "NGC 6520",
-                "ra": 270.8546, "dec": -27.8911,
-                "object_type": "open_cluster",
-                "size_amin": 6.0,
-            },
-            {
-                "name": 'Barnard 86 ("the Ink Spot")',
-                "label": "B 86",
-                "ra": 270.708, "dec": -27.850,
-                "object_type": "dark_nebula",
-                "width_amin": 5.0, "height_amin": 3.5, "angle_deg": 35.0,
-            },
-        ],
-    },
-]
-
 MAG_LIMIT     = 12.0
-STAR_SIZE_MIN = 3.0   # minimum marker size in points — faint stars are otherwise invisible
+# Marker sizes are in matplotlib scatter's native s= units (marker AREA in
+# points^2) -- these values are handed straight to starplot's stars()
+# (size_fn), which passes them straight to ax.scatter(s=...), NOT to the old
+# per-point p.marker(style={"marker":{"size":...}}) API this used to go
+# through. That's an important distinction found the hard way: the old
+# STAR_SIZE_MIN/MAX (3.0/26.0) were calibrated for that old API's own
+# internal scaling and rendered as barely-visible gray specks once actually
+# passed through scatter() at these units -- confirmed by diffing rendered
+# pixels with/without stars plotted (real markers were present, just
+# effectively invisible at ~3-26 points^2). starplot's own default size
+# function (callables.size_by_magnitude) uses 20-3800 in this same unit for
+# reference; these are recalibrated to a comparable range.
+STAR_SIZE_MIN = 20.0    # floor marker size (points^2) — faint stars are otherwise invisible
+STAR_SIZE_MAX = 2200.0  # ceiling marker size (points^2) — cap for the brightest star present
+# Reference magnitude anchors for the *absolute* brightness->size curve
+# (see marker_size() below) -- deliberately independent of what's plotted
+# in any one field, so "how bright is this star, really" always means the
+# same thing on a fixed scale rather than a field-relative one.
+ABS_MAG_REF_BRIGHT = 0.0
+ABS_MAG_REF_FAINT  = 13.0
 FOV_PADDING   = 3.0   # finder charts need plenty of context around targets
 FOV_MIN_DEG   = 2.0   # never show less than 2° so observers can navigate
-SCALE         = 2048 / 4096
 
 
 # ─────────────────────────────────────────────────────────────────────────────
 #  Helpers
 # ─────────────────────────────────────────────────────────────────────────────
 
-def marker_size(mag: float, size_min: float = STAR_SIZE_MIN) -> float:
-    # Scale: mag 1 ≈ 28, mag 6 ≈ 8, mag 10 ≈ 3, mag 12 ≈ 2
-    # size_min floor prevents faint stars from becoming invisible dots
-    return max(size_min, 30.0 * (10.0 ** (-0.12 * mag)))
+def marker_size(mag: float, size_min: float = STAR_SIZE_MIN,
+                 size_max: float = STAR_SIZE_MAX) -> float:
+    # Absolute brightness->size curve, anchored to fixed reference
+    # magnitudes (ABS_MAG_REF_BRIGHT..ABS_MAG_REF_FAINT) rather than a
+    # hardcoded constant -- so it scales correctly no matter what
+    # size_min/size_max units are in use (points for the old marker() API,
+    # points^2 for the current scatter()-based one). Used as the shape
+    # reference for size_fn_for_range() below, not called directly for
+    # chart rendering -- an absolute scale alone makes a field's brightest
+    # star huge even when that star is only, say, mag 7 and nothing else
+    # is close.
+    def raw(m):
+        return 10.0 ** (-0.12 * m)
+    r_bright, r_faint = raw(ABS_MAG_REF_BRIGHT), raw(ABS_MAG_REF_FAINT)
+    m_clamped = max(ABS_MAG_REF_BRIGHT, min(ABS_MAG_REF_FAINT, mag))
+    t = (raw(m_clamped) - r_faint) / (r_bright - r_faint)
+    return max(size_min, size_min + t * (size_max - size_min))
+
+
+def size_fn_for_range(mag_min: float, mag_max: float,
+                       size_min: float = STAR_SIZE_MIN,
+                       size_max: float = STAR_SIZE_MAX,
+                       headroom: float = 1.3):
+    """Build a mag → marker-size function using the brightest (mag_min) and
+    faintest (mag_max) star actually present in this field -- a hybrid of
+    relative and absolute scaling, because the two goals pull in opposite
+    directions and both matter:
+
+      - RELATIVE: a field with a narrow, uniformly-faint magnitude spread
+        (say, everything between mag 9 and 12, nothing brighter) needs its
+        faint end pulled up toward size_max, or those stars render as
+        "almost microscopic" dots -- there's no bright star in the field to
+        anchor a purely absolute scale against.
+
+      - ABSOLUTE: but that same stretching must not let a field's "brightest
+        star" hog the full size_max ceiling just because it's the best of a
+        faint bunch -- a field whose brightest star is only mag 7 shouldn't
+        render that star at the same size as a true mag 1-2 showpiece
+        elsewhere. Size should still mean something about real brightness.
+
+    Resolution: compute the relative (min-max-stretched) size as before, but
+    cap every star at what its own absolute magnitude would earn (with a bit
+    of `headroom` for being the local standout), and take the smaller of the
+    two. A genuinely bright star's absolute cap is generously large so the
+    relative value usually wins; a merely-locally-bright but absolutely
+    faint star gets pulled back down by its cap.
+    """
+    def raw(m):
+        return 10.0 ** (-0.12 * m)
+
+    def absolute_size(m):
+        return max(size_min, min(size_max, marker_size(m, size_min, size_max) * headroom))
+
+    if mag_max <= mag_min + 1e-9:
+        # Degenerate case: a single star, or every star at ~the same
+        # magnitude. No meaningful range to stretch across -- fall back to
+        # pure absolute sizing (still clamped to [size_min, size_max]).
+        sz = absolute_size(mag_min)
+        return lambda m: sz
+
+    raw_faint  = raw(mag_max)   # smallest raw value  (faintest star)
+    raw_bright = raw(mag_min)   # largest raw value   (brightest star)
+    span = raw_bright - raw_faint
+
+    def f(m):
+        m_clamped = max(mag_min, min(mag_max, m))
+        t = (raw(m_clamped) - raw_faint) / span
+        relative = size_min + t * (size_max - size_min)
+        return min(relative, absolute_size(m_clamped))
+
+    return f
 
 
 def slug(name: str) -> str:
@@ -345,23 +438,140 @@ def compute_field_center_and_fov(field: dict):
     return ra0, dec0, max(FOV_MIN_DEG, 2.0 * max_half * FOV_PADDING)
 
 
+def _vizier_table_rowcount(result) -> int:
+    if not result or len(result) == 0:
+        return 0
+    return len(result[0])
+
+
+_local_star_catalog_cache = None  # module-level cache -- read the ~50MB parquet once per process
+
+
+def fetch_stars_local(ra_deg, dec_deg, radius_deg, mag_limit) -> pd.DataFrame:
+    """Fallback star source, used only when live Vizier/NOMAD comes back
+    empty or fails outright. Reads the same local BigSky (mag<=11) catalog
+    scripts/starmaps/generate.py already relies on for its own (reliable,
+    network-free) star rendering -- see LOCAL_STAR_CATALOG above. Filters
+    with a flat-sky cos(dec) approximation, which is what the rest of this
+    script already uses for FOV geometry at these field sizes (a few
+    degrees at most), so it's consistent with the precision used
+    elsewhere, not a new source of error.
+
+    Depth caps out at mag 11 regardless of mag_limit requested -- clearly
+    logged, since a chart generated this way is less deep than a real
+    NOMAD fetch would have been.
+    """
+    global _local_star_catalog_cache
+    if not os.path.exists(LOCAL_STAR_CATALOG):
+        print(f"  WARNING: local star catalog fallback not found at {LOCAL_STAR_CATALOG}")
+        return pd.DataFrame(columns=["ra", "dec", "magnitude"])
+
+    if _local_star_catalog_cache is None:
+        print(f"   Loading local star catalog fallback ({os.path.basename(LOCAL_STAR_CATALOG)}) …")
+        # Read all columns rather than passing columns=[...] -- this
+        # particular file's parquet metadata references an index column
+        # that isn't in the actual schema, which pyarrow chokes on when
+        # asked to project down to a column subset up front. Select the
+        # subset afterward in pandas instead.
+        _local_star_catalog_cache = pd.read_parquet(LOCAL_STAR_CATALOG)[
+            ["ra", "dec", "magnitude"]]
+    cat = _local_star_catalog_cache
+
+    effective_limit = min(mag_limit, LOCAL_STAR_CATALOG_MAG_LIMIT)
+    if mag_limit > LOCAL_STAR_CATALOG_MAG_LIMIT:
+        print(f"   NOTE: local catalog fallback only reaches mag "
+              f"{LOCAL_STAR_CATALOG_MAG_LIMIT:.1f} (requested {mag_limit:.1f}) -- "
+              f"chart will be shallower than a live NOMAD fetch would be.")
+
+    cosd = max(math.cos(math.radians(dec_deg)), 0.05)
+    dra_raw = cat["ra"] - ra_deg
+    dra_wrapped = ((dra_raw + 180.0) % 360.0) - 180.0   # correct RA 0/360 wraparound
+    dra = dra_wrapped * cosd
+    ddec = cat["dec"] - dec_deg
+    sep = np.hypot(dra, ddec)
+
+    mask = (sep <= radius_deg) & cat["magnitude"].notna() & cat["magnitude"].between(1.0, effective_limit)
+    out = cat.loc[mask, ["ra", "dec", "magnitude"]].reset_index(drop=True).copy()
+    for col in ("ra", "dec", "magnitude"):
+        out[col] = out[col].astype(float)
+    return out
+
+
+# Known VizieR mirrors, tried in order. The default (vizier.cds.unistra.fr,
+# left as None here -- "whatever astroquery is already configured to use")
+# has been observed, verified by hand against the raw VizieR CGI endpoint,
+# to return HTTP 200 with a syntactically valid but genuinely EMPTY VOTable
+# for perfectly good queries -- not a timeout, not an exception, zero rows
+# -- while vizier.cfa.harvard.edu answers the identical query correctly.
+# That's a live service issue on that specific mirror, not a code/filter
+# bug, so the fix is a mirror fallback rather than anything about the query
+# itself: try the configured default first, then fall back to a
+# known-good alternate if it comes back empty or errors out.
+VIZIER_MIRRORS = [None, "vizier.cfa.harvard.edu"]
+
+
 def fetch_stars(ra_deg, dec_deg, radius_deg, mag_limit) -> pd.DataFrame:
-    from astroquery.vizier import Vizier
+    from astroquery.vizier import Vizier, conf as vizier_conf
     from astropy.coordinates import SkyCoord
     import astropy.units as u
 
-    v = Vizier(columns=["RAJ2000", "DEJ2000", "Vmag"],
-               column_filters={"Vmag": f"<{mag_limit}"}, row_limit=-1)
     coord = SkyCoord(ra=ra_deg, dec=dec_deg, unit="deg", frame="icrs")
-    try:
-        result = v.query_region(coord, radius=radius_deg * u.deg,
-                                catalog="I/297/out")
-    except Exception as exc:
-        print(f"  WARNING: Vizier query failed ({exc})")
-        return pd.DataFrame(columns=["ra", "dec", "magnitude"])
-    if not result:
-        print("  WARNING: Vizier returned no results.")
-        return pd.DataFrame(columns=["ra", "dec", "magnitude"])
+    default_server = vizier_conf.server
+
+    # IMPORTANT: no server-side column_filters on Vmag here, by design.
+    # Verified by hand: filtering server-side with column_filters={"Vmag":
+    # "<12.0"} (or the "0.0..12.0" range form) reliably came back with 0
+    # rows on a real ~1.4 deg-radius NOMAD query, on both the default and
+    # fallback mirrors -- even though the identical query WITHOUT that
+    # constraint returned thousands of real rows, a meaningful fraction of
+    # which do have Vmag < 12. NOMAD is a merged catalog and most rows have
+    # no Vmag at all (photographic-only detections); VizieR's -out.max row
+    # cap appears to be applied to its raw catalog scan *before* the Vmag
+    # constraint is evaluated, so a capped, constrained query can land on
+    # zero qualifying rows even though plenty exist in the field. Fetching
+    # unfiltered and cutting on magnitude client-side (below) sidesteps
+    # that entirely and was confirmed to recover real stars (V<12) in
+    # testing. row_limit=20000 is not a magic number, just what was
+    # confirmed working in that test -- large enough to comfortably find
+    # V<12 stars in a multi-square-degree field without pushing the
+    # request into whatever caused a separate, larger-cap request to come
+    # back empty (consistent with this server's general intermittent-empty
+    # behavior, not something diagnosed further here).
+    # NOTE: mirror selection is passed as the vizier_server= constructor
+    # kwarg, not by mutating the global astroquery.vizier.conf.server --
+    # a first attempt at this mutated conf.server instead, and the
+    # resulting request still hit the original host regardless (visible
+    # in testing as the reported exception's host never actually
+    # changing). vizier_server= is the documented per-instance override
+    # (see astroquery.vizier.core.VizierClass.__init__) and was confirmed
+    # to work.
+    result = None
+    last_exc = None
+    for mirror in VIZIER_MIRRORS:
+        server = mirror if mirror is not None else default_server
+        v = Vizier(columns=["RAJ2000", "DEJ2000", "Vmag"],
+                   row_limit=20000, timeout=90, vizier_server=server)
+        try:
+            result = v.query_region(coord, radius=radius_deg * u.deg,
+                                    catalog="I/297/out")
+            last_exc = None
+        except Exception as exc:
+            last_exc = exc
+            result = None
+            print(f"  WARNING: Vizier query via {server} failed ({exc})")
+            continue
+        n = _vizier_table_rowcount(result)
+        if n > 0:
+            break
+        print(f"  NOTE: {server} returned 0 rows for this query.")
+
+    if _vizier_table_rowcount(result) == 0:
+        if last_exc is not None:
+            print(f"  WARNING: Vizier query failed on all mirrors ({last_exc})")
+        else:
+            print("  WARNING: Vizier returned no results from any mirror.")
+        print("   Falling back to local star catalog …")
+        return fetch_stars_local(ra_deg, dec_deg, radius_deg, mag_limit)
     df = (result[0].to_pandas()
           .rename(columns={"RAJ2000": "ra", "DEJ2000": "dec", "Vmag": "magnitude"})
           .dropna(subset=["magnitude"]))
@@ -571,12 +781,32 @@ def axes_frac_linear(ra0, dec0, ra_min, ra_max, dec_min, dec_max):
 
 
 def axes_frac_proj(p, ra0, dec0, ra_ref, dec_ref):
+    """Axes-fraction position of (ra0,dec0), plus 'spd' = axes-fraction
+    distance per degree of declination, sampled toward dec_ref.
+
+    Near the pole, dec_ref (conventionally dec0+1.0, chosen by the caller)
+    can exceed +90°. cartopy's transform_point doesn't raise for that --
+    it silently evaluates the projection past its valid domain and returns
+    a point mirrored to the wrong side of the pole, which corrupts spd and
+    produces misplaced/misshapen overlays for targets very close to the
+    pole. Clamp the sample point to stay inside ±90° and renormalize by the
+    actual (possibly shortened) delta actually used, so spd stays a true
+    per-degree scale regardless of how close dec0 is to the pole.
+    """
     x_c,y_c = p._proj.transform_point(ra0, dec0, p._crs)
-    x_r,y_r = p._proj.transform_point(ra_ref, dec_ref, p._crs)
+    delta = dec_ref - dec0
+    if dec0 + delta > 90.0:
+        delta = 90.0 - dec0 - 1e-6
+    elif dec0 + delta < -90.0:
+        delta = -90.0 - dec0 + 1e-6
+    if abs(delta) < 1e-9:
+        delta = 1e-6
+    x_r,y_r = p._proj.transform_point(ra_ref, dec0 + delta, p._crs)
     d2a = p.ax.transData + p.ax.transAxes.inverted()
     cx_ax,cy_ax = d2a.transform((x_c,y_c))
     rx_ax,ry_ax = d2a.transform((x_r,y_r))
-    return cx_ax, cy_ax, math.hypot(rx_ax-cx_ax, ry_ax-cy_ax)
+    dist = math.hypot(rx_ax-cx_ax, ry_ax-cy_ax)
+    return cx_ax, cy_ax, dist / abs(delta)
 
 
 LABEL_COLOR = (200, 20, 20)
@@ -713,7 +943,12 @@ def _brand_font(size, bold=False):
         return ImageFont.load_default()
 
 
-def _make_png(chart, title, subtitle, out_path):
+def _make_branded_jpg(chart, title, subtitle, out_path, quality=88):
+    """Composite the title/subtitle header and the NBAS-branded footer
+    (logo, QR, org name/site/tagline) onto the raw chart, same layout as
+    the old PNG output, and save as a single JPEG. This replaces the old
+    _make_png()/_make_pdf() pair -- one printable, on-screen-friendly
+    image, no separate PDF."""
     W, H = chart.size; P = W / 100
     TH = int(P*5); FH = int(P*16); PAD = int(P*1.5); ICH = FH-2*PAD
     canvas = Image.new("RGB", (W, TH+H+FH), "white")
@@ -751,128 +986,85 @@ def _make_png(chart, title, subtitle, out_path):
     draw.text((cx,y0),       ORG_NAME, font=_brand_font(int(P*1.8),True),  fill="#111111", anchor="mt")
     draw.text((cx,y0+lh),    SITE_URL, font=_brand_font(int(P*1.3),False), fill="#0044cc", anchor="mt")
     draw.text((cx,y0+2*lh),  TAGLINE,  font=_brand_font(int(P*1.1),False), fill="#555555", anchor="mt")
-    canvas.save(out_path)
+    canvas.save(out_path, format="JPEG", quality=quality)
     print(f"   Saved {out_path}")
 
 
-def _make_pdf(chart, title, subtitle, out_path):
-    from reportlab.lib.pagesizes import letter
-    from reportlab.lib.units    import inch
-    from reportlab.pdfgen       import canvas as rl
-    from reportlab.lib.utils    import ImageReader
-
-    PW, PH = letter
-    MG   = 0.35 * inch   # page margin
-    AW   = PW - 2 * MG   # usable width
-
-    # Fixed-height blocks
-    TSZ=16; SSZ=11; TL=22; TH=TL*2+6   # title block
-    GAP = 8                              # gap between blocks
-    FH  = 80; LSZ = 64; FP = (FH-LSZ)/2 # footer block
-
-    # Total vertical space consumed by everything except the chart
-    overhead = TH + GAP + GAP + FH
-
-    # Scale chart to fill all remaining vertical space on the page
-    iw, ih = chart.size
-    max_cph = PH - 2*MG - overhead
-    # Start at full available width, then clamp height if needed
-    cpw = AW
-    cph = ih * (cpw / iw)
-    if cph > max_cph:
-        cph = max_cph
-        cpw = iw * (cph / ih)
-
-    # Centre the chart horizontally if it got narrower than AW
-    chart_x = MG + (AW - cpw) / 2.0
-
-    # Lay out from the top of the usable area downward
-    title_y    = PH - MG - TL          # baseline of title line
-    subtitle_y = title_y - TL           # baseline of subtitle line
-    chart_top  = subtitle_y - GAP       # top of chart image
-    chart_bot  = chart_top - cph        # bottom of chart image
-    footer_top = chart_bot - GAP        # top of footer rule
-    footer_y   = footer_top - FH        # bottom of footer block
-
-    c = rl.Canvas(out_path, pagesize=letter)
-    c.setTitle(title); c.setAuthor(ORG_NAME)
-
-    # Title block
-    c.setFont("Helvetica-Bold", TSZ); c.setFillColorRGB(.07,.07,.07)
-    c.drawCentredString(PW/2, title_y, title)
-    c.setFont("Helvetica", SSZ);      c.setFillColorRGB(.35,.35,.35)
-    c.drawCentredString(PW/2, subtitle_y, subtitle)
-
-    # Chart image
-    buf = io.BytesIO(); chart.save(buf, format="PNG"); buf.seek(0)
-    c.drawImage(ImageReader(buf), chart_x, chart_bot,
-                width=cpw, height=cph, preserveAspectRatio=True)
-
-    # Footer rule
-    c.setStrokeColorRGB(.8,.8,.8); c.setLineWidth(.5)
-    c.line(MG, footer_top, PW-MG, footer_top)
-
-    # Logo (left)
-    logo_right = MG
-    if os.path.exists(LOGO_PNG):
-        try:
-            lp = Image.open(LOGO_PNG).convert('RGBA').resize(
-                (int(LSZ*4), int(LSZ*4)), Image.LANCZOS)
-            lb = io.BytesIO(); lp.save(lb, format="PNG"); lb.seek(0)
-            logo_y = footer_top - FP - LSZ
-            c.drawImage(ImageReader(lb), MG, logo_y,
-                        width=LSZ, height=LSZ, mask="auto")
-            logo_right = MG + LSZ
-        except Exception as e:
-            print(f"   WARNING: logo PNG skipped in PDF ({e})")
-
-    # QR code (right)
-    qr_left = PW - MG
-    if os.path.exists(QR_SVG):
-        try:
-            qp = _svg_to_pil(QR_SVG, int(LSZ*4))
-            qb = io.BytesIO(); qp.save(qb, format="PNG"); qb.seek(0)
-            qr_x = PW - MG - LSZ
-            qr_y = footer_top - FP - LSZ
-            c.drawImage(ImageReader(qb), qr_x, qr_y,
-                        width=LSZ, height=LSZ, mask="auto")
-            qr_left = qr_x
-        except Exception as e:
-            print(f"   WARNING: QR skipped in PDF ({e})")
-
-    # Branding text centred between logo and QR
-    tcx = (logo_right + qr_left) / 2.0
-    ofs=11; sfs=9; lsp=14
-    tt = footer_top - FP - ofs
-    c.setFont("Helvetica-Bold", ofs); c.setFillColorRGB(.07,.07,.07)
-    c.drawCentredString(tcx, tt,          ORG_NAME)
-    c.setFont("Helvetica", sfs);          c.setFillColorRGB(0,.27,.8)
-    c.drawCentredString(tcx, tt - lsp,    SITE_URL)
-    c.setFillColorRGB(.35,.35,.35)
-    c.drawCentredString(tcx, tt - 2*lsp,  TAGLINE)
-
-    c.save()
-    print(f"   Saved {out_path}")
-
-
-def apply_branding(raw_png, out_stem, title, subtitle):
-    chart = Image.open(raw_png).convert("RGB")
-    _make_png(chart, title, subtitle, out_stem+".png")
-    _make_pdf(chart, title, subtitle, out_stem+".pdf")
+def apply_branding(raw_chart_path, out_path, title, subtitle):
+    """Composite branding onto the raw chart and save the single output
+    JPG at out_path. raw_chart_path is a transient intermediate (written
+    by starplot's export(), which needs a real file path) -- it is not
+    part of the deliverable and the caller is expected to clean it up."""
+    chart = Image.open(raw_chart_path).convert("RGB")
+    _make_branded_jpg(chart, title, subtitle, out_path)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
 #  Chart builders
 # ─────────────────────────────────────────────────────────────────────────────
 
-def _star_markers(p, df, size_min: float = STAR_SIZE_MIN):
-    for _, row in df.sort_values("magnitude", ascending=False).iterrows():
-        mag = float(row["magnitude"])
-        p.marker(ra=float(row["ra"]), dec=float(row["dec"]),
-                 skip_bounds_check=True,
-                 style={"marker": {"size": marker_size(mag, size_min), "symbol": "circle",
-                                   "fill": "full", "color": "#000000",
-                                   "edge_color": None, "alpha": 0.9, "zorder": 50}})
+def _plot_stars(p, ra0, dec0, radius_deg, mag_limit,
+                 size_min: float = STAR_SIZE_MIN, size_max: float = STAR_SIZE_MAX):
+    """Plot field stars using starplot's own documented stars() method
+    (the same one scripts/starmaps/generate.py already relies on), backed
+    by the local BigSky catalog that STARPLOT_DATA_PATH points at (see
+    module-level setup near the top of this file) -- not a live query.
+
+    This replaces an earlier hand-rolled approach that (a) fetched stars
+    from live Vizier/NOMAD, which proved unreliable across an entire
+    session of testing (server-side empty responses, timeouts, a
+    server-side filter+truncation interaction that zeroed out real
+    results), and (b) plotted each star with p.marker() in a loop, which
+    is not the right API for bulk star plotting -- stars were being
+    fetched successfully in testing but never actually appearing on the
+    rendered chart. stars() handles the correct coordinate projection,
+    proper motion, and rendering in one call; this function's only job is
+    to compute real min/max magnitude (for the adaptive size_fn and the
+    custom legend) and hand stars() a size_fn built from that range.
+
+    Returns (mag_min, mag_max, size_fn), or (None, None, None) if no stars
+    are found in the field -- matching the old function's contract so the
+    legend code didn't need to change.
+    """
+    from starplot import _ as where_
+
+    effective_limit = min(mag_limit, LOCAL_STAR_CATALOG_MAG_LIMIT)
+    stats_df = fetch_stars_local(ra0, dec0, radius_deg, mag_limit)
+    if stats_df.empty:
+        return None, None, None
+
+    mag_min = float(stats_df["magnitude"].min())
+    mag_max = float(stats_df["magnitude"].max())
+    size_fn = size_fn_for_range(mag_min, mag_max, size_min, size_max)
+
+    def star_size_fn(star):
+        return size_fn(star.magnitude)
+
+    from matplotlib.collections import PathCollection
+    collections_before = set(id(c) for c in p.ax.collections)
+
+    p.stars(
+        where=[where_.magnitude < effective_limit],
+        size_fn=star_size_fn,
+        legend_label=None,  # we draw our own multi-swatch magnitude legend
+    )
+
+    # GeoAxes carries an opaque, full-extent "_ViewClippedPathPatch" (part
+    # of cartopy's own view-boundary handling) that renders at zorder=1 --
+    # the exact same zorder stars() uses for its marker collection -- and
+    # ends up drawn AFTER the stars regardless of call order (confirmed by
+    # inspecting ax.get_children(): this patch is consistently last in the
+    # child list no matter when stars()/gridlines() are called). At equal
+    # zorder, later-drawn wins, so that opaque white patch was painting
+    # directly over every star marker -- stars were being fetched and
+    # plotted correctly the whole time, just invisibly. Forcing the new
+    # star collection(s) to a clearly higher zorder fixes this regardless
+    # of draw order.
+    for coll in p.ax.collections:
+        if isinstance(coll, PathCollection) and id(coll) not in collections_before:
+            coll.set_zorder(50)
+
+    return mag_min, mag_max, size_fn
 
 
 def _nice_ra_ticks(ra_min_deg, ra_max_deg, target_n=5):
@@ -904,8 +1096,14 @@ def _nice_dec_ticks(dec_min, dec_max, target_n=5):
     return ticks
 
 
-def _mag_legend(fig, mag_limit):
-    LEG_S = 16
+def _mag_legend(fig, mag_min, mag_max, size_fn):
+    """Legend swatches at (up to) 4 steps spanning the actual brightest→
+    faintest star present in the field, drawn with the same size_fn used
+    for the real markers -- so the legend always matches what's on the
+    chart, instead of showing fixed V=6/8/10/12 reference sizes that may
+    have nothing to do with what was actually plotted."""
+    if size_fn is None:
+        return  # no stars plotted -- nothing to show a legend for
     leg = fig.add_axes([0.71, 0.03, 0.27, 0.25])
     leg.set_xlim(0,1); leg.set_ylim(0,1)
     leg.set_facecolor("white"); leg.patch.set_alpha(0.88)
@@ -914,10 +1112,21 @@ def _mag_legend(fig, mag_limit):
     leg.tick_params(left=False,bottom=False,labelleft=False,labelbottom=False)
     leg.text(.5,.93,"Magnitude",ha="center",va="top",
              fontsize=20,fontweight="bold",transform=leg.transAxes)
-    for mag,y in zip([6,8,10,min(12,mag_limit)],[.72,.52,.33,.14]):
-        sz = marker_size(mag)
-        leg.scatter([.18],[y],s=(sz*SCALE)**2*LEG_S,c="black",zorder=5)
-        leg.text(.34,y,f"V = {mag:g}",va="center",fontsize=20)
+    if mag_max > mag_min:
+        steps = [mag_min + f * (mag_max - mag_min) for f in (0.0, 1/3, 2/3, 1.0)]
+    else:
+        steps = [mag_min]
+    ys = [.72, .52, .33, .14][:len(steps)]
+    for mag, y in zip(steps, ys):
+        sz = size_fn(mag)
+        # sz is already in matplotlib scatter's native s= units (points^2)
+        # now that size_fn's range matches what's used for the real star
+        # markers on the main plot -- no separate rescaling needed here
+        # (an earlier version compensated for the old, much smaller
+        # STAR_SIZE_MIN/MAX range; that compensation would now wildly
+        # over-inflate these swatches).
+        leg.scatter([.18],[y],s=sz,c="black",zorder=5)
+        leg.text(.34,y,f"V = {mag:.1f}",va="center",fontsize=20)
 
 
 def make_raw_chart(field, out_path):
@@ -938,21 +1147,20 @@ def make_raw_chart(field, out_path):
 
     print(f"\n── {field['title']}  FOV {fov:.2f}°  ({len(targets)} target(s))")
 
-    if field.get("fetch_stars", True):
-        print(f"   Fetching stars V ≤ {ml} from NOMAD …")
-        df = fetch_stars(ra0, dec0, max(half_ra, half) * 1.15, ml)
-        print(f"   {len(df)} stars" if len(df) else "   0 stars returned")
-    else:
-        df = pd.DataFrame(columns=["ra","dec","magnitude"])
-        print("   Star fetch disabled")
-
     style = PlotStyle().extend(extensions.GRAYSCALE, extensions.MAP)
     p = MapPlot(projection=Mercator(),
                 ra_min=ra_min, ra_max=ra_max,
                 dec_min=dec_min, dec_max=dec_max,
-                style=style, resolution=2048)
+                style=style, resolution=2048,
+                ephemeris=EPHEMERIS)
     size_min = field.get("star_size_min", STAR_SIZE_MIN)
-    _star_markers(p, df, size_min)
+    size_max = field.get("star_size_max", STAR_SIZE_MAX)
+    if field.get("fetch_stars", True):
+        mag_min, mag_max, size_fn = _plot_stars(
+            p, ra0, dec0, max(half_ra, half) * 1.15, ml, size_min, size_max)
+    else:
+        mag_min, mag_max, size_fn = None, None, None
+        print("   Star fetch disabled")
 
     if field.get("star_labels", False):
         try:
@@ -966,7 +1174,7 @@ def make_raw_chart(field, out_path):
                 ra_locations =_nice_ra_ticks(ra_min,  ra_max),
                 dec_locations=_nice_dec_ticks(dec_min, dec_max),
                 ra_formatter_fn=ra_fmt, dec_formatter_fn=dec_fmt)
-    _mag_legend(p.fig, ml)
+    _mag_legend(p.fig, mag_min, mag_max, size_fn)
     p.export(out_path, padding=0.3)
     ax_pos = p.ax.get_position()
     plt.close("all")
@@ -987,27 +1195,33 @@ def make_raw_chart_stereonorth(field, out_path):
     ra0,dec0,fov = compute_field_center_and_fov(field)
     half = fov/2; ml = field.get("mag_limit",MAG_LIMIT)
 
-    print(f"\n── {field['title']}  FOV {fov:.2f}° (StereoNorth)  ({len(targets)} target(s))")
+    # Near the pole, dec0+half can exceed +90°, which starplot/cartopy will
+    # reject outright. Clamp the northern edge at the pole itself -- you
+    # physically can't have a symmetric FOV that goes past it anyway.
+    dec_hi = min(90.0, dec0 + half)
+    if dec_hi < dec0 + half:
+        print(f"   NOTE: FOV clipped at the pole (dec0+half = {dec0+half:.2f}° > 90°)")
 
-    if field.get("fetch_stars", True):
-        print(f"   Fetching stars V ≤ {ml} from NOMAD …")
-        df = fetch_stars(ra0, dec0, half*1.15, ml)
-        print(f"   {len(df)} stars" if len(df) else "   0 stars returned")
-    else:
-        df = pd.DataFrame(columns=["ra","dec","magnitude"])
-        print("   Star fetch disabled")
+    print(f"\n── {field['title']}  FOV {fov:.2f}° (StereoNorth)  ({len(targets)} target(s))")
 
     style = PlotStyle().extend(extensions.GRAYSCALE, extensions.MAP)
     p = MapPlot(projection=StereoNorth(center_ra=ra0),
                 ra_min=0, ra_max=360,
-                dec_min=dec0-half, dec_max=dec0+half,
-                style=style, resolution=2048)
+                dec_min=dec0-half, dec_max=dec_hi,
+                style=style, resolution=2048,
+                ephemeris=EPHEMERIS)
     xc,yc = p._proj.transform_point(ra0,dec0,p._crs)
-    xn,yn = p._proj.transform_point(ra0,dec0+half,p._crs)
+    xn,yn = p._proj.transform_point(ra0,dec_hi,p._crs)
     r = math.sqrt((xn-xc)**2+(yn-yc)**2)
     p.ax.set_xlim(xc-r,xc+r); p.ax.set_ylim(yc-r,yc+r)
     size_min = field.get("star_size_min", STAR_SIZE_MIN)
-    _star_markers(p, df, size_min)
+    size_max = field.get("star_size_max", STAR_SIZE_MAX)
+    if field.get("fetch_stars", True):
+        mag_min, mag_max, size_fn = _plot_stars(
+            p, ra0, dec0, half * 1.15, ml, size_min, size_max)
+    else:
+        mag_min, mag_max, size_fn = None, None, None
+        print("   Star fetch disabled")
 
     if field.get("star_labels", False):
         try:
@@ -1019,9 +1233,9 @@ def make_raw_chart_stereonorth(field, out_path):
 
     p.gridlines(tick_marks=False,
                 ra_locations =_nice_ra_ticks(ra0 - half, ra0 + half),
-                dec_locations=_nice_dec_ticks(dec0 - half, dec0 + half),
+                dec_locations=_nice_dec_ticks(dec0 - half, dec_hi),
                 ra_formatter_fn=ra_fmt, dec_formatter_fn=dec_fmt)
-    _mag_legend(p.fig, ml)
+    _mag_legend(p.fig, mag_min, mag_max, size_fn)
     p.export(out_path, padding=0.3)
     ax_pos = p.ax.get_position()
     for t in targets:
@@ -1046,7 +1260,6 @@ examples:
   python finder_charts.py --objects "NGC 6946"
   python finder_charts.py --objects "NGC 6520" "Barnard 86" --chart-name inkspot
   python finder_charts.py --objects "M 57" --fov 1.5 --mag-limit 13
-  python finder_charts.py --fields          # run hard-coded FIELDS list
   python finder_charts.py --selftest        # geometry checks, no network needed
 
 assets (place alongside this script):
@@ -1056,9 +1269,8 @@ assets (place alongside this script):
 
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--objects", nargs="+", metavar="NAME",
-                      help="Object name(s) to resolve via SIMBAD — one chart")
-    mode.add_argument("--fields", action="store_true",
-                      help="Run the hard-coded FIELDS list in this script")
+                      help="Object name(s) to resolve via SIMBAD — one chart, "
+                           "all objects sharing a single field")
     mode.add_argument("--selftest", action="store_true",
                       help="Run geometry self-tests and exit")
 
@@ -1079,8 +1291,17 @@ assets (place alongside this script):
                         help="Add Bayer (Greek letter) and Flamsteed number labels")
     parser.add_argument("--min-star-size", type=float, default=STAR_SIZE_MIN,
                         dest="min_star_size",
-                        help=f"Minimum star marker size in points (default: {STAR_SIZE_MIN}; "
-                             f"increase to make faint stars more visible)")
+                        help=f"Minimum star marker size, matplotlib scatter s= units i.e. "
+                             f"points^2 (default: {STAR_SIZE_MIN}; increase to make faint "
+                             f"stars more visible)")
+    parser.add_argument("--max-star-size", type=float, default=STAR_SIZE_MAX,
+                        dest="max_star_size",
+                        help=f"Maximum star marker size, matplotlib scatter s= units i.e. "
+                             f"points^2 (default: {STAR_SIZE_MAX}; caps how big the "
+                             f"brightest star in the FIELD is drawn -- auto-scaling uses "
+                             f"this together with --min-star-size and the brightest/"
+                             f"faintest star actually present, so a field with no truly "
+                             f"bright stars won't force its brightest one to this size)")
     parser.add_argument("--output-dir", default=None, dest="output_dir",
                         help="Output directory (default: script directory)")
     parser.add_argument("--projection",
@@ -1095,53 +1316,63 @@ assets (place alongside this script):
 
     out_dir = args.output_dir or HERE
 
-    if args.objects:
-        print(f"\nResolving {len(args.objects)} object(s) from SIMBAD …")
-        targets = resolve_simbad(args.objects)
-        if not targets:
-            sys.exit("ERROR: no objects resolved from SIMBAD.")
+    print(f"\nResolving {len(args.objects)} object(s) from SIMBAD …")
+    targets = resolve_simbad(args.objects)
+    if not targets:
+        sys.exit("ERROR: no objects resolved from SIMBAD.")
 
-        chart_name = args.chart_name or slug(args.objects[0])
-        title      = args.title      or " & ".join(args.objects)
+    chart_name = args.chart_name or slug(args.objects[0])
+    title      = args.title      or " & ".join(args.objects)
 
-        field = {
-            "chart_name":  chart_name,
-            "title":       title,
-            "info":        args.info,
-            "fov_deg":     args.fov,
-            "mag_limit":   args.mag_limit,
-            "fetch_stars":   not args.no_stars,
-            "star_labels":   args.star_labels,
-            "star_size_min": args.min_star_size,
-            "targets":       targets,
-        }
-        if args.projection:
-            field["projection"] = args.projection
-        else:
-            _, dec0, _ = compute_field_center_and_fov(field)
-            if dec0 > 75:
-                field["projection"] = "StereoNorth"
-
-        fields = [field]
+    field = {
+        "chart_name":  chart_name,
+        "title":       title,
+        "info":        args.info,
+        "fov_deg":     args.fov,
+        "mag_limit":   args.mag_limit,
+        "fetch_stars":   not args.no_stars,
+        "star_labels":   args.star_labels,
+        "star_size_min": args.min_star_size,
+        "star_size_max": args.max_star_size,
+        "targets":       targets,
+    }
+    if args.projection:
+        field["projection"] = args.projection
     else:
-        fields = FIELDS
+        _, dec0, _ = compute_field_center_and_fov(field)
+        if dec0 > 75:
+            field["projection"] = "StereoNorth"
+
+    fields = [field]
+
+    os.makedirs(out_dir, exist_ok=True)
 
     for field in fields:
-        s        = slug(field["chart_name"])
-        raw_png  = os.path.join(out_dir, f"{s}_raw.png")
-        out_stem = os.path.join(out_dir, s)
+        s       = slug(field["chart_name"])
+        out_jpg = os.path.join(out_dir, f"{s}.jpg")
         _, _, fov = compute_field_center_and_fov(field)
         names    = ", ".join(t["name"] for t in field["targets"])
         subtitle = (f"{names} · FOV {fov:.2f}°"
                     + (f" · {field['info']}" if field.get("info") else ""))
 
-        if field.get("projection") == "StereoNorth":
-            make_raw_chart_stereonorth(field, raw_png)
-        else:
-            make_raw_chart(field, raw_png)
+        # The unbranded chart is a transient intermediate -- starplot's
+        # export() needs a real file path to write to, but it's not part
+        # of the deliverable (no more *_raw.png kept alongside the output,
+        # matching the starmap pattern). Write it to a temp file and
+        # remove it once branding has been composited on top.
+        with tempfile.NamedTemporaryFile(suffix="_raw.png", delete=False) as tmp:
+            raw_png = tmp.name
+        try:
+            if field.get("projection") == "StereoNorth":
+                make_raw_chart_stereonorth(field, raw_png)
+            else:
+                make_raw_chart(field, raw_png)
 
-        print("   Applying NBAS branding …")
-        apply_branding(raw_png, out_stem, field["title"], subtitle)
+            print("   Applying NBAS branding …")
+            apply_branding(raw_png, out_jpg, field["title"], subtitle)
+        finally:
+            if os.path.exists(raw_png):
+                os.remove(raw_png)
 
     n = len(fields)
     print(f"\n✓  {n} finder chart{'s' if n != 1 else ''} complete.")

@@ -22,18 +22,9 @@ object_info:
   discoverer: "William Herschel (1784, NGC 6520) · E.E. Barnard (1919 catalog, B86)"
 
 finder_charts:
-  title: "Finder Chart for NGC 6520 & Barnard 86"
-  intro: >
-    An NBAS-branded finder chart for both objects in this article, sharing
-    a single field. Click the thumbnail to open the full branded PNG; use
-    the PDF link for a print-ready chart. Stars are shown to V ≤ 12 over a
-    1° field, with NGC 6520 marked by the standard open-cluster circle and
-    Barnard 86 marked by the standard dark-nebula outline.
   charts:
     - name: "NGC 6520 & Barnard 86"
-      raw:     "inkspot_raw.png"
-      png:     "inkspot.png"
-      pdf:     "inkspot.pdf"
+      image:   "printable/inkspot.jpg"
       caption: "Sgr · ~6 kly · NGC 6520 ~150 Myr · B86 the Ink Spot"
 ---
 

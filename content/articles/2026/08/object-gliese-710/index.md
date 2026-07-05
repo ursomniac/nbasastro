@@ -12,9 +12,7 @@ stars_nearby: ["Gliese 710"]
 finder_charts:
   charts:
     - name: "Gliese 710"
-      raw: "gliese_710_raw.png"
-      png: "gliese_710.png"
-      pdf: "gliese_710.pdf"
+      image: "printable/gliese_710.jpg"
       caption: "Finder chart for Gliese 710"
 
 object_info:
