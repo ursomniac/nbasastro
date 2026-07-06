@@ -37,6 +37,7 @@ server (or run a clean one-shot `hugo --minify`) after --fix completes.
 import argparse
 import re
 import sys
+import unicodedata
 from pathlib import Path
 
 from PIL import Image
@@ -69,6 +70,19 @@ GALLERY_BLOCK_RE = re.compile(
 ATTR_RE = re.compile(r'(\w+)\s*=\s*"([^"]*)"')
 
 
+def _nfc(s):
+    """Normalize to Unicode NFC (precomposed) form. macOS's filesystem
+    returns non-ASCII filenames in NFD (decomposed) form - e.g. 'ü' as
+    'u' + a combining diaeresis, two codepoints - while the same filename
+    typed into index.md by an editor/tool is normally NFC (one precomposed
+    codepoint). The two render identically but compare as different
+    strings, so any non-ASCII filename silently fails the referenced/
+    unreferenced string match unless both sides are normalized to the same
+    form before comparing. NFC is used throughout (not NFD) since that's
+    the standard form for filenames typed into text/markdown."""
+    return unicodedata.normalize("NFC", s)
+
+
 def human_size(n):
     n = float(n)
     for unit in ("B", "KB", "MB", "GB"):
@@ -82,7 +96,7 @@ def parse_references(index_text):
     refs = {}
 
     def add(fname, tag):
-        fname = fname.strip()
+        fname = _nfc(fname.strip())
         if not fname:
             return
         refs.setdefault(fname, []).append(tag)
@@ -364,7 +378,7 @@ def main():
     # shortcodes reference those files by relative path (e.g. "tts/foo.jpg"),
     # so that's the identity used for matching, display, and index.md rewrites.
     media_files = sorted(
-        (p, p.relative_to(directory).as_posix())
+        (p, _nfc(p.relative_to(directory).as_posix()))
         for p in directory.rglob("*")
         if p.is_file() and p.name != "index.md" and p.suffix.lower() in ALL_TRACKED_EXTS
     )
