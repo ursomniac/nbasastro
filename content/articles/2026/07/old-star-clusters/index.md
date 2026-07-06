@@ -4,7 +4,7 @@ date: 2026-07-09
 description: "Most open clusters dissolve within a few hundred million years. A handful have lasted billions. Why that matters, and how to find some of them."
 byline: "Open clusters are typically younger than 1-2 billion years, but a few are much older."
 series: ["wider-view"]
-thumbnail: "icon.png"
+thumbnail: "thumbnail.webp"
 banner: "banner.webp"
 
 dso_caldwell: ["1"]
