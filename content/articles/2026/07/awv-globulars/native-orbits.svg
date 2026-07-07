@@ -1,0 +1,83 @@
+<svg viewBox="0 0 700 460" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bulgeGrad" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#fff3c4"/>
+      <stop offset="60%" stop-color="#f6c453"/>
+      <stop offset="100%" stop-color="#d98f2b" stop-opacity="0.35"/>
+    </radialGradient>
+    <linearGradient id="diskGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7fa7c9" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#7fa7c9" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#7fa7c9" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="700" height="460" fill="#0b0f1a"/>
+
+  <!-- galactic disk, edge-on -->
+  <ellipse cx="350" cy="230" rx="300" ry="16" fill="url(#diskGrad)"/>
+
+  <!-- central bulge -->
+  <ellipse cx="350" cy="230" rx="95" ry="58" fill="url(#bulgeGrad)"/>
+
+  <!-- Main-Disk orbit: close to circular, near the plane, but drawn with
+       real vertical give (ry=42, well beyond the thin gas-disk band's
+       ry=16) rather than nearly coincident with it. This orbit shape is
+       a proxy for Zmax (how far the orbit strays above/below the plane)
+       staying small, not for the cluster sitting inside the gas layer
+       itself: a real Main-Disk cluster's Zmax can be several kpc, far
+       taller than the thin star-forming disk this ellipse sits next to. -->
+  <ellipse cx="350" cy="230" rx="260" ry="42" fill="none" stroke="#5aa9e6" stroke-width="3" stroke-dasharray="9 6"/>
+
+  <!-- Main-Bulge orbit: small, steeply tilted, carries the cluster above/below the plane -->
+  <ellipse cx="350" cy="230" rx="120" ry="95" fill="none" stroke="#f2545b" stroke-width="3" stroke-dasharray="9 6"
+           transform="rotate(-18 350 230)"/>
+
+  <!-- Sun marker on the disk orbit, off to one side -->
+  <circle cx="590" cy="223" r="6" fill="#ffe98a" stroke="#ffffff" stroke-width="1.5"/>
+  <text x="590" y="205" text-anchor="middle" font-size="15" fill="#ffe98a" font-family="sans-serif">Sun</text>
+
+  <!-- Main-Disk cluster marker -->
+  <circle cx="120" cy="250" r="8" fill="#5aa9e6" stroke="#ffffff" stroke-width="1.5"/>
+
+  <!-- Main-Bulge cluster marker -->
+  <circle cx="255" cy="145" r="8" fill="#f2545b" stroke="#ffffff" stroke-width="1.5"/>
+
+  <!-- Galactic center marker -->
+  <circle cx="350" cy="230" r="4" fill="#ffffff"/>
+
+  <!-- Labels -->
+  <text x="350" y="40" text-anchor="middle" font-size="22" fill="#e8e8e8" font-family="sans-serif" font-weight="bold">
+    Two Kinds of "Native" Orbit
+  </text>
+
+  <text x="120" y="270" text-anchor="middle" font-size="16" fill="#5aa9e6" font-family="sans-serif" font-weight="bold">
+    Main-Disk
+  </text>
+  <text x="120" y="290" text-anchor="middle" font-size="13" fill="#bcd6ec" font-family="sans-serif">
+    flat, roughly circular --
+  </text>
+  <text x="120" y="306" text-anchor="middle" font-size="13" fill="#bcd6ec" font-family="sans-serif">
+    orbit stays near the plane
+  </text>
+
+  <text x="565" y="145" text-anchor="middle" font-size="16" fill="#f2545b" font-family="sans-serif" font-weight="bold">
+    Main-Bulge
+  </text>
+  <text x="565" y="165" text-anchor="middle" font-size="13" fill="#f3b7ba" font-family="sans-serif">
+    tightly bound, tipped at
+  </text>
+  <text x="565" y="181" text-anchor="middle" font-size="13" fill="#f3b7ba" font-family="sans-serif">
+    steep angles -- swings through
+  </text>
+  <text x="565" y="197" text-anchor="middle" font-size="13" fill="#f3b7ba" font-family="sans-serif">
+    the crowded center from all sides
+  </text>
+
+  <text x="350" y="428" text-anchor="middle" font-size="13" fill="#8a93a6" font-family="sans-serif">
+    Both orbit families stay close to home --
+  </text>
+  <text x="350" y="446" text-anchor="middle" font-size="13" fill="#8a93a6" font-family="sans-serif">
+    neither one looks like a cluster captured from another galaxy.
+  </text>
+</svg>

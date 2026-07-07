@@ -612,17 +612,17 @@ def _blend(img_path, mask_layer):
     Image.fromarray(blended).save(img_path)
 
 
-def _dashed(draw, pts, color, n_segs=32):
+def _dashed(draw, pts, color, n_segs=32, width=6):
     n = len(pts); seg = max(1, n // n_segs)
     for i in range(0, n - 1, seg):
         if (i // seg) % 2 == 0:
             chunk = pts[i:min(i + seg + 1, n)]
             if len(chunk) >= 2:
-                draw.line(chunk, fill=color, width=6)
+                draw.line(chunk, fill=color, width=width)
 
 
-def _solid(draw, pts, color):
-    draw.line(pts, fill=color, width=6)
+def _solid(draw, pts, color, width=6):
+    draw.line(pts, fill=color, width=width)
 
 
 def _circle_pts(cx, cy, r, n=200):
@@ -691,10 +691,21 @@ def _center_px(ax_pos, img_path, cx_ax, cy_ax):
 
 
 def add_overlay_circle(img_path, ax_pos, cx_ax, cy_ax,
-                       r_ax, color, dashed, bisect=False):
+                       r_ax, color, dashed, bisect=False,
+                       outline_width=6, cross_width=4, min_r_px=None):
     al, ar, at, ab, img = _ax_to_px(img_path, ax_pos)
     W, H = img.size; aw, ah = ar-al, ab-at
     cx = al + cx_ax*aw; cy = ab - cy_ax*ah; r = r_ax*ah
+    if min_r_px is not None:
+        # Enforced visibility floor -- a true-to-angular-size circle for a
+        # small object (a few arcmin) can round down to just 1-2px at a
+        # wide-FOV overview scale, at which point the outline/cross
+        # strokes (outline_width/cross_width) swallow the fill entirely
+        # and it reads as a plain black dot instead of a yellow-filled,
+        # black-rimmed marker. Confirmed by a real test render before this
+        # was added: several of the smallest clusters in the AWV overview
+        # chart showed no visible marker, just their label.
+        r = max(r, min_r_px)
     rgb = _hex_to_rgb(color)
     mask = Image.new("RGB", (W,H), (255,255,255))
     ImageDraw.Draw(mask).ellipse([cx-r,cy-r,cx+r,cy+r], fill=rgb)
@@ -702,11 +713,11 @@ def add_overlay_circle(img_path, ax_pos, cx_ax, cy_ax,
     res = Image.open(img_path); d = ImageDraw.Draw(res)
     pts = _circle_pts(cx, cy, r)
     if bisect:
-        _solid(d, pts, (0,0,0))
-        d.line([(cx-r,cy),(cx+r,cy)], fill=(0,0,0), width=4)
-        d.line([(cx,cy-r),(cx,cy+r)], fill=(0,0,0), width=4)
-    elif dashed: _dashed(d, pts, (0,0,0))
-    else:        _solid(d, pts, (0,0,0))
+        _solid(d, pts, (0,0,0), width=outline_width)
+        d.line([(cx-r,cy),(cx+r,cy)], fill=(0,0,0), width=cross_width)
+        d.line([(cx,cy-r),(cx,cy+r)], fill=(0,0,0), width=cross_width)
+    elif dashed: _dashed(d, pts, (0,0,0), width=outline_width)
+    else:        _solid(d, pts, (0,0,0), width=outline_width)
     res.save(img_path)
 
 
@@ -822,7 +833,7 @@ def _label_font(size_px):
         return ImageFont.load_default()
 
 
-def add_overlay_label(img_path, ax_pos, cx_ax, cy_ax, text):
+def add_overlay_label(img_path, ax_pos, cx_ax, cy_ax, text, font_scale=0.022):
     img = Image.open(img_path)
     W, H = img.size
     al, ar = ax_pos.x0*W, ax_pos.x1*W
@@ -830,12 +841,13 @@ def add_overlay_label(img_path, ax_pos, cx_ax, cy_ax, text):
     aw, ah = ar-al, ab-at
     x = al + cx_ax*aw; y = ab - cy_ax*ah
     draw = ImageDraw.Draw(img)
-    draw.text((x,y), text, font=_label_font(max(14,int(ah*0.022))),
+    draw.text((x,y), text, font=_label_font(max(14,int(ah*font_scale))),
               fill=LABEL_COLOR, anchor="lm")
     img.save(img_path)
 
 
-def render_target_overlay(img_path, ax_pos, t, ra_bounds, proj_ctx=None):
+def render_target_overlay(img_path, ax_pos, t, ra_bounds, proj_ctx=None,
+                          outline_width=6, cross_width=4, min_r_px=None):
     style  = style_for(t["object_type"])
     shape  = style["shape"]; color = style["color"]; dashed = style["dashed"]
     ra0, dec0 = t["ra"], t["dec"]
@@ -849,10 +861,13 @@ def render_target_overlay(img_path, ax_pos, t, ra_bounds, proj_ctx=None):
 
     if shape == "circle":
         add_overlay_circle(img_path,ax_pos,cx_ax,cy_ax,
-                           t["size_amin"]/60/2*spd, color,dashed)
+                           t["size_amin"]/60/2*spd, color,dashed,
+                           outline_width=outline_width, min_r_px=min_r_px)
     elif shape == "circle_plus":
         add_overlay_circle(img_path,ax_pos,cx_ax,cy_ax,
-                           t["size_amin"]/60/2*spd, color,dashed,bisect=True)
+                           t["size_amin"]/60/2*spd, color,dashed,bisect=True,
+                           outline_width=outline_width, cross_width=cross_width,
+                           min_r_px=min_r_px)
     elif shape == "star_target":
         add_overlay_star_target(img_path,ax_pos,cx_ax,cy_ax,
                                 t.get("size_amin",10.0)/60*spd, color)
@@ -891,14 +906,15 @@ def _label_pos(t, fov, others=None):
 
 
 def render_target_label(img_path, ax_pos, t, fov, ra_bounds,
-                        others=None, proj_ctx=None):
+                        others=None, proj_ctx=None, font_scale=0.022):
     lra, ldec = _label_pos(t, fov, others)
     if proj_ctx is not None:
         cx_ax,cy_ax,_ = axes_frac_proj(proj_ctx,lra,ldec,lra,ldec+1.0)
     else:
         ra_min,ra_max,dec_min,dec_max = ra_bounds
         cx_ax,cy_ax = axes_frac_linear(lra,ldec,ra_min,ra_max,dec_min,dec_max)
-    add_overlay_label(img_path,ax_pos,cx_ax,cy_ax,t.get("label",t["name"]))
+    add_overlay_label(img_path,ax_pos,cx_ax,cy_ax,t.get("label",t["name"]),
+                      font_scale=font_scale)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -1004,7 +1020,9 @@ def apply_branding(raw_chart_path, out_path, title, subtitle):
 # ─────────────────────────────────────────────────────────────────────────────
 
 def _plot_stars(p, ra0, dec0, radius_deg, mag_limit,
-                 size_min: float = STAR_SIZE_MIN, size_max: float = STAR_SIZE_MAX):
+                 size_min: float = STAR_SIZE_MIN, size_max: float = STAR_SIZE_MAX,
+                 bayer_labels: bool = False, flamsteed_labels: bool = False,
+                 name_labels: bool = False):
     """Plot field stars using starplot's own documented stars() method
     (the same one scripts/starmaps/generate.py already relies on), backed
     by the local BigSky catalog that STARPLOT_DATA_PATH points at (see
@@ -1021,6 +1039,27 @@ def _plot_stars(p, ra0, dec0, radius_deg, mag_limit,
     proper motion, and rendering in one call; this function's only job is
     to compute real min/max magnitude (for the adaptive size_fn and the
     custom legend) and hand stars() a size_fn built from that range.
+
+    bayer_labels / flamsteed_labels: forwarded straight to stars() as its
+    own bayer_labels=/flamsteed_labels= kwargs. These used to be handled by
+    a separate call to p.bayer_labels()/p.flamsteed_labels() after this
+    function returned -- checked directly against the installed starplot
+    0.20.4 API (`dir(MapPlot)` / plotters/stars.py) and neither method
+    exists on MapPlot at all in this version, only these two kwargs on
+    stars() itself. The old call sites were wrapped in a try/except that
+    silently swallowed the resulting AttributeError and printed a
+    "skipped" warning, so --star-labels has never actually drawn a label
+    in this script's history. Fixed here rather than left in place.
+
+    name_labels: if False (default), suppresses stars() own "common name"
+    label pass (e.g. "Sabik", "Alnasl") by passing label_fn=lambda s: None
+    -- stars() always draws that pass regardless of bayer_labels/
+    flamsteed_labels, so leaving it on prints proper names alongside every
+    Bayer letter, which reads as redundant clutter once Bayer letters are
+    already doing the identification work. Confirmed against a real test
+    render for the AWV overview chart: proper names like "Paikauhale" and
+    "Rosaliadecastro" were taking up real space next to their own Bayer
+    letters with no added value for a star-hopping reference chart.
 
     Returns (mag_min, mag_max, size_fn), or (None, None, None) if no stars
     are found in the field -- matching the old function's contract so the
@@ -1040,6 +1079,8 @@ def _plot_stars(p, ra0, dec0, radius_deg, mag_limit,
     def star_size_fn(star):
         return size_fn(star.magnitude)
 
+    label_kwargs = {} if name_labels else {"label_fn": lambda s: None}
+
     from matplotlib.collections import PathCollection
     collections_before = set(id(c) for c in p.ax.collections)
 
@@ -1047,6 +1088,9 @@ def _plot_stars(p, ra0, dec0, radius_deg, mag_limit,
         where=[where_.magnitude < effective_limit],
         size_fn=star_size_fn,
         legend_label=None,  # we draw our own multi-swatch magnitude legend
+        bayer_labels=bayer_labels,
+        flamsteed_labels=flamsteed_labels,
+        **label_kwargs,
     )
 
     # GeoAxes carries an opaque, full-extent "_ViewClippedPathPatch" (part
@@ -1065,6 +1109,35 @@ def _plot_stars(p, ra0, dec0, radius_deg, mag_limit,
             coll.set_zorder(50)
 
     return mag_min, mag_max, size_fn
+
+
+def _plot_constellation_lines(p, iau_ids, color="#4a90d9", width=2.0, alpha=0.65):
+    """Draws constellation stick-figure lines for the given IAU
+    abbreviation(s) (e.g. ["oph"] for Ophiuchus), using starplot's own
+    constellations() method -- backed by the same local, offline
+    constellations parquet + BigSky star catalog already required for
+    field stars (see STARPLOT_DATA_PATH setup above), not a new network
+    dependency.
+
+    iau_ids: list of lowercase 3-letter IAU constellation abbreviations.
+    Verified directly against the real bundled catalog (not guessed):
+    reading constellations.0.3.3.parquet's own `iau_id` column confirms
+    the key is the standard 3-letter abbreviation (e.g. "oph", "sgr",
+    "sco"), lowercase, one row per constellation, 89 rows total.
+
+    where=[_.iau_id.isin(iau_ids)] restricts the stick figure to exactly
+    the requested constellation(s) -- without this filter, constellations()
+    draws every constellation whose extent intersects the plot's viewing
+    window, which for a wide field would pull in neighboring constellations
+    (Ophiuchus borders Scorpius, Sagittarius, Serpens, Hercules, and more)
+    that aren't wanted as reference clutter.
+    """
+    from ibis import _
+    from starplot.styles import LineStyle
+
+    style = LineStyle(color=color, width=width, alpha=alpha)
+    p.constellations(where=[_.iau_id.isin(iau_ids)], style=style)
+    print(f"   Constellation lines: {', '.join(iau_ids)}")
 
 
 def _nice_ra_ticks(ra_min_deg, ra_max_deg, target_n=5):
@@ -1153,22 +1226,20 @@ def make_raw_chart(field, out_path):
                 dec_min=dec_min, dec_max=dec_max,
                 style=style, resolution=2048,
                 ephemeris=EPHEMERIS)
+    constellation_ids = field.get("constellation_lines")
+    if constellation_ids:
+        _plot_constellation_lines(p, constellation_ids)
+
     size_min = field.get("star_size_min", STAR_SIZE_MIN)
     size_max = field.get("star_size_max", STAR_SIZE_MAX)
+    star_labels = field.get("star_labels", False)
     if field.get("fetch_stars", True):
         mag_min, mag_max, size_fn = _plot_stars(
-            p, ra0, dec0, max(half_ra, half) * 1.15, ml, size_min, size_max)
+            p, ra0, dec0, max(half_ra, half) * 1.15, ml, size_min, size_max,
+            bayer_labels=star_labels, flamsteed_labels=star_labels)
     else:
         mag_min, mag_max, size_fn = None, None, None
         print("   Star fetch disabled")
-
-    if field.get("star_labels", False):
-        try:
-            p.bayer_labels()
-            p.flamsteed_labels()
-            print("   Bayer + Flamsteed labels added")
-        except Exception as exc:
-            print(f"   WARNING: star labels skipped: {exc}")
 
     p.gridlines(tick_marks=True,
                 ra_locations =_nice_ra_ticks(ra_min,  ra_max),
@@ -1214,22 +1285,21 @@ def make_raw_chart_stereonorth(field, out_path):
     xn,yn = p._proj.transform_point(ra0,dec_hi,p._crs)
     r = math.sqrt((xn-xc)**2+(yn-yc)**2)
     p.ax.set_xlim(xc-r,xc+r); p.ax.set_ylim(yc-r,yc+r)
+
+    constellation_ids = field.get("constellation_lines")
+    if constellation_ids:
+        _plot_constellation_lines(p, constellation_ids)
+
     size_min = field.get("star_size_min", STAR_SIZE_MIN)
     size_max = field.get("star_size_max", STAR_SIZE_MAX)
+    star_labels = field.get("star_labels", False)
     if field.get("fetch_stars", True):
         mag_min, mag_max, size_fn = _plot_stars(
-            p, ra0, dec0, half * 1.15, ml, size_min, size_max)
+            p, ra0, dec0, half * 1.15, ml, size_min, size_max,
+            bayer_labels=star_labels, flamsteed_labels=star_labels)
     else:
         mag_min, mag_max, size_fn = None, None, None
         print("   Star fetch disabled")
-
-    if field.get("star_labels", False):
-        try:
-            p.bayer_labels()
-            p.flamsteed_labels()
-            print("   Bayer + Flamsteed labels added")
-        except Exception as exc:
-            print(f"   WARNING: star labels skipped: {exc}")
 
     p.gridlines(tick_marks=False,
                 ra_locations =_nice_ra_ticks(ra0 - half, ra0 + half),
@@ -1289,6 +1359,12 @@ assets (place alongside this script):
                         help="Skip Vizier star fetch")
     parser.add_argument("--star-labels",   action="store_true", dest="star_labels",
                         help="Add Bayer (Greek letter) and Flamsteed number labels")
+    parser.add_argument("--constellation-lines", nargs="+", default=None,
+                        metavar="IAU_ID", dest="constellation_lines",
+                        help="Draw stick-figure lines for these constellations "
+                             "(lowercase 3-letter IAU abbreviations, e.g. oph sgr). "
+                             "Restricted to exactly the ones listed -- see "
+                             "_plot_constellation_lines() for why.")
     parser.add_argument("--min-star-size", type=float, default=STAR_SIZE_MIN,
                         dest="min_star_size",
                         help=f"Minimum star marker size, matplotlib scatter s= units i.e. "
@@ -1332,6 +1408,7 @@ assets (place alongside this script):
         "mag_limit":   args.mag_limit,
         "fetch_stars":   not args.no_stars,
         "star_labels":   args.star_labels,
+        "constellation_lines": args.constellation_lines,
         "star_size_min": args.min_star_size,
         "star_size_max": args.max_star_size,
         "targets":       targets,
