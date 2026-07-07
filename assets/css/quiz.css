@@ -166,16 +166,18 @@
 }
 
 .nbas-quiz-explanation-img {
-  width: 130px;
+  width: 280px;
   flex-shrink: 0;
   border-radius: 6px;
   overflow: hidden;
+  background: #0a0f18;
 }
 
 .nbas-quiz-explanation-img img {
   width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
+  height: auto;
+  max-height: 280px;
+  object-fit: contain;
   display: block;
 }
 
