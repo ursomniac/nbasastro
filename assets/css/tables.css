@@ -24,18 +24,32 @@
     clear: both;
 }
 
-.float-table-right { 
-    float: right; 
-    margin-left: 1.5rem; 
+.float-table-right {
+    float: right;
+    margin: 0 0 1rem 1.5rem;
+    max-width: 45%;
 }
 
-.float-table-left { 
-    float: left; 
-    margin-right: 1.5rem; 
+.float-table-left {
+    float: left;
+    margin: 0 1.5rem 1rem 0;
+    max-width: 45%;
 }
 
+/* Tables inside a floated wrapper should fill that wrapper, not the article column */
+.float-table-right table,
+.float-table-left table {
+    width: 100%;
+    margin: 0;
+}
 
 /* 4. RESPONSIVE */
 @media (max-width: 768px) {
+    .float-table-right,
+    .float-table-left {
+        float: none;
+        max-width: 100%;
+        margin: 1rem 0;
+    }
 }
 

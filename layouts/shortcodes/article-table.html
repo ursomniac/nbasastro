@@ -1,5 +1,5 @@
 {{ $align := .Get "align" | default "none" }}
-<div class="article-table-wrap align-{{ $align }}">
+<div class="article-table-wrap{{ if eq $align "left" }} float-table-left{{ else if eq $align "right" }} float-table-right{{ end }}">
     {{ .Inner | markdownify }}
 </div>
 
