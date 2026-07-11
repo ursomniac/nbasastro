@@ -10,7 +10,7 @@ banner: "banner.webp"
 dso_caldwell: ["33", "34"]
 dso_ngc: ["6960", "6992", "6995", "6974", "6979"]
 dso_ic: ["1340"]
-dso_other: ["Sh 2-103", "LBN 191"]
+dso_other: ["Sh 2-103", "LBN 191", "IC 1340"]
 
 object_info:
   object_type: "Supernova Remnant"
