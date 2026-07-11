@@ -4,6 +4,7 @@
 {{/* Resize: 1200px for full-width to ensure clarity; otherwise use provided width or default 600px */}}
 {{- $w := cond $fullWidth "1200" (.Get "width" | default (.Get "size" | default "600") | strings.TrimSuffix "px") -}}
 {{- $expandSrc := .Get "expand" -}}
+{{- $extLink := .Get "link" -}}
 
 <figure class="nbas-media-container align-{{ $align }} {{ if $fullWidth }}full-width{{ end }}"
         style="{{ if $fullWidth }}width: 100%;{{ else }}width: {{ $w }}px;{{ end }} max-width: 100%; margin: 2rem auto;">
@@ -16,7 +17,10 @@
     {{- if $expandSrc -}}
       {{- $href = printf "%s/%s" ($.Page.RelPermalink | strings.TrimSuffix "/") $expandSrc -}}
     {{- end -}}
-    <a href="{{ $href }}" target="_blank">
+    {{- if $extLink -}}
+      {{- $href = $extLink -}}
+    {{- end -}}
+    <a href="{{ $href }}" target="_blank"{{ if $extLink }} rel="noopener"{{ end }}>{{/* external links get rel=noopener; internal same-site links don't need it */}}
       {{- if $isSVG -}}
         {{/* SVGs are already vector/scalable -- Hugo's .Resize is a
              raster-image operation and panics on SVG resources, so skip
