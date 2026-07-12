@@ -12,7 +12,7 @@ span.we { color: #d4af37; margin-right: 4px; font-weight: bold; }
 The **Northern Berkshire Astronomical Society** is a group of astronomy enthusiasts from across the Northern Berkshires and into southern Vermont and eastern New York — a region that has something increasingly hard to find: genuinely dark skies. On a clear night here, the Milky Way is visible. Most people who live in the area have no idea what's above them once the lights go out.
 
 ## What We Do
-{{< nbas-image src="US_VT_BENN_HOME_26_0621-0008.jpg" width="400" align="right"  >}}
+{{< nbas-image src="US_VT_BENN_HOME_26_0621-0008.webp" width="400" align="right"  >}}
 
 <span class="we">We observe.</span> Several times a year we hold star parties at dark sites around the Berkshires — places far enough from city lights that the Milky Way is actually visible. We also observe informally: a clear night, a few people, a couple of telescopes. If you've never seen Saturn's rings, or the Andromeda Galaxy, or a star cluster through an eyepiece, that experience is available to you.
 
@@ -23,8 +23,9 @@ The **Northern Berkshire Astronomical Society** is a group of astronomy enthusia
 <span class="we">We help.</span> If you have a scope you can't figure out, bring it to a meeting. Someone will know how to use it. If you're trying to decide whether astronomy is actually for you before investing in any equipment, come find out first. The sky is the same whether you're looking at it with a $50 pair of binoculars or a thousand-dollar telescope, and we can help you figure out what — if anything — makes sense for how you want to observe.
 
 {{< nbas-gallery style="grid" size="300px" >}}
-readsboro.jpg | NBAS Member Observing
-bob-lecture.jpg | Outreach lecture
+readsboro.webp | NBAS Member Observing
+artemus-launch.jpg | Watching the Artemis launch at a meeting
+bob-lecture.webp | Outreach lecture
 {{< /nbas-gallery >}}
 ---
 
