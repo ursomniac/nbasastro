@@ -1,6 +1,6 @@
 ---
 title: "We have a new telescope!"
-date: 2026-07-12
+date: 2026-07-14
 description: "An incredible donation of a fully-outfitted Celestron NexStar 6SE to the NBAS that we can use for public events!"
 byline: "The club's first group telescope is a Celestron NexStar 6SE"
 series: ["nbas-announcements"]
@@ -10,6 +10,8 @@ thumbnail: icon.webp
 ## A Generous Donation
 
 We are pleased to announce a generous donation to NBAS: a fully-outfitted Celestron NexStar 6SE, complete with a full set of eyepieces, filters, and other accessories.
+
+{{< nbas-image src="clayton_scope.jpg" fullwidth="true" >}}
 
 This scope will be used at our observing events, and as a training telescope for members who want to gain experience using one.
 
