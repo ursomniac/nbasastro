@@ -11,7 +11,7 @@ thumbnail: icon.webp
 
 We are pleased to announce a generous donation to NBAS: a fully-outfitted Celestron NexStar 6SE, complete with a full set of eyepieces, filters, and other accessories.
 
-{{< nbas-image src="clayton_scope.jpg" fullwidth="true" >}}
+{{< nbas-image src="clayton_scope.webp" fullwidth="true" >}}
 
 This scope will be used at our observing events, and as a training telescope for members who want to gain experience using one.
 
