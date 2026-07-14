@@ -3,6 +3,29 @@
 newsletter-pdf.py
 Generates a print-quality PDF of an NBAS newsletter from a local Hugo server.
 
+VERSION: 1.2.0  <-- bump this on every change. This is the number to quote
+when reporting a bug or asking "is this the latest one" - it is also
+printed to the console on every run and stamped into each PDF's Document
+Properties (Producer field), so a generated file always tells you which
+version of this script made it.
+
+Version history:
+  1.0.0  Original script (Playwright -> Chromium -> page.pdf(), JPEG
+         recompression, volume/issue calculation).
+  1.1.x  Iterative pagination patches (float handling, break-after rules) -
+         not individually tracked, hence "something like v1.1.11."
+  1.2.0  Real fixes, tracked from here on:
+           - apply_auto_image_sizing(): images sized from real source pixel
+             dimensions at AUTO_SIZE_DPI, capped per column, instead of
+             trusting the website-oriented shortcode width.
+           - prevent_heading_orphans(): a heading and whatever immediately
+             follows it (image, paragraph, subheading - any type) are
+             wrapped so a page break can't strand the heading alone.
+           - neutralize_clear_shortcode(): the {{< clear >}} shortcode's
+             inline clear:both is neutralized in print, so content doesn't
+             wait on a much-taller sidebar float.
+           - SCRIPT_VERSION + stamp_pdf_metadata(): this version block.
+
 Usage:
     python scripts/newsletter-pdf.py <local-url> <article-directory>
 
@@ -32,23 +55,139 @@ Image size note:
     few small graphics, like icons, compress worse as JPEG and are left
     untouched). No per-image configuration is required; this is not tunable
     per run by design, so nobody has to remember to do it.
+
+Image sizing note (rewritten 2026-08):
+    Image *display* size in the PDF is handled separately from the file-size
+    recompression above, by apply_auto_image_sizing() (see below). It reads
+    each image's real source pixel dimensions from the rendered page
+    (img.naturalWidth/naturalHeight) and converts them to PDF points at
+    AUTO_SIZE_DPI, instead of trusting the width the nbas-image shortcode
+    declares - that value is tuned for the live website's column width and
+    has no fixed relationship to the print page's much narrower columns.
+    Any image can still be manually sized via the `pdf.images` block in
+    front matter (see apply_image_overrides); that always wins and
+    auto-sizing skips it.
+
+Pagination note (rewritten 2026-08):
+    Chromium's page.pdf() does not paginate CSS "keep together" directives
+    gracefully. Three specific patterns were causing large blank gaps,
+    either mid-page or followed by content stranded alone on the next page:
+
+      1. float: left/right on images - when a floated figure doesn't fit in
+         the remaining space on a page, Chromium moves the whole float to
+         the next page but does NOT reclaim the space it had reserved on
+         the current page, leaving a blank gap behind.
+         Fix: floats are kept (text still wraps beside align-left/right
+         images), but apply_auto_image_sizing() caps every floated image to
+         FLOAT_IMAGE_MAX_WIDTH_PCT of its column width *and*
+         INLINE_IMAGE_MAX_HEIGHT_PT in height. A float that small is very
+         unlikely to be taller than the remaining space on a page, which is
+         what actually triggers the bug - but this is a mitigation, not a
+         hard guarantee, since Chromium's float-break behavior isn't
+         something CSS can fully control.
+
+      2. A heading immediately followed by an image, where the image alone
+         doesn't fit in the remaining page space: the heading renders at
+         the bottom of the current page, and the (non-splittable) image
+         moves whole to the next page, stranding the heading with blank
+         space below it. h3 keeps its pre-existing break-after: avoid /
+         page-break-after: avoid rule below (it hasn't caused problems), but
+         that only stops a break *immediately after* an h3 with nothing
+         between it and the next element - it does nothing for h2, and does
+         nothing to keep a heading and the figure *after* it together as one
+         unit. prevent_heading_orphans() (see below) fixes this directly: it
+         wraps every heading that's immediately followed by a
+         figure.nbas-media-container in a break-inside: avoid container, so
+         Chromium either fits the whole heading+image pair on the current
+         page or pushes the whole pair to the next one - never just the
+         heading.
+
+      3. Mismatched float heights under an explicit clear. The sidebar
+         (.newsletter-stats-grid) and the Telescope Donation photo are both
+         float: left, and the article content uses a `{{< clear >}}`
+         shortcode right after the Donation section to force a clean
+         full-width break before "Perseids". That's fine as long as the two
+         floats are roughly the same height - which, before
+         apply_auto_image_sizing() existed, they coincidentally were,
+         because the Donation photo was rendering oversized (see the
+         "Image sizing note" above) and happened to run about as tall as the
+         sidebar. Now that the photo is correctly sized (a few inches, not
+         most of the page), it finishes well before the much longer sidebar
+         does, and clear: both still waits for the sidebar - leaving a
+         multi-inch blank gap in the main column before "Perseids" can
+         start.
+         IMPORTANT: `{{< clear >}}` renders as a bare
+         `<div style="clear: both;"></div>` with no class attribute at all -
+         it is NOT `<div class="clear">`. An earlier version of this fix
+         tried to neutralize it via a `.clear { clear: none }` rule in the
+         print stylesheet; that rule matched nothing, since the element has
+         no class to match, and an inline style always beats an external
+         stylesheet rule regardless of !important anyway. The actual fix is
+         neutralize_clear_shortcode() (see below), which finds that exact
+         empty-div-with-inline-clear pattern in the DOM and clears the
+         inline style property directly - the only thing that can override
+         an inline style. Content after the Donation section now flows
+         immediately once the Donation text ends, wrapping beside whatever's
+         left of the sidebar rather than waiting for it - the same pattern
+         most print newsletters use for a long-running sidebar. Worth a
+         visual check after the sidebar list length changes issue to issue,
+         since a very short sidebar plus a very tall floated image could in
+         principle reverse which one "wins" - but that's a much smaller
+         mismatch than what caused this bug.
 """
 
 import io
 import sys
 import re
 import calendar
+import hashlib
 import json
 from pathlib import Path
-from datetime import date
+from datetime import date, datetime
 
 import frontmatter
 import pikepdf
 from PIL import Image
 from playwright.sync_api import sync_playwright
 
+
+# The real version number - see the "VERSION" line and "Version history" in
+# the module docstring above. Bump this by hand every time this file
+# changes. This is what gets printed on every run and stamped into every
+# generated PDF's Document Properties.
+SCRIPT_VERSION = "1.2.0"
+
+
+def _script_build_fingerprint() -> str:
+    """Secondary, auto-derived identifier: a short hash of this file's own
+    source. This is NOT the version - SCRIPT_VERSION above is the number
+    that matters and the one to quote. This is just a backstop in case
+    SCRIPT_VERSION ever isn't bumped when it should have been (or a stale
+    file gets passed around under an unchanged name): two files with
+    identical SCRIPT_VERSION but different code will still show different
+    fingerprints.
+    """
+    try:
+        return hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:10]
+    except Exception:
+        return "unknown"
+
+
+SCRIPT_BUILD_FINGERPRINT = _script_build_fingerprint()
+
 IMAGE_MAX_LONG_EDGE = 1500
 IMAGE_JPEG_QUALITY = 82
+INLINE_IMAGE_MAX_HEIGHT_PT = 160  # print-reasonable cap for images meant to float beside text
+
+# ── Auto image sizing: real source pixels -> print points ──────────
+# Governs every image that does NOT have an explicit override in the
+# `pdf.images` front-matter block (see apply_image_overrides).
+AUTO_SIZE_DPI = 150                # typical print DPI target for a home-printed newsletter
+FLOAT_IMAGE_MAX_WIDTH_PCT = 0.40   # align-left/align-right images: never more than this share
+                                    # of their column's width (ceiling agreed at 50%; kept a
+                                    # bit under that to guarantee a readable text gutter)
+CENTER_IMAGE_MAX_HEIGHT_PT = 240   # centered/unaligned images: matches the existing
+                                    # full-width img max-height rule in build_css()
 
 
 def recompress_pdf_images(pdf_path: Path, max_long_edge: int = IMAGE_MAX_LONG_EDGE, quality: int = IMAGE_JPEG_QUALITY) -> None:
@@ -111,6 +250,31 @@ def recompress_pdf_images(pdf_path: Path, max_long_edge: int = IMAGE_MAX_LONG_ED
     pdf.save(pdf_path)
     pdf.close()
     print(f"  Recompressed {touched} image(s), saved {saved_bytes / 1024 / 1024:.2f} MB")
+
+
+def stamp_pdf_metadata(pdf_path: Path, version: str, build_fingerprint: str, generated_at: str) -> None:
+    """Embed the script version + generation timestamp into the PDF's own
+    Document Properties, so opening ANY copy of a PDF - renamed, reuploaded,
+    whatever - in any PDF viewer answers "which version of the script made
+    this, and when" without depending on a filename or on memory of which
+    fix came before which. This is the actual fix for "impossible to tell
+    which of these is the most recent broken version": the answer now
+    travels inside the file itself.
+
+    Written to /Producer since every PDF viewer surfaces that field (macOS
+    Preview's Get Info, Adobe's Document Properties, `pdfinfo`, etc.);
+    duplicated into a couple of custom Info keys for anything that reads
+    metadata programmatically.
+    """
+    pdf = pikepdf.open(pdf_path, allow_overwriting_input=True)
+    pdf.docinfo["/Producer"] = (
+        f"newsletter-pdf.py v{version} (build {build_fingerprint}) - generated {generated_at}"
+    )
+    pdf.docinfo["/NewsletterScriptVersion"] = version
+    pdf.docinfo["/NewsletterBuildFingerprint"] = build_fingerprint
+    pdf.docinfo["/NewsletterGeneratedAt"] = generated_at
+    pdf.save(pdf_path)
+    pdf.close()
 
 
 # ── Volume/Issue calculation ─────────────────────────────────────
@@ -370,8 +534,6 @@ h2 {{
     border-bottom: 1px solid #d4af37;
     padding-bottom: 2pt;
     margin: 10pt 0 5pt 0;
-    break-after: avoid;
-    page-break-after: avoid;
 }}
 
 h3 {{
@@ -434,16 +596,20 @@ figure.nbas-media-container {{
     margin: 6pt 0 !important;
 }}
 
+/* Floats are kept intentionally (text wraps beside align-left/align-right
+   images). What keeps this from re-triggering the Chromium blank-gap
+   pagination bug is apply_auto_image_sizing() in the Python step below,
+   which caps every floated image's width/height so it's small enough to
+   reliably fit remaining page space instead of overflowing onto the next
+   page. See the "Pagination note" in the module docstring. */
 figure.nbas-media-container.align-right {{
     float: right !important;
     margin: 0 0 8pt 10pt !important;
-    clear: right;
 }}
 
 figure.nbas-media-container.align-left {{
     float: left !important;
     margin: 0 10pt 8pt 0 !important;
-    clear: left;
 }}
 
 figure.nbas-media-container.align-center {{
@@ -483,7 +649,12 @@ figcaption,
     display: block;
 }}
 
-.clear {{ clear: both; display: block; }}
+/* This rule is vestigial - kept only in case some future shortcode ever
+   emits an actual class="clear" element. The real `{{{{< clear >}}}}`
+   shortcode output has no class (see neutralize_clear_shortcode() in the
+   Python step, and "Pagination note" item 3 in the module docstring),
+   so this selector currently matches nothing. */
+.clear {{ clear: none; display: block; }}
 .float-table-left {{ float: none; width: auto; margin: 0 0 5pt 0; }}
 
 /* ── TABLES ── */
@@ -637,6 +808,10 @@ def apply_image_overrides(page, pdf_meta: dict) -> None:
 
     width and max-height YAML values are in PDF points (pt).
     Playwright renders at 96 dpi; 1 pt = 96/72 CSS px.
+
+    Any image handled here is flagged with fig.dataset.manualSize = '1' so
+    apply_auto_image_sizing() (below) leaves it alone - a manual override
+    always wins over automatic sizing.
     """
     PT_TO_PX = 96 / 72  # 1.3333...
     images_meta = pdf_meta.get("images", {}) or {}
@@ -663,6 +838,11 @@ def apply_image_overrides(page, pdf_meta: dict) -> None:
         if width_px is not None and max_height is None:
             img_styles.append("height: auto;")
 
+        # brightness-only entries (e.g. sct-dark-*.webp) don't set a size,
+        # so they should NOT block auto-sizing - only flag manualSize when
+        # an actual dimension was given.
+        has_size_override = width_px is not None or max_height is not None
+
         if not img_styles:
             continue
 
@@ -681,7 +861,7 @@ def apply_image_overrides(page, pdf_meta: dict) -> None:
         # Match on stem only so includes() survives the renamed URL.
         stem = filename.rsplit('.', 1)[0]
 
-        page.evaluate(f"""() => {{
+        page.evaluate(f"""(hasSizeOverride) => {{
             document.querySelectorAll('figure.nbas-media-container').forEach(fig => {{
                 const img = fig.querySelector('img');
                 if (img && img.src.includes('{stem}')) {{
@@ -689,9 +869,166 @@ def apply_image_overrides(page, pdf_meta: dict) -> None:
                     if ('{fig_style_str}') {{
                         fig.style.cssText += ' {fig_style_str}';
                     }}
+                    if (hasSizeOverride) {{
+                        fig.dataset.manualSize = '1';
+                    }}
                 }}
             }});
-        }}""")
+        }}""", has_size_override)
+
+
+def apply_auto_image_sizing(page, dpi: int = AUTO_SIZE_DPI) -> None:
+    """Size every image that wasn't manually overridden in YAML, using its
+    real source pixel dimensions rather than the width the nbas-image
+    shortcode declared for the *website* layout.
+
+    For each eligible figure:
+      1. Read the image's natural (source) pixel width/height.
+      2. Convert that to PDF points at `dpi`: native_px / dpi * 72. This is
+         the size the image would print at genuine print resolution.
+      3. Cap that size against the column it will actually sit in:
+           - align-left / align-right (floated) images are capped to
+             FLOAT_IMAGE_MAX_WIDTH_PCT of the containing column's width,
+             and to INLINE_IMAGE_MAX_HEIGHT_PT in height, so a float can
+             never crowd out the text it's meant to sit beside, and is
+             unlikely to be tall enough to trigger Chromium's float
+             pagination bug.
+           - centered/unaligned images are capped to CENTER_IMAGE_MAX_HEIGHT_PT
+             so a single photo can't dominate a whole page.
+      The DPI-correct size is only ever shrunk to fit - never enlarged, so
+      small source images aren't blown up past their native resolution.
+
+    full-width images and anything flagged fig.dataset.manualSize are left
+    untouched (full-width already has its own sizing rule in build_css();
+    manualSize means a YAML override already handled it).
+    """
+    PT_TO_PX = 96 / 72
+
+    # Images must have finished loading before naturalWidth/naturalHeight
+    # are meaningful.
+    page.wait_for_function(
+        """() => Array.from(document.querySelectorAll('figure.nbas-media-container img'))
+            .every(img => img.complete && img.naturalWidth > 0)""",
+        timeout=15000,
+    )
+
+    page.evaluate(
+        """(cfg) => {
+            const { dpi, ptToPx, floatMaxPct, floatMaxHeightPt, centerMaxHeightPt } = cfg;
+
+            document.querySelectorAll('figure.nbas-media-container').forEach(fig => {
+                if (fig.classList.contains('full-width')) return;
+                if (fig.dataset.manualSize === '1') return;
+
+                const img = fig.querySelector('img');
+                if (!img || !img.naturalWidth || !img.naturalHeight) return;
+
+                const isFloat = fig.classList.contains('align-left') ||
+                                 fig.classList.contains('align-right');
+                const parentPt = fig.parentElement.getBoundingClientRect().width / ptToPx;
+                const aspect = img.naturalHeight / img.naturalWidth;
+
+                // Steps 1+2: real source pixels -> print points at target DPI
+                const nativeWidthPt = (img.naturalWidth / dpi) * 72;
+
+                // Step 3: cap against the column, never upscale past native size
+                let widthPt;
+                if (isFloat) {
+                    widthPt = Math.min(nativeWidthPt, parentPt * floatMaxPct);
+                    const heightAtWidth = widthPt * aspect;
+                    if (heightAtWidth > floatMaxHeightPt) {
+                        widthPt = Math.min(widthPt, floatMaxHeightPt / aspect);
+                    }
+                } else {
+                    widthPt = Math.min(nativeWidthPt, parentPt);
+                    const heightAtWidth = widthPt * aspect;
+                    if (heightAtWidth > centerMaxHeightPt) {
+                        widthPt = centerMaxHeightPt / aspect;
+                    }
+                }
+
+                const widthPx = widthPt * ptToPx;
+                fig.style.setProperty('width', widthPx + 'px', 'important');
+                fig.style.setProperty('max-width', '100%', 'important');
+                img.style.setProperty('width', '100%', 'important');
+                img.style.setProperty('height', 'auto', 'important');
+                fig.dataset.autoSized = '1';
+            });
+        }""",
+        {
+            "dpi": dpi,
+            "ptToPx": PT_TO_PX,
+            "floatMaxPct": FLOAT_IMAGE_MAX_WIDTH_PCT,
+            "floatMaxHeightPt": INLINE_IMAGE_MAX_HEIGHT_PT,
+            "centerMaxHeightPt": CENTER_IMAGE_MAX_HEIGHT_PT,
+        },
+    )
+
+
+def prevent_heading_orphans(page) -> None:
+    """Wrap every heading together with whatever immediately follows it in a
+    break-inside: avoid container, so Chromium's page.pdf() either fits the
+    heading + that first element on the current page or pushes the whole
+    pair to the next one - never just the heading, stranded alone with
+    everything it introduces pushed to the following page. See "Pagination
+    note" item 2 in the module docstring.
+
+    Originally this only fired when the next sibling was an image
+    (figure.nbas-media-container), which fixed "This Month's Image" but
+    missed the same bug in a different shape: "Upcoming Events" (h2)
+    immediately followed by "August 8th..." (h3), no image involved at all,
+    still got orphaned the same way. A heading can be stranded by ANY kind
+    of following content - a paragraph, a list, a subheading - so this now
+    wraps a heading with its immediate next sibling regardless of type.
+
+    Runs generically over every h2/h3 in the article, not just the cases
+    seen so far - so future issues get the same protection without needing
+    special-casing.
+    """
+    page.evaluate("""() => {
+        document.querySelectorAll('.article-body h2, .article-body h3').forEach(h => {
+            const next = h.nextElementSibling;
+            if (!next) return;
+            if (h.parentElement && h.parentElement.dataset.orphanGuard === '1') return;
+
+            const wrapper = document.createElement('div');
+            wrapper.dataset.orphanGuard = '1';
+            wrapper.style.breakInside = 'avoid-page';
+            wrapper.style.pageBreakInside = 'avoid';
+            h.parentNode.insertBefore(wrapper, h);
+            wrapper.appendChild(h);
+            wrapper.appendChild(next);
+        });
+    }""")
+
+
+def neutralize_clear_shortcode(page) -> None:
+    """The `{{< clear >}}` content shortcode renders as a bare
+    <div style="clear: both;"></div> - confirmed from the actual page
+    source, not assumed - with no class attribute. It is NOT
+    <div class="clear">, so a `.clear { clear: none }` rule in the print
+    stylesheet cannot reach it: it has no class to match, and even if it
+    did, an inline style always wins over an external stylesheet rule.
+
+    This finds that exact pattern - an empty div whose only styling is an
+    inline `clear` - and clears the inline property directly, which is the
+    only way to actually override it. See "Pagination note" item 3 in the
+    module docstring for why this needs to happen at all (mismatched float
+    heights between the sidebar and a now-correctly-sized floated image).
+
+    Deliberately narrow: only touches empty divs with nothing but a `clear`
+    inline style, so it can't accidentally neutralize `clear: both` on
+    unrelated elements (e.g. figcaption, .align-center figures) that need
+    to keep it.
+    """
+    page.evaluate("""() => {
+        document.querySelectorAll('div').forEach(div => {
+            if (div.children.length !== 0) return;
+            if (div.textContent.trim() !== '') return;
+            if (!div.style.clear) return;
+            div.style.clear = 'none';
+        });
+    }""")
 
 
 def generate_pdf(url: str, output_dir: str) -> None:
@@ -708,6 +1045,8 @@ def generate_pdf(url: str, output_dir: str) -> None:
     volume = pdf_meta.get("vol", calc_vol)
     issue  = pdf_meta.get("issue", calc_issue)
 
+    generated_at = datetime.now().isoformat(timespec="seconds")
+    print(f"  newsletter-pdf.py v{SCRIPT_VERSION} (build {SCRIPT_BUILD_FINGERPRINT}, generated {generated_at})")
     print(f"  Loading:  {url}")
     print(f"  Output:   {pdf_path}")
     print(f"  Volume {volume}, Issue {issue}")
@@ -787,8 +1126,23 @@ def generate_pdf(url: str, output_dir: str) -> None:
         # Inject standalone CSS
         page.add_style_tag(content=build_css(pdf_meta))
 
-        # Apply per-image overrides from YAML
+        # Keep each heading glued to an image that immediately follows it,
+        # so a page break can't strand the heading alone (see docstring).
+        prevent_heading_orphans(page)
+
+        # Neutralize the {{< clear >}} shortcode's inline clear:both so
+        # content doesn't wait for the (much taller) sidebar float to end
+        # before continuing - see "Pagination note" item 3 and this
+        # function's own docstring.
+        neutralize_clear_shortcode(page)
+
+        # Apply per-image overrides from YAML (manual sizes always win)
         apply_image_overrides(page, pdf_meta)
+
+        # Size every remaining image from its real pixel dimensions at
+        # AUTO_SIZE_DPI, capped to fit its column (see docstring at top of
+        # file and the function's own docstring for the full rationale).
+        apply_auto_image_sizing(page)
 
         # Wait for fonts and images to settle
         page.wait_for_timeout(3000)
@@ -814,6 +1168,8 @@ def generate_pdf(url: str, output_dir: str) -> None:
     # content itself.
     print("  Recompressing embedded images...")
     recompress_pdf_images(temp_pdf_path)
+
+    stamp_pdf_metadata(temp_pdf_path, SCRIPT_VERSION, SCRIPT_BUILD_FINGERPRINT, generated_at)
 
     temp_pdf_path.rename(pdf_path)
     print(f"  Done: {pdf_filename}")
