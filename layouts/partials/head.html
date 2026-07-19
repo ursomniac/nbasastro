@@ -1,7 +1,7 @@
 <head data-pagefind-ignore="all">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
-{{ $noindex_types := slice "dso_messier" "dso_ngc" "dso_caldwell" "dso_other" "stars_bright" "stars_exoplanet" "stars_exotic" "stars_multiple" "stars_nearby" "stars_variable" "sso_asteroids" "sso_comets" "sso_meteors" "sso_planets" "series" "knowledge-hub" "explorer" "features" "outreach" "authors" "tags" "knowledgetopics" }}
+{{ $noindex_types := slice "dso_messier" "dso_ngc" "dso_caldwell" "dso_other" "stars_bright" "stars_exoplanet" "stars_exotic" "stars_multiple" "stars_nearby" "stars_variable" "sso_asteroids" "sso_comets" "sso_meteors" "sso_moons" "sso_planets" "series" "knowledge-hub" "explorer" "features" "outreach" "authors" "tags" "knowledgetopics" }}
 {{ if in $noindex_types .Type }}
 <meta name="robots" content="noindex, follow">
 {{ end }}

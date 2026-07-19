@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Solar System
                 "planets": "sso_planets", "meteors": "sso_meteors", 
                 "comets": "sso_comets", "asteroids": "sso_asteroids",
+		"moons": "sso_moons",
                 // DSO
                 "messier": "dso_messier", "caldwell": "dso_caldwell", 
                 "ngc": "dso_ngc", "other": "dso_other",

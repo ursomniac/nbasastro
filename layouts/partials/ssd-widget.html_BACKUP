@@ -59,19 +59,12 @@
     <div class="ssd-live-dot"></div>
     <span class="ssd-live-text">Above Horizon Now</span>
   </div>
-  <div class="ssd-widget-content"><div class="ssd-empty">Loading...</div></div>
+  <div id="ssd-widget-content"><div class="ssd-empty">Loading...</div></div>
   <a href="/solar-system-dashboard/" class="ssd-btn">⊙ Open Dashboard</a>
 </div>
 
 <script>
 (function() {
-  // Guard: if this partial is included more than once on a page (e.g. sidebar
-  // + an inline embed), only run the render loop once. Every instance still
-  // gets updated below via querySelectorAll -- this just avoids stacking up
-  // duplicate setInterval timers.
-  if (window.__ssdWidgetInit) return
-  window.__ssdWidgetInit = true
-
   const LAT_DEG = 42.70
   const LON_DEG = -73.11
   const LAT = LAT_DEG * Math.PI / 180
@@ -140,14 +133,6 @@
     return `${sign}${dd.toString().padStart(2,'0')}°${mm.toString().padStart(2,'0')}'`
   }
 
-  // Apply a chunk of HTML to every instance of the widget on the page,
-  // instead of a single element looked up by id.
-  function setAllContent(html) {
-    document.querySelectorAll('.ssd-widget-content').forEach(function(el) {
-      el.innerHTML = html
-    })
-  }
-
   function render() {
     if (!window.SolarSystem) { setTimeout(render, 500); return }
 
@@ -179,7 +164,8 @@
     const m = date.getUTCMinutes().toString().padStart(2,'0')
 
     if (visible.length === 0) {
-      setAllContent('<div class="ssd-empty">Nothing above horizon</div>')
+      document.getElementById('ssd-widget-content').innerHTML =
+        '<div class="ssd-empty">Nothing above horizon</div>'
       return
     }
 
@@ -194,14 +180,14 @@
         }</td>
       </tr>`).join('')
 
-    setAllContent(`
+    document.getElementById('ssd-widget-content').innerHTML = `
       <table class="ssd-table">
         <thead><tr>
           <th>Object</th><th>Alt</th><th>RA / Dec</th><th style="text-align:right">Sets</th>
         </tr></thead>
         <tbody>${rows}</tbody>
       </table>
-      <div class="ssd-updated">Updated ${h}:${m} UTC</div>`)
+      <div class="ssd-updated">Updated ${h}:${m} UTC</div>`
   }
 
   render()

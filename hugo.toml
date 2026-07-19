@@ -70,6 +70,7 @@ title = "Northern Berkshire Astronomical Society"
   sso_meteors   = "sso_meteors"
   sso_comets    = "sso_comets"
   sso_asteroids = "sso_asteroids"
+  sso_moons     = "sso_moons"
 
   # DSO (Deep Sky Objects)
   dso_messier  = "dso_messier"
@@ -106,6 +107,6 @@ title = "Northern Berkshire Astronomical Society"
 
 [[cascade]]
   [cascade.target]
-    path = "{/dso_messier/**,/dso_caldwell/**,/dso_ngc/**,/dso_other/**,/sso_planets/**,/sso_comets/**,/sso_asteroids/**,/sso_meteors/**,/stars_bright/**,/stars_nearby/**,/stars_variable/**,/stars_multiple/**,/stars_exotic/**,/stars_exoplanet/**}"
+    path = "{/dso_messier/**,/dso_caldwell/**,/dso_ngc/**,/dso_other/**,/sso_planets/**,/sso_comets/**,/sso_asteroids/**,/sso_meteors/**,/sso_moons/**,/stars_bright/**,/stars_nearby/**,/stars_variable/**,/stars_multiple/**,/stars_exotic/**,/stars_exoplanet/**}"
   [cascade.layout]
     layout = "astro-explorer"

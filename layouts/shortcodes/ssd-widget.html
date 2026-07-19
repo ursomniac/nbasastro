@@ -1,0 +1,7 @@
+{{ $align := .Get "align" | default "right" }}
+{{ $width := .Get "width" | default "300" }}
+<div class="ssd-inline-widget{{ if ne $align "none" }} align-{{ $align }}{{ end }}"
+     {{ if ne $align "none" }}style="width: {{ $width }}px;"{{ end }}>
+  {{ partial "ssd-widget.html" . }}
+</div>
+

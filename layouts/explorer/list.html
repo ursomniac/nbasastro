@@ -8,7 +8,7 @@
     <div class="explorer-col">
       <h3>Solar System</h3>
       <ul class="explorer-list">
-        {{ $sso := dict "sso_planets" "Planets" "sso_comets" "Comets" "sso_asteroids" "Asteroids" "sso_meteors" "Meteors" "sso_moon" "Moon" }}
+        {{ $sso := dict "sso_planets" "Planets" "sso_comets" "Comets" "sso_asteroids" "Asteroids" "sso_meteors" "Meteors" "sso_moons" "Moons" }}
         {{ range $key, $label := $sso }}
           {{ $count := 0 }}
           {{ $tax := index $.Site.Taxonomies $key }}

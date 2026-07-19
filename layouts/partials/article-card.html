@@ -62,7 +62,7 @@
     {{ end }}
     {{ $allStars = uniq $allStars }}
 
-    {{ $objKeys := dict "sso_planets" "PLANETS" "sso_meteors" "METEORS" "sso_comets" "COMETS" "sso_asteroids" "ASTEROIDS" "dso_messier" "MESSIER" "dso_caldwell" "CALDWELL" "dso_ngc" "NGC" "dso_other" "OTHER" }}
+    {{ $objKeys := dict "sso_planets" "PLANETS" "sso_moons" "MOONS" "sso_meteors" "METEORS" "sso_comets" "COMETS" "sso_asteroids" "ASTEROIDS" "dso_messier" "MESSIER" "dso_caldwell" "CALDWELL" "dso_ngc" "NGC" "dso_other" "OTHER" }}
     {{ $hasObjects := gt (len $allStars) 0 }}
     {{ if not $hasObjects }}
       {{ range $key, $label := $objKeys }}

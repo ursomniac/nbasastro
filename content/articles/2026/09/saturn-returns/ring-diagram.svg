@@ -1,0 +1,33 @@
+<svg viewBox="0 130 820 290" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="shade" cx="35%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/>
+      <stop offset="60%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.35"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="820" height="420" fill="#0d1b2e"/>
+  <path d="M 131.16 260.00 A 208.84 30.87 0 0 0 548.84 260.00 L 526.30 260.00 A 186.30 27.54 0 0 1 153.70 260.00 Z" fill="#cbb994" opacity="0.85" stroke="#3a4a63" stroke-width="1"/>
+  <path d="M 153.70 260.00 A 186.30 27.54 0 0 0 526.30 260.00 L 519.40 260.00 A 179.40 26.52 0 0 1 160.60 260.00 Z" fill="#0d1b2e"/>
+  <path d="M 160.60 260.00 A 179.40 26.52 0 0 0 519.40 260.00 L 480.39 260.00 A 140.39 20.75 0 0 1 199.61 260.00 Z" fill="#e8dcb8" opacity="0.95"/>
+  <path d="M 199.61 260.00 A 140.39 20.75 0 0 0 480.39 260.00 L 453.99 260.00 A 113.99 16.85 0 0 1 226.01 260.00 Z" fill="#a99a7a" opacity="0.45"/>
+  <ellipse cx="340" cy="260" rx="90.16" ry="81.14" fill="#e4d3a8"/>
+  <ellipse cx="340" cy="260" rx="90.16" ry="81.14" fill="url(#shade)"/>
+  <path d="M 199.61 260.00 A 140.39 20.75 0 0 1 480.39 260.00 L 453.99 260.00 A 113.99 16.85 0 0 0 226.01 260.00 Z" fill="#a99a7a" opacity="0.55"/>
+    <path d="M 160.60 260.00 A 179.40 26.52 0 0 1 519.40 260.00 L 480.39 260.00 A 140.39 20.75 0 0 0 199.61 260.00 Z" fill="#efe4c4"/>
+    <path d="M 153.70 260.00 A 186.30 27.54 0 0 1 526.30 260.00 L 519.40 260.00 A 179.40 26.52 0 0 0 160.60 260.00 Z" fill="#0d1b2e"/>
+    <path d="M 131.16 260.00 A 208.84 30.87 0 0 1 548.84 260.00 L 526.30 260.00 A 186.30 27.54 0 0 0 153.70 260.00 Z" fill="#d4c39c"/>
+  <line x1="537.57" y1="251.24" x2="577.57" y2="181.24" stroke="#0d1b2e" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="537.57" y1="251.24" x2="577.57" y2="181.24" stroke="#f2e9d4" stroke-width="1.3" stroke-linecap="round"/>
+<text x="583.5699999999999" y="185.23918839293685" fill="#f2e9d4" font-family="Georgia, serif" font-size="19" text-anchor="start">A Ring</text>
+<line x1="522.85" y1="268.11" x2="577.85" y2="343.11" stroke="#0d1b2e" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="522.85" y1="268.11" x2="577.85" y2="343.11" stroke="#f2e9d4" stroke-width="1.3" stroke-linecap="round"/>
+<text x="583.85" y="348.1080852475148" fill="#f2e9d4" font-family="Georgia, serif" font-size="19" text-anchor="start">Cassini Division</text>
+<line x1="180.10" y1="252.91" x2="140.10" y2="182.91" stroke="#0d1b2e" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="180.10" y1="252.91" x2="140.10" y2="182.91" stroke="#f2e9d4" stroke-width="1.3" stroke-linecap="round"/>
+<text x="134.104" y="186.90975991940593" fill="#f2e9d4" font-family="Georgia, serif" font-size="19" text-anchor="end">B Ring</text>
+<line x1="212.81" y1="265.64" x2="157.81" y2="340.64" stroke="#0d1b2e" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="212.81" y1="265.64" x2="157.81" y2="340.64" stroke="#f2e9d4" stroke-width="1.3" stroke-linecap="round"/>
+<text x="151.81" y="345.63996370047255" fill="#f2e9d4" font-family="Georgia, serif" font-size="19" text-anchor="end">C Ring (faint)</text>
+  <text x="410.0" y="404" fill="#8fa3bf" font-family="Georgia, serif" font-size="13" text-anchor="middle">Ring tilt shown at ~8.5°, Saturn's actual angle for early September 2026.</text>
+</svg>
