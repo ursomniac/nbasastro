@@ -550,8 +550,31 @@ def build_candidates(args):
         })
 
     # --- MPC pass: enrichment for COBS candidates + residual watchlist -----
+    # This whole pass is best-effort. CometEls.txt is gitignored (see
+    # .gitignore), so every GitHub Actions run starts with zero cached copy
+    # and must download it fresh every time -- there is no persisted disk
+    # between runs on a hosted runner (unlike Bob's own machine, where the
+    # gitignored file just sits on local disk between manual runs). Confirmed
+    # live 2026-07-19: a real production run hit
+    # "OSError: cannot download https://www.minorplanetcenter.net/iau/MPCORB/
+    # CometEls.txt because <urlopen error [Errno 110] Connection timed out>"
+    # with NO error handling at all, which crashed fetch_comet_ephemerides.py
+    # (exit code 1) and took down the ENTIRE site build/deploy, not just the
+    # comet panel -- the COBS pass above (the primary source) had already
+    # succeeded (1705 comets fetched) by the time this killed the run. A
+    # connection *timeout* (not an HTTP 403/429) points at a transient
+    # network condition rather than an explicit block, so retry a few times
+    # before giving up. Either way, this pass must never be allowed to crash
+    # the whole build again: on exhausted retries, log a clear WARN and
+    # proceed COBS-only for this run (same resilience pattern already used
+    # for individual Horizons fetch failures elsewhere in this pipeline) --
+    # this only costs the residual watchlist (comets with zero COBS
+    # observations -- Bob's own expectation is that this is normally a small
+    # to empty set) and the perihelion_au/type enrichment on COBS candidates,
+    # never the COBS-sourced candidates themselves.
     watchlist = []
     dropped_too_faint = []
+    mpc_lookup = {}
     if not args.skip_mpc_watchlist:
         reload_needed = args.reload_comets or comets_file_stale(
             args.assets_dir, args.max_comet_age_days)
@@ -561,152 +584,177 @@ def build_candidates(args):
         print(f"\nChecking MPC CometEls.txt (cache: {args.assets_dir}, {reason}) ...",
               file=sys.stderr)
         loader = Loader(args.assets_dir)
-        with loader.open(mpc.COMET_URL, reload=reload_needed) as f:
-            comets = mpc.load_comets_dataframe_slow(f)
-        print(f"  {len(comets)} MPC orbit record(s) loaded", file=sys.stderr)
-
-        mpc_lookup = build_mpc_lookup(comets, now)
-
-        # Enrichment: every COBS-sourced candidate SHOULD have an MPC record
-        # (Bob's point, 2026-07-19: MPC is the canonical international
-        # clearinghouse comet observers report through, so a COBS-observed
-        # comet with zero MPC record would be a real anomaly -- either a
-        # genuinely unusual data gap or a bug in our key-matching, not a
-        # normal outcome). Backfill perihelion_au/type from the same MPC
-        # load already needed for the watchlist pass below -- no second
-        # data source required.
-        unmatched = []
-        for c in candidates:
-            row = mpc_lookup.get(c["mpc_packed"])
-            if row is None:
-                row = mpc_lookup.get(normalize_packed(c["mpc_packed"]))
-            if row is None:
-                unmatched.append(c["designation"])
-                continue
-            c["perihelion_au"] = to_float(row.get("perihelion_distance_au"))
-            if c["type"] is None:
-                c["type"] = mpc_comet_type(row["orbit_type"])
-            if not c.get("perihelion_date"):
-                try:
-                    c["perihelion_date"] = (
-                        f"{int(row['perihelion_year']):04d}-"
-                        f"{int(row['perihelion_month']):02d}-"
-                        f"{int(row['perihelion_day']):02d}")
-                except (ValueError, TypeError):
-                    pass
-        if unmatched:
-            print(f"  [WARN] {len(unmatched)} COBS-observed comet(s) have NO "
-                  f"matching MPC record -- unexpected (MPC is the canonical "
-                  f"source COBS observations should trace back to); "
-                  f"investigate before trusting this list: "
-                  f"{', '.join(unmatched)}", file=sys.stderr)
-
-        ts = loader.timescale()
-        eph = loader("de421.bsp")
-        sun, earth = eph["sun"], eph["earth"]
-        epochs = sample_epochs(ts, window_start, window_end)
-
-        for key, row in mpc_lookup.items():
-            if key in cobs_keys:
-                continue
-            packed = mpc_packed_number(row["number"], row["orbit_type"])
+        comets = None
+        max_attempts = 3
+        for attempt in range(1, max_attempts + 1):
             try:
-                peri = datetime(int(row["perihelion_year"]),
-                                 int(row["perihelion_month"]),
-                                 int(row["perihelion_day"]),
-                                 tzinfo=timezone.utc)
-            except (ValueError, TypeError):
-                continue
-            if not (window_start <= peri <= window_end):
-                continue
-            perihelion_au = to_float(row.get("perihelion_distance_au"))
-            comet_type = mpc_comet_type(row["orbit_type"])
-            clean_designation = clean_horizons_designation(packed, row["designation"])
-            display_name = extract_display_name(row["designation"])
-            perihelion_date_str = peri.strftime("%Y-%m-%d")
+                with loader.open(mpc.COMET_URL, reload=reload_needed) as f:
+                    comets = mpc.load_comets_dataframe_slow(f)
+                break
+            except Exception as e:
+                print(f"  [WARN] MPC CometEls.txt fetch failed (attempt "
+                      f"{attempt}/{max_attempts}): {type(e).__name__}: {e}",
+                      file=sys.stderr)
+                if attempt < max_attempts:
+                    time.sleep(5)
+                    # Force a fresh download attempt next time rather than
+                    # re-reading whatever (possibly truncated) bytes a failed
+                    # attempt left in the cache dir.
+                    reload_needed = True
 
-            if args.no_crude_filter:
-                watchlist.append({
-                    "designation": row["designation"],
-                    "clean_designation": clean_designation,
-                    "display_name": display_name,
-                    "mpc_packed": packed,
-                    "sources": ["mpc-watchlist"],
-                    "display_mag": None,
-                    "current_mag": None,
-                    "peak_mag": None,
-                    "peak_mag_date": None,
-                    "reasons": ["not yet observed by COBS, perihelion in window"],
-                    "caveat": None,
-                    "visibility": None,
-                    "trend": None,
-                    "type": comet_type,
-                    "perihelion_au": perihelion_au,
-                    "perihelion_date": perihelion_date_str,
-                })
-                continue
+        if comets is None:
+            print(f"  [WARN] MPC CometEls.txt unavailable after {max_attempts} "
+                  "attempt(s) -- proceeding COBS-only for this run. The "
+                  "residual watchlist and perihelion_au/type enrichment are "
+                  "SKIPPED this run (not wrong -- this is a transient MPC "
+                  "fetch failure, not a code defect); COBS-sourced candidates, "
+                  "the primary source, are unaffected.", file=sys.stderr)
 
-            crude_mag = estimate_crude_magnitude(row, ts, sun, earth, epochs)
-            if crude_mag is None:
-                # Can't compute -- unknown is not the same as too faint. Keep
-                # it, claim nothing.
-                watchlist.append({
-                    "designation": row["designation"],
-                    "clean_designation": clean_designation,
-                    "display_name": display_name,
-                    "mpc_packed": packed,
-                    "sources": ["mpc-watchlist"],
-                    "display_mag": None,
-                    "current_mag": None,
-                    "peak_mag": None,
-                    "peak_mag_date": None,
-                    "reasons": ["not yet observed by COBS, perihelion in window, "
-                                "crude magnitude estimate unavailable"],
-                    "caveat": None,
-                    "visibility": None,
-                    "trend": None,
-                    "type": comet_type,
-                    "perihelion_au": perihelion_au,
-                    "perihelion_date": perihelion_date_str,
-                })
-            elif crude_mag <= args.mag_cutoff:
-                watchlist.append({
-                    "designation": row["designation"],
-                    "clean_designation": clean_designation,
-                    "display_name": display_name,
-                    "mpc_packed": packed,
-                    "sources": ["mpc-watchlist-crude"],
-                    "display_mag": round(crude_mag, 1),
-                    "current_mag": None,
-                    "peak_mag": None,
-                    "peak_mag_date": None,
-                    "reasons": ["not yet observed by COBS, perihelion in window"],
-                    "caveat": "CRUDE MPC-derived estimate, not COBS-observed -- "
-                              "known to run optimistic (too bright), sometimes by "
-                              "several magnitudes. Treat as a rough guess only.",
-                    "visibility": classify_visibility(round(crude_mag, 1),
-                                                       args.naked_eye_cutoff,
-                                                       args.binocular_cutoff),
-                    "trend": None,
-                    "type": comet_type,
-                    "perihelion_au": perihelion_au,
-                    "perihelion_date": perihelion_date_str,
-                })
-            else:
-                # Confirmed one-sided bias (see estimate_crude_magnitude
-                # docstring): this optimistic estimate is already fainter
-                # than the cutoff, so the real comet is expected to be
-                # fainter still -- safe to drop rather than list as an
-                # unconfirmed "?" entry.
-                dropped_too_faint.append((row["designation"], round(crude_mag, 1)))
+        if comets is not None:
+            print(f"  {len(comets)} MPC orbit record(s) loaded", file=sys.stderr)
 
-        print(f"  {len(watchlist)} watchlist entry(ies) kept: perihelion in "
-              f"window, zero COBS observations", file=sys.stderr)
-        if dropped_too_faint:
-            print(f"  {len(dropped_too_faint)} dropped as too faint per crude "
-                  f"MPC estimate:", file=sys.stderr)
-            for desig, mag in dropped_too_faint:
-                print(f"    {desig:32s} crude est. mag: {mag}", file=sys.stderr)
+            mpc_lookup = build_mpc_lookup(comets, now)
+
+            # Enrichment: every COBS-sourced candidate SHOULD have an MPC
+            # record (Bob's point, 2026-07-19: MPC is the canonical
+            # international clearinghouse comet observers report through, so
+            # a COBS-observed comet with zero MPC record would be a real
+            # anomaly -- either a genuinely unusual data gap or a bug in our
+            # key-matching, not a normal outcome). Backfill perihelion_au/type
+            # from the same MPC load already needed for the watchlist pass
+            # below -- no second data source required.
+            unmatched = []
+            for c in candidates:
+                row = mpc_lookup.get(c["mpc_packed"])
+                if row is None:
+                    row = mpc_lookup.get(normalize_packed(c["mpc_packed"]))
+                if row is None:
+                    unmatched.append(c["designation"])
+                    continue
+                c["perihelion_au"] = to_float(row.get("perihelion_distance_au"))
+                if c["type"] is None:
+                    c["type"] = mpc_comet_type(row["orbit_type"])
+                if not c.get("perihelion_date"):
+                    try:
+                        c["perihelion_date"] = (
+                            f"{int(row['perihelion_year']):04d}-"
+                            f"{int(row['perihelion_month']):02d}-"
+                            f"{int(row['perihelion_day']):02d}")
+                    except (ValueError, TypeError):
+                        pass
+            if unmatched:
+                print(f"  [WARN] {len(unmatched)} COBS-observed comet(s) have NO "
+                      f"matching MPC record -- unexpected (MPC is the canonical "
+                      f"source COBS observations should trace back to); "
+                      f"investigate before trusting this list: "
+                      f"{', '.join(unmatched)}", file=sys.stderr)
+
+            ts = loader.timescale()
+            eph = loader("de421.bsp")
+            sun, earth = eph["sun"], eph["earth"]
+            epochs = sample_epochs(ts, window_start, window_end)
+
+            for key, row in mpc_lookup.items():
+                if key in cobs_keys:
+                    continue
+                packed = mpc_packed_number(row["number"], row["orbit_type"])
+                try:
+                    peri = datetime(int(row["perihelion_year"]),
+                                     int(row["perihelion_month"]),
+                                     int(row["perihelion_day"]),
+                                     tzinfo=timezone.utc)
+                except (ValueError, TypeError):
+                    continue
+                if not (window_start <= peri <= window_end):
+                    continue
+                perihelion_au = to_float(row.get("perihelion_distance_au"))
+                comet_type = mpc_comet_type(row["orbit_type"])
+                clean_designation = clean_horizons_designation(packed, row["designation"])
+                display_name = extract_display_name(row["designation"])
+                perihelion_date_str = peri.strftime("%Y-%m-%d")
+
+                if args.no_crude_filter:
+                    watchlist.append({
+                        "designation": row["designation"],
+                        "clean_designation": clean_designation,
+                        "display_name": display_name,
+                        "mpc_packed": packed,
+                        "sources": ["mpc-watchlist"],
+                        "display_mag": None,
+                        "current_mag": None,
+                        "peak_mag": None,
+                        "peak_mag_date": None,
+                        "reasons": ["not yet observed by COBS, perihelion in window"],
+                        "caveat": None,
+                        "visibility": None,
+                        "trend": None,
+                        "type": comet_type,
+                        "perihelion_au": perihelion_au,
+                        "perihelion_date": perihelion_date_str,
+                    })
+                    continue
+
+                crude_mag = estimate_crude_magnitude(row, ts, sun, earth, epochs)
+                if crude_mag is None:
+                    # Can't compute -- unknown is not the same as too faint.
+                    # Keep it, claim nothing.
+                    watchlist.append({
+                        "designation": row["designation"],
+                        "clean_designation": clean_designation,
+                        "display_name": display_name,
+                        "mpc_packed": packed,
+                        "sources": ["mpc-watchlist"],
+                        "display_mag": None,
+                        "current_mag": None,
+                        "peak_mag": None,
+                        "peak_mag_date": None,
+                        "reasons": ["not yet observed by COBS, perihelion in window, "
+                                    "crude magnitude estimate unavailable"],
+                        "caveat": None,
+                        "visibility": None,
+                        "trend": None,
+                        "type": comet_type,
+                        "perihelion_au": perihelion_au,
+                        "perihelion_date": perihelion_date_str,
+                    })
+                elif crude_mag <= args.mag_cutoff:
+                    watchlist.append({
+                        "designation": row["designation"],
+                        "clean_designation": clean_designation,
+                        "display_name": display_name,
+                        "mpc_packed": packed,
+                        "sources": ["mpc-watchlist-crude"],
+                        "display_mag": round(crude_mag, 1),
+                        "current_mag": None,
+                        "peak_mag": None,
+                        "peak_mag_date": None,
+                        "reasons": ["not yet observed by COBS, perihelion in window"],
+                        "caveat": "CRUDE MPC-derived estimate, not COBS-observed -- "
+                                  "known to run optimistic (too bright), sometimes by "
+                                  "several magnitudes. Treat as a rough guess only.",
+                        "visibility": classify_visibility(round(crude_mag, 1),
+                                                           args.naked_eye_cutoff,
+                                                           args.binocular_cutoff),
+                        "trend": None,
+                        "type": comet_type,
+                        "perihelion_au": perihelion_au,
+                        "perihelion_date": perihelion_date_str,
+                    })
+                else:
+                    # Confirmed one-sided bias (see estimate_crude_magnitude
+                    # docstring): this optimistic estimate is already fainter
+                    # than the cutoff, so the real comet is expected to be
+                    # fainter still -- safe to drop rather than list as an
+                    # unconfirmed "?" entry.
+                    dropped_too_faint.append((row["designation"], round(crude_mag, 1)))
+
+            print(f"  {len(watchlist)} watchlist entry(ies) kept: perihelion in "
+                  f"window, zero COBS observations", file=sys.stderr)
+            if dropped_too_faint:
+                print(f"  {len(dropped_too_faint)} dropped as too faint per crude "
+                      f"MPC estimate:", file=sys.stderr)
+                for desig, mag in dropped_too_faint:
+                    print(f"    {desig:32s} crude est. mag: {mag}", file=sys.stderr)
 
     candidates.extend(watchlist)
 

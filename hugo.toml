@@ -5,7 +5,7 @@ title = "Northern Berkshire Astronomical Society"
 [params]
   tagline = "Whatever your experience, you belong under our skies."
   logo = "images/nbas-grey.png"
-  site_version = "v1.2.2"
+  site_version = "v1.2.3"
 
   # Banner image map: [filename, X%, Y%, scale%]
   # X: 0=left 50=center 100=right
