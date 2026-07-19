@@ -47,7 +47,7 @@ jobs:
           OUTPUT_PATH: "static/data/galilean-events.json"
       - name: Fetch comet ephemerides
         run: |
-          pip install pyyaml --break-system-packages
+          pip install pandas skyfield jplephem --break-system-packages
           mkdir -p static/data/comets
           python scripts/fetch_comet_ephemerides.py
         env:

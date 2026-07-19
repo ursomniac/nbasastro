@@ -3,28 +3,81 @@
 fetch_comet_ephemerides.py
 Ticket #28 — SSO Comet Panel
 
-Reads data/comets.yaml, fetches a 30-day ephemeris for each comet from
-JPL Horizons, and writes JSON output to static/data/comets/.
+MERGED 2026-07-19: this script used to read a hand-curated data/comets.yaml.
+It now generates its own candidate list at build time (COBS-primary,
+MPC-residual -- see build_comet_candidates.py's module docstring for the
+full design/verification history) and feeds that straight into the existing
+Horizons ephemeris fetch below. Zero manual curation: comets appear as they
+become viable within the window and drop off automatically as they fade,
+per Bob's original Milestone 2 goal for this feature. data/comets.yaml is
+no longer read by this script -- left in the repo, unused, pending Bob's
+call on whether to remove it (never delete without confirmation).
+
+Fetches a WINDOW_DAYS ephemeris for each generated candidate from JPL
+Horizons, and writes JSON output to static/data/comets/.
 
 Output files:
   static/data/comets/index.json        — manifest of all comets + metadata
-  static/data/comets/<slug>.json       — per-comet 30-day ephemeris
+  static/data/comets/<slug>.json       — per-comet ephemeris
 
-Stale files (comets removed from comets.yaml) are pruned at the end,
-but ONLY after all fetches have completed — so a Horizons outage leaves
-existing data intact.
+Stale files (comets no longer in this run's candidate list) are pruned at
+the end, but ONLY after all fetches have completed — so a Horizons outage,
+or a COBS/MPC outage that yields zero candidates, leaves existing data
+intact rather than wiping the live panel.
 
-Requires: PyYAML  (pip install pyyaml --break-system-packages)
-All other dependencies are stdlib.
+MAGNITUDE CORRECTION (added 2026-07-19): confirmed live that JPL Horizons'
+own T-mag is frequently very wrong for comets, for the exact same structural
+reason MPC's magnitude_g/magnitude_k are unreliable (see
+build_comet_candidates.py's docstring) -- Horizons uses its own separately-
+maintained M1/k1 photometric parameters (`T-mag = M1 + 5*log10(delta) +
+k1*log10(r)`, confirmed directly from a live Horizons query's documentation
+block), and those parameters can be stale by years, fit from whatever
+apparition the comet was last well-photometered at rather than kept current.
+Two real, verified examples from the same session that built this:
+  - 10P/Tempel: Horizons M1=14, k1=5.75 -> computes T-mag 13.079 today.
+    Real COBS-observed value: 8.9. Off by ~4 magnitudes. (Orbital solution
+    itself is fresh -- solved 2 days prior, 6095 observations through
+    2026 -- so POSITION is trustworthy; only the magnitude model is stale.)
+  - 383P/Christensen: Horizons M1=18.6, k1=7.5, fit from a 2006-2019 data
+    arc (its discovery apparition, when it was much fainter/farther) ->
+    computes T-mag 20.268 today. Real COBS value: 11.2. Off by ~9
+    magnitudes. Object match confirmed correct (numbered 383P), so this is
+    not a wrong-target bug -- purely a stale photometric model.
+A third-party amateur reference (aerith.net) independently corroborates the
+COBS-scale numbers, not Horizons'.
+
+Given Horizons' geometry (r, delta, and therefore the SHAPE of the
+brightening/fading curve across the ephemeris window) remains reliable even
+when its absolute photometric zero-point is wrong, each comet with a real
+COBS current_mag gets a constant additive offset computed once
+(COBS current_mag minus Horizons' T-mag for today's row) and applied across
+every row's T-mag to produce `our_mag_est` -- an anchored-to-reality
+estimate for the whole window, not just today. Rounded to the nearest
+MAG_EST_ROUND_STEP as a hedge (this is a correction, not real per-day
+photometry). Comets with no COBS current_mag anchor (crude MPC-watchlist
+survivors) get no correction -- `our_mag_est` is left null rather than
+compounding two unreliable numbers, and the raw (unreliable) T-mag is what
+the frontend falls back to displaying for those, same as before.
+
+Requires: pandas, skyfield, jplephem (candidate generation) -- all stdlib
+otherwise (Horizons fetch/parse).
 
 Usage:
   python scripts/fetch_comet_ephemerides.py
 
 Environment variables (all optional):
-  COMET_YAML     path to comets.yaml        default: data/comets.yaml
-  COMET_OUT_DIR  path to output directory   default: static/data/comets
-  WINDOW_DAYS    ephemeris window in days   default: 30
-  STEP_SIZE      Horizons step size         default: 1d
+  COMET_OUT_DIR         path to output directory        default: static/data/comets
+  WINDOW_DAYS           Horizons ephemeris window, days  default: 30
+  STEP_SIZE             Horizons step size               default: 1d
+  CANDIDATE_MAG_CUTOFF  candidate selection mag cutoff    default: 13.0
+  CANDIDATE_DAYS_BACK   candidate selection window start  default: 0
+  CANDIDATE_DAYS_FORWARD candidate selection window end   default: 60
+  NAKED_EYE_CUTOFF      visibility tier threshold         default: 3.0
+  BINOCULAR_CUTOFF      visibility tier threshold         default: 8.5
+  MAX_COMET_AGE_DAYS    CometEls.txt cache staleness      default: 10
+  ASSETS_DIR            CometEls.txt/de421.bsp cache dir  default: scripts/assets
+  ALWAYS_INCLUDE        comma-separated forced designations, optional
+  MAG_EST_ROUND_STEP    rounding step for our_mag_est     default: 0.5
 """
 
 import json
@@ -38,19 +91,18 @@ from urllib.error import URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-try:
-    import yaml
-except ImportError:
-    print("[ERROR] PyYAML not installed. Run: pip install pyyaml --break-system-packages",
-          file=sys.stderr)
-    sys.exit(1)
+# build_comet_candidates.py lives alongside this script -- Python puts this
+# script's own directory on sys.path automatically when run as
+# `python scripts/fetch_comet_ephemerides.py`, so this sibling import needs
+# no extra path setup.
+import build_comet_candidates as candidate_builder
 
 # ── Configuration ──────────────────────────────────────────────────────────────
 
-COMET_YAML   = Path(os.environ.get("COMET_YAML",   "data/comets.yaml"))
 COMET_OUT    = Path(os.environ.get("COMET_OUT_DIR", "static/data/comets"))
 WINDOW_DAYS  = int(os.environ.get("WINDOW_DAYS", "30"))
 STEP_SIZE    = os.environ.get("STEP_SIZE", "1d")
+MAG_EST_ROUND_STEP = float(os.environ.get("MAG_EST_ROUND_STEP", "0.5"))
 
 HORIZONS_URL = "https://ssd.jpl.nasa.gov/api/horizons.api"
 
@@ -300,6 +352,39 @@ def parse_ephemeris(raw):
     return rows
 
 
+# ── COBS-anchored magnitude correction ────────────────────────────────────────
+
+def round_to_step(value, step):
+    """Round to the nearest multiple of step (e.g. step=0.5 -> 8.7 rounds to
+    8.5). Deliberately coarser than Horizons' 3-decimal T-mag -- this is a
+    corrected estimate, not real per-day photometry, and shouldn't look more
+    precise than it is."""
+    if step <= 0:
+        return value
+    return round(round(value / step) * step, 2)
+
+
+def apply_mag_correction(rows, current_mag):
+    """Anchor Horizons' T-mag curve to a real COBS observation. See this
+    module's docstring for why this exists (Horizons' T-mag confirmed
+    unreliable, sometimes by close to 10 magnitudes, for reasons unrelated
+    to orbital/positional accuracy). Computes one constant offset from
+    row[0] (today) and applies it to every row, mutating rows in place by
+    adding an "our_mag_est" key. Returns the offset used, or None if no
+    correction could be applied (missing current_mag or missing/unparseable
+    today's T-mag) -- callers should leave our_mag_est absent/null in that
+    case rather than fabricate a number."""
+    if current_mag is None or not rows or rows[0].get("t_mag") is None:
+        for row in rows:
+            row["our_mag_est"] = None
+        return None
+    offset = current_mag - rows[0]["t_mag"]
+    for row in rows:
+        row["our_mag_est"] = (round_to_step(row["t_mag"] + offset, MAG_EST_ROUND_STEP)
+                               if row.get("t_mag") is not None else None)
+    return round(offset, 2)
+
+
 # ── Slug generation ────────────────────────────────────────────────────────────
 
 def designation_to_slug(designation):
@@ -312,33 +397,85 @@ def designation_to_slug(designation):
     return re.sub(r"[^a-z0-9]", "", designation.lower())
 
 
+# ── Candidate generation ───────────────────────────────────────────────────────
+
+def env_float(name, default):
+    return float(os.environ.get(name, default))
+
+
+def env_int(name, default):
+    return int(os.environ.get(name, default))
+
+
+def generate_comets():
+    """Run the COBS-primary/MPC-residual candidate pipeline (see
+    build_comet_candidates.py) and shape its output into the same
+    "comet" dict fields the rest of this script (unchanged since the old
+    comets.yaml days) already expects: designation, name, type, plus the
+    display metadata written into each JSON file. This replaces reading
+    data/comets.yaml -- see this module's docstring for the merge history.
+    """
+    always_include = [
+        s.strip() for s in os.environ.get("ALWAYS_INCLUDE", "").split(",") if s.strip()
+    ]
+    args = candidate_builder.default_args(
+        mag_cutoff=env_float("CANDIDATE_MAG_CUTOFF", 13.0),
+        days_back=env_int("CANDIDATE_DAYS_BACK", 0),
+        days_forward=env_int("CANDIDATE_DAYS_FORWARD", 60),
+        naked_eye_cutoff=env_float("NAKED_EYE_CUTOFF", 3.0),
+        binocular_cutoff=env_float("BINOCULAR_CUTOFF", 8.5),
+        max_comet_age_days=env_int("MAX_COMET_AGE_DAYS", 10),
+        assets_dir=os.environ.get("ASSETS_DIR", str(candidate_builder.ASSETS_DIR)),
+        always_include=always_include,
+    )
+    raw_candidates = candidate_builder.build_candidates(args)
+    candidate_builder.print_candidates(raw_candidates, args)
+
+    comets = []
+    for c in raw_candidates:
+        # visibility naked-eye/binocular both mean "no telescope required" --
+        # comets.html's only equipment badge is the single "binocular" flag.
+        binocular = c["visibility"] in ("naked-eye", "binocular")
+        comets.append({
+            "designation":     c["clean_designation"],
+            "name":            c["display_name"],
+            "type":            c["type"] or "long-period",
+            "perihelion_date": c["perihelion_date"],
+            "perihelion_au":   c["perihelion_au"],
+            "peak_magnitude":  c["display_mag"],
+            "binocular":       binocular,
+            "warning":         c["caveat"],
+            # Real COBS-observed "today" magnitude, kept separate from
+            # display_mag/peak_magnitude above (which can be a future peak
+            # value, e.g. 10P's display_mag is its peak, not today's actual
+            # brightness) -- this is specifically the anchor point for the
+            # Horizons T-mag correction below, added 2026-07-19 after
+            # confirming Horizons' own comet magnitudes are frequently very
+            # wrong (see module docstring addendum).
+            "current_mag":     c["current_mag"],
+        })
+    return comets
+
+
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main():
-    # Load curated comet list
-    if not COMET_YAML.exists():
-        print(f"[ERROR] {COMET_YAML} not found", file=sys.stderr)
-        sys.exit(1)
-
-    with open(COMET_YAML) as f:
-        config = yaml.safe_load(f)
-
-    comets = config.get("comets", [])
+    comets = generate_comets()
     if not comets:
-        print("[WARN] No comets in comets.yaml — nothing to do", file=sys.stderr)
+        print("[WARN] No candidates generated this run — nothing to do", file=sys.stderr)
         sys.exit(0)
 
-    print(f"[INFO] Loaded {len(comets)} comet(s) from {COMET_YAML}")
+    print(f"[INFO] Generated {len(comets)} candidate(s) this run")
 
-    # Full set of slugs that *should* exist based on comets.yaml right now,
-    # independent of whether this run's fetch succeeds for each one. Used at
-    # prune time so a failed fetch this run doesn't delete a still-curated
-    # comet's previously-good file -- only a comet actually removed from
-    # comets.yaml should ever be pruned.
+    # Full set of slugs that *should* exist based on THIS run's candidate
+    # list, independent of whether this run's Horizons fetch succeeds for
+    # each one. Used at prune time so a failed fetch this run doesn't delete
+    # a still-candidate comet's previously-good file -- only a comet that's
+    # dropped out of the candidate list entirely should ever be pruned.
     expected_slugs = {
-        designation_to_slug(c.get("designation", "").strip())
+        designation_to_slug(c["designation"])
         for c in comets
-        if c.get("designation", "").strip()
+        if c.get("designation")
     }
 
     COMET_OUT.mkdir(parents=True, exist_ok=True)
@@ -377,6 +514,14 @@ def main():
 
         print(f"[INFO]   → {len(rows)} rows parsed")
 
+        mag_offset = apply_mag_correction(rows, comet.get("current_mag"))
+        if mag_offset is not None:
+            print(f"[INFO]   → mag correction: COBS-anchored offset {mag_offset:+.2f} "
+                  f"applied to Horizons T-mag across all rows")
+        else:
+            print(f"[INFO]   → no COBS current_mag anchor -- our_mag_est left null, "
+                  f"frontend falls back to raw (unreliable) Horizons T-mag")
+
         # Per-comet output file
         comet_out = {
             "designation":    designation,
@@ -384,15 +529,12 @@ def main():
             "type":           comet_type,
             "generated_utc":  generated_utc,
             "window_days":    WINDOW_DAYS,
-            # Pass through all yaml metadata for the panel to use
-            "discovery_year":     comet.get("discovery_year"),
             "perihelion_date":    comet.get("perihelion_date"),
             "perihelion_au":      comet.get("perihelion_au"),
             "peak_magnitude":     comet.get("peak_magnitude"),
             "binocular":          comet.get("binocular", False),
-            "telescope_required": comet.get("telescope_required", False),
-            "note":               comet.get("note"),
             "warning":            comet.get("warning"),
+            "mag_offset":         mag_offset,
             "ephemeris":          rows,
         }
 
@@ -411,17 +553,16 @@ def main():
             "slug":               slug,
             "ephemeris_file":     f"/data/comets/{slug}.json",
             "binocular":          comet.get("binocular", False),
-            "telescope_required": comet.get("telescope_required", False),
             "peak_magnitude":     comet.get("peak_magnitude"),
             "perihelion_date":    comet.get("perihelion_date"),
             "warning":            comet.get("warning"),
-            "note":               comet.get("note"),
             # Snapshot of first-row position for quick access
             "current": {
                 "date_utc":      first["date_utc"],
                 "ra_hms":        first["ra_hms"],
                 "dec_dms":       first["dec_dms"],
                 "t_mag":         first["t_mag"],
+                "our_mag_est":   first.get("our_mag_est"),
                 "elong_deg":     first["elong_deg"],
                 "sky_position":  first["sky_position"],
                 "constellation": first["constellation"],
@@ -444,14 +585,14 @@ def main():
     index_path.write_text(json.dumps(index, indent=2, ensure_ascii=False))
     print(f"[INFO] Wrote index → {index_path}")
 
-    # Prune stale files. A file is only pruned if its comet is no longer in
-    # comets.yaml at all -- NOT just because this run's fetch for it failed.
-    # (A comet that's still curated but had a transient fetch failure this
-    # run keeps its last-known-good file; it just won't appear in this run's
-    # index.json until the next successful fetch.)
+    # Prune stale files. A file is only pruned if its comet is not in THIS
+    # run's candidate list at all -- NOT just because this run's fetch for
+    # it failed. (A comet that's still a candidate but had a transient fetch
+    # failure this run keeps its last-known-good file; it just won't appear
+    # in this run's index.json until the next successful fetch.)
     skipped_this_run = expected_slugs - set(slugs_written)
     if skipped_this_run:
-        print(f"[WARN] {len(skipped_this_run)} curated comet(s) failed to fetch this run "
+        print(f"[WARN] {len(skipped_this_run)} candidate(s) failed to fetch this run "
               f"and were left out of index.json (files preserved): "
               f"{', '.join(sorted(skipped_this_run))}", file=sys.stderr)
 

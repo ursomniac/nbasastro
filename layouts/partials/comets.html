@@ -21,7 +21,10 @@
 
   <p class="sso-note">
     Positions interpolated to selected epoch from 30-day JPL Horizons ephemerides.
-    Magnitudes are estimates — comet brightness can vary significantly from predictions.
+    Magnitudes are anchored to real observer-reported brightness (COBS) where available
+    and corrected across the window — still estimates, and comet brightness can vary
+    significantly from any prediction. A * marks a magnitude with no observed anchor,
+    using JPL Horizons' own (frequently unreliable) theoretical estimate instead.
   </p>
 
   <div class="sso-table-scroll">
@@ -72,8 +75,8 @@
           <th>Date<br>(UTC)</th>
           <th>RA</th>
           <th>Dec</th>
+          <th style="text-align:right">Our Mag<br>Est.</th>
           <th style="text-align:right">T<br>mag</th>
-          <th style="text-align:right">N<br>mag</th>
           <th style="text-align:right">r<br>(AU)</th>
           <th style="text-align:right">Δ<br>(AU)</th>
           <th style="text-align:right">Elong.</th>
@@ -89,8 +92,11 @@
 
   <div class="cmt-dlg-key">
     <span class="cmt-key-label">Key:</span>
-    <span><strong>T-mag</strong> total magnitude</span>
-    <span><strong>N-mag</strong> nuclear magnitude</span>
+    <span><strong>Our Mag Est.</strong> Horizons' T-mag anchored to real COBS-observed
+      brightness (offset computed once, applied across the window) — blank if no
+      COBS observation was available for this comet</span>
+    <span><strong>T-mag</strong> JPL Horizons' own theoretical total magnitude — kept
+      for reference, confirmed unreliable on its own for many comets</span>
     <span><strong>r</strong> heliocentric dist.</span>
     <span><strong>Δ</strong> Earth dist.</span>
     <span><strong>Elong.</strong> solar elongation</span>
@@ -99,9 +105,11 @@
     <span><strong>Daily Motion</strong> °/day — <span style="color:#4fd1a0">green</span> &lt;0.1, <span style="color:#f8d44e">amber</span> 0.1–1.0, <span style="color:#f48a6a">red</span> &gt;1.0</span>
   </div>
   <p class="sso-note" style="margin-top:.5rem">
-    Data: <a href="https://ssd.jpl.nasa.gov/horizons/" rel="noopener">JPL Horizons</a>
-    (geocentric, ICRF J2000).
-    Comet magnitudes use the IAU T-mag model and may differ from actual brightness.
+    Positions: <a href="https://ssd.jpl.nasa.gov/horizons/" rel="noopener">JPL Horizons</a>
+    (geocentric, ICRF J2000). Magnitudes: anchored to
+    <a href="https://cobs.si/" rel="noopener">COBS</a> observer reports where available;
+    JPL Horizons' own T-mag model is used unmodified only when no COBS observation exists,
+    and is known to differ from actual brightness by several magnitudes in some cases.
   </p>
 </dialog>
 
@@ -331,6 +339,11 @@ table.comet-modal-table td { padding: 4px 12px !important; }
       ra_deg:             lerp(ra0, ra1) % 360,
       dec_deg:            lerp(r0.dec_deg, r1.dec_deg),
       t_mag:              lerp(r0.t_mag,   r1.t_mag),
+      // our_mag_est is the COBS-anchored correction to t_mag (see
+      // scripts/fetch_comet_ephemerides.py) -- null on both sides just
+      // means no COBS anchor was available for this comet, not a gap to
+      // paper over with a fabricated interpolation.
+      our_mag_est:        lerp(r0.our_mag_est, r1.our_mag_est),
       elong_deg:          lerp(r0.elong_deg, r1.elong_deg),
       sky_position:       r0.sky_position,
       constellation:      r0.constellation,
@@ -355,10 +368,16 @@ table.comet-modal-table td { padding: 4px 12px !important; }
       var name = (comet.name || comet.designation) + ' (' + comet.designation + ')';
       var clampNote = row.outOfRange
         ? '<br><small style="color:var(--gold-base,#f8d44e)">⚠ Nearest: ' + row.clampedTo + '</small>' : '';
+      // our_mag_est (COBS-anchored correction) is preferred over Horizons'
+      // raw t_mag, which is confirmed unreliable for comets -- see
+      // scripts/fetch_comet_ephemerides.py's docstring. Falls back to
+      // t_mag, marked with * , only when no COBS anchor was available.
+      var magVal   = row.our_mag_est != null ? row.our_mag_est : row.t_mag;
+      var magFlag  = row.our_mag_est == null && row.t_mag != null ? '*' : '';
       html +=
         '<tr class="' + (row.outOfRange ? 'cmt-row--outofrange' : '') + '">' +
         '<td>' + name + clampNote + '</td>' +
-        '<td style="text-align:right">' + fmtMag(row.t_mag) + '</td>' +
+        '<td style="text-align:right">' + fmtMag(magVal) + magFlag + '</td>' +
         '<td style="white-space:nowrap">' + (row.ra_deg  != null ? degToHMS(row.ra_deg)  : '—') + '</td>' +
         '<td style="white-space:nowrap">' + (row.dec_deg != null ? degToDMS(row.dec_deg) : '—') + '</td>' +
         '<td>' + (row.constellation || '—') + '</td>' +
@@ -416,8 +435,8 @@ table.comet-modal-table td { padding: 4px 12px !important; }
         '<td>' + fmtDateShort(row.date_utc) + '</td>' +
         '<td style="white-space:nowrap">' + fmtHMS(row.ra_hms)  + '</td>' +
         '<td style="white-space:nowrap">' + fmtDMS(row.dec_dms) + '</td>' +
+        '<td style="text-align:right">' + fmtMag(row.our_mag_est) + '</td>' +
         '<td style="text-align:right">' + fmtMag(row.t_mag)  + '</td>' +
-        '<td style="text-align:right">' + fmtMag(row.n_mag)  + '</td>' +
         '<td style="text-align:right">' + fmtAU(row.r_au)    + '</td>' +
         '<td style="text-align:right">' + fmtAU(row.delta_au) + '</td>' +
         '<td style="text-align:right">' + fmtDeg1(row.elong_deg) + '</td>' +

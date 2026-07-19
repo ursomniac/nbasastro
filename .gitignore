@@ -10,3 +10,4 @@ iss-passes.json
 __pycache__/
 *.pyc
 node_modules/
+scripts/assets/CometEls.txt
