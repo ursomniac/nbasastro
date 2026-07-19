@@ -330,6 +330,17 @@ def main():
 
     print(f"[INFO] Loaded {len(comets)} comet(s) from {COMET_YAML}")
 
+    # Full set of slugs that *should* exist based on comets.yaml right now,
+    # independent of whether this run's fetch succeeds for each one. Used at
+    # prune time so a failed fetch this run doesn't delete a still-curated
+    # comet's previously-good file -- only a comet actually removed from
+    # comets.yaml should ever be pruned.
+    expected_slugs = {
+        designation_to_slug(c.get("designation", "").strip())
+        for c in comets
+        if c.get("designation", "").strip()
+    }
+
     COMET_OUT.mkdir(parents=True, exist_ok=True)
 
     now   = datetime.now(timezone.utc)
@@ -433,10 +444,19 @@ def main():
     index_path.write_text(json.dumps(index, indent=2, ensure_ascii=False))
     print(f"[INFO] Wrote index → {index_path}")
 
-    # Prune stale files — only runs after full successful fetch
-    written_set = set(slugs_written)
+    # Prune stale files. A file is only pruned if its comet is no longer in
+    # comets.yaml at all -- NOT just because this run's fetch for it failed.
+    # (A comet that's still curated but had a transient fetch failure this
+    # run keeps its last-known-good file; it just won't appear in this run's
+    # index.json until the next successful fetch.)
+    skipped_this_run = expected_slugs - set(slugs_written)
+    if skipped_this_run:
+        print(f"[WARN] {len(skipped_this_run)} curated comet(s) failed to fetch this run "
+              f"and were left out of index.json (files preserved): "
+              f"{', '.join(sorted(skipped_this_run))}", file=sys.stderr)
+
     for existing in COMET_OUT.glob("*.json"):
-        if existing.stem != "index" and existing.stem not in written_set:
+        if existing.stem != "index" and existing.stem not in expected_slugs:
             existing.unlink()
             print(f"[INFO] Pruned stale file: {existing.name}")
 
