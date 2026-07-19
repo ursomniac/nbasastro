@@ -5,6 +5,11 @@
   DATA: fetched client-side from /data/galilean-events.json at runtime.
         Written nightly by GitHub Action → static/data/galilean-events.json.
         Hugo serves it as a static file. No Hugo build-time data reading.
+        Fetched with {cache: 'no-store'} -- this file's content changes daily
+        at a fixed URL, so the default browser HTTP cache will happily keep
+        serving the very first response it ever saw indefinitely otherwise.
+        (That's what caused the "hasn't updated since May" report -- the
+        fetch pipeline was working fine; the browser just never re-fetched.)
 
   PLACEMENT: inside .sso-grid, after closing </div> of #sso-jupiter-panel.
     {{ partial "sso/galilean-events.html" . }}
@@ -143,35 +148,52 @@
 
   /* ── Formatting ── */
   function fmtDate(iso) {
-    if (!iso || iso === 'None' || iso === 'null') return '\u2014';
+    if (!iso || iso === 'None' || iso === 'null') return '—';
     var d = new Date(iso);
     return isNaN(d) ? iso : d.toLocaleDateString(undefined, { month:'short', day:'numeric' });
   }
   function fmtTime(iso) {
-    if (!iso || iso === 'None' || iso === 'null') return '\u2014';
+    if (!iso || iso === 'None' || iso === 'null') return '—';
     var d = new Date(iso);
     return isNaN(d) ? iso : d.toLocaleTimeString(undefined, { hour:'2-digit', minute:'2-digit', timeZoneName:'short' });
   }
+  /* "Jul 19 – Aug 3" from generated_utc + window_days. Returns '' if either
+     input is missing/unparseable so callers can fall back to generic copy. */
+  function fmtRange(generatedUtc, windowDays) {
+    if (!generatedUtc || !windowDays) return '';
+    var start = new Date(generatedUtc);
+    if (isNaN(start)) return '';
+    var end = new Date(start.getTime() + windowDays * 86400000);
+    var opts = { month: 'short', day: 'numeric' };
+    return start.toLocaleDateString(undefined, opts) + ' – ' + end.toLocaleDateString(undefined, opts);
+  }
 
-  /* ── Build table rows from data ── */
-  function buildRows(events) {
+  /* ── Build table rows from data ──
+     rangeLabel is a precomputed "Jul 19 – Aug 3" string (see fmtRange below).
+     Passed in so the empty-state message says an actual date range instead
+     of the meaningless "next window" -- a visitor has no way to know what
+     "window" means, and vague copy like that reads as the page being broken. */
+  function buildRows(events, rangeLabel) {
     var tbody = document.getElementById('gal-ev-tbody');
     if (!events || events.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="6">No events visible in the next window.</td></tr>';
+      var msg = rangeLabel
+        ? 'No Galilean satellite events visible from here between ' + rangeLabel + '.'
+        : 'No events visible in the current window.';
+      tbody.innerHTML = '<tr><td colspan="6">' + msg + '</td></tr>';
       return;
     }
     var html = '';
     events.forEach(function (ev) {
       var bc = 'gal-ev-badge gal-ev-badge--' + (BADGE_CLASS[ev.type] || ev.type.replace(/_/g, '-'));
       var label = ev.type_label || ev.type.replace(/_/g, ' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
-      var dur = ev.duration_min != null ? ev.duration_min + '\u202fmin' : '\u2014';
+      var dur = ev.duration_min != null ? ev.duration_min + ' min' : '—';
       html +=
         '<tr class="gal-ev-row" data-type="' + ev.type + '">' +
         '<td class="gal-ev-date"       data-utc="' + (ev.start_utc||'') + '">' + fmtDate(ev.start_utc) + '</td>' +
         '<td class="gal-ev-time-start" data-utc="' + (ev.start_utc||'') + '">' + fmtTime(ev.start_utc) + '</td>' +
         '<td class="gal-ev-time-end"   data-utc="' + (ev.end_utc||'')   + '">' + fmtTime(ev.end_utc)   + '</td>' +
         '<td>' + dur + '</td>' +
-        '<td>' + (ev.satellite || '\u2014') + '</td>' +
+        '<td>' + (ev.satellite || '—') + '</td>' +
         '<td><span class="' + bc + '">' + label + '</span></td>' +
         '</tr>';
     });
@@ -195,7 +217,7 @@
     if (hidden > 0) {
       notice.hidden = false;
       notice.innerHTML = hidden + ' more event' + (hidden > 1 ? 's' : '') +
-        ' in window.\u2002<button class="gal-ev-pill" id="gal-ev-show-all">Show all</button>';
+        ' in window. <button class="gal-ev-pill" id="gal-ev-show-all">Show all</button>';
       document.getElementById('gal-ev-show-all').addEventListener('click', function () {
         document.querySelectorAll('[data-overflow="true"]').forEach(function (r) {
           r.style.display = ''; delete r.dataset.overflow;
@@ -225,16 +247,20 @@
     btn.addEventListener('click', function () { applyFilter(btn.dataset.type); });
   });
 
-  /* ── Main: fetch JSON, render ── */
-  fetch('/data/galilean-events.json')
+  /* ── Main: fetch JSON, render ──
+     cache: 'no-store' forces a real network hit every page load instead of
+     letting the browser silently reuse whatever it first cached for this
+     URL -- this is the actual fix for the "stuck since May" symptom. */
+  fetch('/data/galilean-events.json', { cache: 'no-store' })
     .then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
     })
     .then(function (data) {
       var events = data.events || [];
+      var rangeLabel = fmtRange(data.generated_utc, data.window_days);
 
-      buildRows(events);
+      buildRows(events, rangeLabel);
 
       /* Count badge */
       var badge = document.getElementById('gal-ev-count-badge');

@@ -3,10 +3,49 @@
 fetch_galilean_events.py
 Ticket #22 — Galilean satellite phenomena table
 
-Fetch strategy (in priority order):
-  1. IMCCE phenjupiter data file (HTTPS, authoritative NOE-5-2021 ephemerides)
-     Covers all four classical phenomena: eclipse, occultation, transit, shadow transit.
-  2. Project Pluto jevent.htm (fallback, same four phenomena, identical coverage)
+Fetch strategy:
+  Project Pluto jevent.htm is the primary (and currently only enabled) source.
+  Covers all four classical phenomena: eclipse, occultation, transit, shadow transit.
+  The page itself is correct and complete (confirmed by hand: full year, no
+  gaps, right format) -- but a live fetch of it from inside this GitHub
+  Actions job comes back HTTP 200 with content that parses to zero events,
+  while the identical URL fetched by hand (curl, or a normal browser UA)
+  works fine. No exception is raised either way, so this fails silently.
+  Root cause not fully confirmed under time pressure -- leading suspects are
+  the bot-like User-Agent this script used to send, or GitHub's shared
+  runner IPs getting different treatment from Project Pluto's server.
+
+  To not depend on solving that today, load_pluto_html() now: (1) tries a
+  live fetch with a normal browser User-Agent, in case that alone was the
+  problem; (2) validates the response actually looks like a populated page
+  (hundreds of event-code hits expected) rather than trusting any HTTP 200;
+  (3) automatically falls back to a cached, git-committed copy of the page
+  (PLUTO_CACHE_PATH) if either of those fail. Nothing here requires anyone
+  to remember to run anything for the site to keep showing correct-ish data
+  -- refresh the cache by hand (scripts/fetch_pluto_cache.sh) whenever
+  convenient, or wire up a low-frequency job later.
+
+  IMCCE phenjupiter (intended as the authoritative NOE-5-2021 source) is
+  PARKED, not deleted -- set USE_IMCCE=true to re-enable it. As of 2026-07:
+
+    - The original IMCCE_PHEN_URL_TMPL path (phen_jup_<year>.txt) does not
+      exist on IMCCE's server at all -- confirmed via the real directory
+      listing at https://ftp.imcce.fr/pub/ephem/satel/phenjupiter/. It was
+      apparently guessed or copied from stale documentation and has never
+      worked, silently falling through to Project Pluto every run.
+    - The real per-year files there are named ftp_jupiter_Events_UT_<year>.txt
+      (confirmed against a real downloaded 2027 copy). That one is a dense,
+      fixed-width, four-column-per-line layout that doesn't match the
+      delimited format _parse_imcce_line() expects.
+    - Also present, untried: phenE.<year> / phenF.<year> (~57K, vs. ~72K for
+      the Events_UT file) -- possibly English/French-labeled variants in a
+      different, more delimited format. Worth checking first before writing
+      a parser for the packed Events_UT layout.
+
+  Whichever file ends up being used, update IMCCE_PHEN_URL_TMPL and
+  _parse_imcce_line() together, then flip USE_IMCCE back on. Project Pluto
+  covers the same four phenomena and has been reliably correct every night
+  this whole time, so there's no urgency here.
 
 Jupiter rise/set filtering:
   Uses IMCCE Miriade RTS API to determine whether Jupiter is above the horizon
@@ -36,6 +75,33 @@ WINDOW_DAYS  = int(os.environ.get("WINDOW_DAYS", "15"))
 OUTPUT_PATH  = Path(os.environ.get("OUTPUT_PATH",
                     Path(__file__).parent.parent / "static" / "data" / "galilean-events.json"))
 
+# IMCCE is parked (see module docstring above) -- defaults OFF so the working
+# Project Pluto path is what actually runs, without deleting the IMCCE code.
+USE_IMCCE = os.environ.get("USE_IMCCE", "false").strip().lower() in ("1", "true", "yes")
+
+# Project Pluto's jevent.htm reads correctly (full year, right format) when
+# fetched from a normal machine -- confirmed by hand with curl. It reads back
+# as 0 events when fetched live from inside this GitHub Actions job, with no
+# fetch error logged, meaning something about the CI environment (shared IP
+# range, the bot-like User-Agent below, or similar) gets a different response
+# without triggering an exception. Rather than chase that down under time
+# pressure, PLUTO_CACHE_PATH lets a periodically-refreshed, git-committed
+# copy of the page stand in for the live fetch: refresh it by hand (or via a
+# separate low-frequency job later) from somewhere proven to work. Priority
+# is: (1) live fetch, now with a real browser User-Agent instead of the
+# bot-like one below, in case that's what triggered CI getting back different
+# content than a hand-run curl gets; (2) if that fails, or "succeeds" but the
+# response doesn't actually look like a populated events page, fall back to
+# this cached copy automatically -- no one has to remember to run anything
+# for the site to keep showing correct-ish data even if the live fetch never
+# gets fixed. Refresh the cache by hand whenever convenient (see the
+# fetch_pluto_cache.sh helper), or wire up a low-frequency job later.
+PLUTO_CACHE_PATH = Path(os.environ.get("PLUTO_CACHE_PATH",
+                        Path(__file__).parent.parent / "static" / "data" / "_cache" / "jevent.htm"))
+PLUTO_USER_AGENT = os.environ.get("PLUTO_USER_AGENT",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
+
 # Miriade RTS numeric body codes: 5=Jupiter, 10=Sun
 # Comma must be URL-encoded as %2C in the query string
 RTS_URL = (
@@ -50,9 +116,13 @@ RTS_URL = (
     "&-from=SSO-Dashboard-ticket22"
 )
 
-# IMCCE phenjupiter data file (HTTPS mirror of the FTP)
-IMCCE_PHEN_URL = "https://ftp.imcce.fr/pub/ephem/satel/phenjupiter/phen_jup_2026.txt"
-IMCCE_PHEN_URL_ALT = "https://ftp.imcce.fr/pub/ephem/satel/phenjupCDT/phen_jup_2026.txt"
+# IMCCE phenjupiter data file (HTTPS mirror of the FTP). Published one file
+# per calendar year as phen_jup_<YEAR>.txt -- NOT hardcoded to a single year:
+# fetch_imcce_events() below fills in {year} for every calendar year touched
+# by the requested [start, end) window, so this keeps working every January
+# without anyone needing to edit this file again.
+IMCCE_PHEN_URL_TMPL = "https://ftp.imcce.fr/pub/ephem/satel/phenjupiter/phen_jup_{year}.txt"
+IMCCE_PHEN_URL_ALT_TMPL = "https://ftp.imcce.fr/pub/ephem/satel/phenjupCDT/phen_jup_{year}.txt"
 
 # Project Pluto fallback
 PLUTO_URL = "https://www.projectpluto.com/jevent.htm"
@@ -99,10 +169,10 @@ DISPLAY_LABELS = {
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
-def fetch_url(url: str, timeout: int = 20):
+def fetch_url(url: str, timeout: int = 20, user_agent: str = "SSO-Dashboard/1.0 (ticket#22)"):
     """Fetch a URL, returning bytes or None on failure."""
     try:
-        req = Request(url, headers={"User-Agent": "SSO-Dashboard/1.0 (ticket#22)"})
+        req = Request(url, headers={"User-Agent": user_agent})
         with urlopen(req, timeout=timeout) as resp:
             return resp.read()
     except (URLError, Exception) as exc:
@@ -296,36 +366,58 @@ def event_visible(start_utc, end_utc, windows):
 
 # ── IMCCE phenjupiter parser ──────────────────────────────────────────────────
 
+def _imcce_urls_for_year(year: int):
+    return (IMCCE_PHEN_URL_TMPL.format(year=year), IMCCE_PHEN_URL_ALT_TMPL.format(year=year))
+
+
 def fetch_imcce_events(start: datetime, end: datetime):
     """
-    Attempt to download and parse the IMCCE phenjupiter flat-text prediction file.
+    Attempt to download and parse the IMCCE phenjupiter flat-text prediction
+    file(s), one per calendar year touched by [start, end). Each file only
+    covers its own calendar year, so a window that crosses a Dec 31 / Jan 1
+    boundary needs both years' files -- this fetches every distinct year in
+    the window and merges the results, rather than assuming a single year.
+
     Returns a list of raw half-events (each line is one start or end boundary),
-    or None if download fails.
+    or None if every year's fetch fails.
 
     File format (two variants depending on year):
     Old:  YYYY MMM DD  HH:MM  <SAT>  <CODE>
     New:  <SAT_NUM>  YYYY-MM-DD  HH:MM:SS.S  <CODE>
 
-    We try both URL forms and both parse approaches.
+    We try both URL forms and both parse approaches, per year.
     """
-    raw = fetch_url(IMCCE_PHEN_URL) or fetch_url(IMCCE_PHEN_URL_ALT)
-    if raw is None:
+    # end is exclusive, so the last real moment in-window is (end - 1 second)
+    years = sorted({start.year, (end - timedelta(seconds=1)).year})
+
+    half_events: list[dict] = []
+    any_fetched = False
+
+    for year in years:
+        url, url_alt = _imcce_urls_for_year(year)
+        raw = fetch_url(url) or fetch_url(url_alt)
+        if raw is None:
+            print(f"[WARN] IMCCE phenjupiter file unavailable for {year} "
+                  f"(tried {url} and {url_alt})", file=sys.stderr)
+            continue
+        any_fetched = True
+
+        text = raw.decode("utf-8", errors="replace")
+        for line in text.splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            ev = _parse_imcce_line(line, start, end)
+            if ev:
+                half_events.append(ev)
+
+    if not any_fetched:
+        # Every year's file failed to download -- genuine outage/URL problem
         return None
 
-    text = raw.decode("utf-8", errors="replace")
-    half_events: list[dict] = []
-
-    for line in text.splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
-
-        ev = _parse_imcce_line(line, start, end)
-        if ev:
-            half_events.append(ev)
-
     if not half_events:
-        print("[WARN] IMCCE file parsed but yielded 0 events in window", file=sys.stderr)
+        # File(s) fetched fine, just nothing landed in this particular window
+        print("[WARN] IMCCE file(s) parsed but yielded 0 events in window", file=sys.stderr)
         return None
 
     return half_events
@@ -395,6 +487,9 @@ def pair_imcce_half_events(half_events: list):
             return h[:-4]
         return h
 
+    # Sort by time first so pairing is stable across merged multi-year fetches
+    half_events = sorted(half_events, key=lambda e: e["utc"])
+
     for i, start_ev in enumerate(half_events):
         if i in used:
             continue
@@ -442,13 +537,65 @@ def pair_imcce_half_events(half_events: list):
 
 # ── Project Pluto fallback parser ─────────────────────────────────────────────
 
+def _looks_like_populated_pluto_page(raw: bytes) -> bool:
+    """
+    Sanity check that a fetch actually returned a real, populated events
+    page rather than something that came back HTTP 200 but empty, blocked,
+    or otherwise not what we expect (which is exactly what happened when
+    this was fetched live from inside GitHub Actions -- no fetch error, just
+    zero parseable events). A real page has hundreds of event lines; require
+    a reasonable minimum before trusting it.
+    """
+    if not raw or len(raw) < 5000:
+        return False
+    text = raw.decode("utf-8", errors="replace")
+    hits = len(re.findall(r"\b(Ecl|Occ|Tra|Sha)\b", text))
+    return hits > 20
+
+
+def load_pluto_html():
+    """
+    Return the raw bytes of jevent.htm. Tries a live fetch first (with a
+    normal browser User-Agent); if that fails outright, or "succeeds" but
+    doesn't look like a real populated page, falls back automatically to a
+    cached, git-committed copy (PLUTO_CACHE_PATH). See the config comment
+    above for the full story on why both paths exist. Returns None only if
+    neither source works.
+    """
+    raw = fetch_url(PLUTO_URL, user_agent=PLUTO_USER_AGENT)
+    if raw is not None and _looks_like_populated_pluto_page(raw):
+        print(f"[INFO] Live Pluto fetch looks valid ({len(raw)} bytes)")
+        return raw
+
+    if raw is not None:
+        print(f"[WARN] Live Pluto fetch returned {len(raw)} bytes but doesn't look like a "
+              f"populated events page — falling back to cache", file=sys.stderr)
+
+    if PLUTO_CACHE_PATH.exists():
+        try:
+            raw = PLUTO_CACHE_PATH.read_bytes()
+            age_days = (datetime.now(timezone.utc).timestamp() - PLUTO_CACHE_PATH.stat().st_mtime) / 86400
+            print(f"[INFO] Using cached Pluto file: {PLUTO_CACHE_PATH} "
+                  f"({len(raw)} bytes, {age_days:.1f} days old)")
+            if age_days > 30:
+                print(f"[WARN] Pluto cache is {age_days:.0f} days old — consider refreshing it "
+                      f"(run scripts/fetch_pluto_cache.sh)", file=sys.stderr)
+            return raw
+        except OSError as exc:
+            print(f"[WARN] Could not read Pluto cache at {PLUTO_CACHE_PATH}: {exc}", file=sys.stderr)
+
+    print("[ERROR] No valid live fetch and no usable cache file — giving up on Pluto", file=sys.stderr)
+    return None
+
+
 def fetch_pluto_events(start: datetime, end: datetime):
     """
-    Scrape and parse projectpluto.com/jevent.htm.
+    Parse Project Pluto's jevent.htm (see load_pluto_html() for where the
+    bytes actually come from).
     Format:  "<SAT_ROMAN> <CODE> <phase>: <YYYY> <Mon> <DD> <HH:MM>"
     e.g.:    "II Sha start: 2026 Jan 01 02:01"
     """
-    raw = fetch_url(PLUTO_URL)
+    raw = load_pluto_html()
     if raw is None:
         return None
 
@@ -499,19 +646,37 @@ def main() -> None:
     print(f"[INFO] Got visibility data for {len(windows)} days")
 
     # 2. Fetch event data
-    print("[INFO] Trying IMCCE phenjupiter data file …")
-    half_events = fetch_imcce_events(start, end)
-    source = "IMCCE-phenjupiter"
+    #
+    # IMCCE is parked, not deleted: as of 2026-07, the file IMCCE actually
+    # publishes at this path is a dense fixed-width, four-column-per-line
+    # layout that has never matched the delimited format _parse_imcce_line()
+    # expects (confirmed against a real downloaded 2027 file) -- so this
+    # branch has been silently failing and falling through to Project Pluto
+    # every night since the feature was built. Project Pluto covers the same
+    # four phenomena and has been reliably correct this whole time, so it's
+    # now the default. Set USE_IMCCE=true once someone reverse-engineers the
+    # real column format in fetch_imcce_events() / _parse_imcce_line().
+    if USE_IMCCE:
+        print("[INFO] Trying IMCCE phenjupiter data file(s) …")
+        half_events = fetch_imcce_events(start, end)
+        source = "IMCCE-phenjupiter"
 
-    if half_events is None:
-        print("[WARN] IMCCE unavailable; falling back to Project Pluto …")
+        if half_events is None:
+            print("[WARN] IMCCE unavailable; falling back to Project Pluto …")
+            events = fetch_pluto_events(start, end)
+            source = "Project-Pluto"
+            if events is None:
+                print("[ERROR] Both sources failed — writing empty JSON", file=sys.stderr)
+                events = []
+        else:
+            events = pair_imcce_half_events(half_events)
+    else:
+        print("[INFO] IMCCE parser disabled (USE_IMCCE=false) — using Project Pluto")
         events = fetch_pluto_events(start, end)
         source = "Project-Pluto"
         if events is None:
-            print("[ERROR] Both sources failed — writing empty JSON", file=sys.stderr)
+            print("[ERROR] Project Pluto fetch failed — writing empty JSON", file=sys.stderr)
             events = []
-    else:
-        events = pair_imcce_half_events(half_events)
 
     print(f"[INFO] Raw events before filter: {len(events)}")
 
