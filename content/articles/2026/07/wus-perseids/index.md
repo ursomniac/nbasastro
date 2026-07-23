@@ -5,8 +5,8 @@ authors: ["bob-donahue"]
 series: ["whats-up-in-the-sky"]
 knowledgetopics: ["observing-guides"]
 description: "2026 Perseids peak August 12–13 under a new moon — perfect dark skies all night. What to expect, when to watch, and why you need a lawn chair."
-thumbnail: "thumbnail.jpg"
-banner: "banner.jpg"
+thumbnail: "thumbnail.webp"
+banner: "banner.webp"
 sso_meteors: ["Perseids"]
 ---
 
@@ -20,7 +20,7 @@ But before we get into the details, let's talk about expectations.
 
 ## What You're Actually Going to See
 
-{{< nbas-image src="Leonids-1833.jpg" align="right" width="380"
+{{< nbas-image src="Leonids-1833.webp" align="right" width="380"
 caption="Adolf Vollmy (1889), Public domain, via Wikimedia Commons" >}}
 
 There is a famous engraving from the 1833 Leonids storm: people fleeing in terror from skies absolutely blanketed in meteors, like snow falling upward. That image lives in the cultural memory, and some part of people's brains associates "meteor shower" with something like that.
@@ -39,7 +39,7 @@ Manage your expectations, then go anyway. Once you've seen a bright Perseid fire
 
 The Perseids are the oldest reliably recorded meteor shower in history. Chinese astronomers documented the annual "rain of stars" from Perseus as early as 36 BC, and observations appear regularly in Korean and European records across the following two millennia. The shower has been falling every August for as long as people have been writing down what they saw in the sky.
 
-{{< nbas-image src="799_109P_24_11_92.jpg" fullwidth="true"
+{{< nbas-image src="799_109P_24_11_92.webp" fullwidth="true"
 caption="http://www.astrostudio.at/2_Bright%20Comets.php?img=images/2_Bright%20Comets/799_109P_24_11_92.jpg, Comet 109P/Swift-Tuttle taken by Gerald Rhemann in Lower Austria, 24-Nov-1992, used with permission." >}}
 The source, Comet 109P/Swift-Tuttle, is a significant piece of ice and rock — its nucleus is about 26 kilometers across, considerably larger than Halley's Comet. It was independently discovered in 1862 by Lewis Swift (July 16) and Horace Tuttle (July 19), and four years later Giovanni Schiaparelli figured out that the Perseids and the comet shared the same orbit. This was one of the first demonstrations that meteor showers come from comets.
 
@@ -89,7 +89,7 @@ The predicted peak is around 14:53 UTC on August 13th — late night August 12th
 
 The best hours any night are from midnight through astronomical dawn (around 4–5 AM local time). Two things happen after midnight that matter enormously.
 
-{{< nbas-image src="debris.jpg" align="right" width="380" >}}
+{{< nbas-image src="debris.webp" align="right" width="380" >}}
 
 First: the radiant rises higher in the sky, so meteors travel longer paths across your field of view, producing longer, more dramatic trails. Second — and this is the physics that makes the difference — after midnight you're on the *forward-facing side* of Earth, sweeping directly into the debris stream rather than letting it catch up to you. It's the difference between a car driving into rain versus sitting still. Rates from midnight to 4 AM can be two to three times higher than rates at 10 PM. The radiant (the direction the debris is coming from) breaks the horizon after midnight, which is why the Perseids appear highest in the pre-dawn sky.
 
@@ -97,7 +97,7 @@ First: the radiant rises higher in the sky, so meteors travel longer paths acros
 
 ## Where to Look
 
-{{< nbas-image src="radiant-08130300.jpg" >}}
+{{< nbas-image src="radiant-08130300.webp" >}}
 
 The radiant — the point in Perseus from which all Perseids appear to originate — rises in the northeast around 10–11 PM and climbs toward the top of the sky by dawn. Its exact position is near the famous Double Cluster (h and χ Persei), a pair of open clusters visible to the naked eye from a dark site and striking in binoculars.
 
@@ -160,7 +160,7 @@ Colors are subtle on faint meteors — most people just see white. But on a brig
 
 ## Photographing the Perseids
 
-{{< nbas-image src="960px-Perseids_2015.jpg" fullwidth="true" caption="Perseid composite, August 2015 — dozens of individual exposures stacked into one image. mLu.fotos (CC BY 2.0)" >}}
+{{< nbas-image src="960px-Perseids_2015.webp" fullwidth="true" caption="Perseid composite, August 2015 — dozens of individual exposures stacked into one image. mLu.fotos (CC BY 2.0)" >}}
 
 You don't need to photograph them. Really. Put the camera down and just watch, at least for the first hour. But if you want to try:
 
