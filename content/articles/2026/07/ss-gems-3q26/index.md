@@ -6,7 +6,7 @@ series: ["smart-scopes"]
 knowledgetopics: ["observing-guides", "imaging"]
 description: "Eleven summer targets worth imaging with your smart scope — from overlooked deep-sky objects to familiar names that deliver more than you'd expect."
 thumbnail: "thumbnail.webp"
-banner: "banner.png"
+banner: "banner.webp"
 
 dso_caldwell: ["27", "33", "34", "57"]
 dso_messier: ["55", "75"]
