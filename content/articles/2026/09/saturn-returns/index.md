@@ -11,7 +11,7 @@ banner: "banner.webp"
 sso_planets: ["Saturn"]
 ---
 
-{{< nbas-image src="hero.jpg" width="500" align="right" caption="NASA/JPL" >}}
+{{< nbas-image src="hero.webp" width="500" align="right" caption="NASA/JPL" >}}
 
 ## Always Worth a Look
 
@@ -64,7 +64,7 @@ Now, as of September 2026, they've flipped to show their southern
 face, open to roughly 8.5° — more than double 2024's tilt, and a face
 of the rings unseen since around 2009.
 
-{{< nbas-image src="rings-2026-2031.jpg" fullwidth="true" >}}
+{{< nbas-image src="rings-2026-2031.webp" fullwidth="true" >}}
 
 The chart above shows how that opening continues: the rings won't
 go edge-on again until October 2038, and keep widening toward a
@@ -83,7 +83,7 @@ version of the last. Start wherever you are.
 
 ### Naked Eye
 
-{{< nbas-image src="sky-260904-0200.png"
+{{< nbas-image src="sky-260904-0200.webp"
 caption="Looking southeast, ~10 PM EDT, September 3, click to enlarge"
 fullwidth="true" >}}
 
@@ -117,7 +117,7 @@ It's a slow effect, but a real one: note Saturn's position against
 a couple of background stars now, check back in a few weeks, and
 see if you can detect the shift yourself.
 
-{{< nbas-image src="saturn-track.jpg" fullwidth="true" caption="Saturn's path through Pisces and into Cetus, Sept–Dec 2026" >}}
+{{< nbas-image src="saturn-track.webp" fullwidth="true" caption="Saturn's path through Pisces and into Cetus, Sept–Dec 2026" >}}
 
 ### Binoculars
 
@@ -148,9 +148,9 @@ Here's roughly what to expect at each size:
 ### Smart Scopes
 
 {{< nbas-gallery size="300px" style="carousel" >}}
-eq2-2023-08-13.png
-eq2-2023-09-01.png
-eq2-2024-07-20.png
+eq2-2023-08-13.webp
+eq2-2023-09-01.webp
+eq2-2024-07-20.webp
 {{< /nbas-gallery >}}
 
 None of these were stacked or processed at all — just quick eQuinox 2
