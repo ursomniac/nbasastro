@@ -4,9 +4,35 @@
     border: 1px solid var(--border-soft) !important;
     padding: 20px !important; /* Fixes text crashing into sides */
     width: 270px !important;  /* Physically closes the label-value gap */
-    float: right;
     margin: 0 0 1.5rem 1.5rem;
     box-sizing: border-box;
+}
+
+/* 1a. Float direction, driven by the align-{{ $align }} class the
+   shortcode adds (align="right" is the shortcode default).
+   align-left / align-right are also defined globally in content.css;
+   this fallback just makes sure the box still floats sensibly if an
+   unrecognized $align value is passed, instead of silently no-op'ing. */
+.nbas-spec-box.align-right,
+.nbas-spec-box:not(.align-left):not(.align-center) {
+    float: right;
+}
+
+.nbas-spec-box.align-left {
+    float: left;
+}
+
+.nbas-spec-box.align-center {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 1b. Fullwidth variant: shortcode swaps the table for a grid and
+   drops the float entirely. */
+.nbas-spec-fullwidth {
+    float: none !important;
+    width: 100% !important;
 }
 
 /* 2. The Header: Killing the excessive vertical waste */
@@ -17,6 +43,15 @@
     border-bottom: 1px solid var(--border-soft);
     padding-bottom: 8px !important;
     margin: 0 0 4px 0 !important; /* Removes gap above table */
+}
+
+/* 2a. Optional object name line, shown under the title when the
+   shortcode is called with a `name` param (or Page.Params.object_info.name) */
+.nbas-spec-name {
+    color: var(--text-main) !important;
+    font-size: 0.8rem !important;
+    font-style: italic;
+    margin: 0 0 8px 0 !important;
 }
 
 /* 3. The Table: Killing global margins and borders */
@@ -35,8 +70,36 @@
     border-bottom: none !important;
 }
 
+/* 3a. Fullwidth layout, column count driven by the shortcode's
+   `columns` param via the --nbas-spec-columns custom property set
+   inline on .nbas-spec-grid. Falls back to 3 columns if unset.
+
+   Uses CSS multi-column instead of grid on purpose: a row-based grid
+   forces every cell in a row to match the height of the tallest cell
+   in that row, which leaves ugly dead space under short entries
+   whenever one field (e.g. a long DISCOVERER or ORIGIN value) is
+   much taller than its neighbors. Multi-column lets each item take
+   only the height it needs and packs the next one right after it,
+   balancing column height automatically. column-width acts as a
+   minimum column size (same auto-fit idiom galleries.css uses via
+   minmax(var(--grid-size,250px),1fr)), so columns collapse on
+   narrow screens without a manual breakpoint. */
+.nbas-spec-grid {
+    column-count: var(--nbas-spec-columns, 3);
+    column-width: 220px;
+    column-gap: 28px;
+}
+
+.nbas-spec-item {
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--space-blue) !important;
+}
+
 /* 4. The Cells: Tightening vertical gap and column ratio */
-.nbas-spec-table th, 
+.nbas-spec-table th,
 .nbas-spec-table td {
     padding: 10px 0 !important; /* Uniform vertical spacing */
     background: transparent !important;
@@ -59,3 +122,15 @@
     line-height: 1.3;
 }
 
+/* 4a. In the grid/fullwidth variant, label and value stack inside the
+   same .nbas-spec-item rather than sitting in separate th/td cells,
+   so the table-only width/alignment rules above don't apply here. */
+.nbas-spec-grid .nbas-spec-label {
+    width: auto !important;
+    text-align: left !important;
+    margin-bottom: 2px;
+}
+
+.nbas-spec-grid .nbas-spec-value {
+    text-align: left !important;
+}

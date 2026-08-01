@@ -1,6 +1,30 @@
 {{- $align := .Get "align" | default "right" -}}
+{{- $fullwidth := eq (.Get "fullwidth") "true" -}}
+{{- $columns := .Get "columns" | default "3" -}}
 {{- $name := .Get "name" | default (.Page.Params.object_info.name | default "") -}}
 {{- with .Page.Params.object_info -}}
+{{- if $fullwidth -}}
+<aside class="nbas-spec-box nbas-spec-fullwidth" data-pagefind-ignore>
+  <h4 class="nbas-spec-title">Object Specs</h4>
+  {{- if $name -}}
+  <p class="nbas-spec-name">{{ $name }}</p>
+  {{- end -}}
+  <div class="nbas-spec-grid" style="--nbas-spec-columns: {{ $columns }};">
+    {{- range $k, $v := . -}}
+    <div class="nbas-spec-item">
+      <div class="nbas-spec-label">{{ (replace $k "_" " ") | upper }}</div>
+      <div class="nbas-spec-value">
+        {{- if reflect.IsSlice $v -}}
+          {{- range $v -}}{{ . | safeHTML }}<br>{{- end -}}
+        {{- else -}}
+          {{- $v | safeHTML -}}
+        {{- end -}}
+      </div>
+    </div>
+    {{- end -}}
+  </div>
+</aside>
+{{- else -}}
 <aside class="nbas-spec-box align-{{ $align }}" data-pagefind-ignore>
   <h4 class="nbas-spec-title">Object Specs</h4>
   {{- if $name -}}
@@ -21,4 +45,5 @@
     {{- end -}}
   </table>
 </aside>
+{{- end -}}
 {{- end -}}
