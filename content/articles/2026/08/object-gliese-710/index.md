@@ -5,8 +5,8 @@ authors: ["bob-donahue"]
 description: "Gliese 710 will penetrate the inner Oort Cloud in 1.29 million years — the closest stellar encounter we've ever been able to document."
 byline: "An unremarkable star with the most remarkable itinerary in the galaxy."
 series: ["closer-look"]
-thumbnail: "icon.png"
-banner: "banner.png"
+thumbnail: "icon.webp"
+banner: "banner.webp"
 stars_nearby: ["Gliese 710"]
 
 finder_charts:
@@ -32,13 +32,13 @@ object_info:
 
 ## History
 
-{{< nbas-image src="Wilhelm_Gliese.jpg" size="150" align="left"
+{{< nbas-image src="Wilhelm_Gliese.webp" size="150" align="left"
 caption="Wilhelm Gliese (1915–1993)" >}}
 
 There is nothing in the appearance of Gliese 710 to suggest it deserves special attention. It takes its designation from the 1969 edition of Wilhelm Gliese's *Catalogue of Nearby Stars* — though the star had already appeared in Gliese's earlier 1957 catalog under a different number. The 1969 edition is the one most astronomers reach for, and "Gliese 710" is the name that stuck. The catalog's purpose was simply to gather stars within roughly 20 parsecs (about 65 light-years) into one reference. Gliese 710 made the list. So did hundreds of others. It is a dim orange dwarf in Serpens, visible only with binoculars, and for most of astronomical history it was precisely as interesting as that sounds.
 
 {{< clear >}}
-{{< nbas-image src="hipparcos.jpg" width="300" align="right"
+{{< nbas-image src="hipparcos.webp" width="300" align="right"
 caption="Michael Perryman, CC BY-SA 3.0, via Wikimedia Commons" >}}
 That changed in the 1990s, when the Hipparcos satellite gave astronomers precise measurements of stellar positions and proper motions — the tiny apparent drift of stars across the sky over time. Proper motion is one of two components needed to reconstruct where a star is actually going; the other is radial velocity, which measures motion directly toward or away from us via the Doppler shift of its light.
 
@@ -46,7 +46,7 @@ When astronomers examined Gliese 710 using the Hipparcos data, something unusual
 
 ### The Gaia Refinement
 
-{{< nbas-image src="Gaia_spacecraft.jpeg" width="300" align="left"
+{{< nbas-image src="Gaia_spacecraft.webp" width="300" align="left"
 caption="Spacecraft: ESA/ATG medialab; Milky Way: ESA/Gaia/DPAC. Acknowledgement: A. Moitinho., CC BY-SA IGO 3.0, CC BY-SA 3.0 IGO, via Wikimedia Commons" >}}
 
 The Hipparcos measurements were good, but Gaia is extraordinary. The European Space Agency's Gaia mission has measured the positions, parallaxes, and proper motions of over a billion stars with a precision that makes Hipparcos look coarse. When the Gaia Data Release 2 catalog became available in 2018, Coryn Bailer-Jones and colleagues ran the numbers on 7.5 million stars with complete three-dimensional velocity data. Gliese 710 came out on top.
@@ -72,7 +72,7 @@ What makes Gliese 710 unusual is not what it is but where it is going. It is cur
 
 ## Moving Around the Galaxy
 
-{{< nbas-image src="gliese-710-field.jpg" width="400" align="left"
+{{< nbas-image src="gliese-710-field.webp" width="400" align="left"
 caption="Gliese 710 in Serpens." >}}
 Stars are not fixed. Everything in the galaxy is in motion — orbiting the galactic center, jostling slightly within the disk, drifting relative to one another as their individual orbital histories diverge. From the Sun's frame of reference, nearby stars appear to creep across the sky over centuries, and this apparent drift — proper motion — is measured in arcseconds per year.
 
@@ -113,7 +113,7 @@ The Oort Cloud is not.
 
 {{< nbas-image src="gliese-710-flyby.svg" caption="The path of Gliese 710 through the solar system's Oort Cloud. At closest approach, the star will penetrate the inner Oort Cloud, which is thought to be the reservoir for long-period comets. (Schematic; not to scale.)" >}}
 
-{{< nbas-image src="depiction.png" width="400" align="right" >}}
+{{< nbas-image src="depiction.webp" width="400" align="right" >}}
 The Oort Cloud is a vast, sparsely populated spherical shell of icy bodies — the reservoir that supplies the solar system's long-period comets, the ones that arrive on orbits of thousands or millions of years. It is dynamically fragile. The gravitational field that holds Oort Cloud objects in their distant orbits is weak, and a stellar passage can nudge them onto new trajectories — some of which will aim directly at the inner solar system.
 
 Models of the encounter suggest that the gravitational tidal force from Gliese 710 will significantly increase the flux of comets entering the inner solar system, but not immediately. Comets perturbed during the flyby take millions of years to work their way inward on their new orbits. The comet shower, if it can be called that, would arrive roughly two to three million years after the encounter — not something that future observers of the Earth (should any exist) will see in real-time as a sudden spike, but a slow, extended increase in long-period comet activity spread over millions of years.
