@@ -6,7 +6,7 @@ byline: "Galaxies come in all shapes and sizes, but different inclinations revea
 series: ["wider-view"]
 author: ["bob-donahue"]
 thumbnail: "thumbnail.webp"
-banner: "banner.webp"
+banner: "hero.webp"
 
 dso_caldwell: ["23", "30", "43", "44", "65"]
 dso_messier: ["74", "77"]
@@ -17,44 +17,46 @@ dso_other: ["IC 1727"]
 
 ## Introduction
 
-{{< nbas-image src="hero.png" >}}
+{{< nbas-image src="hero.webp" fullwidth="true" >}}
 
-Look at ten different spiral galaxies and you'll come away with ten very differently shaped impressions — not because spirals themselves vary that wildly, but because you're seeing each one from a different angle. A galaxy that looks like a bright pinwheel seen face-on would look like a thin sliver of light seen edge-on, with an entirely different set of features visible in each case. That one variable — orientation — turns out to be one of the most useful things to understand before you go looking for detail in a galaxy, whatever you're observing with.
+Look at ten different spiral galaxies and you'll come away with ten very differently shaped impressions — not because spirals themselves vary that wildly, but because you're seeing each one from a different angle. A galaxy that looks like a bright pinwheel seen face-on would look like a thin sliver of light seen edge-on, with a different subset of features visible in each case. That one variable — orientation — turns out to be one of the most useful things to understand before you go looking for detail in a galaxy, whatever you're observing with.
 
 This matters whether you're at the eyepiece or working from a stacked image, though the two experiences differ in how much orientation actually gets you. A visual observer at a dark site with enough aperture can usually tell face-on from edge-on at a glance, and some features punch through even visually: a dust lane on a bright enough edge-on galaxy, a sharp stellar-looking nucleus, an extended halo glowing faintly beyond the main disk. What visual observing generally can't deliver — outside of exceptional apertures and skies — is the finer structure: individual spiral arms resolved from each other, subtle bar shapes, star-forming knots. That's where imaging, smart scope or otherwise, earns its keep, and it's also where longer integration time keeps paying off well past what a short live-stack shows you.
 
-This article tours seventeen real galaxies across fifteen images, chosen because between
-them they cover the full range from face-on to edge-on, plus a few
-that are disturbed enough to blur the categories entirely. All of
-the images here are ours — some closer to what you'd see in a shorter
-live stack, some built from longer integrations — specifically so
-you can compare how much more detail comes out with time on target,
-on top of how much orientation alone changes a galaxy's appearance.
-Additionally, this sample is all available in the Fall evening skies.
+This article tours seventeen real galaxies across fifteen images,
+chosen because between them they cover the full range from face-on
+to edge-on, plus a few that are disturbed enough to blur the
+categories entirely.  All of the galaxies in this sample are available
+in the Fall evening skies from Cepheus in the north to Sculptor in
+the south.  The images also span total integration times from a few
+minutes to over an hour, which allows for comparisons of detail
+with time on target.
 
 ## What is Galaxy Inclination
 
-Inclination is the tilt of a galaxy's disk relative to our line of sight, measured as an angle from 0° (face-on, looking straight down at the disk) to 90° (edge-on, looking directly along the disk's plane). Picture a dinner plate: hold it flat and facing you, and you see a circle — that's 0°. Tip it onto its side, and you see a thin line — that's 90°. Every angle in between shows an ellipse, more compressed the closer you get to edge-on.
+Inclination is the tilt of a galaxy's disk relative to our line of sight, measured as an angle from 0° (face-on, looking straight down at the disk) to 90° (edge-on, looking directly along the disk's plane). Picture a dinner plate: hold it flat and facing you, and you see a circle — that's 0°. Tip it onto its side, and you see a thin line — that's 90°. Every angle in between shows an ellipse that becomes more compressed the closer you get to edge-on.
 
-{{< nbas-image src="inclination-diagram.png" >}}
+{{< nbas-image src="inclination-diagram.webp" >}}
 
-For a simple, infinitely thin disk, the geometry works out to cos i = b/a, where a is the longest (major) axis of the galaxy's visible shape and b is the shortest (minor) axis. A perfectly round, face-on galaxy has b/a = 1 and i = 0°; a needle-thin, edge-on one has b/a close to 0 and i close to 90°.
+For a simple, infinitely thin disk, the geometry works out to cos _i_ = _b/a_, where a is the longest (major) axis of the galaxy's visible shape and b is the shortest (minor) axis. A perfectly round, face-on galaxy has _b/a_ = 1 and _i_ = 0°; a needle-thin, edge-on one has _b/a_ close to 0 and _i_ close to 90°.
 
 Edge-on views aren't rare because they're special — they're common because of simple geometry. If galaxy orientations are scattered randomly across the sky (and they are), you're statistically more likely to catch a galaxy somewhere near edge-on than exactly face-on, because there are simply more ways for a randomly-tilted disk to land close to edge-on than to land exactly face-on. The probability of observing a given inclination works out proportional to sin(_i_), which is small near 0° and largest near 90°. That's a real part of why deep-sky catalogs feel stuffed with dramatic, needle-thin edge-on galaxies — you're seeing the statistically favored outcome, not a curated highlight reel.
 
 ## Face-On Galaxies
 
-{{< nbas-image src="features-face-on.png" >}}
+{{< nbas-image src="template-face-on-annotated.webp" fullwidth="true" >}}
 
-Face-on galaxies hand you almost everything about their internal structure at once — spiral arms, bar, nucleus, star-forming regions — laid out like a diagram. That's the most visually generous orientation, but it comes at a real cost: the same total light gets spread across the largest possible area on the sky, so face-on galaxies have a much lower _surface brightness_ *per square arcsecond* than their listed magnitude would suggest.
+Face-on galaxies hand you almost everything about their internal structure at once — spiral arms, bar, nucleus, star-forming regions — laid out like a diagram. That's the most visually generous orientation, but it comes at a real cost: the same total light gets spread across the largest possible area on the sky, so face-on galaxies generally have a much lower _surface brightness_ *per square arcsecond* than their listed/catalog magnitude would suggest.
 
 {{< nbas-gallery style="carousel" width="250px" >}}
-WEBP/m_74-S50-61m.webp | M 74 (NGC 628) | Seestar S50, 61 min
-WEBP/ngc_488-equ-31m.webp | NGC 488 | eQuinox 2, 31 min
-WEBP/ngc_6951-equ-30m.webp | NGC 6951 | eQuinox 2, 30 min
-WEBP/m-77-equ-26m.webp | M 77 (NGC 1068) | eQuinox 2, 26 min
-WEBP/c_44=ngc_7479-equ-42m.webp | NGC 7479 (C44) | eQuinox 2, 42 min
+m_74-S50-61m.webp | M 74 (NGC 628) | Seestar S50, 61 min
+ngc_488-equ-31m.webp | NGC 488 | eQuinox 2, 31 min
+ngc_6951-equ-30m.webp | NGC 6951 | eQuinox 2, 30 min
+m-77-equ-26m.webp | M 77 (NGC 1068) | eQuinox 2, 26 min
+c_44=ngc_7479-equ-42m.webp | NGC 7479 (C44) | eQuinox 2, 42 min
 {{< /nbas-gallery >}}
+
+### Our Face-On Examples
 
 **M 74** is the textbook example of a grand-design spiral: two clean, symmetric arms winding out from the nucleus, used by professional astronomers as a reference case for studying spiral structure itself. It's also famously deceptive — M 74 has one of the lowest surface brightnesses of any Messier object, so despite a respectable total magnitude it can be genuinely hard to detect visually, and even a smart scope stack may need real integration time before the arms separate from the background sky.
 
@@ -70,18 +72,28 @@ WEBP/c_44=ngc_7479-equ-42m.webp | NGC 7479 (C44) | eQuinox 2, 42 min
 
 **Harder to discern, face-on:** the disk's true thickness and vertical structure; the shape of the bulge (round versus boxy/peanut) sitting underneath the disk's glow; dust lane geometry, since dust is spread across the whole visible face rather than concentrated into one dark line; and which side of the galaxy is tilted toward us versus away, which normally takes a spectrum, not an image, to determine. All of this is functionally invisible visually, regardless of aperture.
 
+{{< nbas-image src="template-barred-spiral-annotated.webp" fullwidth="true" >}}
+
+### Barred Spiral Galaxies
+
+Two of the face-on galaxies above — NGC 6951 and NGC 7479 — are barred, and it's worth calling out what changes. A bar doesn't remove any of the features described above, it just rearranges them: the bulge tends to lose its separate, rounded identity, blending into the bar's own elongated glow, and the arms spring from the two ends of the bar rather than winding all the way into the nucleus — which is also why barred spirals tend toward clean, two-armed "grand design" structure rather than the tighter, many-armed patchiness some unbarred spirals show. What's unmistakably prominent instead is the bar itself: a straight, glowing spindle of stars running through the nucleus.
+
+The galaxy in the annotated photo above is close to a textbook prototype for the type: NGC 1300, in Eridanus. Its bar feeds directly into a small, tightly wound spiral pattern in its own nucleus, only a few thousand light-years across — a bar within a bar, in effect, and one of the reasons this particular galaxy shows up so often as *the* reference image for barred spirals.
+
 ## Edge-On Galaxies
 
-{{< nbas-image src="features-edge-on.png" >}}
+{{< nbas-image src="template-edge-on-annotated.webp" fullwidth="true" >}}
 
 Edge-on galaxies trade almost all of that internal detail for a completely different set of clues: seen edge-on, a galaxy's disk collapses into a thin line, and what you're actually looking at is a cross-section — a dust lane cutting through the disk's midplane, a bulge bulging out above and below it, and (in the best cases) a faint stellar halo extending beyond both.
 
 {{< nbas-gallery style="carousel" width="250px" >}}
-WEBP/c_23=ngc_891-equ-50m.webp | NGC 891 (C23) | eQuinox 2, 50 min
-WEBP/c_30=ngc_7331-equ-36m.webp | NGC 7331 (C30) | eQuinox 2, 36 min
-WEBP/c_43=ngc_7814-equ-39m.webp | NGC 7814 (C43) | eQuinox 2, 39 min
-WEBP/ngc_7332-s50-24m.webp | NGC 7332 and 7339| Seestar S50, 24 min
+c_23=ngc_891-equ-50m.webp | NGC 891 (C23) | eQuinox 2, 50 min
+c_30=ngc_7331-equ-36m.webp | NGC 7331 (C30) | eQuinox 2, 36 min
+c_43=ngc_7814-equ-39m.webp | NGC 7814 (C43) | eQuinox 2, 39 min
+ngc_7332-s50-24m.webp | NGC 7332 and 7339| Seestar S50, 24 min
 {{< /nbas-gallery >}}
+
+### Our Edge-On Examples
 
 **NGC 891** is about as textbook an edge-on as exists: a flat, razor-thin disk split cleanly by a dark dust lane, with essentially no bulge poking up above the disk plane — it's often used as a stand-in for what our own Milky Way would look like from outside, seen edge-on.
 
@@ -95,17 +107,17 @@ WEBP/ngc_7332-s50-24m.webp | NGC 7332 and 7339| Seestar S50, 24 min
 
 **Harder to discern, edge-on:** essentially all the face-on structure — spiral arm pattern, bar (directly), rings — since the disk is compressed into a line and everything overlaps along the line of sight. This is true regardless of how you're observing; it's a genuine information loss from the geometry, not just a faintness problem imaging can solve.
 
-## Galaxies "In Between"
+## The Galaxies "In Between"
 
-{{< nbas-image src="features-between.png" >}}
-
-Most galaxies you'll actually point a scope at aren't neatly face-on or edge-on — they sit somewhere in between, which is also, per the geometry above, the single most statistically common orientation to encounter. Intermediate inclination gives you a partial, foreshortened version of both feature sets at once: some arm structure is visible, but compressed and overlapping; some dust lane is visible, but only on the near side of the disk rather than cutting straight through the middle.
+Most galaxies you'll actually point a scope at aren't neatly face-on or edge-on — they sit somewhere in between, which is also, per the geometry above, the single most statistically common orientation to encounter. Intermediate inclination gives you a partial, foreshortened version of both feature sets at once: some arm structure is visible, but compressed and overlapping; a dust lane is sometimes visible, but only on the near side of the disk rather than cutting straight through the middle.
 
 {{< nbas-gallery style="carousel" width="250px" >}}
-WEBP/ngc_1055-equ-30m.webp | NGC 1055 | eQuinox 2, 30 min
-WEBP/c_65=ngc_253-equ-25m.webp | NGC 253 (C65) | eQuinox 2, 25 min
-WEBP/ngc_672-equ-34m.webp | NGC 672 / IC 1727 | eQuinox 2, 34 min
+ngc_1055-equ-30m.webp | NGC 1055 | eQuinox 2, 30 min
+c_65=ngc_253-equ-25m.webp | NGC 253 (C65) | eQuinox 2, 25 min
+ngc_672-equ-34m.webp | NGC 672 / IC 1727 | eQuinox 2, 34 min
 {{< /nbas-gallery >}}
+
+### Our Intermediate Examples
 
 **NGC 1055** sits at a high-but-not-quite-edge-on tilt, and shows a thick, knotty, slightly warped dust lane crossing a boxy bulge — the same boxy-bulge signature seen in NGC 7332, but here alongside genuine disk warping, likely a result of its ongoing gravitational back-and-forth with its much larger neighbor, M 77.
 
@@ -117,13 +129,15 @@ WEBP/ngc_672-equ-34m.webp | NGC 672 / IC 1727 | eQuinox 2, 34 min
 
 ## Even Peculiar Galaxies Show These Features!
 
-Even a badly disturbed galaxy is still, underneath the chaos, a disk with some orientation — and the same inclination cues from the sections above still show up, just alongside evidence that something violent happened.
+Even a highly disturbed galaxy is still, underneath the chaos, a disk with some orientation — and the same inclination cues from the sections above still show up, just alongside evidence that something violent happened.
 
 {{< nbas-gallery style="carousel" width="250px" >}}
-WEBP/ngc_520-equ-34m.webp | NGC 520 | eQuinox 2, 34 min
-WEBP/ngc_660-equ-34m.webp | NGC 660 | eQuinox 2, 34 min
-WEBP/ngc_772-equ-27m.webp | NGC 772 | eQuinox 2, 27 min
+ngc_520-equ-34m.webp | NGC 520 | eQuinox 2, 34 min
+ngc_660-equ-34m.webp | NGC 660 | eQuinox 2, 34 min
+ngc_772-equ-27m.webp | NGC 772 | eQuinox 2, 27 min
 {{< /nbas-gallery >}}
+
+### Our Peculiar Examples
 
 **NGC 520** is two colliding spiral disks in an early stage of merging — simulations suggest the collision began roughly 300 million years ago — with a dark dust lane separating the two components and a tidal tail trailing off to one side. The main, brighter component happens to be oriented close to edge-on, so even inside this wreck you can still pick out a flattened disk and dust lane, the same features you learned to spot in the clean edge-on section above.
 
@@ -158,16 +172,30 @@ WEBP/ngc_772-equ-27m.webp | NGC 772 | eQuinox 2, 27 min
 
 Four of these need a footnote rather than a clean single number, so don't let the table cell stand alone without this context:
 
+### Footnotes
+
 1. **M77's inclination depends on which part of the galaxy you mean.** The large-scale visible disk sits at roughly 35-40°, but the parsec-scale nuclear disk and dust torus around the black hole are inclined very differently (studies give anywhere from ~44° to nearly edge-on for that inner structure). That's not measurement disagreement — the two structures are genuinely misaligned, which is itself a real and interesting result. The table uses the large-scale disk value.
+
 2. **NGC 520 is an active merger**, so "inclination" isn't a rigorously defined single quantity the way it is for an undisturbed disk. The ~66° figure describes the merged system as a whole, not a clean single-disk fit — treat it as approximate.
+
 3. **NGC 660's polar ring genuinely has two different tilts.** The host disk is inclined about 70° to our line of sight; the ring itself is tilted roughly 45-55° relative to *the disk's own plane* (sources vary on the exact figure, and it's a different reference frame than a line-of-sight inclination to begin with). Both numbers are real, they're just not directly comparable to each other or to the rest of this table.
-4. **NGC 672 and IC 1727 don't have a published inclination I could verify** in the sources checked (NED, HyperLeda-derived literature, HALOGAS survey). The values shown are derived here from the axis ratio using the simple cos i = b/a formula from earlier in this article — a real calculation, but a cruder one than the studies behind the other rows, since it skips the intrinsic-flatness correction. For what it's worth, it's consistent with the HALOGAS survey's qualitative call of NGC 672 as "moderately inclined."
 
-## Finding and Observing Them
+4. **NGC 672 and IC 1727 don't have a published inclination I could verify** in the sources checked (NED, HyperLeda-derived literature, HALOGAS survey). The values shown are derived here from the axis ratio using the simple cos _i_ = _b/a_ formula from earlier in this article — a real calculation, but a cruder one than the studies behind the other rows, since it skips the intrinsic-flatness correction. For what it's worth, it's consistent with the HALOGAS survey's qualitative call of NGC 672 as "moderately inclined."
 
-The galaxies in this list are generally bright and easy to *find* — they are mostly magnitude 8 to 12 objects, well within range of any smart scope under reasonably dark skies, and most are bright enough for modest-aperture visual observing too. The real variable isn't detection, it's how much structure you actually pull out, and that comes down to surface brightness and time on target rather than raw magnitude. M 74 is the cautionary example either way: a listed magnitude around 9.4 sounds easy, but with all that light spread across a face-on disk nearly 10 arcminutes across, it's notoriously one of the hardest Messier objects to see any real structure in — visually it's often just a dim, featureless glow even in a fairly large scope, and it takes genuine stacking to show its arms at all.
+## Finding and Observing These Galaxies
+
+The galaxies in this list are generally bright and easy to *find* — they are mostly magnitude 8 to 12 objects, well within range of any smart scope under reasonably dark skies, and most are bright enough for modest-aperture visual observing too. The real variable isn't detection, it's how much structure you actually pull out. For imagers that comes down to surface brightness and time on target rather than raw magnitude; for visual observers it comes down to sky darkness, seeing, and aperture.
+
+M 74 is the cautionary example either way: a listed magnitude around 9.4 sounds easy, but with all that light spread across a face-on disk nearly 10 arcminutes across, it's notoriously one of the hardest Messier objects to see any real structure in — visually it's often just a dim, featureless glow even in a fairly large scope, and it takes genuine stacking to show its arms at all.
 
 If you're observing visually, aperture and sky darkness do most of the work. NGC 253 and NGC 891 are good starting points — both are bright and large enough that a 150mm–200mm scope under a reasonably dark sky should show real structure (NGC 253's mottled dust and elongated shape, NGC 891's dust lane), and both reward pushing to larger apertures if you have access to one. NGC 7332's companion, NGC 7339, is a nice bonus for visual observers specifically: the pair needs only modest aperture to split into two distinct galaxies at close to a right angle to each other. The fainter, more structurally subtle objects in this list — NGC 7479's hooked arm, NGC 6951's starburst ring, NGC 660's polar ring — are realistically imaging-only targets for anyone without a large Dobsonian and very dark skies.
 
 This is also where the "eyepiece impression versus long-exposure imaging" comparison in this article's images is worth paying attention to, for smart scope users specifically. A short live stack will often show you little more than an elongated or roundish smudge — enough to confirm you're on the right object, not much more. Push the integration time further and the features described above start to separate out: a dust lane resolves out of a uniform glow, a bar becomes distinguishable from the surrounding disk, a boxy bulge shape becomes obvious rather than just "fat." If you only ever glance at the live view and move on, you're seeing that a galaxy is there — not what kind of galaxy it is.
 
+## Wherever You're Looking From
+
+None of this — the arms, the bar, the dust lane, the polar ring — requires professional equipment to start noticing. It requires knowing what you're looking for, which is really the point of an article like this one. A visual observer working an eyepiece and a smart scope user watching a live stack build up are pointed at the same photons from the same galaxies; they're just pulling different amounts of the same story out of them, and neither is a lesser way of doing this.
+
+That's also the real payoff of walking through seventeen galaxies by tilt instead of by constellation or catalog number: inclination isn't a curiosity, it's the lens the rest of a galaxy's story gets filtered through, no matter what you're using to look. Once you've noticed that a face-on galaxy is hiding its dust lane and an edge-on one is hiding its bar, you start looking at every galaxy differently — including the next one you point at, on whatever's in your hands that night.
+
+So go find one. M 74 and M 77 are within reach of a modest scope from a reasonably dark yard; NGC 891's dust lane is a genuine visual target if you have the aperture and the sky for it; and even if all you have some night is your own eyes and a memory of what a dust lane looks like in a photograph, that's still a real way to start noticing orientation everywhere you look. Whatever your experience, there's a galaxy out there tilted just the right way to show you something you haven't seen yet.
