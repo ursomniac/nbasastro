@@ -8,6 +8,7 @@ constellations: ["Lacerta"]
 byline: "A small lizard with a surprisingly long reach"
 description: "Open clusters, a giant emission nebula, a faint planetary, and the prototype blazar — six targets hiding in Lacerta's narrow strip of sky."
 thumbnail: "icon.webp"
+banner: "lacerta-banner.webp"
 
 profile_data:
   "Abbreviation": LAC
