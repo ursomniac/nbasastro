@@ -1,5 +1,5 @@
 ---
-title: "Saturn Nebula"
+title: "The Saturn Nebula"
 date: 2026-09-14
 description: "A tiny, brilliant disk in Aquarius that took sixty years and better telescopes to reveal why it's named for a planet."
 byline: ""
