@@ -1,6 +1,7 @@
 ---
 title: "August 2026: Observing the Perseids"
 date: 2026-07-23
+pin_until: 2026-08-15
 authors: ["bob-donahue"]
 series: ["whats-up-in-the-sky"]
 knowledgetopics: ["observing-guides"]
