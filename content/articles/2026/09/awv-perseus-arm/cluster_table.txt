@@ -1,0 +1,45 @@
+
+| Cluster   |  Const |  Distance | Image | Flags |
+| NGC 7281  |  Cep   |  7.3 kly  | dull  |       |
+| NGC 7261  |  Cep   | 11.3 kly  | OK    |       |
+| NGC 7419  |  Cep   | 11.4 kly  | OK    |       |
+| NGC 7226  |  Cep   | 14.7 kly  | small |       |
+| NGC 7142  |  Cep   |  7.9 kly  | good  |       |
+| NGC 6939  |  Cep   |  5.9 kly  | good  |       |
+| NGC 7762  |  Cep   |  2.9 kly  | good  |       |
+| NGC 7510  |  Cep   | 11.4 kly  | Good  | odd shape |
+| NGC 7160  |  Cep   |  2.9 kly  | sparse |       |
+| NGC 7129  |  Cep   |  2.9 kly  | few stars | nebula |
+| NGC 7380  |  Cep   |  5.9 kly  | good  | Nebula! PICKED |
+| Stock 21  |  Cas   |  6.7 kly  | loose |       |
+| Stock 24  |  Cas   |  9.7 kly  | loose |       |
+| IC 1805   |  Cas   | 15.3 kly  | tight | Nebula! PICKED |
+| Cr 36     |  Cas   |  2.2 kly  | loose |       |
+| NGC 886   |  Cas   |  3.3 kly  | irreg |       |
+| Stock 12  |  Cas   |  1.4 kly  | irreg/bright |       |
+| Cr 15     |  Cas   |  9.0 kly  | tight |       |
+| Sh 2-173  |  Cas   |  ?   kly  | ?     | looks like there's an embedded cluster |
+| NGC 1027  |  Cas   |  3.7 kly  | nice  |       |
+| Cr 463    |  Cas   |  2.8 kly  | loose |       |
+| NGC 659   |  Cas   |  9.8 kly  | nice  | PICKED |
+| NGC 336   |  Cas   |  9.4 kly  | tight |       |
+| NGC 637   |  Cas   |  8.2 kly  | tight |       |
+| NGC 381   |  Cas   |  3.8 kly  | nice  |       |
+| NGC 436   |  Cas   | 10.1 kly  | nice  |       |
+| NGC 189   |  Cas   |  4.0 kly  | OK    |       |
+| NGC 223   |  Cas   |  2.1 kly  | loose |       |
+| NGC 7790  |  Cas   | 10.8 kly  | nice  | 7788 in field |
+| NGC 7788  |  Cas   |  9.7 kly  | NICE  | 7790 in field |
+| NGC 7789  |  Cas   |  6.9 kly  | NICE! |       |
+| NGC 609   |  Cas   | 16.4 kly  | tight |       |
+| M 103     |  Cas   |  6.7 kly  | good  | PICKED |
+| NGC 663   |  Cas   |  9.6 kly  | NICE! | PICKED = C 10 |
+| NGC 658   |  Cas   |  9.4 kly  | good  | = C 8 |
+| NGC 457   |  Cas   |  7.4 kly  | NICE! | PICKED = C 13 |
+| M 52      |  Cas   |  5.4 kly  | nice  | picked? |
+| NGC 129   |  Cas   |  6.2 kly  | ok    |       |
+| NGC 654   |  Cas   |  7.8 kly  | nice  | PICKED |
+| NGC 133   |  Cas   | 13.1 kly  | sparse |       |
+| NGC 103   |  Cas   | 10.3 kly  | OK    |       |
+| NGC 869   |  Per   |  7.2 kly  | nice  | PICKED |
+| NGC 884   |  Per   |  6.5 kly  | nice  | PICKED |
