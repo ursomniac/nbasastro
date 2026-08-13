@@ -185,8 +185,8 @@ than a shared-history explanation.
 
 ### IC 10
 
-{{< nbas-image src="ic_10-equ-20240825-21m.webp" width="300" align="right"
-caption="Bob Donahue, NBAS, eQuinox 2, 21 min" >}}
+{{< nbas-image src="ic_10-93S-PIXRCAABEGHS-272m-square.webp"
+width="300" align="right" caption="Bob Donahue, NBAS, Seestar 50, 272 min" >}}
 
 **IC 10** is the wild card of this family. It's a dwarf
 irregular galaxy -- and specifically a *starburst* galaxy, the only
