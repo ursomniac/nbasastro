@@ -1,6 +1,7 @@
 ---
 title: "Smart Scope Challenge!  Find Phoebe!"
 date: 2026-09-09
+main_subject: "Phoebe"
 description: "A moving-target challenge for smart scope owners: track down Saturn's largest irregular moon, Phoebe, a captured Kuiper Belt wanderer sitting at mag 16."
 authors: ["bob-donahue"]
 series: ["smart-scopes", "observing-challenges"]

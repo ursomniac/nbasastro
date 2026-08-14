@@ -1,6 +1,7 @@
 ---
 title: "Planet Watch: Jupiter Meets the Moon, Mars Crosses the Beehive"
 date: 2026-09-19
+main_subject: ["Mars", "Jupiter"]
 pin_until: 2026-10-12
 description: "Two pre-dawn October events worth losing sleep over: the Moon occults Jupiter on the 6th, and Mars threads the Beehive Cluster on the 11th."
 byline: "Two early wake-up calls, both worth it."

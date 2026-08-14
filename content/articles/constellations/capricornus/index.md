@@ -1,6 +1,7 @@
 ---
 layout: "single-constellation"
 title: "Capricornus"
+main_subject: "Capricorn"
 date: 2026-09-01
 authors: ["nbas-staff"]
 series: ["constellation-highlights"]

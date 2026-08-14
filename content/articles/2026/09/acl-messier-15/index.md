@@ -1,6 +1,7 @@
 ---
 title: "Messier 15: The Pegasus Cluster"
 date: 2026-09-28
+main_subject: "Messier 15"
 description: "M 15 is one of the Milky Way's oldest globular clusters -- and home to Pease 1, a planetary nebula that, by most predictions, shouldn't exist there."
 byline: "This easy to find globular cluster has a hidden surprise!"
 series: ["closer-look"]

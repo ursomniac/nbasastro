@@ -1,6 +1,7 @@
 ---
 title: "Saturn Returns!"
 date: 2026-09-03
+main_subject: "Saturn"
 description: "Saturn rises near 9 PM this September, showing its rings' southern face for the first time since 2009 - how to see it, naked eye to telescope."
 authors: ["bob-donahue"]
 series: ["planet-watch"]

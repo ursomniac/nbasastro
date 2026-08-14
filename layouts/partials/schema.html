@@ -42,10 +42,22 @@
     "url": "https://nbasastro.org/contact/"
   },
   "knowsAbout": [
-    "Amateur astronomy",
+    {
+      "@type": "Thing",
+      "name": "Amateur astronomy",
+      "sameAs": "https://wikidata.org"
+    },
+    {
+      "@type": "Thing",
+      "name": "Astrophotography",
+      "sameAs": "https://wikidata.org"
+    },
+    {
+      "@type": "Thing",
+      "name": "Night sky observation",
+      "sameAs": "https://wikidata.org"
+    },
     "Stargazing",
-    "Astrophotography",
-    "Night sky observation",
     "Constellations",
     "Berkshire County dark skies"
   ]
@@ -89,6 +101,19 @@
   "@type": "Article",
   "headline": "{{ .Title | htmlEscape }}",
   "description": "{{ $description | htmlEscape }}",
+  "abstract": "{{ $description | htmlEscape }}",
+  {{ with .Params.main_subject }}
+  {{ if reflect.IsSlice . }}
+  "about": [
+    {{ range $i, $s := . }}{{ if $i }}, {{ end }}{ "@type": "Thing", "name": "{{ $s | htmlEscape }}" }{{ end }}
+  ],
+  {{ else }}
+  "about": {
+    "@type": "Thing",
+    "name": "{{ . | htmlEscape }}"
+  },
+  {{ end }}
+  {{ end }}
   "url": "{{ .Permalink }}",
   "datePublished": "{{ .Date.Format "2006-01-02" }}T03:00:00-05:00",
   "dateModified": "{{ .Lastmod.Format "2006-01-02" }}T03:00:00-05:00",

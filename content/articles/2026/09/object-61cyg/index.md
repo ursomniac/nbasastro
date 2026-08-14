@@ -1,6 +1,7 @@
 ---
 title: "61 Cygni: The Star That Taught Us the Universe Has Depth"
 date: 2026-09-07
+main_subject: "61 Cygni"
 description: "The first star ever measured by parallax turned out to be two ancient suns close enough to see with the naked eye — and still being watched today."
 byline: "The first star whose distance was measured, and a fly-by current neighbor to the Sun"
 series: ["closer-look"]

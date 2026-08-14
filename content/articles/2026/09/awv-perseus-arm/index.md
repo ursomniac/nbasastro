@@ -1,6 +1,7 @@
 ---
 title: "Exploring the Perseus Arm Through Fall Open Clusters"
 date: 2026-09-17
+main_subject: "Perseus Arm"
 description: "In the fall, the Milky Way overhead runs from Deneb to the Double Cluster — and that path happens to trace our way out of our own spiral arm and into the next one, the Perseus Arm."
 byline: "Moving into the Fall Milky Way we start to look in a whole new direction"
 series: ["wider-view"]

@@ -1,6 +1,7 @@
 ---
 title: "NGC 7243: The Lizard's Cluster"
 date: 2026-09-21
+main_subject: "Lacerta star cluster"
 description: "An overlooked open cluster in one of the sky's least storied constellations — and a good reason to visit Lacerta anyway."
 byline: "An overlooked open cluster in an overlooked constellation"
 series: ["closer-look"]

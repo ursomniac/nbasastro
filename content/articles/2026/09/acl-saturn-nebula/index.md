@@ -2,7 +2,8 @@
 title: "The Saturn Nebula"
 date: 2026-09-14
 description: "A tiny, brilliant disk in Aquarius that took sixty years and better telescopes to reveal why it's named for a planet."
-byline: ""
+byline: "This oddly-shaped nebula inspired the term 'planetary nebula'"
+main_subject: "Saturn Nebula"
 series: ["closer-look"]
 authors: ["bob-donahue"]
 thumbnail: "thumbnail.webp"

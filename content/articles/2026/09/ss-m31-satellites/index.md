@@ -1,6 +1,7 @@
 ---
 title: "The Andromeda 'Family' of Galaxies"
 date: 2026-09-24
+main_subject: "Andromeda Galaxy"
 description: "Andromeda has a family of satellite galaxies -- some visible in binoculars, some only through long-exposure imaging. How M 31's household compares to our own."
 byline: "Surrounding M 31 is a set of satellite galaxies spread out over a whole part of the Fall skies."
 series: ["wider-view", "smart-scopes"]
