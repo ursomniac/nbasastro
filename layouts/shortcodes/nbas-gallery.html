@@ -1,7 +1,18 @@
-{{/* V0.15.15: DYNAMIC STYLE SELECTOR */}}
+{{/* V0.16.0: DYNAMIC STYLE SELECTOR + square-render OPTION */}}
 {{ $style := .Get "style" | default "grid" }}
 {{ $size := .Get "size" | default "250px" }}
 {{ $title := .Get "title" }}
+
+{{/* NEW: square-render="true" (default) keeps the existing cropped-square thumbnail
+     behavior for full back-compat. square-render="false" scales each image to the
+     given width instead of cropping it, so landscape (or portrait) images render at
+     their natural aspect ratio -- taller/shorter tiles are expected and fine. */}}
+{{ $squareRenderRaw := .Get "square-render" | default "true" }}
+{{ $isSquare := eq $squareRenderRaw "true" }}
+
+{{/* Pull the bare number out of size (e.g. "400px" -> "400") for Hugo image processing specs */}}
+{{ $sizeNum := replaceRE "[^0-9]" "" $size }}
+{{ if eq $sizeNum "" }}{{ $sizeNum = "250" }}{{ end }}
 
 <section class="nbas-gallery-wrapper" data-pagefind-ignore>
   {{ if $title }}
@@ -10,8 +21,10 @@
     </h3>
   {{ end }}
 
-  {{/* CHANGE: The class now responds to style="carousel" or style="grid" */}}
-  <div class="nbas-gallery-{{ $style }}" style="--grid-size: {{ $size }};">
+  {{/* CHANGE: The class now responds to style="carousel" or style="grid", plus a
+       "-natural" modifier class when square-render="false" so the stylesheet can
+       target the non-cropped layout without touching the default look. */}}
+  <div class="nbas-gallery-{{ $style }}{{ if not $isSquare }} nbas-gallery-{{ $style }}-natural{{ end }}" style="--grid-size: {{ $size }};">
     {{ $lines := split (trim .Inner "\n\r ") "\n" }}
     {{ range $lines }}
       {{ $line := trim . " \r\n\t" }}
@@ -23,10 +36,19 @@
 
         {{ $img := $.Page.Resources.GetMatch $imgName }}
         {{ with $img }}
-          {{ $thumb := .Fill "400x400 Center q60" }}
-          <div class="gallery-item">
+          {{/* Square (default/legacy) path: crop to an exact square, unchanged from before.
+               Natural path: resize to the target width only, height follows the source's
+               own aspect ratio -- this is what avoids the "blown-up square crop" problem
+               on landscape images. */}}
+          {{ $thumb := "" }}
+          {{ if $isSquare }}
+            {{ $thumb = .Fill (printf "%sx%s Center q60" $sizeNum $sizeNum) }}
+          {{ else }}
+            {{ $thumb = .Resize (printf "%sx q60" $sizeNum) }}
+          {{ end }}
+          <div class="gallery-item{{ if not $isSquare }} gallery-item-natural{{ end }}">
             <a href="{{ .RelPermalink }}" target="_blank">
-              <img src="{{ $thumb.RelPermalink }}" alt="{{ $caption }}" loading="lazy">
+              <img src="{{ $thumb.RelPermalink }}" alt="{{ $caption }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" loading="lazy">
               {{ if or $caption $credit }}
                 <div class="gallery-overlay">
                   {{ with $caption }}<strong style="color:#ffcc00">{{ . }}</strong>{{ end }}
@@ -40,4 +62,3 @@
     {{ end }}
   </div>
 </section>
-

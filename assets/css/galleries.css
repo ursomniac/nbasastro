@@ -1,18 +1,18 @@
 /* 1. WRAPPER & TYPOGRAPHY */
-.nbas-gallery-wrapper { 
-    margin: 3rem 0; 
+.nbas-gallery-wrapper {
+    margin: 3rem 0;
     padding: 20px;
     background: rgba(255, 255, 255, 0.02);
     border-radius: 8px;
     border: 1px solid #3a4a64;
 }
 
-.gallery-title { 
-    color: #ffcc00; 
-    border-left: 4px solid #ffcc00; 
-    padding-left: 15px; 
-    margin: 0 0 20px 0; 
-    text-transform: uppercase; 
+.gallery-title {
+    color: #ffcc00;
+    border-left: 4px solid #ffcc00;
+    padding-left: 15px;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
     font-size: 1.2rem;
     letter-spacing: 1px;
 }
@@ -41,20 +41,20 @@
 }
 
 /* 4. COMMON ITEM STYLES */
-.gallery-item { 
-    position: relative; 
-    aspect-ratio: 1 / 1; 
-    overflow: hidden; 
-    border-radius: 4px; 
-    background: #000; 
-    border: 1px solid #3a4a64; 
+.gallery-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #000;
+    border: 1px solid #3a4a64;
 }
 
-.gallery-item img { 
-    width: 100% !important; 
-    height: 100% !important; 
-    object-fit: cover !important; 
-    display: block; 
+.gallery-item img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block;
     transition: transform 0.3s ease;
 }
 
@@ -63,13 +63,13 @@
 }
 
 /* 5. METADATA OVERLAYS */
-.gallery-overlay { 
-    position: absolute; 
-    bottom: 0; 
-    width: 100%; 
-    background: linear-gradient(transparent, rgba(0,0,0,0.9)); 
-    color: #fff; 
-    padding: 8px 10px 5px 10px; 
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    color: #fff;
+    padding: 8px 10px 5px 10px;
     font-size: 0.8rem;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -80,15 +80,15 @@
     opacity: 1;
 }
 
-.gallery-overlay strong { 
-    font-size: 0.9rem; 
-    color: #ffcc00; 
+.gallery-overlay strong {
+    font-size: 0.9rem;
+    color: #ffcc00;
     display: block;
     margin-bottom: 2px;
 }
 
-.gallery-overlay em { 
-    font-size: 0.85rem; 
+.gallery-overlay em {
+    font-size: 0.85rem;
     color: #bbb;
     font-style: italic;
 }
@@ -98,3 +98,26 @@
 .nbas-gallery-carousel::-webkit-scrollbar-track { background: #1a1a1a; }
 .nbas-gallery-carousel::-webkit-scrollbar-thumb { background: #3a4a64; border-radius: 10px; }
 
+/* 7. NATURAL (NON-SQUARE) RENDER MODE — square-render="false" in nbas-gallery.html
+   The shortcode now resizes non-square items to a fixed width with the source's own
+   aspect ratio (no crop). These rules just let the tile's box follow that shape instead
+   of forcing the 1:1 crop from section 4. Placed after sections 2-4 on purpose so equal-
+   specificity !important rules here win by source order without needing to touch the
+   defaults above — every existing square-render="true" (or omitted) gallery is untouched. */
+.gallery-item-natural {
+    aspect-ratio: auto !important;
+    height: auto !important;
+}
+
+.gallery-item-natural img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+/* Carousel tiles still park at --grid-size width via section 3's flex-basis rule (that
+   rule targets .gallery-item generically, which .gallery-item-natural still matches) —
+   only the height needs freeing here. */
+.nbas-gallery-carousel .gallery-item-natural {
+    height: auto !important;
+}
