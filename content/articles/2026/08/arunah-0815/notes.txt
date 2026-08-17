@@ -1,0 +1,59 @@
+What you almost certainly saw is the SpaceX Falcon 9 that flew the Globalstar 2-R mission out of Cape Canaveral — and it's a great story for the article, because it was part of a genuine record-setter.
+
+The launch itself. SpaceX's Falcon 9 rocket took flight from Cape Canaveral Space Force Station at 9:12 p.m. EDT carrying a batch of satellites for Globalstar, using first stage booster B1090 on its 14th flight, which flew back and landed at Landing Zone 40 about eight minutes after liftoff. All eight spacecraft separated successfully over a six-minute span beginning 56.5 minutes after liftoff. 
+Spaceflight Now
+Space.com
+
+Globalstar's constellation operates in a 1,410 km orbit inclined at 52 degrees — a mid-inclination LEO shell, not a polar or sun-synchronous orbit. From Cape Canaveral, reaching 52° inclination requires a launch azimuth of roughly northeast (~044° from true north) — essentially the same "up the coast" heading SpaceX uses for ISS resupply and many Starlink shells. That's the geometry that explains the "north" sighting: the ground track doesn't go straight up and over Massachusetts, it runs parallel to the coast well offshore and then bends further north as it climbs, so from western Massachusetts the booster/second-stage plume would appear to arc up and over toward the northern sky rather than pass overhead. This exact phenomenon has put Cape-launched rockets in New England skies before — Boston TV stations reported a similar sighting from a February Cape Canaveral Falcon 9 back in 2022. 
+Space Launch Schedule
+
+Why it looked like a "burn" rather than a streak. At 9:12 p.m. in mid-August, ground-level observers in New England are already in twilight/darkness, but the second stage climbing to 150–200+ km altitude is still in direct sunlight. Its engine exhaust — and especially any expanding, unburned propellant venting during a coast or restart — scatters that sunlight into the classic diffuse glowing "jellyfish" cloud that can be visible from many hundreds of miles away, long after the vehicle itself is too small/dim to resolve as a point of light. If what you saw had that soft, expanding-cloud character rather than a sharp trail, that's consistent with either the ~T+9 min ascent burn (while still over the Virginia/Carolina coast) or, more likely given a purely northern bearing, the second-stage restart for the circularization/deployment sequence around T+56 min, by which point the vehicle would have been well up over the Gulf of Maine.
+
+The red herring worth mentioning in the article anyway. This Globalstar flight was actually one half of a record: the USSF-366 liftoff from Vandenberg Space Force Base came just 38 minutes and 31 seconds later, at 9:50 p.m. EDT — SpaceX's shortest turnaround between two orbital launches. It's tempting to credit that one instead, and it may even be the more "polar" of the two (Vandenberg missions typically fly south toward higher-inclination or sun-synchronous orbits, and USSF-366's booster drop zones reportedly matched prior high-inclination Starlink shells). But California is about 2,400 miles from Cummington — well beyond the geometric horizon for anything at LEO altitude, so it's essentially impossible that's what you saw from Arunah Hill. Worth a line in the piece as the "twin launch that wasn't visible," though. 
+Space.com
+
+One thing that would sharpen the article: do you have a rough clock time for when you spotted it? If it was closer to 9:20–9:25 p.m. EDT, that points to the ascent/first burn (lower in the sky, more toward the coast); if closer to 10:05–10:15 p.m. EDT, that points to the circularization burn far out over the Gulf of Maine — which would explain a due-north bearing especially well. Either way, you can also mention the crescent moon that night — a UPI photo from the pad noted a crescent moon low in the sky at launch time, which is a nice visual detail for the writeup.
+
+This is the rough path (from memory) so it might be off.
+
+Thought for 1m
+
+The sketch is really helpful, and it lines up with what I'd worked out independently: Arcturus/Boötes sitting fairly low but well clear of the horizon in the NW is right for ~10-11 p.m. in mid-August, and the arc staying high and roughly level all the way over to the NE — rather than rising steeply from the horizon, peaking, and setting again the way an overhead ISS-type pass looks — is itself a useful clue. Let me see if I can pin down the actual object rather than leaving this as pure inference.
+
+Searched the web
+
+The sketch checks out well against what I calculated independently: with Arcturus that low and that far into the NW, and the path staying essentially flat and well clear of the horizon all the way over toward the NE, this really does look like a satellite pass rather than anything climbing away from a launch pad. A couple of things the shape itself tells us:
+
+It stayed level, then started sinking toward the NE end. That's consistent with an object that was never overhead — it passed well to your north the whole time — and by the end of your view it was receding, dropping back toward the horizon as it continued on its track away from you. That fits an object continuing outbound to the northeast, generally the same direction the Globalstar stage's ground track would be heading if it launched from Florida on a 52°-inclination shot.
+
+It stayed high rather than doing a classic fast rise-peak-set. Lower objects (a few hundred km, like a typical Starlink deorbit) sweep the sky quickly with a pronounced curved arc because they're close. Something moving more slowly and staying at a fairly constant, generous altitude over several minutes is more consistent with a considerably higher orbit — which actually fits the Globalstar target altitude (~1,400 km) better than a routine low-LEO Starlink disposal.
+
+One genuinely useful thing I turned up while checking: SpaceX now disposes of the overwhelming majority of its Falcon 9 second stages immediately — only 3 of 165 upper stages launched in 2025 were left in orbit after payload deployment, rather than being deorbited right away. That's a good, citable stat for the article on its own, and it also means the odds strongly favor this being a same-night burn from one of the two vehicles that flew hours earlier, rather than some older derelict stage that happened to come down that week. 
+SpaceNews
+
+Where I have to be honest about my limits: correctly tracing a rocket's ground track minute-by-minute (where exactly it is 60-90 minutes after launch, on which pass it crosses which longitude) needs real orbit propagation, not hand arithmetic — and I don't want to hand you a confident-sounding specific burn time that's actually a guess dressed up as math. That's exactly the kind of claim that would read badly if a reader checked it against actual tracking data.
+
+So for the write-up, I'd suggest treating the "what it was" section in two parts: the well-supported physics (a Falcon 9-class upper-stage propellant vent/deorbit burn, based on the motion and appearance) and a call for confirmation — post your sketch and rough time to the SeeSat-L observers list or r/spacex, and check Jonathan McDowell's feed (@planet4589) and planet4589.org/space/jsr, which regularly logs exact deorbit burn times and locations for Falcon 9 stages. Given how many other people across the region likely also caught this, there's a good chance someone already has it triangulated with an actual NORAD ID by now — that would let the article cite a specific object instead of "probably one of these two."
+
+Someone caught a picture ---  so my guess is a little off.   
+Is there any metadata in this image that could pin down the time?
+
+Ran 2 commands
+
+I checked — there's no usable timestamp in this file. Running it through EXIF extraction turns up nothing: no DateTimeOriginal, no GPS coordinates, no camera/exposure settings. All that survives is a JFIF header and an embedded ICC color profile.
+
+The interesting bit is why it's empty: buried in the file's metadata is a marker reading FBMD (Facebook Metadata) — this is Facebook/Messenger's own internal tag that its servers stamp onto images when they pass through the platform, and as part of that process Facebook strips the original EXIF block (timestamp, GPS, camera model) and re-compresses the file. So this copy has been through Facebook or Messenger at some point before reaching you, and the original capture data didn't survive that trip. 
+Spaceflight Now
+
+A couple of ways to actually recover it:
+
+Ask Doug for the original file — straight off his phone or camera, not re-downloaded from Facebook/text/Messenger (all of which strip EXIF the same way). AirDrop, a cable transfer, email attachment, or Google/iCloud photo link usually preserves it.
+Check when/where he posted it, if he shared it publicly — a Facebook post or group listing usually shows its own upload timestamp separate from the file's internal one, which at least tells you when he shared it (usually close to when he took it).
+
+For what it's worth, the shot itself is a nice confirmation of the diagnosis independent of timing: that bright bowtie/X-shaped core with the much larger, extremely diffuse pale-green cloud fanning off to one side is a dead ringer for the classic Falcon-9-venting "spiral"/jellyfish photos — the crossed-fan look comes from a tumbling, still-venting stage throwing off propellant in a rotating pattern, sunlit from below the local horizon. It's a good image to run by the SeeSat-L / McDowell route I mentioned, since a clear photo like this — even without EXIF — is often enough for someone with orbital elements in hand to match against a known pass just from the star field framing it, if you can get an exact or rough time from Doug directly.
+
+Ah OK - he'll send it to me.
+
+Sounds good — once you've got the original with intact EXIF, the DateTimeOriginal field will give you a real clock time (down to the second, usually), and if his phone tagged GPS on capture, that pins down his location too, which is useful if he wasn't shooting from Arunah Hill itself. That exact timestamp is really the missing piece — it's what would let McDowell or the SeeSat-L folks (or you, cross-referencing against orbital elements) confirm which specific stage and pass you were looking at, rather than leaving it at "probably one of these three."
+
+Feel free to send it over when you have it, or just the EXIF timestamp if that's easier — happy to help pin it down further at that point.
