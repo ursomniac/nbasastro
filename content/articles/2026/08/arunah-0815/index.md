@@ -1,7 +1,6 @@
 ---
 title: "Member Observing Night: Arunah Hill - August 15"
-date: 2026-08-17
-authors: ["Bob Donahue"]
+date: 2026-08-16
 description: "Perseids, Saturn, and a hill full of members and guests — plus an unplanned encounter with a SpaceX second stage that had half of Arunah Hill wondering if it was a UFO."
 byline: "Outreach, Perseids, and ... a UFO?"
 series: ["members-skies", "nbas-events"]
@@ -42,7 +41,7 @@ Not everything we saw that night was on the observing list.
 {{< nbas-image src="Falcon-9-path.webp" 
 caption="Approximate path of the object in the northern sky" >}}
 
-Sometime around 11 p.m., my friend Laura was the first to notice it: a bright point of light with a faint, expanding cloud around it, moving steadily across the northern sky — well above the horizon, drifting from the direction of Boötes over toward Cassiopeia, west to east, over the course of a few minutes. Within a minute or two, half the hill was watching and asking the same question, with several people snapping images of this strange interloper.
+Sometime around 11 p.m., visitor Laura Gaffney was the first to notice it: a bright point of light with a faint, expanding cloud around it, moving steadily across the northern sky — well above the horizon, drifting from the direction of Boötes over toward Cassiopeia, west to east, over the course of a few minutes. Within a minute or two, half the hill was watching and asking the same question, with several people snapping images of this strange interloper.
 
 It took a little musing, but eventually our "UFO" became entirely identified.
 Here's what we've been able to piece together:
