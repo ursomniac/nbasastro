@@ -1,0 +1,42 @@
+---
+title: "Constellation Highlight: Cassiopeia"
+date: 2026-10-01
+description: "The queen who never sets — why Cassiopeia's distinctive 'W' is one of the easiest constellations to learn, and one of the richest to explore."
+byline: "Constellation Highlight"
+series: ["constellation-highlight"]
+thumbnail: icon.webp
+contributors: ["TBD"]
+---
+
+<!-- ✏️ Series slug, thumbnail, and contributor are placeholders — swap in whatever this recurring feature actually uses on the site. -->
+
+If you've spent any time at Arunah Hill after dark, you already know Cassiopeia, even if you haven't learned her name. She's the bright, unmistakable "W" (or "M," depending on the hour) tracing its way around Polaris on the opposite side of the sky from the Big Dipper. October evenings are her best season — by mid-evening she's climbing high overhead, About as prominent as she ever gets.
+
+## Finding Her
+
+Cassiopeia is circumpolar from our latitude, which means she never sets — she's up there every clear night of the year, just at different heights and orientations. In October evenings, look toward the north and northeast; you'll find her well up, forming a bold zigzag of five roughly equal stars. If the Big Dipper is below the pole and hard to see, Cassiopeia will be riding high — the two constellations trade places throughout the night and the year, always on opposite sides of Polaris.
+
+The five stars of the "W," from one end to the other, are Caph, Schedar, Gamma Cassiopeiae, Ruchbah, and Segin. Schedar and Ruchbah bracket the middle star, Gamma Cas, which is worth a second look:
+
+## Gamma Cassiopeiae — the Star That Won't Behave
+
+Gamma Cas is the unpredictable one — a hot, rapidly-spinning star that periodically throws off a disk of gas, brightening or dimming by more than a magnitude over months or years with no reliable schedule. It's the namesake of an entire class of variable stars (the "Gamma Cassiopeiae variables"), and it's bright enough to track with the naked eye. Worth comparing its brightness against Schedar and Ruchbah on either side each time you're out — there's no telling what you'll find.
+
+## Mythology
+
+Cassiopeia was the queen of Aethiopia in Greek myth, and her constellation is really a punishment. She boasted that her beauty (or her daughter Andromeda's, depending on the telling) surpassed that of the sea nymphs, the Nereids — an insult that reached Poseidon, who sent a sea monster to ravage the coast. The chain of consequences from that boast gives us several neighboring constellations: Andromeda was chained to a rock as an offering to the monster, Cetus is the monster itself, and Perseus is the hero who rescued her. Cassiopeia's own punishment was to be placed in the sky bound to a throne, condemned to circle the celestial pole forever — spending half of every night, in the old telling, hanging upside-down.
+
+## What to Look For
+
+Cassiopeia sits right in a rich stretch of the Milky Way, which makes her a good hunting ground even in modest binoculars or a small scope:
+
+- **M52** — an open cluster of a few hundred stars, compact and bright enough to be a satisfying binocular target, better resolved in a telescope.
+- **M103** — a smaller, looser open cluster near Ruchbah, one of the more distant Messier open clusters.
+- **NGC 457** — nicknamed the Owl Cluster or the E.T. Cluster, this is a genuine crowd-pleaser at public outreach nights: two bright stars form a pair of glowing "eyes," with fainter stars trailing off to suggest a body and wings (or, if you prefer, a very determined alien). Easy in almost any scope.
+- **NGC 663** — another rewarding open cluster, a bit fainter than M52 but worth the detour if you're already sweeping this part of the sky.
+
+<!-- ✏️ Good spot for a finder chart or a member's astrophoto of NGC 457 if we have one — the Owl/E.T. Cluster photographs well even with modest gear. -->
+
+## One More Thing
+
+If you were on the hill for our August observing night, you've actually watched something cross right through Cassiopeia already — the SpaceX second stage that had half the group wondering if it was a UFO swept out of Boötes and into Cassiopeia on its way north. So next time you're tracing out that "W," you're looking at the same patch of sky that hosted our own local space mystery.

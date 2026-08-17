@@ -1,0 +1,41 @@
+---
+title: "Binocular Challenge: Find Vesta!"
+date: 2026-10-01
+description: "The brightest asteroid in the solar system is having its best week of the year — here's how to catch it, no telescope required."
+byline: "Binocular Challenge"
+series: ["binocular-challenge"]
+thumbnail: icon.webp
+contributors: ["TBD"]
+---
+
+<!-- ✏️ Series slug, thumbnail, and contributor are placeholders — swap in whatever this recurring feature actually uses on the site. -->
+
+Most of the objects in the asteroid belt need a serious telescope and a dark sky just to register as a faint smudge. Vesta is the exception — the brightest asteroid we can see from Earth, and right now, it's at its best.
+
+## Why Now
+
+Vesta reaches opposition — directly opposite the Sun, at its closest and brightest for this apparition — on **October 13**. By the first week of October it's already brightened to around magnitude 6.6, and it'll peak at about magnitude 6.3 at opposition itself before starting to fade again through November. That's within reach of binoculars from just about anywhere, and a genuine (if challenging) naked-eye target from a dark site like Arunah Hill.
+
+This is actually Vesta's *second* opposition of 2026 — it also had a brighter apparition back in May — but this fall pass is a comfortable one for evening observers, since Vesta will be up for most of the night and highest in the sky around midnight.
+
+## Where to Look
+
+Vesta is currently working its way through **Cetus, the Whale** — a sprawling but dim constellation south of Pisces and Aries, low in the southeast during the evening this time of year. To get oriented:
+
+1. Find the **Great Square of Pegasus**, high in the east on October evenings — four moderately bright stars forming a big, obvious square.
+2. Use the western edge of the Square (the line through Alpheratz and Algenib) to point south, dropping down through the "Circlet" of Pisces.
+3. Keep going south into Cetus, and look for a triangle formed by **Eta Ceti**, **Iota Ceti**, and **Deneb Kaitos** (Beta Ceti) — Deneb Kaitos is the standout, a 2nd-magnitude star that's by far the brightest thing in this otherwise faint stretch of sky.
+
+Vesta's exact position shifts night to night, so rather than us trying to describe a moving target in prose, pull up a current finder chart before you head out — [in-the-sky.org's printable Vesta finder charts](https://in-the-sky.org/findercharts2.php?id=A4) are built for exactly this, or just check tonight's position in Stellarium or SkySafari.
+
+## How to Confirm You've Actually Got It
+
+Vesta looks like nothing special through binoculars — just another faint point of light. The trick amateur astronomers have always used is the same one that first revealed these objects aren't stars: **watch it move.** Sketch (or photograph) the field of faint stars where the chart says Vesta should be, then come back a night or two later and compare. Everything else will have stayed put; Vesta will have visibly shifted against the background. That's your confirmation.
+
+## Why It's Worth the Effort
+
+Vesta is the second-most-massive object in the asteroid belt and the brightest one we can see, largely because its surface is unusually reflective — a mix of basaltic lava flows from a long-dead volcanic past. NASA's Dawn spacecraft orbited it for over a year (2011–2012) and mapped it in detail before moving on to Ceres. Vesta's also one of the few asteroids we have actual pieces of on Earth: chunks of it were blasted off in ancient impacts and eventually fell as meteorites (the HED group — Howardites, Eucrites, and Diogenites), so somewhere out there, someone's meteorite collection has literal pieces of the same object you're tracking down in binoculars.
+
+<!-- ✏️ Good spot for a wide-field finder chart image if we want to build one rather than just linking out to in-the-sky.org. -->
+
+Clear skies, and let us know if you find it!
