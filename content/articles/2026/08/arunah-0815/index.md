@@ -6,10 +6,13 @@ byline: "Outreach, Perseids, and ... a UFO?"
 series: ["members-skies", "nbas-events"]
 tags: ["rocket launch", "Space-X"]
 thumbnail: icon.webp
-contributors: ["Kevin Marsh"]
+contributors: ["Kevin Marsh", "Geneva Smith", "Doug Gaffney"]
 ---
 
 ## Perseids, Saturn, and a Packed Hill
+
+{{< nbas-image src="Kevin_Marsh/IMG_4399.jpeg" fullwidth="true"
+caption="Arunah Hill - one of the darkest sky locations in Massachusetts - Kevin Marsh, NBAS" >}}
 
 This was planned as our monthly opportunity for members to get together at
 one of our favorite observing spots, but this time adding in a dinnertime
@@ -18,17 +21,22 @@ cookout, and some socializing, followed by stargazing.   [Arunah Hill](https://w
 The day was chosen because of an important coincidence: the tail end of the
 Perseid meteor shower, and a close-to-New Moon.  So there was the possibility of dark skies and a good reason to scan the skies.
 
+{{< nbas-gallery title="Moon and Venus - Geneva Smith" style="carousel" size="300px" >}}
+Geneva_Smith/IMG_1836.jpeg | Moon and Venus | Geneva Smith, NBAS
+Geneva_Smith/IMG_1850.jpeg | Moon/Venus and Spica (left) and Porrima (γ Vir, above) | Geneva Smith, NBAS
+Geneva_Smith/IMG_1844.jpeg | Moon and Venus - almost dark! | Geneva Smith, NBAS
+{{< /nbas-gallery >}}
+
 The weather _largely_ cooperated: summer humidity made things a little moist, but not too bad, and for most of the night, cirrus clouds wafted overhead.
 
 {{< nbas-gallery title="From the Hill" style="carousel" size="300px" >}}
-doug-1-selfie.webp | Laura and Doug awaiting the Perseids 
-02-doug-bob-with-fleet.webp | NBAS member Bob Donahue with (part of) his telescope "fleet"
-03-doug-ah-dob.webp | Arunah Hill's resident Dobsonian
-04-doug-kevin-dob.webp | NBAS president Kevin Marsh with his Dobsonian
-05-doug-ed-explains-the-gartner.webp | Arunah Hill member Ed Faits explains the Gaertner telescope
+Doug_Gaffney/01-selfie.webp | Laura and Doug awaiting the Perseids  | Doug Gaffney
+Doug_Gaffney/02-doug-bob-with-fleet.webp | NBAS member Bob Donahue with (part of) his telescope "fleet" | Doug Gaffney
+Doug_Gaffney/03-doug-ah-dob.webp | Arunah Hill's resident Dobsonian | Doug Gaffney
+Doug_Gaffney/04-doug-kevin-dob.webp | NBAS president Kevin Marsh with his Dobsonian | Doug Gaffney
+Doug_Gaffney/05-doug-ed-explains-the-gartner.webp | Arunah Hill member Ed Faits explains the Gaertner telescope | Doug Gaffney
+Kevin_Marsh/IMG_4396.jpeg | At the Gaertner | Kevin Marsh, NBAS
 {{< /nbas-gallery >}}
-
-(All pictures by Doug Gaffney.)
 
 ## Arunah Hill
 
@@ -61,7 +69,6 @@ That timestamp is the key. It's **109 minutes and 59 seconds** after the Globals
 
 Our best explanation: the spent second stage, having deployed its payload about an hour earlier, coasted nearly all the way around the Earth before firing its engine one last time to dump its remaining propellant and set up a controlled reentry. That venting propellant expands and freezes into a sunlit cloud of ice crystals — even though it was fully dark on the ground, the stage itself was still high enough to be in direct sunlight — producing the same "SpaceX spiral" or "space jellyfish" effect that's been photographed over New England several times in the past year, from other Falcon 9, Vulcan, and Ariane 6 missions.
 
-
 {{< member-image src="kevin-2301.webp"
    title="SpaceX second stage venting, seen from Arunah Hill"
    author="Kevin Marsh"
@@ -74,7 +81,7 @@ The photo that cracked the case. Full EXIF data pinned the shot to just before 1
 {{< /member-image >}}
 
 {{< nbas-gallery title="More Views of the Same Object" style="grid" size="280px" square-render="false" >}}
-doug-falcon.webp | Positioned against the Little Dipper | Photo: Doug Gaffney
+Doug_Gaffney/doug-falcon.webp | Positioned against the Little Dipper | Photo: Doug Gaffney
 {{< /nbas-gallery >}}
 
 (Bob's aside: I'm _slightly_ disappointed.  All of my attempts at rocket launches at Arunah Hill Days in the past only resulted in my rockets almost immediately disappearing, never to be seen again, and I had the faint hope that *maybe* one of them had *finally* managed to make its way back!)
