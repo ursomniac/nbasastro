@@ -11,7 +11,7 @@ contributors: ["Kevin Marsh", "Geneva Smith", "Doug Gaffney"]
 
 ## Perseids, Saturn, and a Packed Hill
 
-{{< nbas-image src="Kevin_Marsh/IMG_4399.jpeg" fullwidth="true"
+{{< nbas-image src="Kevin_Marsh/IMG_8903.webp" fullwidth="true"
 caption="Arunah Hill - one of the darkest sky locations in Massachusetts - Kevin Marsh, NBAS" >}}
 
 This was planned as our monthly opportunity for members to get together at
@@ -22,20 +22,20 @@ The day was chosen because of an important coincidence: the tail end of the
 Perseid meteor shower, and a close-to-New Moon.  So there was the possibility of dark skies and a good reason to scan the skies.
 
 {{< nbas-gallery title="Moon and Venus - Geneva Smith" style="carousel" size="300px" >}}
-Geneva_Smith/IMG_1836.jpeg | Moon and Venus | Geneva Smith, NBAS
-Geneva_Smith/IMG_1850.jpeg | Moon/Venus and Spica (left) and Porrima (γ Vir, above) | Geneva Smith, NBAS
-Geneva_Smith/IMG_1844.jpeg | Moon and Venus - almost dark! | Geneva Smith, NBAS
+Geneva_Smith/IMG_1836.webp | Moon and Venus | Geneva Smith, NBAS
+Geneva_Smith/IMG_1850.webp | Moon/Venus and Spica (left) and Porrima (γ Vir, above) | Geneva Smith, NBAS
+Geneva_Smith/IMG_1844.webp | Moon and Venus - almost dark! | Geneva Smith, NBAS
 {{< /nbas-gallery >}}
 
 The weather _largely_ cooperated: summer humidity made things a little moist, but not too bad, and for most of the night, cirrus clouds wafted overhead.
 
 {{< nbas-gallery title="From the Hill" style="carousel" size="300px" >}}
-Doug_Gaffney/01-selfie.webp | Laura and Doug awaiting the Perseids  | Doug Gaffney
+Doug_Gaffney/01-doug-selfie.webp | Laura and Doug awaiting the Perseids  | Doug Gaffney
 Doug_Gaffney/02-doug-bob-with-fleet.webp | NBAS member Bob Donahue with (part of) his telescope "fleet" | Doug Gaffney
 Doug_Gaffney/03-doug-ah-dob.webp | Arunah Hill's resident Dobsonian | Doug Gaffney
 Doug_Gaffney/04-doug-kevin-dob.webp | NBAS president Kevin Marsh with his Dobsonian | Doug Gaffney
 Doug_Gaffney/05-doug-ed-explains-the-gartner.webp | Arunah Hill member Ed Faits explains the Gaertner telescope | Doug Gaffney
-Kevin_Marsh/IMG_4396.jpeg | At the Gaertner | Kevin Marsh, NBAS
+Kevin_Marsh/IMG_4396.webp | At the Gaertner | Kevin Marsh, NBAS
 {{< /nbas-gallery >}}
 
 ## Arunah Hill
