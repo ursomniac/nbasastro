@@ -9,7 +9,7 @@ byline: "Four asteroids - four different stories!"
 sso_asteroids: ["4 Vesta", "2 Pallas", "9 Metis", "192 Nausikaa"]
 tags: []
 thumbnail: "thumbnail.webp"
-banner: "hero.webp"
+banner: "hero.png"
 ---
 
 <style>
@@ -28,7 +28,7 @@ summary {
 
 ## Introduction
 
-{{< nbas-image src="hero.webp" fullwidth="true" >}}
+{{< nbas-image src="hero.png" fullwidth="true" >}}
 
 Between Mars and Jupiter, in a belt of rubble left over from the solar system's earliest days, there are millions of asteroids. 
 Only a small handful are ever bright enough for
@@ -81,24 +81,19 @@ Here's how tonight's four compare, side by side:
 | 2 Pallas     | ~512 km | 2.77 AU | 0.23 | 34.9° | 4.62 yr | 0.159 |
 | 4 Vesta      | ~525 km | 2.36 AU | 0.09 |  7.1° | 3.63 yr | 0.423 |
 
-4 Vesta and 2 Pallas are the second and third largest Main Belt asteroids (behind 1 Ceres).  9 Metis and 192 Nausikaa
+2 Pallas and 4 Vesta are the second and third largest Main Belt asteroids (behind 1 Ceres).  9 Metis and 192 Nausikaa
 are much smaller (about 35th for Metis, and in the 160s for Nausikaa).   
 
-So how do they get so bright at opposition to be good observing
-targets?   Aside from size, there are two other things:  orbital
-eccentricity, and albedo.  If an asteroid has a higher-than-average
-eccentricity (as do Pallas and Nausikaa), then depending on where
-it is in its orbit at/near opposition, the distance to Earth might
-be closer, making the asteroid brighter.  Similarly a higher albedo
-(reflectivity) makes an asteroid brighter;  many of the larger
-carbon-rich asteroids (like 1 Ceres) have low albedos lower than
-0.10 (for comparison, the Moon is 0.12, and asteroid 87 Sylvia is
-close to pitch black), and so asteroids like Vesta and Nausikaa
-stand out.
+So how do they get so bright at opposition to be good observing targets?   
+Aside from size, there are two other things:  orbital eccentricity, and albedo.
+If an asteroid has a higher-than-average eccentricity (as do Pallas and Nausikaa), then depending on where it
+is in its orbit at/near opposition, the distance to Earth might be closer, making the asteroid brighter.
+Similarly a higher albedo (reflectivity) makes an asteroid brighter;  many of the larger carbon-rich asteroids
+(like 1 Ceres) have low albedos lower than 0.10 (for comparison, the Moon is 0.12, and asteroid 87 Sylvia is close to pitch black), 
+and so asteroids like Vesta and Nausikaa stand out.
 
-While most of the Main Belt asteroids stick to the Ecliptic plane, Pallas's inclination is an extreme outlier -- though
-not entirely alone out there. 31 Euphrosyne, at 26.3 degrees, comes closer than anything else to rivaling it, even though
-Euphrosyne itself is only about half Pallas's diameter (267 km against Pallas's 512).
+While most of the Main Belt asteroids stick to the Ecliptic plane, Pallas's inclination is an extreme outlier (another large 
+asteroid, 15 Euphrosine is similar in size and inclination as Pallas).
 
 ## Why Now?
 
@@ -125,7 +120,7 @@ both conveniently parked in the same constellation a few weeks apart.
 
 ### 9 Metis: A Small Telescope's Discovery
 
-{{< nbas-image src="hero-metis.webp" width="500" align="right"
+{{< nbas-image src="hero-metis.png" width="500" align="right"
 caption="9 Metis shape based on lightcurve inversion.  Astronomical Institute of the Charles University: Josef Ďurech, Vojtěch Sidorin, CC BY 4.0, via Wikimedia Commons" >}}
 
 By the 1840s, the pace of asteroid discovery had gone quiet for decades. Vesta, found in 1807, was
@@ -135,7 +130,7 @@ April 25, 1848, came Metis -- found by Andrew Graham, an assistant at Markree Ob
 Sligo, Ireland.
 
 {{< clear >}}
-{{< nbas-image src="andrew-graham.webp" width="200" align="left" 
+{{< nbas-image src="andrew-graham.jpg" width="200" align="right" 
 caption="Andrew Graham (1815-1908), assistant at Markree Observatory in Sligo, Ireland" >}}
 
 Markree was, for a few years around 1834, home to the largest refracting telescope in the world --
@@ -156,14 +151,9 @@ body (some estimates put the original at 300-600 km across, Vesta-sized) shatter
 collision. Metis was once thought to anchor its own small asteroid family, but that grouping hasn't
 held up under closer study; the more interesting lead is a spectral resemblance to 113 Amalthea,
 hinting the two might be fragments of the same shattered parent rather than unrelated neighbors.
-It's usually filed as an S-type asteroid -- the standard "stony" bucket -- but it's a genuine
-borderline case: Metis is one of the specific examples cited for the closely related K-type
-classification instead, a spectral variant with a shallower silicate absorption and a notably
-lower albedo than typical S-types. That low-albedo reading (0.118, against Nausikaa's 0.23-0.26)
-fits the K-type case as well as anything -- it's a real ambiguity in the literature, not a settled
-call either way. It spins briskly, once every 5.08 hours -- close to Vesta's pace -- and its orbit
-is fairly ordinary as these things go, an inclination of just 5.6 degrees, nothing like the dramatic
-tilt we'll get to with Pallas. A quiet, small example of the same violent history that shaped Vesta,
+It spins briskly, once every 5.08 hours -- close to Vesta's pace -- and its orbit is fairly
+ordinary as these things go, an inclination of just 5.6 degrees, nothing like the dramatic tilt
+we'll get to with Pallas. A quiet, small example of the same violent history that shaped Vesta,
 just seen from the debris side rather than the survivor's side.
 
 #### Orbit and Ephemeris
@@ -215,7 +205,7 @@ All times  03:00 UT (11PM EDT, 10PM EST); Sun and Earth are distances in AU, res
 
 ### 192 Nausikaa: Named for a Princess Who Helped a Shipwrecked Hero
 
-{{< nbas-image src="johann-palisa.webp" width="200" align="right"
+{{< nbas-image src="johann-palisa.jpg" width="200" align="right"
 caption="Johann Palisa (1848-1925), astronomer at the Austrian Naval and Vienna Observatories" >}}
 
 Nausikaa was discovered on February 17, 1879, by Johann Palisa at Pola Observatory (in what's now
@@ -229,17 +219,12 @@ episodes in a poem mostly about monsters and revenge.
 
 #### Why It's Worth the Chase
 
-{{< nbas-image src="hero-nausikaa.webp" width="500" align="right"
+{{< nbas-image src="hero-nausikaa.png" width="500" align="right"
 caption="192 Nausikaa shape based on lightcurve inversion.  Astronomical Institute of the Charles University: Josef Ďurech, Vojtěch Sidorin, CC BY 4.0, via Wikimedia Commons" >}}
 
 Nausikaa is an S-type asteroid -- stony, rather than the carbon-rich material that dominates the
-belt's outer reaches -- and specifically an Sl-type in the more detailed SMASS scheme, meaning its
-spectrum carries an especially strong signature of olivine. That clean, crystalline silicate
-surface is also why it's one of the brighter objects on tonight's list: its albedo runs somewhere
-around 0.23 to 0.26 depending on which survey you check, well above Metis's notably darker 0.118,
-and a real part of why Nausikaa punches above its size at opposition. It's also a genuinely
-elongated body: roughly 103 by 90 kilometers, tumbling through a slow 13.6-hour rotation, more than
-twice as long as Metis's day. Its orbit is moderately
+belt's outer reaches -- and a genuinely elongated one: roughly 103 by 90 kilometers, tumbling
+through a slow 13.6-hour rotation, more than twice as long as Metis's day. Its orbit is moderately
 eccentric (about 0.245 -- noticeably more elongated than Metis's 0.12), which is part of why its
 opposition brightness varies more from apparition to apparition than a more circular orbit would
 allow. There's also a small, unresolved mystery attached to it: lightcurve observations in 1985
@@ -294,7 +279,7 @@ All times  03:00 UT (11PM EDT, 10PM EST); Sun and Earth are distances in AU, res
 
 ### 2 Pallas: Lurking in the Outer Reaches of the Main Belt
 
-{{< nbas-image src="heinrich-wilhelm-olbers.webp" width="200" align="right"
+{{< nbas-image src="heinrich-wilhelm-olbers.jpg" width="200" align="right"
 caption="Heinrich Wilhelm Olbers (1758-1840)" >}}
 
 Pallas's discovery only makes sense with a bit of backstory. In 1800, a group of German astronomers
@@ -311,7 +296,7 @@ Ceres to refine its orbit when, on March 28, 1802, he noticed a second object ne
 bodies sharing roughly the same orbit undercut the whole premise of a single missing planet, and
 it was this discovery that pushed William Herschel to coin a new word for them: "asteroid."
 
-{{< nbas-image src="the-orbits.webp" width="500" align="left"
+{{< nbas-image src="the-orbits.jpg" width="500" align="left"
 caption="Some 19th century books included the first four asteroids as planets: Moon, F. G.J. & G. Pickett, Public domain, via Wikimedia Commons" >}}
 It's worth pausing on that word. At the time, none of the first four discoveries -- Ceres,
 Pallas, Juno, and Vesta -- were considered anything other than planets; Herschel's coinage didn't
@@ -339,44 +324,23 @@ what has is redshifted out of visibility.)
 
 Pallas itself is the third-largest asteroid by both mass and volume, behind only Ceres (now
 classified as a dwarf planet) and Vesta, and like Ceres it's thought to be a genuine leftover
-protoplanet -- a building block that never finished building. Its composition backs that up:
-Pallas is a B-type asteroid, a rarer, more primitive offshoot of the carbon-rich C-type family,
-with a surface spectrum close to carbonaceous chondrite meteorites but distinctly bluer, and
-carrying more hydrated minerals than a typical C-type. That's evidence of a surface once altered
-by liquid water, early enough in the solar system's history that Pallas may have briefly had wet
-chemistry going on before it froze into the body we see today.
+protoplanet -- a building block that never finished building.
 
 #### Why It's Worth the Chase
 
-{{< nbas-image src="pallas-sphere-2.webp" align="right" width="450"
+{{< nbas-image src="pallas-sphere-2.jpg" align="right" width="450"
 caption="ESO/M. Marsset et al./MISTRAL algorithm (ONERA/CNRS), CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons" >}}
 The real story here is the orbit. Most asteroids in the main belt keep close to the same flat plane
 the planets orbit in -- inclinations of a few degrees are typical. Pallas is tilted 34.9 degrees to
-that plane -- the most inclined orbit of any large asteroid, clear of its nearest rival, 31 Euphrosyne,
-by almost nine degrees -- and exactly *why* is still an open question. The general explanation for the belt's messy orbits is Jupiter's own early migration --
+that plane, by far the most inclined orbit of any large asteroid, and exactly *why* is still an open
+question. The general explanation for the belt's messy orbits is Jupiter's own early migration --
 the "Grand Tack," in which a young Jupiter swept inward and then back out, scattering material onto
 wildly different paths -- but pinning that broad picture to Pallas's specific, extreme tilt is still
 active research, not a settled answer. That steep tilt is also a practical problem: matching
 Pallas's orbit costs far more fuel than almost anything else in the belt, and no mission has ever
 gone there. Pallas also rotates in under eight hours -- slower than Vesta's brisk 5.3-hour day, but
 faster than Ceres's 9-hour one -- with its axis tipped so far over (about 84 degrees) that it spins
-almost on its side, closer to rolling around the Sun than standing upright the way most of its
-neighbors do.
-
-It's tempting to guess the tilt itself is a collision scar -- the same story usually told about
-Uranus's sideways spin or Venus's backwards rotation, both generally blamed on a single ancient
-impact. For Pallas specifically, the actual research runs the other way. The VLT survey behind the
-images on this page (Marsset et al., the same 2020 study that revealed the "golf ball" surface)
-found that the inclination and eccentricity came first, and that they're the *reason* the impacts
-were so violent: plowing through the belt at that steep an angle means every collision lands two to
-three times harder than an equivalent hit on Vesta or Ceres. The tilt caused the cratering, not the
-other way around. There was a genuinely massive collision in Pallas's past -- roughly 1.7 billion
-years ago, from an impactor 20-40 kilometers across -- but the evidence ties it to the trailing
-family of smaller Pallas fragments, not to any documented shift in Pallas's own orbit. The pattern
-does show up elsewhere in the belt: 31 Euphrosyne's own scattered family of some 2,000 fragments
-really is linked to a collision, and really does cluster at high inclination. But that's a story
-about debris thrown clear after a breakup, not the primary body itself getting knocked onto a new
-plane -- so where Pallas's own tilt actually came from is still, genuinely, an open question.
+almost on its side, giving it seasons more extreme than anything else in the belt.
 
 
 #### Orbit and Ephemeris
@@ -426,17 +390,8 @@ All times  03:00 UT (11PM EDT, 10PM EST); Sun and Earth are distances in AU, res
 
 ### 4 Vesta: the Brightest Main-Belt Asteroid
 
-<figure class="nbas-media-container align-left" style="width: 345px; max-width: 100%; margin: 2rem auto;">
-  <video width="345" autoplay loop muted playsinline>
-    <source src="vesta-rotation.webm" type="video/webm">
-    <source src="vesta-rotation.mp4" type="video/mp4">
-  </video>
-  <figcaption class="nbas-media-caption" style="text-align: center; font-size: 0.85rem; color: #888; padding: 5px;">
-    Vesta rotation: NASA/JPL-Caltech/UCLA/MPS/DLR/IDA
-  </figcaption>
-</figure>
-
-
+{{< nbas-image src="Vesta_Rotation.gif" width="400" align="left"
+caption="Vesta rotation: NASA/JPL-Caltech/UCLA/MPS/DLR/IDA; Little Mountain 5, Public domain, via Wikimedia Commons" >}}
 Vesta's discoverer was already a familiar name by 1807: Heinrich Wilhelm Olbers, the same person
 behind Pallas five years earlier, still searching for fragments of his hypothesized shattered
 planet. He didn't name this one himself, either -- by then it had become something of a tradition
@@ -446,12 +401,9 @@ who picked Vesta, the Roman goddess of the hearth.
 {{< clear >}}
 #### Why It's Worth the Chase
 
-{{< nbas-image src="vesta-meteor.webp" width="350" align="right"
+{{< nbas-image src="vesta-meteor.jpg" width="350" align="right"
 caption="R. Kempton (New England Meteoritical Services), Public domain, via Wikimedia Commons" >}}
-Vesta is chemically distinctive enough to have earned its own spectral classification, V-type --
-named for it specifically, because nothing else in the belt quite matches its basaltic, volcanic
-surface, rich in pyroxene minerals, the signature of ancient solidified lava rather than plain
-undifferentiated rock. Vesta's story just changed, though. For years, the settled picture -- built on Dawn spacecraft data from
+Vesta's story just changed. For years, the settled picture -- built on Dawn spacecraft data from
 2011-2012 -- was that Vesta had genuinely differentiated like a small planet: a metallic core about
 220 kilometers across, a rocky mantle, a basaltic crust, the whole terrestrial-planet package in
 miniature. Then in April 2025, a reanalysis of Dawn's gravity data (Park et al., published in
@@ -464,7 +416,7 @@ Earth (Howardites, Eucrites, and Diogenites, all confirmed fragments of Vesta) m
 a planet that no longer exists in any recognizable form. Nobody knows which planet that would have
 been. It's a genuinely open question, less than two years old as of this writing.
 
-{{< nbas-image src="Rheasilvia_and_Veneneia.webp" width="400" align="left"
+{{< nbas-image src="Rheasilvia_and_Veneneia.jpg" width="400" align="left"
 caption="NASA/JPL-Caltech/UCLA/MPS/DLR/IDA/PSI, Public domain, via Wikimedia Commons" >}}
 What Dawn *did* confirm without controversy is the scale of Vesta's damage: an enormous impact
 basin near its south pole, Rheasilvia, roughly 500 kilometers across on a body only about 525
@@ -527,7 +479,7 @@ All times  03:00 UT (11PM EDT, 10PM EST); Sun and Earth are distances in AU, res
 
 ### Binoculars
 
-{{< nbas-image src="vesta-261013-0200-15x70.webp" width="400" align="right"
+{{< nbas-image src="vesta-261013-0200-15x70.png" width="400" align="right"
 caption="Vesta, 13-Oct at 10 PM with 15x70 binoculars" >}}
 
 Vesta alone is worth pulling out a pair of 10x50s for. At magnitude 6.5 and brightening toward
@@ -548,8 +500,8 @@ patience.
 ### Smart Scopes
 
 {{< nbas-gallery size="350px" style="grid" title="Smart Scope Snapshots" >}}
-2_pallas-equ-250825-5m.webp | 2 Pallas, eQuinox 2, 5 min | Bob Donahue, NBAS
-4_vesta-equ-20231222-2m.webp| 4 Vesta, eQuinox 2, 2 min | Bob Donahue, NBAS
+2_pallas-equ-250825-5m.jpg | 2 Pallas, eQuinox 2, 5 min | Bob Donahue, NBAS
+4_vesta-equ-20231222-2m.jpg| 4 Vesta, eQuinox 2, 2 min | Bob Donahue, NBAS
 {{< /nbas-gallery >}}
 
 This is close to ideal smart-scope territory: point, stack a short sequence, and let the software
