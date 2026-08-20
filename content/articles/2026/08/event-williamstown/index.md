@@ -2,7 +2,7 @@
 title: "NBAS Public Observing: Williamstown Historical Museum"
 date: 2026-08-08
 pin_until: 2026-09-13
-event_date: 2026-09-12T19:00:00-04:00
+event_date: 2026-09-12T19:30:00-04:00
 event_location: Williamstown Historical Museum
 description: "Join NBAS on Sept. 12 for a public talk on 30 years of exoplanet discoveries, followed by telescope viewing at the Williamstown Historical Museum."
 byline: "A public talk on exoplanets, followed by telescope viewing under the stars."
@@ -19,7 +19,7 @@ We're excited to announce an NBAS Public Observing Event on September 12th at th
 
 {{< nbas-image src="talk_banner.webp" fullwidth="true" >}}
 
-Things start off at 7PM with a public lecture: "30 Years of Exoplanets: What have we learned" by NBAS member,
+Things start off at 7:30 PM with a public lecture: "30 Years of Exoplanets: What have we learned" by NBAS member,
 Dr. Bob Donahue showing how the discovery of exoplanets has completely changed our understanding of how the solar
 system formed, what types of planets are common around other stars, and the continued search for Earth-like planets.
 
