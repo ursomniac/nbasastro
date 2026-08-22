@@ -6,8 +6,8 @@ description: "13 deep-sky objects with genuinely spooky nicknames -- ghosts, a w
 byline: "13 objects with 'spooky' nicknames for Halloween!"
 series: ["wider-view"]
 author: ["bob-donahue"]
-thumbnail: "thumbnail.jpg"
-banner: "banner.png"
+thumbnail: "thumbnail.webp"
+banner: "banner.webp"
 
 dso_messier: ["78"]
 dso_caldwell: ["13", "33", "34", "56"]
@@ -20,7 +20,7 @@ dso_other: ["IC 63", "IC 1340", "IC 2118", "Sh 2-136"]
 
 With autumn in force, longer nights, crisper air, comes Halloween, and there are plenty of "treats" to find in the skies above.   Coincidentally, **13** objects (enough to cause triskaidekaphobes to shudder) have nicknames that align with these "spooky" times.
 
-{{< nbas-image src="banner.png" fullwidth="true" 
+{{< nbas-image src="banner.webp" fullwidth="true" 
 caption="Sweeping from Aquila to Orion, our selections provide an entire evening of observing!" >}}
 
 Every one of the 13 objects below has picked up a nickname somewhere along the way -- ghosts,
@@ -39,7 +39,7 @@ easier.
 |  1 | NGC 6781         | Aql | Pl. Neb.   | 19h18m +06.5° | 11.4 | 1.9'    |
 |  2 | NGC 6939         | Cep | Op. Cl.    | 20h32m +60.7° |  7.8 | 10'     |
 |  3 | NGC 6960/C 34    | Cyg | Sup. Rem.  | 20h46m +30.7° |      | 70'x 6' |
-|  4 | NGC 6695/IC 1340 | Cyg | Sup. Rem.  | 20h56m +31.7° |      | 12'     |
+|  4 | NGC 6995/IC 1340 | Cyg | Sup. Rem.  | 20h56m +31.7° |      | 12'     |
 |  5 | Sh2-136          | Cep | Ref. Neb.  | 21h16m +68.3° |      | 20'x10' |
 |  6 | NGC 7380         | Cep | Cl. + Neb. | 22h47m +58.1° |  7.2 | 20'     |
 |  7 | NGC 7790         | Cas | Op. Cl.    | 23h58m +61.2° |  8.5 | 5.0'    |
@@ -52,7 +52,7 @@ easier.
 
 ### 1. NGC 6781 - the Ghost of the Moon
 
-{{< nbas-image src="ngc_6781-equ-21m.jpg" width="400" align="left"
+{{< nbas-image src="ngc_6781-equ-21m.webp" width="400" align="left"
 caption="Bob Donahue, NBAS, eQuinox 2, 21 min" >}}
 
 William Herschel found this one on July 30, 1788, and it's a genuine ghost in the sense that
@@ -66,7 +66,7 @@ for the same reason.
 {{< clear >}}
 ### 2. NGC 6939 - the Ghost Bush Cluster
 
-{{< nbas-image src="ngc_6939-s50-10m.jpg" width="400" align="right"
+{{< nbas-image src="ngc_6939-s50-10m.webp" width="400" align="right"
 caption="Bob Donahue, NBAS, Seestar S50, 10 min" >}}
 
 Discovered by William Herschel in 1798, this open cluster in Cepheus is genuinely old for its
@@ -77,13 +77,13 @@ with no single origin story that's won out. It sits conveniently close to the Fi
 (NGC 6946), making the two a natural pair in the same field of view.
 
 {{< clear >}}
-{{< nbas-image src="veil-bat-large-d30-70m.jpg" fullwidth="true"
+{{< nbas-image src="veil-bat-large-d30-70m.webp" fullwidth="true"
 caption="Bob Donahue, NBAS, Seestar S30, 70 min" >}}
 
 {{< clear >}}
 ### 3. NGC 6960 / Caldwell 34 - the Witch's Broom
 
-{{< nbas-image src="c_34-S30-70m.jpg" width="500" align="left"
+{{< nbas-image src="c_34-S30-70m.webp" width="500" align="left"
 caption="Bob Donahue, NBAS, crop of the image above." >}}
 
 William Herschel discovered this in September 1784, though the "Witch's Broom" nickname is entirely
@@ -94,9 +94,9 @@ easiest, brightest piece of that wreckage to find -- the traditional starting po
 the rest of the Veil.
 
 {{< clear >}}
-### 4. NGC 6995 / IC 1340 the Bat Nebula
+### 4. NGC 6995 / IC 1340 - the Bat Nebula
 
-{{< nbas-image src="ngc_6995-s30-70m.jpg" width="400" align="right"
+{{< nbas-image src="ngc_6995-s30-70m.webp" width="400" align="right"
 caption="Bob Donahue, NBAS, crop of the image above." >}}
 
 The southern tip of the Eastern Veil, on the opposite side of the same supernova remnant from the
@@ -109,7 +109,7 @@ in 2025.   (To see the bat in the image, turn it almost upside-down.)
 {{< clear >}}
 ### 5. Sh 2-136 - the Ghost of Cepheus
 
-{{< nbas-image src="sh2_136-equ-large-126m.jpg" 
+{{< nbas-image src="sh2_136-equ-large-126m.webp" 
 caption="Bob Donahue, NBAS, eQuinox 2, 126 min" >}}
 
 Not a Herschel object at all -- this one comes from Stewart Sharpless's mid-20th-century survey of
@@ -123,7 +123,7 @@ it the name.
 {{< clear >}}
 ### 6. NGC 7380 - the Wizard Nebula
 
-{{< nbas-image src="ngc_7380-s50-LP-26m-wide.jpg" fullwidth="true"
+{{< nbas-image src="ngc_7380-s50-LP-26m-wide.webp" fullwidth="true"
 caption="Bob Donahue, NBAS, Seestar S50, LP filter, 26 min" >}}
 
 Another Caroline Herschel discovery -- she found this open cluster on August 7, 1787, with the
@@ -136,7 +136,7 @@ stars that does most of the work illuminating the whole region.
 {{< clear >}}
 ### 7. NGC 7790 - the Widow's Web Cluster
 
-{{< nbas-image src="ngc_7790-s50-9m.jpg" width="400" align="right"
+{{< nbas-image src="ngc_7790-s50-9m.webp" width="400" align="right"
 caption="Bob Donahue, NBAS, Seestar S50, 21 min.  Neighboring cluster NGC 7788 is at upper-left." >}}
 
 This one earns its keep scientifically, not just visually. NGC 7790 hosts three classical Cepheid
@@ -149,9 +149,9 @@ method against itself. The cluster itself sits around 10,800 light-years away in
 {{< clear >}}
 ### 8. IC 63 - the Ghost of Cassiopeia
 
-{{< nbas-image src="ic_63-equ1-yann-michel-niquet.jpg" width="380" align="left"
+{{< nbas-image src="ic_63-equ1-yann-michel-niquet.webp" width="380" align="left"
 caption="Courtesy Yann-Michel Niquet, eQuinox 1, Saint-Martin-le-Vinoux, France, Bortle 7/8, over four nights (over 12k frames with different filters)." >}}
-{{< nbas-image src="ic_63-s50-LP-34m.jpg" width="380" align="left"
+{{< nbas-image src="ic_63-s50-LP-34m.webp" width="380" align="left"
 caption="Bob Donahue, NBAS, Seestar S50, LP Filter, 34 min" >}}
 
 {{< clear >}}
@@ -166,9 +166,9 @@ detailed image of it in 2018 explicitly timed for Halloween.
 {{< clear >}}
 ### 9. NGC 246/Caldwell 56 - the Skull Nebula
 
-{{< nbas-image src="c_56-equ2-34m.jpg" width="320" align="right"
+{{< nbas-image src="c_56-equ2-34m.webp" width="320" align="right"
 caption="Bob Donahue, NBAS, eQuinox 2, 34m" >}}
-{{< nbas-image src="ngc_246-equ1-40m-phil-norms.jpeg" width="430" align="right"
+{{< nbas-image src="ngc_246-equ1-40m-phil-norms.webp" width="430" align="right"
 caption="Courtesy Phil Normandon, eQuinox 1, 40 min, outside Grenoble, France, 28 Aug 2024" >}}
 {{< clear >}}
 William Herschel found this one in 1785, and its central "eye" turns out to be more crowded than
@@ -181,7 +181,7 @@ shell rather than the cleaner rings most planetary nebulae show.
 {{< clear >}}
 ### 10. NGC 404 - Mirach's Ghost
 
-{{< nbas-image src="ngc_404-equ-15m.jpg" width="400" align="left"
+{{< nbas-image src="ngc_404-equ-15m.webp" width="400" align="left"
 caption="Bob Donahue, NBAS, eQuinox 2, 15 min, with &beta; Amdromedae (Mirach) just out of frame." >}}
 
 William Herschel discovered this one in 1784, and its nickname comes from pure bad luck of
@@ -198,7 +198,7 @@ kind, and one astronomers don't have many confirmed examples of.
 {{< clear >}}
 ### 11. NGC 457/Caldwell 13 - the Owl (or E.T.) Cluster
 
-{{< nbas-image src="c_13-s50-10m.jpg" width="400" align="right"
+{{< nbas-image src="c_13-s50-10m.webp" width="400" align="right"
 caption="Bob Donahue, NBAS, Seestar S50, 10 min.  The \"owl\" is swooping down the image, eyes in front with outstretched wings and a tail above." >}}
 
 William Herschel found this one in 1780. Unlike most of the nicknames on this list, this one has a
@@ -212,8 +212,8 @@ it would be one of the most luminous stars known -- brighter than Rigel.
 {{< clear >}}
 ### 12. IC 2118/NGC 1909 - the Witch's Head Nebula
 
-{{< nbas-image src="ngc_1909-equ-52m.jpg" width="400" align="left"
-caption="Bob Donahue, NBAS, eQuinox 2, 52 min" >}}
+{{< nbas-image src="witch_head-jim-wimmer-18h.webp" fullwidth="true"
+caption="The Witch's Head with Rigel.  Credit: Jim Wimmer SW Virginia, 18+ hours, Seestar S50 and S30 mosaic images." >}}
 
 Officially IC 2118, discovered photographically by Max Wolf in 1891 -- though it also carries the
 older designation NGC 1909, from a visual sighting by William Herschel in 1786 whose recorded
@@ -224,10 +224,14 @@ in neighboring Orion. The profile that gives it its name only really reads clear
 rotated -- most photographers turn it about 90 degrees from its natural orientation to bring out
 the witch's face.
 
+The image above comes from Jim Wimmer in SW Virginia.   This is a great example of what a **really dedicated imaging effort** can accomplish.   Over 2600 20-second and 30-second frames were used to create this image under Bortle 4 skies (about the same we have here) all using free post-processing software (Siril, GraXpert, Gimp, and Astrosharp).  
+
+Jim has a [YouTube channel](https://www.youtube.com/@PhotonRookie-vk7ge) "Photon Rookie" where he discusses his processing techniques using images taken with his Seestars.   He's imaged many of the most popular nebulae we know and love and his images are simply outstanding.   Definitely worth checking out, if you want to think about upping your image processing game, or even just to be amazed at his imaging.
+
 {{< clear >}}
 ### 13. Messier 78 - Casper the Ghost Nebula
 
-{{< nbas-image src="m_78-equ-30m.jpg" width="400" align="right"
+{{< nbas-image src="m_78-equ-30m.webp" width="400" align="right"
 caption="Bob Donahue, NBAS, eQuinox 2, 30 min" >}}
 
 Discovered by Pierre Méchain in early 1780 and added to Messier's own catalog that December --
@@ -266,4 +270,3 @@ the photograph tell the same story. IC 63 in particular transforms with narrowba
 revealing structure that's essentially invisible without it. If you only have time or equipment for
 a handful of these thirteen, the imaging-friendly ones are where the "spooky" shapes actually
 become unmistakable rather than a matter of imagination.
-
