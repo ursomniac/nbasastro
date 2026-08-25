@@ -109,8 +109,9 @@ in 2025.   (To see the bat in the image, turn it almost upside-down.)
 {{< clear >}}
 ### 5. Sh 2-136 - the Ghost of Cepheus
 
-{{< nbas-image src="sh2_136-equ-large-126m.webp" 
-caption="Bob Donahue, NBAS, eQuinox 2, 126 min" >}}
+{{< nbas-image src="sh2_136-s50-204m.webp" fullwidth="true"
+caption="Bob Donahue, NBAS, Seestar S50, 204 min" >}}
+{{< clear >}}
 
 Not a Herschel object at all -- this one comes from Stewart Sharpless's mid-20th-century survey of
 emission nebulae, catalogued in 1959. It's a Bok globule (a dense, cold pocket of gas and dust
