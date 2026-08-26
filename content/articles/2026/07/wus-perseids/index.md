@@ -3,7 +3,7 @@ title: "August 2026: Observing the Perseids"
 date: 2026-07-23
 pin_until: 2026-08-15
 authors: ["bob-donahue"]
-series: ["whats-up-in-the-sky"]
+series: ["whats-up-in-the-sky", "meteor-watch"]
 knowledgetopics: ["observing-guides"]
 description: "2026 Perseids peak August 12–13 under a new moon — perfect dark skies all night. What to expect, when to watch, and why you need a lawn chair."
 thumbnail: "thumbnail.webp"
