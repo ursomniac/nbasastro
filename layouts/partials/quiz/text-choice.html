@@ -1,0 +1,99 @@
+{{/*
+  layouts/partials/quiz/text-choice.html
+
+  Renderer: question may have an optional context image (e.g. a light curve);
+  answers are always text only. Answer count is variable (2, 3, or 4+) rather
+  than a fixed 2x2 grid, since the question determines how many plausible
+  options actually exist.
+
+  This is choose-star.html's optional top-image behavior combined with
+  text-only, variable-count answers instead of star-thumbnail answer panels.
+
+  Context (passed from quiz.html shortcode):
+    .Page    — the Hugo page (for Resources.GetMatch, only used if question has an image)
+    .Q       — the question map from front matter
+    .Qi      — zero-based question index
+    .IsFirst — bool
+    .IsLast  — bool
+
+  Question front matter:
+    text:  the question prompt (required)
+    image: (optional) page-resource filename for a context image — e.g. a light
+           curve — shown above the prompt. Omit the field entirely for a
+           text-only question.
+
+  Answer front matter:
+    text:         answer text (required)
+    correct:      true | false
+    explanation:  markdown string; shown in the explanation panel after a click
+
+  Answer data attributes consumed by the shared JS state machine:
+    data-correct  "true" | "false"
+    data-name     answer text
+
+  NOTE: explanation is intentionally NOT put in a data-attribute (see identify-image.html,
+  which does this and is the older pattern). It's stored in a hidden <span>, markdownified
+  at build time, matching choose-image.html / choose-star.html — this is the current
+  convention and handles bold/links/punctuation safely, which the attribute approach doesn't.
+
+  NOTE: no data-imgsrc is emitted on the answer buttons (identify-image/choose-image/choose-star
+  all emit one, even if empty, since the shared JS reads it to populate the explanation-panel
+  image). Confirm the shared JS treats a missing data-imgsrc attribute the same as an empty one —
+  if it doesn't, add data-imgsrc="" explicitly to each button below.
+
+  NOTE: only a single context image per question is supported. For a question that wants to
+  compare two light curves (e.g. Algol vs. Beta Lyrae side by side), source/build one composite
+  image containing both rather than extending this renderer to accept multiple images — keeps
+  the template and JS simple, and side-by-side comparison images are usually clearer anyway.
+*/}}
+
+{{ $page    := .Page }}
+{{ $q       := .Q }}
+{{ $qi      := .Qi }}
+{{ $isFirst := .IsFirst }}
+{{ $isLast  := .IsLast }}
+
+<div class="nbas-quiz-question{{ if $isFirst }} nbas-quiz-active{{ end }}"
+     data-question="{{ $qi }}">
+
+  {{/* ── Optional context image — present only when question has an `image` field ── */}}
+  {{ if $q.image }}
+    {{ with $page.Resources.GetMatch $q.image }}
+      <div class="nbas-quiz-mystery-wrap">
+        <img src="{{ .RelPermalink }}" alt="{{ $q.text }}">
+      </div>
+    {{ end }}
+  {{ end }}
+
+  {{/* ── Question text ── */}}
+  <p class="nbas-quiz-prompt">{{ $q.text }}</p>
+
+  {{/* ── Answer list: text-only, variable count ── */}}
+  <div class="nbas-quiz-answers nbas-quiz-answers--text-only">
+    {{ range $q.answers }}
+      <button class="nbas-quiz-answer nbas-quiz-answer--text-only"
+              data-correct="{{ .correct }}"
+              data-name="{{ .text }}">
+        <div class="nbas-quiz-answer-name">{{ .text }}</div>
+        <span class="nbas-quiz-answer-explanation" hidden>{{ .explanation | markdownify }}</span>
+      </button>
+    {{ end }}
+  </div>
+
+  {{/* ── Explanation panel (JS populates; hidden until first click) ── */}}
+  <div class="nbas-quiz-explanation">
+    <div class="nbas-quiz-explanation-inner">
+      <div class="nbas-quiz-explanation-body">
+        <div class="nbas-quiz-explanation-name"></div>
+        <div class="nbas-quiz-explanation-text"></div>
+        <div class="nbas-quiz-explanation-prompt"></div>
+      </div>
+    </div>
+  </div>
+
+  {{/* ── Next / Finish button ── */}}
+  <button class="nbas-quiz-next">
+    {{ if $isLast }}Finish Quiz →{{ else }}Next Question →{{ end }}
+  </button>
+
+</div>{{/* .nbas-quiz-question */}}

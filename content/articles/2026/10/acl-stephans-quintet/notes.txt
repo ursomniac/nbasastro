@@ -1,0 +1,168 @@
+# Stephan's Quintet
+**Series:** ACL (object-led — wonder first, mechanics woven in toward the end)
+**Slot:** October
+**Status:** outline / notes only — set aside until ready to draft
+
+---
+
+## Section order (proposed)
+
+1. Opening hook — the "It's a Wonderful Life" connection
+2. What you're actually looking at — the five (or six) galaxies
+3. First reveal — NGC 7320 isn't really there
+4. Second reveal — even the "real" group has an intruder, and evidence of an *older* one
+5. The shockwave — biggest ever seen, and it's building something new
+6. The mechanics aside — the discordant-redshift controversy
+7. Legacy — first of its kind, prototype for an entire class of object
+8. Observing notes — finding it yourself
+
+Rationale: lead with the most immediately disarming, least "science-y" hook (a beloved Christmas
+movie), use the visual tour to set up the first twist (it's not really five), let that escalate
+into the deeper twist (it's not even really one collision), peak on the most wonder-driven material
+(a new galaxy possibly being born from wreckage), *then* drop into the historical/mechanical aside
+once the reader is already hooked, and close on practical "go see it" grounding — consistent with
+the object-led ACL pattern used elsewhere on the site.
+
+---
+
+## 1. Opening hook — the film connection
+
+- The swirling opening of *It's a Wonderful Life* (1946) — the cosmic sequence representing Heaven
+  before Clarence gets his assignment — is based directly on real photographic plates of Stephan's
+  Quintet (sourced, Wikipedia/production history)
+- Good cold open: a 145-year-old smudgy photograph of five galaxies became the visual shorthand for
+  Heaven in one of the most-watched films in American history
+- [ ] TODO: dig for the specific production/plate source if a citable detail exists beyond the
+      general claim, to give this more than one sentence of backing
+
+**Visual ideas:**
+- [ ] Do NOT use an actual film still — likely not public domain/rights-clearable. Reference
+      verbally only, or link out rather than embed
+- [ ] Could open instead with a modern hero image (Hubble or JWST portrait) and let the film
+      anecdote be the first line of text rather than a paired image
+
+---
+
+## 2. What you're actually looking at
+
+- The five visually grouped galaxies: NGC 7317, 7318A, 7318B, 7319, 7320 — plus a probable sixth,
+  NGC 7320C, dangling off to the east on an old tidal tail
+- Discovered 1877 by Édouard Stephan at the Marseille Observatory — decades *before* anyone knew
+  galaxies were separate objects from our own Milky Way; he had no framework for what he'd actually
+  found
+- Located in Pegasus, ~270 million light-years away (for the true group)
+
+**Visual ideas:**
+- [ ] Hero image: Hubble WFC3 portrait (2009, "Galactic Wreckage" release) or the JWST composite —
+      both well-documented NASA/ESA public releases
+- [ ] Labeled diagram identifying each of the 5-6 galaxies by name — useful reference image,
+      readers will want to know which smudge is which
+
+---
+
+## 3. First reveal — NGC 7320 isn't really there
+
+- NGC 7320 is a foreground galaxy roughly 7x closer than the other four — a chance line-of-sight
+  alignment, not a real companion
+- Confirmed via redshift by the Burbidges in 1961
+- Hubble's own press materials call the name "Stephan's Quintet" itself "a bit of a misnomer"
+- Nice beat: even NASA/ESA acknowledge the name doesn't quite hold up
+
+**Visual ideas:**
+- [ ] Simple distance comparison diagram — NGC 7320 in the foreground, the true group far behind it,
+      showing why they only *look* grouped from Earth's vantage point
+
+---
+
+## 4. Second reveal — the group itself is mid-collision (or two)
+
+- NGC 7318B is a genuine intruder, currently ramming through the group core at ~800 km/s
+  (roughly 1.8 million mph) — a first-time passage, still ongoing
+- But there's evidence of an *earlier* intruder too: NGC 7320C, off to the east, appears to have
+  already punched through once before, stripping gas from the others and leaving two long parallel
+  tidal tails of very different ages (~100 million years vs. up to a billion years old)
+- So this isn't witnessing one collision — it's wreckage from at least two, staggered across time
+- This is probably the single best "I did not know that" beat in the whole piece — give it room
+
+**Visual ideas:**
+- [ ] Annotated diagram tracing the two tidal tails back to their sources — this is the kind of
+      image that makes the "two intruders, two eras" claim legible rather than just asserted
+- [ ] Could potentially adapt/simplify a published tidal-tail map (check licensing on the
+      astronomical imaging used in the source papers) rather than building fully from scratch
+
+---
+
+## 5. The shockwave — and a possible new galaxy being born
+
+- The NGC 7318B collision has produced one of the largest shockwaves ever observed — several times
+  the size of the Milky Way, heating intergalactic hydrogen gas to millions of degrees, first
+  detected via radio (1972), later confirmed in X-ray and infrared
+- Counter to the usual script (collisions like this normally trigger a firestorm of new star
+  formation), recent ALMA/JWST work found something stranger: the shock is shredding a giant gas
+  cloud, possibly slamming two others together, and appears to be assembling the raw material for
+  a brand-new dwarf galaxy out of the wreckage
+- Strong "wonder" peak for the piece — the wreck is building something, not just destroying it
+
+**Visual ideas:**
+- [ ] Chandra X-ray + optical composite showing the shock (well-documented public NASA/CXC image)
+- [ ] JWST MIRI image specifically, since that's the instrument that revealed the dust-shrouded
+      detail — good pairing with a visible-light image to show what MIRI added that wasn't visible
+      before
+
+---
+
+## 6. The mechanics aside — the discordant-redshift controversy
+
+- When Geoffrey and Margaret Burbidge measured NGC 7320's redshift in 1961 and found it wildly
+  different from its apparent neighbors, it became a founding piece of evidence in a real (if now
+  largely abandoned) cosmological controversy
+- Halton Arp used cases like this to argue redshift might not reliably indicate distance at all —
+  briefly a serious challenge to the redshift-distance relation underpinning the expanding universe
+- Frame as a "how do we actually know" mechanics section, placed after the wonder has already
+  landed, per the object-led structure
+
+**Visual ideas:**
+- [ ] Simple table: each galaxy's measured recession velocity, side by side, making the
+  "discordant" velocity visually obvious at a glance rather than just stated in prose
+
+---
+
+## 7. Legacy — first of its kind
+
+- First compact group of galaxies ever discovered — decades before Hubble established that spiral
+  nebulae were separate galaxies at all
+- Became the prototype for an entire class of object: Paul Hickson's 1982 catalog of compact
+  groups (Stephan's Quintet = Hickson Compact Group 92) is directly descended from this one
+  discovery
+- Selected by NASA as one of the five targets for JWST's first official science image release —
+  a 145-year-old discovery still doing first-of-its-kind duty in 2022
+
+**Visual ideas:**
+- [ ] Possibly none needed — could be a text-only "legacy" section bridging into observing notes
+
+---
+
+## 8. Observing notes — finding it yourself
+
+- Constellation Pegasus; located ~30' southwest of NGC 7331, which serves as a signpost/finder star
+- Realistic aperture expectations: needs roughly 8-inch telescope or larger to resolve as more than
+  a smudge; smart-scope tie-in opportunity if relevant to cross-reference other site content
+- [ ] TODO: confirm current-year visibility window/best viewing months for an October-published
+      piece — check whether Pegasus is well-placed at publish time
+
+**Visual ideas:**
+- [ ] Finder chart: Great Square of Pegasus → NGC 7331 → Stephan's Quintet
+- [ ] Possibly a Stellarium-style screenshot, consistent with the approach used in the meteor
+      season article
+
+---
+
+## Open TODOs across the whole piece
+
+- [ ] Confirm licensing/rights on any published tidal-tail or shock-front diagrams before
+      adapting rather than building from scratch
+- [ ] Decide whether the "It's a Wonderful Life" hook needs deeper sourcing or is fine as a
+      well-documented one-liner
+- [ ] Confirm October visibility window for Pegasus for the observing-notes section
+- [ ] Pick final title — working title is just "Stephan's Quintet"; consider whether the film
+      hook belongs in the title/subtitle given how strong a hook it is

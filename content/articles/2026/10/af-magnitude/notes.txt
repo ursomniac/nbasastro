@@ -1,0 +1,229 @@
+# Magnitude Systems
+**Series:** Astronomical Frameworks
+**Slot:** last October article (date TBD — currently the open hole in the schedule)
+**Status:** outline / notes only — set aside until ready to draft
+
+---
+
+## Section order (proposed)
+
+1. Historical — Ptolemy
+2. Pogson's fix (1856)
+3. Apparent vs. Absolute magnitude
+4. Standards (Vega, zero point)
+5. Color Index
+6. Photometric bands (UBVRI / Johnson-Cousins)
+7. Distance modulus & standard candles
+8. Surface brightness magnitude
+9. Atmospheric extinction (incl. the Little Dipper practical test)
+10. Limiting magnitude: eye vs. binoculars vs. telescopes vs. imaging
+11. Digital vs. eye photometry
+12. Common misconceptions (closer)
+
+Rationale for the order: historical origin → the math that modernized it → the two core
+apparent/absolute concepts → the reference points and mechanics that make those concepts usable
+(standards, color, bands) → derived applications (distance, surface brightness) → real-world
+observing constraints (extinction, limiting magnitude, sensor vs. eye) → closing myth-busting.
+Open to reshuffling once we see how long each section actually runs.
+
+---
+
+## 1. Historical — Ptolemy
+
+- Ancient 6-tier naked-eye scale (1st magnitude = brightest, 6th = faintest)
+- [ ] TODO: confirm whether this is really Ptolemy's or inherited from Hipparchus (commonly
+      attributed to both depending on source — worth nailing down before publishing)
+
+**Visual ideas:**
+- [ ] Table: the 6 classical tiers with rough modern-magnitude equivalents
+- [ ] Image: a page from the Almagest or an old star catalog, if a usable public-domain scan exists
+
+---
+
+## 2. Pogson's fix (1856)
+
+- Norman Pogson formalized the ancient 6-tier system into a precise logarithmic scale
+- Defined so that a 5-magnitude difference = exactly 100x brightness → each single magnitude step
+  = the fifth root of 100 ≈ **2.512x**
+- This is the single most-confusing mechanic of the whole system for a general reader — give it
+  real room rather than a throwaway line
+
+**Visual ideas:**
+- [ ] Table: magnitude difference → brightness ratio (1 mag = 2.5x, 2 mag = 6.3x, 3 mag = 15.8x,
+      4 mag = 39.8x, 5 mag = 100x) — concrete, scannable, does a lot of explanatory work on its own
+- [ ] Chart: simple curve showing the logarithmic relationship (brightness ratio vs. magnitude
+      difference) — visually reinforces why small number changes = big brightness changes
+
+---
+
+## 3. Apparent vs. Absolute magnitude
+
+- Apparent (m): how bright something looks from here
+- Absolute (M): how bright it would look from a standardized distance (10 parsecs)
+- The whole reason the distinction exists: a nearby dim star and a distant bright one can look
+  identical from Earth
+
+**Visual ideas:**
+- [ ] Diagram: two stars at different distances producing the same apparent brightness at Earth,
+      illustrating the inverse-square law — this is probably the single most useful diagram in
+      the whole article for building intuition
+
+---
+
+## 4. Standards (Vega, zero point)
+
+- Vega historically defined as ~magnitude 0 (modern systems have refined this slightly, but Vega
+  remains the conceptual anchor most people learn first)
+- [ ] TODO: decide whether to get into AB magnitude / modern zero-point refinements, or keep this
+      section purely conceptual for a general audience
+
+**Visual ideas:**
+- [ ] Image: Vega itself (easy, well-documented, likely public domain options)
+
+---
+
+## 5. Color Index
+
+- B−V (or similar) as a proxy for temperature — bluer stars have lower (or negative) index,
+  redder stars have higher
+- Good place to reintroduce Rigel vs. Betelgeuse as a concrete blue/red contrast
+
+**Visual ideas:**
+- [ ] Table: a handful of familiar stars with their color index values, spanning blue to red
+- [ ] Chart: color index vs. spectral type/temperature — adjacent to but not a full H-R diagram
+
+---
+
+## 6. Photometric bands (UBVRI / Johnson-Cousins)
+
+- The actual named filter system behind the B−V numbers introduced above
+- Keep this section short — it's supporting material for Color Index, not a standalone deep dive
+
+**Visual ideas:**
+- [ ] Chart: UBVRI filter transmission curves overlaid (a classic, easy-to-source style of chart —
+      may already exist in a reusable/adaptable public form, worth checking before building custom)
+
+---
+
+## 7. Distance modulus & standard candles
+
+- m − M = 5 log(d) − 5 — how apparent and absolute magnitude combine to actually yield a distance
+- Standard candles: Cepheids (period-luminosity relation), Type Ia supernovae
+- One of the best "how do we actually know that" stories in astronomy — this is the mechanism
+  behind measuring the scale of the universe itself; give it some narrative room, not just the formula
+
+**Visual ideas:**
+- [ ] Diagram: Cepheid period-luminosity relation (classic, iconic chart, likely straightforward
+      to build or adapt)
+- [ ] Worked example table: plug in real numbers for a known Cepheid to show the formula landing
+      on an actual distance
+
+---
+
+## 8. Surface brightness magnitude (mag/arcsec²)
+
+- Distinct from point-source (total) magnitude — same total light, spread over a bigger area,
+  looks fainter per unit area
+- Direct callback to the smart-scope talk material: this is *why* M33 and M101 look disappointing
+  in an eyepiece despite having a respectable total magnitude — all that light is spread thin
+
+**Visual ideas:**
+- [ ] Diagram: same total flux spread over a small vs. large apparent area, side by side
+- [ ] Possibly reuse/repurpose an M33 or M101 image from prior smart-scope material if rights allow
+
+---
+
+## 9. Atmospheric extinction
+
+- Why the same star looks dimmer near the horizon than overhead (airmass)
+- Direct practical payoff: **the Little Dipper as a field-usable limiting-magnitude test**,
+  especially useful near culmination (near-overhead) since that minimizes extinction and isolates
+  sky darkness/transparency as the variable being tested
+
+**Little Dipper benchmark stars (confirmed magnitudes):**
+
+| Star | Magnitude | Role as benchmark |
+|---|---|---|
+| Polaris (α) | 1.98 | Visible from nearly anywhere, even light-polluted suburbs |
+| Kochab (β) | 2.08 | "Guardian of the pole" — easy from most locations |
+| Pherkad (γ) | 3.05 | The other "guardian" — starts to separate decent from mediocre skies |
+| Yildun (δ) | 4.36 | Suburban-fringe test |
+| ε UMi | 4.23 | |
+| ζ UMi | 4.32 | |
+| η UMi | 4.95 | Faintest — seeing this means a genuinely dark site |
+
+Practical framing: "Can you see Yildun and the epsilon/zeta pair? You're past magnitude 4.3 — a
+genuinely good suburban-fringe sky. All seven, including faint eta? Dark-sky territory, magnitude
+5 or better."
+
+**Visual ideas:**
+- [ ] Diagram: airmass vs. altitude (simple curve showing extinction increasing sharply near the
+      horizon)
+- [ ] Star chart: Little Dipper with each star labeled by magnitude — this is a genuinely useful,
+      reusable reference image, worth making clean enough that readers might screenshot/save it
+- [ ] Possibly a Stellarium-style screenshot (same approach as the meteor season article) rather
+      than a schematic, if that reads more usable in the field
+
+---
+
+## 10. Limiting magnitude: eye vs. binoculars vs. telescopes vs. imaging
+
+**Benchmark timeline (verified figures):**
+
+| Era / instrument | Limiting magnitude | Note |
+|---|---|---|
+| Naked eye, typical dark sky | ~6.0–6.5 | Roughly matches Ptolemy's original 6th tier — nice callback |
+| Naked eye, exceptional/Bortle 1 | 7.6–8.0 | Best sites, best eyes |
+| Galileo's telescope (~1610) | *(soft — no solid figure found)* | Frame as "not dramatically fainter than naked eye — the real breakthrough was resolution/detail, not depth," rather than giving a fabricated number |
+| Herschel's 40-foot reflector (1789, 48-in mirror) | ~15.7 | Well-sourced (2014 study); consistent with his own catalog |
+| Hubble Deep Field (1995) | ~28.6–30 (varies by filter) | Commonly rounded to ~30 |
+| Hubble Ultra Deep Field (2004) | ~31 | |
+| JWST (GLIMPSE program, 2025–26) | ~30.9 direct; beyond 33 with gravitational-lensing assist | Lensing example is a great aside — a foreground galaxy cluster acting as a natural telescope |
+
+**Big hook for this section:** ~6.5 → 33+ is roughly 27 magnitudes, i.e. each step ~2.5x fainter →
+naked eye to JWST is on the order of **10 billion times fainter**. Strong closing or opening line
+for this section.
+
+**Visual ideas:**
+- [ ] Timeline chart/infographic: the benchmark table above rendered visually — this is probably
+      the single best visual anchor for the entire article, could even be the banner/hero image
+- [ ] Benchmark object table (separate from the instrument timeline): Sun (−26.7), full Moon
+      (−12.7), Venus at brightest, Sirius, naked-eye limit, modern deep-field limit — gives
+      abstract magnitude numbers something concrete to sit next to
+- [ ] TODO: pick 3-4 imagery examples (Galileo sketch, Herschel's telescope, HDF/HUDF image,
+      JWST deep field image) to accompany the timeline if going the infographic route
+
+---
+
+## 11. Digital vs. eye photometry
+
+- Sensors (CCD/CMOS) respond ~linearly to light; the eye's response is closer to logarithmic —
+  part of *why* the magnitude scale exists at all (it mimics how brightness is actually perceived)
+- Good bridge back to modern smart-scope/citizen-science material: connects historical visual
+  astronomy to what a sensor is actually doing when it "sees" something
+
+**Visual ideas:**
+- [ ] Diagram: linear sensor response curve vs. logarithmic eye response curve, side by side
+
+---
+
+## 12. Common misconceptions (closer)
+
+- "Twice as bright" fallacy (people assume magnitude differences are linear/additive)
+- Why smaller and negative numbers mean *brighter*, not fainter
+- One magnitude step is not a round doubling — it's ~2.5x
+
+**Visual ideas:**
+- [ ] Possibly a short myth-vs-fact table as a clean closing device, mirroring the "quick
+      reference" pattern used in other NBAS articles
+
+---
+
+## Open TODOs across the whole piece
+
+- [ ] Confirm Ptolemy vs. Hipparchus attribution for the original 6-tier scale
+- [ ] Decide how deep to go on AB magnitude / modern zero-point systems in the Standards section
+- [ ] Find or build UBVRI filter transmission chart
+- [ ] Find or build Cepheid period-luminosity diagram
+- [ ] Decide on visual style for the limiting-magnitude timeline (infographic vs. simple table)
+- [ ] Pick final publish date — this fills the open October slot in Astronomical Frameworks

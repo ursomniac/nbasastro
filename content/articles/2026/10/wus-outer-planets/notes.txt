@@ -1,0 +1,154 @@
+# What's Up: The Outer Planets
+**Series:** What's Up in the Sky
+**Slot:** October 23, 2026 (confirmed good timing — see below, no need to shuffle)
+**Status:** outline / notes only — set aside until ready to draft
+
+---
+
+## Section order (proposed)
+
+1. Opening hook — same constellation, opposite extremes (Saturn & Eris)
+2. Saturn — the anchor
+3. Neptune — modest scope, surprising smart-scope catch
+4. Uranus — borderline naked eye, best window starts right at publish
+5. Pluto — farewell cameo
+6. Eris — the edge case
+7. Coming attraction — Jupiter
+8. Close — the observing ladder, whatever your gear
+
+---
+
+## Confirmed 2026 dates (verified, not estimated)
+
+| Object | 2026 Opposition | Constellation | Mag at peak |
+|---|---|---|---|
+| Saturn | Oct 4 | Cetus | 0.3 |
+| Neptune | Sep 25/26 | — | 7.8 |
+| Uranus | Nov 25 (brightest window: Oct 24–Dec) | Taurus | ~5.6 |
+| Pluto | Jul 27 | Capricornus | 14.9 |
+| Eris | Oct 18 | Cetus | 18.7 |
+| Jupiter | Jan 10, 2027 | Leo | — (not yet an evening object) |
+
+Publish date (Oct 23) sits 5 days after Eris's peak, 19 days after Saturn's, right at the start of
+Uranus's best window, and just before Jupiter becomes relevant — no need to shuffle the schedule.
+
+---
+
+## 1. Opening hook
+
+- Saturn and Eris are in the **same constellation** (Cetus) at the same time this year
+- Saturn mag 0.3, Eris mag 18.7 — an 18.4-magnitude spread, which works out to roughly a
+  **23-million-fold difference in brightness**, sitting in the same patch of sky
+- Good framing device for the whole piece: "outer planets" spans from the easiest object in the
+  sky to one of the hardest amateur targets that exists, and this year you can point at both from
+  the same spot
+- [ ] TODO: possible cross-link to the Magnitude Systems article if that piece runs nearby —
+      this is a great real-world payoff for the Pogson/magnitude-math material there
+
+---
+
+## 2. Saturn — the anchor
+
+- Opposition Oct 4; still excellent by Oct 23 (three weeks past peak, still bright, still up all
+  evening)
+- **Naked eye:** yes, easy, unmistakable
+- **Binoculars:** yes
+- **Visual telescope:** rings resolved easily even in modest scopes; with a long focal length,
+  real aperture, and good seeing, the Cassini Division, moons, and storm systems are all in play —
+  this is real optical-telescope territory, not a smart-scope claim
+- **Smart scope:** rings *are* achievable with the right settings — short single exposures rather
+  than the usual long-stack deep-sky mode, since Saturn is bright enough that stacking mostly just
+  blurs or blows it out. Worth framing as a "wait, really?" moment, since smart scopes are usually
+  marketed/understood as deep-sky instruments, not planetary ones
+
+---
+
+## 3. Neptune
+
+- Opposition was Sep 25/26; still well-placed all autumn
+- **Naked eye / binoculars:** no — too faint, starlike even at best
+- **Visual telescope:** tiny blue disk, needs a real scope to resolve as non-stellar at all
+- **Smart scope:** Neptune + Triton is a genuine, legitimate catch — faint-companion detection is
+  closer to a smart scope's actual strength (deep-sky sensitivity) than a resolution challenge
+- **Aside — Nereid:** Neptune's third-largest moon, mag ~18.7–19.2, essentially the *same
+  difficulty tier as Eris*. A documented amateur capture exists (a Cloudy Nights planetary imager
+  recorded its trail at mag 18.69). Worth a callout paired with the Eris section later — same
+  difficulty, different object type (moon vs. dwarf planet)
+
+---
+
+## 4. Uranus
+
+- Opposition Nov 25, but brightest window is **Oct 24–Dec** — meaning it becomes prime literally
+  the day after this article publishes
+- **Naked eye:** borderline — mag ~5.7, achievable only under genuinely dark skies
+- **Binoculars:** yes, easily, as a "star" (won't show a disk)
+- **Visual telescope:** small disk, hint of blue-green color
+- **Smart scope:** Uranus + 5 moons is a real, personal catch worth featuring — arguably the best
+  "smart scopes aren't supposed to do this" moment in the whole piece
+- **Correction/note:** Uranus's rings are NOT an amateur target at any level — don't imply
+  otherwise. Even JWST reportedly shows them only as thin slivers; this is professional/space
+  telescope territory only
+
+---
+
+## 5. Pluto — farewell cameo
+
+- Opposition was back on Jul 27; by Oct 23 it's three months past peak and setting notably
+  earlier each night
+- Gone from convenient evening visibility by mid-November
+- Frame as a "catch it now" nod tied back to the existing dedicated Pluto article, not a full
+  section — a paragraph, not a subhead's worth of new material
+- **Naked eye / binoculars:** no
+- **Visual telescope:** needs real aperture even to confirm as a point source
+- **Smart scope:** feasible as a faint point; more "confirm the dot is there and has moved between
+  sessions" than a satisfying image
+
+---
+
+## 6. Eris — the edge case
+
+- Opposition Oct 18 — five days before publish, essentially at peak
+- Mag 18.7, in Cetus (same constellation as Saturn — callback to the opening hook)
+- **Everything except the most serious dedicated imaging:** no
+- This is the "how far can this hobby actually go" section — pairs naturally with the Nereid aside
+  from the Neptune section
+- [ ] TODO: pull an actual Horizons ephemeris for the specific date/finder position before
+      drafting — don't rely on approximate constellation-level info for the actual observing box
+- [ ] Personal angle: mention the eQuinox 2 (80mm, high Bortle site) image found as precedent, and
+      the possibility of a personal attempt — decide before drafting whether this write-up happens
+      before or after publish date, since that changes whether it's framed as "here's how" or
+      "here's what happened when I tried"
+
+---
+
+## 7. Coming attraction — Jupiter
+
+- Short teaser only, not a full section
+- Currently in Leo, rising after midnight — not yet an evening object
+- Opposition isn't until Jan 10, 2027
+- Framing: "it's there, it's building, and it'll dominate the winter sky — more on that when it
+  actually arrives"
+- This is what completes the "outer planets" set without padding a planet that isn't actually
+  observable yet into real column space
+
+---
+
+## 8. Close
+
+- Tie back to the observing-ladder idea established through Saturn/Neptune/Uranus: naked eye
+  through binoculars through visual telescope through smart scope, with a different planet
+  rewarding you at nearly every rung
+- Closing line candidate: whatever's in your driveway tonight — eyes, binoculars, a scope, or a
+  smart scope — there's an outer planet waiting at exactly that level, all the way up to the edge
+  of what's been done at all
+
+---
+
+## Open TODOs across the whole piece
+
+- [ ] Pull real Horizons ephemeris for Eris's finder position near publish date
+- [ ] Decide timing/framing of the personal Eris-attempt angle (before vs. after the fact)
+- [ ] Confirm final title — working title is generic; the Saturn/Eris magnitude-spread hook might
+      deserve to be in the title itself
+- [ ] Cross-link opportunity with Magnitude Systems piece if scheduling allows
