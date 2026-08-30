@@ -16,6 +16,7 @@ Overlay style is driven by OBJECT TYPE:
     galaxy              red ellipse, solid outline, rotated to orientation
     galaxy_barred       purple ellipse, solid outline, rotated to orientation
     galaxy_dwarf_irr    blue ellipse, solid outline, rotated to orientation
+    compact_group       indigo circle, solid outline
     planetary_nebula    cyan, two concentric circles, NO outline
 
 Usage
@@ -33,8 +34,10 @@ Usage
   --title TEXT          chart title (default: object names joined with " & ")
   --info TEXT           extra text appended to subtitle
   --fov DEG             explicit FOV in degrees (default: auto from object sizes)
-  --mag-limit MAG       star depth (default: 12.0); capped at 11.0 in practice --
-                        see star source note below
+  --mag-limit MAG       star depth (default: 12.0); mag_limit <= 11 uses the
+                        local mag11 BigSky catalog, mag_limit > 11 uses the
+                        deeper mag16 catalog (capped at 16.0) -- see star
+                        source note below
   --no-stars            skip star plotting entirely
   --output-dir DIR      where to write output (default: same dir as this script)
   --projection {Mercator,StereoNorth}  (default: auto; StereoNorth if dec > 75)
@@ -113,8 +116,27 @@ EPHEMERIS = os.path.normpath(os.path.join(HERE, "..", "assets", "de421.bsp"))
 # location under scripts/starmaps/ rather than deduped into scripts/assets/
 # (like de421.bsp was) -- that would mean touching scripts/starmaps/
 # generate.py too, which is explicitly out of scope for this session.
-LOCAL_STAR_CATALOG = os.path.join(STARPLOT_SHARED_DATA_DIR, "stars.bigksy.0.1.3.mag11.parquet")
-LOCAL_STAR_CATALOG_MAG_LIMIT = 11.0
+# Two BigSky depths are present in STARPLOT_SHARED_DATA_DIR: the mag11
+# file scripts/starmaps/generate.py already used, and a mag16 file
+# (deeper, ~2.5M stars vs ~984K) added alongside it. Both fetch_stars_local()
+# (used only for min/max stats + legend) and _plot_stars()'s call into
+# starplot's own p.stars() (used for the actual rendered markers) must pick
+# the SAME file for a given request, or the legend and the chart disagree.
+# See _select_local_catalog() below -- this used to be a single hardcoded
+# path+limit pair, which is why --mag-limit above 11 silently did nothing:
+# both consumers were pinned to the mag11 file no matter what was requested.
+LOCAL_STAR_CATALOG_MAG11 = os.path.join(STARPLOT_SHARED_DATA_DIR, "stars.bigksy.0.1.3.mag11.parquet")
+LOCAL_STAR_CATALOG_MAG16 = os.path.join(STARPLOT_SHARED_DATA_DIR, "stars.bigksy.0.1.3.mag16.parquet")
+
+
+def _select_local_catalog(mag_limit: float):
+    """Pick the shallowest local BigSky parquet that can satisfy mag_limit,
+    and the true depth ceiling of that file (used to compute effective_limit
+    -- not a fixed constant). mag16 is the deepest catalog present on disk;
+    requests deeper than 16 are clamped to 16, same as before for 11."""
+    if mag_limit <= 11.0:
+        return LOCAL_STAR_CATALOG_MAG11, 11.0
+    return LOCAL_STAR_CATALOG_MAG16, 16.0
 
 ORG_NAME = "Northern Berkshire Astronomical Society"
 SITE_URL = "nbasastro.org"
@@ -134,6 +156,7 @@ OBJECT_STYLES = {
     "galaxy":            {"shape": "ellipse",      "color": "#DD3333", "dashed": False},
     "galaxy_barred":     {"shape": "ellipse",      "color": "#9933CC", "dashed": False},
     "galaxy_dwarf_irr":  {"shape": "ellipse",      "color": "#3366DD", "dashed": False},
+    "compact_group":     {"shape": "circle",       "color": "#8010C0", "dashed": False},
     "planetary_nebula":  {"shape": "double_circle","color": "#33CCCC", "dashed": False},
     # star: small circle with inward N/S/E/W ticks (classic finder-chart reticle)
     "star":              {"shape": "star_target",  "color": "#3366FF", "dashed": False},
@@ -163,10 +186,10 @@ SIMBAD_OTYPE_MAP = {
     "RNe": "reflection_nebula",
     "DNe": "dark_nebula",     "DkN": "dark_nebula",     "MoC": "dark_nebula",
     "G":   "galaxy",  "GiG": "galaxy", "GiC": "galaxy", "GiP": "galaxy",
-    "AGN": "galaxy",  "SyG": "galaxy", "Sy1": "galaxy", "Sy2": "galaxy",
+    "AGN": "galaxy",  "SyG": "galaxy", "Sy1": "galaxy", "Sy2": "galaxy", "AG?": "galaxy",
     "QSO": "galaxy",  "H2G": "galaxy", "SBG": "galaxy", "bCG": "galaxy",
     "EmG": "galaxy",  "LSB": "galaxy", "BiC": "galaxy", "BLL": "galaxy",
-    "LIN": "galaxy",  "cD":  "galaxy",
+    "LIN": "galaxy",  "cD":  "galaxy", "CGG": "compact_group",
     # Stars — single, multiple, variable, proper-motion, spectral subtypes, etc.
     "*":   "star",   "**":  "star",   "V*":  "star",   "PM*": "star",
     "HB*": "star",   "RG*": "star",   "sg*": "star",   "SB*": "star",
@@ -444,43 +467,46 @@ def _vizier_table_rowcount(result) -> int:
     return len(result[0])
 
 
-_local_star_catalog_cache = None  # module-level cache -- read the ~50MB parquet once per process
+_local_star_catalog_cache = {}  # module-level cache keyed by path -- mag11 and
+                                 # mag16 are separate files and may both be
+                                 # loaded in a single process
 
 
 def fetch_stars_local(ra_deg, dec_deg, radius_deg, mag_limit) -> pd.DataFrame:
     """Fallback star source, used only when live Vizier/NOMAD comes back
-    empty or fails outright. Reads the same local BigSky (mag<=11) catalog
-    scripts/starmaps/generate.py already relies on for its own (reliable,
-    network-free) star rendering -- see LOCAL_STAR_CATALOG above. Filters
-    with a flat-sky cos(dec) approximation, which is what the rest of this
-    script already uses for FOV geometry at these field sizes (a few
-    degrees at most), so it's consistent with the precision used
-    elsewhere, not a new source of error.
+    empty or fails outright. Reads whichever local BigSky catalog file
+    (mag11 or mag16 -- see _select_local_catalog()) covers the requested
+    mag_limit. Filters with a flat-sky cos(dec) approximation, which is
+    what the rest of this script already uses for FOV geometry at these
+    field sizes (a few degrees at most), so it's consistent with the
+    precision used elsewhere, not a new source of error.
 
-    Depth caps out at mag 11 regardless of mag_limit requested -- clearly
-    logged, since a chart generated this way is less deep than a real
-    NOMAD fetch would have been.
+    Depth caps out at whatever the selected file's ceiling is (11 or 16)
+    if mag_limit asks for more than that -- clearly logged, since a chart
+    generated this way would be shallower than a real NOMAD fetch.
     """
     global _local_star_catalog_cache
-    if not os.path.exists(LOCAL_STAR_CATALOG):
-        print(f"  WARNING: local star catalog fallback not found at {LOCAL_STAR_CATALOG}")
+    catalog_path, catalog_ceiling = _select_local_catalog(mag_limit)
+
+    if not os.path.exists(catalog_path):
+        print(f"  WARNING: local star catalog fallback not found at {catalog_path}")
         return pd.DataFrame(columns=["ra", "dec", "magnitude"])
 
-    if _local_star_catalog_cache is None:
-        print(f"   Loading local star catalog fallback ({os.path.basename(LOCAL_STAR_CATALOG)}) …")
+    if catalog_path not in _local_star_catalog_cache:
+        print(f"   Loading local star catalog fallback ({os.path.basename(catalog_path)}) …")
         # Read all columns rather than passing columns=[...] -- this
         # particular file's parquet metadata references an index column
         # that isn't in the actual schema, which pyarrow chokes on when
         # asked to project down to a column subset up front. Select the
         # subset afterward in pandas instead.
-        _local_star_catalog_cache = pd.read_parquet(LOCAL_STAR_CATALOG)[
+        _local_star_catalog_cache[catalog_path] = pd.read_parquet(catalog_path)[
             ["ra", "dec", "magnitude"]]
-    cat = _local_star_catalog_cache
+    cat = _local_star_catalog_cache[catalog_path]
 
-    effective_limit = min(mag_limit, LOCAL_STAR_CATALOG_MAG_LIMIT)
-    if mag_limit > LOCAL_STAR_CATALOG_MAG_LIMIT:
+    effective_limit = min(mag_limit, catalog_ceiling)
+    if mag_limit > catalog_ceiling:
         print(f"   NOTE: local catalog fallback only reaches mag "
-              f"{LOCAL_STAR_CATALOG_MAG_LIMIT:.1f} (requested {mag_limit:.1f}) -- "
+              f"{catalog_ceiling:.1f} (requested {mag_limit:.1f}) -- "
               f"chart will be shallower than a live NOMAD fetch would be.")
 
     cosd = max(math.cos(math.radians(dec_deg)), 0.05)
@@ -1066,8 +1092,21 @@ def _plot_stars(p, ra0, dec0, radius_deg, mag_limit,
     legend code didn't need to change.
     """
     from starplot import _ as where_
+    # starplot's own MapPlot.stars() takes a `catalog=` kwarg that defaults
+    # to BIG_SKY_MAG11 (confirmed directly against the installed starplot
+    # source, starplot/plotters/stars.py) if not passed explicitly. This is
+    # independent of the `where=` magnitude filter below -- passing a higher
+    # mag_limit in `where` does nothing if the underlying catalog file only
+    # contains stars down to mag 11 in the first place. This was the actual
+    # cause of --mag-limit having no visible effect: the two prior fixes
+    # only touched the LOCAL_STAR_CATALOG_MAG_LIMIT clamp (used for legend
+    # stats via fetch_stars_local()), never this call, so the rendered
+    # chart kept using BIG_SKY_MAG11 no matter what was requested.
+    from starplot.data.catalogs import BIG_SKY, BIG_SKY_MAG11
 
-    effective_limit = min(mag_limit, LOCAL_STAR_CATALOG_MAG_LIMIT)
+    catalog_path, effective_limit = _select_local_catalog(mag_limit)
+    starplot_catalog = BIG_SKY if catalog_path == LOCAL_STAR_CATALOG_MAG16 else BIG_SKY_MAG11
+
     stats_df = fetch_stars_local(ra0, dec0, radius_deg, mag_limit)
     if stats_df.empty:
         return None, None, None
@@ -1086,6 +1125,7 @@ def _plot_stars(p, ra0, dec0, radius_deg, mag_limit,
 
     p.stars(
         where=[where_.magnitude < effective_limit],
+        catalog=starplot_catalog,
         size_fn=star_size_fn,
         legend_label=None,  # we draw our own multi-swatch magnitude legend
         bayer_labels=bayer_labels,
