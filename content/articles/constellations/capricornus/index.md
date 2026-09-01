@@ -9,7 +9,7 @@ constellations: ["Capricornus"]
 byline: "A Zodiacal constellation with deep roots."
 description: "The zodiac's smallest, dimmest constellation carries millennia-old Sumerian roots and hides a captured cluster, a collapsed core, and colliding galaxies."
 thumbnail: "icon.webp"
-banner: "capricornus-banner.png"
+banner: "banner.webp"
 
 profile_data:
   "Abbreviation": Cap
