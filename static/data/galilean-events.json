@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-07-19T05:35:10Z",
+  "generated_utc": "2026-09-06T20:58:46Z",
   "source": "Project-Pluto",
   "observer": {
     "lat": 42.7,
@@ -7,6 +7,7 @@
     "note": "Times accurate to ~5 min for observers within ~60 miles of this coordinate"
   },
   "window_days": 15,
+  "filter_applied": true,
   "event_count": 0,
   "events": []
 }

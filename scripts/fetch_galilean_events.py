@@ -54,10 +54,27 @@ Jupiter rise/set filtering:
   Note: times are accurate to within ~5 minutes for observers within ~60 miles
   of this coordinate; the RTS horizon calculation does not account for terrain.
 
+CLI options (Ticket #22 follow-up -- added to debug the "0 events" filtering bug):
+  --no-filter             Skip the Jupiter-visibility filter entirely. Every raw
+                          event from the source (Pluto/IMCCE) is written out,
+                          so you can confirm the fetch/parse stage independently
+                          of the filter.
+  --date-range START END  Override the default "today .. today+WINDOW_DAYS"
+                          window with an explicit range (YYYY-MM-DD YYYY-MM-DD,
+                          END exclusive). Useful for probing a future date to
+                          see whether events start showing up.
+  --help                  List all options.
+  (no options)            Same as before: today .. today+WINDOW_DAYS, filter applied.
+
 Output: static/data/galilean-events.json (relative to repo root)
 Run:    python scripts/fetch_galilean_events.py
+        python scripts/fetch_galilean_events.py --no-filter
+        python scripts/fetch_galilean_events.py --date-range 2026-12-01 2026-12-15
+        python scripts/fetch_galilean_events.py --no-filter --date-range 2026-12-01 2026-12-15
+        python scripts/fetch_galilean_events.py --help
 """
 
+import argparse
 import json
 import os
 import re
@@ -115,6 +132,11 @@ RTS_URL = (
     "&-mime=json"
     "&-from=SSO-Dashboard-ticket22"
 )
+
+# Per IMCCE's own Miriade rts docs (https://ssp.imcce.fr/webservices/miriade/api/rts),
+# -nbd must satisfy 1 <= nbd < 731. Checked here so a large --date-range fails
+# fast with a clear message instead of silently getting an API error.
+RTS_MAX_NBD = 730
 
 # IMCCE phenjupiter data file (HTTPS mirror of the FTP). Published one file
 # per calendar year as phen_jup_<YEAR>.txt -- NOT hardcoded to a single year:
@@ -633,16 +655,84 @@ def fetch_pluto_events(start: datetime, end: datetime):
     return pair_imcce_half_events(half_events)
 
 
+# ── CLI ───────────────────────────────────────────────────────────────────────
+
+def _parse_cli_date(value: str) -> datetime:
+    """argparse type= callback: parse a YYYY-MM-DD string as a UTC midnight datetime."""
+    try:
+        return datetime.strptime(value, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    except ValueError:
+        raise argparse.ArgumentTypeError(
+            f"'{value}' is not a valid date — expected YYYY-MM-DD, e.g. 2026-12-01"
+        )
+
+
+def build_arg_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="fetch_galilean_events.py",
+        description="Fetch Jupiter Galilean satellite phenomena (Ticket #22) and write "
+                     "the galilean-events.json dashboard data file.",
+        epilog=(
+            "With no options, this runs the normal nightly job: "
+            f"today .. today+{WINDOW_DAYS}d, with the Jupiter-visibility filter applied. "
+            "The two options below can be combined, e.g. "
+            "--no-filter --date-range 2026-12-01 2026-12-15."
+        ),
+    )
+    parser.add_argument(
+        "--no-filter",
+        action="store_true",
+        help="Skip the Jupiter-above-horizon-at-night visibility filter. Every raw event "
+             "from the source (Project Pluto, or IMCCE if enabled) is written out as-is. "
+             "Use this to confirm the fetch/parse stage works independently of the filter "
+             "(e.g. to check whether 'raw events' is really 0, or the filter is dropping them).",
+    )
+    parser.add_argument(
+        "--date-range",
+        nargs=2,
+        metavar=("START", "END"),
+        type=_parse_cli_date,
+        help="Override the default 'today .. today+WINDOW_DAYS' window with an explicit "
+             "range in YYYY-MM-DD format, e.g. --date-range 2026-12-01 2026-12-15. "
+             "END is exclusive, same convention as the default window. Useful for probing "
+             "a future date range to see whether events start appearing.",
+    )
+    return parser
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main() -> None:
-    start, end = date_window()
-    print(f"[INFO] Window: {start.date()} → {end.date()} ({WINDOW_DAYS}d)")
-    print(f"[INFO] Observer: lat={OBSERVER_LAT}, lon={OBSERVER_LON}")
+    args = build_arg_parser().parse_args()
 
-    # 1. Fetch Jupiter visibility windows
+    if args.date_range:
+        start, end = args.date_range
+        if end <= start:
+            print("[ERROR] --date-range END must be after START", file=sys.stderr)
+            sys.exit(1)
+        window_days = (end - start).days
+        if window_days + 1 > RTS_MAX_NBD:
+            print(f"[ERROR] --date-range spans {window_days} days; Miriade RTS allows at "
+                  f"most {RTS_MAX_NBD - 1} days per request "
+                  f"(see https://ssp.imcce.fr/webservices/miriade/api/rts)", file=sys.stderr)
+            sys.exit(1)
+        range_note = "  [explicit --date-range]"
+    else:
+        start, end = date_window()
+        window_days = WINDOW_DAYS
+        range_note = ""
+
+    print(f"[INFO] Window: {start.date()} → {end.date()} ({window_days}d){range_note}")
+    print(f"[INFO] Observer: lat={OBSERVER_LAT}, lon={OBSERVER_LON}")
+    if args.no_filter:
+        print("[INFO] --no-filter set: visibility filter will be skipped")
+
+    # 1. Fetch Jupiter visibility windows.
+    #    Fetched even with --no-filter -- it's one extra API call, but it means
+    #    a --no-filter run still tells you whether Miriade itself is failing,
+    #    for comparison against a normal run.
     print("[INFO] Fetching Jupiter rise/set via Miriade RTS …")
-    windows = fetch_jupiter_windows(start, WINDOW_DAYS + 1)
+    windows = fetch_jupiter_windows(start, window_days + 1)
     print(f"[INFO] Got visibility data for {len(windows)} days")
 
     # 2. Fetch event data
@@ -680,22 +770,26 @@ def main() -> None:
 
     print(f"[INFO] Raw events before filter: {len(events)}")
 
-    # 3. Apply Jupiter visibility filter
-    visible_events = []
-    for ev in events:
-        try:
-            ev_utc = datetime.fromisoformat(ev["start_utc"].replace("Z", "+00:00"))
-        except (ValueError, TypeError):
-            visible_events.append(ev)
-            continue
-        try:
-            ev_end_utc = datetime.fromisoformat(ev["end_utc"].replace("Z", "+00:00")) if ev.get("end_utc") else None
-        except (ValueError, TypeError):
-            ev_end_utc = None
-        if event_visible(ev_utc, ev_end_utc, windows):
-            visible_events.append(ev)
+    # 3. Apply Jupiter visibility filter (unless --no-filter)
+    if args.no_filter:
+        visible_events = events
+        print(f"[INFO] Visibility filter skipped (--no-filter) — keeping all {len(visible_events)} raw events")
+    else:
+        visible_events = []
+        for ev in events:
+            try:
+                ev_utc = datetime.fromisoformat(ev["start_utc"].replace("Z", "+00:00"))
+            except (ValueError, TypeError):
+                visible_events.append(ev)
+                continue
+            try:
+                ev_end_utc = datetime.fromisoformat(ev["end_utc"].replace("Z", "+00:00")) if ev.get("end_utc") else None
+            except (ValueError, TypeError):
+                ev_end_utc = None
+            if event_visible(ev_utc, ev_end_utc, windows):
+                visible_events.append(ev)
 
-    print(f"[INFO] Events after visibility filter: {len(visible_events)}")
+        print(f"[INFO] Events after visibility filter: {len(visible_events)}")
 
     # 4. Annotate with display label
     for ev in visible_events:
@@ -710,7 +804,8 @@ def main() -> None:
             "lon": OBSERVER_LON,
             "note": "Times accurate to ~5 min for observers within ~60 miles of this coordinate",
         },
-        "window_days": WINDOW_DAYS,
+        "window_days": window_days,
+        "filter_applied": not args.no_filter,
         "event_count": len(visible_events),
         "events": visible_events,
     }
