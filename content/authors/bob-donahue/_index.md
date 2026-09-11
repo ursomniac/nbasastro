@@ -41,3 +41,14 @@ objects, and learning about all the scientific knowledge we've gleaned since fir
 reading about them in high school.  We've learned a lot!
 
 
+## Public Talks
+
+Here are some public talks that I've given - if your organization would like me to share any with you, please reach out to me:
+
+- [How Many Planets are There?  - Rethinking Pluto, our Solar System, and what counts as a “world”](/authors/bob-donahue/talk-planets)
+- [30 Years of Exoplanets - what have we learned?](/authors/bob-donahue/talk-exoplanets)
+- [Rebooting the Universe (it Never Goes Easily)](/authors/bob-donahue/talk-universe)
+- [Mapping the Skies - the History of the Constellations](/authors/bob-donahue/talk-constellations)
+
+as well as talks on Smart Telescopes, "What's Up in the Sky" seasonal features, and Citizen Science programs. 
+
