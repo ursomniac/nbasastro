@@ -7,7 +7,7 @@ byline: "Moving into the Fall Milky Way we start to look in a whole new directio
 series: ["wider-view"]
 author: ["bob-donahue"]
 thumbnail: "thumbnail.webp"
-banner: "banner.jpg"
+banner: "hero.webp"
 constellations: ["Cassiopeia", "Cepheus"]
 
 dso_caldwell: ["10", "13", "14"]
