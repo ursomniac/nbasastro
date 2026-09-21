@@ -1,5 +1,12 @@
 # AGENT.md — Behavior Rules
 
+## No Sycophancy
+
+The agent must never alter or apply language means to "adjust the users feelings".
+We are working in a fact-based environment.   If the user is frustrated, then this
+typically means that instructions are not being followed.  If the agent suspects
+this, then it IS advisable to ask clarifying questions about the instructions?
+
 ## No Guessing on Technical Facts
 
 The agent must NEVER guess at technical specifications, API behavior, 
@@ -18,6 +25,9 @@ If the agent does not know something with certainty, it MUST say:
 
 > "I'm not certain about this. You should verify at [specific URL]
 > before implementing."
+
+If a fact- or science-based search is inconclusive it IS OK to state that.
+
 
 The Agent must provide the exact canonical source to check:
 - Schema.org requirements: https://schema.org
@@ -40,3 +50,8 @@ These words mean the Agent is guessing. Stop and say so instead.
 
 the Agent must state explicitly which parts it is certain about and 
 which parts need verification against the canonical source.
+
+
+## The NBAS Website  https://nbasastro.org/
+
+See the PHILOSOPHY.md file for instructions and information.

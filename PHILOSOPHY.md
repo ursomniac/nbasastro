@@ -161,13 +161,13 @@ This series focuses on a single object.   Aside from doing what other sites do: 
 
 Every object has a *story*;  we want to tell those stories.
 
-Frequency: Weekly (Mondays)
+Frequency: 2-3 a month
 
 ### A Wider View (AWV)
 
 This is similar to ACL but looks at a set of class of objects.  It can get a little more technical/geeky than ACL because now we get to delve into the underlying physics and astronomy.   But overall the goals are the same: e.g., you're not just looking at some globular cluster to "check it off of a list" but that each one of them is part of a *larger* story, and comparing them enlightens us to the bigger picture.
 
-Frequency: monthly, in most months
+Frequency: 1-2 monthly, in most months
 
 ### What's Up in the Sky (WUS)
 
@@ -175,7 +175,7 @@ This is a monthly article (intended to be with a companion video mini-lecture, b
 
 Again the focus is "hey these things are happening and are interesting - go check them out".
 
-Frequency: monthly (3rd Thu), intended for the following month (e.g., July's WUS covers August, etc.)
+Frequency: monthly, intended for the following month (e.g., July's WUS covers August, etc.)
 
 ### Getting Started (GS)
 
@@ -203,7 +203,7 @@ This takes a constellation, gives some of the history and mythology, looks at th
 
 In 2028 we'll run out of constellations that are visible from the Northern Hemisphere.  The plan is to then go back and start over, and improve upon the pages (adding/refining objects) and re-publish them.
 
-Frequency: monthly (1st of the month)
+Frequency: monthly (1st of the month) will change early 2028
 
 ### Observing Challenges (OC)
 
@@ -217,10 +217,16 @@ Frequency: sporadic
 
 Short (8-12 questions) on some topic.   The goal here is learning, not scoring (i.e., if you guess wrong you get an explanation, and you can always click on all the answers to get more information).  Skill is beginner/intermediate/expert,
 
-Frequency: monthly (3rd Tuesday)
+Frequency: monthly 
 
 ### Historical Perspectives (HP)
 
 These articles talk about the history of astronomy: biographies, inventions, etc.
+
+Frequency: sporadic
+
+### Planet Watch, Comet Watch, Supernova Watch
+
+Generally short, discussing an upcoming event, a new comet of interest, or the discovery of a supernova in another galaxy.
 
 Frequency: sporadic
