@@ -9,6 +9,7 @@ series: ["planet-watch"]
 authors: ["bob-donahue"]
 thumbnail: "thumbnail.webp"
 banner: "banner.webp"
+sso_planets: ["Mars", "Jupiter"]
 ---
 
 ## Introduction

@@ -1,6 +1,6 @@
 ---
 title: "Mira the Wonderful"
-date: 2026-11-08
+date: 2026-11-09
 description: "Mira swings from naked-eye bright to invisible and back every eleven months — a discovery accident from 1596 that's still surprising astronomers, most recently with a 13-light-year tail nobody noticed until 2007."
 byline: "The first variable star, monitored for over 400 years."
 main_subject: "Mira"

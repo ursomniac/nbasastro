@@ -1,9 +1,10 @@
 ---
 title: "NGC 253: The Silver Coin Caroline Found"
-date: 2026-10-12
+date: 2026-10-18
 description: "One of the brightest galaxies in the sky sits almost due south of the Sculptor constellation's pole -- a starburst spiral found by a comet hunter, hiding a bar and ring the eye can't see."
 byline: "Out in the dim southern fall sky, but a bright neighbor worth the hunt"
 series: ["closer-look"]
+authors: ["bob-donahue"]
 thumbnail: "thumbnail.webp"
 banner: "banner.webp"
 dso_caldwell: ["65"]

@@ -1,9 +1,9 @@
 ---
 title: "Observing Challenge! Fall Asteroids!"
-date: 2026-10-02
+date: 2026-10-04
 main_subject: ["Vesta", "Pallas", "Metis", "Nausikaa"]
 description: "Four asteroids, four stories: 4 Vesta and 2 Pallas near opposition in early October, with 9 Metis and 192 Nausikaa still catchable a few weeks past their own."
-authors: ["bob-donahue"]
+authors: ["nbas-staff"]
 series: ["smart-scopes", "observing-challenges"]
 byline: "Four asteroids - four different stories!"
 sso_asteroids: ["4 Vesta", "2 Pallas", "9 Metis", "192 Nausikaa"]

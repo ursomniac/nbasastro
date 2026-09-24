@@ -1,6 +1,6 @@
 ---
 title: "Fomalhaut - the Lonely Star"
-date: 2026-10-05
+date: 2026-10-10
 description: "The 'Loneliest Star' isn't lonely: Fomalhaut hides two companion stars, a vast debris ring, and an IAU-named 'planet' that's probably just dust."
 byline: "Sitting down on the southern horizon is a nearby, young but interesting stellar system"
 main_subject: "Fomalhaut"

@@ -1,6 +1,6 @@
 ---
 title: "Spooky Astronomy - Objects for Halloween" 
-date: 2026-10-15
+date: 2026-10-12
 main_subject: ["IC 63", "NGC 1909", "Sh 2-136", "NGC 246"]
 description: "13 deep-sky objects with genuinely spooky nicknames -- ghosts, a witch, a wizard, a skull, and a bat -- all above the horizon at midnight on Halloween."
 byline: "13 objects with 'spooky' nicknames for Halloween!"

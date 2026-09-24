@@ -2,7 +2,7 @@
 layout: "single-constellation"
 title: "Cassiopeia"
 main_subject: "Cassiopeia"
-date: 2026-10-01
+date: 2026-10-07
 authors: ["nbas-staff"]
 series: ["constellation-highlights"]
 constellations: ["Cassiopeia"]
