@@ -1,0 +1,9 @@
+Order    Title    Series    Why here
+1    Measuring Distance    AF    The spine — orients the reader to the whole ladder before any zoom-in
+2    Speed of Light    HP    Establishes c, which light-time (next) depends on
+3    Why We Measure in Light-Time    AF    Near-solar-system scale: Sun, planets, probes
+4    Measuring the AU Itself    HP    The baseline every parallax measurement below secretly depends on — revealed here rather than assumed
+5    Parallax: 61 Cygni to Gaia    HP    Stellar-neighborhood scale, using the AU baseline just established
+6    Parsecs vs. Light-Years    AF    The unit born directly out of the parallax technique in #5
+7    Cosmic Distance Ladder    AF    Where parallax runs out — the jump to extragalactic
+8    How Far Can We See?    AF    Capstone: redshift, the edge of the observable universe

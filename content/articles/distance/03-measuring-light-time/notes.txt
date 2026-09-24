@@ -1,0 +1,124 @@
+# Article 3: Why We Measure Distance in Light-Time
+**Series:** AF | **Position in arc:** 3 of 8
+
+## Core Hook (two hooks, folded together)
+1. A tour of light-time units at each scale (parallel structure to #1's AU
+   section and #2's history-of-c groundwork).
+2. The deeper argument: *why switch to time as a distance unit at all* —
+   answered by inverting the usual framing. Instead of "here's the light-time
+   to object X," ask "how far do you get in a familiar chunk of time?" —
+   1 second, 1 minute, 1 hour, 1 day, 1 week, 1 month, 1 year. This works
+   because we already have real intuition for what a week or a month
+   *feels* like, even though we have no intuition at all for what "173 AU"
+   feels like. The inversion is the argument, not just a device.
+
+## Structure — The Inside-Out Ladder
+
+### 1 second
+Light covers ~300,000 km/s. The Moon (384,400 km) is just over 1 light-second
+away — so "in about a second and a quarter, you've reached the Moon."
+
+### L2 (~5 seconds) — the "small enough to ignore" counterpoint
+Earth-Sun L2 is about 1.5 million km away (~4x the Earth-Moon distance),
+giving a one-way light delay of about 5 seconds, ~10 seconds round-trip.
+JWST orbits in a halo around L2 rather than sitting exactly at the point, so
+its actual distance varies (~1.5-1.8 million km), but the delay is
+essentially always "about 5 seconds" regardless. Roman Space Telescope is
+also planned for an L2 halo orbit, so the same figure should apply once it's
+operational — worth a direct check at drafting time rather than assuming by
+analogy alone.
+Good contrast point for the section: not every spacecraft light-delay is
+operationally significant. A 5-second lag is basically invisible to mission
+operations (no special design needed around it), which sets up a sharp
+contrast against Mars (3-22 minutes, genuinely constrains crewed-mission
+communication) and Voyager (~23+ hours, forces fully autonomous operation)
+later in the ladder — same underlying phenomenon, wildly different
+practical consequences depending on scale.
+
+### 1 minute
+~18 million km / ~0.12 AU. Not yet at the Sun (that takes ~8.3 minutes) —
+useful for setting up the "the Sun is 8 light-minutes away" framing as the
+next real landmark, rather than dropping it in unexplained.
+
+### Minutes (the Sun, and Mars implications for crewed missions)
+- Sun: ~8.3 light-minutes (1 AU) — the classic "you're seeing the Sun as it
+  was 8 minutes ago" framing.
+- **Mars, confirmed via search**: one-way light-time ranges from about
+  **3 minutes** (near close/perihelic opposition) to about **22 minutes**
+  (at conjunction, ~2.7 AU, maximum separation). This is a genuinely strong
+  worked example: real-time conversation with a Mars crew is *never*
+  possible, and the delay itself varies by roughly 7x across the ~26-month
+  Earth-Mars cycle depending on orbital timing — a concrete, human-stakes
+  consequence of the distance/light-time relationship, not just trivia.
+
+### 1 hour
+~7.2 AU — just beyond Jupiter's orbit (~5.2 AU), matching your own note.
+Good, simple checkpoint before jumping to spacecraft-scale distances.
+
+### 1 day — the Voyager 1 tie-in (timely, not evergreen)
+~173 AU. **Voyager 1 will reach exactly 1 light-day from Earth on
+November 18, 2026** — confirmed via multiple current sources (NASA-sourced
+reporting, EarthSky, others), all converging on that date and ~173.1-173.8 AU.
+As of a signal sent today, one-way delay to Voyager 1 is already around
+23+ hours. This is a rare case where a light-time milestone is a *live,
+happening-this-year* event rather than an abstract fact — worth featuring
+prominently, but flag in the article that the exact distance keeps growing
+(~3.6 AU/year), so pin the "1 light-day" moment to the specific Nov 18, 2026
+date rather than presenting Voyager's distance as a fixed number that will
+go stale.
+
+### 1 week / 1 month
+Rough scale only — light-week ~1,200 AU, light-month ~5,200 AU (~0.08 ly) —
+pushing into extreme trans-Neptunian/inner Oort Cloud territory. These
+specific boundary figures (where the Oort Cloud "starts") vary by source and
+aren't precisely nailed down in the literature — will present these as
+approximate scale-setting rather than precise boundaries, and verify
+specific Oort Cloud distance ranges at drafting time rather than asserting
+a hard edge.
+
+### 1 year
+1 light-year — roughly a quarter of the way to Proxima Centauri (~4.24 ly),
+setting up "the nearest star besides the Sun is still over 4 of these away."
+
+### Beyond — light-years to megalight-years
+Per your note, this piece runs all the way out to Mly without stepping on
+#4's territory (parsecs vs. light-years is a units/parallax story, not a
+"how far is X" tour). Andromeda (~2.5 Mly) as the natural landmark for the
+Mly jump — nearest major galaxy, a good place to end the ladder.
+
+## Cross-links
+- Back to #1 (Measuring Distance) — this is where the light-minute unit
+  teased there actually gets built out fully.
+- Back to #2 (Speed of Light) — direct dependency; this whole piece only
+  works because c is a solid, known constant, per #2's wrap-up.
+- Does NOT overlap with #4 (parsecs vs. light-years) per your own note —
+  this piece is about *scale intuition through light-time*, #4 is about
+  *why the parsec exists as a unit distinct from the light-year*. Different
+  jobs even though both mention light-years.
+
+## Figures/Facts Needed From You (or verify at drafting time)
+- Confirmed via search, ready to use: Mars light-time range (3-22 min),
+  Voyager 1 light-day date (Nov 18, 2026) and current distance (~170-173 AU
+  as of early-mid 2026, growing ~3.6 AU/year), L2 distance (~1.5 million km,
+  ~5 second one-way light delay, ~10 sec round-trip).
+- Still open: confirm Roman Space Telescope's L2 orbit and light-delay
+  figure directly rather than assuming it matches JWST by analogy.
+- Still rough/unverified: precise light-week and light-month landmark
+  objects (Oort Cloud boundary claims vary by source — will pin down at
+  drafting time rather than assert a specific edge here).
+- Proxima Centauri distance (~4.24 ly) and Andromeda distance (~2.5 Mly) —
+  standard values, will confirm exact figures at drafting time.
+
+## Open Questions
+- Should the Mars communication-delay implications get their own
+  highlighted callout (given how strong an example it is, similar to how
+  Mars opposition got a callout in #1), or stay woven into the "minutes"
+  section prose?
+- Should the Voyager 1 milestone be framed as a dated, celebratory "this is
+  happening this year" moment (risk: article ages oddly once the date
+  passes), or framed more evergreen ("as of [publish date], Voyager 1 is
+  about to cross...")? Worth deciding given the article may be read well
+  after Nov 18, 2026.
+- Light-week/month section may end up thin given the Oort Cloud boundary
+  fuzziness — okay to keep brief/approximate here rather than force
+  precision that doesn't exist in the literature.

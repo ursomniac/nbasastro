@@ -1,0 +1,134 @@
+# Article 1: Measuring Distance
+**Series:** AF | **Position in arc:** 1 of 8 (the spine)
+
+## Core Hook
+Not a glossary of units — a piece about *perspective*. The point isn't "here are
+the conversion factors," it's building an actual felt sense of scale, the way
+*Powers of Ten* builds intuition by anchoring every jump to something concrete
+you already understand, rather than just multiplying by ten and moving on.
+
+The specific problem this piece has to solve: km/miles stay intuitive a long
+way (a trillion km is still "a number of km," however large), but something
+like a megaparsec has *nothing* in ordinary life to anchor against — you can't
+feel what 1 Mpc means the way you can feel what 1 AU means (Earth-to-Sun is at
+least a distance our solar system already hands us for free). So the AU
+section of this piece isn't just "here's the definition" — it needs to do the
+actual work of making AU-scale distances *feel* like something, before later
+articles in the arc ask the reader to make the same leap for parsecs and
+megaparsecs with much less to hold onto.
+
+## Subtopics / Beats (rough order)
+1. Why raw km/miles break down eventually — numbers get unwieldy past
+   planetary distances; a unit is only useful if it stays legible.
+2. **Define the AU concretely**: ~150 million km, ~8.3 light-minutes,
+   Earth-Sun mean distance. This is the one rung in the ladder people already
+   half-own intuitively — lean on that.
+3. **Solar system table**: planets' (and notable bodies') distance from the
+   Sun in AU — Mercury through Neptune, plus reach objects like Sedna to show
+   just how far the ladder still has to stretch even within "our own
+   neighborhood."
+4. **Worked examples section (the Powers-of-Ten heart of the piece)** — not
+   just listing "Sedna is X AU away," but building intuition through specific,
+   concrete scenarios:
+   - What 1 AU means when you're already out at Neptune's distance, vs. what
+     it means near Earth (relative vs. absolute significance of "1 AU")
+   - **Mars opposition case study**: opposition distance to Earth ranges from
+     about 0.37-0.38 AU (perihelic opposition) to about 0.68 AU (aphelic
+     opposition) — confirmed via multiple sources, not just an estimate.
+     Same event ("opposition"), nearly double the apparent size and roughly
+     5x the brightness depending on where in that range it falls. This is a
+     genuinely great "1 AU is not a small deal" example because it's not
+     abstract — it directly explains something readers have likely noticed
+     themselves (why some Mars oppositions are hyped as special and others
+     aren't).
+   - Possible additional worked example: Jupiter or Saturn's distance
+     variation across their orbits, for contrast with how much *less*
+     dramatic 1 AU is at that scale (since they're already so far out) —
+     reinforcing the "relative vs. absolute" point above.
+5. **Aside: "It's not just linear distance — it's comparative distance."**
+   Science doesn't always convert everything back to one base unit. It's
+   common (and more useful) to measure in terms of a natural reference size
+   for the domain you're in:
+   - Planetary sizes -> Earth radii / Earth diameters
+   - Stars -> solar radii
+   - Solar system -> AU
+   - Stellar neighborhood -> light-years / parsecs
+   - Galaxy structure -> galactic diameters
+   - Clusters & groups -> galactic radii, or Mpc
+   The point of this aside: this isn't a quirk, it's a *pattern* — every
+   field picks the ruler that keeps numbers human-sized for what it's
+   actually comparing. But flag honestly (per your own note) that this
+   pattern gets *harder* to feel the further out you go — an AU means
+   something because Earth-Sun is a real, given distance; a megaparsec has
+   no equivalent everyday anchor, which is exactly why later rungs of the
+   ladder (light-years, parsecs) need their own dedicated grounding work in
+   later articles rather than this one trying to cover everything.
+5b. **Sub-aside: coining our own unit — a "JLU" (Jovian Lunar Unit)?**
+   A real, official "Lunar Distance" (LD, ~384,400 km) already exists and is
+   used casually in astronomy (e.g., describing how close a near-Earth
+   asteroid passed, in multiples of LD). There is no equivalent named unit
+   for other planets' moon systems, even though the same trick could build
+   the same kind of intuition for Jupiter's or Saturn's systems.
+   - Genuinely nice hook: Io orbits Jupiter at ~421,800 km — almost exactly
+     1 real Lunar Distance. So "1 JLU" (if loosely anchored to Io's orbit)
+     lands close to the same raw km as our own Moon's orbit.
+   - The payoff: same *distance*, wildly different *dynamics* — Io completes
+     an orbit in under 2 days vs. the Moon's ~27, purely because Jupiter's
+     mass is so much greater. This reinforces the comparative-unit idea
+     while smuggling in a free orbital-mechanics/mass lesson.
+   - **Saturn confirmed via search**: Dione orbits Saturn at a semi-major
+     axis of 377,396 km — about 2% *less* than the Earth-Moon distance
+     (matches Wikipedia's own stated comparison). Dione's orbital period is
+     2.737 days, about one-tenth the Moon's ~27.3 days, again attributed
+     directly to Saturn's much greater mass (95x Earth's). So Dione is the
+     natural "SLU" anchor, mirroring Io almost exactly.
+   - **This makes a genuinely strong table/graphic**: Io (~10% more than
+     1 LD, ~15x faster) and Dione (~2% less than 1 LD, ~10x faster) both
+     sit close to "1 Earth-Moon distance" from their respective planets,
+     yet both orbit dramatically faster — a clean two-planet echo of the
+     same mass/gravity lesson, not a strained one-off coincidence.
+   - Framing note: present this explicitly as *us coining a teaching device*,
+     not an established astronomical unit — should be transparent about that
+     rather than implying JLU/SLU is real terminology.
+6. Tie back to "understanding, not glossary" mission: end this piece with the
+   reader having a *feel* for AU-scale distances specifically, with the ladder
+   above (light-years, parsecs, Mpc) explicitly teed up as "the same idea,
+   applied at scales even harder to feel" — setting up #3 and #4 rather than
+   trying to fully deliver that intuition here.
+
+## Cross-links
+- Forward to #3 (light-time units) — "there's a whole other axis for
+  measuring distance: time" as the bridge/teaser.
+- Forward to #4 (parsecs vs. light-years) — this piece introduces both
+  loosely; #4 is where the parsec gets properly earned via parallax.
+- Forward to #5 (cosmic distance ladder) — the "ladder" framing here should
+  foreshadow the literal Distance Ladder piece later without duplicating it.
+
+## Figures/Facts Needed From You
+- Solar system table distances (Mercury-Neptune, Sedna) — standard values,
+  will pull from a verified source at drafting time rather than from memory.
+- Confirmed via search: Mars opposition range is ~0.37-0.38 AU (perihelic) to
+  ~0.68 AU (aphelic) — multiple sources agree (Wikipedia orbital mechanics
+  page, nakedeyeplanets.com, EarthSky). Your recollection of "0.39 to 0.7"
+  was close; this is the tighter figure to use.
+- Still open: whether to include a second worked example (Jupiter/Saturn
+  orbital distance variation) — need rough numbers if you want this included.
+- JLU idea confirmed via search: Io's distance (~421,800 km, ~10% more than
+  1 LD) and Saturn's Dione (~377,396 km, ~2% less than 1 LD, per Wikipedia's
+  own stated comparison) both anchor close to 1 Earth-Moon distance, while
+  orbiting ~15x and ~10x faster respectively due to their planets' greater
+  mass. Both numbers pulled from Wikipedia's Dione and Io pages and
+  cross-checked against a second source (astro.if.ufrgs.br teaching sheet
+  for Io) — no remaining open question on this sub-example.
+
+## Analogies / Hooks (open — not settled)
+- p3 open per your note — will surface candidates once we're drafting rather
+  than force one now.
+
+## Open Questions
+- Does the "comparative distance" aside get its own subheading, or stay a
+  woven-in paragraph? (Lean toward its own subheading given how much
+  conceptual weight it's carrying.)
+- Structural question: should the Mars opposition case study live inside the
+  worked-examples section, or get pulled out as its own highlighted callout
+  box, given how strong an example it is?

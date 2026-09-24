@@ -1,0 +1,20 @@
+"Content contributed to the NBAS website remains the copyright of its author, who grants NBAS a perpetual, non-exclusive license to publish, edit, compile, and distribute the work in any format, including future print and digital compilations."
+
+
+Motion (for the agenda / to read aloud):
+
+"I move that NBAS adopt a content policy under which authors retain copyright in material they contribute to the NBAS website, and grant NBAS a perpetual, non-exclusive license to edit, compile, and publish that material in any format, including future print or digital collections."
+
+Minutes entry (after it passes):
+
+"The club adopted a content policy for website contributions: authors retain copyright in their work; NBAS receives a perpetual, non-exclusive license to edit, compile, and republish contributed material in any format, including future print or digital collections. Motion passed [unanimously / by vote of X–X]."
+
+Club documentation (the actual policy text, for wherever NBAS keeps its governance records — bylaws appendix, a contributor guidelines page, wherever makes sense for you):
+
+"Content Policy. Authors who contribute articles, images, or other material to the NBAS website retain copyright in their work. By submitting content, an author grants the Northern Berkshire Astronomical Society a perpetual, non-exclusive license to edit, compile, and publish that material in any current or future format, including print and digital collections, with author credit maintained. This policy was adopted by club vote on [date]."
+
+Footer text (cosmetic, site-wide, separate step):
+
+"© Northern Berkshire Astronomical Society and contributing authors"
+
+One thing worth deciding before the meeting: does this need to apply retroactively to everything Bob's already written, or only to content going forward? If retroactive, the motion should say so explicitly ("...applies to all content contributed to date and going forward") — otherwise someone could reasonably argue it only covers articles published after the vote, which would leave the existing archive in the same unclear spot you're trying to fix right now.
