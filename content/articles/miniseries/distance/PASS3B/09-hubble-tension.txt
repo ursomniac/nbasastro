@@ -1,0 +1,118 @@
+# Article 9: Velocities and the Hubble Tension (working title)
+**Slug:** hubble-tension | **Series:** AF (+HP) | **Position:** 9 of 10
+
+(From old #7 "The Cosmic Distance Ladder," sections 4-6 — the 7B half of the
+split. Section numbers below are the OLD #7 numbers.)
+
+## Core Hook (old #7 hook, shared with ladder-cracks)
+NOT a parade of standard candles ("here's Cepheids, here's supernovae,
+here's the ladder"). The actual insight: the ladder isn't a chain of
+"here's how we measure X" facts — it's a chain of *inference*, where each
+rung's trustworthiness depends entirely on the rung below it, and history
+shows this has cracked before (dramatically), may currently be showing a
+new crack (the Hubble tension), and even the "corrections" applied to clean
+up the data have their own layered, incompletely-resolved history. This is
+explicitly the kind of "insight, not facts" piece the site's whole editorial
+philosophy is built around — arguably the strongest test case for that
+philosophy in the entire arc.
+
+**Split note:** this half carries redshift as the far-end ruler, the layered
+"cosmic velocity" corrections, why nearby galaxies can't anchor the
+redshift side, and the current unresolved crack (Hubble tension).
+ladder-cracks carries the historical cracks (Baade, Hyades/Pleiades).
+
+## Structure
+
+### 4. The "cosmic velocity" correction chain — additive, not squared, and layered by discovery
+Directly answers your question about how various velocity corrections
+combine. Confirmed via search: these are straightforward **vector sums**
+(signed, projected onto the line of sight), not combined in quadrature —
+that distinction matters and should be stated explicitly since it's an easy
+thing to assume incorrectly.
+- Standard published form: V(cosmic) = V(heliocentric) + V(LG correction)
+  − V(Virgo infall) − V(Great Attractor infall) − V(Shapley Supercluster
+  infall) − ...
+- The genuinely good story: this was discovered in layers, decades apart.
+  The Local Group's total motion relative to the CMB (known precisely from
+  the CMB dipole, ~627 km/s) is only ~27% explained by Virgo infall alone
+  (~220-240 km/s). That gap led to discovering infall toward the "Great
+  Attractor" (Hydra-Centaurus), accounting for roughly the remaining 70%.
+  Even that didn't close the loop completely, leading to a further
+  Shapley Supercluster correction. Each "residual" led to the next
+  discovery — structurally the same "precision improves via successive
+  correction" pattern as Baade, and as the AU/parallax chronologies in measuring-the-au / parallax, just playing out at the largest scale in the whole arc.
+- Modern practice has largely replaced the "discover one attractor, find a
+  residual, discover the next" approach with continuous 3D velocity-field
+  reconstructions (e.g. the 2M++ model) built from galaxy density surveys
+  via linear gravitational instability theory — one unified model instead
+  of a growing list of named patches.
+- **Even now, this isn't fully solved**: residual uncertainty after the
+  best current flow-field corrections is still commonly quoted around
+  ~150-250 km/s. "Peeling off all known structure" doesn't perfectly
+  recover pure Hubble flow — there's more out there not yet fully mapped.
+
+### 5. Why nearby galaxies can't anchor the redshift side at all (validates your instinct directly)
+- Peculiar velocities are typically on the order of a few hundred km/s
+  (~300 km/s commonly cited).
+- Below about cz ~ 3,000 km/s (~40 Mpc), that's already a 10%+
+  contamination of the total observed velocity — which is why redshift
+  alone is unreliable as a distance indicator at Local Group-adjacent
+  scales, exactly as you suspected.
+- The ladder's actual far-end structure is a deliberately engineered
+  two-tier system: a small set of **anchor galaxies** (Milky Way, LMC,
+  NGC 4258) get independent, non-redshift geometric distances to calibrate
+  standard-candle absolute luminosity; then a **separate, much larger
+  "Hubble flow" sample** of supernovae at cz gtrsim 7,000 km/s is used
+  purely for the redshift-distance relation, specifically chosen far
+  enough out that peculiar velocities become a small fraction of the total.
+
+### 6. Wrap-up — the current, unresolved crack
+Close on the **Hubble tension**: current local (ladder-based) measurements
+of H0 disagree with early-universe (CMB-based) measurements by roughly
+5-9% (exact current figures shift; verify at drafting time rather than
+quote a fixed number as settled). Nobody currently knows for certain
+whether this is a hidden systematic hiding somewhere in the chain this
+article just walked through, or genuinely new physics. This is the honest,
+open-ended ending the whole piece has been building toward: the ladder has
+cracked before, we know exactly how and when (Baade), and it might be
+cracked again, right now, in a way we can't yet locate.
+
+## Running Metaphor (see series map)
+**Stage:** 2 (upgraded).
+- **Vehicle — CANDIDATE (new, not agreed):** peculiar velocities are local
+  traffic; the Hubble flow is the highway. Near home, local traffic swamps
+  the highway speed — exactly why nearby galaxies can't anchor the redshift
+  side (section 5: ~300 km/s peculiar velocities vs. cz below ~3,000 km/s).
+- **Neighborhood:** none (extragalactic neighborhood lives in the possible
+  extragalactic companion, if written).
+
+## Cross-links
+- Back to ladder-cracks — the ladder has cracked before; this asks whether
+  it's cracked again. The velocity-correction discovery sequence is the same
+  "successive correction" pattern as Baade and as measuring-the-au / parallax,
+  at the largest scale in the arc.
+- Back to parsecs-vs-light-years — standard candles and parsecs.
+- Forward to how-far-can-we-see — redshift as a distance indicator, and its
+  limits, extend naturally into the observable universe's edge.
+
+## Figures/Facts (from old #7)
+- Velocity decomposition chain (Virgo ~220-240 km/s, Great Attractor
+  ~70% of remainder, Shapley Supercluster) confirmed via multiple sources
+  (Sandage & the Cosmic Expansion review, Kocevski & Ebeling on the Great
+  Attractor, Mould et al. 2000 methodology papers).
+- Current Hubble tension percentage — check at drafting time rather than
+  quote a fixed figure, since this shifts with each new data release.
+
+## Open Questions
+- How much technical depth on the velocity-correction formula itself
+  (full V(cosmic) = ... equation) vs. just narrating the discovery history
+  in prose? Given the "don't lose the reader" caution from earlier
+  articles, leaning toward narrating the Virgo -> Great Attractor ->
+  Shapley discovery sequence as the main content, with the formula as an
+  optional callout.
+- Should the Hubble tension get a full explanation of both measurement
+  methods (ladder vs. CMB), or just be named as "the current open
+  question" without fully explaining the CMB-based method (which would
+  pull in early-universe physics well beyond this arc's scope)? Leaning
+  toward the latter — naming it clearly without a full second explanation
+  keeps this piece's ending sharp rather than sprawling into cosmology.

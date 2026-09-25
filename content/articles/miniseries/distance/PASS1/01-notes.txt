@@ -35,7 +35,6 @@ megaparsecs with much less to hold onto.
    - **Mars opposition case study**: opposition distance to Earth ranges from
      about 0.37-0.38 AU (perihelic opposition) to about 0.68 AU (aphelic
      opposition) — confirmed via multiple sources, not just an estimate.
-     Same event ("opposition"), nearly double the apparent size and roughly
      5x the brightness depending on where in that range it falls. This is a
      genuinely great "1 AU is not a small deal" example because it's not
      abstract — it directly explains something readers have likely noticed

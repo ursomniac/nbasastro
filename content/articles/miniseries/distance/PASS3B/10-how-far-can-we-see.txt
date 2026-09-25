@@ -1,0 +1,197 @@
+# Article 10: How Far Can We See?
+**Slug:** how-far-can-we-see | **Series:** AF | **Position:** 10 of 10 (capstone)
+
+(From old #8. Body unchanged except capstone cross-links converted to slugs
+to match the new 10-article order.)
+
+## Core Hook
+Not "here's the size of the observable universe" as a fact to report. The
+real insight, confirmed through this discussion: "how far can we see" does
+not have one answer, it has at least three, and they answer genuinely
+different questions. The capstone framing: this whole arc has been building
+the tools (distance units, parallax, the ladder, redshift) to even ask this
+question — and the honest answer is that we are observing during a uniquely
+privileged, closing window in cosmic history. This is the strongest
+available "insight, not facts" ending for the series.
+
+## Structure — Three Distinct Horizons
+
+### 1. Lookback time vs. comoving distance (the entry point)
+Grounded directly in your uploaded Planck 2018 chart. The two curves
+diverge dramatically at high redshift:
+- **Lookback time** (how long ago the light left) asymptotes toward the
+  age of the universe (~13.8 Gyr) — it can never exceed this, by
+  definition.
+- **Comoving distance** (where that object actually is *now*, accounting
+  for expansion during the light's travel time) keeps climbing well past
+  30+ billion light-years even as lookback time flattens out.
+- This directly explains the classic popular-science conflation: the
+  observable universe is *not* "13.8 billion light-years" (naively:
+  speed of light times age of universe) — it's the comoving distance to
+  the particle horizon, commonly cited as ~46 billion light-years. Space
+  itself has been expanding the whole time the light was travelling, so
+  the object is now much farther away than the light's travel time alone
+  would suggest.
+
+### 2. The particle horizon (the conventional "observable universe")
+- ~46 billion light-years (comoving) — the edge of what light *has had
+  time to reach us* since the Big Bang.
+- This boundary keeps growing over time (more light arrives every year),
+  though the *rate* of growth is shaped by the universe's full expansion
+  history (matter density, radiation density, dark energy density — the
+  same Planck parameters behind your chart).
+- This is the boundary most popular sources mean by "observable universe,"
+  though as section 1 shows, it's frequently reported with the wrong
+  number because of the lookback-time/comoving-distance conflation.
+
+### 3. The cosmological event horizon (a completely different, forward-looking boundary)
+This is the genuinely surprising addition, confirmed via search, that most
+readers (and most casual science writing) never encounter:
+- Currently about **17 billion light-years** away (comoving).
+- Light emitted **right now**, from beyond that distance, will **never**
+  reach us — not "not yet," but never, under any amount of waiting —
+  because accelerating expansion (dark energy) stretches the intervening
+  space faster than the light can close the gap.
+- Directly answers the acceleration-parameter question: this horizon
+  exists *because* expansion is accelerating. A coasting or decelerating
+  universe would not have one at all.
+- It will continue to grow somewhat into the future, but asymptotes to a
+  maximum of roughly **60 billion light-years** in a standard dark-energy
+  cosmology — meaning it doesn't swallow literally everything; there's a
+  bounded "core" region that remains permanently reachable.
+- Confirmed: galaxies currently visible to us are, one by one, crossing
+  beyond this horizon as expansion carries them away — going from
+  observable to permanently unobservable. The "observable universe" is
+  not just growing (via the particle horizon) — it's also, separately,
+  losing objects out its far edge as the event horizon does its work.
+
+### 4. The "torus" was never thinner than it is right now — a follow-up insight worth featuring prominently
+A reader-generated framing worth building directly into the piece: picture
+the reachable universe as a "light realm" surrounded by a "dark torus" of
+permanently unreachable space. Intuition suggests this torus should have
+been thin in the deep past and thicken toward some future maximum. The
+actual physics inverts this, confirmed via real numbers (cosmology lecture
+notes working out the explicit cases):
+- **A purely matter-dominated universe has no future event horizon at
+  all.** Given infinite time, an observer would eventually receive light
+  from an unboundedly large, ever-growing region — because decelerating
+  expansion lets light eventually catch up to anything, no matter how far,
+  given enough patience. In this framing, the "torus" isn't thin — it's
+  **absent**.
+- **Dark energy is what switches the torus on.** Once accelerating
+  expansion took over (a few billion years ago), the event horizon became
+  fixed and finite for the first time. Using our universe's actual
+  measured values (matter ~27%, dark energy ~73%), the numbers show our
+  current event horizon is already smaller than our particle horizon —
+  meaning **there are already galaxies whose light we could once have
+  received that have since permanently crossed out of reach**. That gap
+  (event horizon sitting inside the particle horizon) is the "dark torus,"
+  and it didn't always exist — it switched on with dark energy domination,
+  and has been thickening ever since.
+- **Reframe of the capstone question**: the "thin torus" era isn't ahead
+  of us, waiting to be reached — it's *behind* us. We are living in the
+  window after that ceiling appeared, watching the reachable fraction of
+  the universe shrink in real (cosmic) time, for the first time in the
+  universe's history.
+- **Observer-dependence, confirmed and worth stating explicitly**: there
+  is no single universal torus. Every observer, everywhere, has their own
+  private event horizon centered on themselves, by the same physics
+  applying everywhere (the cosmological principle). If a galaxy sits
+  beyond our current event horizon, by that same symmetry, we are almost
+  certainly beyond theirs too — billions of overlapping, observer-centered
+  horizons, each independently shrinking its own reachable fraction, all
+  for the same underlying reason.
+- This slots naturally as either the emotional peak right before the
+  Krauss/Scherrer far-future material in section 5, or as its own short
+  section between 3 and 5 — the "the ceiling already exists and is
+  closing" idea is a natural bridge into "and here's what that means taken
+  to its endpoint."
+
+### 5. The far-future payoff — Krauss & Scherrer's "End of Cosmology"
+This is the capstone beat, verified as a real, published, peer-reviewed
+result (Krauss & Scherrer 2007, "The Return of a Static Universe and the
+End of Cosmology," Gravity Research Foundation prize winner, published in
+*General Relativity and Gravitation*):
+- On a timescale comparable to the lifespan of the longest-lived stars
+  (red dwarfs — genuinely trillions of years out), all three observational
+  pillars of the Big Bang will vanish for any observer in our galaxy:
+  1. **The Hubble expansion itself** — the tracer galaxies used to detect
+     it will have redshifted away and crossed the event horizon.
+  2. **The CMB** — redshifted to wavelengths so long it can no longer even
+     penetrate the galaxy.
+  3. **Primordial light-element abundances** (helium, deuterium) — swamped
+     by material subsequently produced by generations of stars, no longer
+     distinguishable as a primordial signature.
+- The result, direct from their abstract: a far-future observer would be
+  "fundamentally incapable of determining the true nature of the
+  universe." They could infer a finite age for their own (by then merged
+  Milky Way/Andromeda) galaxy, but not that a Big Bang or an expanding
+  universe ever existed.
+- The genuinely great irony, worth foregrounding: this is a return to
+  almost exactly the *wrong*, static "island universe" picture astronomers
+  held **before** Hubble in the 1920s — cosmology completing a full,
+  ironic circle from wrong, to right, back to (an unrecoverable) wrong.
+
+## Running Metaphor (see series map)
+**Stage:** 3 (it breaks — the one-way street).
+- **Vehicle:** for the quasar of the week (z ~ 6), "how long did the trip
+  take?" and "how far is it now?" give different answers (section 1). A
+  laser fired at it TODAY would never arrive — it's beyond the event
+  horizon (section 3, ~17 Gly comoving, confirmed). By observer symmetry,
+  its surroundings' light sent today never reaches us either. We receive
+  mail from places we can no longer write back to: seeing a place no longer
+  means you could ever reach it. Natural fit with the "dark torus" beat
+  (section 4).
+  Fact-pass items: z ~ 6 comoving distance; from memory, anything above
+  roughly z ~ 1.8 is already beyond our event horizon — UNVERIFIED.
+- **Neighborhood:** "your neighborhood used to be a city" — physical
+  density scales as (1+z)^3 (standard cosmology); exact factors for 5 and
+  10 Gyr ago UNVERIFIED; galaxy counts not conserved (mergers).
+
+## Cross-links / Capstone Framing
+
+This is the natural place to explicitly loop back across the whole arc,
+per the earlier open question about whether this article should function as a capstone:
+- measuring-distance started the series asking how to build intuition
+  for scale at all; solar-system-scale made the first rung (AU, light-time)
+  something you can feel.
+- speed-of-light, measuring-the-au, and parallax built the actual tools.
+- parsecs-vs-light-years, ladder-cracks, and hubble-tension extended
+  those tools as far as they can currently reach, ending hubble-tension on the open
+  question of the Hubble tension.
+- how-far-can-we-see closes by pointing out that the entire project this series has just
+  walked through — measuring, calibrating, extending outward — is only
+  possible *right now*. The window is closing, on a timescale that is
+  long by human standards but short by the universe's own.
+- Suggested closing line direction (not final): something like "every
+  article in this series has been about a window we happen to be standing
+  inside of, at a moment in the universe's life when it's still open."
+
+## Figures/Facts Needed From You (or verify at drafting time)
+- Particle horizon (~46 Gly) and event horizon (~17 Gly current, ~60 Gly
+  asymptotic future) figures confirmed via multiple sources (Universe
+  Today, ScienceDaily, Reed Beta's dark-energy horizon explainer, and the
+  Kaloper et al. theoretical paper on cosmological event horizons).
+- Krauss & Scherrer 2007 paper confirmed directly (arXiv 0704.0221,
+  published in General Relativity and Gravitation, Gravity Research
+  Foundation prize).
+- Your uploaded Planck 2018 comoving-distance/lookback-time chart is the
+  natural lead figure for section 1 — confirm whether you want it used
+  as-is or want a companion version generated for the article specifically
+  showing the particle horizon and event horizon as marked reference lines
+  on the same kind of plot.
+
+## Open Questions
+- How much of the theoretical machinery (de Sitter horizons, equation of
+  state w, e-folds) to include vs. keep purely at the "here's what happens
+  and why" level — given the "don't lose the reader" caution running
+  through this whole arc, leaning strongly toward the latter, with the
+  math left out entirely.
+- Confirmed as standalone per your instruction — any series-spanning
+  epilogue material becomes a separate index/miniseries landing page
+  later, not folded into this article itself.
+- The "core region that always remains reachable" nuance (the ~60 Gly
+  asymptotic bound) is honest and worth keeping in, even though the
+  Krauss/Scherrer ending is bleaker — avoids overstating "everything
+  disappears" when the literature is clear that a bounded region persists.
+

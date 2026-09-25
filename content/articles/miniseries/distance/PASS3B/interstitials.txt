@@ -1,0 +1,87 @@
+# Interstitials — Measuring the Universe
+Pieces that sit OUTSIDE the numbered chain. They may or may not become
+articles; each can run whenever it's ready, and can link into the series by
+slug.
+
+---
+
+## I-1: JLU / SLU — Coining Our Own Unit
+**Status:** idea, facts confirmed | **Possible series:** AF (or HSW)
+(Moved out of old #1 beat 5b — author decision: this is an interstitial,
+not a beat in measuring-distance.)
+
+   A real, official "Lunar Distance" (LD, ~384,400 km) already exists and is
+   used casually in astronomy (e.g., describing how close a near-Earth
+   asteroid passed, in multiples of LD). There is no equivalent named unit
+   for other planets' moon systems, even though the same trick could build
+   the same kind of intuition for Jupiter's or Saturn's systems.
+   - Genuinely nice hook: Io orbits Jupiter at ~421,800 km — almost exactly
+     1 real Lunar Distance. So "1 JLU" (if loosely anchored to Io's orbit)
+     lands close to the same raw km as our own Moon's orbit.
+   - The payoff: same *distance*, wildly different *dynamics* — Io completes
+     an orbit in under 2 days vs. the Moon's ~27, purely because Jupiter's
+     mass is so much greater. This reinforces the comparative-unit idea
+     while smuggling in a free orbital-mechanics/mass lesson.
+   - **Saturn confirmed via search**: Dione orbits Saturn at a semi-major
+     axis of 377,396 km — about 2% *less* than the Earth-Moon distance
+     (matches Wikipedia's own stated comparison). Dione's orbital period is
+     2.737 days, about one-tenth the Moon's ~27.3 days, again attributed
+     directly to Saturn's much greater mass (95x Earth's). So Dione is the
+     natural "SLU" anchor, mirroring Io almost exactly.
+   - **This makes a genuinely strong table/graphic**: Io (~10% more than
+     1 LD, ~15x faster) and Dione (~2% less than 1 LD, ~10x faster) both
+     sit close to "1 Earth-Moon distance" from their respective planets,
+     yet both orbit dramatically faster — a clean two-planet echo of the
+     same mass/gravity lesson, not a strained one-off coincidence.
+   - Framing note: present this explicitly as *us coining a teaching device*,
+     not an established astronomical unit — should be transparent about that
+     rather than implying JLU/SLU is real terminology.
+
+### Figures/Facts (from old #1 notes)
+- JLU idea confirmed via search: Io's distance (~421,800 km, ~10% more than
+  1 LD) and Saturn's Dione (~377,396 km, ~2% less than 1 LD, per Wikipedia's
+  own stated comparison) both anchor close to 1 Earth-Moon distance, while
+  orbiting ~15x and ~10x faster respectively due to their planets' greater
+  mass. Both numbers pulled from Wikipedia's Dione and Io pages and
+  cross-checked against a second source (astro.if.ufrgs.br teaching sheet
+  for Io) — no remaining open question on this sub-example.
+
+### Sky tie-in (candidate, unverified)
+Io visibly shifts position around Jupiter over an evening in binoculars or a
+small scope — a "go look" angle. Check Jupiter's visibility for whenever
+this runs.
+
+### Figure candidate
+Moon / Io / Dione comparison graphic: three systems at nearly the same
+distance, very different orbital periods (numbers confirmed above).
+
+---
+
+## I-2: GenericLU — Generalizing the Idea
+**Status:** idea only (from handoff note) | **Possible series:** AF
+Generalize the JLU/SLU idea across moon systems and orbital resonances: a
+"lunar unit" for each planet's moon system, and what the comparisons reveal
+(mass, dynamics). Could absorb I-1 entirely, or I-1 could run first as the
+teaser. Nothing verified beyond Io/Dione (see I-1).
+
+---
+
+## I-3: Voyager 1 at One Light-Day (Watch piece)
+**Status:** fallback option | **Possible series:** Watch (timely)
+Short standalone piece on/around **Nov 18, 2026** (Wednesday): Voyager 1
+reaches 1 light-day from Earth (~173 AU). Contents could reuse
+solar-system-scale's Voyager material: what a light-day means, round-trip
+command time, why it's a nice coincidence.
+- Only needed if solar-system-scale does NOT publish before Nov 18. If it
+  does (e.g., Thu Nov 12), that article carries the milestone and this
+  becomes optional.
+- Re-verify the date before publishing.
+
+---
+
+## I-4: How c Behaves — Medium and Gravity (possible AF companion)
+**Status:** contingent | **Possible series:** AF
+From old #2's open question: speed-of-light section 4 (light in a medium;
+local invariance vs. Shapiro delay/lensing) drifts toward AF territory.
+Only split it out if it runs long during drafting; otherwise it stays inside
+speed-of-light. Author's call once length is known.

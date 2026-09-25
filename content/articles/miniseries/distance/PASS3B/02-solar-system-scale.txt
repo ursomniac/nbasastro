@@ -1,0 +1,170 @@
+# Article 2: Distance at Solar System Scale
+**Slug:** solar-system-scale | **Series:** AF | **Position:** 2 of 10
+
+Built from old #1 beats 2-4 (AU, table, worked examples, Mars opposition)
+and old #3's core hook + inside-out ladder from 1 second through 1 month.
+
+## Core Hook (three hooks, folded together)
+1. **The AU is the one rung readers already half-own.** You are standing
+   1 AU from the Sun right now. This section has to do the actual work of
+   making AU-scale distances *feel* like something — before later articles
+   ask the reader to make the same leap for parsecs and megaparsecs with much
+   less to hold onto.
+2. **Light-time as a second ruler for the same territory** — the AU and
+   light-time describe the same solar system two ways.
+3. **The inversion (from old #3): why switch to time as a distance unit at
+   all?** Instead of "here's the light-time to object X," ask "how far do you
+   get in a familiar chunk of time?" — 1 second, 1 minute, 1 hour, 1 day,
+   1 week, 1 month. This works because we already have real intuition for
+   what a week or a month *feels* like, even though we have no intuition at
+   all for what "173 AU" feels like. The inversion is the argument, not just
+   a device.
+
+**Dependency note:** this article now comes BEFORE speed-of-light. It can
+state c's value plainly and use it; the history of how c was measured lives
+in speed-of-light (forward link).
+
+## Structure (draft — see Open Questions on how AU and light-time combine)
+
+### 1. Define the AU concretely
+~150 million km (exact since 2012: 149,597,870,700 m), ~8.3 light-minutes,
+Earth-Sun mean distance. No history here — measuring-the-au tells that story
+(forward link; "a topic for a later article" until written).
+
+### 2. Solar system table
+Planets' (and notable bodies') distances from the Sun. v0 plan: columns for
+km / AU / light travel time. Mercury through Neptune, plus reach objects like
+Sedna to show how far the ruler still has to stretch within "our own
+neighborhood."
+
+### 3. Worked examples (the Powers-of-Ten heart of the piece)
+Not just "Sedna is X AU away" — build intuition through concrete scenarios:
+- **What 1 AU means at Neptune's distance vs. near Earth** (relative vs.
+  absolute significance of "1 AU").
+- **Mars — one distance variation, two consequences (merged from old #1
+  and old #3):**
+  - *Opposition size/brightness:* opposition distance ranges from about
+    0.37-0.38 AU (perihelic) to about 0.68 AU (aphelic) — confirmed via
+    multiple sources. Same event, nearly double the apparent size and
+    roughly 5x the brightness depending on where in that range it falls.
+    Explains something readers have noticed (why some oppositions are hyped
+    and others aren't).
+  - *Communication delay:* one-way light-time ranges from about 3 minutes
+    (near close/perihelic opposition) to about 22 minutes (at conjunction,
+    ~2.7 AU) — confirmed via search. Real-time conversation with a Mars crew
+    is *never* possible; the delay varies ~7x across the ~26-month
+    Earth-Mars cycle.
+- Possible additional example: Jupiter or Saturn's distance variation, for
+  contrast with how much *less* dramatic 1 AU is that far out — reinforcing
+  relative vs. absolute.
+
+### 4. The light-time ladder (inside-out, 1 second -> 1 month)
+
+**1 second** — Light covers ~300,000 km/s. The Moon (384,400 km) is just
+over 1 light-second away — "in about a second and a quarter, you've reached
+the Moon."
+
+**L2 (~5 seconds) — the "small enough to ignore" counterpoint** — Earth-Sun
+L2 is about 1.5 million km away (~4x the Earth-Moon distance), giving a
+one-way delay of about 5 seconds, ~10 seconds round-trip. JWST orbits in a
+halo around L2 rather than sitting at the point, so its distance varies
+(~1.5-1.8 million km), but the delay is essentially always "about 5
+seconds." Roman Space Telescope is also planned for an L2 halo orbit —
+verify directly rather than assume by analogy. Contrast point: a 5-second
+lag is basically invisible to mission operations, vs. Mars (constrains
+crewed-mission communication) and Voyager (forces fully autonomous
+operation) — same phenomenon, wildly different consequences by scale.
+
+**1 minute** — ~18 million km / ~0.12 AU. Not yet at the Sun — sets up the
+Sun at ~8.3 light-minutes as the next real landmark.
+
+**Minutes** — Sun: ~8.3 light-minutes (1 AU), "you're seeing the Sun as it
+was 8 minutes ago." Mars: see worked example above (3-22 min).
+
+**1 hour** — ~7.2 AU — just beyond Jupiter's orbit (~5.2 AU). Simple
+checkpoint before spacecraft-scale distances.
+
+**1 day — the Voyager 1 tie-in (timely, not evergreen)** — ~173 AU.
+Voyager 1 reaches 1 light-day from Earth on **November 18, 2026** —
+confirmed via multiple sources (NASA-sourced reporting, EarthSky), converging
+on that date and ~173.1-173.8 AU. Distance keeps growing (~3.6 AU/year), so
+pin the "1 light-day" moment to the specific date rather than presenting
+Voyager's distance as a fixed number that will go stale.
+
+**1 week / 1 month** — rough scale only: light-week ~1,200 AU, light-month
+~5,200 AU (~0.08 ly) — extreme trans-Neptunian/inner Oort Cloud territory.
+Oort Cloud boundaries vary by source and aren't precisely nailed down —
+present as approximate scale-setting, not precise boundaries. The
+light-month is this article's outer wall.
+
+### (Candidate) Timely Mars hook — "go look" (UNVERIFIED)
+The next Mars opposition is in early 2027 and, as recalled, near the
+aphelic (far) end of the range — so the case study can end with "go look,
+and here's why it'll look small." Contrast with the next perihelic
+opposition (recalled as 2035). Verify both dates and distances. Points the
+article back at the sky per PHILOSOPHY.md.
+
+### 5. Ending
+Hand off outward: "beyond the light-month..." — the next rung (1
+light-year, the nearest stars) belongs to the stars articles (parallax,
+parsecs-vs-light-years). Brief teaser only.
+
+## Running Metaphor (see series map)
+**Stage:** 1 (it works), seeding stage 2.
+- **Vehicle:** spacecraft. Venus is a hop by spacecraft standards; Neptune is
+  a very long haul — Voyager 2's trip (~12 years, from memory, UNVERIFIED).
+  The light-time ladder then introduces light as the fastest vehicle — the
+  seed of stage 2.
+- **Neighborhood:** the asteroid belt myth — movies show it crowded; from
+  memory, typical spacing between asteroids is enormous (UNVERIFIED —
+  needs a real figure). Misinformation-correction beat that fits
+  PHILOSOPHY.md.
+
+## Cross-links
+- Back to measuring-distance — the AU was introduced there as one ruler
+  among many; here it gets built out.
+- Forward to speed-of-light — this article uses c; that one earns it.
+- Forward to measuring-the-au — how we know 1 AU = ~150 million km.
+- Forward to parallax — Gaia shares JWST's L2 parking spot.
+- Forward to parsecs-vs-light-years — picks up at 1 light-year.
+
+## Figures/Facts
+- Confirmed via search (per old notes): Mars opposition range (0.37-0.38 to
+  0.68 AU); Mars light-time range (3-22 min); Voyager 1 light-day date (Nov
+  18, 2026) and distance (~170-173 AU as of early-mid 2026, ~3.6 AU/yr); L2
+  distance (~1.5 million km, ~5 s one-way, ~10 s round-trip); AU exact value.
+- To pull at drafting time from a verified source: solar system table
+  distances (Mercury-Neptune, Sedna).
+- Still open: Roman Space Telescope's L2 orbit/delay; Jupiter/Saturn
+  variation numbers (if that example is kept); light-week/month landmark
+  objects (Oort Cloud claims vary).
+- Re-verify the Voyager date before anything is published around it.
+
+## Figure Candidates (discussed, not committed)
+Per project figure convention: three files each (source + SVG + PNG).
+- Solar system scale graphic in AU.
+- Mars opposition geometry: why perihelic oppositions happen when they do,
+  perihelic vs. aphelic distances (numbers confirmed). Good first test of the
+  figure workflow.
+- Earth-to-planet distance range chart: Mars's distance swings by a large
+  factor while Neptune's barely changes — the "relative vs. absolute" point
+  (numbers to pull at fact pass).
+- Author's own Mars images from different oppositions, same setup, very
+  different apparent sizes — would do more than any table. Author to check
+  image library.
+
+## Open Questions
+- **How do the AU tour and the light-time ladder combine?** Options: (a) two
+  passes — AU section, then light-time ladder; (b) one integrated tour with
+  the km/AU/light-time table as the backbone and the inversion ("how far in
+  a second / minute / day?") as a second pass. Unresolved.
+- Mars: its own highlighted callout box, or woven into worked examples?
+  (Stronger case for a callout now that it carries both opposition and
+  communication-delay consequences.)
+- Voyager framing: dated/celebratory "this is happening" (ages oddly after
+  Nov 18) vs. evergreen "as of [publish date]..." Depends on whether this
+  publishes before Nov 18 (see series map timing notes).
+- Light-week/month section may end up thin given Oort Cloud fuzziness —
+  okay to keep brief.
+- Length: this is now a big article. Watch whether it wants to become two
+  book chapters (AU half / light-time half).
