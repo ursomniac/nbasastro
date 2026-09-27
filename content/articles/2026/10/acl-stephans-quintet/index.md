@@ -1,6 +1,6 @@
 ---
 title: "Stephan's Quintet: A Portrait With One Photobomber"
-date: 2026-10-26
+date: 2026-10-29
 description: "Five galaxies, one accidental interloper, and a collision you can watch happening in real time — a closer look at the first compact galaxy group ever found."
 byline: "A popular deep-sky system of interacting galaxies... and one 'photobomber'"
 authors: ["bob-donahue"]

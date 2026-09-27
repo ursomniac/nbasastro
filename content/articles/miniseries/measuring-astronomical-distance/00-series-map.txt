@@ -15,18 +15,18 @@ reordering/splitting doesn't require hunting numbers across files.
 
 ## Order
 
-| #  | Slug                       | Working title                        | Tag(s)   | Role                                      |
+| #  | Slug                       | Working title                        | Tag(s)   | Role                                      |  Word Count |
 |----|----------------------------|--------------------------------------|----------|-------------------------------------------|
-| 1  | measuring-distance         | Measuring Distance                   | AF       | Prologue: why numbers fail; choosing rulers |
-| 2  | solar-system-scale         | Distance at Solar System Scale       | AF       | Solar system: the ruler (AU + light-time)  |
-| 3  | speed-of-light             | Speed of Light                       | HP       | Solar system: measurement (1 of 2)         |
-| 4  | measuring-the-au           | Measuring the AU Itself              | HP       | Solar system: measurement (2 of 2)         |
-| 5  | parallax                   | Parallax: 61 Cygni to Gaia           | HP       | Stars: measurement                         |
-| 6  | parsecs-vs-light-years     | Parsecs vs. Light-Years              | AF       | Stars: the ruler                           |
-| 7  | galactic-scale             | Distance at Galactic Scale (working title) | AF (+HP?) | Our galaxy: the ruler (kpc) — companion to solar-system-scale |
-| 8  | ladder-cracks              | The Ladder Cracks (working title)    | HP (+AF) | Galaxies: measurement                      |
-| 9  | hubble-tension             | Velocities and the Hubble Tension (working title) | AF (+HP) | Galaxies: the ruler (redshift) and its limits |
-| 10 | how-far-can-we-see         | How Far Can We See?                  | AF       | Epilogue / capstone                        |
+| 1  | measuring-distance         | Measuring Distance                   | AF       | Prologue: why numbers fail; choosing rulers | 2,810 |
+| 2  | solar-system-scale         | Distance at Solar System Scale       | AF       | Solar system: the ruler (AU + light-time)  | ----- |
+| 3  | speed-of-light             | Speed of Light                       | HP       | Solar system: measurement (1 of 2)         | ----- |
+| 4  | measuring-the-au           | Measuring the AU Itself              | HP       | Solar system: measurement (2 of 2)         | ----- |
+| 5  | parallax                   | Parallax: 61 Cygni to Gaia           | HP       | Stars: measurement                         | ----- |
+| 6  | parsecs-vs-light-years     | Parsecs vs. Light-Years              | AF       | Stars: the ruler                           | ----- |
+| 7  | galactic-scale             | Distance at Galactic Scale (working title) | AF (+HP?) | Our galaxy: the ruler (kpc) — companion to solar-system-scale | ----- |
+| 8  | ladder-cracks              | The Ladder Cracks (working title)    | HP (+AF) | Galaxies: measurement                      | ----- |
+| 9  | hubble-tension             | Velocities and the Hubble Tension (working title) | AF (+HP) | Galaxies: the ruler (redshift) and its limits | ----- |
+| 10 | how-far-can-we-see         | How Far Can We See?                  | AF       | Epilogue / capstone                        | ----- |
 
 Interstitials (outside the numbered chain; may or may not become articles):
 see interstitials.txt — JLU/SLU, GenericLU, Voyager light-day Watch piece,

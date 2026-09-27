@@ -168,3 +168,6 @@ Per project figure convention: three files each (source + SVG + PNG).
   okay to keep brief.
 - Length: this is now a big article. Watch whether it wants to become two
   book chapters (AU half / light-time half).
+
+- FROM measuring-distance: sizes vs. distances -- planet/Sun diameters stay readable,
+  distances don't. Sun is ~107 of its own diameters away (verify Sun diameter first).

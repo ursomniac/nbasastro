@@ -1,6 +1,6 @@
 ---
 title: "Measuring Brightness: the Magnitude System"
-date: 2026-10-29
+date: 2026-10-26
 description: "The magnitude system, explained: how astronomers measure starlight, from Hipparchus's ancient guesswork to Pogson's 1856 fix to JWST today."
 byline: "A two-thousand-year-old ranking system, one very good fix in 1856, and the math that lets you compare a firefly to the Sun."
 authors: ["nbas-staff"]

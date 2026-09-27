@@ -5,6 +5,11 @@
 {{- $w := cond $fullWidth "1200" (.Get "width" | default (.Get "size" | default "600") | strings.TrimSuffix "px") -}}
 {{- $expandSrc := .Get "expand" -}}
 {{- $extLink := .Get "link" -}}
+{{/* Alt text: use alt= if given; otherwise fall back to the caption as plain text
+     (markdown rendered, tags stripped, entities decoded -- html/template re-escapes it
+     safely in the attribute). No alt and no caption -> alt="" (treated as decorative). */}}
+{{- $captionText := .Get "caption" | default "" | markdownify | plainify | htmlUnescape -}}
+{{- $alt := .Get "alt" | default $captionText -}}
 
 <figure class="nbas-media-container align-{{ $align }} {{ if $fullWidth }}full-width{{ end }}"
         style="{{ if $fullWidth }}width: 100%;{{ else }}width: {{ $w }}px;{{ end }} max-width: 100%; margin: 2rem auto;">
@@ -27,12 +32,14 @@
              it entirely and let the <img> width/height attributes (and
              the figure's own width style, set above) handle sizing. */}}
         <img src="{{ .RelPermalink }}"
+             alt="{{ $alt }}"
              width="{{ $w }}"
              class="nbas-media-img"
              style="width: 100%; height: auto; display: block;">
       {{- else -}}
         {{- $scaled := .Resize (printf "%sx" $w) -}}
         <img src="{{ $scaled.RelPermalink }}"
+             alt="{{ $alt }}"
              width="{{ $scaled.Width }}"
              height="{{ $scaled.Height }}"
              class="nbas-media-img"
