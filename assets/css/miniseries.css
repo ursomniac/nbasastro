@@ -1,0 +1,33 @@
+/* Miniseries line on article cards: sits below the byline.
+   Styled from the site's existing card vocabulary:
+   - label = .card-metadata voice (0.85rem, --text-muted, regular weight)
+   - badge = the pill system's footprint (0.72rem / 800 / uppercase / 1px
+     tracking / 4px 12px / 3px radius), solid blue instead of gold.
+   Not using .facet-badge itself, so the pill hover lift/gold doesn't
+   apply to this non-link badge. */
+
+.card-miniseries {
+  display: flex;
+  flex-wrap: wrap;            /* badge drops under the label on narrow screens */
+  align-items: center;
+  gap: 6px 10px;              /* row gap, column gap */
+  margin: 4px 0 10px;
+}
+
+.miniseries-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: normal;
+}
+
+.miniseries-badge {
+  background: #4aa3df;
+  color: #050a14;             /* same dark text as .series-badge */
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 3px;
+  border: 1px solid #4aa3df;  /* same box size as the bordered gold pill */
+}

@@ -1,0 +1,6 @@
+# One entry per miniseries.
+# Key = the miniseries slug: must match the folder name under
+# content/articles/miniseries/ AND each article's `miniseries` front matter.
+measuring-astronomical-distances:
+  title: "Measuring Astronomical Distances"
+  total: 10

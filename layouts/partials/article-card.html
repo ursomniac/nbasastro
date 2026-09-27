@@ -38,6 +38,19 @@
     </div>
     {{ end }}
 
+    {{/* Miniseries lookup: slug and part number come from front matter
+         (miniseries, miniseries-sequence); title and total come from
+         data/miniseries.yaml. Every step is guarded, so a missing data file,
+         a missing entry, or a non-series article just renders no line. */}}
+    {{ $ms := false }}
+    {{ $msPart := index .context.Params "miniseries-sequence" }}
+    {{ with .context.Params.miniseries }}
+      {{ $msSlug := . }}
+      {{ with site.Data.miniseries }}
+        {{ with index . $msSlug }}{{ $ms = . }}{{ end }}
+      {{ end }}
+    {{ end }}
+
     {{/* 1. SERIES BADGES */}}
     {{ with .context.Params.series }}
     <div class="card-facets">
@@ -109,6 +122,20 @@
 
     {{ with .context.Params.byline }}
     <p class="card-byline">{{ . }}</p>
+    {{ end }}
+
+    {{/* MINISERIES: own line below the byline (only on miniseries articles) */}}
+    {{ with $ms }}
+    <div class="card-miniseries">
+      <span class="miniseries-label">
+        {{- with $msPart -}}
+          Part {{ . }} of the {{ with $ms.total }}{{ . }}-part {{ end }}Miniseries:
+        {{- else -}}
+          Part of the Miniseries:
+        {{- end -}}
+      </span>
+      <span class="miniseries-badge">{{ .title }}</span>
+    </div>
     {{ end }}
 
     {{/* 4. TAGS */}}
