@@ -1,5 +1,5 @@
 ---
-title: "Astronomical Distance: Part 1 - Measuring Distance"
+title: "Measuring Distance"
 date: 2026-10-10
 description: "Why do astronomers use AU, light-years, and parsecs instead of miles? A look at how we already judge 'near' and 'far' in daily life, and how choosing the right ruler keeps cosmic distances graspable."
 byline: "How far is far? It depends on how you're traveling -- and astronomers pick their rulers the same way"
@@ -7,7 +7,7 @@ authors: ["bob-donahue"]
 series: ["astronomical-frameworks"]
 thumbnail: "thumbnail.webp"
 banner: "banner.webp"
-miniseries: "measuring-astronomical-distance"
+miniseries: "measuring-astronomical-distances"
 miniseries-sequence: 1
 ---
 
