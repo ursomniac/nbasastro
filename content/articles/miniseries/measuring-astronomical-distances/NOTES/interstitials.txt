@@ -85,3 +85,33 @@ From old #2's open question: speed-of-light section 4 (light in a medium;
 local invariance vs. Shapiro delay/lensing) drifts toward AF territory.
 Only split it out if it runs long during drafting; otherwise it stays inside
 speed-of-light. Author's call once length is known.
+
+## CANDIDATE: How close can Pluto and Neptune get?
+(PINNED -- UNVERIFIED, all from memory)
+ - Pluto's perihelion is inside Neptune's orbit, yet they never collide.
+ - Two separate answers, and the difference between them IS the story:
+   1. Orbits: how close do the two ellipses come in space? Pluto's orbit is
+      tilted (~17 deg), so the paths never actually cross.
+   2. Objects: how close do the two BODIES ever get? Pluto is locked in a
+      3:2 resonance with Neptune (3 Neptune orbits per 2 Pluto orbits), which
+      keeps Neptune far away whenever Pluto is near perihelion. Recalled:
+      never closer than ~17 AU -- and Pluto gets closer to URANUS than to
+      Neptune. VERIFY both.
+ - Angle: "the orbits look like they cross on the diagram; the planets
+   never come close" -- a diagram-vs-reality beat. Figure candidate: both
+   orbits from above AND edge-on.
+ - Home: after A02 (solar-system scale).
+
+## CANDIDATE SECTION (or companion piece): Launch windows and the long way around
+ - Launch windows to Mars recur every ~26 months = the synodic period.
+ - Minimum-energy (Hohmann) transfers go halfway around the Sun:
+   Jupiter -> Saturn half-ellipse ~22 AU long vs 4.4 AU "dot to dot," ~10 years.
+   (Computed from circular orbits at 5.2 and 9.5 AU -- re-verify.)
+ - Faster = straighter: Voyager 1 went Jupiter -> Saturn in ~20 months via
+   gravity assist; path far shorter (get real value from JPL Horizons).
+ - Rule: the cheaper the trip, the longer the path.
+ - Only light travels essentially straight across the solar system.
+
+ OK - getting around by spacecraft...  this adds another twist - solar system navigation.  Because the paths are NEVER in a straight line (CAN they be - I think that would not be possible - certainly not practical).    It's the same issue we saw with the synodic period calculation...   People tend to just compare semi-amjor axes of two bodies and "connect the dots" - the reality is that the actual path traveled is much longer because - first - you have the Sun's gravity to contend with, and second - everything is moving.  
+
+So getting from Jupiter to Saturn isn't just "go another 4.4 AU" it could be ~22 AU distance traveled.

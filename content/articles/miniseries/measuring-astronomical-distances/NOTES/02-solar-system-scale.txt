@@ -104,6 +104,11 @@ and here's why it'll look small." Contrast with the next perihelic
 opposition (recalled as 2035). Verify both dates and distances. Points the
 article back at the sky per PHILOSOPHY.md.
 
+DIAGRAM NOTE: a diagram of the upcoming Mars oppositions with the orbits of Earth and Mars,
+showing the eccentricity of Mars' orbit making successive oppositions favorable or
+unfavorable (perihelic or aphelic).   A second panel should show the varying angular
+size of Mars at these oppositions.
+
 ### 5. Ending
 Hand off outward: "beyond the light-month..." — the next rung (1
 light-year, the nearest stars) belongs to the stars articles (parallax,
