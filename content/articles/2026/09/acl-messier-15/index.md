@@ -39,9 +39,7 @@ caption="Giovanni Domenico Maraldi (1709-1788)" >}}
 For once, this isn't a William Herschel find. M 15 was discovered on
 September 7, 1746, by Jean-Dominique (Giovanni Domenico) Maraldi, an astronomer at the
 Paris Observatory -- and he wasn't even looking for it. Maraldi was
-tracking a comet (later named for the Swiss astronomer
-Jean-Philippe de Chéseaux, who'd spotted it a few weeks earlier) when
-he ran across a small, fuzzy patch of light that clearly wasn't a
+tracking a comet when he ran across a small, fuzzy patch of light that clearly wasn't a
 comet at all. He noted it and moved on -- and four days later, using
 the same comet-tracking sweep, ran across a second one: M 2, in
 Aquarius. Charles Messier picked up M 15 independently in 1764 and
