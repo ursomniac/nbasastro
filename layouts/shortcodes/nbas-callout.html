@@ -1,0 +1,6 @@
+{{- $kind := .Get "kind" | default "note" -}}
+{{- $title := .Get "title" -}}
+<aside class="nbas-callout nbas-callout-{{ $kind }}">
+  {{- with $title }}<p class="nbas-callout-title">{{ . | $.Page.RenderString }}</p>{{ end }}
+  {{ .Inner | .Page.RenderString (dict "display" "block") }}
+</aside>

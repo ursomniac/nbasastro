@@ -1,0 +1,31 @@
+/* nbas callout -- matches the site palette:
+   page #1a2a44, rules #3a4a64 (same as h2 underline / table borders),
+   gold #d4af37 (same as table headers). Previewed on localhost 2026-09-30. */
+
+.article-body aside.nbas-callout {
+  margin: 1.75em 0;
+  padding: 1em 1.25em;
+  background: rgba(10, 18, 34, 0.45);   /* a shade darker than the page */
+  border: 1px solid rgb(58, 74, 100);
+  border-radius: 6px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.article-body aside.nbas-callout > :last-child {
+  margin-bottom: 0;
+}
+
+.article-body aside.nbas-callout .nbas-callout-title {
+  margin: 0 0 0.6em;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(212, 175, 55);
+}
+
+/* exercise boxes: same look, border warmed toward the gold */
+.article-body aside.nbas-callout-exercise {
+  border-color: rgba(212, 175, 55, 0.45);
+}
