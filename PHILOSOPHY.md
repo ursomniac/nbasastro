@@ -149,9 +149,9 @@ keep the following in mind:
 
 ## Series Considerations
 
-Note on "sporadic" series: the cadence for article release is to have at least two articles per week:  one on Mondays (ACL articles) and one on Thrursdays (basically most of the "sporadic" ones).  
-
-Other articles (Watch!, events, announcements) can happen on any day depending on their timeliness.
+Cadence: there is no fixed schedule for any series and no day-of-week slots. Overall, about one
+article every three days, and it can be from any series. Watch pieces, events, and announcements
+go out whenever timeliness requires.
 
 NBAS Newsletters are released to coincide with the club meeting dates.
 
