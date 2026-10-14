@@ -1,0 +1,67 @@
+{{/* partials/miniseries-nav.html
+     Context: the article Page. Renders nothing unless the article has
+     `miniseries` front matter. Shows the part strip (this part
+     highlighted; live parts linked; future parts outlined) and
+     previous/next parts. A next part that isn't live yet shows its
+     planned title as "Coming soon", unlinked. */}}
+{{ $page := . }}
+{{ with $page.Params.miniseries }}
+{{ $slug := . }}
+{{ $ms := index hugo.Data.miniseries $slug }}
+{{ $msPage := site.GetPage (printf "miniseries/%s" $slug) }}
+{{ $parts := partial "miniseries-parts.html" $slug }}
+{{ $n := index $page.Params "miniseries-sequence" }}
+{{ $total := len $parts }}{{ with $ms }}{{ with .total }}{{ $total = . }}{{ end }}{{ end }}
+{{ $title := $slug | humanize }}{{ with $ms }}{{ with .title }}{{ $title = . }}{{ end }}{{ end }}
+{{ $prev := false }}{{ $next := false }}
+{{ range $parts }}
+  {{ if eq .n (sub $n 1) }}{{ $prev = . }}{{ end }}
+  {{ if eq .n (add $n 1) }}{{ $next = . }}{{ end }}
+{{ end }}
+<nav class="ms-nav" data-pagefind-ignore aria-label="Miniseries navigation">
+  <div class="ms-nav-head">
+    <span class="miniseries-label">Part {{ $n }} of the {{ $total }}-part miniseries</span>
+    {{ if $msPage }}<a href="{{ $msPage.RelPermalink }}" class="miniseries-badge">{{ $title }}</a>{{ else }}<span class="miniseries-badge">{{ $title }}</span>{{ end }}
+  </div>
+
+  <ol class="ms-strip" aria-label="Parts">
+    {{ range $parts }}
+      {{ if eq .n $n }}
+      <li><span class="ms-strip-box ms-strip-current" aria-current="page" title="Part {{ .n }}: {{ .title }} (this article)">{{ .n }}</span></li>
+      {{ else }}{{ with .page }}
+      <li><a href="{{ .RelPermalink }}" class="ms-strip-box ms-strip-live" title="Part {{ index .Params "miniseries-sequence" }}: {{ .Title }}">{{ index .Params "miniseries-sequence" }}</a></li>
+      {{ else }}
+      <li><span class="ms-strip-box" title="Part {{ .n }}: {{ .title }} (coming soon)">{{ .n }}</span></li>
+      {{ end }}{{ end }}
+    {{ end }}
+  </ol>
+
+  {{ if or $prev $next }}
+  <div class="ms-nav-links">
+    {{ with $prev }}{{ with .page }}
+    <div class="ms-nav-item ms-nav-prev">
+      <a href="{{ .RelPermalink }}" class="ms-nav-link">
+        <span class="dir-meta">← Part {{ index .Params "miniseries-sequence" }}</span>
+        <span class="title-meta">{{ .Title }}</span>
+      </a>
+    </div>
+    {{ end }}{{ end }}
+    {{ with $next }}
+    <div class="ms-nav-item ms-nav-next">
+        {{ with .page }}
+        <a href="{{ .RelPermalink }}" class="ms-nav-link">
+          <span class="dir-meta">Part {{ index .Params "miniseries-sequence" }} →</span>
+          <span class="title-meta">{{ .Title }}</span>
+        </a>
+        {{ else }}
+        <div class="ms-nav-link ms-nav-soon">
+          <span class="dir-meta">Part {{ .n }} · Coming soon</span>
+          <span class="title-meta">{{ .title }}</span>
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+</nav>
+{{ end }}

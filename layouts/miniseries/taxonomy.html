@@ -1,0 +1,40 @@
+{{/* layouts/miniseries/taxonomy.html
+     Handles: /miniseries/
+     One card per miniseries: title, description, progress, the series
+     its parts belong to, and a link to Part 1 if it's live. */}}
+{{ define "main" }}
+<section class="nbas-series-list">
+  <h1>Miniseries</h1>
+  <hr class="section-divider">
+  <div class="list-container">
+    <div class="hub-grid">
+      {{ range $slug, $term := .Data.Terms }}
+        {{ $ms := index hugo.Data.miniseries $slug }}
+        {{ $parts := partial "miniseries-parts.html" $slug }}
+        {{ $live := slice }}{{ range $parts }}{{ if .page }}{{ $live = $live | append . }}{{ end }}{{ end }}
+        {{ $total := len $parts }}{{ with $ms }}{{ with .total }}{{ $total = . }}{{ end }}{{ end }}
+        {{ $series := slice }}
+        {{ range $live }}{{ range .page.Params.series }}{{ $series = $series | append . }}{{ end }}{{ end }}
+        <div class="hub-card ms-card">
+          <div class="hub-info">
+            <a href="{{ $term.Page.RelPermalink }}" class="hub-link">{{ $term.Page.Title }}</a>
+            {{ with $term.Page.Description }}<div class="hub-summary">{{ . }}</div>{{ end }}
+            {{ with uniq $series }}
+            <div class="card-facets">
+              {{ range . }}
+              {{ $termPage := site.GetPage (printf "series/%s" (. | urlize)) }}
+              <a href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}#{{ end }}" class="facet-badge series-badge {{ . | urlize }}">{{ if $termPage }}{{ $termPage.LinkTitle }}{{ else }}{{ . | humanize }}{{ end }}</a>
+              {{ end }}
+            </div>
+            {{ end }}
+            {{ with index $parts 0 }}{{ with .page }}
+            <a href="{{ .RelPermalink }}" class="ms-start">Start with Part 1: {{ .Title }} →</a>
+            {{ end }}{{ end }}
+          </div>
+          <span class="hub-count">{{ len $live }} of {{ $total }} parts published</span>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

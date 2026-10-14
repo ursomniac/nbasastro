@@ -1,0 +1,53 @@
+{{/* layouts/miniseries/term.html
+     Handles: /miniseries/<slug>/
+     Intro from content/miniseries/<slug>/_index.md, then every planned
+     part in order: live parts link, future parts show as "Coming soon". */}}
+{{ define "main" }}
+{{ $slug := .Data.Term | default (path.Base .RelPermalink) }}
+{{ $ms := index hugo.Data.miniseries $slug }}
+{{ $parts := partial "miniseries-parts.html" $slug }}
+{{ $liveCount := 0 }}{{ range $parts }}{{ if .page }}{{ $liveCount = add $liveCount 1 }}{{ end }}{{ end }}
+<div class="archive-container">
+  <header class="archive-header">
+    <span class="ms-eyebrow">Miniseries</span>
+    <h1 class="page-title">{{ .Title }}</h1>
+    <p class="ms-progress">{{ $liveCount }} of {{ with $ms }}{{ .total | default (len $parts) }}{{ else }}{{ len $parts }}{{ end }} parts published</p>
+  </header>
+
+  {{ with .Content }}
+  <div class="series-intro-box">{{ . }}</div>
+  {{ end }}
+
+  <ol class="ms-parts">
+    {{ range $parts }}
+      {{ with .page }}
+      <li class="ms-part ms-part-live">
+        <div class="ms-num">{{ index .Params "miniseries-sequence" }}</div>
+        <div class="ms-body">
+          {{ with .Params.series }}
+          <div class="card-facets">
+            {{ range . }}
+            {{ $termPage := site.GetPage (printf "series/%s" (. | urlize)) }}
+            <a href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}#{{ end }}" class="facet-badge series-badge {{ . | urlize }}">{{ if $termPage }}{{ $termPage.LinkTitle }}{{ else }}{{ . | humanize }}{{ end }}</a>
+            {{ end }}
+          </div>
+          {{ end }}
+          <a href="{{ .RelPermalink }}" class="card-title-link"><h2 class="card-title">{{ .Title }}</h2></a>
+          <div class="card-metadata">{{ .PublishDate.Format "Jan 2, 2006" }}</div>
+          {{ with .Params.byline }}<p class="card-byline">{{ . }}</p>{{ end }}
+        </div>
+      </li>
+      {{ else }}
+      <li class="ms-part ms-part-upcoming">
+        <div class="ms-num">{{ .n }}</div>
+        <div class="ms-body">
+          <span class="ms-soon">Coming soon</span>
+          <h2 class="card-title">{{ .title }}</h2>
+          {{ with .blurb }}<p class="card-byline">{{ . }}</p>{{ end }}
+        </div>
+      </li>
+      {{ end }}
+    {{ end }}
+  </ol>
+</div>
+{{ end }}

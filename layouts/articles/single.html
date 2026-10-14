@@ -51,6 +51,12 @@
     </div>
   </div>
 
+<!-- 2b. MINISERIES NAVIGATION (renders only on miniseries articles) -->
+{{ if .Params.miniseries }}
+  <hr class="article-separator">
+  {{ partial "miniseries-nav.html" . }}
+{{ end }}
+
 <!-- 3. SERIES NAVIGATION (CHRONOLOGY REPAIRED) -->
 {{ if .Params.series }}
   <hr class="article-separator">

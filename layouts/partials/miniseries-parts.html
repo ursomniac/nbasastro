@@ -1,0 +1,32 @@
+{{/* partials/miniseries-parts.html
+     Input:  the miniseries slug (string).
+     Returns: a slice of dicts, one per planned part, in plan order:
+       n      part number
+       title  live article's title, else the planned title
+       blurb  planned blurb from data/miniseries.yaml
+       page   the live article Page, or false if not live
+     "Live" = built: future-dated and draft articles aren't in
+     site.RegularPages, so they come back with page = false.
+     Plan comes from data/miniseries.yaml (parts). If a series has no
+     parts list, the live articles alone are returned, in order. */}}
+{{ $slug := . }}
+{{ $live := where site.RegularPages "Params.miniseries" $slug }}
+{{ $out := slice }}
+{{ $ms := index hugo.Data.miniseries $slug }}
+{{ with and $ms $ms.parts }}
+  {{ range . }}
+    {{ $n := .n }}
+    {{ $page := false }}
+    {{ range $live }}
+      {{ if eq (index .Params "miniseries-sequence") $n }}{{ $page = . }}{{ end }}
+    {{ end }}
+    {{ $title := .title }}
+    {{ with $page }}{{ $title = .Title }}{{ end }}
+    {{ $out = $out | append (dict "n" $n "title" $title "blurb" .blurb "page" $page) }}
+  {{ end }}
+{{ else }}
+  {{ range sort $live "Params.miniseries-sequence" }}
+    {{ $out = $out | append (dict "n" (index .Params "miniseries-sequence") "title" .Title "blurb" .Description "page" .) }}
+  {{ end }}
+{{ end }}
+{{ return $out }}

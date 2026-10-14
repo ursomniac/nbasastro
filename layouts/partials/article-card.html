@@ -43,9 +43,11 @@
          data/miniseries.yaml. Every step is guarded, so a missing data file,
          a missing entry, or a non-series article just renders no line. */}}
     {{ $ms := false }}
+    {{ $msPage := false }}
     {{ $msPart := index .context.Params "miniseries-sequence" }}
     {{ with .context.Params.miniseries }}
       {{ $msSlug := . }}
+      {{ $msPage = site.GetPage (printf "miniseries/%s" $msSlug) }}
       {{ with site.Data.miniseries }}
         {{ with index . $msSlug }}{{ $ms = . }}{{ end }}
       {{ end }}
@@ -134,7 +136,7 @@
           Part of the Miniseries:
         {{- end -}}
       </span>
-      <span class="miniseries-badge">{{ .title }}</span>
+      {{ if $msPage }}<a href="{{ $msPage.RelPermalink }}" class="miniseries-badge">{{ .title }}</a>{{ else }}<span class="miniseries-badge">{{ .title }}</span>{{ end }}
     </div>
     {{ end }}
 
