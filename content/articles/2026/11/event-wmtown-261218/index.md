@@ -8,12 +8,12 @@ description: "Join NBAS on Nov. 28 for Public Observing at Williamstown Rural La
 byline: "A laser pointer tour of the late Fall sky, and observing with club telescopes"
 series: ["nbas-events"]
 thumbnail: "thumbnail.jpg"
-banner: "banner.png"
+banner: "banner.webp"
 ---
 
 ## Dec 18: Williamstown Public Lands (Sheep Hill), Williamstown MA - 6:00 PM
 
-{{< nbas-image src="banner.png" fullwidth="true" >}}
+{{< nbas-image src="banner.webp" fullwidth="true" >}}
 
 Join NBAS at a public event coordinated with [Williamstown Rural Lands](https://rurallands.org/) on **Saturday, November 28**
 for an evening under the stars at their Sheep Hill property: a laser-pointer tour of the autumn sky, followed by a look through telescopes. No experience or equipment needed, and families are welcome.
