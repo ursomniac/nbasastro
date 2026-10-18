@@ -8,8 +8,8 @@ series: ["constellation-highlights"]
 constellations: ["Taurus"]
 byline: "Painted, perhaps, 17,000 years ago: a bull carrying two star clusters, a stellar nursery, and the wreck of a star seen exploding in 1054."
 description: "A guide to Taurus the Bull: possible Ice Age star art at Lascaux, the Hyades and Aldebaran, the Pleiades, the Taurus Molecular Cloud and T Tauri, the Crab Nebula, NGC 1514, and a 'double cluster' that isn't."
-thumbnail: "taurus-icon.jpg"
-banner: "banner.png"
+thumbnail: "taurus-icon.webp"
+banner: "banner.webp"
 
 profile_data:
   "Abbreviation": Tau
@@ -53,7 +53,7 @@ highlights:
 
 ## The Bull
 
-{{< nbas-image src="Lascaux_IV-bull.jpg" fullwidth="true"
+{{< nbas-image src="Lascaux_IV-bull.webp" fullwidth="true"
 caption="An aurochs from the Lascaux cave paintings, as reproduced in the Lascaux IV replica. Credit: Renhour48, CC0, via Wikimedia Commons"
 alt="A black-outlined aurochs painted on pale cave rock, its head at center. A cluster of dark spots sits on and around the face, and a separate group of six dots lies above its back." >}}
 
@@ -73,10 +73,10 @@ and colleagues looked at hundreds of sequences of dots and lines painted next to
 and argued that they're counts of lunar months, recording when each species mates and gives birth
 -- a hunter's calendar rather than a star chart. That idea has its own critics. The honest summary
 is that people were clearly paying attention to the sky and to the seasons, and that some of the
-oldest art we have *might* include this exact patch of stars. The stars haven’t changed. 
-Look at the Bull yourself on a winter night and judge the resemblance.
+oldest art we have *might* include this exact patch of stars. The stars themselves haven't changed:
+step outside on a winter night, find the Bull, and judge the resemblance for yourself.
 
-{{< nbas-image src="hist_TAU.jpeg" width="550" align="left" caption="From _Urania's Mirror_, c. 1825" >}}
+{{< nbas-image src="hist_TAU.webp" width="550" align="left" caption="From _Urania's Mirror_, c. 1825" >}}
 
 On firmer ground, the Bull is among the oldest constellations in the written record. Mesopotamian
 astronomers called these stars the Bull of Heaven, and in the *Epic of Gilgamesh* the goddess Ishtar
@@ -120,9 +120,9 @@ the galaxy.
 
 ### The Sky 17,000 Years Ago
 
-{{< nbas-image src="orion-late-july-15000bce.png" align="right" width="500"
+{{< nbas-image src="orion-late-july-15000bce.webp" align="right" width="500"
 caption="The southern sky from Lascaux on a spring night about 17,000 years ago (15,000 BCE), simulated in Stellarium. Orion barely clears the horizon."
-alt="A simulated night sky looking south from a dark site. A small tight cluster sits high near the center, with a V-shaped group and a bright orange star below it. Near the horizon, three stars in a short line form Orion’s Belt, flanked by an orange star to the left and a blue-white star to the right." >}}
+alt="A simulated night sky looking south from a dark site. A small tight cluster sits high near the center, with a V-shaped group and a bright orange star below it. Near the horizon, three stars in a short line form Orion's Belt, flanked by an orange star to the left and a blue-white star to the right." >}}
 Would an Ice Age observer have seen the same pattern of stars? Yes. Over 17,000 years the stars of
 the Hyades and the Pleiades have barely moved relative to each other; the pattern on the painting,
 if it is the sky, is the pattern you can see tonight. What *has* changed is where that pattern
@@ -136,7 +136,7 @@ Orion fared worse. From the same cave, 17,000 years ago, Orion's Belt rose less 
 horizon, and a couple of thousand years later it didn't rise at all. That's worth keeping in mind
 before reading any of the cave's other marks as the Belt: depending on exactly when the painting was
 made, its artists may have seen it only skimming the horizon, or not at all.
-<!-- Altitudes computed with the IAU long-term precession model (erfa.ltp) for 45.05° N; see notes-hsw-precession. Re-run with catalog positions before publishing. Values: Aldebaran 32° (-15000) vs 62° now; Alnilam 9° (-15000), below horizon (-13000). -->
+<!-- Altitudes computed with the IAU long-term precession model (erfa.ltp) for 45.05° N; see notes-hsw-precession. Values: Aldebaran 32° (-15000) vs 62° now; Alnilam 9° (-15000), below horizon (-13000). Cross-checked against Bob's Stellarium view (Aldebaran ~33°, Belt ~9°, Rigel ~6°, Sirius not up). Season: Orion opposite the Sun ~36 days after the March equinox in -15000 (spring), computed. -->
 
 {{< clear >}}
 
@@ -144,7 +144,7 @@ made, its artists may have seen it only skimming the horizon, or not at all.
 
 ### The Closest Star Cluster
 
-{{< nbas-image width="400" align="right" src="hyades.png" >}}
+{{< nbas-image width="400" align="right" src="hyades.webp" >}}
 
 The Hyades are the nearest open cluster to the Sun, about 153 light-years away -- close enough that
 the cluster spreads across more than five degrees of sky, far too big for most telescopes to frame
@@ -166,7 +166,7 @@ the brightest part of the bull's face is a coincidence of perspective.
 
 ### The Brightest Messier Object
 
-{{< nbas-image width="400" align="left" src="m_45-s30-69m-mosaic.jpg"
+{{< nbas-image width="400" align="left" src="m_45-s30-69m-mosaic.webp"
 caption="Bob Donahue, NBAS, Seestar S30, 69 min - mosaic" >}}
 
 At an integrated magnitude of 1.6, the Pleiades outshine every other entry in Messier's catalog,
@@ -191,8 +191,9 @@ Merope, has its own catalog number: NGC 1435, the Merope Nebula.
 
 ### The Taurus Dark Cloud
 
-{{< nbas-image width="400" align="right" src="ngc_1555-TODO.jpg"
-caption="TODO: NGC 1555, Hind's Variable Nebula, with T Tauri" >}}
+{{< nbas-image width="400" align="right" src="ngc_1555-noirlab.webp"
+caption="T Tauri and NGC 1555, Hind's Variable Nebula. Credit: T. A. Rector/University of Alaska Anchorage, H. Schweiker/WIYN and NOIRLab/NSF/AURA, CC BY 4.0"
+alt="A small, fan-shaped reflection nebula glowing yellow-orange beside a bright star, T Tauri, against a dark, sparsely starred background." >}}
 
 Much of Taurus is darker than it should be. Spread across the region between the Pleiades and the
 Hyades, and on into Auriga, lies the Taurus Molecular Cloud: cold gas and dust about 430-450
@@ -205,12 +206,16 @@ You can't see the cloud itself visually, but you can see something it made. T Ta
 settling down after its formation, gave its name to a whole class of newborn stars, and it lights
 a small, faint nebula beside it: NGC 1555, Hind's Variable Nebula, discovered by John Russell Hind
 in 1852. As the light from T Tauri and the dust around it change, the nebula brightens and fades
-over the years.
-<!-- VERIFY: specifics of NGC 1555's fading and recovery history (dates), if we want to tell that story. -->
+over the years -- sometimes dramatically. Within a few years of Hind's discovery it had faded from
+view, and by 1868 Otto Struve couldn't find it. Struve did report a different small nebula a few
+arcminutes away, which went into the catalog as NGC 1554. In 1890, E. E. Barnard, working with the
+36-inch refractor at Lick Observatory, glimpsed both. No one has seen NGC 1554 since, and it's
+known today as Struve's Lost Nebula. NGC 1555 is still there, but it's a faint wisp about an
+arcminute across that rewards a large telescope and a lot of patience.
 
-{{< nbas-image fullwidth="true" src="tmc_1-herschel.jpg"
-caption="Part of the Taurus Molecular Cloud seen by the Herschel Space Observatory in far-infrared light -- the cloud's cold dust glowing in its own light, rather than blocking the light of stars behind it." >}}
-<!-- VERIFY: which region the Herschel mosaic shows (TMC-1 is one specific ridge; the mosaic may show the wider area around the B211/B213 filament) and the correct credit line. -->
+{{< nbas-image fullwidth="true" src="tmc_1-herschel.webp"
+caption="Part of the Taurus Molecular Cloud seen by the Herschel Space Observatory in far-infrared light -- the cloud's cold dust glowing in its own light, rather than blocking the light of stars behind it. Credit: ESA/Herschel/NASA/JPL-Caltech, CC BY-SA 3.0 IGO; Acknowledgement: R. Hurt (JPL-Caltech)" >}}
+<!-- Image appears to be ESA's 2017 release "Herschel's view of the Taurus molecular cloud" (sci.esa.int/web/herschel/-/59536). Confirm visually against that page; the credit above is from that release. -->
 
 Infrared telescopes see the cloud the other way around: the dust itself glows faintly at long
 wavelengths, revealing filaments and knots where new stars are forming. Radio telescopes find
@@ -219,13 +224,18 @@ different molecules, many of them carbon chains and rings. In 2018, a team using
 Telescope detected benzonitrile there, and in 2021 the same program found polycyclic aromatic
 hydrocarbons -- multi-ringed carbon molecules that weren't expected in a cold, dark cloud where no
 stars have formed yet.
-<!-- TODO: B 22 is in dso_other but not in the prose yet. Add a sentence or drop it from the taxonomy. -->
+
+For imagers, the darkest parts of the cloud are targets in their own right. E. E. Barnard, the same
+observer who recovered Hind's nebula, catalogued a dozen or so dark clouds across Taurus and
+Auriga. One of them, Barnard 22, is a lane of dust about two degrees long that hides some of the
+cloud's youngest stars -- a shadow you can only photograph by capturing the faint starlight around it.
+<!-- B 22: Barnard dark nebula, ~4h38m +26°03', catalogued size 120' (2°); one of the darkest clouds hosting pre-main-sequence stars (arXiv 0810.1298). -->
 
 {{< clear >}}
 
 ### The Supernova of 1054
 
-{{< nbas-image width="400" align="right" src="m_1-equ-31m-square.jpg"
+{{< nbas-image width="400" align="right" src="m_1-equ-31m-square.webp"
 caption="Bob Donahue, NBAS, eQuinox 2, 31 min" >}}
 
 On July 4, 1054, Chinese astronomers recorded a new star near the tip of the bull's southern horn,
@@ -245,7 +255,7 @@ are rotating neutron stars. It's easy to find, about a degree northwest of Zeta 
 
 {{< clear >}}
 
-{{< nbas-image width="400" align="left" src="Anasazi_Supernova_Petrographs.jpg"
+{{< nbas-image width="400" align="left" src="Anasazi_Supernova_Petrographs.webp"
 caption="Alex Marentes, CC BY-SA 2.0, via Wikimedia Commons"
 alt="A painting on the underside of a sandstone overhang: a large star with radiating points, a crescent Moon beside it, and a red handprint." >}}
 Did anyone in the Americas record the 1054 supernova? The most famous candidate is a painting on a
@@ -263,13 +273,13 @@ Krupp, who has studied the claimed "supernova" rock art across the Southwest, co
 it is a convincing record of 1054. Like the Lascaux aurochs, it's a match that's easy to see and
 hard to prove -- and a good place to end the story of how long people have been watching this patch
 of sky.
-<!-- VERIFY: Chaco image credit/license. Sources: UCAR HAO "Supernova Pictograph" page; Krupp, Journal of Skyscape Archaeology vol. 1 no. 2 (2015). Who first proposed the 1054 reading (W. C. Miller, 1955?) and the year -- add if wanted. -->
+<!-- Sources: UCAR HAO "Supernova Pictograph" page; Krupp, Journal of Skyscape Archaeology vol. 1 no. 2 (2015). -->
 
 {{< clear >}}
 
 ### Poor Man's Double Cluster
 
-{{< nbas-image width="400" align="right" src="ngc_1807-equ-5m-full.jpg"
+{{< nbas-image width="400" align="right" src="ngc_1807-equ-5m-full.webp"
 caption="Bob Donahue, NBAS, eQuinox 2, 5 min" >}}
 
 About eight and a half degrees east of Aldebaran, NGC 1807 and NGC 1817 sit 27 arcminutes apart,
@@ -282,13 +292,13 @@ coherent group, and the brightest of them is moving much too fast to belong. NGC
 be a chance grouping of unrelated stars, seen in the same direction. Through the eyepiece it still
 looks like a pair -- which makes it a good reminder that a cluster is defined by stars traveling
 together, not just stars sitting together.
-<!-- VERIFY: publication year of Balaguer-Núñez et al. (arXiv astro-ph/0407456; 2004 is from the arXiv number). NGC 1817's distance is from a distance modulus of 10.9 ± 0.6, about 4,900 ly with roughly ±30% uncertainty. -->
+<!-- Balaguer-Núñez et al., A&A 426, 827 (2004), "uvby-Hbeta CCD photometry of NGC 1817 and NGC 1807". NGC 1817 distance from distance modulus 10.9 ± 0.6, about 4,900 ly with roughly ±30% uncertainty. -->
 
 {{< clear >}}
 
 ### Tiny Crystal Ball
 
-{{< nbas-image width="360" align="left" src="ngc_1514-equ-10m-square.jpg"
+{{< nbas-image width="360" align="left" src="ngc_1514-equ-10m-square.webp"
 caption="Bob Donahue, NBAS, eQuinox 2, 10 min" >}}
 
 On November 13, 1790, William Herschel came across what he called "a most singular phenomenon": a
