@@ -62,12 +62,12 @@ A parade of astronomers tried and came up short. François Arago and Claude-Loui
 {{< nbas-image src="bessel.webp" width="150" align="right"
 caption="Friedrich Bessel,<br>1784-1846" >}}
 
-The breakthrough came when Joseph von Fraunhofer built a new kind of instrument, the heliometer, and Bessel got his hands on one at Königsberg. Between 1837 and 1838 he ran a careful series of measurements and arrived at a parallax of 313.6 ± 13.6 milliarcseconds — a distance of roughly 600,000 astronomical units, or about 10.4 light-years. He published in 1838, just weeks ahead of Struve's parallax of Vega and Thomas Henderson's parallax of Alpha Centauri. It was the first reliable measurement of the distance to any star besides the Sun, full stop. Bessel kept refining his numbers for another thirty years, and his best full run, in 1849, landed on 360.2 ± 12.1 mas.
+The breakthrough came when Joseph von Fraunhofer built a new kind of instrument, the heliometer, and Bessel got his hands on one at Königsberg. Between 1837 and 1838 he ran a careful series of measurements and arrived at a parallax of 313.6 ± 20.2 milliarcseconds — a distance of about 657,000 astronomical units, or roughly 10.4 light-years. He announced it in the autumn of 1838. Struve had already published a tentative parallax of Vega the year before, and Thomas Henderson announced Alpha Centauri’s about two months after Bessel. But Bessel’s was the result that convinced, and it’s remembered as the first reliable distance to any star besides the Sun. (In 1840 he revised it to 348.3 mas — further from the truth than his first number.)
 
 {{< nbas-image src="heliometer.webp" fullwidth="true"
 caption="How a heliometer measures: split the objective lens in two and slide one half until a star's image lines up with a reference point, then read the size of that slide off a micrometer — turning a shift too small to eyeball into one you can dial in precisely." >}}
 
-The modern number, from Gaia's third data release, is 285.9949 milliarcseconds — a distance of 11.404 light-years. Bessel's original figure was off by about nine percent. For a measurement made with 1830s optics, glass plates lit by candlelight, and no way to check the answer against anything, that's not a rounding error to apologize for. It's a genuinely remarkable result, and it's why finding this star in your own eyepiece means looking at the star that first proved the universe has measurable depth.
+The modern number, from Gaia's third data release, is 285.9949 milliarcseconds — a distance of 11.404 light-years. Bessel's original figure was off by about nine percent.  For a measurement made by eye with 1830s optics, and no way to check the answer against anything, that's not a rounding error to apologize for.  It's a genuinely remarkable result, and it's why finding this star in your own eyepiece means looking at the star that first proved the universe has measurable depth.
 
 ---
 

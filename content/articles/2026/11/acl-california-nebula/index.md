@@ -5,7 +5,7 @@ description: "NGC 1499 glows two and a half degrees wide in Perseus, far from th
 byline: "A huge red nebula with no cluster inside it -- lit by a single star that wasn't born there"
 series: ["closer-look"]
 authors: ["nbas-staff"]
-thumbnail: "thumbnail.jpg"
+thumbnail: "thumbnail.webp"
 banner: "banner.webp"
 dso_ngc: ["1499"]
 
