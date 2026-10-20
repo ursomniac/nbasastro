@@ -1,5 +1,4 @@
 ---
-draft: true
 title: "NBAS Public Observing: Williamstown Rural Lands"
 date: 2026-11-20
 pin_until: 2026-12-19
