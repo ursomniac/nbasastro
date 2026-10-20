@@ -11,12 +11,12 @@ thumbnail: "thumbnail.jpg"
 banner: "banner.webp"
 ---
 
-<!-- DRAFT v5 (2026-10-14), from the author's v4: Quadrantid timing rewrite, scaffolding cleaned up; see "What changed v4 -> v5". -->
+<!-- DRAFT v10 (2026-10-19), from the author's v9: v7 fact-check fixes applied; banner shortcode closed. -->
 
 ## Three Showers, Three Very Different Nights
 
 {{< nbas-image src="banner.webp" fullwidth="true"
-   alt="Banner image for the winter meteor showers article." >}}
+   alt="Star map showing the radiants for the Geminids, Ursids, and Quadrantids" >}}
 
 It's tempting to give up on meteors once the nights turn bitter. Don't. Winter has the single best
 meteor shower of the year, and this year the Moon is almost entirely out of its way. It also has the
@@ -82,15 +82,15 @@ object with a very unusual orbit in data from the IRAS infrared satellite. Fred 
 that its orbit matched the Geminids. It was named 3200 Phaethon, after the son of the Sun god Helios
 who lost control of his father's chariot, and the name fits: Phaethon swings closer to the Sun than
 any other named asteroid, about 0.14 AU, less than half of Mercury's closest distance, and its surface
-reaches roughly 750°C.
+heats to more than 700°C.
 
-That closeness makes Phaethon do comet-like things. Spacecraft watching it near the Sun in 2009 and
-2012 saw it brighten and grow a short tail. However, a 2023 study found that tail is sodium gas, not dust,
+That closeness makes Phaethon do comet-like things. Spacecraft watching it near the Sun in 2009, 2012
+and 2016 saw it brighten and grow a short tail. However, a 2023 study found that tail is sodium gas, not dust,
 which leaves a real puzzle: if Phaethon isn't shedding dust today, how did it make the Geminids? One
 study, using dust measurements from NASA's Parker Solar Probe, suggests the stream was born in a
 sudden, violent event — a collision, or an explosive release of gas — rather than slow, comet-like
 shedding. We may find out more soon: Japan's DESTINY+ spacecraft is scheduled to
-launch in 2028 and fly past Phaethon about two years later.
+launch in 2028 and fly past Phaethon in 2030.
 
 ### The Young Upstart
 
@@ -103,12 +103,11 @@ and 2016, as the densest part of the stream drifts toward Earth's orbit.  This i
 already one of the major events of the year, and it seems that it will only get more intense for some time
 to come.
 
-Their solid parent may explain why Geminids look the way they do. The particles are denser than the
-fluffy dust that comets shed, so they tend to survive longer in the atmosphere and burn as slower,
-brighter streaks. And one more date for the calendar: Phaethon will pass about 3 million km from Earth
+Their unusual parent may also help explain their looks. Geminid particles are denser than the fluffy
+dust that comets shed, which may be part of why so many Geminids burn as bright, relatively slow
+streaks. And one more date for the calendar: Phaethon will pass about 3 million km from Earth
 on December 14, 2093 — Geminid peak night.
 
-<!-- NOTE: WGSBN orbit plotter for 3200 Phaethon (obj id: check with Gareth) -->
 <iframe
   src="https://www.wgsbn-iau.org/cgi-bin/orbit_plotter.html?obj=3200"
   width="100%" height="500"
@@ -139,8 +138,8 @@ on December 14, 2093 — Geminid peak night.
 The Ursids are a shower most people have never heard of, and in 2026 they won't win any converts:
 the peak comes a day before the Full Moon. Expect a handful an hour at best.
 
-But the Ursids have one trick none of the others share. Their radiant sits in the Little Dipper, near
-Kochab, close enough to the pole that from New England it never sets. It's at its lowest in the evening,
+But the Ursids have one useful trick. Their radiant sits in the Little Dipper, near Kochab, close
+enough to the pole that from New England it never sets, or even gets low. It's at its lowest in the evening,
 still about 30° up, and climbs toward dawn. So there's no special hour to wait for. If you're out on
 any clear night around December 22, for the Geminids' tail end, or to look at the Moon, or to walk the
 dog, glance north.  Maybe you'll get lucky.
@@ -148,11 +147,12 @@ dog, glance north.  Maybe you'll get lucky.
 ### About the Source: Comet 8P/Tuttle
 
 {{< nbas-image src="8P_Tuttle.webp" width="400" align="right"
-caption="Comet 8P/Tuttle imaged by Arecibo radar in January 2008, showing its two-lobed nucleus. (NOTE: credit)"
+caption="Comet 8P/Tuttle imaged by Arecibo radar in January 2008, showing its two-lobed nucleus. Credit: Arecibo Radiotelescope, Public domain, via Wikimedia Commons"
 alt="Radar image of the nucleus of comet 8P/Tuttle, showing two rounded lobes joined together." >}}
 
 Comet 8P/Tuttle circles the Sun every 13.6 years, from near Earth's orbit out to beyond Saturn's. It
-was first seen in 1790 and found again in 1858 by Horace Tuttle, which is how it got his name. When it
+was first seen in 1790 by Pierre Méchain in Paris, and found again in 1858 by Horace Tuttle at
+Harvard, which is how it got his name. When it
 passed Earth in January 2008, radar from the Arecibo Observatory showed its nucleus to be two lobes
 stuck together, a "contact binary" about 4.5 km across.
 
@@ -167,18 +167,16 @@ he had a hand in a fourth.
 ### Outbursts at the Wrong Time
 
 The Ursids were probably first noticed by the English meteor observer William Denning around 1900, but
-nobody paid much attention until 1945, when a Czech astronomer, Antonín Bečvář, saw rates of about 169
-an hour. Another major outburst came in 1986, and smaller ones since.
+nobody paid much attention until 1945, when the Czech astronomer Antonín Bečvář saw rates of well over
+100 an hour. Another major outburst came in 1986, and smaller ones since.
 
 The strange part is when they happen. You'd expect a shower to flare when its comet is nearby, freshly
 shedding dust. The biggest Ursid outbursts have come instead when Tuttle was near the far end of its
-orbit, out beyond Saturn. The explanation of why that is involves Jupiter: old meteoroids that have settled into a
-slightly different rhythm with Jupiter from the parent comet.  Thus, they have been slowly drifting out of 
-step with comet 8P/Tuttle, until, after centuries, they now arrive at Earth's orbit half an orbit 
-apart from the comet. Tuttle's next trip to the far end of its orbit is around 2028, so the next 
+orbit, out beyond Saturn. The explanation involves Jupiter. Old meteoroids have settled into a slightly
+different rhythm with Jupiter than their parent comet has, so they slowly drift out of step with
+8P/Tuttle until, after centuries, they arrive at Earth's orbit half an orbit apart from the comet. Tuttle's next trip to the far end of its orbit is around 2028, so the next 
 few Decembers are worth watching. IMO doesn't predict anything unusual for 2026's Moon-washed return, though.
 
-<!-- NOTE: WGSBN orbit plotter for 8P/Tuttle -->
 <iframe
   src="https://www.wgsbn-iau.org/cgi-bin/orbit_plotter.html?obj=8P"
   width="100%" height="500"
@@ -213,7 +211,8 @@ you'll wonder what the fuss was about. That's why Quadrantid reports swing so wi
 
 This year the peak, by IMO's best estimate, comes at about 10:25 PM EST on January 3 — give or take a
 couple of hours — when the radiant, in northern Boötes, is only a few degrees above our northern
-horizon. That doesn't mean you'll miss it. You don't watch the radiant anyway: the usual advice is to
+horizon. (The American Meteor Society's prediction is a little later, closer to 1 AM.) That doesn't
+mean you'll miss it. You don't watch the radiant anyway: the usual advice is to
 look 20° or more away from it, and meteors fly outward from it in every direction. With the radiant
 that low, only the half of the shower heading *up* from the horizon reaches you, so expect a fraction
 of the full rate — perhaps 5 to 10 an hour under dark skies around the peak. But those few can be
@@ -234,7 +233,7 @@ Jenniskens linked them to a newly discovered object, 2003 EH1. Like Phaethon, it
 asteroid than a comet. It may be a surviving piece of a comet that astronomers in China, Japan and
 Korea recorded at the end of 1490.
 
-That would fit the shower's sharp peak. A newly-created meteor stream starts out narrow and spreads over time as the
+That would fit the shower's sharp peak. A newly created meteor stream starts out narrow and spreads over time as the
 planets tug on it. The Quadrantid stream is still tight, which suggests it formed only about 500 years
 ago — young enough to fit a breakup around the time of that 1490 comet.
 
@@ -249,16 +248,16 @@ January, the night of the shower. If 2003 EH1 were there at the same moment, it 
 magnitude 13. The closest it comes to that within the next few decades is December 28, 2052 — just days
 before that year's Quadrantids — when it passes about 50 million km from Earth, a third of the
 distance to the Sun, and should reach about magnitude 15½: a target for a large amateur
-telescope or a camera, not the eye. This winter it's out near the far end of its orbit, around
-magnitude 23. The shower is the trail it left behind; the parent is somewhere else entirely.
+telescope or a camera, not the eye. This winter it's out near the far end of its orbit, fainter
+than magnitude 22. The shower is the trail it left behind; the parent is somewhere else entirely.
 
 ### Why "Quadrantids"?
 
 {{< nbas-image src="quadrans.webp" width="450" align="left"
-caption="Quadrans Muralis, shown on a card from _Urania's Mirror_, c. 1825. (NOTE: credit)"
+caption="Quadrans Muralis, shown on a card from _Urania's Mirror_, c. 1825. Public domain."
 alt="Hand-colored star chart card showing the constellation Quadrans Muralis, drawn as a wall-mounted quadrant, between the figures of Boötes and Draco." >}}
 
-There's no constellation called Quadrans. There used to be - for a time. In 1795 the French astronomer Jérôme
+There's no constellation called Quadrans. There used to be, for a while. In 1795 the French astronomer Jérôme
 Lalande carved out a new constellation between Boötes and Draco and named it Quadrans Muralis, the
 Mural Quadrant, after the large wall-mounted instruments observatories used to measure star positions.
 (There's a famous 1598 engraving of Tycho Brahe that depicts him using a mural quadrant.)
@@ -274,7 +273,6 @@ you won't find on a modern star chart.
 
 {{< clear >}}
 
-<!-- NOTE: WGSBN orbit plotter for 2003 EH1 (= 196256; check id with Gareth) -->
 <iframe
   src="https://www.wgsbn-iau.org/cgi-bin/orbit_plotter.html?obj=196256"
   width="100%" height="500"
@@ -282,8 +280,6 @@ you won't find on a modern star chart.
 </iframe>
 
 *2003 EH1 orbit viewer. [NASA/JPL Small Bodies viewer](https://www.wgsbn-iau.org/) via WGSBN-IAU.*
-
-<!-- TODO: camera angle with Gareth — its orbit is steeply tilted; show that -->
 
 ### Quick Reference
 
@@ -335,80 +331,3 @@ Clear skies.  And Happy New Year 2027!
 
 ---
 
-<!--
-====================================================================
-SCAFFOLDING -- delete everything below before publishing
-====================================================================
-
-## BEFORE PUBLISHING (these show on the page or break things)
-1. Captions still contain "(NOTE: credit)" — they will render:
-   - 8P_Tuttle.webp (Arecibo radar, Jan 2008)
-   - quadrans.webp (Urania's Mirror card)
-2. Banner alt text is a placeholder: "Banner image for the winter meteor showers article."
-3. Gareth: orbit plotter ids 3200, 8P, 196256 (2003 EH1) — confirm each works; set camera angles:
-   Phaethon (perihelion inside Mercury), 8P (aphelion past Saturn), 2003 EH1 (71° tilt).
-   Then delete the three NOTE/TODO comments around the iframes.
-4. Copy into the page bundle: fig-winter-meteors-zhr.svg (+ .png), the three radiant maps
-   (geminids-1214-0200.webp, ursids-1223-0300.webp, quadrantids-0104-0600.webp), PIA22185.gif,
-   8P_Tuttle.webp, quadrans.webp, banner.webp, thumbnail.jpg.
-5. Delete this scaffolding block.
-
-## What changed v4 -> v5 (Claude)
-- Quadrantids: timing paragraph rewritten as two (evening near the peak: low rate, earthgrazers;
-  1 AM to dawn: ~20/hr). Quick Reference "Peak" line and season-table "Best Hours" updated to match.
-- Phaethon: "ancient breakup ... 2005 UD and 1999 YC" replaced. The Parker Solar Probe study
-  (Cukier & Szalay 2023, PSJ) concludes a violent event (collision or gas explosion) fits best; it
-  does not mention 2005 UD or 1999 YC. That link came from Wikipedia's summary and isn't supported.
-- Typo: "Internation" -> "International".
-- Removed three stale image NOTE comments (images now found) and the PIA22185 CHECK comment
-  (credit now in the caption).
-- Scaffolding reorganized; resolved items moved to "Verified".
-
-## Still to check (prose is written; these are the soft spots)
-- Phaethon: 0.14 AU perihelion; ~750 °C surface (Wikipedia). NASA's 2023 article gives no numbers.
-- Phaethon 2093 Dec 14 pass "about 3 million km" (Wikipedia: 0.0198 AU) — confirm in JPL SBDB
-  close-approach table or Horizons.
-- DESTINY+ flyby "about two years later" (2030; Wikipedia as of Oct 2024) — reconfirm in December.
-- Geminid sentence "denser ... survive longer ... slower, brighter streaks": density 2–3 g/cm³ is
-  sourced (Wikipedia); the causal chain is not. Consider softening to "may help explain".
-- "Perseids ... two thousand years" (Wikipedia: 36 AD); "Leonids ... more than a thousand" (902 AD).
-- 8P/Tuttle "first seen in 1790" (Wikipedia: precovery 1790; Méchain not confirmed).
-- Bečvář 1945, ~169/hr; Denning ~1900 (Wikipedia via Kronk).
-- 2003 EH1: Jenniskens 2003 link; C/1490 Y1 "may be"; ~500-year stream age.
-- Brucalassi 1825; Quetelet and Herrick 1839 (Wikipedia via Kronk / Herrick in Am. J. Sci.).
-  If you name Herrick's job: he became Yale's librarian in 1843, after the 1839 paper.
-- 2003 EH1 "around magnitude 23 this winter" is from my two-body model; the model ran ~1 mag
-  faint vs Horizons at small distances. Check with Horizons if you keep the number.
-
-## Verified
-- IMO 2027 calendar: QUA max Jan 4 03:25 UT (λ 283.15), ZHR 80 (60–200), ±0.1° (~2.5 h); stream
-  shifted sunward (Vaubaillon), possible enhancement. URS Dec 17–26, ZHR 10 (to 50), λ 270.7;
-  outbursts 1945, 1986; lesser 2006–08, 2011, 2014, 2015, 2017, 2020; 8P period 13.6 yr,
-  perihelion 2021 Aug 27; peaks often near aphelion. GEM Dec 4–20, λ 262.2, ZHR 150.
-  GEM 150 vs PER 110+.
-- Computed (astropy, North Adams): GEM 2026 max ~14 UT Dec 14; URS ~22 UT Dec 22; Moon sets
-  8:30 PM Dec 13 (~20%); Full Moon 9 PM EST Dec 23; Moon rises ~5:10 AM Jan 4 (~10%).
-  Map times: GEM 02 UT Dec 14 = 9 PM EST; URS 03 UT Dec 23 = 10 PM; QUA 06 UT Jan 4 = 1 AM.
-- Quadrantid hourly rates (ZHR 80 × 10^(−1.8|Δλ|) × sin(radiant alt), ideal skies), EST Jan 3–4:
-  10 PM 5.5/hr (alt 4°); 10:30 PM 8 (6°); 11 PM 10 (8°); midnight 14 (14°); 1 AM 18 (20°);
-  2 AM 20 (28°); 3 AM 22 (37°); 4 AM 22 (46°); 5 AM 21 (56°); 6 AM 20 (65°).
-  Real counts at a typical site will be lower; peak-time uncertainty moves the evening numbers most.
-- ZHR figure: IMO 2027 peaks + Jenniskens 1994 Table 3b B values (GEM 0.39/0.72, URS 0.61,
-  QUA "Boo" 1.8). Script: fig-winter-meteors-zhr.py.
-- Phaethon: found by Green & Davies (Leicester) in IRAS data, Oct 1983; Whipple linked it to the
-  Geminids (U. Leicester 2015). Tail is sodium, not dust (Zhang et al. 2023, PSJ; NASA); STEREO
-  saw it in 2009, 2012, 2016. Violent-origin model (Cukier & Szalay 2023, PSJ).
-- DESTINY+: launch FY2028 on H3 (JAXA, Oct 2024).
-- 1862 Geminids: Greg (Manchester), Marsh and Twining (US) (Library of Congress).
-- Geminid increase ~20% 2000–2016 (Ryabova & Rendtel 2017).
-- Ursid aphelion outbursts 1795, 1945, 1986, 2000; 2014 ZHR ~45; 7:6 vs 15:13 resonance
-  (Moreno-Ibáñez et al. 2017). Next Tuttle aphelion ~2028 (2021.65 + 6.8).
-- Tuttle: 8P (1858), 109P/Swift-Tuttle (1862), 55P/Tempel-Tuttle (1866), Encke recovered 1875.
-- 2003 EH1: LONEOS 2003 Mar 6; H 16.2; ~4 km, point-like, no activity (Kasuga & Jewitt 2015, AJ
-  150, 152, Keck 2013 Oct 2, R ≈ 20.2). Horizons (Bob): brightest 2052-Dec-28 06:00 UT, V 15.612;
-  min distance 0.33334 AU (49.9 million km) ~18 h earlier. Theoretical best ~13 at MOID 0.21 AU.
-- Quadrans Muralis: Lalande 1795; dropped from the IAU's 88 (1922 list). "Only major shower named
-  for a constellation not on a modern chart": all other major showers use a current constellation
-  or a star in one (author confirmed).
-- Draconids are also called Giacobinids (after Giacobini) — same shower; not a conflict.
--->
