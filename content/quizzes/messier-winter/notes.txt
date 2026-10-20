@@ -1,0 +1,84 @@
+# Winter Messier Quiz — Framework Notes (started 2026-10-18)
+
+Series: Astronomy Quizzes (AQ). 8–12 questions; learning, not scoring — every wrong answer gets
+an explanation, and every option is clickable for more.
+Workflow step: 1 (framework). No fact pass yet. [verify] = check before writing answers.
+Follows `winter-star-colors` and `galactic-anticenter`, so it can reward readers of both.
+Overlap check: keep cluster questions to history/oddities (lost M47, non-member planetary in M46,
+M35/NGC 2158), not "which arm is it in" — the fall Perseus Arm article covered that.
+
+## Title
+"Messier challenge" was only a placeholder (Bob, 2026-10-18). Candidates:
+- "The Winter Messiers"
+- "Messier's Winter Sky"
+- "Stories Behind the Numbers: Winter Messier Objects"
+Level: intermediate (matches the template quiz) [Bob to confirm].
+Timing: quizzes are monthly; last one dated 2026-11-17, so this one ≈ mid-December [Bob].
+
+## Winter Messier pool
+M1, M35, M36, M37, M38, M41, M42, M43, M45, M46, M47, M48, M50, M78, M79, M93;
+late-winter edge: **M67 (Bob: include)**, M44 (optional). Circumpolar M81/M82 — excluded.
+
+## Candidate questions (pick 12; mix "why" with "what")
+
+**Bob's triage (2026-10-18):** answer string "YYYYYYYYMMYNY", plus "14 is a maybe":
+- YES: 1–8, 11, 13
+- MAYBE (depends on choices/wording): 9 (Hodierna), 10 (Aristotle/M41), 14 (distance contrast)
+- NO: 12 (anticenter) — cut
+- NEW: 15 (M67), Bob "might be good" → treat as a maybe until the fact pass
+Result: 10 firm + 4 maybes = 14 candidates for a 12-question cap → two maybes drop.
+9 and 10 rest on contested historical claims; the fact pass decides them. 14 is solid data
+(Gaia distances). 13 (constellation naming) is a YES but thin; if the fact pass finds no real
+story, it is the first firm question to swap for a maybe.
+
+1. **The only globular** among the winter Messiers? → M79. Explanation: why winter has so few
+   globulars (link `galactic-anticenter`).
+2. **Why M1 is first**: Messier's comet hunting; the Crab looked like a comet in 1758 [verify
+   year and the comet involved].
+3. **Why is a bright cluster like M45 in a list of things not to mistake for comets?** [verify
+   the accepted explanations — debated; be honest about it].
+4. **M42 vs M43**: why two numbers for one nebula complex (De Mairan's Nebula) [verify].
+5. **Which winter Messier was "lost"** because of a position error? → M47 (identified as NGC
+   2422) [verify who/when]; M48 has a similar story [verify].
+6. **Which is a reflection nebula?** → M78 [verify classification wording].
+7. **Which shares its field with a much older, farther cluster?** → M35 / NGC 2158.
+8. **Which has a planetary nebula in front of it that isn't a member?** → M46 / NGC 2438
+   [verify membership].
+9. **The Auriga trio**: which was discovered first, and by whom? Hodierna (pre-1654) claim
+   [verify — Hodierna credited for several].
+10. **M41 and Aristotle**: oldest recorded deep-sky sighting? [verify — often claimed; find a
+    solid source or turn into a "what we can't be sure of" question].
+11. **Which winter Messier was the last one Messier himself discovered?** M93 (1781)? [verify]
+12. ~~**Where is the galactic anticenter?**~~ — CUT (Bob, 2026-10-18).
+13. **Which winter cluster is in a constellation Messier wouldn't recognize by name?** (if any
+    Puppis/Monoceros naming history is interesting [verify] — maybe drop).
+14. **Distance contrast**: which is nearest (M45) vs farthest open cluster in the set [verify
+    Gaia distances].
+15. **M67: why has it survived so long?** One of the oldest known open clusters (several billion
+    years [verify age]); most open clusters dissolve within a few hundred million. Answer
+    direction: it orbits well away from the Galactic plane, out of reach of the giant molecular
+    clouds that tear clusters apart [verify height above the plane and the mechanism wording].
+    Ties to `galactic-anticenter` story 3 (old survivors) — a different reason for survival
+    than the outer-disk clusters, which is a nice contrast. Distractors could be other "why"
+    answers that sound right (very massive, recently captured, etc.) [check none are partly true].
+
+## Format (from the template: last month's "Solar System Object Features", 2026-11-17)
+- Front matter: title, date, series ["astronomy-quiz"], level, description, banner, thumbnail.
+- `quiz.renderer: "text-choice"`, `passing_score: 70`.
+- 12 questions; each has `id`, `image`, `text`, and four `answers` with `text`, `correct`,
+  `explanation`. Every option gets a real explanation that teaches something.
+- Correct answer position rotated across questions, recorded in a comment above each question
+  ("# Q1 — topic — correct at position 3"). Aim for an even spread (each position 3×).
+- Body: `{{< quiz >}}` only.
+- Template style worth copying: wrong answers are near-misses that point to the right object
+  elsewhere ("Right planet, wrong moon").
+
+## Production notes
+- One image per question → up to 12 object images. Bob's own (Seestar/eQuinox) where possible;
+  otherwise public domain beyond doubt. Banner + thumbnail (square .webp, 600×600).
+- Keep images WebP and ≤ 2× display width (V1.3 image notes).
+
+## Open questions for Bob
+1. Title (candidates above) and level.
+2. Include M44 too, or M67 only?
+3. Which objects do you already have your own images of?

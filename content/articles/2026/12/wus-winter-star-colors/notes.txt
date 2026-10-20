@@ -1,0 +1,107 @@
+a# Winter Star Colors — Framework Notes (started 2026-10-18)
+
+Series: Observing Challenges (OC) or Getting Started (GS) [Bob].
+Workflow step: 1 (framework). No fact pass yet. [verify] = check before prose.
+Replaces the binocular winter Milky Way tour (dropped: too close to the fall Perseus Arm article).
+Sets up a later Astronomical Frameworks piece on color index (slug TBD, e.g. `color-index`).
+
+---
+
+## Central picture
+
+Stars have colors, and the colors are thermometers. A red star is cool, a blue-white star is hot,
+and the winter sky puts the full range on display at once, bright enough to see from town.
+
+Everyday anchor: a piece of iron in a forge, or an electric stove element. It glows dull red,
+then orange, then yellow-white as it heats. Stars follow the same sequence.
+
+The challenge: see the colors for yourself, rank them, and work out which stars are hottest.
+
+---
+
+## Stories to dig for ("wait, why is that true?")
+
+1. **Why color means temperature.** Thermal (blackbody) glow: hotter objects emit more light
+   overall and peak at shorter wavelengths [verify wording; Wien's law as an optional aside].
+2. **Why there are no green stars.** A star whose output peaks in the green still emits strongly
+   across the whole visible range, so the eye sees white. The Sun's peak is near green, and the
+   Sun is white, not yellow, seen from space [verify peak wavelength and the "white Sun" framing].
+   Probably the best "wait, why?" moment in the piece.
+3. **Why your eye undersells star colors.** Cones (color) need more light than rods. Bright stars
+   show color; faint ones look white. Tricks: compare stars side by side, slightly defocus
+   binoculars or a telescope to spread the light [verify the defocus advice and why it helps].
+4. **Twinkling colors aren't the star's color.** Sirius low in the sky flashes red, green, blue:
+   that's our atmosphere (scintillation and dispersion), not the star [verify mechanism wording].
+5. **Spectral classes, briefly.** O B A F G K M as a temperature sequence, with one winter star
+   per class where possible. Keep the history (Harvard computers, Annie Jump Cannon) to a few
+   lines; it may deserve its own Historical Perspectives piece later [Bob].
+6. **Same color, different reasons for brightness.** Betelgeuse and Aldebaran are both orange-red
+   but differ hugely in size and luminosity [verify]: color tells temperature, not size. A small
+   step toward the H-R diagram without naming it yet (or naming it, linking an existing quiz —
+   the H-R diagram quiz exists).
+7. **Carbon stars: the reddest of all.** Hind's Crimson Star (R Leporis): a variable carbon star,
+   strongly red, within binocular reach near maximum [verify range, period, current phase for the
+   publication date]. Why carbon makes it so red [verify].
+8. **Cameras don't see color the way eyes do.** Smart-scope images: bright stars saturate to white
+   cores; white balance and processing change apparent color [verify Seestar/eQuinox behavior].
+   Turns into a mini-experiment (below).
+
+Pick 5–6 for the article. Strongest spine: 1 → 3 → 2 → 6 → 7, with 4 as a sidebar.
+
+---
+
+## Candidate stars (all to verify: spectral type, temperature, magnitude)
+
+| Star | Constellation | Color (approx.) | Spectral type / temp [verify] |
+|---|---|---|---|
+| Rigel | Orion | blue-white | B8, ~12,000 K |
+| Bellatrix | Orion | blue-white | B2 |
+| Sirius | Canis Major | white | A1, ~9,900 K |
+| Castor | Gemini | white | A-type (multiple system) |
+| Procyon | Canis Minor | yellow-white | F5 |
+| Capella | Auriga | yellow | G-type giants (a pair) |
+| Pollux | Gemini | orange | K0 |
+| Aldebaran | Taurus | orange | K5 |
+| Betelgeuse | Orion | orange-red | M1–2, ~3,500 K, variable |
+| R Leporis | Lepus | deep red | carbon star, variable (binocular) |
+
+Built-in comparison pairs:
+- **Betelgeuse vs Rigel**: same constellation, opposite ends of the range.
+- **Castor vs Pollux**: the "twins" don't match.
+- **Aldebaran vs the Pleiades/Hyades**: orange giant in front of a blue-white field [verify that
+  Aldebaran is a foreground star, not a Hyades member].
+
+## The challenge (format)
+
+- Naked eye from town: rank five bright stars by color, then check the ranking against the
+  temperature table.
+- Binoculars: Betelgeuse/Rigel side by side; then find R Leporis.
+- Smart scope: image Betelgeuse and Rigel with the same settings and compare; try a short
+  exposure so cores don't saturate [verify feasibility].
+- Optional: record observations (sketch, notes) and come back in a month — Betelgeuse varies.
+
+## Timing
+
+Whole winter evening sky; best roughly January–February evenings [verify for the publication
+month]. Works under light pollution and moonlight, which makes it a good beginner piece.
+
+## Figures (code-generated, nbas_style)
+
+1. **Thermal glow curves** at ~3,500 K, ~5,800 K, ~10,000 K with the visible band marked: shows
+   why hot stars look blue-white and why there are no green stars. (Planck function — exact.)
+2. **Temperature color strip** with the winter stars placed on it. Note in the caption that the
+   on-screen colors are approximations.
+3. Possibly: winter star chart with each star labelled by temperature.
+4. Bob's images (Betelgeuse/Rigel same settings, R Lep).
+
+## Open questions for Bob
+
+1. OC or GS?
+2. Publication month (fits December or January).
+3. Include spectral-class history, or save for a Historical Perspectives piece?
+4. Link to the existing H-R diagram quiz?
+
+## Cross-references
+- `color-index` (future AF) — the quantitative follow-up
+- `winter-variable-stars` (AWV, January) — Betelgeuse and R Leporis again
+- `galactic-anticenter` (AWV)
