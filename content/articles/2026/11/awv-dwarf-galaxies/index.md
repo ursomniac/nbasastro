@@ -1,7 +1,7 @@
 ---
 title: "Dwarf Galaxies"
 date: 2026-11-26
-description: "Six small galaxies near the Milky Way, from quiet and ragged to bursting with new stars to smooth and spent -- and why gas, more than size, decides how a dwarf galaxy looks."
+description: "Seven small galaxies near the Milky Way, from quiet and ragged to bursting with new stars to smooth and spent -- and why gas, more than size, decides how a dwarf galaxy looks."
 byline: "Small, ragged, and close by: what gas does to a galaxy too small to keep itself tidy"
 series: ["wider-view"]
 authors: ["bob-donahue"]
@@ -9,7 +9,7 @@ thumbnail: "thumbnail.webp"
 banner: "banner.webp"
 
 dso_caldwell: ["17", "18", "51"]
-dso_ngc: ["147", "185", "1569"]
+dso_ngc: ["147", "185", "1156", "1569"]
 dso_other: ["IC 10", "IC 1613", "PGC 143", "WLM"]
 
 ---
@@ -30,8 +30,8 @@ The short answer is gas. In a small galaxy, the handful of places where gas is t
 dominate the light, and wherever they happen to be is what you see. That's the ragged look. Take
 the gas away, and the raggedness goes with it.
 
-This article walks through six dwarf galaxies in that order: two quiet ones, two in the middle of
-a burst of star formation, and two that have almost nothing left to make stars.
+This article walks through seven dwarf galaxies in that order: three quiet ones, two in the middle
+of a burst of star formation, and two that have almost nothing left to make stars.
 
 ---
 
@@ -55,8 +55,8 @@ Large Magellanic Cloud, can share nearly everything with the dwarfs except the l
 ### Where the Tuning Fork Runs Out
 
 {{< nbas-image src="fig-tuning-fork-dwarf.svg" fullwidth="true"
-alt="Hubble's tuning fork diagram extended to the right: Sa, Sb, Sc and their barred versions, then Sd, Sm and Im added by de Vaucouleurs, fading out. WLM, IC 1613, IC 10 and NGC 1569 are all marked at the barred irregular end, IBm. NGC 147 and NGC 185 sit in a separate box below S0, labeled dwarf spheroidal or dwarf elliptical, with no slot on Hubble's fork."
-caption="Hubble's tuning fork, extended. Four of this article's galaxies share one label at the far end; the other two have no slot at all. Schematic: the shapes are not to scale." >}}
+alt="Hubble's tuning fork diagram extended to the right: Sa, Sb, Sc and their barred versions, then Sd, Sm and Im added by de Vaucouleurs, fading out. WLM, IC 1613, NGC 1156, IC 10 and NGC 1569 are all marked at the barred irregular end, IBm. NGC 147 and NGC 185 sit in a separate box below S0, labeled dwarf spheroidal or dwarf elliptical, with no slot on Hubble's fork."
+caption="Hubble's tuning fork, extended. Five of this article's galaxies share one label at the far end; the other two have no slot at all. Schematic: the shapes are not to scale." >}}
 
 Our [Peculiar Galaxies](/articles/2026/11/peculiar-galaxies/) article looked at Hubble's tuning fork and the galaxies it
 couldn't hold because something had happened to them. Dwarfs fall off the fork for a different
@@ -68,8 +68,8 @@ like the Large Magellanic Cloud; and Im, with no obvious structure at all, like 
 Magellanic Cloud. The "m" stands for Magellanic. There's no gap between a ragged spiral and an
 irregular galaxy, just a fade.
 
-Four of our six sit at that faint end: WLM and IC 1613 are IB(s)m, IC 10 and NGC 1569 are listed
-as barred or blue compact irregulars. One label covers a galaxy in an extreme burst of star
+Five of our seven sit at that faint end: WLM, IC 1613 and NGC 1156 are Magellanic barred
+irregulars, and IC 10 and NGC 1569 are listed as barred or blue compact irregulars. One label covers a galaxy in an extreme burst of star
 formation and one that's barely ticking over. The classification records the shape. It says
 nothing about what's going on inside.
 
@@ -140,7 +140,7 @@ Without gas there's no new star formation, the blue clumps fade over time as the
 an evenly spread population of old stars. Smooth. Quiet. That's NGC 147.
 
 The famous examples, the Large and Small Magellanic Clouds, are out of reach from New England.
-Barnard's Galaxy in Sagittarius is the summer one. The six here are the ones up on late-autumn
+Barnard's Galaxy in Sagittarius is the summer one. The seven here are the ones up on late-autumn
 evenings.
 
 ---
@@ -155,6 +155,7 @@ The table runs from the most gas-rich, quietest galaxy to the most spent.
 | :-------------- | :----- | :--- | :-------- | :------------ | :--------- | :---- |
 | PGC 143 (WLM)   |   Cet  | 11.0 |   15.0    |  11.5 x  4.2  | IB(s)m     |  3.2  |
 | IC 1613 (C 51)  |   Cet  |  9.9 |   16.1    |  16.2 x 14.5  | IB(s)m     |  2.4  |
+| NGC 1156        |   Ari  | 11.6 |   14.1    |   3.0 x  2.3  | IBm        | 24.8  |
 | IC 10           |   Cas  | 10.4 |   15.6    |   6.8 x  5.9  | dIrr / BCD |  2.3  |
 | NGC 1569        |   Cam  | 11.9 |   14.1    |   3.6 x  1.8  | IBm        | 11.0  |
 | NGC 185 (C 18)  |   Cas  | 10.1 |   15.7    |  11.7 x 10.0  | dSph/dE3   |  2.1  |
@@ -164,9 +165,9 @@ The table runs from the most gas-rich, quietest galaxy to the most spent.
 
 {{< nbas-image src="fig-local-group-dwarfs.svg" width="500" align="right"
 alt="A to-scale map of the Local Group with the Milky Way at left and the Andromeda Galaxy about 2.5 million light-years to the right, with M33 beside it. NGC 185, NGC 147 and IC 10 cluster near Andromeda. IC 1613 sits about 2.4 million light-years from the Milky Way, well away from Andromeda, and WLM is farthest out, more than 3 million light-years from the Milky Way and nearly as far from Andromeda."
-caption="Five of this article's dwarfs in the Local Group, to scale. The view looks down on the flat-ish plane the galaxies best fit; WLM sits about half a million light-years off it. NGC 1569, at 11 million light-years, is far off the map." >}}
+caption="Five of this article's dwarfs in the Local Group, to scale. The view looks down on the flat-ish plane the galaxies best fit; WLM sits about half a million light-years off it. NGC 1569 (11 million light-years) and NGC 1156 (25 million) are far off the map." >}}
 
-All but one of these galaxies are members of the Local Group, and that's no accident. Dwarfs give
+All but two of these galaxies are members of the Local Group, and that's no accident. Dwarfs give
 off little light in total, so even nearby ones are hard targets; at ten times the distance, most
 would be out of reach. (Surface brightness, oddly, doesn't fade with distance. A galaxy twice as
 far away is a quarter as bright, but it also covers a quarter of the sky area, so each square
@@ -182,7 +183,7 @@ IC 1613 and WLM belong to neither big galaxy. They're out on their own, members 
 
 {{< clear >}}
 
-### Quiet -- WLM: As Isolated as It Gets
+### Quiet -- WLM: Out on the Edge
 
 {{< nbas-image src="pgc_143-s50-98m-square.webp" width="300" align="right"
 caption="Wolf-Lundmark-Melotte (PGC 143), Bob Donahue, NBAS, Seestar S50, 98 min"
@@ -194,7 +195,7 @@ established in 1926, and credited to Knut Lundmark and Philibert Melotte.
 
 WLM sits on the outer edge of the Local Group, about a million parsecs (3.3 million light-years)
 from both the Milky Way and Andromeda. Its nearest neighbor, the small Cetus dwarf, is about
-250,000 parsecs away. If any galaxy should be undisturbed, it's this one. It doesn't appear to have had 
+250,000 parsecs away. If any galaxy in the Local Group should be undisturbed, it's this one. It doesn't appear to have had 
 any mergers to speak of, and contains one old globular cluster.
 
 So it's the baseline. WLM is patchy for no other reason than that's how dwarfs make stars on their
@@ -208,13 +209,34 @@ thin intergalactic gas it's moving through. Isolated, it turns out, isn't the sa
 
 {{< clear >}}
 
+### Quiet -- NGC 1156: Alone in Aries
+
+{{< nbas-image src="ngc_1156-equ-11m-square.webp" width="300" align="right"
+caption="NGC 1156, Bob Donahue, NBAS, eQuinox 2, 11 min"
+alt="Smart scope image of NGC 1156 in Aries" >}}
+
+NGC 1156 makes WLM look sociable. It's a Magellanic-type irregular in Aries, about 25 million
+light-years away (7.6 megaparsecs), well outside the Local Group, and its nearest sizable
+neighbors are more than 10 degrees away on the sky. At its distance, that puts them at least
+4 million light-years off. When a radio survey mapped the hydrogen around it looking for company,
+it found just one: a tiny dwarf with about a thousandth of NGC 1156's gas and star formation.
+
+And yet it's busy. Its outline is boxy, its brightness uneven, and its bright blue patches mark
+active star formation, with no neighbor around to set it off. If WLM is the baseline, NGC 1156 is
+the proof that a dwarf left entirely to itself still turns out ragged.
+
+There's order underneath here too: its stars and gas rotate together, about the same axis. Oddly,
+that axis doesn't line up with the bar that dominates its light. William Herschel found it in 1786.
+
+{{< clear >}}
+
 ### Quiet -- IC 1613: Blowing Holes in Itself
 
 {{< nbas-image src="c_51-s50-square-92m.webp" width="300" align="right"
 caption="IC 1613 (C 51), Bob Donahue, NBAS, Seestar S50, 92 min"
 alt="Smart scope image of Caldwell 51 in Cetus" >}}
 
-IC 1613, also found by Max Wolf, in 1906, is the largest of the six on the sky, about 16
+IC 1613, also found by Max Wolf, in 1906, is the largest of the seven on the sky, about 16
 arcminutes across. It's also the faintest per square arcminute, which is the number that
 matters for a diffuse object. Large doesn't always mean easy to observe.
 
@@ -270,8 +292,8 @@ what's in this image. IC 10 also appeared in our [Andromeda family article](/art
 caption="NGC 1569, Bob Donahue, NBAS, eQuinox 2, 26 min"
 alt="Smart scope image of NGC 1569 in Camelopardalis" >}}
 
-NGC 1569 is the odd one out on distance: about 11 million light-years, more than four times
-farther than the others. It's here because it's the most extreme example of a dwarf in a burst.
+NGC 1569 is well beyond the Local Group too: about 11 million light-years, more than four times
+farther than the Local Group members. It's here because it's the most extreme example of a dwarf in a burst.
 Over the last hundred million years it has been forming stars at roughly a hundred times the
 Milky Way's rate.
 
@@ -352,14 +374,15 @@ star-hopping or using setting circles:
 | NGC 147  | 00h 33m 12s  | +48° 30′ 32″ | 84° |
 | NGC 185  | 00h 38m 58s  | +48° 20′ 15″ | 84° |
 | IC 1613  | 01h 04m 48s  | +02° 07′ 04″ | 50° |
+| NGC 1156 | 02h 59m 42s  | +25° 14′ 14″ | 73° |
 | NGC 1569 | 04h 30m 49s  | +64° 50′ 53″ | 68° |
 
 {{< /article-table >}}
 
 In late November, the sky is fully dark a little after 6 PM. Start with WLM: it's the most southern
 of the set, peaking at 32 degrees around 7:30 PM, so catch it early. IC 10, NGC 147, NGC 185,
-and IC 1613 all cross the meridian between about 7:50 and 8:35 PM, high and well placed. NGC 1569
-is the late one, highest around midnight, but it's far enough north that it never sets from here.
+and IC 1613 all cross the meridian between about 7:50 and 8:35 PM, high and well placed. NGC 1156
+follows around 10:30 PM, high in Aries. NGC 1569 is the latest, highest around midnight, but it's far enough north that it never sets from here.
 Neither do IC 10, NGC 147, or NGC 185.
 
 ### At the Eyepiece
@@ -397,6 +420,11 @@ than overhead, and that's attenuating the dim galaxy even more.
 **IC 1613 (C 51)**: This might be the most challenging object on our list. It may take
 apertures in the 15"+ range to see even a faint haze.
 
+**NGC 1156**: Small but fairly bright for its size. Steve Gottlieb found it faint and diffuse in an
+8", and in an 18" "fairly bright, fairly large," elongated SSW-NNE, with a roughly rectangular
+outline and uneven surface brightness. A magnitude 11.5 star sits just under an arcminute north of
+its center.
+
 ### Smart Scopes
 
 Surface brightness is the thing to watch. NGC 1569 is compact and comes up fast. IC 1613 and WLM
@@ -404,7 +432,7 @@ are spread thin and reward long sessions. IC 10 needs the most patience of all, 
 galaxy's dust is in the way: this galaxy deserves a very long exposure.
 
 If your scope has a dual-band or hydrogen-alpha filter, there's an experiment built into this list.
-The four gas-rich galaxies should show glowing gas, the red light of hydrogen lit by young stars.
+The five gas-rich galaxies should show glowing gas, the red light of hydrogen lit by young stars.
 The two spent ones should show little or nothing. That's the article's whole argument, in one
 filter.
 
@@ -414,10 +442,14 @@ What to look for in each:
 pinkish patches among them: those are clouds of gas lit up by new stars. There are no arms to
 find, and that's the point.
 
-**IC 1613**: The challenge here is the faint, wide haze; it's the largest of the six, about 16
+**IC 1613**: The challenge here is the faint, wide haze; it's the largest of the seven, about 16
 arcminutes across, and needs a long session to fill in. On the northeast side, look for the
 cluster of knots and arcs, the region of superbubbles in the hydrogen-alpha image above. A
 hydrogen-alpha filter and a lot of time could start to show the bubbles themselves.
+
+**NGC 1156**: A small, boxy, elongated glow. Look for its bright blue patches of star formation,
+and for any pinkish knots among them. Don't mistake the star just north of its center for part of
+the galaxy.
 
 **IC 10**: The field tells half the story: a crowd of orange-tinted Milky Way stars, reddened by the
 same dust that dims the galaxy. In the galaxy itself, look for a mottled core with pinkish knots
