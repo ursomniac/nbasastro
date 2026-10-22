@@ -1,6 +1,6 @@
 ---
 title: "NBAS Public Observing: Williamstown Rural Lands"
-date: 2026-11-20
+date: 2026-11-19
 pin_until: 2026-12-19
 event_date: 2026-12-18T18:00:00-05:00
 event_location: Williamstown Rural Lands (Sheep Hill)
