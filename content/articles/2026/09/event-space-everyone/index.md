@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Symposium: Space for Everyone"
 date: 2026-09-29
 pin_until: 2026-10-30
@@ -10,6 +11,8 @@ series: ["nbas-announcements"]
 thumbnail: "thumbnail.jpg"
 banner: "banner.webp"
 ---
+
+<!-- CANCELLED 23 October 2026 -->
 
 {{< nbas-image src="banner.webp" fullwidth="true" >}}
 
