@@ -6,8 +6,8 @@ series: ["whats-up-in-the-sky"]
 knowledgetopics: ["observing-guides"]
 byline: "Red, orange, yellow, white, blue -- the winter sky puts every star color on display at once, bright enough to see from town. Here's what those colors are telling you."
 description: "Betelgeuse, Rigel, Capella, Sirius and Hind's Crimson Star: a guide to winter star colors -- why color is temperature, why there are no green stars, and how to see the colors for yourself."
-thumbnail: "thumbnail.jpg"
-banner: "banner.png"
+thumbnail: "thumbnail.webp"
+banner: "banner.webp"
 stars_bright: ["Betelgeuse", "Rigel", "Bellatrix", "Sirius", "Procyon", "Castor", "Pollux", "Capella", "Aldebaran", "Almach"]
 stars_nearby: ["Sirius", "Capella", "Gliese 205"]
 stars_variable: ["Betelgeuse", "R Lep"]
@@ -26,7 +26,7 @@ just as well from a driveway in town.
 
 And the colors aren't decoration. Each one is a temperature reading.
 
-{{< nbas-image src="banner.png" fullwidth="true"
+{{< nbas-image src="banner.webp" fullwidth="true"
 caption="The winter sky as rendered by Stellarium V26.3. On-screen colors are approximations." >}}
 
 ## Why Color Means Temperature
@@ -45,7 +45,7 @@ toward blue. Stars in between come out orange, yellow, or white.
 caption="Light output of Rigel, the Sun, and Betelgeuse across the spectrum, each curve scaled to its own peak. The shaded band is what the eye can see: Rigel's light leans blue, Betelgeuse's leans red, and the Sun's peak falls in the blue-green."
 alt="Three curves of light versus wavelength. Rigel's peaks in the ultraviolet near 240 nanometers, the Sun's in the blue-green near 500, and Betelgeuse's in the infrared near 800. A shaded visible band runs from 380 to 750 nanometers." >}}
 
-{{< nbas-image src="Annie_Jump_Cannon_1922_Portrait.jpg" width="240" align="right"
+{{< nbas-image src="Annie_Jump_Cannon_1922_Portrait.webp" width="240" align="right"
 caption="1922 photograph of astronomer Annie Jump Cannon (1863-1941). Credit: New York World-Telegram and the Sun Newspaper, Public domain, via Wikimedia Commons"
 alt="Black-and-white portrait photograph of Annie Jump Cannon, 1922." >}}
 Astronomers sort stars into spectral classes that run in order of temperature: O, B, A, F, G, K,
@@ -75,7 +75,7 @@ scattering some of the blue out of its light.)
 
 ### But I've Seen a Green Star...
 
-{{< nbas-image src="Almach_double_star.jpg" width="250" align="right"
+{{< nbas-image src="Almach_double_star.webp" width="250" align="right"
 caption="Gamma Andromedae, Credit: NVN271, CC BY-SA 4.0, via Wikimedia Commons"
 alt="Telescopic view of Gamma Andromedae (Almach) showing the color contrast between the two stars." >}}
 You may well have -- in a telescope, next to a bright orange one. Double stars with an orange or
@@ -178,7 +178,7 @@ If you'd like to test yourself on the diagram, try our [H-R diagram quiz](/quizz
 
 ## Hind's Crimson Star
 
-{{< nbas-image src="r-lep-X43330GG.png" width="345" align="right"
+{{< nbas-image src="r-lep-X43330GG.webp" width="345" align="right"
 caption="AAVSO finder chart for R Lep.  From [AAVSO VSP service](https://apps.aavso.org/vsp/chart/?star=R+Lep&scale=E&orientation=visual&type=chart&fov=60.0&maglimit=16.5&resolution=150&north=up&east=left&other=aid&lines=True)"
 alt="AAVSO finder chart with nearby comparison star magnitudes for R Leporis" >}}
 {{< nbas-image src="fig-r-lep-finder.svg" width="380" align="right"
@@ -275,10 +275,14 @@ brightness of red stars have to watch out for it.
 
 ### A Camera Trick
 
-{{< nbas-image src="Blurred_star_trails_in_Orion_(54444410402).png" width="200" align="right"
-caption="Credit: Mark McCaughrean, CC BY-SA 4.0, via Wikimedia Commons"
-alt="Time lapse of the sky centered on Orion with the camera defocused at intervals causing the star trails to be cone-shaped highlighting their color" >}}
+{{< nbas-image src="Blurred_star_trails_in_Orion_(54444410402).webp" width="350" align="right"
+caption="The same trick on Orion: orange Betelgeuse at the top stands out among blue-white Rigel, Bellatrix and the Belt stars. Credit: Mark McCaughrean, CC BY-SA 4.0, via Wikimedia Commons"
+alt="Time lapse image of Orion using the defocus technique to highligh star colors.  The contrast of Betelgeuse with the other stars is apparent." >}}
+{{< nbas-image src="lonelyspec-star-trails.webp" width="350" align="right"
+caption="Star trails near the celestial pole, showing a range of star colors.  Credit: https://www.lonelyspeck.com/how-to-photograph-a-defocused-star-trail-rain-shower/?v=0b3b97fa6688, used with permission, CC BY-SA 4.0" 
+alt="Time lapse image of the sky using the defocus technique to highlight star colors." >}}
 
+{{< clear >}}
 The same idea works in photography, and it makes a striking picture. Put a camera on a tripod, aim
 it at a bright part of the winter sky, and start a long star-trail exposure. Every couple of
 minutes, turn the focus a little further out. Each star's trail widens into a cone, and as the
