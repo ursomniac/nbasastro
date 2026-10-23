@@ -1,0 +1,102 @@
+# Winter Messier Quiz — Notes (started 2026-10-18; fact pass 1 2026-10-21)
+
+Series: Astronomy Quizzes (AQ). 8–12 questions; learning, not scoring — every wrong answer gets
+an explanation, and every option is clickable for more.
+Workflow step: 3 (fact pass 1 done 2026-10-21). Remaining [verify] items marked below.
+Follows `winter-star-colors` and `galactic-anticenter`, so it can reward readers of both.
+Overlap check: keep cluster questions to history/oddities, not "which arm is it in" — the fall
+Perseus Arm article covered that.
+
+## Title
+"Messier challenge" was only a placeholder (Bob, 2026-10-18). Candidates:
+- "The Winter Messiers"
+- "Messier's Winter Sky"
+- "Stories Behind the Numbers: Winter Messier Objects"
+Level: intermediate (matches the template quiz) [Bob to confirm].
+Timing: quizzes are monthly; last one dated 2026-11-17, so this one ≈ mid-December [Bob].
+
+## Winter Messier pool
+M1, M35, M36, M37, M38, M41, M42, M43, M45, M46, M47, M48, M50, M78, M79, M93;
+late-winter edge: M67 (Bob: include), M44 (optional). Circumpolar M81/M82 — excluded.
+
+## Fact pass 1 results (2026-10-21)
+
+Proposed set: 11 questions (within the 8–12 range). Bob to confirm, or add a 12th.
+
+KEEP (verified):
+1. **The only globular** → M79 (Lepus). Méchain 1780; ~41,000 ly away. Origin: the Milky Way
+   "might have" taken it from another galaxy, possibly the Canis Major Dwarf — say "may have",
+   not "was" (NASA Hubble Messier page). Link `galactic-anticenter` for why winter has so few.
+2. **Why M1 is first** → Bevis saw it first (1731). Messier found it independently on
+   Aug 28, 1758 while following the comet of 1758 (De la Nux); it looked like a comet. He called
+   it "the first of all that I have discovered" and it heads the first catalog (Mém. Acad. 1771)
+   (SEDS M1). The comet-hunting motive for the catalog as a whole is standard.
+3. **Why is the Pleiades on a list of things not to mistake for comets?** → REFRAMED: correct
+   answer is "No one knows for certain." Facts: Messier observed M45 on March 4, 1769; the first
+   catalog (1771) had 45 objects, only 17 his own discoveries; it included objects found by
+   others (SEDS M45; encyclopedia.pub). Popular guesses (rounding to 45; outnumbering Lacaille's
+   42 southern nebulae) — NO source found; may appear only as "one popular guess", or not at all.
+4. **M42 vs M43** → M43 (De Mairan's Nebula, found before 1731) is physically part of the Orion
+   Nebula, but a dense dust lane (the northeast dark lane) makes it look separate. Messier
+   catalogued M43 in 1769 (Wikipedia M43). Don't claim to know WHY Messier gave it its own number.
+5. **The lost Messier** → M47. Hodierna before 1654; Messier 1771. His position — measured as
+   offsets from the star "2 Navis" — matches nothing; apply the offsets with the opposite signs
+   and you land on NGC 2422. Identified by T. F. Morris, 1959 (SEDS M47; Wikipedia M47).
+   Wording: "a sign error in his offsets" (SEDS and Wikipedia differ on which coordinate).
+   Distractor/aside: M48 was also "lost" — Messier's declination was off by about 5° (Wikipedia
+   M48); Oswald Thomas identified it before Morris (SEDS Morris bio).
+6. **The reflection nebula** → M78. Méchain 1780; ~1,350 ly; "the brightest diffuse reflection
+   nebula in a group" incl. NGC 2064/2067/2071 (Wikipedia M78). Don't say brightest in the sky.
+7. **Same field, much older and farther** → M35 (~2,800 ly, ~150 Myr) with NGC 2158 (about 4×
+   farther, over 10× older, i.e., >1.5 Gyr) (APOD 2021 May 10).
+8. **The planetary nebula that isn't a member** → M46 / NGC 2438. CORRECTION: not "in front of"
+   — it lies at about the same distance (1.4–1.9 kpc vs cluster 1.5–1.7 kpc) but moves ~30 km/s
+   differently along our line of sight (78 vs 48 km/s), so it isn't a member now
+   (Kiss et al. 2008, arXiv 0809.0327). Good "looks related, isn't" question.
+13'. **REWRITTEN: "the prow of the ship"** → Messier described M93 (March 20, 1781) as "between
+   the Greater Dog and the prow of the ship." Which ship? → Argo Navis, the giant constellation
+   later split by Lacaille (1750s) into Puppis, Carina, Vela (and Pyxis, per BAA). Messier also
+   used "2 Navis" as M47's reference star. M46, M47, M93 are now in Puppis
+   (Universe Today M93; SEDS M47; BAA "Sailing with the Argonauts").
+   [verify: IAU formal adoption date of Puppis, if quoted]
+15. **M67's survival** → ~4 Gyr (estimates 3.2–5); ~2,600–2,900 ly away (Wikipedia M67). CORRECTION:
+   "one of the oldest known" — Wikipedia: "M67 is not the oldest known open cluster." Why it
+   survived: it sits ~1,400 ly above the Galactic plane (consistent with b = +31.9° at ~2,800 ly)
+   and crosses the plane only briefly, away from the giant molecular clouds that tear clusters
+   apart (Ken Croswell). Distractors: "very massive" (it has lost most of its original mass —
+   initial ~10× current per Hurley et al.), "recently captured", "protected by a dark cloud".
+
+MAYBE → KEEP AS HONEST QUESTION:
+10. **M41 and Aristotle** → Wikipedia: M41 "may have been observed by Aristotle as early as
+    325 BC" (citation titled "M41 possibly recorded by Aristotle"). Frame as possible, not fact.
+    Hodierna before 1654; ~2,360 ly; ~200 Myr.
+
+DROP:
+9. Hodierna and the Auriga trio — sources conflict (Wikipedia discoverer list credits M37 to
+   Messier 1764; Wikipedia M37 says Hodierna recorded all three). Side fact: Le Gentil (1749)
+   rediscovered M36 and M38 but missed M37.
+11. "Last object Messier discovered himself" = M93 — not supported by SEDS, Wikipedia, or
+    Universe Today. M93's date (1781) is fine; the "last" claim isn't. Its material moved to 13'.
+14. Distance contrast — M46 (~4,900 ± 980 ly) and M37 (~4,500 ly) are too close to call;
+    M36 estimates range 3,800–4,340 ly. Not clean enough for a right/wrong answer.
+
+Reference distances gathered (Wikipedia unless noted): M36 ~4,300 ly (2020: ~3,800); M37 ~4,500;
+M38 ~3,480; M41 ~2,360; M46 ~4,900; M47 ~1,600; M48 ~2,500; M50 ~2,900; M93 ~3,380; M35 ~2,800
+(APOD); M67 ~2,600–2,900.
+
+## Format (from the template: "Solar System Object Features", 2026-11-17)
+- Front matter: title, date, series ["astronomy-quiz"], level, description, banner, thumbnail.
+- `quiz.renderer: "text-choice"`, `passing_score: 70`.
+- Each question: `id`, `image`, `text`, four `answers` with `text`, `correct`, `explanation`.
+- Correct position rotated, recorded in a comment ("# Q1 — topic — correct at position 3").
+- Body: `{{< quiz >}}` only. Near-miss distractors ("Right planet, wrong moon").
+
+## Production notes
+- One image per question. Bob's own (Seestar/eQuinox) where possible; otherwise public domain
+  beyond doubt. Banner + thumbnail (square .webp, 600×600).
+
+## Open questions for Bob
+1. Title and level.
+2. 11 questions OK, or add a 12th? (Candidates: M44 Beehive; a Méchain question — he found
+   both M78 and M79 in 1780.)
+3. Which objects do you already have your own images of?

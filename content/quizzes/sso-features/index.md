@@ -2,6 +2,7 @@
 title: "Solar System Object Features"
 date: 2026-11-17
 series: ["astronomy-quiz"]
+knowledgetopics: ["quizzes"]
 level: "intermediate"
 description: "Twelve questions on famous features of the planets and moons -- volcanoes, ice plains, methane seas, and storms -- and what spacecraft learned about how each one formed."
 banner: "banner.webp"

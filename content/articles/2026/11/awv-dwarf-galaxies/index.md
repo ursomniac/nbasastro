@@ -420,10 +420,9 @@ than overhead, and that's attenuating the dim galaxy even more.
 **IC 1613 (C 51)**: This might be the most challenging object on our list. It may take
 apertures in the 15"+ range to see even a faint haze.
 
-**NGC 1156**: Small but fairly bright for its size. Steve Gottlieb found it faint and diffuse in an
-8", and in an 18" "fairly bright, fairly large," elongated SSW-NNE, with a roughly rectangular
-outline and uneven surface brightness. A magnitude 11.5 star sits just under an arcminute north of
-its center.
+**NGC 1156**: Small but fairly bright for its size. It might be dim and diffuse in an
+8", elongated SSW-NNE, with a roughly rectangular outline and uneven surface brightness. 
+A magnitude 11.5 star sits just under an arcminute north of its center.
 
 ### Smart Scopes
 

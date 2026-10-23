@@ -2,6 +2,7 @@
 title: "Why Do Variable Stars Do That?"
 date: 2026-10-20
 series: ["astronomy-quiz"]
+knowledgetopics: ["quizzes"]
 level: "expert"
 description: "An advanced quiz on the mechanisms behind ten kinds of variable stars — not recognizing light curves, but understanding why each one behaves the way it does."
 banner: "banner.webp"

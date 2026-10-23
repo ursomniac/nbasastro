@@ -1,6 +1,6 @@
 ---
 title: "NBAS Public Observing: Williamstown Rural Lands"
-date: 2026-11-01
+date: 2026-10-30
 pin_until: 2026-11-29
 event_date: 2026-11-28T18:00:00-05:00
 event_location: Adams Free Library
