@@ -8,7 +8,7 @@
 # Edit this list only when the plan changes, not when a part goes live.
 measuring-astronomical-distances:
   title: "Measuring Astronomical Distances"
-  total: 10
+  total: 13
   description: "From the Earth-Sun distance to the edge of the observable universe: what astronomers' distance units mean, and how each one was actually measured."
   parts:
     - n: 1
@@ -27,17 +27,26 @@ measuring-astronomical-distances:
       title: "Parallax: 61 Cygni to Gaia"
       blurb: "Using Earth's orbit as a baseline to reach the stars."
     - n: 6
-      title: "Parsecs vs. Light-Years"
-      blurb: "Two rulers for the stars, and why astronomers prefer the stranger one."
+      title: "Parsecs vs. Light Years"
+      blurb: "Two rulers for the stars, and how to get a feel for the stranger one"
     - n: 7
-      title: "Distance at Galactic Scale"
-      blurb: "Our own galaxy, measured in kiloparsecs."
+      title: "Building the Ladder"
+      blurb: "When parallax runs out: the first rungs of the distance ladder, and how each one was tested and repaired."
     - n: 8
-      title: "The Ladder Cracks"
-      blurb: "Reaching other galaxies, and the surprises along the way."
+      title: "Distance at Galactic Scale"
+      blurb: "Our own galaxy in kiloparsecs: mapping the far side, and how crowded it gets."
     - n: 9
+      title: "The Local Group"
+      blurb: "A Cepheid in Andromeda, and the moment the universe got bigger."
+    - n: 10
+      title: "Extending the Ladder"
+      blurb: "Brighter rungs for farther galaxies, calibrated on the ones we already trust."
+    - n: 11
+      title: "Distance at Extragalactic Scale"
+      blurb: "Megaparsecs, groups, clusters, and the voids between them."
+    - n: 12
       title: "Velocities and the Hubble Tension"
       blurb: "Redshift as a ruler, and where it stops agreeing with itself."
-    - n: 10
+    - n: 13
       title: "How Far Can We See?"
       blurb: "The edge of the observable universe, and why 'how far' stops having one answer."

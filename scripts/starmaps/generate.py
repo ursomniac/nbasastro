@@ -580,9 +580,10 @@ def generate_evergreen(year=None, output_dir=None, quality=None, resolution=None
         anchor_date = date_cls(year, month, EVERGREEN_MONTH_DAY)
         dt_utc, dt_local, date_str, time_str = _labels_for(anchor_date)
         month_slug = anchor_date.strftime("%m-%b").lower()
-        label = f"Sky on/near: {date_str}, {time_str} – North Adams, MA"
+        evergreen_date_str = dt_local.strftime("%-d %b")   # no year: chart is reused every year
+        label = f"Sky on/near: {evergreen_date_str}, {time_str} – North Adams, MA"
 
-        print(f"  {month_slug}: {date_str}, {time_str} ({dt_utc.strftime('%H:%M UTC')})")
+        print(f"  {month_slug}: {evergreen_date_str}, {time_str} ({dt_utc.strftime('%H:%M UTC')})")
 
         observer = Observer(lat=LAT, lon=LON, dt=dt_utc)
 
