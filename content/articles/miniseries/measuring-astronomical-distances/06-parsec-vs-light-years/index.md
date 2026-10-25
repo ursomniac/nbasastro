@@ -5,7 +5,7 @@ description: "A parsec is easy to define and hard to feel. Where the unit came f
 byline: "Two rulers for the same sky, and how to get a feel for the stranger one"
 authors: ["bob-donahue"]
 series: ["astronomical-frameworks"]
-thumbnail: "thumbnail.jpg"
+thumbnail: "thumbnail.webp"
 banner: "banner.webp"
 miniseries: "measuring-astronomical-distances"
 miniseries-sequence: 6
