@@ -638,4 +638,8 @@ a:hover {
         margin-top: -10px !important;
     }
 }
-
+span.astro-sym {
+  font-size: 2.2em;
+  line-height: 1;   /* keeps the larger glyph from making the row taller */
+  font-family: "Segoe UI Symbol", "Noto Sans Symbols", "DejaVu Sans", sans-serif;
+}
