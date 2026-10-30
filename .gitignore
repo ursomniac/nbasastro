@@ -9,6 +9,8 @@ public/
 iss-passes.json
 __pycache__/
 *.pyc
+*.heic
+*.HEIC
 node_modules/
 scripts/assets/CometEls.txt
 scripts/starmaps/finder_charts/stars.bigksy.0.1.3.mag16.parquet
