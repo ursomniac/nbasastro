@@ -6,7 +6,7 @@ byline: "From pretty pictures to real observing: what a little effort buys you"
 series: ["smart-scopes"]
 authors: ["bob-donahue"]
 thumbnail: "thumbnail.webp"
-banner: "banner.png"
+banner: "banner.webp"
 
 # Tag only objects the text discusses (Bob's call). No sso_* tags (covered in linked articles).
 dso_messier: ["101"]
@@ -17,7 +17,7 @@ dso_other: ["PG 1634+706", "Q0957+561"]
 
 ## Introduction
 
-{{< nbas-image src="banner.png" fullwidth="true"
+{{< nbas-image src="banner.webp" fullwidth="true"
 caption="Part of the \"fleet\" at Arunah Hill before an observing session (not seen: the eQuinox 2). Below: the Iris Nebula, Comet Tsuchinshan-ATLAS, the Double Cluster, and the Whirlpool Galaxy."
 alt="A man in a plaid shirt stands in a grassy field at dusk between three small smart telescopes on tripods. Along the bottom, four astrophotos: a blue reflection nebula, a comet with a long tail, a rich field of two star clusters, and a spiral galaxy with its small companion." >}}
 
@@ -109,10 +109,10 @@ But if planets are your main interest, a smart scope isn't the right tool for th
 That's not to say you can't still have fun with planets!
 
 {{< nbas-gallery style="carousel" size="300px" title="Mars, Jupiter, and Saturn" >}}
-p1-mars-equ-1m.png | Mars |
-p1-jupiter-0.01m.png | Jupiter, with the Great Red Spot |
-p1-jupiter-moons-4mmin.png | Jupiter and three of its four Galilean moons |
-p1-saturn-3.33mmin.png | Saturn and its rings |
+p1-mars-equ-1m.webp | Mars |
+p1-jupiter-0.01m.webp | Jupiter, with the Great Red Spot |
+p1-jupiter-moons-4mmin.webp | Jupiter and three of its four Galilean moons |
+p1-saturn-3.33mmin.webp | Saturn and its rings |
 {{< /nbas-gallery >}}
 
 Here are four images of planets taken with my eQuinox 2, straight from the app. They might
@@ -133,8 +133,8 @@ baseline you can easily beat with a little care: wait for the planet to be high 
 pick a steady night, and try more than one exposure setting.
 
 {{< nbas-gallery style="grid" size="300px" title="Outer planets and their moons" >}}
-p2-uranus-moons.jpg | Uranus and its five major moons |
-p2-neptune-triton.png | Neptune and Triton |
+p2-uranus-moons.webp | Uranus and its five major moons |
+p2-neptune-triton.webp | Neptune and Triton |
 {{< /nbas-gallery >}}
 
 Uranus and Neptune are a slightly different story. They're only a few arcseconds across, so at
@@ -170,9 +170,9 @@ exposures into one image. Your gift is, in that one respect, better equipped tha
 observatory that found Pluto.
 
 {{< clear >}}
-{{< nbas-image src="pluto-230812-9m.png" width="380" align="right" caption="Pluto, 12 Aug 2023, eQuinox 2"
+{{< nbas-image src="pluto-230812-9m.webp" width="380" align="right" caption="Pluto, 12 Aug 2023, eQuinox 2"
 alt="Star field photographed on 12 August 2023. Pluto is one of the faint points of light." >}}
-{{< nbas-image src="pluto-230810-9m.png" width="380" align="right" caption="Pluto, 10 Aug 2023, eQuinox 2"
+{{< nbas-image src="pluto-230810-9m.webp" width="380" align="right" caption="Pluto, 10 Aug 2023, eQuinox 2"
 alt="The same star field two nights earlier, on 10 August 2023. One faint point of light is in a different place." >}}
 {{< clear >}}
 
@@ -183,9 +183,9 @@ it'll be a late Summer target -- but definitely put it on your "To Do" list!
 
 ### But why stop there?
 
-{{< nbas-image src="makemake-equ-27m-annotated.jpg" width="380" align="right" caption="Makemake, eQuinox 2, 27 min"
+{{< nbas-image src="makemake-equ-27m-annotated.webp" width="380" align="right" caption="Makemake, eQuinox 2, 27 min"
 alt="Star field with the dwarf planet Makemake marked; it looks like a faint star." >}}
-{{< nbas-image src="haumea-equ-23m-annotated.jpg" width="380" align="right" caption="Haumea, eQuinox 2, 23 min"
+{{< nbas-image src="haumea-equ-23m-annotated.webp" width="380" align="right" caption="Haumea, eQuinox 2, 23 min"
 alt="Star field with the dwarf planet Haumea marked; it looks like a faint star." >}}
 {{< clear >}}
 
@@ -208,10 +208,10 @@ Solar System, and capturing a distant world.
 
 ### The Moon and Sun
 
-{{< nbas-image src="2024-04-08-ingress.jpg" width="380" align="right"
+{{< nbas-image src="2024-04-08-ingress.webp" width="380" align="right"
 caption="Ingress of the April 2024 eclipse from West Glover VT, showing sunspots. Bob Donahue, NBAS, Seestar S50"
 alt="Partial solar eclipse: the Moon's dark disk cutting into the edge of the Sun, with small dark sunspots on the solar surface." >}}
-{{< nbas-image src="gareth-moon-261010.jpg" width="360" align="right"
+{{< nbas-image src="gareth-moon-261010.webp" width="360" align="right"
 caption="Gibbous Moon, Gareth Williams, NBAS, Seestar S30"
 alt="Gibbous Moon, with craters and dark plains sharpest along the line between day and night." >}}
 {{< clear >}}
@@ -219,7 +219,7 @@ alt="Gibbous Moon, with craters and dark plains sharpest along the line between 
 The Moon is an easy, satisfying target: big, bright, and full of detail along the line
 between day and night. 
 
-{{< nbas-image src="2024-04-08-152819-Solar_thn.jpg" width="350" align="right"
+{{< nbas-image src="2024-04-08-152819-Solar_thn.webp" width="350" align="right"
 caption="Totality of the April 2024 eclipse from West Glover VT, Bob Donahue, NBAS, Seestar S50"
 alt="Totally eclipsed Sun: the black disk of the Moon surrounded by the pale, wispy corona." >}}
 The Sun is satisfying too, with sunspots that change from day to day, but it comes with a
@@ -241,7 +241,7 @@ manually slew the scope using the background to find the Sun.)
 
 ### Comets
 
-{{< nbas-image src="c2023_a3-s50-4m-full-rotated.jpg"
+{{< nbas-image src="c2023_a3-s50-4m-full-rotated.webp"
 caption="C/2023 A3 Tsuchinshan-ATLAS, Seestar S50, 4 min"
 alt="Comet Tsuchinshan-ATLAS: a bright head trailing a long tail across a star field." >}}
 
@@ -265,8 +265,8 @@ With a smart scope you don't have to wait months or years for a really bright on
 comets are now within your grasp!
 
 {{< nbas-gallery style="grid" size="300px" title="A Few Comets" >}}
-c_62p-equ-8m-square.jpg | 62P/Tsuchinshan | eQuinox 2, 8 min
-13P_Olbers-equ-16m-square.jpg | 13P/Olbers | eQuinox 2, 16 min
+c_62p-equ-8m-square.webp | 62P/Tsuchinshan | eQuinox 2, 8 min
+13P_Olbers-equ-16m-square.webp | 13P/Olbers | eQuinox 2, 16 min
 {{< /nbas-gallery >}}
 
 ### Asteroids
@@ -276,9 +276,9 @@ there's a good chance an asteroid is in the frame. You won't notice it in a sing
 might notice it in a time-lapse, as a "star" that moves.
 
 {{< nbas-gallery style="carousel" size="300px" title="Asteroids" >}}
-6_hebe-equ-8m-annotated.jpg | 6 Hebe | eQuinox 2, 8 min
-m_44-s30-36m-annotated-rotated_D2QwfLa.jpg | 135 Hertha photobombs Praesepe! | Seestar S30, 36 min
-ngc_6583-equ-15m.jpg | 980 Anacostia photobombs NGC 6583 | eQuinox 2, 15 min
+6_hebe-equ-8m-annotated.webp | 6 Hebe | eQuinox 2, 8 min
+m_44-s30-36m-annotated-rotated_D2QwfLa.webp | 135 Hertha photobombs Praesepe! | Seestar S30, 36 min
+ngc_6583-equ-15m.webp | 980 Anacostia photobombs NGC 6583 | eQuinox 2, 15 min
 {{< /nbas-gallery >}}
 
 These photobombers are worth tracking down, because they turn a pretty picture into a
@@ -311,14 +311,14 @@ colorful. Dark nebulae are clouds of dust that show up only as holes against a s
 background.
 
 {{< nbas-gallery style="carousel" size="300px" title="Nebulae Smart Scope Images" >}}
-b_84-w50-80m.jpg | Dark Nebula Barnard 84 | Seestar S50, 80 min
-c_4-equ2-140m.jpg | Iris Nebula | eQuinox 2, 140 min
-c_63-equ-48m.jpg | Helix Nebula | eQuinox 2, 48 min
-ic_1795-s50-35m-LP.jpg | Fish Head Nebula | Seestar S50, 35 min, dual-band filter
-m_20-s50-62m.jpg | Trifid Nebula | Seestar S50, 62 min
-m_27-equ-31m.jpg | Dumbbell Nebula | eQuinox 2, 31 min
-c_27-s30-112m-LP.jpg | Crescent Nebula | Seestar S30, 112 min, dual-band filter
-c_22-equ-18m.jpg | Blue Snowball | eQuinox 2, 18 min
+b_84-w50-80m.webp | Dark Nebula Barnard 84 | Seestar S50, 80 min
+c_4-equ2-140m.webp | Iris Nebula | eQuinox 2, 140 min
+c_63-equ-48m.webp | Helix Nebula | eQuinox 2, 48 min
+ic_1795-s50-35m-LP.webp | Fish Head Nebula | Seestar S50, 35 min, dual-band filter
+m_20-s50-62m.webp | Trifid Nebula | Seestar S50, 62 min
+m_27-equ-31m.webp | Dumbbell Nebula | eQuinox 2, 31 min
+c_27-s30-112m-LP.webp | Crescent Nebula | Seestar S30, 112 min, dual-band filter
+c_22-equ-18m.webp | Blue Snowball | eQuinox 2, 18 min
 {{< /nbas-gallery >}}
 
 Your smart scope might have a built-in filter. Typically these are dual-band filters centered
@@ -350,12 +350,12 @@ Globular clusters are ancient balls of hundreds of thousands of stars orbiting i
 our Galaxy. In a smart scope, the difference is obvious at a glance.
 
 {{< nbas-gallery style="carousel" size="300px" title="Open and Globular Clusters" >}}
-c_14-s30-65m.jpg | Double Cluster (Perseus) | Seestar S30, 65 min
-m_92-equ-16m.jpg | Messier 92 (Hercules) | eQuinox 2, 16 min
-m_37-s50-8m.jpg | Salt &amp; Pepper Cluster (M 37, Auriga) | Seestar S50, 8 min
-m_55-equ-13m.jpg | Messier 55 (Sagittarius) | eQuinox 2, 13 min
-m_67-s30-17m-square.jpg | Goldeneye Cluster (M 67, Cancer) | Seestar S30, 17 min
-ngc_5466-s50-26m.jpg | NGC 5466 (Boötes) | Seestar S50, 26 min
+c_14-s30-65m.webp | Double Cluster (Perseus) | Seestar S30, 65 min
+m_92-equ-16m.webp | Messier 92 (Hercules) | eQuinox 2, 16 min
+m_37-s50-8m.webp | Salt &amp; Pepper Cluster (M 37, Auriga) | Seestar S50, 8 min
+m_55-equ-13m.webp | Messier 55 (Sagittarius) | eQuinox 2, 13 min
+m_67-s30-17m-square.webp | Goldeneye Cluster (M 67, Cancer) | Seestar S30, 17 min
+ngc_5466-s50-26m.webp | NGC 5466 (Boötes) | Seestar S50, 26 min
 {{< /nbas-gallery >}}
 
 Compare your images of clusters with the view through an eyepiece, and you'll notice how much
@@ -376,20 +376,20 @@ spirals seen face-on and edge-on, a barred spiral, interacting pairs, and an irr
 in our own Local Group.
 
 {{< nbas-gallery style="carousel" size="300px" title="Galaxy Smart Scope Images" >}}
-c_57-equ-27m.jpg | Barnard's Galaxy (Sagittarius) | eQuinox 2, 27 min
-c_44-equ-42m.jpg | Superman Galaxy (Pegasus) | eQuinox 2, 42 min
-m_51-s30-54m.jpg | Whirlpool Galaxy (Canes Venatici) | Seestar S30, 54 min
-m_74-s50-61m.jpg | Phantom Galaxy (Pisces) | Seestar S50, 61 min
-ngc_4565-s30-92m.jpg | Flying Saucer Galaxy (Coma Berenices) | Seestar S30, 92 min
-ngc_4302-s50-97m.jpg | NGC 4298 and 4302 (Coma Berenices) | Seestar S50, 97 min
-ngc_4656-equ-31m.jpg | Crowbar Galaxy (Canes Venatici) | eQuinox 2, 31 min
+c_57-equ-27m.webp | Barnard's Galaxy (Sagittarius) | eQuinox 2, 27 min
+c_44-equ-42m.webp | Superman Galaxy (Pegasus) | eQuinox 2, 42 min
+m_51-s30-54m.webp | Whirlpool Galaxy (Canes Venatici) | Seestar S30, 54 min
+m_74-s50-61m.webp | Phantom Galaxy (Pisces) | Seestar S50, 61 min
+ngc_4565-s30-92m.webp | Flying Saucer Galaxy (Coma Berenices) | Seestar S30, 92 min
+ngc_4302-s50-97m.webp | NGC 4298 and 4302 (Coma Berenices) | Seestar S50, 97 min
+ngc_4656-equ-31m.webp | Crowbar Galaxy (Canes Venatici) | eQuinox 2, 31 min
 {{< /nbas-gallery >}}
 
 ### Quasars and Other Exotic Objects
 
 Here's a target that will look like nothing at all, and that's the point.
 
-{{< nbas-image src="pg_1634706-92U-8m-square.jpg" width="420" align="right"
+{{< nbas-image src="pg_1634706-92U-8m-square.webp" width="420" align="right"
 caption="PG 1634+706, eQuinox 2, 8 min. The quasar is the faint star at the center. Its light left about 9 billion years ago."
 alt="Star field in Draco. The quasar PG 1634+706 looks like any other faint star." >}}
 
@@ -438,7 +438,7 @@ or challenge, or going back to get a deeper stack on something.)
 
 ### Comet Monitoring
 
-{{< nbas-image src="cc-comet.jpg"
+{{< nbas-image src="cc-comet.webp"
 caption="Comet C/2019 U6 (Lemmon), 11 May to 23 June 2020: nine snapshots over six weeks with a Unistellar eVscope (3–4 min exposures), from Réunion Island. Patrick Huet / Unistellar"
 alt="Grid of nine images of a green comet against stars, dated 11 May to 23 June 2020. The comet's head brightens and a faint tail appears and changes from image to image." >}}
 Comets change, sometimes suddenly, and observers who record their brightness over weeks
@@ -450,7 +450,7 @@ good place to pick your target.
 
 ### Asteroid Occultations
 
-{{< nbas-image src="cc-asteroid-occultation.png" width="350" align="left"
+{{< nbas-image src="cc-asteroid-occultation.webp" width="350" align="left"
 caption="Results of an asteroid occultation involving 90 Antiope: each line is one observer's record of the star as the asteroid passed. Where a line breaks, the asteroid hid the star, and together the gaps trace its outline. Unistellar"
 alt="Many parallel colored lines crossing a black background diagonally. Gaps in the lines outline two dark, roughly round shapes. A scale bar is at the bottom." >}}
 When an asteroid passes in front of a star, the star blinks out for a few seconds, but only
@@ -467,6 +467,13 @@ whether your scope can record video with reliable time stamps before you try.
 
 ### Variable Stars
 
+{{< nbas-image src="peterson-dy_peg_field.webp" width="330" align="right"
+caption="Seestar app setting up observations of the variable star DY Peg. Credit: courtesy of Pete Peterson of [Peterson Engineering](https://petersonengineering.com/)" 
+alt="" >}}
+{{< nbas-image src="peterson-dy_peg-lightcurve.webp" width="420" align="right"
+caption="Seestar light curve of the variable star DY Peg. Credit: courtesy of Pete Peterson of [Peterson Engineering](https://petersonengineering.com/)" 
+alt="" >}}
+{{< clear >}}
 Thousands of stars change in brightness, some in hours, some over years, and the American
 Association of Variable Star Observers ([AAVSO](https://www.aavso.org/)) has been collecting
 amateur measurements for over a century. AAVSO observers are already measuring stars from
@@ -477,10 +484,10 @@ We'll come back to this in more depth in a future article.
 
 ### Supernova Monitoring
 
-{{< nbas-image src="m_101-sn-equ-20m.jpeg" width="380" align="right"
+{{< nbas-image src="m_101-sn-equ-20m.webp" width="380" align="right"
 caption="SN 2023ixf in M 101, eQuinox 2, 20 min"
 alt="Face-on spiral galaxy M 101 with the supernova SN 2023ixf, a bright star-like point in the galaxy's outer disk." >}}
-{{< nbas-image src="c_30SN2025rbs-equ-36m.jpg" width="380" align="right"
+{{< nbas-image src="c_30SN2025rbs-equ-36m.webp" width="380" align="right"
 caption="NGC 7331 with SN 2025rbs, eQuinox 2, 36 min"
 alt="Tilted spiral galaxy NGC 7331 with the supernova SN 2025rbs, a star-like point beside the galaxy's bright center." >}}
 
@@ -495,7 +502,7 @@ Galaxy, about 21 million light-years away: SN 2023ixf, the closest supernova in 
 It was a Type II, the collapse of a massive star, and it peaked around magnitude 10.8, easily
 within reach of a smart scope.
 
-{{< nbas-image src="sgro-fig1.jpg" width="400" align="right"
+{{< nbas-image src="sgro-fig1.webp" width="400" align="right"
 caption="Light curve of SN 2023ixf from 252 observations by Unistellar observers. Sgro et al. 2023, Research Notes of the AAS, CC BY 4.0."
 alt="Graph of the supernova's brightness over about five weeks, built from hundreds of citizen-science measurements: a steep rise in the first days after discovery, a peak, then a slow fade." >}}
 
@@ -516,7 +523,7 @@ supernova in the sky at the time, and another easy smart-scope target.
 
 ### Even Exoplanets!
 
-{{< nbas-image src="cc-exoplanet.jpg" width="350" align="right"
+{{< nbas-image src="cc-exoplanet.webp" width="350" align="right"
 caption="A transit of the exoplanet HD 189733 b, 9 June 2021, observed with a Unistellar eVscope by Pierre-Michael M. Unistellar / SETI Institute"
 alt="Graph of a star's brightness over about three hours. The points dip by about two percent for nearly two hours while the planet crosses the star; a red model curve fits the dip, and a smaller panel below shows the leftover scatter." >}}
 In September 1999, a Harvard graduate student named David Charbonneau watched the star
