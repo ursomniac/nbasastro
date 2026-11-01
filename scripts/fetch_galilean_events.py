@@ -313,7 +313,10 @@ def _civil_twilight_jd(date_utc, lat_deg, lon_deg):
     dec = 23.45 * math.sin(B)
     eot_min = 9.87*math.sin(2*B) - 7.53*math.cos(B) - 1.5*math.sin(B)
     jd_noon = _dt_to_jd(date_utc.replace(hour=12, minute=0, second=0, microsecond=0))
-    jd_solar_noon = jd_noon + eot_min/1440.0 - lon_deg/360.0
+    # 2026-10-31 fix: equation of time was added; it must be subtracted
+    # (apparent noon = 12:00 mean - EoT). The wrong sign put dusk/dawn up to
+    # ~30 min off in Feb and Nov.
+    jd_solar_noon = jd_noon - eot_min/1440.0 - lon_deg/360.0
     lat   = math.radians(lat_deg)
     dec_r = math.radians(dec)
     cos_ha = (math.sin(math.radians(-6.0)) - math.sin(lat)*math.sin(dec_r)) /              (math.cos(lat)*math.cos(dec_r))
@@ -323,38 +326,54 @@ def _civil_twilight_jd(date_utc, lat_deg, lon_deg):
     return jd_solar_noon - ha_days, jd_solar_noon + ha_days   # jd_dawn, jd_dusk
 
 
-def _find_window(jd, windows):
+def _jupiter_arcs_near(jd_start, jd_end, windows):
     """
-    Return the (rise_jd, set_jd, jd_dusk, jd_dawn) tuple for the Jupiter arc
-    that contains jd, or None. Checks today and yesterday's date keys.
+    Yield every (rise_jd, set_jd) arc whose date key lies within a day of the
+    event. Keys are the UTC date of each rise (see fetch_jupiter_windows).
     """
-    dt = _jd_to_dt(jd)
-    for date_str in [
-        dt.strftime("%Y-%m-%d"),
-        (dt - timedelta(days=1)).strftime("%Y-%m-%d"),
-    ]:
-        candidate = windows.get(date_str)
-        if candidate:
-            rise_jd, set_jd = candidate
-            if rise_jd <= jd <= set_jd:
-                rise_date = _jd_to_dt(rise_jd).replace(hour=0, minute=0, second=0, microsecond=0)
-                set_date  = _jd_to_dt(set_jd).replace(hour=0, minute=0, second=0, microsecond=0)
-                _, jd_dusk = _civil_twilight_jd(rise_date, OBSERVER_LAT, OBSERVER_LON)
-                jd_dawn, _ = _civil_twilight_jd(set_date,  OBSERVER_LAT, OBSERVER_LON)
-                return rise_jd, set_jd, jd_dusk, jd_dawn
-    return None
+    d0 = _jd_to_dt(jd_start) - timedelta(days=1)
+    d1 = _jd_to_dt(jd_end) + timedelta(days=1)
+    d = d0
+    seen = set()
+    while d.date() <= d1.date():
+        key = d.strftime("%Y-%m-%d")
+        if key in windows and key not in seen:
+            seen.add(key)
+            yield windows[key]
+        d += timedelta(days=1)
+
+
+def _nights_overlapping(jd_a, jd_b):
+    """
+    Yield (dusk_jd, dawn_jd) for every night that could overlap [jd_a, jd_b].
+    A night runs from civil dusk on UTC date D to civil dawn on UTC date D+1.
+
+    2026-10-31 fix: the old code took dusk from the rise date and dawn from the
+    set date. Whenever Jupiter rises after 00:00 UTC (7 PM EST / 8 PM EDT), the
+    "dusk" of the rise date is the NEXT evening, so the computed window came out
+    empty and every event was dropped -- i.e. the table was always empty from
+    late summer until Jupiter started rising before 7 PM EST.
+    """
+    d = _jd_to_dt(jd_a).replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
+    last = _jd_to_dt(jd_b)
+    while d <= last:
+        _, dusk = _civil_twilight_jd(d, OBSERVER_LAT, OBSERVER_LON)
+        dawn, _ = _civil_twilight_jd(d + timedelta(days=1), OBSERVER_LAT, OBSERVER_LON)
+        if dusk is not None and dawn is not None:
+            yield dusk, dawn
+        d += timedelta(days=1)
 
 
 def event_visible(start_utc, end_utc, windows):
     """
-    True if the event overlaps the observable window at all.
-    Observable window = intersection of Jupiter-above-horizon and civil night.
+    True if the event overlaps, at all, a time when Jupiter is above the
+    horizon AND it is dark (Sun below -6 deg, civil twilight).
 
-    Overlap test: event_start < obs_end AND event_end > obs_start
-    So an event that starts in twilight but ends in darkness is included,
-    and one that starts before Jupiter sets but finishes after is included.
+    Overlap test: event_start < obs_end AND event_end > obs_start, so an event
+    that starts in twilight but ends in darkness is included, and one that
+    starts before Jupiter sets but finishes after is included.
 
-    end_utc may be None (unpaired event) — treat as a point event at start.
+    end_utc may be None (unpaired event) -- treated as a point event at start.
     """
     if not windows:
         return True
@@ -362,26 +381,15 @@ def event_visible(start_utc, end_utc, windows):
     jd_start = _dt_to_jd(start_utc)
     jd_end   = _dt_to_jd(end_utc) if end_utc else jd_start
 
-    # Find the window for the start time; if not found try the end time.
-    win = _find_window(jd_start, windows) or _find_window(jd_end, windows)
-    if win is None:
-        return False
-
-    rise_jd, set_jd, jd_dusk, jd_dawn = win
-
-    # Observable window = max(rise, dusk) to min(set, dawn)
-    if jd_dusk is not None and jd_dawn is not None:
-        obs_start = max(rise_jd, jd_dusk)
-        obs_end   = min(set_jd,  jd_dawn)
-    else:
-        obs_start = rise_jd
-        obs_end   = set_jd
-
-    if obs_end <= obs_start:
-        return False  # no observable window tonight
-
-    # Overlap: event interval and obs window must intersect
-    return jd_start < obs_end and jd_end > obs_start
+    for rise_jd, set_jd in _jupiter_arcs_near(jd_start, jd_end, windows):
+        for dusk_jd, dawn_jd in _nights_overlapping(rise_jd, set_jd):
+            obs_start = max(rise_jd, dusk_jd)
+            obs_end   = min(set_jd, dawn_jd)
+            if obs_end <= obs_start:
+                continue
+            if jd_start < obs_end and jd_end > obs_start:
+                return True
+    return False
 
 
 

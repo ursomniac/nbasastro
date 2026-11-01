@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-09-06T20:58:46Z",
+  "generated_utc": "2026-11-01T03:06:33Z",
   "source": "Project-Pluto",
   "observer": {
     "lat": 42.7,
@@ -8,6 +8,119 @@
   },
   "window_days": 15,
   "filter_applied": true,
-  "event_count": 0,
-  "events": []
+  "event_count": 14,
+  "events": [
+    {
+      "type": "shadow_transit",
+      "satellite": "Io",
+      "start_utc": "2026-11-01T04:35:00Z",
+      "end_utc": "2026-11-01T06:52:00Z",
+      "duration_min": 137,
+      "type_label": "Shadow Transit"
+    },
+    {
+      "type": "transit",
+      "satellite": "Io",
+      "start_utc": "2026-11-01T05:47:00Z",
+      "end_utc": "2026-11-01T08:05:00Z",
+      "duration_min": 138,
+      "type_label": "Transit (front of Jupiter)"
+    },
+    {
+      "type": "shadow_transit",
+      "satellite": "Ganymede",
+      "start_utc": "2026-11-04T01:25:00Z",
+      "end_utc": "2026-11-04T05:04:00Z",
+      "duration_min": 219,
+      "type_label": "Shadow Transit"
+    },
+    {
+      "type": "transit",
+      "satellite": "Ganymede",
+      "start_utc": "2026-11-04T06:24:00Z",
+      "end_utc": "2026-11-04T10:03:00Z",
+      "duration_min": 219,
+      "type_label": "Transit (front of Jupiter)"
+    },
+    {
+      "type": "shadow_transit",
+      "satellite": "Europa",
+      "start_utc": "2026-11-06T06:33:00Z",
+      "end_utc": "2026-11-06T09:27:00Z",
+      "duration_min": 174,
+      "type_label": "Shadow Transit"
+    },
+    {
+      "type": "transit",
+      "satellite": "Europa",
+      "start_utc": "2026-11-06T09:05:00Z",
+      "end_utc": "2026-11-06T11:59:00Z",
+      "duration_min": 174,
+      "type_label": "Transit (front of Jupiter)"
+    },
+    {
+      "type": "shadow_transit",
+      "satellite": "Io",
+      "start_utc": "2026-11-08T06:28:00Z",
+      "end_utc": "2026-11-08T08:45:00Z",
+      "duration_min": 137,
+      "type_label": "Shadow Transit"
+    },
+    {
+      "type": "transit",
+      "satellite": "Callisto",
+      "start_utc": "2026-11-08T07:06:00Z",
+      "end_utc": "2026-11-08T11:54:00Z",
+      "duration_min": 288,
+      "type_label": "Transit (front of Jupiter)"
+    },
+    {
+      "type": "transit",
+      "satellite": "Io",
+      "start_utc": "2026-11-08T07:42:00Z",
+      "end_utc": "2026-11-08T09:59:00Z",
+      "duration_min": 137,
+      "type_label": "Transit (front of Jupiter)"
+    },
+    {
+      "type": "shadow_transit",
+      "satellite": "Ganymede",
+      "start_utc": "2026-11-11T05:23:00Z",
+      "end_utc": "2026-11-11T09:02:00Z",
+      "duration_min": 219,
+      "type_label": "Shadow Transit"
+    },
+    {
+      "type": "transit",
+      "satellite": "Ganymede",
+      "start_utc": "2026-11-11T10:27:00Z",
+      "end_utc": "2026-11-11T14:06:00Z",
+      "duration_min": 219,
+      "type_label": "Transit (front of Jupiter)"
+    },
+    {
+      "type": "shadow_transit",
+      "satellite": "Europa",
+      "start_utc": "2026-11-13T09:08:00Z",
+      "end_utc": "2026-11-13T12:03:00Z",
+      "duration_min": 175,
+      "type_label": "Shadow Transit"
+    },
+    {
+      "type": "shadow_transit",
+      "satellite": "Io",
+      "start_utc": "2026-11-15T08:21:00Z",
+      "end_utc": "2026-11-15T10:38:00Z",
+      "duration_min": 137,
+      "type_label": "Shadow Transit"
+    },
+    {
+      "type": "transit",
+      "satellite": "Io",
+      "start_utc": "2026-11-15T09:36:00Z",
+      "end_utc": "2026-11-15T11:53:00Z",
+      "duration_min": 137,
+      "type_label": "Transit (front of Jupiter)"
+    }
+  ]
 }

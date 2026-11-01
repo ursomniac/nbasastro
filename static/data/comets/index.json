@@ -1,8 +1,29 @@
 {
-  "generated_utc": "2026-07-19T18:16:30Z",
+  "generated_utc": "2026-11-01T03:06:38Z",
   "window_days": 30,
-  "comet_count": 6,
+  "comet_count": 5,
   "comets": [
+    {
+      "designation": "P/2016 BA14",
+      "name": "PANSTARRS",
+      "type": "long-period",
+      "slug": "p2016ba14",
+      "ephemeris_file": "/data/comets/p2016ba14.json",
+      "binocular": false,
+      "peak_magnitude": 11.3,
+      "perihelion_date": "2021-06-17 07:43",
+      "warning": null,
+      "current": {
+        "date_utc": "2026-11-01T00:00:00Z",
+        "ra_hms": "14 28 27.96",
+        "dec_dms": "-08 09 32.6",
+        "t_mag": 22.835,
+        "our_mag_est": 11.5,
+        "elong_deg": 6.2091,
+        "sky_position": "evening",
+        "constellation": "Vir"
+      }
+    },
     {
       "designation": "10P",
       "name": "Tempel",
@@ -10,18 +31,18 @@
       "slug": "10p",
       "ephemeris_file": "/data/comets/10p.json",
       "binocular": false,
-      "peak_magnitude": 8.7,
-      "perihelion_date": "2026-08-02 02:45",
+      "peak_magnitude": 11.5,
+      "perihelion_date": "2026-08-02 02:26",
       "warning": null,
       "current": {
-        "date_utc": "2026-07-19T00:00:00Z",
-        "ra_hms": "21 32 12.66",
-        "dec_dms": "-18 24 56.6",
-        "t_mag": 13.079,
-        "our_mag_est": 9.0,
-        "elong_deg": 156.2878,
-        "sky_position": "morning",
-        "constellation": "Cap"
+        "date_utc": "2026-11-01T00:00:00Z",
+        "ra_hms": "23 22 58.98",
+        "dec_dms": "-26 27 08.8",
+        "t_mag": 14.886,
+        "our_mag_est": 11.5,
+        "elong_deg": 120.2128,
+        "sky_position": "evening",
+        "constellation": "Scl"
       }
     },
     {
@@ -31,102 +52,60 @@
       "slug": "p2006s1",
       "ephemeris_file": "/data/comets/p2006s1.json",
       "binocular": false,
-      "peak_magnitude": 11.2,
+      "peak_magnitude": 12.1,
       "perihelion_date": "2019-10-25 11:27",
       "warning": null,
       "current": {
-        "date_utc": "2026-07-19T00:00:00Z",
-        "ra_hms": "02 12 26.86",
-        "dec_dms": "+21 44 50.0",
-        "t_mag": 20.268,
-        "our_mag_est": 11.0,
-        "elong_deg": 77.8876,
-        "sky_position": "morning",
-        "constellation": "Ari"
-      }
-    },
-    {
-      "designation": "P/2009 Q4",
-      "name": "Boattini",
-      "type": "long-period",
-      "slug": "p2009q4",
-      "ephemeris_file": "/data/comets/p2009q4.json",
-      "binocular": false,
-      "peak_magnitude": 12.0,
-      "perihelion_date": "2020-12-26 23:29",
-      "warning": null,
-      "current": {
-        "date_utc": "2026-07-19T00:00:00Z",
-        "ra_hms": "07 06 42.59",
-        "dec_dms": "+19 23 27.7",
-        "t_mag": 18.308,
+        "date_utc": "2026-11-01T00:00:00Z",
+        "ra_hms": "04 29 51.71",
+        "dec_dms": "+11 31 50.3",
+        "t_mag": 20.721,
         "our_mag_est": 12.0,
-        "elong_deg": 10.7374,
+        "elong_deg": 149.0605,
         "sky_position": "morning",
-        "constellation": "Gem"
+        "constellation": "Tau"
       }
     },
     {
-      "designation": "P/2016 BA14",
-      "name": "PANSTARRS",
+      "designation": "C/2026 A2",
+      "name": "Bok",
       "type": "long-period",
-      "slug": "p2016ba14",
-      "ephemeris_file": "/data/comets/p2016ba14.json",
+      "slug": "c2026a2",
+      "ephemeris_file": "/data/comets/c2026a2.json",
       "binocular": false,
-      "peak_magnitude": 12.0,
-      "perihelion_date": "2021-06-17 07:43",
+      "peak_magnitude": 12.2,
+      "perihelion_date": "2026-12-22 08:30",
       "warning": null,
       "current": {
-        "date_utc": "2026-07-19T00:00:00Z",
-        "ra_hms": "07 24 49.01",
-        "dec_dms": "+11 33 16.8",
-        "t_mag": 23.283,
-        "our_mag_est": 12.0,
-        "elong_deg": 11.4276,
-        "sky_position": "morning",
-        "constellation": "CMi"
-      }
-    },
-    {
-      "designation": "29P",
-      "name": "Schwassmann-Wachmann",
-      "type": "short-period",
-      "slug": "29p",
-      "ephemeris_file": "/data/comets/29p.json",
-      "binocular": false,
-      "peak_magnitude": 12.7,
-      "perihelion_date": "2019-04-19 22:56",
-      "warning": null,
-      "current": {
-        "date_utc": "2026-07-19T00:00:00Z",
-        "ra_hms": "11 17 40.90",
-        "dec_dms": "-02 16 47.1",
-        "t_mag": 17.877,
+        "date_utc": "2026-11-01T00:00:00Z",
+        "ra_hms": "20 05 37.77",
+        "dec_dms": "+54 38 03.2",
+        "t_mag": 13.972,
         "our_mag_est": 12.5,
-        "elong_deg": 55.4123,
+        "elong_deg": 99.0508,
         "sky_position": "evening",
-        "constellation": "Leo"
+        "constellation": "Cyg"
       }
     },
     {
-      "designation": "220P",
-      "name": "McNaught",
+      "designation": "161P",
+      "name": "Hartley-IRAS",
       "type": "short-period",
-      "slug": "220p",
-      "ephemeris_file": "/data/comets/220p.json",
+      "slug": "161p",
+      "ephemeris_file": "/data/comets/161p.json",
       "binocular": false,
-      "peak_magnitude": 12.8,
-      "perihelion_date": "2026-06-14 02:50",
+      "peak_magnitude": 12.4,
+      "perihelion_date": "2026-11-27 04:17",
       "warning": null,
       "current": {
-        "date_utc": "2026-07-19T00:00:00Z",
-        "ra_hms": "02 01 14.03",
-        "dec_dms": "+08 28 22.0",
-        "t_mag": 16.145,
-        "our_mag_est": 13.0,
-        "elong_deg": 84.8372,
-        "sky_position": "morning",
-        "constellation": "Psc"
+        "date_utc": "2026-11-01T00:00:00Z",
+        "ra_hms": "19 54 54.61",
+        "dec_dms": "+13 45 05.5",
+        "t_mag": 15.567,
+        "our_mag_est": 12.5,
+        "elong_deg": 86.6783,
+        "sky_position": "evening",
+        "constellation": "Aql"
       }
     }
   ]
