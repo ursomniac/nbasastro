@@ -3,7 +3,22 @@
 fetch_galilean_events.py
 Ticket #22 — Galilean satellite phenomena table
 
-Fetch strategy:
+UPDATE 2026-10-31 (supersedes the notes below where they disagree):
+  - IMCCE is now the PRIMARY source again, parsing the real per-year file
+    ftp_jupiter_Events_UT_<year>.txt (fixed-width, four events per line; see
+    parse_imcce_events_text). Live fetch first, then a committed copy at
+    static/data/_cache/ftp_jupiter_Events_UT_<year>.txt. Project Pluto is the
+    fallback if IMCCE yields nothing. Checked against Project Pluto for
+    2027-01-10..14: all 12 events agree within 2 minutes.
+  - Visibility filter fixed: it dropped every event whenever Jupiter rose
+    after 00:00 UTC (dusk was taken from the wrong evening), and the equation
+    of time had the wrong sign in the twilight calculation.
+  - Known limitation (both sources): only events with BOTH phases in the
+    window are kept (pair_imcce_half_events). Single-phase events -- e.g. an
+    eclipse disappearance whose reappearance happens behind Jupiter -- are
+    dropped. Mutual events are not covered at all.
+
+Fetch strategy (original notes):
   Project Pluto jevent.htm is the primary (and currently only enabled) source.
   Covers all four classical phenomena: eclipse, occultation, transit, shadow transit.
   The page itself is correct and complete (confirmed by hand: full year, no
@@ -94,7 +109,9 @@ OUTPUT_PATH  = Path(os.environ.get("OUTPUT_PATH",
 
 # IMCCE is parked (see module docstring above) -- defaults OFF so the working
 # Project Pluto path is what actually runs, without deleting the IMCCE code.
-USE_IMCCE = os.environ.get("USE_IMCCE", "false").strip().lower() in ("1", "true", "yes")
+# 2026-10-31: IMCCE re-enabled as the primary source now that the parser
+# matches the real file layout; Project Pluto remains the fallback.
+USE_IMCCE = os.environ.get("USE_IMCCE", "true").strip().lower() in ("1", "true", "yes")
 
 # Project Pluto's jevent.htm reads correctly (full year, right format) when
 # fetched from a normal machine -- confirmed by hand with curl. It reads back
@@ -143,8 +160,14 @@ RTS_MAX_NBD = 730
 # fetch_imcce_events() below fills in {year} for every calendar year touched
 # by the requested [start, end) window, so this keeps working every January
 # without anyone needing to edit this file again.
-IMCCE_PHEN_URL_TMPL = "https://ftp.imcce.fr/pub/ephem/satel/phenjupiter/phen_jup_{year}.txt"
-IMCCE_PHEN_URL_ALT_TMPL = "https://ftp.imcce.fr/pub/ephem/satel/phenjupCDT/phen_jup_{year}.txt"
+# 2026-10-31: the real per-year file (confirmed against the downloaded 2027 copy).
+IMCCE_PHEN_URL_TMPL = "https://ftp.imcce.fr/pub/ephem/satel/phenjupiter/ftp_jupiter_Events_UT_{year}.txt"
+# Committed fallback copies, one per year, same filename as on IMCCE's server:
+#   static/data/_cache/ftp_jupiter_Events_UT_<year>.txt
+# Used automatically if the live fetch fails or doesn't parse. Drop next
+# year's file in here once IMCCE publishes it.
+IMCCE_CACHE_DIR = Path(os.environ.get("IMCCE_CACHE_DIR",
+                       Path(__file__).parent.parent / "static" / "data" / "_cache"))
 
 # Project Pluto fallback
 PLUTO_URL = "https://www.projectpluto.com/jevent.htm"
@@ -169,6 +192,13 @@ EVENT_TYPE_MAP = {
     # Shadow transit (satellite shadow on Jupiter disk)
     "O.C": "shadow_transit_start", "O.F": "shadow_transit_end",
     "SH.D": "shadow_transit_start", "SH.F": "shadow_transit_end",
+    # ftp_jupiter_Events_UT_<year>.txt codes (2026-10-31):
+    #   EC D/R eclipse disappearance/reappearance, OC D/R occultation,
+    #   TR I/E transit ingress/egress, SH I/E shadow ingress/egress
+    "EC D": "eclipse_start",        "EC R": "eclipse_end",
+    "OC D": "occultation_start",    "OC R": "occultation_end",
+    "TR I": "transit_start",        "TR E": "transit_end",
+    "SH I": "shadow_transit_start", "SH E": "shadow_transit_end",
 }
 
 # Project Pluto codes
@@ -396,108 +426,105 @@ def event_visible(start_utc, end_utc, windows):
 
 # ── IMCCE phenjupiter parser ──────────────────────────────────────────────────
 
-def _imcce_urls_for_year(year: int):
-    return (IMCCE_PHEN_URL_TMPL.format(year=year), IMCCE_PHEN_URL_ALT_TMPL.format(year=year))
+_IMCCE_BLOCK_RE = re.compile(
+    r"^\s*(\d{1,2})\s([ \d]{2})([ \d]{2})\s+(I|II|III|IV)\s(SH|TR|EC|OC)\s([IEDR])\s*$"
+)
+
+
+def parse_imcce_events_text(text: str, year: int, start: datetime, end: datetime):
+    """
+    Parse IMCCE's ftp_jupiter_Events_UT_<year>.txt (times in UT).
+
+    Layout (fixed width, confirmed on the 2027 file, 2026-10-31):
+      cols 0-1  two-digit year ("27"), cols 2-3 month (%2d), then four
+      19-character blocks per line, each one event:
+        day (%2d, 0 = last day of the previous month), HH (%2d), MM (%2d),
+        satellite (I-IV), code (SH/TR/EC/OC), phase (I/E or D/R).
+      e.g. "27 1  0  836    I SH I   7 1537   II OC R  ..."
+           -> 2026-12-31 08:36 Io shadow ingress; 2027-01-07 15:37 Europa occ. reappearance
+    The file also has trailing tables (satellite coordinates, conjunction
+    times in TT); their lines don't start with the two-digit year + month
+    and are ignored.
+    """
+    yy = f"{year % 100:02d}"
+    line_re = re.compile(rf"^{yy}[ \d]\d\s")
+    half_events = []
+    for line in text.splitlines():
+        if not line_re.match(line) or line.startswith(str(year)):
+            continue
+        month = int(line[2:4])
+        for k in range(4):
+            blk = line[4 + 19 * k: 4 + 19 * (k + 1)]
+            if not blk.strip():
+                continue
+            m = _IMCCE_BLOCK_RE.match(blk)
+            if not m:
+                print(f"[WARN] IMCCE: unparsed block {blk!r}", file=sys.stderr)
+                continue
+            day_s, hh_s, mm_s, sat_roman, code, phase = m.groups()
+            ev_half = EVENT_TYPE_MAP.get(f"{code} {phase}")
+            sat = SAT_NAME.get(sat_roman)
+            if not ev_half or not sat:
+                continue
+            try:
+                utc = (datetime(year, month, 1, tzinfo=timezone.utc)
+                       + timedelta(days=int(day_s) - 1, hours=int(hh_s), minutes=int(mm_s)))
+            except ValueError:
+                continue
+            if start <= utc < end:
+                half_events.append({"satellite": sat, "event_half": ev_half, "utc": utc})
+    return half_events
+
+
+def _load_imcce_year(year: int):
+    """Live fetch of one year's file; fall back to the committed cache copy."""
+    url = IMCCE_PHEN_URL_TMPL.format(year=year)
+    raw = fetch_url(url)
+    if raw is not None and len(raw) > 5000:
+        print(f"[INFO] Live IMCCE fetch for {year} ({len(raw)} bytes)")
+        return raw.decode("utf-8", errors="replace"), "live"
+    cache = IMCCE_CACHE_DIR / f"ftp_jupiter_Events_UT_{year}.txt"
+    if cache.exists():
+        print(f"[INFO] Using cached IMCCE file {cache}")
+        return cache.read_text(encoding="utf-8", errors="replace"), "cache"
+    print(f"[WARN] IMCCE file unavailable for {year} (tried {url} and {cache})", file=sys.stderr)
+    return None, None
 
 
 def fetch_imcce_events(start: datetime, end: datetime):
     """
-    Attempt to download and parse the IMCCE phenjupiter flat-text prediction
-    file(s), one per calendar year touched by [start, end). Each file only
-    covers its own calendar year, so a window that crosses a Dec 31 / Jan 1
-    boundary needs both years' files -- this fetches every distinct year in
-    the window and merges the results, rather than assuming a single year.
+    Download (or read from cache) and parse IMCCE's per-year event file(s),
+    one per calendar year touched by [start, end), and merge them.
 
-    Returns a list of raw half-events (each line is one start or end boundary),
-    or None if every year's fetch fails.
-
-    File format (two variants depending on year):
-    Old:  YYYY MMM DD  HH:MM  <SAT>  <CODE>
-    New:  <SAT_NUM>  YYYY-MM-DD  HH:MM:SS.S  <CODE>
-
-    We try both URL forms and both parse approaches, per year.
+    Returns a list of half-events (each one start or end boundary), or None if
+    no year's file could be loaded or nothing fell in the window.
     """
     # end is exclusive, so the last real moment in-window is (end - 1 second)
     years = sorted({start.year, (end - timedelta(seconds=1)).year})
-
     half_events: list[dict] = []
-    any_fetched = False
-
+    any_loaded = False
     for year in years:
-        url, url_alt = _imcce_urls_for_year(year)
-        raw = fetch_url(url) or fetch_url(url_alt)
-        if raw is None:
-            print(f"[WARN] IMCCE phenjupiter file unavailable for {year} "
-                  f"(tried {url} and {url_alt})", file=sys.stderr)
+        text, _how = _load_imcce_year(year)
+        if text is None:
             continue
-        any_fetched = True
-
-        text = raw.decode("utf-8", errors="replace")
-        for line in text.splitlines():
-            line = line.strip()
-            if not line or line.startswith("#"):
-                continue
-            ev = _parse_imcce_line(line, start, end)
-            if ev:
-                half_events.append(ev)
-
-    if not any_fetched:
-        # Every year's file failed to download -- genuine outage/URL problem
+        any_loaded = True
+        half_events.extend(parse_imcce_events_text(text, year, start, end))
+    # A file's "day 0" rows repeat the previous year's last day; drop duplicates
+    # when a window spans New Year and both files are loaded.
+    seen = set()
+    unique = []
+    for ev in half_events:
+        key = (ev["satellite"], ev["event_half"], ev["utc"])
+        if key not in seen:
+            seen.add(key)
+            unique.append(ev)
+    half_events = unique
+    if not any_loaded:
         return None
-
     if not half_events:
-        # File(s) fetched fine, just nothing landed in this particular window
-        print("[WARN] IMCCE file(s) parsed but yielded 0 events in window", file=sys.stderr)
+        print("[WARN] IMCCE file(s) loaded but yielded 0 events in window", file=sys.stderr)
         return None
-
     return half_events
-
-
-def _parse_imcce_line(line: str, start: datetime, end: datetime):
-    """
-    Try to parse one line of an IMCCE phenjupiter file.
-    Returns a dict with keys: satellite, event_half (e.g. 'eclipse_start'), utc
-    """
-    # New format (2024+): "501 2026-05-12 21:14:00.0 EC.D"
-    m = re.match(
-        r"^(\d{3})\s+(\d{4}-\d{2}-\d{2})\s+(\d{2}:\d{2}:\d{2}(?:\.\d+)?)\s+(\S+)",
-        line
-    )
-    if m:
-        sat_num, date_s, time_s, code = m.groups()
-        sat = SAT_NAME.get(sat_num)
-        ev_half = EVENT_TYPE_MAP.get(code)
-        if not sat or not ev_half:
-            return None
-        try:
-            utc = datetime.fromisoformat(f"{date_s}T{time_s[:8]}+00:00")
-        except ValueError:
-            return None
-        if start <= utc < end:
-            return {"satellite": sat, "event_half": ev_half, "utc": utc}
-        return None
-
-    # Old format: "2026 May 12  21:14  I  E.C"
-    m = re.match(
-        r"^(\d{4})\s+(\w{3})\s+(\d{1,2})\s+(\d{2}:\d{2})\s+(I{1,3}V?|IV)\s+(\S+)",
-        line
-    )
-    if m:
-        yr, mon, day, hm, sat_roman, code = m.groups()
-        sat = SAT_NAME.get(sat_roman)
-        ev_half = EVENT_TYPE_MAP.get(code)
-        if not sat or not ev_half:
-            return None
-        try:
-            utc = datetime.strptime(f"{yr} {mon} {day} {hm}", "%Y %b %d %H:%M")
-            utc = utc.replace(tzinfo=timezone.utc)
-        except ValueError:
-            return None
-        if start <= utc < end:
-            return {"satellite": sat, "event_half": ev_half, "utc": utc}
-        return None
-
-    return None
 
 
 def pair_imcce_half_events(half_events: list):
