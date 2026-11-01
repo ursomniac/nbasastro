@@ -1,7 +1,7 @@
 ---
 title: "November 2026 Newsletter"
 date: 2026-11-01
-description: "November 2026 at NBAS: Mars and Jupiter pass 1.2° apart, Uranus reaches opposition, the Leonids peak, a family stargazing night with Williamstown Rural Lands, and this month's new articles."
+description: "November 2026 at NBAS: Mars and Jupiter pass 1.2° apart, Uranus reaches opposition, the Leonids peak, lecture and stargazing at Greylock Glen, a family stargazing night with Williamstown Rural Lands, and this month's new articles."
 byline: "Two planets pair up before dawn, a third reaches opposition, and the Leonids return"
 authors: ["nbas-staff"]
 series: ["nbas-newsletter"]
@@ -53,6 +53,27 @@ pdf:
 <style>span.yellow { color: #f8d44e; }</style>
 
 *Daylight saving time ends Sunday, November 1 -- all times in this issue are EST.*
+
+## 🔭 Lecture and Stargazing at Greylock Glen, Nov 7
+
+{{< nbas-image src="planet-lecture.webp" fullwidth="true" >}}
+
+Join NBAS at a public event coordinated with [Greylock Glen Center](https://greylockglenresort.com/) on **Saturday, November 7**
+for a public talk "How Many Planets Are There?" by NBAS member Dr. Bob Donahue, followed by observing (weather permitting)
+with the club's telescopes!
+
+**Saturn** will definitely be on the menu!
+
+{{< nbas-image src="greylock-glen-outdoor-center-adams-ma.webp"
+caption="Greylock Glen Center, Adams MA" >}}
+
+**Greylock Glen Center**
+- When: November 7, 6 PM
+- Address: Gould Road, Adams MA, 01220
+- Phone: (413) 398-4044
+- Website: [https://greylockglenresort.com/](https://greylockglenresort.com/)
+
+All NBAS Public Events are free to the public.   Please review our [Event Rules](/outreach/event-rules/) page.
 
 ## 🔭 Stargazing with Williamstown Rural Lands, Nov 28
 
