@@ -8,7 +8,7 @@
 # Edit this list only when the plan changes, not when a part goes live.
 measuring-astronomical-distances:
   title: "Measuring Astronomical Distances"
-  total: 13
+  total: 14
   description: "From the Earth-Sun distance to the edge of the observable universe: what astronomers' distance units mean, and how each one was actually measured."
   parts:
     - n: 1
@@ -34,19 +34,22 @@ measuring-astronomical-distances:
       blurb: "When parallax runs out: the first rungs of the distance ladder, and how each one was tested and repaired."
     - n: 8
       title: "Distance at Galactic Scale"
-      blurb: "Our own galaxy in kiloparsecs: mapping the far side, and how crowded it gets."
+      blurb: "Mapping a galaxy from the inside, and what the distances revealed that nobody was looking for."
     - n: 9
+      title: "A Tour of the Galaxy"
+      blurb: "Visiting the Galaxy's other realms, in distances you can feel."
+    - n: 10
       title: "The Local Group"
       blurb: "A Cepheid in Andromeda, and the moment the universe got bigger."
-    - n: 10
+    - n: 11
       title: "Extending the Distance Ladder"
       blurb: "Brighter rungs for farther galaxies, calibrated on the ones we already trust."
-    - n: 11
+    - n: 12
       title: "Distance at Extragalactic Scale"
       blurb: "Megaparsecs, groups, clusters, and the voids between them."
-    - n: 12
+    - n: 13
       title: "Velocities and the Hubble Tension"
       blurb: "Redshift as a ruler, and where it stops agreeing with itself."
-    - n: 13
+    - n: 14
       title: "How Far Can We See?"
       blurb: "The edge of the observable universe, and why 'how far' stops having one answer."
