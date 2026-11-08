@@ -1,0 +1,34 @@
+{{- /* layouts/partials/sort-pinned.html
+     Input:  a page list, newest first (e.g. $pages.ByPublishDate.Reverse).
+     Returns a slice in homepage order:
+       1-2. pinned items with an upcoming event_date, soonest event first
+       3.   other pinned items (no event_date, or the event has passed), newest first
+       4.   everything else, newest first
+     Pinned = pin_until is set and still in the future (same test as before).
+     Pages are appended one at a time (never list onto list), so the result is
+     always a plain page list that .Paginate accepts.
+     Usage:  {{ $combined := partial "sort-pinned.html" $sorted }}
+*/ -}}
+{{- $now := now -}}
+{{- $events := slice -}}
+{{- $featured := slice -}}
+{{- $normal := slice -}}
+{{- range . -}}
+  {{- $p := . -}}
+  {{- if and $p.Params.pin_until (gt (time $p.Params.pin_until) $now) -}}
+    {{- $ev := $p.Params.event_date -}}
+    {{- if and $ev (ge (time $ev).Unix $now.Unix) -}}
+      {{- $events = $events | append (dict "t" (time $ev).Unix "page" $p) -}}
+    {{- else -}}
+      {{- $featured = $featured | append $p -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $normal = $normal | append $p -}}
+  {{- end -}}
+{{- end -}}
+{{- $out := slice -}}
+{{- range sort $events "t" "asc" -}}{{- $out = $out | append .page -}}{{- end -}}
+{{- range $featured -}}{{- $out = $out | append . -}}{{- end -}}
+{{- range $normal -}}{{- $out = $out | append . -}}{{- end -}}
+{{- if not $out -}}{{- $out = . -}}{{- end -}}
+{{- return $out -}}

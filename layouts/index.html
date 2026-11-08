@@ -18,19 +18,7 @@
 {{ $sorted := $all_posts.ByPublishDate.Reverse }}
 
 {{/* Split into pinned and normal preserving date order */}}
-{{ $now := now }}
-{{ $pinned := slice }}
-{{ $normal := slice }}
-{{ range $sorted }}
-  {{ if and .Params.pin_until (gt (.Params.pin_until | time) $now) }}
-    {{ $pinned = $pinned | append . }}
-  {{ else }}
-    {{ $normal = $normal | append . }}
-  {{ end }}
-{{ end }}
-
-{{/* Combine: pinned first then normal */}}
-{{ $combined := $pinned | append $normal }}
+{{ $combined := partial "sort-pinned.html" $sorted }}
 
 {{ range first 20 $combined }}
     {{ if eq .Section "quizzes" }}
