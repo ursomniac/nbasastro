@@ -5,7 +5,7 @@ main_subject: ["Mercury"]
 pin_until: 2027-02-10
 description: "Catch Mercury low in the west-southwest after sunset in late January and early February 2027, and learn why some of Mercury's appearances are so much better than others."
 byline: "The elusive planet, and why its best showings aren't its biggest"
-series: ["planet-watch"]
+series: ["planet-watch", "how-the-sky-works"]
 authors: ["nbas-staff"]
 thumbnail: "thumbnail.webp"
 banner: "fig-mercury-horizon-track.webp"
