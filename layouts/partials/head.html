@@ -1,8 +1,23 @@
 <head data-pagefind-ignore="all">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
-{{ $noindex_types := slice "dso_messier" "dso_ngc" "dso_caldwell" "dso_other" "stars_bright" "stars_exoplanet" "stars_exotic" "stars_multiple" "stars_nearby" "stars_variable" "sso_asteroids" "sso_comets" "sso_meteors" "sso_moons" "sso_planets" "knowledge-hub" "features" "tags" "outreach" "knowledgetopics" }}
+{{/* NOINDEX RULES
+     - $astro_types: object term pages (e.g. /dso_messier/1/) are indexed once they
+       have at least site.Params.astro_index_min_articles pages tagged with them.
+       The catalog pages themselves (e.g. /dso_messier/) stay noindex.
+     - $noindex_types: always noindex. */}}
+{{ $astro_types := slice "dso_messier" "dso_ngc" "dso_caldwell" "dso_other" "stars_bright" "stars_exoplanet" "stars_exotic" "stars_multiple" "stars_nearby" "stars_variable" "sso_asteroids" "sso_comets" "sso_meteors" "sso_moons" "sso_planets" }}
+{{ $noindex_types := slice "knowledge-hub" "features" "tags" "outreach" "knowledgetopics" }}
+{{ $min_articles := site.Params.astro_index_min_articles | default 2 }}
+{{ $noindex := false }}
 {{ if in $noindex_types .Type }}
+  {{ $noindex = true }}
+{{ else if in $astro_types .Type }}
+  {{ if or (ne .Kind "term") (lt (len .Pages) $min_articles) }}
+    {{ $noindex = true }}
+  {{ end }}
+{{ end }}
+{{ if $noindex }}
 <meta name="robots" content="noindex, follow">
 {{ end }}
 <meta name="google-site-verification" content="EyVI1AEamitOg8zKK-OGQBsGP5XvDwgyi6CJAshvkws" />
@@ -11,6 +26,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
+{{/* RSS discovery: main feed on every page, plus this page's own feed if it has one */}}
+{{ with site.Home.OutputFormats.Get "rss" }}<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">{{ end }}
+{{ if not .IsHome }}{{ with .OutputFormats.Get "rss" }}<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ $.Title }} | {{ site.Title }}">{{ end }}{{ end }}
 
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 

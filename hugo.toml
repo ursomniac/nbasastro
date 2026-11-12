@@ -5,7 +5,14 @@ title = "Northern Berkshire Astronomical Society"
 [params]
   tagline = "Whatever your experience, you belong under our skies."
   logo = "images/nbas-grey.png"
-  site_version = "v1.2.9"
+  site_version = "v1.2.10"
+
+  # Astro Hub object pages (e.g. /dso_messier/1/) are indexed by search engines
+  # only when at least this many articles are tagged with the object.
+  astro_index_min_articles = 2
+
+  # RSS: sections whose pages go in the main feed (/index.xml).
+  rss_home_sections = ["articles"]
 
   # Banner image map: [filename, X%, Y%, scale%]
   # X: 0=left 50=center 100=right
@@ -45,6 +52,18 @@ title = "Northern Berkshire Astronomical Society"
 
 [frontmatter]
   date = ["lastmod", "date", "publishDate"]
+
+# RSS feeds: home feed on; section/taxonomy/term feeds off by default.
+# Series, miniseries, sso_planets and sso_meteors pages get feeds via the
+# [[cascade]] at the bottom. (Authors: add "/authors/**" there in v1.3.)
+[outputs]
+  home = ["html", "rss"]
+  section = ["html"]
+  taxonomy = ["html"]
+  term = ["html"]
+
+[services.rss]
+  limit = 50
 
 [pagination]
   pagerSize = 20
@@ -111,3 +130,9 @@ title = "Northern Berkshire Astronomical Society"
     path = "{/dso_messier/**,/dso_caldwell/**,/dso_ngc/**,/dso_other/**,/sso_planets/**,/sso_comets/**,/sso_asteroids/**,/sso_meteors/**,/sso_moons/**,/stars_bright/**,/stars_nearby/**,/stars_variable/**,/stars_multiple/**,/stars_exotic/**,/stars_exoplanet/**}"
   [cascade.layout]
     layout = "astro-explorer"
+
+[[cascade]]
+  outputs = ["html", "rss"]
+  [cascade.target]
+    kind = "term"
+    path = "{/series/**,/miniseries/**,/sso_planets/**,/sso_meteors/**}"
