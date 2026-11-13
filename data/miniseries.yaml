@@ -53,3 +53,29 @@ measuring-astronomical-distances:
     - n: 14
       title: "How Far Can We See?"
       blurb: "The edge of the observable universe, and why 'how far' stops having one answer."
+as-the-sky-turns:
+  title: "As the Sky Turns"
+  total: 7
+  description: "One motion, Earth spinning about the celestial pole, explains the nightly turn of the stars, which ones never set, why each season has its own constellations, rotating smart-scope frames, and the changing tilt of the ecliptic and the Milky Way. Then the pole itself moves."
+  parts:
+    - n: 1
+      title: "The Turning Sky"
+      blurb: "Fifteen degrees an hour, east to west, around Polaris."
+    - n: 2
+      title: "Circumpolar"
+      blurb: "Why some stars never set, others never rise, and how that changes when you travel north or south."
+    - n: 3
+      title: "When Is It Up?"
+      blurb: "Four minutes earlier every night: the sidereal day, the meridian, and why each season has its own stars."
+    - n: 4
+      title: "Field Rotation"
+      blurb: "Why your smart scope's frame turns, where it's worst, and what an equatorial mount does about it."
+    - n: 5
+      title: "The Tilted Road"
+      blurb: "The ecliptic's 23.4° tilt, and why the Sun and planets ride high or low with the seasons."
+    - n: 6
+      title: "The Tilted River"
+      blurb: "Why the Milky Way arches overhead on some evenings and hugs the horizon on others."
+    - n: 7
+      title: "Precession"
+      blurb: "The slowest turn: pole stars change, the equinox drifts, and star charts carry a date."

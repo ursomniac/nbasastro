@@ -4,6 +4,9 @@
 {{/* Resize: 1200px for full-width to ensure clarity; otherwise use provided width or default 600px */}}
 {{- $w := cond $fullWidth "1200" (.Get "width" | default (.Get "size" | default "600") | strings.TrimSuffix "px") -}}
 {{- $expandSrc := .Get "expand" -}}
+{{/* Optional resample filter for .Resize (e.g. filter="lanczos"). Empty = site default
+     (box). Use lanczos for fine detail such as star trails, which box breaks into dashes. */}}
+{{- $filter := .Get "filter" | default "" -}}
 {{- $extLink := .Get "link" -}}
 {{/* Alt text: use alt= if given; otherwise fall back to the caption as plain text
      (markdown rendered, tags stripped, entities decoded -- html/template re-escapes it
@@ -37,7 +40,7 @@
              class="nbas-media-img"
              style="width: 100%; height: auto; display: block;">
       {{- else -}}
-        {{- $scaled := .Resize (printf "%sx" $w) -}}
+        {{- $scaled := .Resize (strings.TrimSpace (printf "%sx %s" $w $filter)) -}}
         <img src="{{ $scaled.RelPermalink }}"
              alt="{{ $alt }}"
              width="{{ $scaled.Width }}"

@@ -27,7 +27,7 @@ object_info:
 ## Introduction
 
 {{< nbas-image src="banner.webp" fullwidth="true" 
-caption="Mike Fraietta, NBAS, shot on 2026 Oct 7 from my backyard in North Adams. I used the Explore Scientific ED127 with the ASI071 MC Pro camera. The image is a composite of 45 five minute exposures. Processing was performed using PixInsight and Photoshop"
+caption="Mike Fraietta, NBAS, shot on 2026 Oct 7 from my backyard in North Adams. I used the Explore Scientific ED127 with the ASI071 MC Pro camera and an Optolong L-eNhance filter. The image is a composite of 45 five minute exposures. Processing was performed using PixInsight and Photoshop"
 alt="A wide star field with the Crab Nebula, small, at its center." >}}
 
 {{< object-specs align="right" >}}
@@ -88,7 +88,7 @@ was getting bigger. That's the next part of the story -- but first, the name.
 
 ## Why "Crab"?
 
-{{< nbas-image src="M1rosse-1844.webp" width="300" align="right"
+{{< nbas-image src="M1Rosse-1844.webp" width="300" align="right"
 caption="Lord Rosse's 1844 drawing of M 1, made with his 36-inch reflector at Birr Castle (Philosophical Transactions, 1844). Wikimedia Commons."
 alt="An old pencil-style drawing of a nebula with long filaments trailing from one end, vaguely like a crab's legs." >}}
 
@@ -212,13 +212,20 @@ and in 1954 two Soviet astronomers, Vashakidze and Dombrovsky, found that it was
 the first place synchrotron light was confirmed on a cosmic scale. Those electrons, and the 
 magnetic fields they spiral in, come from the pulsar's wind.
 
-This is where the filter question comes in. The eQuinox 2 image below was taken with no filter, so
-it records both kinds of light. A dual-band filter, like the one built into the Seestar S50, passes
-two narrow slices of the spectrum -- one around hydrogen-alpha (which also catches the nitrogen
-lines beside it), one around ionized oxygen -- and blocks most of the rest. That lets nearly all of
-the filament light through while throwing away most of the smooth synchrotron glow, which is spread
-across every color. Both images in this article were taken without a narrowband filter, so both
-show the glow and the filaments together. 
+This is where filters come in, and the two images in this article show the difference. A
+dual-band filter passes two narrow slices of the spectrum -- one around hydrogen-alpha (wide enough
+to take in the nitrogen lines beside it), one around ionized oxygen -- and blocks most of the rest.
+That lets nearly all of the filament light through while throwing away most of the smooth
+synchrotron glow, which is spread across every color.
+
+The image at the top of this article was taken through an Optolong L-eNhance, a filter of exactly this kind made for color
+cameras: a 10-nanometer window at hydrogen-alpha and a 24-nanometer window covering hydrogen-beta
+and ionized oxygen. Together those windows let through only about a tenth of a smooth glow's
+visible light, which is why the filaments stand out so strongly in that image. The glow isn't gone,
+though. The synchrotron light is bright enough that, after nearly four hours of exposure, what gets
+through the filter still fills the center. The eQuinox 2 image below was taken with no filter at
+all, so it records both kinds of light at full strength. The dual-band filter built into the
+Seestar S50 works the same way as the L-eNhance, with slightly wider windows.
 
 ## Finding and Observing It
 
@@ -268,8 +275,8 @@ alt="The Crab Nebula as a small oval among scattered stars." >}}
 
 The Crab is a good smart-scope target: bright, compact, and high in the sky all winter evening. Two
 experiments are worth trying. If your scope has a dual-band or light-pollution filter, take one
-stack with it and one without, and compare: the filtered image should show the filaments, the
-unfiltered one the glow between them (see *Where the Light Comes From*). And keep your best image.
+stack with it and one without, and compare: the filtered image brings the filaments forward, the
+unfiltered one shows more of the glow between them (see *Where the Light Comes From*). And keep your best image.
 In ten or twenty years, shoot it again with the same scope, align the two, and blink between them.
 The nebula will have grown by a few pixels -- you'll have measured the expansion of a supernova
 remnant from your backyard.

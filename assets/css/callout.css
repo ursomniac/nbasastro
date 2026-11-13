@@ -29,3 +29,14 @@
 .article-body aside.nbas-callout-exercise {
   border-color: rgba(212, 175, 55, 0.45);
 }
+
+/* definition boxes (key terms defined once per miniseries): border toward the blue
+   used for the miniseries badge (#4aa3df). Added 2026-11-13. */
+.article-body aside.nbas-callout-definition {
+  border-color: rgba(74, 163, 223, 0.5);
+}
+
+/* experiment boxes ("try it tonight"): same treatment as exercise boxes. */
+.article-body aside.nbas-callout-experiment {
+  border-color: rgba(212, 175, 55, 0.45);
+}
