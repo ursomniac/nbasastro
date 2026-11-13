@@ -113,6 +113,10 @@ looking at. It needed a star whose true brightness could be *read* unequivocally
 
 ## A Cepheid in Andromeda
 
+{{< nbas-image src="var-hubble-carnegie.webp" width="260" align="right"
+caption="Hubble's plate H335H: 100-inch Hooker telescope, Mount Wilson, night of 5–6 October 1923, 45-minute exposure. One “N” crossed out, “VAR!” written beside it. Courtesy of Carnegie Science."
+alt="Hubble's 1923 glass plate of part of the Andromeda Galaxy, with his handwritten marks, including VAR!" >}}
+
 On the night of October 5–6, 1923, Edwin Hubble exposed a 4-by-5-inch glass plate on the
 Andromeda nebula for 45 minutes, using the 100-inch Hooker telescope on Mount Wilson -- the
 largest telescope in the world at the time. He was hunting novae, and on the plate he marked
@@ -126,7 +130,8 @@ famous photographs in astronomy, and the exclamation point is earned.
 {{< nbas-image src="hubble1929-plateVI-v1.webp" fullwidth="true"
 caption="V1 on another of Hubble's 100-inch plates, taken August 4, 1924, when the star was near its faintest; Hubble's label and tick marks point to it. At its brightest, he noted, it matched the brighter of the two stars just above and to the left. North is to the left. Edwin Hubble, Astrophysical Journal 69, 103 (1929), Plate VI; public domain. Scan: NASA Astrophysics Data System."
 alt="A grainy black-and-white photographic plate of a star field in Andromeda's outer disk, with the label V1 and two short tick marks pointing to a faint star near the top; two novae elsewhere in the field are marked with crosses numbered 77 and 78." >}}
-<!-- OPEN (ledger D2): only if Carnegie grants the "VAR!" plate -- it goes here, beside this one. -->
+
+{{< clear >}}
 
 {{< nbas-image src="hubble1929-fig1-v1.webp" width="450" align="right"
 caption="Hubble's own light curve of V1, from his measurements on the Mount Wilson plates: brightness (up is brighter) against days through one 31.4-day cycle. Edwin Hubble, Astrophysical Journal 69, 103 (1929), Fig. 1; public domain. Scan: NASA ADS."
