@@ -40,3 +40,19 @@
 .article-body aside.nbas-callout-experiment {
   border-color: rgba(212, 175, 55, 0.45);
 }
+
+
+/* nbas-equation -- displayed equations (KaTeX HTML rendered at build time).
+   Palette as callout.css: page #1a2a44, text #d1d1d1, muted #8f9bb0. */
+.article-body .nbas-equation {
+  margin: 1.25em 0;
+  overflow-x: auto;            /* a long equation scrolls on a phone instead of breaking the page */
+  overflow-y: hidden;
+}
+.article-body .nbas-equation .katex-display { margin: 0; }
+.article-body .nbas-equation .eq-caption {
+  margin-top: 0.4em;
+  text-align: center;
+  font-size: 0.85em;
+  color: #8f9bb0;
+}

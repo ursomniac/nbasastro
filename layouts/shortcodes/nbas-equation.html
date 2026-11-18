@@ -1,0 +1,43 @@
+{{- /*
+nbas-equation -- a displayed equation, written in LaTeX, rendered to HTML when the site is BUILT
+(Hugo's transform.ToMath, embedded KaTeX; Hugo >= 0.132). No JavaScript, and no "math: true"
+needed in front matter. The content never goes through Markdown, so backslashes are safe.
+
+  {{< nbas-equation >}}
+  z = \frac{\Delta\lambda}{\lambda_{\text{lab}}}
+  {{< /nbas-equation >}}
+
+Stacked, with the operators lined up (LaTeX "aligned"; & marks the alignment point, \\ ends a line):
+
+  {{< nbas-equation >}}
+  \begin{aligned}
+  V_{\text{cosmic}} = {} & V_{\text{measured}} \\
+                        & + V_{\text{our motion}} \\
+                        & - V_{\text{Virgo infall}}
+  \end{aligned}
+  {{< /nbas-equation >}}
+
+Optional: caption="..." (Markdown allowed) shown under the equation.
+A LaTeX error stops the build and names the file and line.
+
+The KaTeX stylesheet must match the KaTeX version inside Hugo. Set it once in hugo.toml:
+  [params]
+    katexVersion = "0.19.1"
+(tested 2026-11-17: Hugo 0.170.0 renders correctly with 0.19.1; 0.16.11 misplaces subscripts).
+*/ -}}
+{{- $tex := trim .Inner "\n\r\t " -}}
+{{- $opts := dict "displayMode" true "output" "htmlAndMathml" -}}
+{{- with try (transform.ToMath $tex $opts) -}}
+  {{- with .Err -}}
+    {{- errorf "nbas-equation: KaTeX could not render the equation at %s: %s" $.Position . -}}
+  {{- else -}}
+    {{- if not ($.Page.Store.Get "nbasKatexCSS") -}}
+      {{- $.Page.Store.Set "nbasKatexCSS" true -}}
+      {{- $v := site.Params.katexVersion | default "0.19.1" -}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@{{ $v }}/dist/katex.min.css" crossorigin="anonymous">
+    {{- end -}}
+<div class="nbas-equation">{{ .Value }}
+{{- with $.Get "caption" }}<div class="eq-caption">{{ . | $.Page.RenderString }}</div>{{ end -}}
+</div>
+  {{- end -}}
+{{- end -}}
